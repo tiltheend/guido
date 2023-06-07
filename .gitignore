@@ -1,0 +1,32 @@
+.classpath
+.project
+.metadata/
+bin/
+.settings/
+*.class
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Servers 폴더
+Servers
+*.war
+*.tar.gz
+*.rar
+*.ttf
+*.woff
+
+#Spring 관련 폴더, 파일
+target
+/target/
+.springBeans
+pom.properties
+MANIFEST.MF
+*.log
+.factorypath
+settings.json
+
+config.properties
