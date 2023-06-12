@@ -1,14 +1,5 @@
-.font0{font-size: 2rem;} /* 강조 컨텐츠  32px 너무 크니까 사용 지양 */
 
-.font1{font-size: 1.625rem;} /* 상세 페이지 제목 26px */
-.font2{font-size: 1.375rem;} /* 상세 페이지 내용 중요한 정보 22px */
-.font3{font-size: 1rem;} /* 헤더 컨텐츠 16px */
-.font4{font-size: 0.875rem;} /* 컨텐츠 내용 타이틀 14px */
-.font5{font-size: 0.75rem;} /* 가장 작은 컨텐츠 내용 본문 12px */
-
-.font6{font-size: 0.625rem;} /* 제일 작은 거 눈에 안띄니까 사용 지양 10px */
-
-/* -----------------판매자 프로필---------------------- */
+/* -----------------후기 상세 페이지---------------------- */
 
 /* 임시로 하나씩 안보이게 하기 위해 잠시 주는 것!! */
 #displayNone{display: none;}
@@ -369,31 +360,9 @@
     .seller-profile-top{
         display: flex; justify-content: space-between;
     }
-    /* 프로필 오른쪽 박스 - 판매자 소개 */
-    .seller-profile-top .profile_right .about-me{
-        grid-template-columns: repeat(1,1fr);
-    }
-    .seller-profile-top .profile_right li{
-        margin-bottom: 40px; margin-right: 50px;
-    }
 
 }
 
 @media screen and (max-width : 767px) {
-    /* 프로필 오른쪽 박스 - 판매자 소개 */
-    .seller-profile-top .profile_right .about-me{
-        grid-template-columns: repeat(1,1fr);
-    }
-    .seller-profile-top .profile_right li{
-        margin-bottom: 40px; margin-right: 50px;
-    }
 
 }
-
-
-.seller-profile-top {}
-.seller-profile-top {}
-.seller-profile-top {}
-.seller-profile-top {}
-.seller-profile-top {}
-.seller-profile-top {}
