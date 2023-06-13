@@ -6,7 +6,9 @@ if(profileEditIcon!=null){
 }
 
 /* 댓글 눌렀을 때 상세 페이지 */
-const commentView = document.querySelector(".comment-view");
-commentView.addEventListener("click",()=>{
-    location.href="sellerReviewMore.html"
-})
+const commentView = document.querySelectorAll(".comment-view img");
+for(let i of commentView){
+    i.addEventListener("click",()=>{
+        location.href="sellerReviewMore.html"
+    })
+}
