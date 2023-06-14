@@ -69,8 +69,6 @@ window.addEventListener("scroll", ()=>{
         li.classList.remove('scroll--active');
     });
 
-    console.log(scroll);
-
 
     if(scroll >= section1 && scroll < section2){
 
