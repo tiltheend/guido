@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      a {
+        color: #000000;
+        text-decoration: none;
+      }
+
+      .scriptCalendar {
+        text-align: center;
+        border: 0.5px solid #999;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px gray;
+        padding: 15px;
+        font-weight: bolder;
+      }
+      
+      .scriptCalendar > thead > tr > td {
+        width: 50px;
+        height: 50px;
+      }
+      .scriptCalendar > thead > tr:first-child > td {
+        font-weight: bold;
+      }
+      .scriptCalendar > thead > tr:last-child > td {
+        color: #777;
+      }
+      .scriptCalendar > tbody > tr > td {
+        width: 50px;
+        height: 50px;
+      }
+      .calendarBtn {
+        cursor: pointer;
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <table class="scriptCalendar">
+      <thead>
+        <tr>
+          <td class="calendarBtn" id="btnPrevCalendar">&#60;</td>
+          <td colspan="5">
+            <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+          </td>
+          <td class="calendarBtn" id="nextNextCalendar">&#62;</td>
+        </tr>
+        <tr>
+          <td>Sun</td>
+          <td>Mon</td>
+          <td>Tue</td>
+          <td>Wed</td>
+          <td>Thu</td>
+          <td>Fri</td>
+          <td>Sat</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+
+    <script src="/calendar.js"></script>
+
+  </body>
+
+</html>

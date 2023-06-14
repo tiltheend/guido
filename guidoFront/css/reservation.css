@@ -55,6 +55,7 @@ body::-webkit-scrollbar-track {
     flex-direction: column;
     align-items: center;
     margin: auto;
+    padding: 2vh 0;
 }
 
 
@@ -71,7 +72,7 @@ input[type='checkbox']:checked+label {
     cursor: pointer;
     width: 1rem;
     height: 1rem;
-    background: url('/reservation/checkedbox.png') no-repeat 0 1px / contain;
+    background: url('/reservation/checkedbox.png') no-repeat 0 0px / contain;
 }
 
 input[type="checkbox"] {
@@ -85,20 +86,21 @@ input[type="checkbox"] {
     margin: 5vh 0 1vh 0;
     color: #5C5C5C;
     font-weight: 600;
-    font-size: 1.6rem;
+    width: 100%;
+    font-size: 1.4rem;
 }
 
 /* 예약/결제 구분선 */
 .reservation--top__divisionline{
-    width: 100%;
     height: 1px;
+    width: 100%;
     background-color: #231F20;
     margin: 2vh 0;
 }
 
 /* 예약 상품, 결제 정보, 주문자 정보 txt */
 .reservation--text{
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: bold;
     margin-bottom: 3vh;
 }
@@ -116,6 +118,8 @@ input[type="checkbox"] {
 
 .reservation--category__product div{
     margin: 1rem 1rem 1rem 0;
+    white-space:  nowrap;
+    
 }
 
 
@@ -136,7 +140,7 @@ color: #5C5C5C;
 
 
 .reservation--title__product{
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-bottom: 4vh;
 }
 
@@ -212,6 +216,7 @@ color: #5C5C5C;
     position: relative; 
     border-radius: 15px;
     margin-right: 3vw;
+    min-height: 200px;
 }
 
 
@@ -289,6 +294,13 @@ color: #5C5C5C;
 /* 결제 정보 div */
 .reservation--payment__info{
     margin-top: 4vh;
+    width: 100%;
+}
+
+
+/* 결제 정보 text 회색 글씨 */
+.reservation--color__info td{
+    color: #5C5C5C;
 }
 
 
@@ -298,56 +310,55 @@ color: #5C5C5C;
 }
 
 
-/* 결제 정보 하위 text*/
-/* 주문자 정보 하위 text */
-.reservation--price__text,
-.reservation--orderer__text{
-    margin-right: 6vw;
+/* 테이블 크기 지정 */
+.reservation--payment__info>table{
+    width: 35%;
+    height: 100px;
 }
 
-/* 결제 정보 총결제금액 + 총 주묵 금액 + 수수료 div  */
-/* 결제 정보 가격들 div */
-.reservation--price__text div,
-.reservation--price__number div{
-    margin-bottom: 1vh;
+.reservation--orderer__info>table{
+    width: 60%;
+    height: 110px;
 }
 
 
-.reservation--price__text div:not(:nth-of-type(1)),
-.reservation--price__number div:not(:nth-of-type(1)){
-    color: #5C5C5C;
-}
-
-/* 주문자 정보 하위 div 정렬 */
-.reservation--orderer__info>div:nth-of-type(2){
-    display: flex;
-}
 
 
-/* 주문자 정보 하위 div 예약자명, 연락처, 비상연락망 */
-.reservation--orderer__text div{
-    margin-bottom: 1.9vh;
+@media screen and (max-width : 767px) {
+    
+    .reservation--payment__info>table{
+        width: 50%;
+        height: 90px;
+    }
+    
+    .reservation--orderer__info>table{
+        width: 85%;
+        height: 90px;
+    }
+    
 }
 
-.reservation--orderer__input div{
-    margin-bottom: 1vh;
+
+td{
+    white-space:nowrap;
 }
+
 
 
 /* 연락처, 비상 연락망 div */
-.orderer--tel>input, 
-.orderer--emergency>input{
+.orderer--tel, 
+.orderer--emergency{
     border: none;
     background-color: #f0f0f0;
-    padding: 0.35rem;
+    padding: 0.35rem 0.7rem;
     border-radius: 3px;
-    width: 14vw;
+    font-size: 1rem;
 }
 
 input:focus {
     outline: none;
-    box-shadow: 0 0 0 3px #000 inset; 
- }
+    box-shadow: 0 0 0 1px #5C5C5C inset; 
+}
 
 
 /* 약관 동의 div */
@@ -378,6 +389,10 @@ input:focus {
     font-size: 1.2rem;
     font-weight: bold;
     margin: 2vh 0;
-    border-radius: 10px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    min-height: 40px;
+}
+
+.reservation--btn__bottom:hover{
+    background-color: #0f4957ef;
 }

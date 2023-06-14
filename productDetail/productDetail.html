@@ -88,6 +88,28 @@
                 <!-- 예약 캘린더(날짜) -->
                 <div class="detail--right__calendar">
 
+                    <table class="scriptCalendar">
+                        <thead>
+                          <tr>
+                            <td class="calendarBtn" id="btnPrevCalendar">&#60;</td>
+                            <td colspan="5">
+                              <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+                            </td>
+                            <td class="calendarBtn" id="nextNextCalendar">&#62;</td>
+                          </tr>
+                          <tr>
+                            <td>Sun</td>
+                            <td>Mon</td>
+                            <td>Tue</td>
+                            <td>Wed</td>
+                            <td>Thu</td>
+                            <td>Fri</td>
+                            <td>Sat</td>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+
                 </div>
 
                 <!-- 예약 옵션(시간) -->
@@ -615,6 +637,7 @@
     <script src="/assets/vendors/highlight.js"></script>
     <script src="/assets/js/app.js"></script>
     <script src="/guidoFront/js/productDetail.js"></script>
+    <script src="/calendar.js"></script>
     
 </body>
 </html>
