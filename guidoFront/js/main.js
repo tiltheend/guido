@@ -16,7 +16,6 @@ const whereModal = document.querySelector('.where-modal-bg');
 const whenModal = document.querySelector('.when-modal-bg');
 const guestModal = document.querySelector('.guest-modal-bg');
 
-const modalsBG = document.querySelectorAll('.modal');
 
 whereButton.addEventListener('click', () => {
   mainSearchBox.style.display = 'none';
@@ -72,11 +71,30 @@ function toggleModal(modal) {
 
 
 /* *** 모달창 닫기 *** */
-modalsBG.forEach(modal => {
+const modalsBG = document.querySelectorAll('.modal');
+
+/* modalsBG.forEach(modal => {
   modal.addEventListener('click', () => {
     modal.style.display = 'none';
     mainSearchBox.style.display = 'flex';
     searchBoxClickBox.style.display = 'none';
+  });
+}); */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 모달 요소들을 가져옵니다.
+  var modals = document.querySelectorAll('.modal');
+
+  // 각 모달 요소에 이벤트 리스너를 추가합니다.
+  modals.forEach(function(modal) {
+    // 모달 이외의 영역을 클릭하면 모달이 닫히도록 합니다.
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        mainSearchBox.style.display = 'flex';
+        searchBoxClickBox.style.display = 'none';
+      }
+    });
   });
 });
 
@@ -121,107 +139,6 @@ mypageModalClose.addEventListener("click", () => {
 });
 
 
-
-
-
-/* ***** 메인 슬라이드 ***** */
-const slides = document.querySelector('.slides'); 
-const slideImg = document.querySelectorAll('.slides li'); 
-let currentIdx = 0; // 현재 슬라이드 index
-const slideCount = slideImg.length; // 슬라이드 개수
-const prev = document.querySelector('.prev'); // 이전 버튼
-const next = document.querySelector('.next'); // 다음 버튼
-const slideWidth = 1280; // 한개의 슬라이드 넓이
-const interval = 5000; // 슬라이드 전환 간격(5초)
-
-// 슬라이드 복사
-slides.innerHTML += slides.innerHTML;
-
-const slideTotalCount = slideCount * 2; // 복사한 슬라이드까지 포함한 전체 슬라이드 개수
-let slideTimer = null;
-
-// 전체 슬라이드 컨테이너 넓이 설정
-slides.style.width = slideWidth * slideCount + 'px';
-
-function moveSlide(num) {
-  slides.style.left = -num * slideWidth + 'px';
-  currentIdx = num;
-}
-
-function startSlideShow(){
-  setInterval(function (){
-    if(currentIdx !== slideCount - 1){
-      moveSlide(currentIdx + 1);
-    } else{
-      moveSlide(0)
-    }
-  }, interval)
-}
-
-prev.addEventListener('click', function () {
-  /*첫 번째 슬라이드로 표시 됐을때는 
-  이전 버튼 눌러도 아무런 반응 없게 하기 위해 
-  currentIdx !==0일때만 moveSlide 함수 불러옴 */
-
-  if (currentIdx !== 0) {
-    moveSlide(currentIdx - 1);
-  } else{
-    moveSlide(slideCount - 1);
-  }
-});
-
-next.addEventListener('click', function () {
-  /* 마지막 슬라이드로 표시 됐을때는 
-  다음 버튼 눌러도 아무런 반응 없게 하기 위해
-  currentIdx !==slideCount - 1 일때만 
-  moveSlide 함수 불러옴 */
-  if (currentIdx !== slideCount - 1) {
-    moveSlide(currentIdx + 1);
-  } else{
-    moveSlide(0); // 현재 슬라이드 마지막 슬라이드인 경우 처음 슬라이드로 이동
-  }
-});
-
-startSlideShow(); // 슬라이드 자동 전환
-
-
-
-
-
-/* ***** 게시글 슬라이드 ***** */
-const postSlides = document.querySelector('.post-img-area'); 
-const postSlideImg = document.querySelectorAll('.post-img-area li'); 
-let postCurrentIdx = 0; // 현재 슬라이드 index
-const postSlideCount = postSlideImg.length; // 슬라이드 개수
-const mainPrev = document.querySelector('.main-prev'); // 이전 버튼
-const mainNext = document.querySelector('.main-next'); // 다음 버튼
-const postSlideWidth = 296; // 한개의 슬라이드 넓이
-const postSlideMargin = 0; // 슬라이드간의 margin 값
-
-// 전체 슬라이드 컨테이너 넓이 설정
-postSlides.style.width = (postSlideWidth + postSlideMargin) * postSlideCount + 'px';
-
-function movePostSlide(num) {
-  postSlides.style.left = -num * 296 + 'px';
-  postCurrentIdx = num;
-}
-
-mainPrev.addEventListener('click', function () {
-  if (postCurrentIdx !== 0) {
-    movePostSlide(postCurrentIdx - 1);
-  } else{
-    movePostSlide(postSlideCount - 1);
-  }
-});
-
-mainNext.addEventListener('click', function () {
-
-  if (postCurrentIdx !== postSlideCount - 1) {
-    movePostSlide(postCurrentIdx + 1);
-  } else{
-    movePostSlide(0);
-  }
-});
 
 
 

@@ -16,6 +16,7 @@
 
 
 
+
 /* ***** 메인 헤더 영역 : 로고 + 상단 아이콘 ***** */
 header, header .logo img{z-index: 300;}
 
@@ -46,8 +47,8 @@ header .main-search-box button{
 header .chatting-icon, header .alarm-icon{margin-right: 20px;}
 
 
-/* header 밑으로 길어지는 부분 */
 
+/* header 밑으로 길어지는 부분 */
 header .search-box-click-box{
   width: 100%; height: 80px; box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   display: flex; justify-content: space-between; align-items: center;
@@ -103,6 +104,8 @@ header .search-box-click-box button{
   padding-left: 40px;
   outline: none;
 }
+
+
 
 /* *** hover & click *** */
 
@@ -239,51 +242,35 @@ header .search-box-click-box button{
   margin: 24px;
 }
 
-/* 달력 */
-.calendar-container {
+/* 캘린더 */
+.calendar-container{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.calendar {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 16px;
+.scriptCalendar {
+  text-align: center;
+  padding: 15px;
+  font-weight: bolder;
+  width: 385px;
+  height: 255px;
 }
-
-.calendar caption {
+.scriptCalendar > thead > tr > td {
+  width: 50px;
+  height: 50px;
+}
+.scriptCalendar > thead > tr:first-child > td {
   font-weight: bold;
-  font-size: 1.2rem;
-  padding: 10px;
-  text-align: center;
 }
-
-.calendar thead {
-  background-color: #f2f2f2;
+.scriptCalendar > thead > tr:last-child > td {
+  color: #777;
 }
-
-.calendar th {
-  padding: 10px;
-  text-align: center;
+.scriptCalendar > tbody > tr > td {
+  width: 50px;
+  height: 50px;
 }
-
-.calendar td {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ccc;
-}
-
-.calendar .current-month {
-  background-color: #e6e6e6;
-}
-
-.calendar .selected-day {
-  background-color: #b3d9ff;
-}
-
-.calendar .today {
-  background-color: #ffff99;
+.calendarBtn {
+  cursor: pointer;
 }
 
 /* ** Guest 모달창 ** */
@@ -408,11 +395,11 @@ header .search-box-click-box button{
 
 
 /* ***** 메인 슬라이드 ***** */
-li{
+/* li{
   list-style-type: none;
 }
 
-/* 보여줄 구간의 높이와 넓이 설정 */
+보여줄 구간의 높이와 넓이 설정 
 .slideShow{
   width: 1280px;
   height: 360px;
@@ -420,11 +407,17 @@ li{
   position: relative;
   margin: 180px auto 100px auto;
   overflow: hidden;   
+  cursor: pointer;
 }
-
+.owl-carousel{
+  height: 360px;
+}
+.owl-item{
+  height: 360px;
+}
 .slides{
   position: absolute;
-  width: 10240px; /* 슬라이드할 사진과 마진 총 넓이 */
+  width: 10240px; 슬라이드할 사진과 마진 총 넓이 
   transition: left 0.5s ease-out; 
 }
 
@@ -433,7 +426,7 @@ li{
   height: 360px;
 }
 
-/* 슬라이드들 옆으로 정렬 */
+슬라이드들 옆으로 정렬 
 .slides li:not(:last-child){
   float: left;
 }
@@ -442,9 +435,9 @@ li{
   float: left;
 }
 
-/* 슬라이드 화살표 */
+슬라이드 화살표
 .controller span{
-  position:absolute;
+  position: absolute;
   color: #fff;
   font-size: 40px;
   top: 50%;
@@ -458,7 +451,98 @@ li{
 }
 .next{
   right: 30px;
+} */
+
+
+
+
+/* 메인 슬라이드 */
+
+.detail--container{
+  width: 91vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
 }
+
+/* 상단 섹션 */
+.detail--top{
+  margin-top: 170px;
+  margin-bottom: 63px;
+  position: relative;
+}
+
+/* owl 캐러셀 */
+#demos .owl-carousel,
+.owl-carousel .owl-stage-outer{
+  /* height: 40vh; */
+  height: 360px;
+  /* width: 1280px; */
+  width: 66.7vw;
+  border-radius: 15px;
+}
+
+.item{
+  overflow: hidden;
+  /* position: relative; */
+  /* height: 40vh; */
+  height: 360px;
+  border-radius: 15px;
+}
+
+
+
+.owl-carousel__prev, .owl-carousel__next {
+	z-index: 1;
+	position: absolute;
+	top: 50%;
+	/* transform: translateY(-50%); */
+	transform: translateY(-19.5px);
+  cursor: pointer;
+}
+
+.owl-carousel__prev{
+	left: 0.5vw;
+  left: 12px;
+}
+
+.owl-carousel__next {
+	right: 0.5vw;
+  right: 12px;
+}
+
+.owl-theme .owl-nav.disabled+.owl-dots{
+  position: absolute;
+  top: 90%;
+  /* left: 32%; */
+  width: 100%;
+}
+
+.owl-theme .owl-dots .owl-dot span{
+  background-color: #ffffff7b;
+}
+
+.owl-dot{
+  width: 10px;
+  height: 10px;
+  margin: 2px 7px;
+}
+
+.item>img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+
+
+
 
 
 
@@ -471,6 +555,7 @@ li{
   justify-content: center; 
   align-items: center; 
   text-align: center;
+  margin-top: 20px;
 }
 
 .categori-icon-box>div{
@@ -521,6 +606,7 @@ hr{
   position: relative;
   overflow: hidden;
   background-color: #F0F0F0;
+  cursor: pointer;
 }
 
 .post-img-area{
@@ -596,11 +682,13 @@ hr{
   align-items: center;
   text-align: center;
   justify-content: space-around;
+  cursor: pointer;
 }
 
 /* 상품 이름 */
 .main-post p{ 
   font-size: 14px;
+  cursor: pointer;
 }
 
 /* 별 */

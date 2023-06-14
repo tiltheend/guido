@@ -7,19 +7,14 @@
     <title>Guido</title>
 
     <link rel="stylesheet" href="css/style.css"> <!-- 초기 세팅 css -->
+    
+    <link rel="stylesheet" href="/assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/owlcarousel/assets/owl.theme.default.min.css">
+    
+    <script src="/assets/vendors/jquery.min.js"></script>
+    <script src="/assets/owlcarousel/owl.carousel.js"></script>
+    
     <link rel="stylesheet" href="css/main.css">
-
-    <!-- owl 슬라이드 
-    <link rel="stylesheet" href="css/main/docs.theme.min.css">
-
-    <link rel="stylesheet" href="css/main/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/main/owl.theme.default.min.css">
-
-    <link rel="stylesheet" href="css/main/owl.css">
-
-    <script src="js/main/jquery.min.js"></script>
-    <script src="js/main/owl.carousel.js"></script>
-    -->
 </head>
 
 <body>
@@ -109,70 +104,47 @@
     <!-- When 모달창 -->
     <div class="when-modal-bg modal">
         <div class="when-modal calendar-container">
-            <!-- 6월 달력 -->
-            <table class="calender">
-                <caption>June</caption>
+            <table class="scriptCalendar">
                 <thead>
-                <tr>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </tr>
+                  <tr>
+                    <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
+                    <td colspan="5">
+                      <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+                    </td>
+                    <td class="calendarBtn" id="nextNextCalendar">&#62;&#62;</td>
+                  </tr>
+                  <tr>
+                    <td>Sun</td>
+                    <td>Mon</td>
+                    <td>Tue</td>
+                    <td>Wed</td>
+                    <td>Thu</td>
+                    <td>Fri</td>
+                    <td>Sat</td>
+                  </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td></td><td></td><td></td><td></td><td></td><td>1</td><td>2</td>
-                </tr>
-                <tr>
-                    <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-                </tr>
-                <tr>
-                    <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td>
-                </tr>
-                <tr>
-                    <td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td>
-                </tr>
-                <tr>
-                    <td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td>
-                </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
-            
-            <!-- 7월 달력 -->
-            <table class="calender">
-                <caption>July</caption>
+            <table class="scriptCalendar">
                 <thead>
-                <tr>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </tr>
+                  <tr>
+                    <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
+                    <td colspan="5">
+                      <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+                    </td>
+                    <td class="calendarBtn" id="nextNextCalendar">&#62;&#62;</td>
+                  </tr>
+                  <tr>
+                    <td>Sun</td>
+                    <td>Mon</td>
+                    <td>Tue</td>
+                    <td>Wed</td>
+                    <td>Thu</td>
+                    <td>Fri</td>
+                    <td>Sat</td>
+                  </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td>
-                </tr>
-                <tr>
-                    <td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td>
-                </tr>
-                <tr>
-                    <td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td>
-                </tr>
-                <tr>
-                    <td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td>
-                </tr>
-                <tr>
-                    <td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td>
-                </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -218,9 +190,9 @@
 
 
 
-    <!-- ***** 메인 영역 ***** -->
+    <!-- ***** 메인 영역 슬라이드 ***** -->
 
-    <div class="slideShow">
+<!--     <div class="slideShow">
         <ul class="slides">
             <li><img src="images/slide1.png" alt=""></li>
             <li><img src="images/silde2.png" alt=""></li>
@@ -232,12 +204,67 @@
             <li><img src="images/silde2.png" alt=""></li>
         </ul>  
         <p class="controller">
-          
-          <!-- &lang: 왼쪽 방향 화살표
-          &rang: 오른쪽 방향 화살표 -->
+
           <span class="prev">&lang;</span>  
           <span class="next">&rang;</span>
         </p>
+    </div> -->
+
+    <div class="detail--container">
+        <section class="detail--top">
+            <div class="detail--top__slide">
+                <div class="detail--silde__container">
+                    <section id="demos">
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div class="loop owl-carousel owl-theme">
+      
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁2.jpg">
+                                    </div>
+
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁1.jpg">
+                                    </div>
+
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁3.jpg">
+                                    </div>
+
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁4.jpg">
+                                    </div>
+
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁2.jpg">
+                                    </div>
+
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁1.jpg">
+                                    </div>
+
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁3.jpg">
+                                    </div>
+
+                                    <div class="item">
+                                        <img class="detail--silde__item-img" src="/productDetail/경복궁4.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="owl-carousel__prev">
+                            <img src="/productDetail/arrow_left.svg">
+                        </div>
+                        
+                        <div class="owl-carousel__next">
+                            <img src="/productDetail/arrow_right.svg">
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
     </div>
 
 
@@ -701,8 +728,37 @@
 
 
 
+    <script>
+        jQuery(document).ready(function($) {
+        $('.loop').owlCarousel({
+            center: true,
+            items: 8,
+            loop: true,
+            nav: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            mouseDrag: false,
+            margin: 10,
+            responsive: {
+            200: {
+                items: 1
+            }
+            }
+        });
 
+        const owl = $('.owl-carousel')
+
+        $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
+
+        $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
+
+        });
+    </script>
     
+    <script src="/assets/vendors/highlight.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/guidoFront/js/calendar.js"></script>
     <script src="js/main.js"></script>
 
 </body>
