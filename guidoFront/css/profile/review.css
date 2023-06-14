@@ -1,46 +1,45 @@
 
-/* 임시 별점 */
-/* .starpoint_wrap{display:inline-block;} */
-.review-rating{
+/* 별점 주기 */
+.sale-review-info .review-rating{
     height: 24px; margin: 4px;
 }
-.review-star{
+.score-star{
     position:relative;
     background:url(../../images/profile/smallStar_empty.png) 0 0 no-repeat;
     background-size: 104px 16px;
     width: 110px; height: 20px;
     font-size:0;}
-.review-star .starpoint_bg{
+.score-star .starpoint_bg{
     display:block;
     position:absolute; top:0; left:0; height:16px;
     background:url(../../images/profile/smallStar.png) 0 0 no-repeat;
     background-size: 104px 16px;
     pointer-events:none;
 }
-.review-star .label_star{
+.score-star .label_star{
     display:inline-block;width:11px;height:16px;
 }
-.review-star .star_radio{opacity:0;width:0;height:0;position:absolute;}
-.review-star .star_radio:nth-of-type(1):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(1):checked ~ .starpoint_bg{width:10px;}
-.review-star .star_radio:nth-of-type(2):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(2):checked ~ .starpoint_bg{width:20px;}
-.review-star .star_radio:nth-of-type(3):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(3):checked ~ .starpoint_bg{width:31px;}
-.review-star .star_radio:nth-of-type(4):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(4):checked ~ .starpoint_bg{width:43px;}
-.review-star .star_radio:nth-of-type(5):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(5):checked ~ .starpoint_bg{width:52.5px;}
-.review-star .star_radio:nth-of-type(6):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(6):checked ~ .starpoint_bg{width:62px;}
-.review-star .star_radio:nth-of-type(7):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(7):checked ~ .starpoint_bg{width:74px;}
-.review-star .star_radio:nth-of-type(8):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(8):checked ~ .starpoint_bg{width:84px;}
-.review-star .star_radio:nth-of-type(9):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(9):checked ~ .starpoint_bg{width:95px;}
-.review-star .star_radio:nth-of-type(10):hover ~ .starpoint_bg,
-.review-star .star_radio:nth-of-type(10):checked ~ .starpoint_bg{width:106px;}
+.score-star .star_score{opacity:0;width:0;height:0;position:absolute;}
+.score-star .star_score:nth-of-type(1):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(1):checked ~ .starpoint_bg{width:10px;}
+.score-star .star_score:nth-of-type(2):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(2):checked ~ .starpoint_bg{width:20px;}
+.score-star .star_score:nth-of-type(3):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(3):checked ~ .starpoint_bg{width:31px;}
+.score-star .star_score:nth-of-type(4):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(4):checked ~ .starpoint_bg{width:43px;}
+.score-star .star_score:nth-of-type(5):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(5):checked ~ .starpoint_bg{width:52.5px;}
+.score-star .star_score:nth-of-type(6):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(6):checked ~ .starpoint_bg{width:62px;}
+.score-star .star_score:nth-of-type(7):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(7):checked ~ .starpoint_bg{width:74px;}
+.score-star .star_score:nth-of-type(8):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(8):checked ~ .starpoint_bg{width:84px;}
+.score-star .star_score:nth-of-type(9):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(9):checked ~ .starpoint_bg{width:95px;}
+.score-star .star_score:nth-of-type(10):hover ~ .starpoint_bg,
+.score-star .star_score:nth-of-type(10):checked ~ .starpoint_bg{width:106px;}
 
 .blind{position:absolute;clip:rect(0 0 0 0);
     margin:-1px;width:1px;height: 1px;overflow:hidden;}

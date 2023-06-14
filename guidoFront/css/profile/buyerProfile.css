@@ -3,6 +3,11 @@
 /* 임시로 하나씩 안보이게 하기 위해 잠시 주는 것!! */
 #displayNone{display: none;}
 
+/* 에러 클래스 */
+.error{
+    color: red; font-weight: bold;
+}
+
 /* ----- 구매자 프로필 ----- */
 .buyer-profile-top{
     margin:80px;
@@ -107,18 +112,17 @@
 }
 
 /* ----- 구매 내역 ----- */
-.purchase-history{
-    width: 100%; position: relative;
-}
 .purchase-history #demos, .purchase-history #demos .row,
 .purchase-history #demos .row .columns{
-    width: 100%;
+    /* width: 100%; */
 }
 .purchase-history #demos .owl-carousel .item{
     background-color: #F0F0F0;
+    /* max-width: 300px; */
 }
 
 #demos .owl-carousel .item img{
+    /* max-width: 300px; */
     width: 100%; height: 300px; 
     border: 1px solid #C5C5C5;
 }
@@ -144,14 +148,25 @@
     width: 64px; height: 64px;
     top: 0; left: -64px;
 }
+.Previous{
+    width: 10px; height: 10px;
+    /* background-color: #0F4957; */
+    position: relative;
+}
 .Previous img{
-    position: absolute; top: 216px; left: 12px;
+    position: absolute; top: -216px; left: 12px;
     width: 48px;
     z-index: 2;
     cursor: pointer;
 }
+.Next{
+    width: 10px; height: 10px;
+    /* background-color: #B1D8DA; */
+    position: relative;
+    float: right;
+}
 .Next img{
-    position: absolute; top: 216px; right: 12px;
+    position: absolute; top: -216px; right: 12px;
     width: 48px;
     z-index: 2;
     cursor: pointer;
@@ -294,19 +309,19 @@
     border-radius: 5px;
 }
 .buyer-profile-top .review-write>div h3{
-    margin: 24px 0; margin-right: 12px;
+    margin: 24px 0; margin-right: 20px;
     font-size: 1.375rem;
 }
 .buyer-profile-top #reviewContent{
-    width: 100%; height: 46vh;
+    width: 100%; height: 30vh;
     resize: none;
     border: 1px solid #c5c5c5;
     border-radius: 5px;
     padding: 8px;
+    font-size: 1rem;
 }
 .buyer-profile-top .review-write form>div:last-of-type{
     display: flex; justify-content: center;
-    margin-top: 10px;
 }
 .buyer-profile-top .review-write form>div>button{
     width: 180px; height: 48px;
@@ -315,8 +330,67 @@
     margin: 10px;
     /* border-radius: 5px; */
 }
+.write-count{display: flex; justify-content: space-between;}
+.write-count .over-error{
+    margin-top: 4px;
+    font-size: 0rem;
+}
 
-/* 내 후기 수정 */
+/* 별점 주기 */
+.review-write .review-star-score{
+    display: flex; align-items: center;
+}
+.review-write .sale-review-info .review-rating{
+    height: 26px; margin: 4px;
+    margin-right: 20px;
+}
+.review-write .score-star{
+    position:relative;
+    background:url(../../images/profile/largeStar_empty.png) 0 0 no-repeat;
+    background-size: 160px 26px;
+    width: 160px; height: 26px;
+    font-size:0;
+}
+.review-write .score-star .starpoint_bg{
+    display:block;
+    position:absolute; top:0; left:0; height:26px;
+    background:url(../../images/profile/largeStar.png) 0 0 no-repeat;
+    background-size: 160px 26px;
+    pointer-events:none;
+}
+.review-write .score-star .label_star{
+    display:inline-block;width:16px;height:26px;
+}
+.review-write .score-star .star_score{opacity:0;width:0;height:0;position:absolute;}
+.review-write .score-star .star_score:nth-of-type(1):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(1):checked ~ .starpoint_bg{width:10%}
+.review-write .score-star .star_score:nth-of-type(2):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(2):checked ~ .starpoint_bg{width:20%}
+.review-write .score-star .star_score:nth-of-type(3):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(3):checked ~ .starpoint_bg{width:30%}
+.review-write .score-star .star_score:nth-of-type(4):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(4):checked ~ .starpoint_bg{width:40%}
+.review-write .score-star .star_score:nth-of-type(5):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(5):checked ~ .starpoint_bg{width:50%}
+.review-write .score-star .star_score:nth-of-type(6):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(6):checked ~ .starpoint_bg{width:60%}
+.review-write .score-star .star_score:nth-of-type(7):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(7):checked ~ .starpoint_bg{width:70%}
+.review-write .score-star .star_score:nth-of-type(8):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(8):checked ~ .starpoint_bg{width:81%}
+.review-write .score-star .star_score:nth-of-type(9):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(9):checked ~ .starpoint_bg{width:91%}
+.review-write .score-star .star_score:nth-of-type(10):hover ~ .starpoint_bg,
+.review-write .score-star .star_score:nth-of-type(10):checked ~ .starpoint_bg{width:100%}
+
+.blind{position:absolute;clip:rect(0 0 0 0);
+    margin:-1px;width:1px;height: 1px;overflow:hidden;}
+
+.review-write .review-star-score>span{ /* 별점 */
+    margin-left: 12px;
+}
+
+/* ---------- 내 후기 수정 ---------- */
 .buyer-profile-top .myreview-edit button{ 
     width: 80px; height: 34px;
     background-color: #F0F0F0; color: #5C5C5C;
@@ -331,6 +405,112 @@
 }
 .buyer-profile-top .myreview-edit>button:first-of-type{
     margin-right: 12px;
+}
+
+.buyer-profile-top .review-edit{
+    position: fixed; top: 0; left: 0;
+    z-index: 2;
+    width: 100vw; height: 100vh;
+    background-color: #5C5C5C60;
+    display: flex; justify-content: center; align-items: center;
+    display: none;
+}
+.buyer-profile-top .review-edit>div{
+    width: 900px; height: 600px;
+    background-color: #fff;
+    padding: 32px;
+    
+}
+.buyer-profile-top .review-edit>div h2{
+    font-size: 1.625rem;
+}
+.buyer-profile-top .review-edit #reviewSaleList{
+    width: 100%; height: 40px;
+    margin-top: 16px;
+    padding: 4px;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+}
+.buyer-profile-top .review-edit>div h3{
+    margin: 24px 0; margin-right: 20px;
+    font-size: 1.375rem;
+}
+.buyer-profile-top #reviewContent{
+    width: 100%; height: 30vh;
+    resize: none;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 1rem;
+}
+.buyer-profile-top .review-edit form>div:last-of-type{
+    display: flex; justify-content: center;
+}
+.buyer-profile-top .review-edit form>div>button{
+    width: 180px; height: 48px;
+    background-color: #0F4957; color: #fff;
+    font-size: 1rem; font-weight: bold;
+    margin: 10px;
+    /* border-radius: 5px; */
+}
+.write-count{display: flex; justify-content: space-between;}
+.write-count .over-error{
+    margin-top: 4px;
+    font-size: 0rem;
+}
+
+/* 별점 수정하기 */
+.review-edit .review-star-score{
+    display: flex; align-items: center;
+}
+.review-edit .sale-review-info .review-rating{
+    height: 26px; margin: 4px;
+    margin-right: 20px;
+}
+.review-edit .score-star{
+    position:relative;
+    background:url(../../images/profile/largeStar_empty.png) 0 0 no-repeat;
+    background-size: 160px 26px;
+    width: 160px; height: 26px;
+    font-size:0;
+}
+.review-edit .score-star .starpoint_bg{
+    display:block;
+    position:absolute; top:0; left:0; height:26px;
+    background:url(../../images/profile/largeStar.png) 0 0 no-repeat;
+    background-size: 160px 26px;
+    pointer-events:none;
+}
+.review-edit .score-star .label_star{
+    display:inline-block;width:16px;height:26px;
+}
+.review-edit .score-star .star_score{opacity:0;width:0;height:0;position:absolute;}
+.review-edit .score-star .star_score:nth-of-type(1):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(1):checked ~ .starpoint_bg{width:10%}
+.review-edit .score-star .star_score:nth-of-type(2):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(2):checked ~ .starpoint_bg{width:20%}
+.review-edit .score-star .star_score:nth-of-type(3):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(3):checked ~ .starpoint_bg{width:30%}
+.review-edit .score-star .star_score:nth-of-type(4):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(4):checked ~ .starpoint_bg{width:40%}
+.review-edit .score-star .star_score:nth-of-type(5):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(5):checked ~ .starpoint_bg{width:50%}
+.review-edit .score-star .star_score:nth-of-type(6):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(6):checked ~ .starpoint_bg{width:60%}
+.review-edit .score-star .star_score:nth-of-type(7):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(7):checked ~ .starpoint_bg{width:70%}
+.review-edit .score-star .star_score:nth-of-type(8):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(8):checked ~ .starpoint_bg{width:81%}
+.review-edit .score-star .star_score:nth-of-type(9):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(9):checked ~ .starpoint_bg{width:91%}
+.review-edit .score-star .star_score:nth-of-type(10):hover ~ .starpoint_bg,
+.review-edit .score-star .star_score:nth-of-type(10):checked ~ .starpoint_bg{width:100%}
+
+.blind{position:absolute;clip:rect(0 0 0 0);
+    margin:-1px;width:1px;height: 1px;overflow:hidden;}
+
+.review-edit .review-star-score>span{ /* 별점 */
+    margin-left: 12px;
 }
 
 /* 임시 별점 */
@@ -359,25 +539,15 @@
     display:inline-block;width:11px;height:16px;
 }
 .review-star .star_radio{opacity:0;width:0;height:0;position:absolute;}
-/* .review-star .star_radio:nth-of-type(1):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(1):checked ~ .starpoint_bg{width:10px;}
-/* .review-star .star_radio:nth-of-type(2):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(2):checked ~ .starpoint_bg{width:20px;}
-/* .review-star .star_radio:nth-of-type(3):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(3):checked ~ .starpoint_bg{width:31px;}
-/* .review-star .star_radio:nth-of-type(4):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(4):checked ~ .starpoint_bg{width:43px;}
-/* .review-star .star_radio:nth-of-type(5):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(5):checked ~ .starpoint_bg{width:52.5px;}
-/* .review-star .star_radio:nth-of-type(6):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(6):checked ~ .starpoint_bg{width:62px;}
-/* .review-star .star_radio:nth-of-type(7):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(7):checked ~ .starpoint_bg{width:74px;}
-/* .review-star .star_radio:nth-of-type(8):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(8):checked ~ .starpoint_bg{width:84px;}
-/* .review-star .star_radio:nth-of-type(9):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(9):checked ~ .starpoint_bg{width:95px;}
-/* .review-star .star_radio:nth-of-type(10):hover ~ .starpoint_bg, */
 .review-star .star_radio:nth-of-type(10):checked ~ .starpoint_bg{width:106px;}
 
 .blind{position:absolute;clip:rect(0 0 0 0);

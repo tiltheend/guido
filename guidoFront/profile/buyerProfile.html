@@ -14,6 +14,8 @@
     <script src="../js/profile/nabong_owl/owl.carousel.js"></script>
     <script src="../js/profile/nabong_owl/owl.carousel.min.js"></script>
 
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+
     <style>
         header{width: 100%; height: 80px; background-color: #B1D8DA;}
     </style>
@@ -115,11 +117,90 @@
                             <option>상품2</option>
                             <option>상품3</option>
                         </select>
-                        <div class="review-star-score">
+                        <div class="review-star-score"> <!-- 별점 주기 -->
                             <h3>Star Rating</h3>
-
+                            <div class="review-rating">
+                                <div class="score-star">
+                                    <label for="starpoint_W1" class="label_star" title="0.5"><span class="blind">0.5점</span></label>
+                                    <label for="starpoint_W2" class="label_star" title="1"><span class="blind">1점</span></label>
+                                    <label for="starpoint_W3" class="label_star" title="1.5"><span class="blind">1.5점</span></label>
+                                    <label for="starpoint_W4" class="label_star" title="2"><span class="blind">2점</span></label>
+                                    <label for="starpoint_W5" class="label_star" title="2.5"><span class="blind">2.5점</span></label>
+                                    <label for="starpoint_W6" class="label_star" title="3"><span class="blind">3점</span></label>
+                                    <label for="starpoint_W7" class="label_star" title="3.5"><span class="blind">3.5점</span></label>
+                                    <label for="starpoint_W8" class="label_star" title="4"><span class="blind">4점</span></label>
+                                    <label for="starpoint_W9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
+                                    <label for="starpoint_W10" class="label_star" title="5"><span class="blind">5점</span></label>
+                                    <input type="radio" name="starScore" id="starpoint_W1" class="star_score" value="0.5">
+                                    <input type="radio" name="starScore" id="starpoint_W2" class="star_score" value="1.0">
+                                    <input type="radio" name="starScore" id="starpoint_W3" class="star_score" value="1.5">
+                                    <input type="radio" name="starScore" id="starpoint_W4" class="star_score" value="2.0">
+                                    <input type="radio" name="starScore" id="starpoint_W5" class="star_score" value="2.5">
+                                    <input type="radio" name="starScore" id="starpoint_W6" class="star_score" value="3.0">
+                                    <input type="radio" name="starScore" id="starpoint_W7" class="star_score" value="3.5">
+                                    <input type="radio" name="starScore" id="starpoint_W8" class="star_score" value="4.0">
+                                    <input type="radio" name="starScore" id="starpoint_W9" class="star_score" value="4.5">
+                                    <input type="radio" name="starScore" id="starpoint_W10" class="star_score" value="5.0">
+                                    <span class="starpoint_bg"></span>
+                                </div>
+                            </div>
+                            <span class="score-span">0.0</span>
                         </div>
                         <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요."></textarea>
+                        <div class="write-count">
+                            <span class="over-error"><i class="fa-sharp fa-solid fa-bomb"></i> 500자 이하로 작성해주세요.</span>
+                            <div><span id="count">0</span> / 500</div>
+                        </div>
+                        <div>
+                            <button class="review-modal-close">Close</button>
+                            <button>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 리뷰 수정 모달 -->
+            <div class="review-edit"> <!-- 불투명 배경 -->
+                <div> <!-- 하얀 배경 -->
+                    <form action="">
+                        <h2>Purchase History</h2>
+                        <input type="text" name="reviewSaleList" id="reviewSaleList"
+                        value="[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea">
+        
+                        <div class="review-star-score"> <!-- 별점 수정 -->
+                            <h3>Star Rating</h3>
+                            <div class="review-rating">
+                                <div class="score-star">
+                                    <label for="starpoint_E1" class="label_star" title="0.5"><span class="blind">0.5점</span></label>
+                                    <label for="starpoint_E2" class="label_star" title="1"><span class="blind">1점</span></label>
+                                    <label for="starpoint_E3" class="label_star" title="1.5"><span class="blind">1.5점</span></label>
+                                    <label for="starpoint_E4" class="label_star" title="2"><span class="blind">2점</span></label>
+                                    <label for="starpoint_E5" class="label_star" title="2.5"><span class="blind">2.5점</span></label>
+                                    <label for="starpoint_E6" class="label_star" title="3"><span class="blind">3점</span></label>
+                                    <label for="starpoint_E7" class="label_star" title="3.5"><span class="blind">3.5점</span></label>
+                                    <label for="starpoint_E8" class="label_star" title="4"><span class="blind">4점</span></label>
+                                    <label for="starpoint_E9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
+                                    <label for="starpoint_E10" class="label_star" title="5"><span class="blind">5점</span></label>
+                                    <input type="radio" name="starScore" id="starpoint_E1" class="star_score" value="0.5">
+                                    <input type="radio" name="starScore" id="starpoint_E2" class="star_score" value="1.0">
+                                    <input type="radio" name="starScore" id="starpoint_E3" class="star_score" value="1.5">
+                                    <input type="radio" name="starScore" id="starpoint_E4" class="star_score" value="2.0">
+                                    <input type="radio" name="starScore" id="starpoint_E5" class="star_score" value="2.5">
+                                    <input type="radio" name="starScore" id="starpoint_E6" class="star_score" value="3.0">
+                                    <input type="radio" name="starScore" id="starpoint_E7" class="star_score" value="3.5">
+                                    <input type="radio" name="starScore" id="starpoint_E8" class="star_score" value="4.0">
+                                    <input type="radio" name="starScore" id="starpoint_E9" class="star_score" value="4.5" checked>
+                                    <input type="radio" name="starScore" id="starpoint_E10" class="star_score" value="5.0">
+                                    <span class="starpoint_bg"></span>
+                                </div>
+                            </div>
+                            <span class="score-span"></span>
+                        </div>
+                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요.">그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</textarea>
+                        <div class="write-count">
+                            <span class="over-error"><i class="fa-sharp fa-solid fa-bomb"></i> 500자 이하로 작성해주세요.</span>
+                            <div><span id="count">0</span> / 500</div>
+                        </div>
                         <div>
                             <button class="review-modal-close">Close</button>
                             <button>Submit</button>
@@ -169,8 +250,8 @@
 
                         <div class="comment-view"> <!-- 리뷰 답글 버튼 -->
                             <div class="myreview-edit">
-                                <button>Edit</button>
-                                <button>Delete</button>
+                                <button class="review-edit-btn">Edit</button>
+                                <button class="review-delete-btn">Delete</button>
                             </div>
                             <img src="../images/profile/comment-view.png" alt="comment-view">
                             <img src="../images/profile/comment-view_hover.png" alt="comment-view_hover">
