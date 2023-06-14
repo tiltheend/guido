@@ -13,10 +13,11 @@
 
         <div class="reservation--top">
             <div class="reservation--top__title">예약/결제</div>
+            
+            <div class="reservation--top__divisionline"></div>
         </div>
         
         
-        <div class="reservation--top__divisionline"></div>
 
         
         <div class="reservation--middle">
@@ -96,21 +97,24 @@
                 <div class="reservation--payment__info">
                     <div class="reservation--text">결제 정보</div>
 
-                    <div>
+                    <table>
+                        <tr>
+                            <td>총 결제 금액</td>
+                            <td>KRW <strong>209,000</strong></td>
+                        </tr>
 
-                        <div class="reservation--price__text">
-                            <div>총 결제 금액</div>
-                            <div>총 주문 금액</div>
-                            <div>수수료</div>
-                        </div>
-    
-                        <div class="reservation--price__number">
-                            <div>KRW <strong>209,000</strong></div>
-                            <div>KRW 190,000</div>
-                            <div>KRW 19,000</div>
-                        </div>
+                        <tr class="reservation--color__info">
+                            <td>총 주문 금액</td>
+                            <td>KRW 190,000</td>
+                        </tr>
 
-                    </div>
+                        <tr class="reservation--color__info">
+                            <td>수수료</td>
+                            <td>KRW 19,000</td>
+                        </tr>
+                        
+                    </table>
+
                 </div>
                 
 
@@ -122,32 +126,25 @@
                 <div class="reservation--orderer__info">
                     <div class="reservation--text">주문자 정보</div>
 
+                    <table>
+                        <tr>
+                            <td>예약자명</td>
+                            <td>John Doe</td>
+                        </tr>
 
-                    <div>
+                        <tr>
+                            <td>연락처</td>
+                            <td><input type="text" class="orderer--tel"></td>
+                        </tr>
+
+                        <tr>
+                            <td>비상 연락망</td>
+                            <td><input type="text" class="orderer--emergency"></td>
+                        </tr>
                         
-                        <div class="reservation--orderer__text">
-                            <div>예약자명</div>
-                            <div>연락처</div>
-                            <div>비상 연락망</div>
-                        </div>
-    
-                        <div class="reservation--orderer__input">
-                            <div>John Doe</div>
-                            <div class="orderer--tel"><input type="text"></div>
-                            <div class="orderer--emergency"><input type="text"></div>
-                        </div>
-
-                    </div>
+                    </table>
 
                 </div>
-
-
-
-
-
-
-
-
 
             </div>
 
@@ -163,7 +160,7 @@
                     <div class="reservation--text__bottom">주문 내용을 확인하였으며 약관에 동의합니다.</div>
                 </div>
 
-                <button class="reservation--btn__bottom">209,000 won payment</button>
+                <a href="/reservation/reservationDetails.html"><button class="reservation--btn__bottom">209,000 won payment</button></a>
 
         </div>
     </div>

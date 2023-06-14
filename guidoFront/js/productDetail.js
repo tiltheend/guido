@@ -22,19 +22,6 @@ menuLinks.forEach(function(link) {
 });
 
 
-/* menuLi.forEach(function(li){
-    li.addEventListener('click', function(e){
-
-        menuLi.forEach(function(li){
-            li.classList.remove('scroll--active');
-        });
-
-        this.classList.add('scroll--active');
-        
-    })
-}); */
-
-
 
 
 /* 예약 1박 시 인원 수 증가 버튼 클릭 이벤트 */
