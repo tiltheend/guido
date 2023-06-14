@@ -456,7 +456,7 @@ header .search-box-click-box button{
 
 
 
-/* 메인 슬라이드 */
+/* ***** 메인 슬라이드 ***** */
 
 .detail--container{
   width: 91vw;
@@ -536,6 +536,74 @@ header .search-box-click-box button{
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+
+
+
+
+/* ***** 게시글 슬라이드 ***** */
+.container--inner__top__left{
+  /* border: 1px solid brown; */
+  width: 300px;
+  height: 370px;
+  display: flex;
+  justify-content: start;
+  margin-right: 50px;
+
+}
+
+.carousel-wrapper{
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.carousel-wrapper > .carousel {
+  display: flex;
+  position: relative;
+  transition-duration: 0.3s;
+}
+
+.prev{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: bolder;
+  border: none;
+  background-color: #d8e2f0;
+  box-shadow:2px 2px 2px #8e8d8d;
+  position: absolute;
+  z-index: 100px;
+  margin-top: 135px;
+  margin-left: 5px;
+  /* transition-duration: 0.2s; */
+  opacity: 0.6;
+  cursor: pointer;
+}
+.next{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: bolder;
+  border: none;
+  background-color: #d8e2f0;
+  box-shadow:2px 2px 2px #c2c2c2;
+  position: absolute;
+  z-index: 100px;
+  margin-left: 265px;
+  margin-top: 135px;
+  /* transition-duration: 0.2s; */
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.container--inner__top__left img{
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 300px;
+  max-height: 300px;
+  border-radius: 10px;
 }
 
 
@@ -631,13 +699,13 @@ hr{
   right: 10px;
   width: 25px;
   height: 21px;
-  background-image: url('/guidoFront/images/icons/like.png'); /* 빈 하트 아이콘 이미지 파일 경로 */
+  background-image: url('/guidoFront/images/icons/like.png'); 
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .heart-icon.selected {
-  background-image: url('/guidoFront/images/icons/liked.png'); /* 채워진 하트 아이콘 이미지 파일 경로 */
+  background-image: url('/guidoFront/images/icons/liked.png'); 
 }
 
 /* 슬라이드들 옆으로 정렬 */

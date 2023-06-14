@@ -219,25 +219,29 @@ header .search-box-click-box button{
 
 /* ***** 게시글 영역 ***** */
 hr{
-    width: 60%;
-    margin: 0 auto;
+  width: 60%;
+  margin: 0 auto;
 }
 .event-page{
-    margin-top: 160px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
+  margin-top: 160px;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
 }
 
 .local-trip-title, .popular-tour-title, .enroll-payment-title{
-    font-size: 16px;
+    font-size: 22px;
     display: flex;
     justify-content: center;
     margin-top: 52px;
+    margin-bottom: 10px;
 }
 
-.local-trip-event, .popular-tour-event, .enroll-payment-event{
+
+
+/* .local-trip-event, .popular-tour-event, .enroll-payment-event{
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -251,9 +255,11 @@ hr{
     background-color: #1C797D;
     border-radius: 10px;
     margin: 20px 12px;
+} */
+
+#demos_1{
+  width: 60vw;
 }
-
-
 
 
 

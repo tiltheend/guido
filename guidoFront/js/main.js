@@ -205,3 +205,9 @@ document.addEventListener('DOMContentLoaded', function() {
     clickDivs[3].classList.add('clicked');
   });
 });
+
+
+
+
+
+

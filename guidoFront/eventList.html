@@ -7,10 +7,11 @@
     <title>Guido</title>
 
     <link rel="stylesheet" href="css/style.css"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" href="css/main.css"> 
     <link rel="stylesheet" href="css/eventList.css">
 
-    <!-- owl 슬라이드 
-    <link rel="stylesheet" href="css/main/docs.theme.min.css">
+    <!-- owl 슬라이드  -->
+    <!-- <link rel="stylesheet" href="css/main/docs.theme.min.css"> -->
 
     <link rel="stylesheet" href="css/main/owl.carousel.min.css">
     <link rel="stylesheet" href="css/main/owl.theme.default.min.css">
@@ -19,7 +20,7 @@
 
     <script src="js/main/jquery.min.js"></script>
     <script src="js/main/owl.carousel.js"></script>
-    -->
+   
 </head>
 
 <body>
@@ -40,16 +41,28 @@
             </svg>
         </div>
         <div class="search-box-click-box"> <!-- *** 밑으로 길어지는 바탕 부분 *** -->
-            <div class="search-box-click">
-                <button type="button" class="where-button-click">Where</button>
-                <button type="button" class="check-in-button-click">Check-in</button>
-                <button type="button" class="check-out-button-click">Check-out</button>
-                <button type="button" class="guest-button-click">Guest</button>
-                <div>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.8067 12.86L11.54 10.6C12.2713 9.66831 12.6681 8.51777 12.6667 7.33334C12.6667 6.2785 12.3539 5.24736 11.7678 4.37029C11.1818 3.49323 10.3489 2.80965 9.37431 2.40598C8.39978 2.00231 7.32742 1.89669 6.29285 2.10248C5.25829 2.30827 4.30798 2.81622 3.5621 3.5621C2.81622 4.30798 2.30827 5.25829 2.10248 6.29285C1.89669 7.32742 2.00231 8.39978 2.40598 9.37431C2.80965 10.3489 3.49323 11.1818 4.37029 11.7678C5.24736 12.3539 6.2785 12.6667 7.33334 12.6667C8.51777 12.6681 9.66831 12.2713 10.6 11.54L12.86 13.8067C12.922 13.8692 12.9957 13.9188 13.077 13.9526C13.1582 13.9864 13.2453 14.0039 13.3333 14.0039C13.4213 14.0039 13.5085 13.9864 13.5897 13.9526C13.671 13.9188 13.7447 13.8692 13.8067 13.8067C13.8692 13.7447 13.9188 13.671 13.9526 13.5897C13.9864 13.5085 14.0039 13.4213 14.0039 13.3333C14.0039 13.2453 13.9864 13.1582 13.9526 13.077C13.9188 12.9957 13.8692 12.922 13.8067 12.86ZM3.33334 7.33334C3.33334 6.54221 3.56793 5.76885 4.00746 5.11106C4.44698 4.45326 5.0717 3.94057 5.8026 3.63782C6.53351 3.33507 7.33777 3.25585 8.1137 3.41019C8.88962 3.56454 9.60235 3.9455 10.1618 4.50491C10.7212 5.06432 11.1021 5.77705 11.2565 6.55297C11.4108 7.3289 11.3316 8.13317 11.0289 8.86407C10.7261 9.59497 10.2134 10.2197 9.55562 10.6592C8.89782 11.0987 8.12446 11.3333 7.33334 11.3333C6.27247 11.3333 5.25505 10.9119 4.50491 10.1618C3.75476 9.41162 3.33334 8.3942 3.33334 7.33334Z" fill="white"/>
-                    </svg>
-                    Search
+            <div class="search-box-click"> <!-- 검색 전체 창 -->
+                <div class="click-div">
+                    <button type="button" class="where-button-click">
+                        <div>
+                            <input type="text" placeholder="장소를 입력하세요">
+                        </div>
+                    </button>
+                </div>
+                <div class="click-div">
+                    <button type="button" class="check-in-button-click">Check-in</button>
+                </div>
+                <div class="click-div">
+                    <button type="button" class="check-out-button-click">Check-out</button>
+                </div>
+                <div class="click-div">
+                    <button type="button" class="guest-button-click">Guest</button>
+                    <div class="final-search-btn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.8067 12.86L11.54 10.6C12.2713 9.66831 12.6681 8.51777 12.6667 7.33334C12.6667 6.2785 12.3539 5.24736 11.7678 4.37029C11.1818 3.49323 10.3489 2.80965 9.37431 2.40598C8.39978 2.00231 7.32742 1.89669 6.29285 2.10248C5.25829 2.30827 4.30798 2.81622 3.5621 3.5621C2.81622 4.30798 2.30827 5.25829 2.10248 6.29285C1.89669 7.32742 2.00231 8.39978 2.40598 9.37431C2.80965 10.3489 3.49323 11.1818 4.37029 11.7678C5.24736 12.3539 6.2785 12.6667 7.33334 12.6667C8.51777 12.6681 9.66831 12.2713 10.6 11.54L12.86 13.8067C12.922 13.8692 12.9957 13.9188 13.077 13.9526C13.1582 13.9864 13.2453 14.0039 13.3333 14.0039C13.4213 14.0039 13.5085 13.9864 13.5897 13.9526C13.671 13.9188 13.7447 13.8692 13.8067 13.8067C13.8692 13.7447 13.9188 13.671 13.9526 13.5897C13.9864 13.5085 14.0039 13.4213 14.0039 13.3333C14.0039 13.2453 13.9864 13.1582 13.9526 13.077C13.9188 12.9957 13.8692 12.922 13.8067 12.86ZM3.33334 7.33334C3.33334 6.54221 3.56793 5.76885 4.00746 5.11106C4.44698 4.45326 5.0717 3.94057 5.8026 3.63782C6.53351 3.33507 7.33777 3.25585 8.1137 3.41019C8.88962 3.56454 9.60235 3.9455 10.1618 4.50491C10.7212 5.06432 11.1021 5.77705 11.2565 6.55297C11.4108 7.3289 11.3316 8.13317 11.0289 8.86407C10.7261 9.59497 10.2134 10.2197 9.55562 10.6592C8.89782 11.0987 8.12446 11.3333 7.33334 11.3333C6.27247 11.3333 5.25505 10.9119 4.50491 10.1618C3.75476 9.41162 3.33334 8.3942 3.33334 7.33334Z" fill="white"/>
+                        </svg>
+                        Search
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +85,7 @@
                 </svg>
             </div>
 
-            <div class="myPage-icon">
+            <div class="mypage-icon">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="32" height="32" rx="16" fill="#1C797D"/>
                     <path d="M16 15C16.7911 15 17.5645 14.7654 18.2223 14.3259C18.8801 13.8864 19.3928 13.2616 19.6955 12.5307C19.9983 11.7998 20.0775 10.9956 19.9231 10.2196C19.7688 9.44372 19.3878 8.73098 18.8284 8.17157C18.269 7.61216 17.5563 7.2312 16.7804 7.07686C16.0044 6.92252 15.2002 7.00173 14.4693 7.30448C13.7384 7.60723 13.1136 8.11992 12.6741 8.77772C12.2346 9.43552 12 10.2089 12 11C12 12.0609 12.4214 13.0783 13.1716 13.8284C13.9217 14.5786 14.9391 15 16 15Z" fill="white"/>
@@ -83,133 +96,323 @@
     </header>
 
 
-    <div class="main-container">
-
-        <!-- Where 모달창 -->
-        <div class="where-modal-bg modal">
-            <div class="where-modal">
-                <div>
-                    <div><img src="images/icons/location.png" alt=""> 경복궁</div>
-                    <div><img src="images/icons/location.png" alt=""> 덕수궁</div>
-                    <div><img src="images/icons/location.png" alt=""> 덕수궁 돌담길</div>
-                </div>
+    <!-- Where 모달창 -->
+    <div class="where-modal-bg modal">
+        <div class="where-modal">
+            <div>
+                <div><img src="images/icons/location_pin.svg" alt=""> 경복궁</div>
+                <div><img src="images/icons/location_pin.svg" alt=""> 덕수궁</div>
+                <div><img src="images/icons/location_pin.svg" alt=""> 덕수궁 돌담길</div>
             </div>
         </div>
-
-        <!-- When 모달창 -->
-        <div class="when-modal-bg modal">
-            <div class="when-modal calendar-container">
-                <!-- 6월 달력 -->
-                <table class="calender">
-                    <caption>June</caption>
-                    <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td><td></td><td></td><td></td><td></td><td>1</td><td>2</td>
-                    </tr>
-                    <tr>
-                        <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-                    </tr>
-                    <tr>
-                        <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td>
-                    </tr>
-                    <tr>
-                        <td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td>
-                    </tr>
-                    <tr>
-                        <td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td>
-                    </tr>
-                    </tbody>
-                </table>
-                
-                <!-- 7월 달력 -->
-                <table class="calender">
-                    <caption>July</caption>
-                    <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td>
-                    </tr>
-                    <tr>
-                        <td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td>
-                    </tr>
-                    <tr>
-                        <td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td>
-                    </tr>
-                    <tr>
-                        <td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td>
-                    </tr>
-                    <tr>
-                        <td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Guest 모달창 -->
-        <div class="guest-modal-bg modal">
-            <div class="guest-modal">
-                <div>Guest</div>
-                <div class="guest-up-down">
-                    <div class="main--right__guest-minus">&minus;</div>
-                    <div class="main--right__guest-count">1</div>
-                    <div class="main--right__guest-plus">&plus;</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ----------------------------------------------------------------------------- -->
-
-        <div class="event-page">EVENT</div>
-        <hr>
-
-        <div class="local-trip-title">국내 여행 이벤트</div>
-        <div class="local-trip-event">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-
-        <div class="popular-tour-title">인기 투어 이벤트</div>
-        <div class="popular-tour-event">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-
-        <div class="enroll-payment-title">회원 가입 & 결제 이벤트</div>
-        <div class="enroll-payment-event">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-
-
     </div>
+
+    <!-- When 모달창 -->
+    <div class="when-modal-bg modal">
+        <div class="when-modal calendar-container">
+            <table class="scriptCalendar">
+                <thead>
+                  <tr>
+                    <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
+                    <td colspan="5">
+                      <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+                    </td>
+                    <td class="calendarBtn" id="nextNextCalendar">&#62;&#62;</td>
+                  </tr>
+                  <tr>
+                    <td>Sun</td>
+                    <td>Mon</td>
+                    <td>Tue</td>
+                    <td>Wed</td>
+                    <td>Thu</td>
+                    <td>Fri</td>
+                    <td>Sat</td>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <table class="scriptCalendar">
+                <thead>
+                  <tr>
+                    <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
+                    <td colspan="5">
+                      <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+                    </td>
+                    <td class="calendarBtn" id="nextNextCalendar">&#62;&#62;</td>
+                  </tr>
+                  <tr>
+                    <td>Sun</td>
+                    <td>Mon</td>
+                    <td>Tue</td>
+                    <td>Wed</td>
+                    <td>Thu</td>
+                    <td>Fri</td>
+                    <td>Sat</td>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Guest 모달창 -->
+    <div class="guest-modal-bg modal">
+        <div class="guest-modal">
+            <div>Guest</div>
+            <div class="guest-up-down">
+                <div class="main--right__guest-minus">&minus;</div>
+                <div class="main--right__guest-count">1</div>
+                <div class="main--right__guest-plus">&plus;</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 마이페이지 모달창 -->
+    <div class="mypage-modal">
+        <div>
+            <div class="mypage-modal-close"></div>
+            <div>마이페이지</div>
+            <div>결제 및 예약 내역</div>
+            <div>위시리스트</div>
+            <hr>
+            <div>1:1 문의</div>
+            <div>로그아웃</div>
+        </div>
+    </div>
+
+    <!-- 알람 모달창 -->
+    <div class="alarm-modal">
+        <div>
+            <div class="alarm-modal-close"></div>
+            <div><img src="images/icons/alarm_guide.png" alt="">tiltheend 가이드님의 예약이 완료되었습니다.</div>
+            <div><img src="images/icons/alarm_guide.png" alt="">tiltheend 가이드님이 메세지를 보내셨습니다.</div>
+            <div><img src="images/icons/alarm_wish.svg" alt="">관심 상품 “경복궁” 상품이 등록되었습니다.</div>
+        </div>
+    </div>
+
+    <!-- ----------------------------------------------------------------------------- -->
+
+
+   
+
+    <div class="event-page">EVENT</div>
+    <hr>
+
+    <div class="local-trip-title">국내 여행 이벤트</div>
+    <section id="demos_1">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <!-- <div class="item">
+                        <h4>2</h4>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="popular-tour-title">인기 투어 이벤트</div>
+    <section id="demos_2">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <!-- <div class="item">
+                        <h4>2</h4>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="enroll-payment-title">회원 가입 & 결제 이벤트</div>
+    <section id="demos_3">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <!-- <div class="item">
+                        <h4>2</h4>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="demos_4">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <!-- <div class="item">
+                        <h4>2</h4>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <hr>
+    <section id="demos">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="slider-item-link">
+                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <!-- <div class="item">
+                        <h4>2</h4>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 
 
@@ -230,11 +433,36 @@
         <div class="project-info">프로젝트 정보 | 연락처</div>
     </footer>
 
-
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                nav: true
+                },
+                600: {
+                    items: 2,
+                nav: false
+                },
+                1200: {
+                    items: 3,
+                nav: true,
+                loop: false,
+                margin: 20
+                }
+            }
+            })
+        })
+    </script>
 
 
     
     <script src="js/eventList.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>
