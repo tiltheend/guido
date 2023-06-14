@@ -1,0 +1,413 @@
+/* -----------------구매자 프로필---------------------- */
+
+/* 임시로 하나씩 안보이게 하기 위해 잠시 주는 것!! */
+#displayNone{display: none;}
+
+/* ----- 구매자 프로필 ----- */
+.buyer-profile-top{
+    margin:80px;
+    /* display: flex; justify-content: space-between; */
+    display: flex; justify-content: space-around;
+}
+
+/* 프로필 위 가이드 배너 */
+.buyer-profile-top .guide-banner{margin-bottom: 4px;}
+.buyer-profile-top .guide-banner>img{height: 45px;}
+
+/* 프로필 왼쪽 박스 */
+.buyer-profile-top .profile-left{
+    width: 336px; border-radius: 5px; 
+    background-color: #F0F0F0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.buyer-profile-top .profile-img-box{ /* 프로필 사진 + 이름 */
+    width: 100%; height: 300px; border-bottom: 2px solid #fff;
+    display: flex; flex-direction: column; align-items: center;
+}
+.buyer-profile-top .profile-img-box>h2{ /* 유저 이름 */
+    font-size: 1.625rem; margin-top: 12px;
+}
+.buyer-profile-top .profile-img{
+    width: 180px; height: 180px; border-radius: 50%;
+    background-color: #B1D8DA; border: 2px solid #fff;
+    position: relative; margin-top: 32px;
+}
+
+.buyer-profile-top .profile-img>img:first-of-type{
+    width: 100%; height: 100%; border-radius: 50%;
+}
+/* 파일 첨부 버튼 안보이게 */
+.buyer-profile-top #userProfileFile{display: none;}
+.buyer-profile-top .profile-edit-icon{ /* 프로필 편집 아이콘 */
+    width: 32px; height: 32px; cursor: pointer;
+    position: absolute; bottom: 8px; right: 8px;
+}
+
+
+/* 유저 이메일 */
+.buyer-profile-top .user-email{
+    width: 100%; height: 60px; 
+    display: flex; align-items: center;}
+.buyer-profile-top .user-email p{width: 100%; text-align: center;}
+
+/* 구매자 버튼 */
+.buyer-profile-top .seller-btn{
+    width: 336px; margin-top: 8px;
+    margin-bottom: 80px;
+}
+.buyer-profile-top .seller-btn button{
+    width: 100%; height: 60px; border-radius: 10px;
+    background-color: #fff; color: #5C5C5C;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 12px; font-size: 1rem;
+    display: flex; align-content: center; 
+    /* justify-content: space-between; padding: 0 60px; */
+    border: 1px solid #F0F0F0; line-height: 58px;
+    text-align: center;
+}
+.buyer-profile-top .seller-btn button:hover{
+    font-size: 1.1rem;
+}
+.buyer-profile-top .seller-btn button>img{
+    width: 35px; margin-top: 12px;
+    margin-left: 84px; margin-right: 30px;
+}
+.buyer-profile-top .seller-btn button:nth-of-type(2)>img{
+    width: 31px; 
+    margin-left: 86px; margin-right: 32px;
+}
+.buyer-profile-top .seller-btn button:nth-of-type(3)>img{
+    width: 30px; margin-top: 14px;
+    margin-left: 87px; margin-right: 30px;
+}
+
+/* 프로필 오른쪽 박스 */
+/* 구매자 소개 */
+.buyer-profile-top .profile_right{
+    margin-left: 80px; 
+    /* margin-right: 80px; */
+}
+.buyer-profile-top .profile_right .about-me{
+    width: 100%;  height: auto;
+    display: grid; grid-template-columns: repeat(2,1fr);
+    margin-bottom: 40px;
+}
+.buyer-profile-top .profile_right h1{
+    font-size: 2rem; margin-bottom: 32px; margin-top: 50px;
+}
+.buyer-profile-top .profile_right .seller-about li{
+    margin-bottom: 30px; margin-right: 30px;
+}
+.buyer-profile-top .profile_right .seller-about li img{
+    width: 32px; margin-right: 16px; transform: translateY(8px);
+}
+.buyer-profile-top .profile_right .seller-about li>pre{
+    width: 100%;
+    line-height: 32px; font-size: 1rem; white-space: pre-wrap;
+}
+
+/* ----- 구매 내역 ----- */
+.purchase-history{
+    width: 100%; position: relative;
+}
+.purchase-history #demos, .purchase-history #demos .row,
+.purchase-history #demos .row .columns{
+    width: 100%;
+}
+.purchase-history #demos .owl-carousel .item{
+    background-color: #F0F0F0;
+}
+
+#demos .owl-carousel .item img{
+    width: 100%; height: 300px; 
+    border: 1px solid #C5C5C5;
+}
+
+.owl-carousel .owl-nav button.owl-next{
+    position: absolute; top: 116px; right: 0;
+}
+
+.owl-carousel .owl-nav button.owl-prev{
+    position: absolute; top: 116px; left: 0;
+}
+[aria-label="Previous"], [aria-label="Next"]{
+    font-size: 0; 
+    height: 64px; line-height: 64px; 
+    display: inline-block;
+    /* display: none; */
+    position: absolute; top: -2px; left: 20px;
+}
+[aria-label="Previous"]{
+    top: 0;
+}
+[aria-label="Next"]{
+    width: 64px; height: 64px;
+    top: 0; left: -64px;
+}
+.Previous img{
+    position: absolute; top: 216px; left: 12px;
+    width: 48px;
+    z-index: 2;
+    cursor: pointer;
+}
+.Next img{
+    position: absolute; top: 216px; right: 12px;
+    width: 48px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+/* ----- 구매자 리뷰 리스트 ----- */
+.buyer-profile-top .review-list{
+    margin-bottom: 40px;
+}
+.buyer-profile-top .my-review>div{ /* 제목 + 리뷰 등록 아이콘 */
+    display: flex; justify-content: space-between; align-items: center;
+}
+.buyer-profile-top .my-review>div>svg{ /* 리뷰 등록 아이콘 */
+    margin-bottom: 32px; margin-top: 50px;
+    cursor: pointer;
+}
+.buyer-profile-top .review-list li{
+    width: 100%;  height: 280px; background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 12px;
+    padding: 10px 20px;
+    /* position: relative; */
+}
+.buyer-profile-top .review-list li>div{
+    display: flex; 
+}
+.buyer-profile-top .review-list li:first-child{
+    display: flex; flex-direction: column;
+    margin-right: 40px;
+}
+/* 리뷰 남긴 사람 프로필 */
+.buyer-profile-top .review-list li:first-child>div{
+    width: 100%;
+    display: flex; 
+}
+.buyer-profile-top .review-list li:first-child>div>div:first-child{
+    margin-top: 14px;
+}
+.buyer-profile-top .review-list li .reviewer{ 
+    width: 80px; height: 80px; border-radius: 50%;
+    background-color: #FFE69A;
+    margin-right: 40px;
+}
+.buyer-profile-top .review-list li .reviewer>img{
+    width: 80px; height: 80px; border-radius: 50%;
+}
+.buyer-profile-top .review-list li .reviewer-name{
+    width: 80px; text-align: center;
+    font-size: 1rem; font-weight: bold;
+    margin-top: 4px;
+}
+/* 리뷰 내용 */
+.buyer-profile-top .review-list li .sale-review-info{
+    margin-top: 14px;
+}
+.buyer-profile-top .review-list li .sale-review-info>p{ /* 이용한 상품 정보 */
+    font-size: 1rem;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.buyer-profile-top .review-list li>pre{ /* 리뷰 내용 */
+    font-size: 1.2rem;
+    margin-top: 12px;
+    width: 100%; height: 96px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 30px;
+}
+
+.buyerler-profile-top .review-list li .comment-view button{ 
+    width: 80px; height: 34px;
+    background-color: #F0F0F0; color: #5C5C5C;
+    font-weight: bold; font-size: 1rem;
+    border-radius: 20px; line-height: 32px;
+    margin-top: 4px;
+    float: right;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.buyer-profile-top .review-list li>button:hover{
+    background-color: #5C5C5C; color: #F0F0F0;
+} 
+
+/* 리뷰 더보기 버튼 */
+.buyer-profile-top .review-list li>div:last-of-type.comment-view{ 
+    display: flex;
+    width: 100%; height: 50px;
+    position: relative;
+}
+.buyer-profile-top .review-list li>div:last-of-type.comment-view>img{ 
+    width: 30px; height: 30px;
+    cursor: pointer;
+    float: right;
+    margin: 10px 0;
+}
+.buyer-profile-top .review-list li>.comment-view>img:first-of-type{
+    position: absolute; bottom: 0; right: 0;
+    opacity: 1;
+}
+.buyer-profile-top .review-list li>.comment-view>img:last-of-type{
+    position: absolute; bottom: 0; right: 0;
+    opacity: 0;
+}
+.buyer-profile-top .review-list li>.comment-view>img:first-of-type:hover{
+    opacity: 0;
+}
+.buyer-profile-top .review-list li>.comment-view>img:last-of-type:hover{
+    opacity: 1;
+}
+/* 후기 작성 모달 */
+.buyer-profile-top .review-write{
+    position: fixed; top: 0; left: 0;
+    z-index: 2;
+    width: 100vw; height: 100vh;
+    background-color: #5C5C5C60;
+    display: flex; justify-content: center; align-items: center;
+    display: none;
+}
+.buyer-profile-top .review-write>div{
+    width: 900px; height: 600px;
+    background-color: #fff;
+    padding: 32px;
+    
+}
+.buyer-profile-top .review-write>div h2{
+    font-size: 1.625rem;
+}
+.buyer-profile-top .review-write #reviewSaleList{
+    width: 100%; height: 40px;
+    margin-top: 16px;
+    padding: 4px;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+}
+.buyer-profile-top .review-write>div h3{
+    margin: 24px 0; margin-right: 12px;
+    font-size: 1.375rem;
+}
+.buyer-profile-top #reviewContent{
+    width: 100%; height: 46vh;
+    resize: none;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+    padding: 8px;
+}
+.buyer-profile-top .review-write form>div:last-of-type{
+    display: flex; justify-content: center;
+    margin-top: 10px;
+}
+.buyer-profile-top .review-write form>div>button{
+    width: 180px; height: 48px;
+    background-color: #0F4957; color: #fff;
+    font-size: 1rem; font-weight: bold;
+    margin: 10px;
+    /* border-radius: 5px; */
+}
+
+/* 내 후기 수정 */
+.buyer-profile-top .myreview-edit button{ 
+    width: 80px; height: 34px;
+    background-color: #F0F0F0; color: #5C5C5C;
+    font-weight: bold; font-size: 1rem;
+    border-radius: 20px; line-height: 32px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 0;
+    transform: translateY(-10px);
+}
+.buyer-profile-top .myreview-edit>button:hover{
+    background-color: #5C5C5C; color: #F0F0F0;
+}
+.buyer-profile-top .myreview-edit>button:first-of-type{
+    margin-right: 12px;
+}
+
+/* 임시 별점 */
+/* .starpoint_wrap{display:inline-block;} */
+.review-rating{
+    height: 24px; margin: 12px 0;
+    display: flex; align-items: center;
+}
+.review-star{
+    position:relative;
+    background:url(../../images/profile/smallStar_empty.png) 0 0 no-repeat;
+    background-size: 104px 16px;
+    width: 110px; height: 16px;
+    font-size:0;
+    margin-right: 8px;
+}
+.review-star .starpoint_bg{
+    display:block;
+    position:absolute; top:0; left:0; height:16px;
+    background:url(../../images/profile/smallStar.png) 0 0 no-repeat;
+    background-size: 104px 16px;
+    width: 110px; height: 16px;
+    pointer-events:none;
+}
+.review-star .label_star{
+    display:inline-block;width:11px;height:16px;
+}
+.review-star .star_radio{opacity:0;width:0;height:0;position:absolute;}
+/* .review-star .star_radio:nth-of-type(1):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(1):checked ~ .starpoint_bg{width:10px;}
+/* .review-star .star_radio:nth-of-type(2):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(2):checked ~ .starpoint_bg{width:20px;}
+/* .review-star .star_radio:nth-of-type(3):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(3):checked ~ .starpoint_bg{width:31px;}
+/* .review-star .star_radio:nth-of-type(4):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(4):checked ~ .starpoint_bg{width:43px;}
+/* .review-star .star_radio:nth-of-type(5):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(5):checked ~ .starpoint_bg{width:52.5px;}
+/* .review-star .star_radio:nth-of-type(6):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(6):checked ~ .starpoint_bg{width:62px;}
+/* .review-star .star_radio:nth-of-type(7):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(7):checked ~ .starpoint_bg{width:74px;}
+/* .review-star .star_radio:nth-of-type(8):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(8):checked ~ .starpoint_bg{width:84px;}
+/* .review-star .star_radio:nth-of-type(9):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(9):checked ~ .starpoint_bg{width:95px;}
+/* .review-star .star_radio:nth-of-type(10):hover ~ .starpoint_bg, */
+.review-star .star_radio:nth-of-type(10):checked ~ .starpoint_bg{width:106px;}
+
+.blind{position:absolute;clip:rect(0 0 0 0);
+    margin:-1px;width:1px;height: 1px; overflow:hidden;
+}
+.review-date{
+    font-size: 0.875rem; color: #5C5C5C;
+}
+
+
+.buyer-profile-top .review-list-more{ /* 리뷰 더보기 버튼 */
+    width: 100%; height: 62px;
+    background-color: #0F4957; color: #fff;
+    font-size: 1rem; text-align: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 40px;
+}
+.buyer-profile-top .review-list-more:hover{ /* 리뷰 더보기 버튼 */
+    /* background-color: #fff; color: #0F4957; */
+    background-color: #1C797D;
+}
+    
+@media screen and (max-width : 1024px) {
+    /* 구매자 프로필 */
+    .buyer-profile-top{
+        display: flex; justify-content: space-between;
+    }
+
+}
+
+@media screen and (max-width : 767px) {
+
+}

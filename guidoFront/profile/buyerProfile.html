@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guido</title>
+    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" href="../css/profile/nabong_owl/nobongPurchase_owl.css"> <!-- owl 슬라이드 -->
+    <link rel="stylesheet" href="../css/profile/buyerProfile.css">
+    
+    <!-- owl 슬라이드 -->
+    <script src="../js/profile/nabong_owl/jquery.min.js"></script>
+    <script src="../js/profile/nabong_owl/owl.carousel.js"></script>
+    <script src="../js/profile/nabong_owl/owl.carousel.min.js"></script>
+
+    <style>
+        header{width: 100%; height: 80px; background-color: #B1D8DA;}
+    </style>
+</head>
+<body>
+    <header>임시헤더</header>
+
+    <div class="buyer-profile-top">
+        <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
+
+            <div class="guide-banner"> <!-- 프로필 위 투어리스트 배너 -->
+                <img src="../images/profile/touristBanner.png" alt="guideBanner"> <!-- 일반 가이드 -->
+            </div>
+
+            <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
+
+                <div class="profile-img-box"> <!-- 프로필+이름 -->
+                    <div class="profile-img">
+                        <img src="" alt=""> <!-- 프로필 사진 칸 -->
+
+                        <input type="file" name="userProfileFile" id="userProfileFile">
+                        <!-- 프로필 편집 버튼 -->
+                        <img src="../images/profile/profileEdit.png" alt="profileEditIcon" class="profile-edit-icon"> 
+                    </div>
+                    <h2>UserName</h2> <!-- 유저이름 -->
+                </div>
+
+                <div class="user-email"> <!-- 유저 이메일 -->
+                    <p>tiltheend@gmail.com</p>
+                </div>
+
+            </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
+            
+            <div class="seller-btn">
+                <button> <!-- 내 정보 수정 -->
+                    <img src="../images/profile/myInfoEdit.png" alt="">
+                    <div>내 정보 수정</div>
+                </button>
+                <button onclick="location.href='sellerReservationSchedule.html'"> <!-- 예약 관리 --> 
+                    <img src="../images/profile/buyerReservation.png" alt="">
+                    <div>예약 관리</div> 
+                </button>
+                <button onclick="location.href='sellerReservation.html'"> <!-- 위시리스트 -->
+                    <img src="../images/profile/buyerWishList.png" alt="">
+                    <div>위시 리스트</div>
+                </button>
+            </div>
+        </div> <!-- // profile-box (프로필 + 버튼) -->
+        
+        <div class="profile_right"> <!-- 프로필 오른쪽 박스 -->
+            
+            <div class="purchase-history">
+                <h1>Purchase History (16)</h1>
+
+                <section id="demos">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div class="owl-carousel owl-theme">
+                                <div class="item">
+                                    <a href="#"><img src="" alt=""></a>
+                                </div>
+                                <div class="item">
+                                    <a href="#"><img src="" alt=""></a>
+                                </div>
+                                <div class="item">
+                                    <a href="#"><img src="" alt=""></a>
+                                </div>
+                                <div class="item">
+                                    <a href="#"><img src="" alt=""></a>
+                                </div>
+                                <div class="item">
+                                    <a href="#"><img src="" alt=""></a>
+                                </div>
+                                <!-- <div class="item">
+                                    <h4>2</h4>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Previous">
+                        <img src="../images/profile/purchaseL-arrow.png" alt="purchaseL">
+                    </div>
+                    <div class="Next">
+                        <img src="../images/profile/purchaseR-arrow.png" alt="purchaseR">
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- 리뷰 작성 모달 -->
+            <div class="review-write"> <!-- 불투명 배경 -->
+                <div> <!-- 하얀 배경 -->
+                    <form action="">
+                        <h2>Purchase History</h2>
+                        <select name="reviewSaleList" id="reviewSaleList">
+                            <option selected="selected" disabled>후기를 작성할 상품을 선택해주세요.</option>
+                            <option>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</option>
+                            <option>상품1</option>
+                            <option>상품2</option>
+                            <option>상품3</option>
+                        </select>
+                        <div class="review-star-score">
+                            <h3>Star Rating</h3>
+
+                        </div>
+                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요."></textarea>
+                        <div>
+                            <button class="review-modal-close">Close</button>
+                            <button>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="my-review"> <!-- 구매자 리뷰 내역 -->
+                <div>
+                    <h1>Review (36)</h1>
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
+                    </svg>
+                </div>
+                <ul class="review-list">
+                    <li>
+                        <div>
+                            <div> <!-- 리뷰 남긴 사람 프로필 -->
+                                <div class="reviewer">
+                                    <img src="">
+                                </div>
+                                <p class="reviewer-name">Anna</p>
+                            </div>
+                            <div class="sale-review-info">
+                                <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
+                                <div class="review-rating">
+                                    <div class="review-star">
+                                        <input type="radio" id="starpoint_1" class="star_radio">
+                                        <input type="radio" id="starpoint_2" class="star_radio">
+                                        <input type="radio" id="starpoint_3" class="star_radio">
+                                        <input type="radio" id="starpoint_4" class="star_radio">
+                                        <input type="radio" id="starpoint_5" class="star_radio">
+                                        <input type="radio" id="starpoint_6" class="star_radio">
+                                        <input type="radio" id="starpoint_7" class="star_radio">
+                                        <input type="radio" id="starpoint_8" class="star_radio">
+                                        <input type="radio" id="starpoint_9" class="star_radio" checked>
+                                        <input type="radio" id="starpoint_10" class="star_radio">
+                                        <span class="starpoint_bg"></span>
+                                    </div>
+                                    <span class="review-date">2023/05/25</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <pre>그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre>
+
+                        <div class="comment-view"> <!-- 리뷰 답글 버튼 -->
+                            <div class="myreview-edit">
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </div>
+                            <img src="../images/profile/comment-view.png" alt="comment-view">
+                            <img src="../images/profile/comment-view_hover.png" alt="comment-view_hover">
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div>
+                            <div> <!-- 리뷰 남긴 사람 프로필 -->
+                                <div class="reviewer">
+                                    <img src="">
+                                </div>
+                                <p class="reviewer-name">Anna</p>
+                            </div>
+                            <div class="sale-review-info">
+                                <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
+                                <div class="review-rating">
+                                    <div class="review-star">
+                                        <input type="radio" id="starpoint_1" class="star_radio">
+                                        <input type="radio" id="starpoint_2" class="star_radio">
+                                        <input type="radio" id="starpoint_3" class="star_radio">
+                                        <input type="radio" id="starpoint_4" class="star_radio">
+                                        <input type="radio" id="starpoint_5" class="star_radio">
+                                        <input type="radio" id="starpoint_6" class="star_radio">
+                                        <input type="radio" id="starpoint_7" class="star_radio">
+                                        <input type="radio" id="starpoint_8" class="star_radio">
+                                        <input type="radio" id="starpoint_9" class="star_radio" checked>
+                                        <input type="radio" id="starpoint_10" class="star_radio">
+                                        <span class="starpoint_bg"></span>
+                                    </div>
+                                    <span class="review-date">2023/05/25</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <pre>그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre>
+                        <div class="comment-view"> <!-- 리뷰 답글 버튼 -->
+                            <div class="myreview-edit">
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </div>
+                            <img src="../images/profile/comment-view.png" alt="comment-view">
+                            <img src="../images/profile/comment-view_hover.png" alt="comment-view_hover">
+                        </div>
+                    </li>
+                </ul>
+                <button class="review-list-more">more reviews</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                600: {
+                    items: 1,
+                nav: true
+                },
+                800: {
+                    items: 2,
+                nav: false
+                },
+                1000: {
+                    items: 3,
+                nav: true,
+                loop: false,
+                margin: 20
+                }
+            }
+            })
+
+        const purchasePrevious = document.querySelector(".Previous>img");
+        const purchaseNext = document.querySelector(".Next>img");
+
+        const realSlidePrevious = document.querySelector("[aria-label='Previous']");
+        const realSlideNext = document.querySelector("[aria-label='Next']");
+
+        if(purchasePrevious != null){
+            purchasePrevious.addEventListener('click',()=>realSlidePrevious.click());
+        }
+        if(purchaseNext != null){
+            purchaseNext.addEventListener('click',()=>realSlideNext.click());
+        }
+
+        }) 
+
+    </script>
+    <script src="../js/profile/sellerProfile.js"></script>                   
+    <script src="../js/profile/buyerProfile.js"></script>                   
+</body>
+</html>
