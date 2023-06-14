@@ -49,6 +49,7 @@ body::-webkit-scrollbar-track {
 }
 
 
+
 .reservation--container{
     width: 70vw;
     display: flex;
@@ -56,6 +57,7 @@ body::-webkit-scrollbar-track {
     align-items: center;
     margin: auto;
     padding: 2vh 0;
+    min-width: 440px;
 }
 
 
@@ -120,6 +122,7 @@ body::-webkit-scrollbar-track {
     display: flex;
     align-items: center;
     margin: 4vh 0 2vh 0;
+    white-space: nowrap;
 }
 
 
@@ -354,6 +357,39 @@ body::-webkit-scrollbar-track {
     .reservation--title__detail{
         margin-bottom: 3vh;
     }
+
+    .reservation--bottom__product{
+        display: block;
+        white-space: nowrap; 	
+    }
+
+
+    .reservation--bottom__product>div:nth-of-type(2){
+    display: flex;
+    align-items: center;
+    margin: 0;
+    user-select: none;
+    width: 100%;
+    margin-top: 13px;
+}
+
+.reservation--inquire__bottom{
+    margin-right: 1px;
+}
+
+
+.reservation--payment__method{
+    margin: 3vh 0;
+}
+
+.reservation--divisionline{
+    margin: 20px 0;
+}
+
+
+.reservation--date__product{
+    margin-top: 30px;
+}
 
 
 }
