@@ -49,6 +49,7 @@ body::-webkit-scrollbar-track {
 }
 
 
+
 .reservation--container{
     width: 70vw;
     display: flex;
@@ -56,19 +57,21 @@ body::-webkit-scrollbar-track {
     align-items: center;
     margin: auto;
     padding: 2vh 0;
+    min-width: 440px;
 }
 
 
 /* 모든 div width 고정 */
 .reservation--product,
 .reservation--price{
-    width: 70vw;
+    width: 100%;
+    /* padding: 0 10px; */
 }
 
 
 /* 예약 내역 title */
 .reservation--title{
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #5C5C5C;
 }
@@ -85,9 +88,16 @@ body::-webkit-scrollbar-track {
 
 /* 예약 내역 분류 text */
 .reservation--classification{
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 2vh;
+}
+
+/* 예약 정보 div */
+.reservation--info{
+    margin: 10px 0;
+    width: 100%;
+    /* padding: 0 10px; */
 }
 
 
@@ -110,7 +120,8 @@ body::-webkit-scrollbar-track {
 
 /* 예약 정보 내 모든 div들 */
 .reservation--content__info div div{
-    margin-bottom: 1vh;
+    margin-bottom: 0.8vh;
+    font-size: 1.2rem;
 }
 
 
@@ -119,7 +130,9 @@ body::-webkit-scrollbar-track {
 .reservation--text__product{
     display: flex;
     align-items: center;
-    margin: 4vh 0 2vh 0;
+    margin: 20px 0 18px 0;
+    white-space: nowrap;
+    font-size: 1.2rem;
 }
 
 
@@ -130,7 +143,7 @@ body::-webkit-scrollbar-track {
 
 
 .reservation--text__product>div:nth-of-type(1){
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: bold;
 }
 
@@ -142,16 +155,17 @@ body::-webkit-scrollbar-track {
     overflow: hidden;
     position: relative; 
     border-radius: 15px;
-    margin-right: 2vw;
+    margin-right: 40px;
     
-    min-height: 200px;
+    min-height: 270px;
+    min-width: 300px;
 }
 
 
 .reservation--img__detail::before {
     content: "";
     display: block;
-    padding-top: calc(100% / (485 / 266)); 
+    padding-top: calc(100% / (36 / 33)); 
 }
 
 
@@ -174,8 +188,15 @@ body::-webkit-scrollbar-track {
 
 /* 예약 상품 설명 타이틀 */
 .reservation--title__detail{
-    font-size: 1.2rem;
-    margin-bottom: 6vh;
+    font-size: 1.5rem;
+    margin-bottom: 5vh;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 
@@ -188,21 +209,31 @@ body::-webkit-scrollbar-track {
 
 /* 예약 상품 설명 아이콘 */
 .reservation--short>img{
-    margin-right: 1.2vw;
+    margin-right: 30px;
+    height: 20px;
+    width: auto;
 }
 
 
 /* 예약 상품 설명 text */
 .reservation--short>div{
     color: #777777;
+    font-size: 1.25rem;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 
 /* 예약 상품 설명 중 위치 img */
 .reservation--location__detail>img{
-    height: 20px;
+    height: 25px;
     width: auto;
-    margin-right: 1.4vw;
+    margin-right: 30px;
 }
 
 .reservation--location__detail{
@@ -216,16 +247,24 @@ body::-webkit-scrollbar-track {
 }
 
 
+/* 예약 상품 설명 중 취소 수수료 */
+.reservation--cancel__detail>img{
+    margin-left: 3px;
+    margin-right: 24px;
+}
+
+
 /* 예약 상품 기간 */
 .reservation--date__product>div:nth-of-type(1){
     font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 0.5vh;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
 .reservation--date__product>div:nth-of-type(2){
     color: #777777;
-    margin-bottom: 6vh;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
 }
 
 
@@ -239,7 +278,7 @@ body::-webkit-scrollbar-track {
 
 /* 게스트 수 div */
 .reservation--bottom__product>div:nth-of-type(1){
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: bold;
     text-decoration: underline;
 }
@@ -249,13 +288,13 @@ body::-webkit-scrollbar-track {
 .reservation--inquire__bottom{
     display: flex;
     align-items: center;
-    margin-left: 1.5vw;
+    margin-left: 30px;
     user-select: none;
 }
 
 /* 가이드에게 문의하기 img */
 .reservation--inquire__bottom>img{
-    width: 1.3rem;
+    width: 1.6rem;
     margin-right: 0.3vw;
 }
 
@@ -264,28 +303,30 @@ body::-webkit-scrollbar-track {
     cursor: pointer;
 }
 
-/* 가이드에게 문의하기 div */
-.reservation--inquire__bottom>div{
-    font-size: 0.9rem;
-}
-
 
 /* 가이드 문의 text */
 .reservation--question__bottom{
     color: #5C5C5C;
-    font-size: 0.9rem;
 }
 
 
 
 /* 결제 수단 div */
 .reservation--payment__method{
-    margin: 5vh 0;
+    margin: 40px 0;
 }
+
+
+/* 결제 수단 하위 text */
+.reservation--payment__method>div:nth-of-type(2){
+    font-size: 1.3rem;
+    margin-left: 2px;
+}
+
 
 /* 총 결제 금액 div */
 .reservation--price{
-    margin: 2vh 0 5vh 0;
+    margin: 15px 0 50px 0;
 }
 
 
@@ -297,9 +338,14 @@ body::-webkit-scrollbar-track {
 
 /* 총 결제 금액 하위 div text */
 .reservation--text__price{
-    margin-right: 5vw;
+    margin-right: 140px;
+    font-size: 1.3rem;
 }
 
+/*  총 결제 금액 하위 div price */
+.reservation--price__price{
+    font-size: 1.3rem;
+}
 
 
 .reservation--text__price>div:not(:nth-of-type(1)),
@@ -311,11 +357,11 @@ body::-webkit-scrollbar-track {
 
 /* 예약 리스트 보기 버튼 */
 .reservation--btn{
-    width: 70vw;
+    width: 100%;
     background-color: #0F4957;
-    height: 50px;
+    height: 70px;
     color: #ffffff;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: bold;
     margin: 3vh 0;
 }
@@ -355,7 +401,43 @@ body::-webkit-scrollbar-track {
         margin-bottom: 3vh;
     }
 
+    .reservation--bottom__product{
+        display: block;
+        white-space: nowrap;    
+    }
 
+
+    .reservation--bottom__product>div:nth-of-type(2){
+    display: flex;
+    align-items: center;
+    margin: 0;
+    user-select: none;
+    width: 100%;
+    margin-top: 13px;
 }
 
+.reservation--inquire__bottom{
+    margin-right: 1px;
+}
+
+
+.reservation--payment__method{
+    margin: 3vh 0;
+}
+
+.reservation--divisionline{
+    margin: 20px 0;
+}
+
+
+.reservation--date__product{
+    margin-top: 30px;
+}
+
+.reservation--btn{
+    height: 50px;
+}
+
+
+}
 

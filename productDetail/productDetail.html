@@ -82,7 +82,97 @@
     
         <section class="detail--middle">
 
-            
+            <!-- 예약 사이드바 -->
+            <section class="detail--right__sidebar">
+
+                <!-- 예약 캘린더(날짜) -->
+                <div class="detail--right__calendar">
+
+                    <table class="scriptCalendar">
+                        <thead>
+                          <tr>
+                            <td class="calendarBtn" id="btnPrevCalendar">&#60;</td>
+                            <td colspan="5">
+                              <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+                            </td>
+                            <td class="calendarBtn" id="nextNextCalendar">&#62;</td>
+                          </tr>
+                          <tr>
+                            <td>Sun</td>
+                            <td>Mon</td>
+                            <td>Tue</td>
+                            <td>Wed</td>
+                            <td>Thu</td>
+                            <td>Fri</td>
+                            <td>Sat</td>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+
+                </div>
+
+                <!-- 예약 옵션(시간) -->
+                <div class="detail--right__option">
+                    <span>시간</span>
+
+                    <div class="detail--item__option">
+                        <input type="radio" name="option" id="option1" value="">
+                        <label class="option--active" for="option1">19:20 (25 left)</label>
+                        
+                        <input type="radio" name="option" id="option2" value="" disabled>
+                        <label for="option2">20:00</label>
+                        
+                        <input type="radio" name="option" id="option3" value="">
+                        <label for="option3">20:40 (46 left)</label>
+                    </div>
+                </div>
+                
+                <!-- 예약 가격 -->
+                <div class="detail--right__price">
+                    <span>인원 수</span>
+                    <div class="detail--right__price-qty">
+                        <!-- 4000 (가격)만 달라짐 -->
+                        <div> KRW 4,000 / person</div>
+                        <div>
+                            <div class="detail--right__price-minus">&minus;</div>
+                            <div class="detail--right__price-count">1</div>
+                            <div class="detail--right__price-plus">&plus;</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="detail--right__price-total">
+                    <span>총 금액</span>
+                    <div>KRW 4,000</div>
+                </div>
+                <!-- 예약 버튼 -->
+                <a href="/reservation/reservation.html"><button class="detail--right__button">Reserve</button></a>
+                
+
+
+                <div class="detail--right__scroll">
+                    <ul>
+                        <li class="scroll--active"><div></div> <a href="#section1">상품설명</a></li>
+                        <li><div></div> <a href="#section2">일정소개</a> </li>
+                        <li><div></div> <a href="#section3">가이드 소개</a> </li>
+                        <li><div></div> <a href="#section4">구매 시 유의사항</a></li>
+                        <li><div></div> <a href="#section5">리뷰</a></li>
+                        <li><div></div> <a href="#section6">위치</a></li>
+                    </ul>
+                </div>
+
+            </section>
+
+
+
+
+            <section  class="detail--left__content">
+
+
+                
+            </section>
 
 
              <!-- 상세 설명 -->
