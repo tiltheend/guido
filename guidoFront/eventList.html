@@ -7,7 +7,6 @@
     <title>Guido</title>
 
     <link rel="stylesheet" href="css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="css/main.css"> 
     <link rel="stylesheet" href="css/eventList.css">
 
     <!-- owl 슬라이드  -->
@@ -28,7 +27,7 @@
     <!-- ---------- 메인 헤더 영역 ---------- -->
     <header>
         <!-- 메인 로고 -->
-        <div class="logo"><a href="#"><img src="images/guido_test.png" alt="메인 로고"></a></div>
+        <div class="logo"><a href="/guidoFront/main.html"><img src="images/guido_test.png" alt="메인 로고"></a></div>
 
         <!-- 메인 검색 (where, when, guest) -->
         <div class="main-search-box">
@@ -40,8 +39,9 @@
                 <path d="M21.8067 20.86L19.54 18.6C20.2713 17.6683 20.6681 16.5178 20.6667 15.3333C20.6667 14.2785 20.3539 13.2474 19.7678 12.3703C19.1818 11.4932 18.3489 10.8096 17.3743 10.406C16.3998 10.0023 15.3274 9.89669 14.2929 10.1025C13.2583 10.3083 12.308 10.8162 11.5621 11.5621C10.8162 12.308 10.3083 13.2583 10.1025 14.2929C9.89669 15.3274 10.0023 16.3998 10.406 17.3743C10.8096 18.3489 11.4932 19.1818 12.3703 19.7678C13.2474 20.3539 14.2785 20.6667 15.3333 20.6667C16.5178 20.6681 17.6683 20.2713 18.6 19.54L20.86 21.8067C20.922 21.8692 20.9957 21.9188 21.077 21.9526C21.1582 21.9864 21.2453 22.0039 21.3333 22.0039C21.4213 22.0039 21.5085 21.9864 21.5897 21.9526C21.671 21.9188 21.7447 21.8692 21.8067 21.8067C21.8692 21.7447 21.9188 21.671 21.9526 21.5897C21.9864 21.5085 22.0039 21.4213 22.0039 21.3333C22.0039 21.2453 21.9864 21.1582 21.9526 21.077C21.9188 20.9957 21.8692 20.922 21.8067 20.86ZM11.3333 15.3333C11.3333 14.5422 11.5679 13.7689 12.0075 13.1111C12.447 12.4533 13.0717 11.9406 13.8026 11.6378C14.5335 11.3351 15.3378 11.2559 16.1137 11.4102C16.8896 11.5645 17.6024 11.9455 18.1618 12.5049C18.7212 13.0643 19.1021 13.7771 19.2565 14.553C19.4108 15.3289 19.3316 16.1332 19.0289 16.8641C18.7261 17.595 18.2134 18.2197 17.5556 18.6592C16.8978 19.0987 16.1245 19.3333 15.3333 19.3333C14.2725 19.3333 13.2551 18.9119 12.5049 18.1618C11.7548 17.4116 11.3333 16.3942 11.3333 15.3333Z" fill="white"/>
             </svg>
         </div>
+        
         <div class="search-box-click-box"> <!-- *** 밑으로 길어지는 바탕 부분 *** -->
-            <div class="search-box-click"> <!-- 검색 전체 창 -->
+            <div class="search-box-click"> 
                 <div class="click-div">
                     <button type="button" class="where-button-click">
                         <div>
@@ -193,54 +193,55 @@
     <!-- ----------------------------------------------------------------------------- -->
 
 
-   
 
     <div class="event-page">EVENT</div>
     <hr>
 
     <div class="local-trip-title">국내 여행 이벤트</div>
-    <section id="demos_1">
-        <div class="row">
-            <div class="large-12 columns">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <!-- <div class="item">
-                        <h4>2</h4>
-                    </div> -->
+    <div class="slide-container">
+        <section id="demos_1">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <a href="#" class="slider-item-link">
+                                <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#" class="slider-item-link">
+                                <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#" class="slider-item-link">
+                                <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#" class="slider-item-link">
+                                <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#" class="slider-item-link">
+                                <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#" class="slider-item-link">
+                                <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <!-- <div class="item">
+                            <h4>2</h4>
+                        </div> -->
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <div class="popular-tour-title">인기 투어 이벤트</div>
     <section id="demos_2">
@@ -249,32 +250,32 @@
                 <div class="owl-carousel owl-theme">
                     <div class="item">
                         <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                            <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
                         </a>
                     </div>
                     <div class="item">
                         <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                            <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
                         </a>
                     </div>
                     <div class="item">
                         <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                            <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
                         </a>
                     </div>
                     <div class="item">
                         <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
+                            <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
                         </a>
                     </div>
                     <div class="item">
                         <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
+                            <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
                         </a>
                     </div>
                     <div class="item">
                         <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
+                            <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
                         </a>
                     </div>
                     <!-- <div class="item">
@@ -286,133 +287,18 @@
     </section>
 
     <div class="enroll-payment-title">회원 가입 & 결제 이벤트</div>
-    <section id="demos_3">
-        <div class="row">
-            <div class="large-12 columns">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <!-- <div class="item">
-                        <h4>2</h4>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="demos_4">
-        <div class="row">
-            <div class="large-12 columns">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <!-- <div class="item">
-                        <h4>2</h4>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="enroll-payment-event">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
 
 
-    <hr>
-    <section id="demos">
-        <div class="row">
-            <div class="large-12 columns">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide1.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/silde2.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="slider-item-link">
-                        <img src="/guidoFront/images/slide3.png" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <!-- <div class="item">
-                        <h4>2</h4>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
 
 
 
@@ -437,6 +323,7 @@
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({
             loop: true,
+            items: 1,
             margin: 10,
             responsiveClass: true,
             responsive: {
@@ -462,7 +349,7 @@
 
     
     <script src="js/eventList.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/guidoFront/js/calendar.js"></script>
 
 </body>
 </html>
