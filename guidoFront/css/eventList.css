@@ -398,6 +398,7 @@ hr{
   display: flex;
   justify-content: center;
   margin-top: 52px;
+  margin-bottom: 20px;
 }
 
 
@@ -414,8 +415,11 @@ hr{
   height: 300px;
   background-color: #1C797D;
   border-radius: 10px;
-  margin: 20px 10px;
+  margin: 0 10px 20px 10px;
 }
+/* .enroll-payment-event div{
+  margin-top: 0;
+} */
 
 
 
@@ -465,6 +469,24 @@ body{
 
 
 
+/* !!!!!!!!!!!! */
+.owl-carousel {
+  display: block; /* 이전에는 display: none;으로 설정되어 있었음 */
+  width: 100%;
+  z-index: 1;
+}
+
+.owl-carousel .owl-item {
+  min-height: 1px;
+  float: left;
+  width: 33.33%; /* 3개씩 넘어가기 위해 33.33%로 변경 */
+  -webkit-backface-visibility: hidden;
+  -webkit-touch-callout: none;
+}
+
+
+
+
 
 
 /* ***** footer ***** */
@@ -500,3 +522,9 @@ footer .footer-event-link{position: absolute; left: 50%; transform: translateX(-
 .item a img{
   width: 100%;
 }
+
+
+
+
+
+
