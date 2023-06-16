@@ -15,8 +15,8 @@ let slickDot; /* 슬라이드 도트 */
 document.addEventListener("DOMContentLoaded", () => {
     /* 슬라이드 화살표 커스텀 */
     // 내가 만든 버튼
-    const boardSlidePrevious = document.querySelectorAll(".slick-slide-next");
-    const boardSlideNext = document.querySelectorAll(".slick-slide-pre");
+    const boardSlideNext = document.querySelectorAll(".slick-slide-next");
+    const boardSlidePrevious = document.querySelectorAll(".slick-slide-pre");
 
     // 원래 버튼
     const boardSlidePreviousOriginal = document.querySelectorAll(".slick-prev");
