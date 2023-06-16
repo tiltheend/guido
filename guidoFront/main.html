@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Guido</title>
 
+    <!-- css -->
     <link rel="stylesheet" href="css/style.css"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" href="css/main.css">
-    
+
+    <!-- owl 슬라이드 -->
     <link rel="stylesheet" href="/assets/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/assets/owlcarousel/assets/owl.theme.default.min.css">
-    
+
+    <!-- slick 슬라이드 -->
+    <link rel="stylesheet" type="text/css" href="/guidoFront/css/main/mainPostSlick.css" />
+
+    <!-- js -->
     <script src="/assets/vendors/jquery.min.js"></script>
     <script src="/assets/owlcarousel/owl.carousel.js"></script>
-    
 </head>
 
 <body>
@@ -193,24 +200,6 @@
 
     <!-- ***** 메인 영역 슬라이드 ***** -->
 
-<!--     <div class="slideShow">
-        <ul class="slides">
-            <li><img src="images/slide1.png" alt=""></li>
-            <li><img src="images/silde2.png" alt=""></li>
-            <li><img src="images/slide3.png" alt=""></li>
-            <li><img src="images/slide1.png" alt=""></li>
-            <li><img src="images/silde2.png" alt=""></li>
-            <li><img src="images/slide3.png" alt=""></li>
-            <li><img src="images/slide1.png" alt=""></li>
-            <li><img src="images/silde2.png" alt=""></li>
-        </ul>  
-        <p class="controller">
-
-            <span class="prev">&lang;</span>  
-            <span class="next">&rang;</span>
-        </p>
-    </div> -->
-
     <div class="detail--container">
         <section class="detail--top">
             <div class="detail--top__slide">
@@ -342,177 +331,476 @@
 
     <!-- 게시글 -->
     <article class="main-post">
+        <!-- <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div>
+        <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div>
+        <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div>
+        <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div>
+        <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div>
+        <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div>
+        <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div>
+        <div>
+            <div class="main-post-item">
+                <ul class="post-img-area">
+                    <li><img src="images/slide1.png" alt=""></li>
+                    <li><img src="images/silde2.png" alt=""></li>
+                    <li><img src="images/slide3.png" alt=""></li>
+                </ul>  
+                <p class="slide-arrow">
+                    <span class="main-prev">&lang;</span>  
+                    <span class="main-next">&rang;</span>
+                </p>
+                <div class="heart-icon" onclick="toggleHeart()"></div>
+            </div>
+            <div class="main-post-title">
+                <p>A trip to Jeju Island where...</p>
+                <div>
+                    <img src="images/icons/mark.png" alt="">4.9
+                </div>
+            </div>
+            <p>₩ 190,000 / total</p>
+        </div> -->
 
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
+        <div class="wish-list">
+            <ul>
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+        
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample3.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample1.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+        
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample3.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample4.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample1.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+        
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample4.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample3.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample2.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+        
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample3.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample1.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+        
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample4.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample2.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+        
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+        
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/sample2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample3.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/sample4.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </article>
-
+        
     <hr>
     
     <div class="divide-main">
@@ -522,94 +810,162 @@
     <div class="post-more"><button type="button">more +</button></div>
     <!-- 인기 여행지 -->
     <article class="main-post">
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>    
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
+    
+        <div class="wish-list">
+            <ul>
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+    
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+    
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+    
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </article>
-
-
-
+    
+    
+    
     <div class="divide-main">
         <p>슈퍼 가이드 PICK</p>
         <img src="images/icons/superguide-pick.png" alt="">
@@ -617,94 +973,158 @@
     <div class="post-more"><button type="button">more +</button></div>
     <!-- 슈퍼가이드 추천 여행지 -->
     <article class="main-post">
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
-        </div>
-        <div>
-            <div class="main-post-item">
-                <ul class="post-img-area">
-                    <li><img src="images/slide1.png" alt=""></li>
-                    <li><img src="images/silde2.png" alt=""></li>
-                    <li><img src="images/slide3.png" alt=""></li>
-                </ul>  
-                <p class="slide-arrow">
-                    <span class="main-prev">&lang;</span>  
-                    <span class="main-next">&rang;</span>
-                </p>
-                <div class="heart-icon" onclick="toggleHeart()"></div>
-            </div>
-            <div class="main-post-title">
-                <p>A trip to Jeju Island where...</p>
-                <div>
-                    <img src="images/icons/mark.png" alt="">4.9
-                </div>
-            </div>
-            <p>₩ 190,000 / total</p>
+        <div class="wish-list"> 
+            <ul>
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+    
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+    
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+    
+                <li>
+                    <div class="slider single-item">
+                        <div>
+                            <img src="/guidoFront/images/slide1.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide2.png">
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/slide3.png">
+                        </div>
+                    </div>
+                    <div class="slide-btn">
+                        <img src="/guidoFront/images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
+                        <img src="/guidoFront/images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                    </div>
+                    <div class="add-wish-heart">
+                        <img class="heart-icon" onclick="toggleHeart()" src="/guidoFront/images/profile/empty.png">
+                    </div>
+                    <div class="sales-text">
+                        <div>
+                            <p>A trip to Jeju Island where...</p>
+                            <div>
+                                <img src="/guidoFront/images/profile/slideStar.png" alt="slideStar">
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/guidoFront/images/profile/location.png" alt="location">
+                            <span>Jeju</span>
+                        </div>
+                        <div>
+                            <p>₩ 190,000 / total</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </article>
-
-
-
 
 
 <!--     
@@ -775,7 +1195,9 @@
     <script src="/assets/vendors/highlight.js"></script>
     <script src="/assets/js/app.js"></script>
     <script src="/guidoFront/js/calendar.js"></script>
+    
+    <script src="/guidoFront/js/profile/nabong_slick/slick.js"></script>
+    
     <script src="js/main.js"></script>
-
 </body>
 </html>
