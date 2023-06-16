@@ -6,16 +6,23 @@ const searchBoxClickBox = document.querySelector('.search-box-click-box');
 const whereButton = document.querySelector('.where-button');
 const whenButton = document.querySelector('.when-button');
 const guestButton = document.querySelector('.guest-button');
+/* const searchIcon = document.querySelector('.search-icon'); */
 
-const whereButtonClick = document.querySelector('.where-button-click');
-const checkInButtonClick = document.querySelector('.check-in-button-click');
-const checkOutButtonClick = document.querySelector('.check-out-button-click');
-const guestButtonClick = document.querySelector('.guest-button-click');
+const whereButtonClick = document.querySelector('.where-btn-click');
+const checkInButtonClick = document.querySelector('.in-btn-click');
+const checkOutButtonClick = document.querySelector('.out-btn-click');
+const guestButtonClick = document.querySelector('.guest-btn-click');
 
 const whereModal = document.querySelector('.where-modal-bg');
 const whenModal = document.querySelector('.when-modal-bg');
 const guestModal = document.querySelector('.guest-modal-bg');
 
+const modalsBG = document.querySelectorAll('.modal');
+
+/* searchIcon.addEventListener('click', () => {
+  mainSearchBox.style.display = 'none';
+  searchBoxClickBox.style.display = 'block';
+}); */
 
 whereButton.addEventListener('click', () => {
   mainSearchBox.style.display = 'none';
@@ -37,6 +44,7 @@ guestButton.addEventListener('click', () => {
   guestModal.style.display = 'block';
   /* toggleModal(guestModal); */
 });
+
 
 
 /* *** 헤더 검색 추가 모달창 *** */
@@ -71,7 +79,7 @@ function toggleModal(modal) {
 
 
 /* *** 모달창 닫기 *** */
-const modalsBG = document.querySelectorAll('.modal');
+/* const modalsBG = document.querySelectorAll('.modal'); */
 
 /* modalsBG.forEach(modal => {
   modal.addEventListener('click', () => {
@@ -103,8 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ***** 메인 헤더 아이콘 모달창 ***** */
-/* const modal = document.querySelectorAll(".modal"); */
-
 const alarmIcon = document.querySelector(".alarm-icon");
 const mypageIcon = document.querySelector(".mypage-icon");
 
