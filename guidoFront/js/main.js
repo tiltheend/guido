@@ -103,6 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ***** 메인 헤더 아이콘 모달창 ***** */
+/* const modal = document.querySelectorAll(".modal"); */
+
 const alarmIcon = document.querySelector(".alarm-icon");
 const mypageIcon = document.querySelector(".mypage-icon");
 
