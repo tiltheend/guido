@@ -9,6 +9,8 @@ let boardSlide; /* 게시글 슬라이드 박스 */
 let boardSlideBtn; /* 게시글 슬라이드 btn */
 
 let wishHeart; /* 위시 하트 */
+let slickDot; /* 슬라이드 도트 */
+
 
 document.addEventListener("DOMContentLoaded", () => {
     /* 슬라이드 화살표 커스텀 */
@@ -52,16 +54,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /* 하트 색 바꾸기 */
-    // wishHeart = document.querySelectorAll(".add-wish-heart");
+    /* 호버하면 슬라이드 도트 나오게 */
+    slickDot = document.querySelectorAll(".slick-dots");
+    if (boardSlide.length > 0) {
+        
+        for (let i = 0; i < boardSlide.length; i++) {
+            slickDot[i].style.display="none";
+            boardSlide[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+            slickDot[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+            boardSlideBtn[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+        }
+        for (let i = 0; i < boardSlide.length; i++) {
+            boardSlide[i].addEventListener('mouseout', () => {
+                slickDot[i].style.display="none";
+            });
+        }
+    }
 
-    // for (let i = 0; i < wishHeart.length; i++) {
-    //     wishHeart[i].addEventListener('mouseout', () => {
-    //         heartIcon[i].classList.toggle(".wish-heart-none");
-    //     });
-    // }
+
+
 
 
 });
+
+// 하트 색 바꾸기
+function toggleHeart() {
+    let heartIcon = event.target;
+    // heartIcon.setAtrribute("src",'');
+    heartIcon.classList.toggle("selected");
+}
 
 

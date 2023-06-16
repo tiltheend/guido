@@ -143,10 +143,12 @@
     position: relative;
     margin: 10px;
 }
-.buyer-profile-top .wish-list .slider div{
+.buyer-profile-top .wish-list .slider>div{
     width: 300px; height: 300px;
+    border-radius: 20px;
+    border: none;
 }
-.buyer-profile-top .wish-list .slider div img{
+.buyer-profile-top .wish-list .slider>div>img{
     /* width: 100%; height: 100%; */
     width: 300px; height: 300px;
     border-radius: 20px;
@@ -179,6 +181,7 @@
 .buyer-profile-top .wish-list .add-wish-heart>img{ 
     width: 30px; height: 30px;
     cursor: pointer;
+    border: none;
 }
 .buyer-profile-top .wish-list .add-wish-heart>img:first-of-type{ 
     position: absolute;
@@ -189,8 +192,19 @@
     top: 12px; right: 12px;
 }
 .wish-heart-none{ /* 하트 안보이게 */
-    display: none;
+    /* display: none; */
 }
+
+.heart-icon{
+    background-image: url('/images/profile/heartNone.png'); 
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+.heart-icon.selected{
+    background-image: url('/images/profile/heartClick.png'); 
+}
+
 
 /* 게시글 텍스트 */
 .buyer-profile-top .wish-list .sales-text{
