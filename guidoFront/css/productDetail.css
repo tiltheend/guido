@@ -1,15 +1,51 @@
 /* 폰트 웹폰트 우선 사용 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap');
-/* font-family: 'Noto Sans KR', sans-serif; 
-font-weight: 100 / 400 / 700; 사용가능
-*/
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap'); */
+
+
+/* header.css에 선언하기 */
+@font-face {
+    font-family: 'Pretendard';
+    src: url(/guidoFront/font/Pretendard-Light.woff) format('woff');
+    font-weight: 300;
+    font-style: light;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(/guidoFront/font/Pretendard-Regular.woff) format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(/guidoFront/font/Pretendard-Medium.woff) format('woff');
+    font-weight: 500;
+    font-style: medium;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(/guidoFront/font/Pretendard-Bold.woff) format('woff');
+    font-weight: 700;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(/guidoFront/font/Pretendard-ExtraBold.woff) format('woff');
+    font-weight: 800;
+    font-style: bolder;
+}
+
 
 /* 기본 세팅 */
 *{
     padding: 0; 
     margin: 0; 
-    font-family: 'Noto Sans KR', sans-serif;
-    box-sizing: border-box;}
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+}
     
 ul,ol{list-style: none;}
 a{color: #000; text-decoration: none;}
@@ -203,8 +239,7 @@ body::-webkit-scrollbar-track {
 .detail--right__price span{
     color: #777777;
     font-weight: bold;
-    font-size: 1.25rem;
-
+    font-size: 1.4rem;
 }
 
 /* 예약 옵션 라디오버튼 */
@@ -221,14 +256,15 @@ input[type="radio"]{
 
 /* 예약 옵션 선택지들 */
 .detail--item__option>label{
-    height: 55px;
-    line-height: 55px;
+    height: 57px;
+    line-height: 57px;
     background-color: rgba(217, 217, 217, 0.38);
     cursor: pointer;
-    margin-top: 1.5vh;
+    margin-top: 10px;
     border-radius: 8px;
-    padding-left: 1.2vw;
+    padding: 0 20px;
     font-weight: 600;
+    font-size: 1.2rem;
 }
 
 /* 비활성화된 예약 옵션 선택지들 */
@@ -241,7 +277,7 @@ input[type="radio"]:disabled + label{
 input[type="radio"]:checked + label {
     box-shadow: 0 0 0 3px #1C797D inset; 
     background-color: #B1D8DA;
-    line-height: 55px;
+    line-height: 57detail--right__optionpx;
 }
 
 /* 예약 1박 시 인원 수 */
@@ -309,7 +345,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 예약 가격 중 krw */
 .detail--right__price-total>div, span{
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 }
 
 /* 예약 버튼 */
@@ -435,6 +471,20 @@ box-shadow:  5px 5px 8px #e2e2e2,
 }
 
 
+/* 상품 위치 + 좋아요 div */
+.detail--top__like{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* 좋아요 div */
+.container{
+    margin-top: 5vh;
+}
+
+
 
 .detail--div__shortdescription{
     white-space : pre-line;
@@ -469,6 +519,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 상품 상세 설명 */
 .detail--text__detail{
     white-space : pre-line;
+    font-size: 1.1rem;
 }
 
 
@@ -495,6 +546,11 @@ box-shadow:  5px 5px 8px #e2e2e2,
 {
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+/* 리뷰 이름 text */
+.detail--item__review-name{
+    font-size: 1.1rem;
 }
 
 
@@ -525,6 +581,118 @@ box-shadow:  5px 5px 8px #e2e2e2,
 .detail--item__pr-text{
     font-size: 1.3rem;
 }
+
+
+/* 판매자 프로필 div */
+.detail--middle__profile{
+    display: flex;
+    margin: 30px 0 90px 0;
+}
+
+
+/* 판매자 프로필 왼쪽 div */
+.detail--middle__profile>div:nth-of-type(1){
+    display: flex;
+    position: relative;
+    /* border: 1px solid #F0F0F0; */
+    background-color: white;
+    padding: 10px;
+    align-items: center;
+    width: 30vw;
+
+    box-shadow: 0 3px 3px 0 rgba(197, 197, 197, 0.5);
+}
+
+
+/* 프로필 이미지 */
+.detail--img__profile{
+    width: 125px;
+    height: 125px;
+    overflow: hidden;
+    position: relative; 
+    margin-right: 20px;
+}
+
+.detail--img__profile::before {
+    content: "";
+    display: block;
+    padding-top: calc(100%); /* 높이 대비 너비의 비율을 계산하여 적용 */
+  }
+
+.detail--img__profile>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* 프로필 슈퍼가이드 여부 딱지 */
+.detail--div__super{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.detail--content__profile{
+    height: 100%;
+}
+
+/* 경력 + 평점 + 후기 div */
+.detail--innercontent__profile{
+    display: flex;
+    height: 60%;
+}
+
+/* 프로필 판매자 이름 text */
+.detail--content__profile>div:nth-of-type(1){
+    font-size: 23px;
+    height: 40%;
+    padding-top: 10px;
+}
+
+
+
+/* 경력 , 평점, 후기 내 span 숫자 */
+.detail--innercontent__profile div span{
+    font-size: 1.1rem; margin: 0 30px 0 10px;
+}
+
+
+.detail--innercontent__profile div{
+    align-self: center;
+}
+
+/* 프로필 오른쪽 div */
+.detail--ect__profile{
+    margin-left: 20px;
+}
+
+/* 가이드에게 연락하기 버튼 */
+#contactGuide{
+    height: 53px;
+    width: 196px;
+    background-color: #d9d9d9;
+    border: 1px solid #000000;
+    font-size: 18px;
+    border-radius: 15px;
+}
+
+
+/* 프로필 주의 */
+.detail--div__warning>span{
+    color: red;
+    font-size: 15px;
+}
+
+.detail--div__warning{
+    font-size: 15px;
+    margin-top: 20px;
+    color: #5c5c5c;
+}
+
 
 /* 유의사항 설명 div */
 .detail--description__precaution{
@@ -608,7 +776,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
 
 
 /* 리뷰 더보기 버튼 */
-.detail--item__reivew-button:hover{
+.detail--item__review-button:hover{
     background-color: #0F4957;
     color: #ffffff;
     transition: 0.4s;
@@ -636,9 +804,9 @@ box-shadow:  5px 5px 8px #e2e2e2,
 
 /* 리뷰 날짜 */
 .detail--item__review-date{
-    font-size: 0.8rem;
     color: #555555;
-    margin: 0.5vh 0 0 0.5vw;
+    font-size: 0.9rem;
+    margin: 0.5vh 0 0 20px;
 }
 
 /* 리뷰 프로필 crop div */
@@ -651,12 +819,20 @@ box-shadow:  5px 5px 8px #e2e2e2,
 }
 
 /* 리뷰 상세 내용 div */
-.detail--item__reivew-content{
+.detail--item__review-content{
     background-color: #F0F0F0;
     width: 50vw;
     border-radius: 10px;
     padding: 20px;
     min-width: 500px;
+    font-size: 1.1rem;
+
+    /* display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden; */
 }
 
 
@@ -678,15 +854,15 @@ box-shadow:  5px 5px 8px #e2e2e2,
 }
 
 /* 리뷰 더보기 버튼 */
-.detail--item__reivew-button{
+.detail--item__review-button{
     width: 230px;
-    height: 50px;
+    height: 53px;
     background-color: #ffffff;
     border: 1px solid #777777;
     color: #555555;
     font-weight: 600;
-    font-size: 0.95rem;
     border-radius: 10px;
+    font-size: 1.1rem;
     text-align: center;
     line-height: 50px;
 }
@@ -815,6 +991,116 @@ a {
 
 
 
+  /* 좋아요 버튼 */
+  /* .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    transition: 100ms;
+  }
+  
+  .checkmark {
+    top: 0;
+    left: 0;
+    height: 2em;
+    width: 2em;
+    transition: 100ms;
+    animation: dislike_effect 400ms ease;
+  }
+
+  .checkmark path{
+    stroke: #FF5353;
+    stroke-width: 10;
+  }
+  
+  .container input:checked ~ .checkmark path {
+    fill: #FF5353;
+    stroke-width: 0;
+  }
+  
+  .container input:checked ~ .checkmark {
+    animation: like_effect 400ms ease;
+  }
+  
+  .container:hover {
+    transform: scale(1.1);
+  }
+  
+  @keyframes like_effect {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      transform: scale(1.2);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes dislike_effect {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      transform: scale(1.2);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  } */
+
+
+
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .container svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    transition: all 0.3s;
+    fill: #666;
+  }
+  
+  .container svg:hover {
+    transform: scale(1.1);
+  }
+  
+  .container input:checked ~ svg {
+    fill: #E3474F;
+  }
+  
+
+
 
 /* 반응형 */
 
@@ -882,17 +1168,30 @@ a {
     }
 
 
-    .detail--item__reivew-button{
+    .detail--item__review-button{
         width: 170px;
         height: 45px;
         line-height: 45px;
     }
 
-    .detail--item__reivew-content{
+    .detail--item__review-content{
         width: 100%;
         min-width: 0;
     }
         
+
+    .checkmark {
+        height: 1.5em;
+        width: 1.5em;
+      }
+
+
+
+      .container svg {
+        height: 30px;
+        width: 30px;
+      }
+    
 
 }
 
@@ -932,6 +1231,10 @@ a {
 
     .detail--right__price-count{
         font-size: 20px;
+    }
+
+    .detail--right__price-total>div, span{
+        font-size: 1.3rem;
     }
 
 }

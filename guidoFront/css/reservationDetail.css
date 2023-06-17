@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap');
-/* font-family: 'Noto Sans KR', sans-serif; 
-font-weight: 100 / 400 / 700; 사용가능
-*/
+
 
 /* 기본 세팅 */
 *{
     padding: 0; 
     margin: 0; 
-    font-family: 'Noto Sans KR', sans-serif;
-    box-sizing: border-box;}
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+}
     
 ul,ol{list-style: none;}
 a{color: #000; text-decoration: none;}
@@ -76,6 +74,13 @@ body::-webkit-scrollbar-track {
     color: #5C5C5C;
 }
 
+/* 예약/결제 구분선 */
+.reservation--top__divisionline{
+    height: 1px;
+    width: 100%;
+    background-color: #231F20;
+    margin: 2vh 0;
+}
 
 /* 구분선 */
 .reservation--divisionline{
@@ -355,8 +360,38 @@ body::-webkit-scrollbar-track {
 }
 
 
-/* 예약 리스트 보기 버튼 */
-.reservation--btn{
+/* 취소 규정 */
+.reservation--cancel{
+    white-space: pre-line;
+    width: 100%;
+    background-color: #F0F0F0;
+    padding: 40px;
+    color: #5C5C5C;
+    font-size: 1.1rem;
+    margin-top: 30px;
+}
+
+
+
+/* 뒤로가기/취소하기 버튼 */
+.reservation--btns{
+    width: 100%;
+    display: flex;
+}
+
+.reservation--btns>a:nth-of-type(1){
+    margin-right: 20px;
+}
+
+
+.reservation--btns a{
+    width: 100%;
+}
+
+
+/* 예약 리스트 보기 버튼, 뒤로가기/취소하기 버튼들 */
+.reservation--btn,
+.reservation--btns a button{
     width: 100%;
     background-color: #0F4957;
     height: 70px;
@@ -366,10 +401,12 @@ body::-webkit-scrollbar-track {
     margin: 3vh 0;
 }
 
-
-.reservation--btn:hover{
+.reservation--btn:hover,
+.reservation--btns a button:hover{
     background-color: #0f4957ef;
 }
+
+
 
 
 @media screen and (max-width : 767px) {

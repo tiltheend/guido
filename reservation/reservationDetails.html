@@ -15,7 +15,7 @@
 
         <div class="reservation--title">예약 내역</div>
         
-        <div class="reservation--divisionline"></div>
+        <div class="reservation--top__divisionline"></div>
         
         
         <div class="reservation--info">
@@ -34,6 +34,7 @@
                     <div>20230602-0002063</div>
                     <div>2023-06-02 14:06:59</div>
                     <div>John Doe</div>
+                    <!-- 취소 or 결제 완료 -->
                     <div>결제 완료</div>
                     <div>010-1234-5678</div>
                 </div>
@@ -132,6 +133,25 @@
         </div>
 
 
+        <div class="reservation--cancel">여행 출발(개시) 전 취소 및 환불 규정 (*공정거래위원회 제정_소비자 피해보상 규정 기준)
+
+            여행계약 해제로 인한 피해 : 당사의 귀책사유로 당사가 계약해제하는 경우
+
+            1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불 
+            2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
+            3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
+            4) 여행당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
+        </div>
+
+
+        <!-- 예약 리스트에서 들어가는 예약 상세페이지의 경우 -->
+        <div class="reservation--btns">
+            <a href="javascript:window.history.back();"><button type="button" id="backButton">back</button></a>
+            <a href="#"><button id="cancelButton">cancel</button></a>
+        </div>
+
+        
+        <!-- 예약 완료 시 바로 보여주는 페이지의 경우 -->
         <a href="/reservation/reservation.html" style="width: 100%;"><button class="reservation--btn">view order list</button></a>
 
 
