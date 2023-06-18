@@ -78,9 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
-
-
 });
 
 // 하트 색 바꾸기
