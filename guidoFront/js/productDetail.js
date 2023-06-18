@@ -1,11 +1,4 @@
 
-// 사이드바 영역 고정을 위한 height 값 설정
-const sideBar = document.querySelector('.detail--right__sidebar');
-
-sideBar.style.height = document.querySelector('.detail--middle').offsetHeight + 'px';
-
-
-
 /* 네비게이션 메뉴 클릭 시 특정 위치로 이동 */
 const menuLinks = document.querySelectorAll('.detail--right__scroll ul li a');
 const menuLi = document.querySelectorAll('.detail--right__scroll>ul>li');
@@ -102,15 +95,15 @@ window.addEventListener("scroll", ()=>{
 
 
 /* 리뷰 3줄 이상 넘어갈 시 말줄임표 */
-const reviewContent = document.querySelector(".detail--item__reivew-content");
-const lineHeight = parseInt(window.getComputedStyle(reviewContent).getPropertyValue('line-height'), 10);
-const maxHeight = lineHeight * 3; // 3줄의 높이
+// const reviewContent = document.querySelector(".detail--item__reivew-content");
+// const lineHeight = parseInt(window.getComputedStyle(reviewContent).getPropertyValue('line-height'), 10);
+// const maxHeight = lineHeight * 3; // 3줄의 높이
 
-const textLines = Math.floor(reviewContent.clientHeight / lineHeight);
+// const textLines = Math.floor(reviewContent.clientHeight / lineHeight);
 
-if (textLines > 3) {
-    while (textLines > 3) {
-        reviewContent.textContent = reviewContent.textContent.replace(/\W*\s(\S)*$/, '...');
-        textLines = Math.floor(reviewContent.clientHeight / lineHeight);
-    }
-}
+// if (textLines > 3) {
+//     while (textLines > 3) {
+//         reviewContent.textContent = reviewContent.textContent.replace(/\W*\s(\S)*$/, '...');
+//         textLines = Math.floor(reviewContent.clientHeight / lineHeight);
+//     }
+// }

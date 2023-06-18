@@ -406,6 +406,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
 .detail--left__content{
     margin-right: 70px;
     width: 75%;
+    height: 100%;
 }
 
 /* 중간 섹션 오른쪽 컨테이너 */
@@ -680,6 +681,12 @@ box-shadow:  5px 5px 8px #e2e2e2,
     border-radius: 15px;
 }
 
+#contactGuide:hover{
+    /* 리뷰 더보기 버튼 */
+    background-color: #d9d9d953;
+    transition: 0.4s;
+}
+
 
 /* 프로필 주의 */
 .detail--div__warning>span{
@@ -775,13 +782,6 @@ box-shadow:  5px 5px 8px #e2e2e2,
 }
 
 
-/* 리뷰 더보기 버튼 */
-.detail--item__review-button:hover{
-    background-color: #0F4957;
-    color: #ffffff;
-    transition: 0.4s;
-}
-
 /* 별점, 상품 총 평균 별점 span*/
 .detail--item__review-rating span ,
 .detail--stars__rating span{
@@ -821,7 +821,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 리뷰 상세 내용 div */
 .detail--item__review-content{
     background-color: #F0F0F0;
-    width: 50vw;
+    width: 100%;
     border-radius: 10px;
     padding: 20px;
     min-width: 500px;
@@ -865,8 +865,45 @@ box-shadow:  5px 5px 8px #e2e2e2,
     font-size: 1.1rem;
     text-align: center;
     line-height: 50px;
+    margin-bottom: 40px;
 }
 
+
+/* 리뷰 더보기 버튼 */
+.detail--item__review-button:hover{
+    background-color: #0F4957;
+    color: #ffffff;
+    transition: 0.4s;
+}
+
+
+/* 리뷰 댓글 하단 div */
+.detail--item__review-bottom{
+    width: 80%;
+}
+
+/* 리뷰 댓글 */
+.detail--item__review--reply{
+    width: 95%;
+    display: flex;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    padding: 10px 20px 20px 20px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+/* 리뷰  댓글 아이콘 */
+.detail--item__review--reply>img{
+    width: 45px;
+    height: 40px;
+}
+
+/* 리뷰 댓글 콘텐츠 */
+.detail--item__review--reply>div{
+    font-size: 1.1rem;
+    margin: 10px 0 0 15px;
+}
 
 
 /* 추천 text */
