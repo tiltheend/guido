@@ -599,7 +599,8 @@ box-shadow:  5px 5px 8px #e2e2e2,
     background-color: white;
     padding: 10px;
     align-items: center;
-    width: 30vw;
+    width: 575px;
+    height: 120px;
 
     box-shadow: 0 3px 3px 0 rgba(197, 197, 197, 0.5);
 }
@@ -608,7 +609,6 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 프로필 이미지 */
 .detail--img__profile{
     width: 125px;
-    height: 125px;
     overflow: hidden;
     position: relative; 
     margin-right: 20px;
@@ -635,16 +635,20 @@ box-shadow:  5px 5px 8px #e2e2e2,
     position: absolute;
     top: 0;
     right: 0;
+    width: 140px;
 }
 
 .detail--content__profile{
     height: 100%;
+    width: 100%;
 }
 
 /* 경력 + 평점 + 후기 div */
 .detail--innercontent__profile{
     display: flex;
     height: 60%;
+    width: 100%;
+    justify-content: space-between;
 }
 
 /* 프로필 판매자 이름 text */
@@ -654,11 +658,17 @@ box-shadow:  5px 5px 8px #e2e2e2,
     padding-top: 10px;
 }
 
+/* 경력, 평점, 후기 div */
+.detail--innercontent__profile div{
+    width: 33%;
+    text-align: center;
+}
 
 
 /* 경력 , 평점, 후기 내 span 숫자 */
-.detail--innercontent__profile div span{
-    font-size: 1.1rem; margin: 0 30px 0 10px;
+.detail--innercontent__profile span{
+    font-size: 1.1rem; 
+    margin: 0 10px;
 }
 
 
@@ -1229,7 +1239,51 @@ a {
         width: 30px;
       }
     
+      .detail--middle__profile>div:nth-of-type(1){
+        width: 330px;
+      }
 
+      .detail--content__profile>div:nth-of-type(1){
+        font-size: 16px;
+      }
+
+      .detail--div__super {
+        width: 100px;
+      }
+
+      .detail--innercontent__profile{
+        display: block;
+      }
+
+      .detail--innercontent__profile div{
+        width: 100%;
+        text-align: start;
+      }
+      
+      #contactGuide{
+        width: 330px;
+        height: 40px;
+        font-size: 15px;
+        margin-bottom: 10px;
+        margin-right: auto;
+      }
+
+      .detail--ect__profile{
+        flex-direction: column;
+      }
+
+      .detail--div__warning{
+        width: 100%;
+      }
+
+      .detail--item__review--reply>img{
+        height: 15px;
+      }
+
+      .detail--item__review--reply>div{
+        margin: 10px 0 0 10px;
+      }
+      
 }
 
 
@@ -1274,4 +1328,31 @@ a {
         font-size: 1.3rem;
     }
 
+}
+
+
+@media screen and (max-width : 1370px){
+
+    .detail--middle__profile{
+        display: block;
+    }
+
+    .detail--ect__profile{
+        margin: 20px 0 0 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .detail--div__warning{
+        margin: 0 0 0 20px;
+    }
+
+    .detail--item__review-bottom{
+        width: 90%;
+    }
+
+    .detail--item__review--reply>img{
+        height: 30px;
+        margin-top: 5px;
+    }
 }
