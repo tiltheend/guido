@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VOTE 나의청원</title>
+        <style>
+            .write-petition-container{
+  width: 960px;
+  margin: 0 auto;
+}
+
+main *{
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+#page1Tip{
+  margin-top: 20px;
+}
+
+.wp-progress-bar {
+  width: 960px;
+  height: 8px;
+  margin: auto;
+  background-color: #eee;
+}
+
+.wp-progress {
+  height: 100%;
+  background-color: #2DB400;
+  width: 0px;
+  transition: width 0.1s ease-in-out;
+}
+
+
+.container{
+  display: flex;
+  width: 600px;
+  margin: 30px auto;
+  flex-direction: column;
+}
+
+.medium{
+  font-size: 1.5rem;
+}
+
+.large{
+  font-size: 2rem;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.btn-container{
+  width: 600px;
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px auto;
+}
+
+.select-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scope-item{
+  display: flex;
+  height: 80px;
+  flex-basis: 32%;
+  border: 1px solid black;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.scope-item:hover{
+  background-color: #eee;
+}
+
+.selected-item{
+  border: 2px solid #2DB400;
+  color: #2DB400;
+  font-weight: bold;
+}
+
+.my-btn{
+  margin: 5px;
+  width: 100px;
+  height: 40px;
+  border: 2px solid #2DB400;
+  border-radius: 5px;
+  /* font-size: 1rem; */
+  font-weight: bold;
+}
+
+.my-btn:hover{
+  border-color: black;
+}
+
+#prevBtn{
+  display: none;
+}
+
+#nextBtn{
+  background-color: #2DB400;
+  color: white;
+}
+
+
+#submitBtn{
+  display: none;
+  width: auto;
+  background-color: #2DB400;
+  color: white;
+}
+
+.tip{
+  border: 1px solid #bbb;
+  background-color: #eee;
+  border-radius: 5px;
+  width: 100%;
+  /* height:0px; */
+  align-items: center;
+  padding: 20px 0;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .ai-center{
+  display: flex;
+  align-items: center;
+} */
+
+.scope-icon{
+  margin-left: 10px;
+  margin-right: 10px;
+  pointer-events: none;
+}
+
+.page{
+  display:none;
+}
+
+.page.current{
+  display: flex;
+}
+
+#categoryContainer{
+  display: flex;
+  padding: 3px;
+  flex-wrap: wrap;
+}
+
+.category-item{
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  display: flex;
+  cursor: pointer;
+}
+
+.pointer-events-none{
+  pointer-events: none;
+}
+
+#titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+#titleContainer > div:first-child {
+  font-size: 0.8rem;
+}
+
+#inputTitle {
+  width: 100%;
+  padding: 10px;
+  /* margin-bottom: 10px; */
+  outline: none;
+  /* -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; */
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+#titleCountContainer {
+  display: flex;
+  align-self: flex-end;
+  margin-top: 5px;
+}
+
+.red{
+  color: red;
+}
+
+button:disabled{
+  background-color: #bbb !important;
+  border: 2px solid #bbb;
+}
+
+button:disabled:hover{
+  cursor: not-allowed;
+}
+.input-img-btn{
+  background-color: white;
+  color: #2DB400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page6{
+  width: 960px;
+}
+#previewContainer{
+  width: 100%;
+  display: flex;
+}
+
+#previewTitle{
+  font-weight: bold;
+  align-self: center;
+}
+
+#previewContent{
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+#previewImgAndSignContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-img{
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+#writer{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.profile-img{
+  margin-right: 5px;
+}
+
+#signContainer{
+  padding: 10px;
+}
+#signContainer *{
+  margin: 5px;
+}
+
+#progC{
+  height: 10px;
+  background-color: #eee;
+  border-radius: 10px;
+  padding: 0px;
+}
+
+#prog{
+  width: 20%;
+  height: 100%;
+  background-image: linear-gradient(to right, orange, red);
+  border-radius: 10px;
+  margin: 0px;
+}
+
+.sticky{
+  background-color: white;
+  bottom: 0px;
+  position: sticky;
+  z-index: 1000;
+}
+
+/* 숨기기 */
+.hidden{
+  display: none;
+}
+
+/* 체크박스 선택되었을 때, 검색된 아이템의 색상 변경 */
+input[name="categoryItems"]:checked + label,#directInputCheckbox:checked + label, .direct-input-item {
+  border: 2px solid #2DB400;
+  background-color: #2DB400;
+  color: white;
+  font-weight: bold;
+}
+
+.direct-input-item {
+  display: inline;
+  position:relative;
+}
+
+.category-item:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.direct-input-item:hover>span{
+  color: red;
+}
+
+#directInputInputContainer,
+#directInputItemContainer{
+  display: flex;
+  align-items: center;
+}
+
+
+#progHr{
+  width: 100%;
+  margin: 10px 0;
+}
+
+#signer{
+  display: flex;
+  align-items: center;
+}
+
+#directInputItemContainer{
+  display: flex;
+  padding: 3px;
+  flex-wrap: wrap;
+}
+
+#categoryInput {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 5px;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+#categoryInputBtn{
+  background-color: #2DB400;
+  color: white;
+}
+
+.scope-item i{
+  font-size: 20px;
+}
+
+#previewImage{
+  width: 100%;
+  height: 100%;
+}
+
+.no-img-container{
+  width: 100%;
+  height: 100%;
+  border: 1px dashed #aaa;
+  border-radius: 8px;
+}
+
+.input-img-container{
+  width: 560px;
+  height: 350px;
+  position: relative;
+}
+
+.img-container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.img-container:hover>.delete-image{
+  display: flex;
+}
+.delete-image:hover{
+  color:red;
+  border: 2px solid red;
+  cursor: pointer;
+}
+
+.delete-image{
+  display: none;
+}
+
+.delete-image{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#writeTitle {
+  margin-bottom: 5px;
+}
+
+#writeImageTitle{
+  margin-bottom: 5px;
+}
+
+.smallText {
+  font-size: 12px;
+}
+        </style>
+        
+        <!-- include summernote css/js -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        
+        
+        <link rel="stylesheet" href="resources/css/writePetition/writePetition.css">
+    </head>
+    <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <main>
+        <div class="write-petition-container">
+            <div class="wp-progress-bar"><div class="wp-progress"></div></div>
+            <form action="/writePetition" method="post" enctype="multipart/form-data">
+                <!-- page1 -->
+                <div id="page1" class="page container border current">
+                    <h2>변화를 향한 첫 걸음</h2>
+                    <p>청원 범위 선택:</p>
+                    <div class="select-container border">
+                        <span class="scope-item selected-item" name="scope" value="local">
+                            <span class="scope-icon pointer-events-none"><i class="fa-solid fa-house"></i></span>
+                            <span class="pointer-events-none">지역</span>
+                        </span><span class="scope-item" name="scope" value="national">
+                            <span class="scope-icon pointer-events-none"><i class="fa-sharp fa-solid fa-landmark-dome"></i></span>
+                            <span class="pointer-events-none">국가</span>
+                        </span><span class="scope-item" name="scope" value="global">
+                            <span class="scope-icon pointer-events-none"><i class="fa-solid fa-earth-americas"></i></span>
+                            <span class="pointer-events-none">세계</span>
+                        </span>
+                    </div>
+                    <div id="page1Tip" class="tip"><span class="scope-icon"><i class="fa-solid fa-arrow-trend-up"></i></span><span>지역 청원은 승리할 확률이 50% 더 높습니다.</span></div>
+                </div>
+                
+                <!-- page2 -->
+                <div id="page2" class="page container border">
+                    <h2>이 청원에 가장 적합한 주제는 무엇인가요?</h2>
+                    <div id="categoryContainer" class="border">
+                        <c:forEach items="${defaultCategoryList}" var="defaultCategory">
+                            <input type="checkbox" name="categoryItems" class="hidden" id="defaultCategoryItem${defaultCategory.categoryNo}"
+                            value="${defaultCategory.categoryNo}">
+                            <label class="category-item" for="defaultCategoryItem${defaultCategory.categoryNo}">${defaultCategory.categoryName}</label>
+                        </c:forEach>
+                        <input type="checkbox" name="directInput" class="hidden" id="directInputCheckbox" value="y">
+                        <label for="directInputCheckbox" class="category-item">직접 입력</label>
+                    </div>
+                    <div id="directInputContainer" class="hidden">
+                        <div id="directInputInputContainer">
+                            <input type="text" id="categoryInput">
+                            <input id="categoryInputBtn" class="my-btn" type="button" value="입력">
+                        </div>
+                        <div id="directInputItemContainer">
+                            <%-- <div class="direct-input-item category-item">
+                                <input type="hidden" name="directInputCategory" value="직접 입력한 샘플데이터">
+                                직접 입력한 샘플데이터
+                                <span>X</span>
+                            </div> --%>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- page3 -->
+                <div id="page3" class="page container border">
+                    <h2>청원 제목을 작성하세요.</h2>
+                    <p>사람들에게 당신이 바꾸고 싶은 주제에 대해 말해보세요.</p>
+                    <div id="titleContainer">
+                        <div id="writeTitle">청원 제목</div>
+                        <input type="text" name="title" id="inputTitle" onkeydown="return event.key != 'Enter';">
+                        <div id="titleCountContainer"><div id="titleCharCount">0</div><div>/90</div></div>
+                    </div>
+                </div>
+                
+                <!-- page4 -->
+                <div id="page4" class="page container border">
+                    <h2>당신의 이야기를 들려주세요.</h2>
+                    <!-- 에디터 출력영역 -->
+                    <textarea id="summernote" name="editorContent"></textarea>
+                </div>
+                
+                <!-- page5 -->
+                <div id="page5" class="page container border">
+                    <h2 id="writeImageTitle">이미지를 추가하세요.</h2>
+                    <div class="smallText">(선택 사항)</div>
+                    <h4>이미지가 있는 청원은 6배 많은 서명을 받습니다.</h4>
+                    <div class="input-img-container container border center">
+                        <div class="no-img-container center container">
+                            <img data-testid="drop-target" width="115" src="resources/images/writePetition/uploadimg.svg">
+                            <label for='inputImage' class="input-img-btn my-btn">이미지 등록</label>
+                            <input type="file" name="thumbnailImage" id="inputImage" class="hidden" accept="image/*">
+                        </div>
+                        <div class="img-container hidden">
+                            <img id="previewImage" class="preview-image">
+                            <span class="delete-image center">X</span>
+                        </div>
+                    </div>
+                    <div class="smallText">이미지 크기는 1200 x 675픽셀에 최적화 되어 있습니다.</div>
+                </div>
+                
+                <!-- page6 -->
+                <div id="page6" class="page container border">
+                    <h2>당신의 청원이 준비되었습니다.</h2>
+                    <h3>다음 진행 사항은 아래와 같습니다.</h3>
+                    <ol>
+                        <li>아래에서 당신의 청원서를 확인하세요.</li>
+                        <li>제출 버튼을 눌러 작성을 완료하세요.</li>
+                        <li>청원서는 언제든지 수정할 수 있습니다.</li>
+                        <li>아는 사람이나 온라인 커뮤니티에 공유하세요.</li>
+                    </ol>
+                    <div id="previewContainer" class="border container">
+                        <h1 id="previewTitle">제목이 작성되는 곳</h1>
+                        <div id="previewImgAndSignContainer">
+                            <div class="input-img-container container border center">
+                                <div class="no-img-container center container">
+                                    <img data-testid="drop-target" width="115" src="resources/images/writePetition/uploadimg.svg">
+                                    <label for='inputImage' class="input-img-btn my-btn">이미지 등록</label>
+                                </div>
+                                <div class="img-container hidden">
+                                    <img id="previewImage" class="preview-image">
+                                    <span class="delete-image center">X</span>
+                                </div>
+                            </div>
+                            <div id="signContainer">
+                                <br><br>
+                                <div class="bold">현재 1명이 청원에 서명하였습니다.</div>
+                                <div>다음 목표는 5명입니다.</div>
+                                <div id="progC"><div id="prog"></div></div>
+                                <hr id="progHr" style="width:100%;">
+                                <div id="signer">
+                                    <c:choose>
+                                        <c:when test="${not empty loginUser.userImage}">
+                                            <img class="user-image" src="${loginUser.userImage}" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            <i class="fa-sharp fa-solid fa-user header-a"></i>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <div id="signerName">${loginUser.userNickname}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="writer">
+                            <c:choose>
+                                <c:when test="${not empty loginUser.userImage}">
+                                    <img class="user-image" src="${loginUser.userImage}" />
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa-sharp fa-solid fa-user header-a"></i>
+                                </c:otherwise>
+                            </c:choose>
+                            ${loginUser.userNickname}님이 이 청원을 시작하였습니다.
+                        </div>
+                        <div id="previewContentContainer">
+                            <div id="previewContent">내용</div>
+                        </div>
+                    </div>
+                </div>
+                
+            <div id="btnContainer" class="btn-container border">
+                <button type="button" id="prevBtn" class="my-btn">이전으로</button>
+                <button type="button" id="nextBtn" class="my-btn">다음으로</button>
+                <button type="submit" id="submitBtn" class="my-btn">제출</button>
+            </div>
+            </form>
+        </div>
+    </main>
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+        <script src="/js/writePetition.js"></script>
+        <script src="https://kit.fontawesome.com/fa1a384c97.js" crossorigin="anonymous"></script>
+    </body>
+</html>

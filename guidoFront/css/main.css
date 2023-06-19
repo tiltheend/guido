@@ -106,7 +106,7 @@ header .search-box-click-box button{
   background-color: #fff;
   border-radius: 50px;
 
-  background-image : url('/guidoFront/images/icons/location_pin.svg');
+  background-image : url('/images/icons/location_pin.svg');
   background-repeat : no-repeat;
   background-size : 15px;
   background-position: 15px center;
@@ -724,13 +724,13 @@ hr{
   right: 10px;
   width: 25px;
   height: 21px;
-  background-image: url('/guidoFront/images/icons/like.png'); 
+  background-image: url('/images/icons/like.png'); 
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .heart-icon.selected {
-  background-image: url('/guidoFront/images/icons/liked.png'); 
+  background-image: url('/images/icons/liked.png'); 
 } */
 
 /* 슬라이드들 옆으로 정렬 */
@@ -849,13 +849,13 @@ hr{
 }
 
 .heart-icon{
-  background-image: url('/guidoFront/images/profile/heartNone.png'); 
+  background-image: url('/images/profile/heartNone.png'); 
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .heart-icon.selected{
-  background-image: url('/guidoFront/images/profile/heartClick.png'); 
+  background-image: url('/images/profile/heartClick.png'); 
 }
 
 

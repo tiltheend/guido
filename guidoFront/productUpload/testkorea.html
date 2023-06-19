@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SVG Map of South Korea</title>
+    <style>
+      .land {
+        fill: #cccccc;
+        fill-opacity: 1;
+        stroke: white;
+        stroke-opacity: 1;
+        stroke-width: 0.5;
+      }
+
+      .land:hover {
+        fill: #408c8c;
+      }
+    </style>
+  </head>
+  <body>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:amcharts="http://amcharts.com/ammap"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+    >
+      <defs>
+        <amcharts:ammap
+          projection="mercator"
+          leftLongitude="125.384458"
+          topLatitude="38.612296"
+          rightLongitude="131.873029"
+          bottomLatitude="33.194027"
+        ></amcharts:ammap>
+      </defs>
+    </svg>
+  </body>
+</html>
