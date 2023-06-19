@@ -10,10 +10,15 @@ if(profileEditIcon!=null){
 let reviewContentList; /* 리뷰 글자 수 */
 let reviewContentMore; /* 리뷰 글자 수 */
 
+/* ---- 긴 리뷰들만 더보기 상세 조회 모달 ---- */
 let moreAndReply; /* 더보기 버튼 */
 let reviewMoreModal; /* 더보기 모달 */
+let reviewMoreModalTextArea; /* 리뷰 내용 */
+let reviewMoreModalP; /* 리뷰 상품 제목 */
+let reviewerName; /* 리뷰 단 사람 이름 */
+let reviewerProfile; /* 리뷰 단 사람 사진 */
+let reviewerDate; /* 리뷰 단 날짜 */
 let reviewMoreModalClose; /* 더보기 닫기 */
-let replyContent; /* 리뷰 요소 */
 
 let commentView; /* 판매자 답글 버튼 */
 let sellerReply; /* 답글 박스 */
@@ -37,16 +42,34 @@ document.addEventListener("DOMContentLoaded",()=>{
     moreAndReply = document.querySelector(".more-and-reply>p");
     reviewMoreModal=document.querySelector(".seller-profile-top .review-more-modal");
 
+    reviewMoreModalTextArea = document.querySelector(".review-more-modal textarea");
+    reviewMoreModalP = document.querySelector(".review-more-modal .sale-review-info>p");
+    reviewerName = document.querySelector(".review-more-modal .reviewer-name");
+    reviewerProfile = document.querySelector(".review-more-modal .reviewer");
+    reviewerDate = document.querySelector(".review-more-modal .review-date");
 
     if(moreAndReply != null){
         moreAndReply.addEventListener("click",()=>{
-            reviewMoreModal.firstElementChild.firstElementChild.innerHTML;
-            reviewMoreModal.firstElementChild.firstElementChild.innerHTML;
-
+            // 리뷰 상세 조회 내용 넣기
+            reviewMoreModalTextArea.innerText = moreAndReply.parentElement.previousElementSibling.innerText;
+            
+            // 리뷰 상세 조회 상품 제목 넣기
+            reviewMoreModalP.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
+            
+            // 리뷰 이름 넣기
+            reviewerName.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.firstElementChild.lastElementChild.innerText;
+            
+            // 리뷰 사진 넣기
+            reviewerProfile.innerHTML = moreAndReply.parentElement.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
+            
+            // 리뷰 날짜 넣기
+            reviewerDate.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerText;
+            
+            // 모달 열기
             reviewMoreModal.style.display="flex";
             
-            reviewMoreModalClose = document.querySelector(".seller-profile-top .review-more-modal .review-modal-close");
             // 모달 닫기
+            reviewMoreModalClose = document.querySelector(".seller-profile-top .review-more-modal .review-modal-close");
             reviewMoreModalClose.addEventListener('click',()=>{
                 reviewMoreModal.style.display="none";
             });
