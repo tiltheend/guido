@@ -62,14 +62,14 @@ input[type="checkbox"]+label {
     width: 1.2rem;
     height: 1.2rem;
     cursor: pointer;
-    background: url('/reservation/checkbox.png') no-repeat 0 0px / contain;
+    background: url('/guidoFront/images/reservation/checkbox.png') no-repeat 0 0px / contain;
 }
 
 input[type='checkbox']:checked+label {
     cursor: pointer;
     width: 1.2rem;
     height: 1.2rem;
-    background: url('/reservation/checkedbox.png') no-repeat 0 0px / contain;
+    background: url('/guidoFront/images/reservation/checkedbox.png') no-repeat 0 0px / contain;
 }
 
 input[type="checkbox"] {
