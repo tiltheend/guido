@@ -17,7 +17,8 @@
 }
 .container_top_subTitle{
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    width: 420px;
     font-weight: lighter;
     margin: 10px 0 50px 0;
 }
