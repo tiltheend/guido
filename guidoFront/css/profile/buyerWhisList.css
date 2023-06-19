@@ -213,6 +213,15 @@
     position: absolute;
     top: 310px;
 }
+.buyer-profile-top .wish-list .sales-text p:first-of-type{
+    width: 250px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
 .buyer-profile-top .wish-list .sales-text img{
     width: 12px; margin-right: 4px;
 }

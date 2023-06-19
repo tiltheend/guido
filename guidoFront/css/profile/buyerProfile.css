@@ -184,105 +184,7 @@
     margin-bottom: 32px; margin-top: 50px;
     cursor: pointer;
 }
-/* .buyer-profile-top .review-list li{
-    width: 100%;  height: 280px; background-color: #fff;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 12px;
-    padding: 10px 20px;
-}
-.buyer-profile-top .review-list li>div{
-    display: flex; 
-}
-.buyer-profile-top .review-list li:first-child{
-    display: flex; flex-direction: column;
-    margin-right: 40px;
-} */
-/* 리뷰 남긴 사람 프로필 */
-/* .buyer-profile-top .review-list li:first-child>div{
-    width: 100%;
-    display: flex; 
-}
-.buyer-profile-top .review-list li:first-child>div>div:first-child{
-    margin-top: 14px;
-}
-.buyer-profile-top .review-list li .reviewer{ 
-    width: 80px; height: 80px; border-radius: 50%;
-    background-color: #FFE69A;
-    margin-right: 40px;
-}
-.buyer-profile-top .review-list li .reviewer>img{
-    width: 80px; height: 80px; border-radius: 50%;
-}
-.buyer-profile-top .review-list li .reviewer-name{
-    width: 80px; text-align: center;
-    font-size: 1rem; font-weight: bold;
-    margin-top: 4px;
-} */
-/* 리뷰 내용 */
-/* .buyer-profile-top .review-list li .sale-review-info{
-    margin-top: 14px;
-}
-.buyer-profile-top .review-list li .sale-review-info>p{
-    font-size: 1rem;
-    overflow: hidden;
-    white-space: normal;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-.buyer-profile-top .review-list li>pre{
-    font-size: 1.2rem;
-    margin-top: 12px;
-    width: 100%; height: 96px;
-    overflow: hidden;
-    white-space: normal;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    line-height: 30px;
-}
 
-.buyerler-profile-top .review-list li .comment-view button{ 
-    width: 80px; height: 34px;
-    background-color: #F0F0F0; color: #5C5C5C;
-    font-weight: bold; font-size: 1rem;
-    border-radius: 20px; line-height: 32px;
-    margin-top: 4px;
-    float: right;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-.buyer-profile-top .review-list li>button:hover{
-    background-color: #5C5C5C; color: #F0F0F0;
-}  */
-
-/* 리뷰 더보기 버튼 */
-/* .buyer-profile-top .review-list li>div:last-of-type.comment-view{ 
-    display: flex;
-    width: 100%; height: 50px;
-    position: relative;
-}
-.buyer-profile-top .review-list li>div:last-of-type.comment-view>img{ 
-    width: 30px; height: 30px;
-    cursor: pointer;
-    float: right;
-    margin: 10px 0;
-}
-.buyer-profile-top .review-list li>.comment-view>img:first-of-type{
-    position: absolute; bottom: 0; right: 0;
-    opacity: 1;
-}
-.buyer-profile-top .review-list li>.comment-view>img:last-of-type{
-    position: absolute; bottom: 0; right: 0;
-    opacity: 0;
-}
-.buyer-profile-top .review-list li>.comment-view>img:first-of-type:hover{
-    opacity: 0;
-}
-.buyer-profile-top .review-list li>.comment-view>img:last-of-type:hover{
-    opacity: 1;
-} */
 
 /* 리뷰 옮기는 중 */
 .buyer-profile-top .review-list{
@@ -622,11 +524,13 @@
 .buyer-profile-top .review-more-modal textarea{/* 리뷰 내용 */
     font-size: 1rem;
     margin: 20px 0;
-    width: 100%; height: 34vh;
+    width: 100%; height: 32vh;
     line-height: 26px;
     resize: none;
     margin-top: 30px;
     padding: 8px;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
 }
 
 
@@ -777,9 +681,14 @@
 .buyer-profile-top .review-edit #reviewSaleList{
     width: 100%; height: 40px;
     margin-top: 16px;
-    padding: 4px;
+    padding: 8px;
     border: 1px solid #c5c5c5;
     border-radius: 5px;
+    user-select: none;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .buyer-profile-top .review-edit>div h3{
     margin: 24px 0; margin-right: 20px;

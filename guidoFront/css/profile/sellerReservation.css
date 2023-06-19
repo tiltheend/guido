@@ -208,6 +208,7 @@
 .seller-profile-top .reservation-list-box .sale-content>div>img{
     width: 32px; height: 32px;
     position: absolute; bottom: 20px; right: 20px;
+    cursor: pointer;
 }
 
 

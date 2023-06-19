@@ -1,5 +1,4 @@
-let reviewContentList; /* 리뷰 글자 수 */
-let reviewContentMore; /* 리뷰 글자 수 */
+
 
 /* ---- 긴 리뷰들만 더보기 상세 조회 모달 ---- */
 let moreAndReply; /* 더보기 버튼 */
@@ -12,6 +11,10 @@ let reviewerDate; /* 리뷰 단 날짜 */
 let reviewerRating; /* 리뷰 단 날짜 */
 let reviewMoreModalClose; /* 더보기 닫기 */
 
+/* ---- 리뷰 모달들 ---- */
+let reviewContentList; /* 리뷰 글자 수(작성) */
+let reviewContentMore; /* 리뷰 글자 수(수정) */
+
 let addReview; /* 리뷰 열기 + */
 let reviewWriteModal; /* 리뷰 모달 */
 let reviewModalClose; /* 리뷰 닫기 */
@@ -19,6 +22,9 @@ let reviewModalClose; /* 리뷰 닫기 */
 let reviewEdit; /* 리뷰 수정 */
 let reviewEditModal; /* 리뷰 수정 모달 */
 let reviewEditModalClose; /* 리뷰 수정 닫기 */
+let reviewSaleList; /* 리뷰 상품명 */
+let reviewSaleListContent; /* 리뷰 작성 글 */
+let reviewSaleListStar; /* 리뷰 별점 */
 
 document.addEventListener("DOMContentLoaded",()=>{
 
@@ -92,13 +98,39 @@ document.addEventListener("DOMContentLoaded",()=>{
         });
     }
 
+    // 리뷰 수정 모달 열기
     reviewEdit=document.querySelector(".review-edit-btn");
     reviewEditModal=document.querySelector(".buyer-profile-top .review-edit");
-    // 리뷰 수정 모달 열기
+
+    reviewSaleList=document.querySelector(".review-edit #reviewSaleList");
+    reviewSaleListContent=document.querySelector(".review-edit #reviewContent");
+    reviewSaleListStar=document.querySelector(".review-edit .score-star");
+    
+
     if(reviewEdit != null){
         reviewEditModalClose = document.querySelector(".buyer-profile-top .review-edit .review-modal-close");
-        reviewEdit.addEventListener('click',()=>{
-            ㄴ
+        reviewEdit.addEventListener('click',e=>{
+
+            // 상품 제목 가져오기
+            reviewSaleList.value=e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
+            
+            // 리뷰 내용 가져오기
+            reviewSaleListContent.value=e.target.parentElement.parentElement.previousElementSibling.innerText;
+            let reviewSaleListContentCount = document.querySelector(".review-edit #count");
+            reviewSaleListContentCount.innerText=reviewSaleListContent.value.length;
+
+
+            // 별점 가져오기
+            let checkedInput =e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.lastElementChild.firstElementChild.querySelector('.reply-content input[type="radio"]:checked').value;
+            let reviewSaleListStarList = reviewSaleListStar.querySelectorAll('input[type="radio"]');
+            let scoreSpan = document.querySelector('.review-edit .score-span');
+            for(let i of reviewSaleListStarList){
+                if(i.value==checkedInput){
+                    i.checked=true;
+                    scoreSpan.innerText=checkedInput;
+                }
+            }
+            
 
             reviewEditModal.style.display="flex";
             // 모달 닫기
@@ -153,7 +185,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     
 
     // 리뷰 별점 실시간 값 출력
-    const starScoreList = document.getElementsByName('starScore');
+    let starScoreList = document.getElementsByName('starScore');
 
     for(let i of starScoreList){
         i.addEventListener("input",()=>{
@@ -161,7 +193,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         });
     }
 
-    const starScoreListEdit = document.querySelectorAll('.star_score');
+    let starScoreListEdit = document.querySelectorAll('.star_score');
 
     for(let i of starScoreListEdit){
         i.addEventListener("input",()=>{

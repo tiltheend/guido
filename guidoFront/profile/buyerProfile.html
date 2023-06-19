@@ -146,7 +146,7 @@
                             </div>
                             <span class="score-span">0.0</span>
                         </div>
-                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요."></textarea>
+                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요." maxlength="1000"></textarea>
                         <div class="write-count">
                             <span class="over-error"><i class="fa-sharp fa-solid fa-bomb"></i> 500자 이하로 작성해주세요.</span>
                             <div><span id="count">0</span> / 500</div>
@@ -164,8 +164,7 @@
                 <div> <!-- 하얀 배경 -->
                     <form action="">
                         <h2>Purchase History</h2>
-                        <input type="text" name="reviewSaleList" id="reviewSaleList"
-                        value="[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea">
+                        <input type="text" name="reviewSaleList" id="reviewSaleList">
         
                         <div class="review-star-score"> <!-- 별점 수정 -->
                             <h3>Star Rating</h3>
@@ -196,7 +195,7 @@
                             </div>
                             <span class="score-span"></span>
                         </div>
-                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요.">그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</textarea>
+                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요." maxlength="1000">그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</textarea>
                         <div class="write-count">
                             <span class="over-error"><i class="fa-sharp fa-solid fa-bomb"></i> 500자 이하로 작성해주세요.</span>
                             <div><span id="count">0</span> / 500</div>
@@ -222,19 +221,6 @@
                         <div class="sale-review-info">
                             <p>상품 제목</p>
                             <div class="review-rating">
-                                <div class="review-star">
-                                    <input type="radio" id="starpoint_1" class="star_radio">
-                                    <input type="radio" id="starpoint_2" class="star_radio">
-                                    <input type="radio" id="starpoint_3" class="star_radio">
-                                    <input type="radio" id="starpoint_4" class="star_radio">
-                                    <input type="radio" id="starpoint_5" class="star_radio">
-                                    <input type="radio" id="starpoint_6" class="star_radio">
-                                    <input type="radio" id="starpoint_7" class="star_radio">
-                                    <input type="radio" id="starpoint_8" class="star_radio">
-                                    <input type="radio" id="starpoint_9" class="star_radio" checked>
-                                    <input type="radio" id="starpoint_10" class="star_radio">
-                                    <span class="starpoint_bg"></span>
-                                </div>
                                 <span class="review-date">리뷰 날짜</span>
                             </div>
                         </div>
@@ -269,16 +255,16 @@
                                         <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
                                         <div class="review-rating">
                                             <div class="review-star">
-                                                <input type="radio" id="starpoint_1" class="star_radio">
-                                                <input type="radio" id="starpoint_2" class="star_radio">
-                                                <input type="radio" id="starpoint_3" class="star_radio">
-                                                <input type="radio" id="starpoint_4" class="star_radio">
-                                                <input type="radio" id="starpoint_5" class="star_radio">
-                                                <input type="radio" id="starpoint_6" class="star_radio">
-                                                <input type="radio" id="starpoint_7" class="star_radio">
-                                                <input type="radio" id="starpoint_8" class="star_radio">
-                                                <input type="radio" id="starpoint_9" class="star_radio" checked>
-                                                <input type="radio" id="starpoint_10" class="star_radio">
+                                                <input type="radio" id="starpoint_1" class="star_radio" value="0.5">
+                                                <input type="radio" id="starpoint_2" class="star_radio" value="1.0">
+                                                <input type="radio" id="starpoint_3" class="star_radio" value="1.5">
+                                                <input type="radio" id="starpoint_4" class="star_radio" value="2.0">
+                                                <input type="radio" id="starpoint_5" class="star_radio" value="2.5">
+                                                <input type="radio" id="starpoint_6" class="star_radio" value="3.0" checked>
+                                                <input type="radio" id="starpoint_7" class="star_radio" value="3.5">
+                                                <input type="radio" id="starpoint_8" class="star_radio" value="4.0">
+                                                <input type="radio" id="starpoint_9" class="star_radio" value="4.5">
+                                                <input type="radio" id="starpoint_10" class="star_radio" value="5.0">
                                                 <span class="starpoint_bg"></span>
                                             </div>
                                             <span class="review-date">2023/05/25</span>
@@ -316,47 +302,6 @@
                             </li>
                         </ul>
                     </li>
-                    
-                    <!-- <li>
-                        <div>
-                            <div>
-                                <div class="reviewer">
-                                    <img src="">
-                                </div>
-                                <p class="reviewer-name">Anna</p>
-                            </div>
-                            <div class="sale-review-info">
-                                <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
-                                <div class="review-rating">
-                                    <div class="review-star">
-                                        <input type="radio" id="starpoint_1" class="star_radio">
-                                        <input type="radio" id="starpoint_2" class="star_radio">
-                                        <input type="radio" id="starpoint_3" class="star_radio">
-                                        <input type="radio" id="starpoint_4" class="star_radio">
-                                        <input type="radio" id="starpoint_5" class="star_radio">
-                                        <input type="radio" id="starpoint_6" class="star_radio">
-                                        <input type="radio" id="starpoint_7" class="star_radio">
-                                        <input type="radio" id="starpoint_8" class="star_radio">
-                                        <input type="radio" id="starpoint_9" class="star_radio" checked>
-                                        <input type="radio" id="starpoint_10" class="star_radio">
-                                        <span class="starpoint_bg"></span>
-                                    </div>
-                                    <span class="review-date">2023/05/25</span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <pre>그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre>
-
-                        <div class="comment-view">
-                            <div class="myreview-edit">
-                                <button class="review-edit-btn">Edit</button>
-                                <button class="review-delete-btn">Delete</button>
-                            </div>
-                            <img src="../images/profile/comment-view.png" alt="comment-view">
-                            <img src="../images/profile/comment-view_hover.png" alt="comment-view_hover">
-                        </div>
-                    </li> -->
                     
                     
                 </ul>

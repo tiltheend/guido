@@ -602,12 +602,13 @@
 .seller-profile-top .review-more-modal textarea{/* 리뷰 내용 */
     font-size: 1rem;
     margin: 20px 0;
-    width: 100%; height: 34vh;
+    width: 100%; height: 32vh;
     line-height: 26px;
     resize: none;
     margin-top: 30px;
     padding: 8px;
     border: 1px solid #c5c5c5;
+    border-radius: 5px;
 }
 
 
