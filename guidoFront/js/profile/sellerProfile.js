@@ -18,6 +18,7 @@ let reviewMoreModalP; /* 리뷰 상품 제목 */
 let reviewerName; /* 리뷰 단 사람 이름 */
 let reviewerProfile; /* 리뷰 단 사람 사진 */
 let reviewerDate; /* 리뷰 단 날짜 */
+let reviewerRating; /* 리뷰 단 날짜 */
 let reviewMoreModalClose; /* 더보기 닫기 */
 
 let commentView; /* 판매자 답글 버튼 */
