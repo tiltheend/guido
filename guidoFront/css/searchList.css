@@ -1,44 +1,17 @@
 /* 컬러 
 : 컬러는 태그에 웬만하면 직접 지정해주세요
 혹시 몰라서 클래스로 세팅 해놨습니다.*/
-.colormain1 {
-    background-color: #0F4957;
-}
-
-.colorsub1 {
-    background-color: #B1D8DA;
-}
-
-.colormain2 {
-    background-color: #1C797D;
-}
-
-.colorsub1 {
-    background-color: #FFE69A;
-}
+.colormain1 {background-color: #0F4957;}
+.colorsub1 {background-color: #B1D8DA;}
+.colormain2 {background-color: #1C797D;}
+.colorsub1 {background-color: #FFE69A;}
 
 /* 무채색 컬러 */
-.monocolor1 {
-    background-color: #231F20;
-}
-
-.monocolor2 {
-    background-color: #5C5C5C;
-}
-
-.monocolor3 {
-    background-color: #C5C5C5;
-}
-
-.monocolor4 {
-    background-color: #F0F0F0;
-}
-
-.modalcolor {
-    background-color: #5C5C5C60;
-}
-
-
+.monocolor1 {background-color: #231F20;}
+.monocolor2 {background-color: #5C5C5C;}
+.monocolor3 {background-color: #C5C5C5;}
+.monocolor4 {background-color: #F0F0F0;}
+.modalcolor {background-color: #5C5C5C60;}
 
 
 
