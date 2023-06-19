@@ -1,158 +1,22 @@
 
 <!DOCTYPE html>
-                            <!-- 현재 html 문서에 타임리프 문법을 사용한다고 선언 -->
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판 프로젝트</title>
+    <title>guido</title>
 </head>
 <body>
     <main>
 
-        <!-- ht:block 
-            - html 태그가 아닌 단순히 타임리프를 쓰기 위한 태그가 필요할 때 사용
-            - 타임리프 해석 시 다른 타임리프 수행 후 사라짐
-        -->
-
-        <!--   ~{경로} : 접두사 접미사 제외하고 작성  -->
         <th:block th:replace="~{common/header}"></th:block>
 
-        <section class="content">
-            <section class="content-1">
-
-                <h3>로그인된 회원 정보</h3>
-                ${sessionScope.loginMember}
-
-                <h3>닉네임이 일치하는 회원의 전화번호 조회</h3>
-
-                <input type="text" id="inputNickname">
-                <button id="btn1">조회</button>
-                <h4 id="result1"></h4>
-
-                <hr>
-
-                <h3>이메일을 입력 받아 일치하는 회원의 정보를 조회</h3>
-                email : <input type="text" id="inputEmail">
-                <button id="btn2">조회</button>
-                <ul id="result2">
-                </ul>
-
-                <hr>
-                <h3>이메일이 일부라도 일치하는 모든 회원 조회</h3>
-                검색어 : <input type="text" id="input">
-                <button id="btn3">조회</button>
-
-                <table border="1" style="border-collapse:collapse">
-                    <thead>
-                        <tr>
-                            <th>회원번호</th>
-                            <th>이메일</th>
-                            <th>닉네임</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="result3">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-                <h3>삼항 연산자</h3>
-                <!-- ${name} 값이 있으면 true/ 없으면 false -->
-                <p th:text="${name} ? ${name} : '이름 없음' "></p>
-                <p th:text="${name2} ? ${name2} : '이름 없음' "></p>
-                
-                
-                <h3>Elvis 연산자</h3>
-                <p th:text="${name} ?: '이름 없음' "></p>
-                <p th:text="${name2} ?: '이름 없음' "></p>
-                
-                
-                <h3>No-Operation</h3>
-                <p th:text="${name} ?:_ ">(태그에 작성) 이름 없음</p>
-                <p th:text="${name2} ?:_ ">(태그에 작성) 이름 없음</p>
-                <!-- 태그 내용을 교체하는 것이 아닌 실제 태그에 작성된 값을 보여줌 -->
-                
-
-            </section>
-
-            <section class="content-2">
-
-
-                <!-- unless는 조건식이 false일 때 실행 -->
-                <th:block th:unless="${session.loginMember}">
-                
-                        <!-- method="POST" : 제출되는 값이 주소에 안보임 -->
-                        <form th:action="@{/member/login}" method="POST" id="loginFrm">
-                            <fieldset class="id-pw-area">
-                                <section>
-                                    <input type="text" name="memberEmail" placeholder="이메일" autocomplete="off"
-                                    value="">
-                                    <input type="password" name="memberPw" placeholder="비밀번호">
-                                </section>
-                                <section>
-                                    <button>로그인</button>
-                                </section>
-                            </fieldset>
-                            
-                            <label>
-                                
-                                <input type="checkbox" name="saveId"> 아이디 저장
-                                
-                            </label>
-                            
-                            <article class="signup-find-area">
-                                <a th:href="@{/member/signUp}">회원가입</a>
-                                <span>|</span>
-                                <a href="#">ID/PW 찾기</a>
-                            </article>
-                        </form>
-                        
-                    </th:block>
-
-                    <!-- <th:block th:if="${session.loginMember!=null}"> 와 동일 -->
-                    <th:block th:if="${session.loginMember}">
-                        <!-- 로그인이 되었을 때 -->
-                            <article class="login-area">
-                            
-                                <a th:href="@{/myPage/profile}">
-                                        <img th:src="@{/images/user.png}" id="memberProfile">
-                                </a>
-    
-                                <div class="my-info">
-                                    <div>
-                                        <a th:href="@{/myPage/info}" id="nickname">
-                                            <th:block th:text="${session.loginMember.memberNickname}">회원 닉네임</th:block>
-                                        </a>
-                                        <a th:href="@{/member/logout}" id="logoutBtn">로그아웃</a>
-                                    </div>
-                                    <p><th:block th:text="${session.loginMember.memberEmail}">회원 이메일</th:block></p>
-                                </div>
-    
-    
-                            </article>
-                    </th:block>
-                    
-                    
-            </section>
-        </section>
+        
     </main>
 
 
-    <!-- templates 기준으로 경로 작성 , 접두사 /templates/  접미사 .html 자동으로 붙음 -->
     <th:block th:replace="~{/common/footer}"></th:block>
 
-    <!-- SockJS -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
-
-    <!-- main.js 추가 -->
-    <script th:src="@{/js/main.js}"></script>
-    
 </body>
 </html>
