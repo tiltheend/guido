@@ -17,7 +17,7 @@
 
 
 
-/* ***** 메인 헤더 영역 : 로고 + 상단 아이콘 ***** */
+/* ***** 메인 헤더 영역 ***** */
 header, header .logo img{z-index: 300;}
 
 header{
@@ -53,7 +53,7 @@ header .chatting-icon, header .alarm-icon{margin-right: 20px;}
 
 
 
-/* header 밑으로 길어지는 부분 */
+/* *** header 밑으로 길어지는 부분 *** */
 header .search-box-click-box{
   width: 100%; height: 30px; box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   display: flex; justify-content: space-between; align-items: center;
@@ -201,7 +201,7 @@ header .search-box-click-box button{
 
 
 
-/* ***** 헤더 모달창 ***** */
+/* ***** 헤더 검색 모달창 ***** */
 /* .modal{
   display: none; 
   z-index: 200;
@@ -335,7 +335,7 @@ header .search-box-click-box button{
 }
 
 
-/* ***** 메인 아이콘 모달창 ***** */
+/* ***** 헤더 아이콘 모달창 ***** */
 /* 마이페이지 */
 .mypage-modal{
   width: 200px;
@@ -564,6 +564,55 @@ header .search-box-click-box button{
 
 
 
+/* ***** 테마 카테고리 ***** */
+.categori-icon-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.categori-icon-box>div {
+  margin-left: 50px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.categori-icon-box>div:first-child{
+  margin-left: 0px;
+}
+
+.categori-icon-box img{
+  width: 40px;
+}
+
+.categori-icon-box button {
+  background-color: transparent;
+  font-size: 12px;
+}
+
+hr{
+  width: 68%;
+  margin: 0 auto;
+  margin-top: 100px;
+  background-color: #C5C5C5;
+  height: 1px;
+  border: 0;
+}
+
+
+
+
+
 /* ***** 게시글 슬라이드 ***** */
 .container--inner__top__left{
   /* border: 1px solid brown; */
@@ -630,51 +679,7 @@ header .search-box-click-box button{
 
 
 
-
-
-/* ***** 테마 카테고리 ***** */
-.categori-icon-box{
-  width: 100%;
-  display: flex; 
-  flex-wrap: wrap;
-  justify-content: center; 
-  align-items: center; 
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 25px;
-}
-
-.categori-icon-box>div{
-  margin-left: 50px;
-  cursor: pointer;
-}
-
-.categori-icon-box>div:first-child{
-  margin-left: 0px;
-}
-
-.categori-icon-box img{
-  width: 40px;
-}
-
-.categori-icon-box div{
-  font-size: 12px;
-}
-
-hr{
-  width: 68%;
-  margin: 0 auto;
-  margin-top: 100px;
-  background-color: #C5C5C5;
-  height: 1px;
-  border: 0;
-}
-
-
-
-
-
-/* ***** 메인 게시글 ***** */
+/* ***** 게시글 슬라이드 ***** */
 
 /* 게시글 감싸는 article */
 .main-post{
@@ -762,13 +767,7 @@ hr{
 
 
 
-
-
-
-
-/* ********************************************************** */
-
-/* ----- 구매자 예약 리스트 ----- */
+/* ***** 게시글 슬라이드 ***** */
 .main-post .product-post .slider{
   width: 300px; height: 280px;
   background-color: #FFE69A;
@@ -818,7 +817,6 @@ hr{
   width: 100%; 
   display: none;
 }
-
 .main-post .product-post .slide-btn>img{ 
   width: 32px; height: 32px;
   cursor: pointer;
@@ -914,24 +912,6 @@ hr{
 }
 
 /* ********************************************************** */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
