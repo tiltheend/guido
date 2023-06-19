@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>벡터맵을 활용한 우리나라 지도</title>
+    <meta name="description" content="D3.js로 만든 우리나라 지도" />
+    <meta name="author" content="링크잇, http://linkit.kr" />
+
+    <link
+      rel="stylesheet"
+      href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!--[if lt IE 9]>
+      <script src="http://linkit.kr/demos/browser_update.js"></script>
+    <![endif]-->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+  </head>
+  <body>
+    <div id="container" class="container">
+      <h1>벡터맵을 활용한 우리나라 지도</h1>
+      <p style="font-size: 13px">
+        벡터맵을 활용하여 우리나라를 표출하고, 확대/축소가 가능하며,
+        행정구역별로 확대 이동이 가능하여 행정구역별 통계등을 표현하는데
+        유용하게 활용될 수 있습니다.
+      </p>
+
+      <div id="radio" class="ui-buttonset">
+        <span class="title">지명표시</span>
+        <input
+          type="radio"
+          id="radio1"
+          name="radio"
+          value="on"
+          checked=""
+          class="ui-helper-hidden-accessible"
+        /><label
+          for="radio1"
+          class="ui-state-active ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left"
+          role="button"
+          aria-disabled="false"
+          ><span class="ui-button-text">On</span></label
+        >
+        <input
+          type="radio"
+          id="radio2"
+          name="radio"
+          value="off"
+          class="ui-helper-hidden-accessible"
+        /><label
+          for="radio2"
+          class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right"
+          role="button"
+          aria-disabled="false"
+          ><span class="ui-button-text">Off</span></label
+        >
+      </div>
+
+      <!-- <div
+        id="control"
+        class="ui-widget-header ui-corner-all"
+        style="top: 140px"
+      >
+        <button
+          id="zoomin"
+          class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+          role="button"
+          aria-disabled="false"
+          title="확대"
+        >
+          <span class="ui-button-icon-primary ui-icon ui-icon-plus"></span
+          ><span class="ui-button-text">확대</span>
+        </button>
+        <button
+          id="zoomout"
+          class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+          role="button"
+          aria-disabled="false"
+          title="축소"
+        >
+          <span class="ui-button-icon-primary ui-icon ui-icon-minus"></span
+          ><span class="ui-button-text">축소</span>
+        </button> -->
+
+
+    <script src="/js/script.js"></script>
+    <!-- <script>
+      // <![CDATA[  <-- For SVG support
+      if ('WebSocket' in window) {
+        (function () {
+          function refreshCSS() {
+            var sheets = [].slice.call(document.getElementsByTagName('link'));
+            var head = document.getElementsByTagName('head')[0];
+            for (var i = 0; i < sheets.length; ++i) {
+              var elem = sheets[i];
+              var parent = elem.parentElement || head;
+              parent.removeChild(elem);
+              var rel = elem.rel;
+              if (
+                (elem.href && typeof rel != 'string') ||
+                rel.length == 0 ||
+                rel.toLowerCase() == 'stylesheet'
+              ) {
+                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                elem.href =
+                  url +
+                  (url.indexOf('?') >= 0 ? '&' : '?') +
+                  '_cacheOverride=' +
+                  new Date().valueOf();
+              }
+              parent.appendChild(elem);
+            }
+          }
+          var protocol =
+            window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+          var address =
+            protocol + window.location.host + window.location.pathname + '/ws';
+          var socket = new WebSocket(address);
+          socket.onmessage = function (msg) {
+            if (msg.data == 'reload') window.location.reload();
+            else if (msg.data == 'refreshcss') refreshCSS();
+          };
+          if (
+            sessionStorage &&
+            !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')
+          ) {
+            console.log('Live reload enabled.');
+            sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+          }
+        })();
+      } else {
+        console.error(
+          'Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.'
+        );
+      }
+      // ]]>
+    </script> -->
+  </body>
+</html>

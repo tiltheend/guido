@@ -1,0 +1,86 @@
+/* 전체 */
+.container_total{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 400px 0;
+}
+/* 유효성 검사 색상 */
+.correct{color: green;}
+.incorrect{color: red;}
+/* 회원가입 */
+.container_top_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+}
+/* 입력 부분 */
+.container_middle_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container_middle_input>*{
+    width: 420px;
+    height: 55px;
+    border: 1px solid #c5c5c5;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 5px;
+    color: #5c5c5c;
+}
+/* 확인서 링크 */
+.qNet{
+    color: #1c797d;
+    margin: 5px 20px;
+}
+/* 동의 체크 */
+.container_middle_check{
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 10px 30px 10px;
+}
+.box{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #c5c5c5;
+}
+[type="checkbox"]{
+    display: none;
+}
+.ment1,.ment2{
+    color: #5c5c5c;
+    vertical-align: 2px;
+}
+.box:hover{
+    cursor: pointer;
+    color: black;
+}
+input[type="checkbox"]:checked + label{
+    background: url("/src/main/resources/static/images/check.png") 0 0 no-repeat;
+    background-size: cover;
+    border: none;
+}
+
+/* 제출 버튼 */
+.container_bottom{
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container_bottom_button{
+    width: 420px;
+    height: 50px;
+    background-color: #1c797d;
+    border-radius: 8px;
+    color: #fff;
+}
+

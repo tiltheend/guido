@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #5c5c5c60;
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        width: 1032px;
+        height: 580px;
+        background-color: white;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .modal-header {
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid lightgray;
+        position: relative;
+      }
+      .modal-header > i {
+        position: absolute;
+        top: 25px;
+        left: 15px;
+        transform: translate(40%, -50%);
+      }
+      .modal-container {
+        display: flex;
+        height: 100%;
+      }
+      .modal-container > div {
+        width: 50%;
+        height: calc(100% - 50px);
+        padding: 20px;
+      }
+      .modal-container > div > img {
+        border-radius: 20px;
+        height: 100%;
+        width: 100%;
+      }
+      .confirm-detail {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .confirm-detail > div {
+        /* border-bottom: 1px solid lightgray; */
+        margin: 4px;
+      }
+      .confirm-detail > div:nth-child(1),
+      .confirm-detail > div:nth-child(5) {
+        height: 23%;
+      }
+      .confirm-detail > div:nth-child(2),
+      .confirm-detail > div:nth-child(3),
+      .confirm-detail > div:nth-child(4) {
+        height: 12.5%;
+      }
+      #modalTitle {
+        display: flex;
+        font-size: 1.6rem;
+        align-items: center;
+      }
+
+      #guideProfileImage {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        padding: 10px;
+      }
+      #modalGuideTitle {
+        width: 100%;
+        height: 100%;
+        font-weight: bold;
+      }
+      .modal-detail-small > * {
+        margin-right: 3rem;
+      }
+      .modal-title {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .modal-detail-small {
+        bottom: 0;
+        align-items: center;
+        color: #777;
+        font-size: 1rem;
+        display: flex;
+        height: 100%;
+        bottom: 0;
+      }
+      #tourThemeImage {
+        width: 2rem;
+        height: 2rem;
+      }
+      .travel-theme-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      .second-line {
+        justify-items: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        padding-top: 10px;
+        /* margin: 1.2rem 0; */
+      }
+      .tour-theme-name {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+      .tour-theme-name > * {
+        margin-right: 1.2rem;
+        bottom: 0;
+      }
+      #modal-details {
+        overflow: auto;
+        height: 80%;
+        font-size: 0.8rem;
+        line-height: 1rem;
+      }
+      .tour-theme-name2 {
+        height: 100%;
+        display: flex;
+        margin-top: 5px;
+      }
+      #modalTitle,
+      .confirm-detail > div:nth-child(2),
+      .confirm-detail > div:nth-child(3),
+      .confirm-detail > div:nth-child(4) {
+        border-bottom: 1px solid lightgrey;
+      }
+      #tourThemeName {
+        margin-bottom: -6px;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="page2" class="page">
+      <div class="modal-overlay">
+        <div class="modal-content">
+          <div class="modal-header">
+            <i class="fa-solid fa-xmark" style="color: #000000"></i>
+          </div>
+          <div class="modal-container">
+            <div><img src="/images/writeTour/main_thumnail.jpg" alt="" /></div>
+            <div class="confirm-detail">
+              <div id="modalTitle">
+                <div class="modal-title">
+                  <span id="modalGuideTitle"
+                    >Seoul Changdeok tour (2hour) with Jayden Guide</span
+                  >
+                  <div class="modal-detail-small">
+                    <span>5 ~ 20 people</span
+                    ><span>Price per person : USD 30</span>
+                  </div>
+                </div>
+                <div>
+                  <img
+                    src="/images/writeTour/guide.jpg"
+                    alt=""
+                    id="guideProfileImage"
+                  />
+                </div>
+              </div>
+              <div class="second-line">
+                <div class="travel-theme-title">Travel Theme</div>
+                <div class="tour-theme-name">
+                  <img
+                    src="/images/theme/gyeongbokgung.png"
+                    alt=""
+                    id="tourThemeImage"
+                  /><span id="tourThemeName">Palace Tour</span>
+                </div>
+              </div>
+              <div class="second-line">
+                <div class="travel-theme-title">Additional information</div>
+                <div class="tour-theme-name">
+                  <span>Entrance fee to Changdeok Palace (USD 4)</span>
+                </div>
+              </div>
+              <div class="second-line">
+                <div class="travel-theme-title">Location</div>
+                <div class="tour-theme-name">
+                  <span>Changdeok Palace</span><span>Seoul N Tower</span
+                  ><span>MyeongDong</span>
+                </div>
+              </div>
+              <div class="second-line">
+                <div class="travel-theme-title">Details</div>
+                <div class="tour-theme-name2">
+                  <span id="modal-details"
+                    >Changdeok PalaceChangdeok PalaceChangdeok PalaceChangdeok
+                    PalaceChangdeok PalaceChangdeok PalaceChangdeok
+                    PalaceChangdeok PalaceChangdeok PalaceChangdeok
+                    PalaceChangdeok PalaceChangdeok PalaceChangdeok
+                    PalaceChangdeok PalaceChangdeok Palace PalaceChangdeok
+                    PalaceChangdeok Palace PalaceChangdeok PalaceChangdeok
+                    PalacePalaceChangdeok PalaceChangdeok Palace
+                    PalacePalaceChangdeok PalaceChangdeok
+                    PalacePalacePalaceChangdeok PalaceChangdeok
+                    PalacePalacePalaceChangdeok PalaceChangdeok Palace</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script
+    src="https://kit.fontawesome.com/f7459b8054.js"
+    crossorigin="anonymous"
+  ></script>
+</html>
