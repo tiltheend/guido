@@ -576,7 +576,7 @@ header .search-box-click-box button{
   margin-bottom: 25px;
 }
 
-.categori-icon-box>div {
+.categori-icon-box a {
   margin-left: 50px;
   cursor: pointer;
   display: flex;
