@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     reviewerName = document.querySelector(".review-more-modal .reviewer-name");
     reviewerProfile = document.querySelector(".review-more-modal .reviewer");
     reviewerDate = document.querySelector(".review-more-modal .review-date");
+    reviewerRating = document.querySelector(".review-more-modal .review-rating");
 
     if(moreAndReply != null){
         moreAndReply.addEventListener("click",()=>{
@@ -65,6 +66,9 @@ document.addEventListener("DOMContentLoaded",()=>{
             
             // 리뷰 날짜 넣기
             reviewerDate.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerText;
+            
+            // 리뷰 별점 넣기
+            reviewerRating.innerHTML = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerHTML;
             
             // 모달 열기
             reviewMoreModal.style.display="flex";
