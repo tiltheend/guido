@@ -172,7 +172,8 @@
     font-size: 1.375rem; font-weight: normal;
     margin-bottom: 16px;
     width: 100%; text-align: left;
-    height: 64px;
+    height: 60px;
+    line-height: 30px;
     overflow: hidden;
     white-space: normal;
     text-overflow: ellipsis;
@@ -606,6 +607,7 @@
     resize: none;
     margin-top: 30px;
     padding: 8px;
+    border: 1px solid #c5c5c5;
 }
 
 

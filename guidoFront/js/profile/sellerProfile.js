@@ -29,6 +29,7 @@ let sellerReplyWirte; /* 리뷰 달기 박스 */
 document.addEventListener("DOMContentLoaded",()=>{
 
     /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
+    // 리뷰 달기
     reviewContentList=document.querySelectorAll(".seller-profile-top .review-list li>pre");
     reviewContentMore=document.querySelectorAll(".seller-profile-top .review-list li>div:last-of-type>p");
 
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             }
         }
     }
+    
     /* 더보기 버튼 누르면 상세 조회 */
     moreAndReply = document.querySelector(".more-and-reply>p");
     reviewMoreModal=document.querySelector(".seller-profile-top .review-more-modal");
