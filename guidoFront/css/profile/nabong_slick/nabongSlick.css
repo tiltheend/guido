@@ -89,8 +89,7 @@
 .slick-slide img
 {
     display: block;
-    width: 300px;
-    height: 300px;
+    width: 100%;
 }
 .slick-slide.slick-loading img
 {
@@ -299,8 +298,8 @@
 .slick-dots li button:before
 {
     font-family: 'slick';
-    font-size: 40px;
-    line-height: 20px;
+    font-size: 30px;
+    line-height: 0px;
 
     position: absolute;
     top: 0;
