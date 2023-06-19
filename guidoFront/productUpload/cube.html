@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* .card-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 400px;
+        height: 300px;
+        background: #fff000;
+        perspective: 500px;
+      } */
+      .card {
+        /* position: relative; */
+        width: 100px;
+        height: 150px;
+        margin: 1em;
+        transform: rotateY(0deg);
+        transition: 1s;
+        transform-style: preserve-3d;
+      }
+      .card-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5em;
+        font-size: 1.5rem;
+        backface-visibility: hidden;
+      }
+      .card-side-front {
+        z-index: 1;
+        background: #14bb8a;
+        color: #fff;
+      }
+      .card-side-back {
+        background: #555;
+        color: #fff;
+        transform: rotateY(180deg);
+      }
+      .card-form:hover .card {
+        transform: rotateY(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-form">
+      <div class="card">
+        <div class="card-side card-side-front">F</div>
+        <div class="card-side card-side-back">B</div>
+      </div>
+    </div>
+  </body>
+</html>

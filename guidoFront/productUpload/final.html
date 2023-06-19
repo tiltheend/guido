@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>guido</title>
+    <style>
+      .page {
+        display: none;
+      }
+      .page.current {
+        display: flex;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #body-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .content-container {
+        /* background-color: #2db400; */
+        padding: 50px 150px;
+        margin: 30px auto;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 500px;
+      }
+      .greeting {
+        margin: 20px;
+      }
+      .title {
+        margin-bottom: 10px;
+      }
+      .wp-progress {
+        display: fixed;
+        height: 80px;
+        /* background-color: brown; */
+        margin-top: auto;
+        flex-direction: column;
+      }
+      .greeting :last-child {
+        color: #555;
+      }
+      .tour-box {
+        display: flex;
+        justify-content: space-between;
+      }
+      .tour-box > * {
+        background-color: white;
+        justify-content: center;
+        border: 4px solid #5555;
+        border-radius: 15px;
+        width: 200px;
+        height: 200px;
+        justify-content: center;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        margin: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        box-shadow: 5px 5px 5px gray;
+      }
+      .tour-box > *:hover {
+        background-color: rgb(185, 215, 218);
+        border-color: rgb(59, 119, 124);
+      }
+      .wp-progress-bar {
+        width: 100%;
+        height: 8px;
+        margin: auto;
+        background-color: lightgray;
+      }
+      .wp-progress {
+        height: 100%;
+        background-color: black;
+        width: 0px;
+        transition: width 0.1s ease-in-out;
+        align-items: center;
+      }
+      .progress-btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 15px 30px;
+      }
+      .next-btn {
+        width: 91px;
+        height: 47px;
+        color: white;
+        background-color: black;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .back-btn {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1페이지 -->
+    <div id="body-container">
+      <div id="page1" class="page content-container current">
+        <div class="greeting">
+          <h1 class="title">Jayden 가이드님, 환영합니다.</h1>
+          <span class="sub-title"
+            >판매 등록하실 가이드 상품을 선택해주세요!</span
+          >
+        </div>
+        <div class="tour-box">
+          <div onclick="changeBackgroundColor(this)">당일투어</div>
+          <div onclick="changeBackgroundColor(this)">1박이상 패키지</div>
+        </div>
+      </div>
+      <div class="wp-progress-bar">
+        <div class="wp-progress"></div>
+      </div>
+      <div class="progress-btn">
+        <span class="back-btn">이전</span>
+        <button class="next-btn">다음</button>
+      </div>
+    </div>
+    <!-- 2페이지 -->
+  </body>
+  <script src="/js/final.js"></script>
+</html>

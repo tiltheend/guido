@@ -27,6 +27,7 @@
 }
 .seller-profile-top .profile-img-box>h2{ /* 유저 이름 */
     font-size: 1.625rem; margin-top: 12px;
+    cursor: pointer;
 }
 .seller-profile-top .profile-img{
     width: 180px; height: 180px; border-radius: 50%;

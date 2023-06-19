@@ -1,0 +1,122 @@
+<!-- 메인에 연결/붙여넣기 해야함 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>임시 메인</title>
+    <link rel="stylesheet" href="../css/login/mainModal.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="main">
+        <button id="showModal">임시 메인입니다.</button>
+    </div>
+    <!-- 인증 사진 추가 -->
+    <div class="faceModal" id="faceModal"> 
+        <div class="window" id="modalWindow">
+            <div class="popup">
+                <div class="modal_top">
+                    <div class="modal_title font3">추가 정보 입력</div>
+                </div>
+                <hr>
+                <div class="modal_body">
+                    <div class="modal_body_title font1">인증 사진 추가</div>
+                    <div class="modal_body_content font3">얼굴이 보이는 이미지를 추가하세요.</div>
+                    <form action="#" method="post">
+                        <div class="profile_image_area">
+                            <div class="profile_image">
+                                <img src="../images/signUp/profile.png">
+                            </div>
+                        </div>
+                        <div class="image_btn_area">
+                            <input type="file" name="profileImage" id="imageInput" class="input_image">
+                            <label for="imageInput"><button id="chooseImage">사진 선택</button></label>
+                            <button id="setImage">사진 등록</button>
+                        </div>
+                    </form>
+                    <button class="modal_body_close1 font3" id="close1">나중에 할게요</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 관심 지역 추가 -->
+    <div class="regionModal" id="regionModal"> 
+        <div class="window" id="modalWindow">
+            <div class="popup">
+                <div class="modal_top">
+                    <div class="modal_title font3">추가 정보 입력</div>
+                </div>
+                <hr>
+                <div class="modal_body">
+                    <div class="modal_body_title font1">관심 지역 설정</div>
+                    <div class="modal_body_content font3">설정한 관심 지역을 기반으로 여행 상품을 추천해드려요.</div>
+                    <form action="#">
+                        <div class="modal_body_search">
+                            <input type="text" name="search" id="search" placeholder="원하는 지역을 검색해보세요.">
+                            <button type="button"><img src="../images/signUp/search.png"></button>
+                        </div>
+                        <div class="modal_body_region">
+                            <div class="modal_body_region_top">
+                                <div class="count-choosed-region" id="countChoosedRegion">선택된 지역 수</div>
+                                <div>&nbsp/&nbsp</div>
+                                <div>5</div>
+                                <form action="#" method="post">
+                                    <div class="input-like-region-area">
+                                        <div class="input-like-region">
+                                            <!-- 지역 선택 api -->
+                                            <input type="text" placeholder="지역 선택 5개 까지" name="inputRegion" id="inputRegion" class="inputRegion">
+                                        </div>
+                                        <button>추가</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal_body_region_bottom">
+                                <!-- 선택되면 요소 추가 -->
+                                <div class="choosed-like-region">
+                                    <div class="region-1d">제주도</div>
+                                    <div>&nbsp>&nbsp</div>
+                                    <div class="region-2d">서귀포시</div>
+                                    <div class="delete-region">&nbsp&nbsp&times;</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="saveRegion">저장 하기</button>
+                    </form>
+                    <button class="modal_body_close2 font3" id="close2">나중에 할게요</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var showModal = document.querySelector("#showModal");
+        var close1 = document.querySelector("#close1");
+        var close2 = document.querySelector("#close2");
+        var faceModal = document.querySelector("#faceModal");
+        var regionModal = document.querySelector("#regionModal");
+        var setImage = document.querySelector("#setImage");
+        var saveRegion = document.querySelector("#saveRegion");
+        
+        // 추후 비동기 써야함
+        showModal.addEventListener("click",()=>{
+            faceModal.style.display = "block";
+        })
+        close1.addEventListener("click",()=>{
+            faceModal.style.display = "none";
+        })
+        setImage.addEventListener("click",()=>{
+            faceModal.style.display = "none";
+            regionModal.style.display = "block";
+        })
+        close2.addEventListener("click",()=>{
+            regionModal.style.display = "none";
+        })
+        saveRegion.addEventListener("click",()=>{
+            regionModal.style.display = "none";
+        })
+        
+
+    </script>
+</body>
+</html>
