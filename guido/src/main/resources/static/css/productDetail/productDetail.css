@@ -1,0 +1,1358 @@
+/* 폰트 웹폰트 우선 사용 */
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap'); */
+
+
+/* header.css에 선언하기 */
+@font-face {
+    font-family: 'Pretendard';
+    src: url(../../font/Pretendard-Light.woff) format('woff');
+    font-weight: 300;
+    font-style: light;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(../../font/Pretendard-Regular.woff) format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(../../font/Pretendard-Medium.woff) format('woff');
+    font-weight: 500;
+    font-style: medium;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(../../font/Pretendard-Bold.woff) format('woff');
+    font-weight: 700;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(../../font/Pretendard-ExtraBold.woff) format('woff');
+    font-weight: 800;
+    font-style: bolder;
+}
+
+
+/* 기본 세팅 */
+*{
+    padding: 0; 
+    margin: 0; 
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+}
+    
+ul,ol{list-style: none;}
+a{color: #000; text-decoration: none;}
+button{border: none; user-select: none; cursor: pointer;}
+svg{cursor: pointer; background-color: rgba(0, 0, 0, 0);}
+
+@media screen and (max-width : 1024px) {
+    html{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width : 767px) {
+    html{
+        font-size: 13px;
+    }
+}
+
+.font1{font-size: 1.625rem;} /* 상세 페이지 제목 */
+.font2{font-size: 1.375rem;} /* 상세 페이지 내용 중요한 정보 */
+.font3{font-size: 1rem;} /* 헤더 컨텐츠 */
+.font4{font-size: 0.875rem;} /* 컨텐츠 내용 타이틀 */
+.font5{font-size: 0.75rem;} /* 가장 작은 컨텐츠 내용 본문 */
+
+body::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+body::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #D9D9D9; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f0f0f05d;  /*스크롤바 뒷 배경 색상*/
+}
+
+
+.detail--container{
+    width: 88vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+
+
+/* 상단 섹션 */
+.detail--top{
+    margin-bottom: 4vh;
+}
+
+
+/* 상단 카테고리 */
+.detail--top__category{
+    display: flex;
+    margin-top: 2vh;
+}
+
+
+.detail--top__category div{
+    margin-right: 1vw;
+    font-size: 1.1rem;
+}
+
+.detail--top__category>div:nth-of-type(1),
+.detail--top__category>div:nth-of-type(3){
+   color: #0F4957; 
+   white-space: nowrap;
+}
+
+.detail--top__category>div:nth-of-type(5){
+    color: #C5C5C5;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+
+/* 상단 슬라이드 */
+.detail--silde__container{
+    width: 88vw;
+    height: 50vh;
+    border-radius: 15px;
+    margin-top: 3vh;
+    position: relative;
+}
+
+
+/* owl 캐러셀 */
+#demos .owl-carousel,
+.owl-carousel .owl-stage-outer{
+    height: 50vh;
+    width: 88vw;
+    border-radius: 15px;
+}
+
+
+.item{
+    overflow: hidden;
+    position: relative; 
+    height: 50vh;
+    border-radius: 15px;
+}
+
+.owl-carousel__prev,
+.owl-carousel__next 
+ {
+	z-index: 1;
+	position: absolute;
+	top: 50%;
+	transform: translatey(-50%);
+    cursor: pointer;
+}
+
+
+.owl-carousel__prev{
+	left: 0.5vw;
+}
+
+.owl-carousel__next {
+	right: 0.5vw;
+}
+
+
+.owl-theme .owl-nav.disabled+.owl-dots{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.owl-theme .owl-dots .owl-dot span{
+    background-color: #ffffff7b;
+}
+
+.owl-dot{
+    margin: 0 0.3vw;
+}
+
+
+.item>img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+
+
+/* ------------------------------------------------------------------- */
+
+
+/* 예약 네비게이션 섹션 */
+.detail--right__scroll{
+    transition: top 0.5s;
+    position: sticky;
+    top: 3%;
+}
+
+
+/* 예약 캘린더, 예약 옵션(시간 선택), 예약 가격 div */
+.detail--right__calendar,
+.detail--right__option,
+.detail--right__price{
+    border-radius: 10px;
+    border: 1px solid #D9D9D9;
+    box-shadow: 4px 4px 4px 0 rgba(197, 197, 197, 0.5);
+    box-shadow: 0 4px 4px 0 rgba(197, 197, 197, 0.5);
+    padding: 20px;
+    margin-bottom: 2.4vh;
+}
+
+
+/* 예약 캘린더 */
+.detail--right__calendar{
+    height: 40vh;
+}
+
+
+/* selectTime, price 텍스트 */
+.detail--right__option span,
+.detail--right__price span{
+    color: #777777;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+/* 예약 옵션 라디오버튼 */
+input[type="radio"]{
+    display: none;
+}
+
+/* 예약 옵션 라디오버튼 모음 div */
+.detail--item__option{
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 예약 옵션 선택지들 */
+.detail--item__option>label{
+    height: 57px;
+    line-height: 57px;
+    background-color: rgba(217, 217, 217, 0.38);
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 0 20px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+/* 비활성화된 예약 옵션 선택지들 */
+input[type="radio"]:disabled + label{
+    text-decoration:line-through;
+    color: #777777;
+}
+
+/* 선택된 예약 옵션 */
+input[type="radio"]:checked + label {
+    box-shadow: 0 0 0 3px #1C797D inset; 
+    background-color: #B1D8DA;
+    line-height: 57detail--right__optionpx;
+}
+
+/* 예약 1박 시 인원 수 */
+.detail--right__price-qty{
+    width: 100%;
+    display: flex;
+    margin-top: 3vh;
+    align-items: center;
+    border-radius: 8px;
+    justify-content: space-between;
+}
+
+/* 예약 1박 시 인원 수 당 가격 */
+.detail--right__price-qty>div:nth-of-type(1){
+    font-weight: bold;
+    color: #777777;
+    font-size: 0.9rem;
+}
+
+
+/* 예약 1박 시 인원 수 증감버튼+인원숫자 */
+.detail--right__price-qty>div:nth-of-type(2){
+    width: 8vw;
+    min-width: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F0F0F0;
+    height: 5vh;
+    border-radius: 20px;
+}
+
+/* 예약 1박 시 인원 수 증감 버튼 */
+.detail--right__price-minus,
+.detail--right__price-plus{
+    border-radius: 6px;
+background: #f0f0f0;
+box-shadow:  5px 5px 8px #e2e2e2,
+            -5px -5px 8px #fefefe;
+    width: 1.4vw;
+    height: 1.4vw;
+    text-align: center;
+    line-height: 1.4vw;
+    font-size: 1.3rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    user-select: none;
+}
+
+/* 예약 1박 시 인원 수 */
+.detail--right__price-count{
+    font-size: 1.3vw;
+    font-weight: bold;
+}
+
+/* 예약 가격 하단 div (총가격) */
+.detail--right__price-total{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 2px;
+}
+
+/* 예약 가격 중 krw */
+.detail--right__price-total>div, span{
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+/* 예약 버튼 */
+.detail--right__button{
+    width: 100%;
+    height: 61px;
+    color: white;
+    background-color: #1C797D;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 4vh 0;
+}
+
+
+/* 예약 상세페이지 구성요소 바로가기 리스트 */
+.detail--right__scroll li{
+    margin-top: 10px;
+    display: flex;
+    cursor: pointer;
+}
+
+.detail--right__scroll li a{
+    font-size: 1.2rem;
+}
+
+
+.detail--right__scroll li:not(.scroll--active) a{
+    color: #555555;
+}
+
+/* 예약 상세페이지 구성요소 바로가기 리스트 속 div */
+.detail--right__scroll>ul>li>div{
+    width: 10px;
+    height: 1.8rem;
+    margin-right: 1vw;
+}
+
+/* 활성화된 바로가기 리스트 */
+.scroll--active>div{
+    background-color: #1C797D;
+    border-radius: 5px;
+}
+
+.scroll--active a{
+    font-weight: bold;
+    color: #1C797D;
+}
+
+
+/* 중간 섹션 */
+.detail--middle{
+    width: 100%;
+    display: flex;
+}
+
+/* 중간 섹션 왼쪽 컨테이너 */
+.detail--left__content{
+    margin-right: 70px;
+    width: 75%;
+    height: 100%;
+}
+
+/* 중간 섹션 오른쪽 컨테이너 */
+.detail--right__sidebar{
+    width: 25%;
+}
+
+
+/* 상품 진행중 표시 */
+.detail--ongoing__title{
+    background-color: #D3305B;
+    color: #ffffff;
+    padding: 0 6px;
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 26px;
+    margin-left: 0.5vw;
+    font-size: 1.1rem;
+}
+
+
+/* 상품 평균 별점 div */
+.detail--div__rating{
+    display: flex;
+    margin: 1vw 0;
+    align-items: end;
+}
+
+
+/* 상품 평균 별점 숫자 */
+.detail--number__rating{
+    color: #1C797D;
+    margin-right: 0.5vw;
+}
+
+
+/* 상품 평균 별점 리뷰 개수 */
+.detail--count__rating{
+    margin-left: 0.8vw;
+    color: #777777f4;
+}
+
+/* 상품 위치 */
+.detail--div__location{
+    display: flex;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+/* 상품 위치 이미지 */
+.detail--div__location>img{
+    width: 14px;
+    height: 19px;
+    margin-right: 0.5vw;
+}
+
+/* 상품 위치 txt */
+.detail--div__location>div{
+    color: #777777;
+}
+
+
+/* 상품 위치 + 좋아요 div */
+.detail--top__like{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* 좋아요 div */
+.container{
+    margin-top: 5vh;
+}
+
+
+
+.detail--div__shortdescription{
+    white-space : pre-line;
+    color: #555555;
+    margin-top: 3vh;
+}
+
+
+/* 상품 짧은 설명 모음 (시간, 가이드 언어)*/
+.detail--div__collection{
+    display: flex;
+    width: 100%;
+    margin-top: 4vh;
+    border-color: #F0F0F0;
+    border-style: solid none;
+    border-width: 2px;
+    padding: 3vh 0;
+}
+
+.detail--div__collection>div{
+    color: #555555;
+    display: flex;
+    align-items: center;
+    margin-right: 3vw;
+}
+
+.detail--div__collection img{
+    margin-right: 0.5vw;
+}
+
+
+/* 상품 상세 설명 */
+.detail--text__detail{
+    white-space : pre-line;
+    font-size: 1.1rem;
+}
+
+
+/* 상품 일자 및 위치 간단 설명 */
+.detail--text__date-first{
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1vh;
+}
+
+/* 상품 일자 (총 날짜?) */
+.detail--text__date-second{
+    color: #777777;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+
+/* 리뷰, 유의사항, 자기소개, 상품 상세설명  text */
+.detail--title__review, 
+.detail--title__precaution,
+.detail--title__pr,
+.detail--title__detail
+{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* 리뷰 이름 text */
+.detail--item__review-name{
+    font-size: 1.1rem;
+}
+
+
+/* 자기소개 컨테이너 */
+.detail--container__pr{
+    display: grid;
+    margin-top: 2vh;
+    grid-template-columns: repeat(auto-fill, minmax(45%, auto));
+    column-gap: 70px;
+}
+
+
+/* 자기소개 item */
+.detail--item__pr{
+    gap: 20px;
+    display: flex;
+    padding: 20px 0;
+    align-items: center;
+}
+
+/* 자기소개 icon img */
+.detail--item__pr>img{
+    width: 30px;
+    height: 30px;
+}
+
+/* 자기소개 txt */
+.detail--item__pr-text{
+    font-size: 1.3rem;
+}
+
+
+/* 판매자 프로필 div */
+.detail--middle__profile{
+    display: flex;
+    margin: 30px 0 90px 0;
+}
+
+
+/* 판매자 프로필 왼쪽 div */
+.detail--middle__profile>div:nth-of-type(1){
+    display: flex;
+    position: relative;
+    /* border: 1px solid #F0F0F0; */
+    background-color: white;
+    padding: 10px;
+    align-items: center;
+    width: 575px;
+    height: 120px;
+
+    box-shadow: 0 3px 3px 0 rgba(197, 197, 197, 0.5);
+}
+
+
+/* 프로필 이미지 */
+.detail--img__profile{
+    width: 125px;
+    overflow: hidden;
+    position: relative; 
+    margin-right: 20px;
+}
+
+.detail--img__profile::before {
+    content: "";
+    display: block;
+    padding-top: calc(100%); /* 높이 대비 너비의 비율을 계산하여 적용 */
+  }
+
+.detail--img__profile>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* 프로필 슈퍼가이드 여부 딱지 */
+.detail--div__super{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 140px;
+}
+
+.detail--content__profile{
+    height: 100%;
+    width: 100%;
+}
+
+/* 경력 + 평점 + 후기 div */
+.detail--innercontent__profile{
+    display: flex;
+    height: 60%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* 프로필 판매자 이름 text */
+.detail--content__profile>div:nth-of-type(1){
+    font-size: 23px;
+    height: 40%;
+    padding-top: 10px;
+}
+
+/* 경력, 평점, 후기 div */
+.detail--innercontent__profile div{
+    width: 33%;
+    text-align: center;
+}
+
+
+/* 경력 , 평점, 후기 내 span 숫자 */
+.detail--innercontent__profile span{
+    font-size: 1.1rem; 
+    margin: 0 10px;
+}
+
+
+.detail--innercontent__profile div{
+    align-self: center;
+}
+
+/* 프로필 오른쪽 div */
+.detail--ect__profile{
+    margin-left: 20px;
+}
+
+/* 가이드에게 연락하기 버튼 */
+#contactGuide{
+    height: 53px;
+    width: 196px;
+    background-color: #d9d9d9;
+    border: 1px solid #000000;
+    font-size: 18px;
+    border-radius: 15px;
+}
+
+#contactGuide:hover{
+    /* 리뷰 더보기 버튼 */
+    background-color: #d9d9d953;
+    transition: 0.4s;
+}
+
+
+/* 프로필 주의 */
+.detail--div__warning>span{
+    color: red;
+    font-size: 15px;
+}
+
+.detail--div__warning{
+    font-size: 15px;
+    margin-top: 20px;
+    color: #5c5c5c;
+}
+
+
+/* 유의사항 설명 div */
+.detail--description__precaution{
+    margin-top: 4vh;
+    padding: 3vw;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+}
+
+
+/* 유의사항 설명 ul */
+.detail--description__precaution>ul{
+    list-style-type: disc;
+    margin: 0 20px;
+    color: #5c5c5c;
+}
+
+
+
+/* 여행 코스(지도) img */
+.detail--img__map{
+    width: 88.8vw;
+    height: 55.5vh;
+    overflow: hidden;
+    position: relative;
+    margin-top: 2vh;
+}
+
+
+
+.detail--img__map::before{
+    content: "";
+    display: block;
+    padding-top: calc(100% / (88 / 50)); /* 높이 대비 너비의 비율을 계산하여 적용 */
+}
+
+
+/* 추천 item 속 img */
+.detail--img__map>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* 리뷰 개수 */
+.detail--title__review>span{
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* 리뷰 item */
+.detail--item__review{
+    margin: 5vh 0;
+}
+
+/* 리뷰 div 상단 (프로필, 이름+별점+날짜) */
+.detail--item__review-top{
+    display: flex;
+    margin-bottom: 2vh;
+}
+
+/* 리뷰 이름+별점+날짜 div */
+.detail--item__review-top>div:nth-of-type(2){
+    margin-left: 1vw;
+}
+
+/* 리뷰 별점 , 상품 총 평균 별점 */
+.detail--item__review-rating, 
+.detail--stars__rating {
+    position: relative;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+    user-select: none;
+    letter-spacing: -2px;
+    font-size: 1.1rem;
+}
+
+
+/* 별점, 상품 총 평균 별점 span*/
+.detail--item__review-rating span ,
+.detail--stars__rating span{
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: transparent;
+    overflow: hidden;
+    pointer-events: none;
+    letter-spacing: -2px;
+    font-size: 1.1rem;
+}
+
+
+/* 리뷰 별점+날짜 div */
+.detail--item__review-top-second{
+    display: flex;
+    align-items: center;
+}
+
+/* 리뷰 날짜 */
+.detail--item__review-date{
+    color: #555555;
+    font-size: 0.9rem;
+    margin: 0.5vh 0 0 20px;
+}
+
+/* 리뷰 프로필 crop div */
+.detail--item__review-profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 리뷰 상세 내용 div */
+.detail--item__review-content{
+    background-color: #F0F0F0;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 500px;
+    font-size: 1.1rem;
+
+    /* display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden; */
+}
+
+
+.detail--item__review-profile::before{
+    content: "";
+    display: block;
+    padding-top: calc(100% / (21 / 40)); /* 높이 대비 너비의 비율을 계산하여 적용 */
+}
+
+
+/* 리뷰 프로필 속 img */
+.detail--item__review-profile>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 리뷰 더보기 버튼 */
+.detail--item__review-button{
+    width: 230px;
+    height: 53px;
+    background-color: #ffffff;
+    border: 1px solid #777777;
+    color: #555555;
+    font-weight: 600;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 50px;
+    margin-bottom: 40px;
+}
+
+
+/* 리뷰 더보기 버튼 */
+.detail--item__review-button:hover{
+    background-color: #0F4957;
+    color: #ffffff;
+    transition: 0.4s;
+}
+
+
+/* 리뷰 댓글 하단 div */
+.detail--item__review-bottom{
+    width: 80%;
+}
+
+/* 리뷰 댓글 */
+.detail--item__review--reply{
+    width: 95%;
+    display: flex;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    padding: 10px 20px 20px 20px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+/* 리뷰  댓글 아이콘 */
+.detail--item__review--reply>img{
+    width: 45px;
+    height: 40px;
+}
+
+/* 리뷰 댓글 콘텐츠 */
+.detail--item__review--reply>div{
+    font-size: 1.1rem;
+    margin: 10px 0 0 15px;
+}
+
+
+/* 추천 text */
+.detail--text__recommend{
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 5vh;
+}
+
+/* 추천 컨테이너 */
+.detail--list_recommend{
+    display: flex;
+    margin: 2vh  0 10vh 0;
+}
+
+/* 추천 item */
+.detail--item__recommend{
+    cursor: pointer;
+}
+
+
+.detail--item__recommend:not(:first-of-type){
+    margin-left: 2vw;
+}
+
+
+/* 추천 item 속 img 크롭 */
+.detail--item__recommend-img{
+    border-radius: 10px;
+    width: 21vw;
+    height: 40vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.detail--item__recommend-img::before{
+    content: "";
+    display: block;
+    padding-top: calc(100% / (21 / 40)); /* 높이 대비 너비의 비율을 계산하여 적용 */
+}
+
+
+/* 추천 item 속 img */
+.detail--item__recommend-img>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 지도 + 추천 item 제목 */
+.detail--text__map,
+.detail--item__festival-title, 
+.detail--item__recommend-title{
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 1vh;
+}
+
+
+.detail--item__festival-title, 
+.detail--item__recommend-title{
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+/* 구분선 */
+.detail--divisionline{
+    width: auto;
+    height: 0.1vh;
+    background-color: #D9D9D9;
+    margin: 40px 0;
+}
+
+
+
+
+
+/* -------------------------------------------------------------------- */
+
+/* 캘린더 */
+a {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .scriptCalendar {
+    text-align: center;
+    border: 0.5px solid #999;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px gray;
+    padding: 15px;
+    font-weight: bolder;
+  }
+  
+  .scriptCalendar > thead > tr > td {
+    width: 50px;
+    height: 50px;
+  }
+  .scriptCalendar > thead > tr:first-child > td {
+    font-weight: bold;
+  }
+  .scriptCalendar > thead > tr:last-child > td {
+    color: #777;
+  }
+  .scriptCalendar > tbody > tr > td {
+    width: 50px;
+    height: 50px;
+  }
+  .calendarBtn {
+    cursor: pointer;
+  }
+
+
+
+
+  /* 좋아요 버튼 */
+  /* .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    transition: 100ms;
+  }
+  
+  .checkmark {
+    top: 0;
+    left: 0;
+    height: 2em;
+    width: 2em;
+    transition: 100ms;
+    animation: dislike_effect 400ms ease;
+  }
+
+  .checkmark path{
+    stroke: #FF5353;
+    stroke-width: 10;
+  }
+  
+  .container input:checked ~ .checkmark path {
+    fill: #FF5353;
+    stroke-width: 0;
+  }
+  
+  .container input:checked ~ .checkmark {
+    animation: like_effect 400ms ease;
+  }
+  
+  .container:hover {
+    transform: scale(1.1);
+  }
+  
+  @keyframes like_effect {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      transform: scale(1.2);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes dislike_effect {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      transform: scale(1.2);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  } */
+
+
+
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .container svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    transition: all 0.3s;
+    fill: #666;
+  }
+  
+  .container svg:hover {
+    transform: scale(1.1);
+  }
+  
+  .container input:checked ~ svg {
+    fill: #E3474F;
+  }
+  
+
+
+
+/* 반응형 */
+
+@media screen and (max-width : 767px) {
+    .detail--ongoing__title{
+        width: 100px;
+        height: 25px;
+        line-height: 21px;
+        display: block;
+        margin: 20px 0;
+    }
+
+
+    .detail--number__rating{
+        font-size: 14px;
+        margin-right: 8px;
+        line-height: 100%;
+    }
+    
+    .detail--count__rating{
+        font-size: 14px;
+        margin-left: 10px;
+        line-height: 100%;
+    }
+
+    .detail--div__collection{
+        display: block;
+    }
+
+    .detail--div__collection div,
+    .detail--div__collection img
+    {
+        margin: 5px 0;
+    }
+    
+    .detail--div__location img,
+    .detail--div__collection img{
+        margin-right: 10px;
+    }
+
+
+    .detail--list_recommend{
+        display: block;
+    }
+
+    .detail--item__recommend{
+        margin: 30px 0;
+    }
+
+    .detail--item__recommend:not(:first-of-type){
+        margin-left: 0;
+    }
+
+    .detail--item__recommend-img{
+        width: 400px;
+        height: 230px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .detail--item__recommend-img::before{
+        content: "";
+        display: block;
+        padding-top: calc(100% / (400 / 230)); /* 높이 대비 너비의 비율을 계산하여 적용 */
+    }
+
+
+    .detail--item__review-button{
+        width: 170px;
+        height: 45px;
+        line-height: 45px;
+    }
+
+    .detail--item__review-content{
+        width: 100%;
+        min-width: 0;
+    }
+        
+
+    .checkmark {
+        height: 1.5em;
+        width: 1.5em;
+      }
+
+
+
+      .container svg {
+        height: 30px;
+        width: 30px;
+      }
+    
+      .detail--middle__profile>div:nth-of-type(1){
+        width: 330px;
+      }
+
+      .detail--content__profile>div:nth-of-type(1){
+        font-size: 16px;
+      }
+
+      .detail--div__super {
+        width: 100px;
+      }
+
+      .detail--innercontent__profile{
+        display: block;
+      }
+
+      .detail--innercontent__profile div{
+        width: 100%;
+        text-align: start;
+      }
+      
+      #contactGuide{
+        width: 330px;
+        height: 40px;
+        font-size: 15px;
+        margin-bottom: 10px;
+        margin-right: auto;
+      }
+
+      .detail--ect__profile{
+        flex-direction: column;
+      }
+
+      .detail--div__warning{
+        width: 100%;
+      }
+
+      .detail--item__review--reply>img{
+        height: 15px;
+      }
+
+      .detail--item__review--reply>div{
+        margin: 10px 0 0 10px;
+      }
+      
+}
+
+
+
+@media screen and (max-width : 1580px) {
+
+    .detail--right__sidebar{
+        width: 260px;
+    }
+
+    .detail--right__price-qty{
+        display: block;
+    }
+
+    .detail--right__price-qty>div:nth-of-type(2){
+        width: 200px;
+        height: 40px;
+        border-radius: 15px;
+        margin-top: 20px;
+        justify-content: space-between;
+    }
+
+    .detail--right__price-minus, .detail--right__price-plus{
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .detail--right__price-minus{
+        margin-left: 10px;
+    }
+
+    .detail--right__price-plus{
+        margin-right: 10px;
+    }
+
+    .detail--right__price-count{
+        font-size: 20px;
+    }
+
+    .detail--right__price-total>div, span{
+        font-size: 1.3rem;
+    }
+
+}
+
+
+@media screen and (max-width : 1370px){
+
+    .detail--middle__profile{
+        display: block;
+    }
+
+    .detail--ect__profile{
+        margin: 20px 0 0 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .detail--div__warning{
+        margin: 0 0 0 20px;
+    }
+
+    .detail--item__review-bottom{
+        width: 90%;
+    }
+
+    .detail--item__review--reply>img{
+        height: 30px;
+        margin-top: 5px;
+    }
+}
