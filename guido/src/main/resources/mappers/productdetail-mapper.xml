@@ -2,7 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.guido.product.model.dao.ProductDetailMapper">
 	
+	<resultMap id="product_rm" type="Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productPackage" column="PRODUCT_PACKAGE"/>
+		<result property="productContent" column="PRODUCT_CONTENT"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="productAddPrice" column="PRODUCT_ADD_PRICE"/>
+		<result property="maxTourist" column="PRODUCT_MAX_TOURIST"/>
+		<result property="minTourist" column="PRODUCT_MIN_TOURIST"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="regionCode" column="REGION_CODE"/>
+		<result property="themeCode" column="THEME_CODE"/>
+		<result property="productState" column="PRODUCT_STATE"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="guideLanguage" column="GUIDE_LANGUAGE"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+	</resultMap>
 	
 	 
+	 <select id="selectProduct" resultMap="product_rm">
+		 SELECT * FROM "PRODUCT"
+		 WHERE PRODUCT_NO = #{productNo}
+	 </select>
 	
 </mapper>
