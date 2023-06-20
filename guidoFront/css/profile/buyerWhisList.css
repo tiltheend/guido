@@ -12,6 +12,7 @@
 .buyer-profile-top{
     width: 100vw;
     margin:80px;
+    margin-top: 160px;
     /* display: flex; justify-content: space-between; */
     display: flex; justify-content: space-around;
 }
@@ -129,13 +130,11 @@
     width: 300px; height: 300px;
 }
 .buyer-profile-top .wish-list>ul{
-    width: 70vw;
-    /* width: 1260px; */
-    /* display: grid;
-    grid-template-columns: repeat(4,1fr);
-    row-gap: 88px; column-gap: 20px; */
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
+    /* margin: 0 auto;  */
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    max-width: 1280px; grid-template-rows: auto;
 }
 .buyer-profile-top .wish-list>ul>li{
     /* width: 100%; */
@@ -249,17 +248,207 @@
 .buyer-profile-top .wish-list .sales-text>div>div>img:nth-of-type(2){
     padding-top: 2px;
 }
+@media screen and (max-width : 1800px) {
+    .buyer-profile-top .wish-list>ul{
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        max-width: 960px; grid-template-rows: auto;
+    }
+}
+@media screen and (max-width : 1500px) {
+    .buyer-profile-top .wish-list>ul{
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        max-width: 640px; grid-template-rows: auto;
+    }
+}
+    
+@media screen and (max-width : 1200px) {
+    .buyer-profile-top .wish-list>ul{
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        max-width: 960px; grid-template-rows: auto;
+    }
 
-
-
-@media screen and (max-width : 1024px) {
-    /* 구매자 프로필 */
+    /* 판매자 프로필 */
     .buyer-profile-top{
         display: flex; justify-content: space-between;
+    }
+    /* 프로필 오른쪽 박스 - 판매자 소개 */
+    .buyer-profile-top .profile_right .about-me{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .buyer-profile-top .profile_right li{
+        margin-bottom: 40px; margin-right: 0;
+    }
+    /* 판매자 프로필 아래로 예약 리스트 오게  */
+    .buyer-profile-top {
+        flex-direction: column;
+    }
+
+    .buyer-profile-top .profile-box {
+        margin-bottom: 40px;
+        margin-top: 60px;
+    }
+    .buyer-profile-top .profile-left {
+        position: relative;
+    }
+    .buyer-profile-top .seller-btn {
+        /* position: absolute; */
+        /* bottom: 166px; right: 80px; */
+    }
+    /* 내정보 버튼 */
+    .buyer-profile-top .seller-btn {
+        display: flex;
+        width: 83.5%;
+        justify-content: space-between;
+        margin: 0;
+        margin-top: 20px;
+        position: absolute;
+        top: 80px;
+    }
+    .buyer-profile-top .seller-btn button {
+        justify-content: space-around;
+        padding: 0 20px;
+        margin-right: 20px;
+    }
+    .buyer-profile-top .seller-btn button>img {
+        margin: 0;
+        margin-top: 12px; 
+    }
+    .buyer-profile-top .seller-btn button:nth-of-type(2)>img{
+        margin: 0;
+        margin-top: 12px;
+    }
+    .buyer-profile-top .seller-btn button:nth-of-type(3)>img{
+        margin: 0;
+        margin-top: 12px; 
+    }
+    .buyer-profile-top .seller-btn button:last-of-type{
+        padding: 0 30px;
+    }
+    /* 자기소개 */
+    .buyer-profile-top .profile_right {
+        margin-left: 0;
+    }
+
+    /* 상품 리스트 */
+    .buyer-profile-top .reservation-list-box .sale-img {
+        width: 260px;
+        height: 260px;
     }
 
 }
 
-@media screen and (max-width : 767px) {
+@media screen and (max-width : 1024px) {
+    .buyer-profile-top .wish-list>ul{
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        max-width: 640px; grid-template-rows: auto;
+    }
+}
 
+
+@media screen and (max-width : 767px) {
+    .buyer-profile-top .wish-list>ul{
+        display: grid; grid-template-columns: repeat(1, 1fr);
+        max-width: 320px; grid-template-rows: auto;
+    }
+    .buyer-profile-top {
+        margin: 61px;
+    }
+    /* 프로필 오른쪽 박스 - 판매자 소개 */
+    .buyer-profile-top .profile_right .about-me{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .buyer-profile-top .profile_right li{
+        margin-bottom: 40px; margin-right: 50px;
+    }
+    .buyer-profile-top .profile_right {
+        margin: 0;
+    }
+    /* 판매자 프로필 아래로 예약 리스트 오게  */
+
+    .buyer-profile-top .sales-list-more {
+        width: 80vw;
+    }
+    .buyer-profile-top .wish-list-more {
+        width: 80vw;
+    }
+    .buyer-profile-top .wish-list li ul li {
+        width: 80vw;
+    }
+    .buyer-profile-top .reservation-list div {
+        width: 80vw;
+    }
+    .buyer-profile-top .reservation-list-box .sale-content {
+        margin: 20px 10px;
+    }
+    .buyer-profile-top .reservation-list-box li {
+        width: 80vw;
+    }
+    .buyer-profile-top .profile-box {
+        width: 80vw;
+        justify-content: center;
+    }
+    .buyer-profile-top .profile-box {
+        margin: 0;
+        margin-top: 80px;
+    }
+    .buyer-profile-top .profile-left {
+        position: relative;
+    }
+    .buyer-profile-top .seller-btn {
+        position: inherit;
+    }
+    .buyer-profile-top .profile_right h1 {
+        margin-top: 50px;
+    }
+    .buyer-profile-top .reservation-list{
+        margin-top: 80px;
+    }
+    /* 내정보 버튼 */
+    .buyer-profile-top .seller-btn {
+        display: block;
+        width: 336px;
+    }
+    .buyer-profile-top .seller-btn button {
+        justify-content:left;
+    }
+    .buyer-profile-top .seller-btn button>img{
+        width: 35px; margin-top: 12px;
+        margin-left: 64px; margin-right: 30px;
+    }
+    .buyer-profile-top .seller-btn button:nth-of-type(2)>img{
+        width: 32px; 
+        margin-left: 66px; margin-right: 32px;
+    }
+    .buyer-profile-top .seller-btn button:nth-of-type(3)>img{
+        margin-left: 67px; margin-right: 29px;
+    }
+    /* 예약 리스트 */
+    .buyer-profile-top .reservation-list-box .sale-img {
+        min-width: 150px;
+        height: 150px;
+    }
+    
+    .buyer-profile-top .reservation-list-box .sale-content>h3:nth-of-type(1){
+        font-size: 1rem;
+        line-height: 24px;
+        -webkit-line-clamp: 3;
+        height: auto;
+        
+    }
+    .buyer-profile-top .reservation-list-box .sale-content>h3:nth-of-type(2){
+        font-size: 1rem;
+    }
+    .buyer-profile-top .reservation-list-box .sale-content>div>h2{
+        font-size: 1.2rem;
+    }
+    /* .buyer-profile-top .reservation-list-box .sale-content>p {
+        font-size: 0.875rem;
+    } */
+    .buyer-profile-top .reservation-list-box .guest-profile-img{
+        bottom: -110px; left: 0;
+        font-size: 0;
+    }
+    .buyer-profile-top .reservation-list-box .guest-profile-img>img{
+        width: 0; height: 0;
+    }
 }
