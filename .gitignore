@@ -17,7 +17,7 @@ Servers
 *.tar.gz
 *.rar
 *.ttf
-*.woff
+
 
 #Spring 관련 폴더, 파일
 target
