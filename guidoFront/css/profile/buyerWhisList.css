@@ -10,7 +10,7 @@
 
 /* ----- 구매자 프로필 ----- */
 .buyer-profile-top{
-    width: 100vw;
+    /* width: 100vw; */
     margin:80px;
     margin-top: 160px;
     /* display: flex; justify-content: space-between; */
@@ -92,9 +92,10 @@
 /* 프로필 오른쪽 박스 */
 /* 구매자 소개 */
 .buyer-profile-top .profile_right{
-    width: 100%;
+    /* width: 100%; */
     margin-left: 80px; 
     /* margin-right: 80px; */
+    width: 1280px;
 }
 .buyer-profile-top .profile_right .about-me{
     width: 100%;  height: auto;
@@ -103,6 +104,7 @@
 }
 .buyer-profile-top .profile_right h1{
     font-size: 2rem; margin-bottom: 32px; margin-top: 50px;
+    margin-left: 20px;
 }
 .buyer-profile-top .profile_right .seller-about li{
     margin-bottom: 30px; margin-right: 30px;
@@ -195,13 +197,13 @@
 }
 
 .heart-icon{
-    background-image: url('/images/profile/heartNone.png'); 
+    background-image: url('../../images/profile/heartNone.png'); 
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
 }
 .heart-icon.selected{
-    background-image: url('/images/profile/heartClick.png'); 
+    background-image: url('../../images/profile/heartClick.png'); 
 }
 
 
@@ -253,11 +255,17 @@
         display: grid; grid-template-columns: repeat(3, 1fr);
         max-width: 960px; grid-template-rows: auto;
     }
+    .buyer-profile-top .profile_right{
+        width: 960px;
+    }
 }
-@media screen and (max-width : 1500px) {
+@media screen and (max-width : 1400px) {
     .buyer-profile-top .wish-list>ul{
         display: grid; grid-template-columns: repeat(2, 1fr);
         max-width: 640px; grid-template-rows: auto;
+    }
+    .buyer-profile-top .profile_right{
+        width: 640px;
     }
 }
     
@@ -265,6 +273,9 @@
     .buyer-profile-top .wish-list>ul{
         display: grid; grid-template-columns: repeat(3, 1fr);
         max-width: 960px; grid-template-rows: auto;
+    }
+    .buyer-profile-top .profile_right{
+        width: 960px;
     }
 
     /* 판매자 프로필 */
@@ -327,6 +338,7 @@
     /* 자기소개 */
     .buyer-profile-top .profile_right {
         margin-left: 0;
+        align-self: center;
     }
 
     /* 상품 리스트 */
@@ -342,13 +354,19 @@
         display: grid; grid-template-columns: repeat(2, 1fr);
         max-width: 640px; grid-template-rows: auto;
     }
+    .buyer-profile-top .profile_right{
+        width: 640px;
+    }
 }
 
 
-@media screen and (max-width : 767px) {
+@media screen and (max-width : 780px) {
     .buyer-profile-top .wish-list>ul{
-        display: grid; grid-template-columns: repeat(1, 1fr);
-        max-width: 320px; grid-template-rows: auto;
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        max-width: 640px; grid-template-rows: auto;
+    }
+    .buyer-profile-top .profile_right{
+        width: 640px;
     }
     .buyer-profile-top {
         margin: 61px;
@@ -385,7 +403,8 @@
     }
     .buyer-profile-top .profile-box {
         width: 80vw;
-        justify-content: center;
+        /* justify-content: center; */
+        align-self: center;
     }
     .buyer-profile-top .profile-box {
         margin: 0;
@@ -420,7 +439,7 @@
         margin-left: 66px; margin-right: 32px;
     }
     .buyer-profile-top .seller-btn button:nth-of-type(3)>img{
-        margin-left: 67px; margin-right: 29px;
+        margin-left: 57px; margin-right: 29px;
     }
     /* 예약 리스트 */
     .buyer-profile-top .reservation-list-box .sale-img {
@@ -450,5 +469,20 @@
     }
     .buyer-profile-top .reservation-list-box .guest-profile-img>img{
         width: 0; height: 0;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .buyer-profile-top .profile-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .buyer-profile-top .wish-list>ul{
+        display: grid; grid-template-columns: repeat(1, 1fr);
+        max-width: 320px; grid-template-rows: auto;
+    }
+    .buyer-profile-top .profile_right{
+        width: 320px;
     }
 }
