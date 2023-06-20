@@ -106,7 +106,7 @@ header .search-box-click-box button{
   background-color: #fff;
   border-radius: 50px;
 
-  background-image : url('/guidoFront/images/icons/location_pin.svg');
+  background-image : url('/images/icons/location_pin.svg');
   background-repeat : no-repeat;
   background-size : 15px;
   background-position: 15px center;
@@ -196,6 +196,9 @@ header .search-box-click-box button{
   width: 225px;
   height: 72px;
   background-color: #B1D8DA;
+}
+.main--right__guest-minus, .main--right__guest-plus{
+  cursor: pointer;
 }
 
 
@@ -849,13 +852,13 @@ hr{
 }
 
 .heart-icon{
-  background-image: url('/guidoFront/images/profile/heartNone.png'); 
+  background-image: url('/images/profile/heartNone.png'); 
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .heart-icon.selected{
-  background-image: url('/guidoFront/images/profile/heartClick.png'); 
+  background-image: url('/images/profile/heartClick.png'); 
 }
 
 

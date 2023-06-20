@@ -197,6 +197,9 @@ header .search-box-click-box button{
   height: 72px;
   background-color: #B1D8DA;
 }
+.main--right__guest-minus, .main--right__guest-plus{
+  cursor: pointer;
+}
 
 
 

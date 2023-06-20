@@ -71,6 +71,32 @@ guestButtonClick.addEventListener('click', () => {
   whenModal.style.display = 'none';
 });
 
+
+/* *** 게스트 수 업다운 *** */
+// 마이너스 버튼 클릭 이벤트 핸들러
+document.querySelector('.main--right__guest-minus').addEventListener('click', function() {
+  // 현재 게스트 수 가져오기
+  var guestCountElement = document.querySelector('.main--right__guest-count');
+  var guestCount = parseInt(guestCountElement.innerHTML);
+
+  // 게스트 수가 0보다 크면 감소시키기
+  if (guestCount > 0) {
+    guestCount--;
+    guestCountElement.innerHTML = guestCount;
+  }
+});
+
+// 플러스 버튼 클릭 이벤트 핸들러
+document.querySelector('.main--right__guest-plus').addEventListener('click', function() {
+  // 현재 게스트 수 가져오기
+  var guestCountElement = document.querySelector('.main--right__guest-count');
+  var guestCount = parseInt(guestCountElement.innerHTML);
+
+  // 게스트 수 증가시키기
+  guestCount++;
+  guestCountElement.innerHTML = guestCount;
+});
+
 /* 
 function toggleModal(modal) {
   modal.classList.toggle('show');

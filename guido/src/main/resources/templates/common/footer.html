@@ -6,30 +6,47 @@
     <title>Document</title>
 
     <!-- css -->
-    <link rel="stylesheet" href="/css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-    
+
+    <!--     
+    <div class="info-about-us">
+        <div class="guido-info-box">
+            <div>프로젝트 정보 | 연락처</div>
+            <div>Team_name tiltheend Project_name guido</div>
+        </div>
+        <div class="about-us">
+            <span>팀원 : 경규원</span>
+            <span>팀원 : 박재경</span>
+            <span>팀원 : 서지영</span>
+            <span>팀원 : 이나현</span>
+            <span>팀원 : 이도현</span>
+            <span>팀원 : 전희진</span>
+        </div>
+    </div> 
+    -->
+
     <footer>
             <div class="about-guido">
-            <img src="images/icons/footer_logo.svg" alt="">
+            <img th:src="@{images/icons/footer_logo.svg}" alt="">
 
-            <a href="#">개인정보 처리 방침 |</a>
-            <a href="#"> 이용약관 |</a>
-            <a href="#"> 환불 정책 |</a>
-            <a href="#"> 회사 세부 정보</a>
+            <a th:href="@{/}">개인정보 처리 방침 |</a>
+            <a th:href="@{/}"> 이용약관 |</a>
+            <a th:href="@{/}"> 환불 정책 |</a>
+            <a th:href="@{/}"> 회사 세부 정보</a>
         </div>    
         <div class="footer-event-link">
-            <a href="#">EVENT</a>
+            <a th:href="@{/}">EVENT</a>
         </div>    
         <div class="project-info">
             <div>프로젝트 정보 | 연락처</div> 
-            <img src="images/icons/upper_arrow.png" alt="">
+            <img th:src="@{images/icons/upper_arrow.png}" alt="">
         </div>
     </footer>
 
-    <script src="/guidoFront/js/main.js"></script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
 
