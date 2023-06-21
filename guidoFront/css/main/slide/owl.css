@@ -1,0 +1,30 @@
+#demos .owl-carousel .item img{
+    width: 100%; height: 100%; border-radius: 10px;
+    border: 1px solid #C5C5C5;
+}
+
+#demos .owl-carousel .item{
+    width: 100%; height: 100%;
+    border-radius: 10px; padding: 10px;
+}
+
+.owl-carousel .owl-nav button.owl-next{
+    position: absolute; top: 135px; right: 0;
+}
+.owl-carousel .owl-nav button.owl-prev{
+    position: absolute; top: 135px; left: 0;
+}
+
+[aria-label="Previous"], [aria-label="Next"]{
+    font-size:32px; 
+    height: 40px; line-height: 40px; display: inline;
+    position: absolute; top: -2px; left: 20px;
+}
+
+[aria-label="Previous"]{
+    top: -3px; left: 15px;
+}
+
+[aria-label="Next"]{
+    top: -3px; left: 16px;
+}

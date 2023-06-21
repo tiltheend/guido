@@ -1,0 +1,404 @@
+*{
+    /* border: 1px solid black ; */
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    height: calc(100% - 80px);
+    min-height: 800px;
+    display: flex;
+}
+
+.btn {
+    height: 30px;
+    border-radius: 20px;
+}
+
+.btn1 {
+    background-color: #1C797D;
+    color: #F0F0F0;
+    width: 80px;
+    height: 36px;
+}
+
+.btn2 {
+    background-color: #C5C5C5;
+    color: black;
+    width: 80px;
+    height: 36px;
+}
+
+.btn3 {
+    background-color: #F0F0F0;
+    ;
+    color: black;
+    width: 144px;
+    height: 34px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn4 {
+    background-color: #C5C5C5;
+    color: black;
+    width: 144px;
+    height: 34px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn5 {
+    background-color: #B1D8DA;
+    border-radius: 20px;
+    width: 80px;
+    height: 31px;
+    font-weight: bold;
+}
+
+.btn6 {
+    border: 2px solid #B1D8DA;
+    border-radius: 20px;
+    width: 80px;
+    height: 31px;
+    width: 80px;
+}
+
+.btn6::before{
+    content:"대기중";
+}
+
+.btn6:hover {
+    background-color: #B1D8DA;
+    border-radius: 20px;
+    width: 80px;
+    height: 31px;
+    font-weight: bold;
+}
+
+.btn6:hover::before{
+    content:"승인하기";
+}
+
+
+
+/*********************************************** 메뉴 ***********************************************/
+.menu-container {
+    background-color: #0F4957;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 272px;
+    height: 100%;
+}
+
+.menu-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.menu-group * {
+    margin-top: 20px;
+}
+
+.menu-title {
+    font-size: 16px;
+    background-color: #F0F0F0;
+    color: #0F4957;
+    width: 224px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.menu-item > a {
+    font-size: 14px;
+    color: #F0F0F0;
+}
+
+.menu-item > a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+.selected-menu > a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/****************************************************************************************************/
+
+
+/*********************************************** 메인 ***********************************************/
+.content-container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 272px);
+    padding: 30px 60px;
+}
+
+.content-header,
+.content-count-and-search,
+.content-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.radio-area > span{
+    margin-right: 20px;
+    font-weight: bold;
+    color: #1C797D;
+}
+.radio-area > input{
+    margin-right: 5px;
+}
+
+input[type="radio"]:checked{
+    accent-color:#1C797D;
+}
+
+.radio-area > label{
+    margin-right: 20px;
+}
+
+.count-container {
+    margin-left:20px;
+}
+
+.content-title{
+    color: #1C797D;
+}
+
+.search-container{
+    display: flex;
+    border-radius: 30px;
+    width: 300px;
+    height: 30px;
+    border: 1px solid black ;
+    padding-left: 10px;
+    box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.15);
+    align-items: center;
+}
+
+#searchImg {
+    width: 19px;
+    height: 19px;
+}
+
+#searchBtn{
+    width: 19px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    margin-right: 5px;
+}
+
+#search{
+    border:none;
+    outline: none;
+    background-color: transparent;
+    width: 270px;
+}
+
+
+
+/************* 테이블 *************/
+
+table {
+    margin-top: 10px;
+    border-collapse: collapse;
+    /* border-spacing: 0;
+    -webkit-border-horizontal-spacing: 0;
+    -webkit-border-vertical-spacing: 0; */
+}
+
+thead>tr {
+    background-color: #B1D8DA;
+    height: 40px;
+}
+
+thead>tr>:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+thead>tr>:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+tbody{
+    padding-top: 30px;
+}
+
+.여백{
+    height: 20px;
+}
+
+tbody>tr {
+    height: 50px;
+}
+
+td {
+    text-align: center;
+    border-radius: 10px;
+    /* padding: 5px; */
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 내용을 넘어가는 부분 숨김 */
+    text-overflow: ellipsis; /* 생략 부호로 표시 */
+    max-width: 300px;
+    min-width: 40px;
+    padding: 5px;
+}
+
+.col-checkbox {width: 60px;}
+.col-number {width: 60px;}
+.col-email {width: 300px;}
+.col-passportNo {width: 300px;}
+.col-title {width: 400px;}
+.col-writer {width: 150px;}
+.col-date {width: 150px;}
+.col-blind {width: 150px;}
+.col-ans{width:150px;}
+.col-schedule{width:150px;}
+.col-super-guide{width:150px;}
+.col-state{width:150px;}
+.col-approval{width:150px;}
+.col-confirmationNo{width:150px;}
+
+/* 페이지네이션 */
+
+.pagination-container{
+    margin-top: 30px;
+}
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination li{
+    margin: 0 5px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.pagination a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.current{
+    background-color: #1C797D;
+    border-radius: 50%;
+    color: white;
+    /* letter-spacing: 0; */
+}
+
+
+
+
+
+
+
+.settle-search-container{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background-color: #B1D8DA;
+
+}
+
+.search-area{
+    display: flex;
+    font-size: 12px;
+}
+.search-area>*{
+    padding: 5px;
+}
+
+.search-area>:first-child {
+    margin: 0 30px;
+}
+
+.search-area>:nth-child(2) {
+    background-color: white;
+    border: 1px solid #F0F0F0;
+    width: 120px;
+    height: 30px;
+    margin: 0 30px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#query{
+    border: none;
+    margin-right: 30px;
+}
+
+.search-btn{
+    border: 2px solid black;
+    width: 80px;
+}
+
+
+#modalCalendar {
+    display: none;
+    /* 초기에는 모달을 숨김 */
+    position: fixed;
+    /* 화면 상단에 고정 */
+    z-index: 1;
+    /* 다른 요소 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* 스크롤 가능하도록 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 반투명한 배경색 */
+}
+
+#calendarArea {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+
+.test{
+    color:red;
+}

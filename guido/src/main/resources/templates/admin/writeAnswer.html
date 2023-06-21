@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guido</title>
+
+    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" href="../css/admin/admin.css">
+    <link rel="stylesheet" href="../css/admin/writeAnswer.css">
+    <link rel="stylesheet" href="../css/lightbox/lightbox.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        header {
+            width: 100%;
+            height: 80px;
+            background-color: #B1D8DA;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        임시헤더
+    </header>
+    <main>
+        <!-- 사이드 메뉴 -->
+        <th:block th:replace="~{admin/sideMenu}"></th:block>
+
+
+        <!-- 내용 컨테이너 -->
+        <div class="content-container monocolor4">
+            <div class="content-header">
+                <h1 class="content-title">1:1 답변</h1>
+            </div>
+            <hr>
+            <div class="content-area">
+                <div class="write-header">문의 내용</div>
+                <div class="writer-and-date"><div class="writer">작성자 : <span>user01@kh.or.kr</span></div><div class="date">2023-06-07</div></div>
+                <div class="q-title">프로필 변경 방법 문의합니다.</div>
+                <div class="q-content">프로필 변경은 어떻게 하나요?? 신분증 인증할 때 찍었던 사진이 마음에 들지 않아서 수정하고 싶어요..</div>
+                <div class="q-img-container">
+                    <a href="../images/admin/very-high-resolution.jpg" data-lightbox="gallery"><img src="../images/admin/very-high-resolution.jpg"></img></a>
+                    <a href="../images/admin/a.jpg" data-lightbox="gallery"><img src="../images/admin/a.jpg"></img></a>
+                    <a href="../images/admin/a.jpg" data-lightbox="gallery"><img src="../images/admin/a.jpg"></img></a>
+                    <a href="../images/admin/a.jpg" data-lightbox="gallery"><img src="../images/admin/a.jpg"></img></a>
+                    <a href="../images/admin/a.jpg" data-lightbox="gallery"><img src="../images/admin/a.jpg"></img></a>
+                </div>
+                <form>
+                    <div class="answer-area">
+                        <div>
+                            <img src="../images/admin/material-symbols_reply.svg" alt="">
+                        </div>
+                        <textarea name="answer" id="answer"></textarea>
+                    </div>
+                    <div class="btn-area"><button type="submit" class="sbmt-btn">등록</button></div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="../js/lightbox/lightbox.js"></script>
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true
+        })
+    </script>
+</body>
+</html>
