@@ -466,9 +466,9 @@ box-shadow:  5px 5px 8px #e2e2e2,
 .detail--div__collection{
     display: flex;
     width: 100%;
-    margin-top: 4vh;
+    margin-top: 1vh;
     border-color: #F0F0F0;
-    border-style: solid none;
+    border-style: solid none none none;
     border-width: 2px;
     padding: 3vh 0;
 }
@@ -553,12 +553,15 @@ box-shadow:  5px 5px 8px #e2e2e2,
 }
 
 
+.detail--middle__pr{
+    margin-top: 100px;
+}
+
 /* 판매자 프로필 div */
 .detail--middle__profile{
     display: flex;
-    margin: 30px 0 90px 0;
+    margin: 100px 0 90px 0;
 }
-
 
 /* 판매자 프로필 왼쪽 div */
 .detail--middle__profile>div:nth-of-type(1){

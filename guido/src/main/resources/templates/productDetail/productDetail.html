@@ -105,7 +105,7 @@
                     <div class="detail--top__like">
                         <div class="detail--div__location">
                             <img th:src="@{/images/productDetail/location_icon.svg}">
-                            <div> [[*{regionName}]] - Changdeokgung Palace </div>
+                            <div> [[*{regionName}]] </div>
                         </div>
 
                         <!-- <label class="container">
@@ -142,7 +142,7 @@
                     </div>
 
 
-                    <div class="detail--div__shortdescription">
+                    <!-- <div class="detail--div__shortdescription">
                         - Changdeokgung Moonlight Tour is a program where you can watch various parts of the palace with a professional commentator 
                         at Changdeokgung Palace, where greenery is harmonized under the silver moonlight, and commentary on each pavilion and 
                         traditional art performance.
@@ -151,45 +151,16 @@
                         Heejeong Party, Nakseonjae Pass, Sangryangjeong Pavilion, Buyongji Gate, Bullomun Gate, Aeryeonjeong Pavilion, Yeongyeongdang, and Jugwon Forest Road, giving special impression that can only be experienced in Changdeokgung Moonlight Trip.
                     </div>
                     
-
+                    
+                -->
 
                     
-                    <div class="detail--divisionline" id="section1"></div>
+                    <div class="detail--divisionline" id="section1" style="margin-top: 0;"></div>
             
     
                     <!-- 자기소개 -->
                     <div class="detail--middle__pr">
                         <div class="detail--title__pr">About Guide!</div>
-
-
-                        <div class="detail--middle__profile">
-                            <div>
-                                
-                                <div class="detail--img__profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                                
-    
-                                <img th:if="${guide.superGuideFl=='Y'}" th:src="@{/images/productDetail/superguide_mark.png}" class="detail--div__super">
-                                <img th:if="${guide.superGuideFl=='N'}" th:src="@{/images/productDetail/guide_mark.png}" class="detail--div__super">
-    
-                                <div class="detail--content__profile">
-                                    <div th:text="${guide.userName}">회원 이름</div>
-                                    <div class="detail--innercontent__profile">
-                                        <div>경력(개월) <span>10</span></div>
-                                        <div>평점 <span>4.8</span></div>
-                                        <div>후기 <span>36</span></div>
-                                    </div>
-                                </div>
-    
-                            </div>
-    
-                            <div class="detail--ect__profile">
-                                <button id="contactGuide">가이드에게 연락하기</button>
-                                <div class="detail--div__warning"><span>!</span> 안전한 결제를 위해 가이두 웹사이트 외부에서 <br>
-                                    송금하거나 대화를 나누지 마세요.</div>
-                            </div>
-                        </div>
 
             
                         <div class="detail--container__pr">
@@ -264,6 +235,37 @@
                                 <div class="detail--item__pr-text">[[${pr.capList}]] as guide</div>
                             </div>
             
+                        </div>
+                    </div>
+
+
+
+                    <div class="detail--middle__profile">
+                        <div>
+                            
+                            <div class="detail--img__profile">
+                                <img th:src="@{/images/productDetail/profile.jpg}">
+                            </div>
+                            
+    
+                            <img th:if="${guide.superGuideFl=='Y'}" th:src="@{/images/productDetail/superguide_mark.png}" class="detail--div__super">
+                            <img th:if="${guide.superGuideFl=='N'}" th:src="@{/images/productDetail/guide_mark.png}" class="detail--div__super">
+    
+                            <div class="detail--content__profile">
+                                <div th:text="${guide.userName}">회원 이름</div>
+                                <div class="detail--innercontent__profile">
+                                    <div>경력(개월) <span>10</span></div>
+                                    <div>평점 <span>4.8</span></div>
+                                    <div>후기 <span>36</span></div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="detail--ect__profile">
+                            <button id="contactGuide">가이드에게 연락하기</button>
+                            <div class="detail--div__warning"><span>!</span> 안전한 결제를 위해 가이두 웹사이트 외부에서 <br>
+                                송금하거나 대화를 나누지 마세요.</div>
                         </div>
                     </div>
 
