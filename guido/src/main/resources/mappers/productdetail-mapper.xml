@@ -38,14 +38,21 @@
 	</resultMap>
 	
 	
+	<!-- 여행 코스 리스트 조회 -->
 	<select id="selectTourCourseList" resultMap="tourcourse_rm">
 		SELECT * FROM "TOUR_COURSE"
 		WHERE PRODUCT_NO = #{productNo}
 	</select>
 	 
+	 
+	 <!--특정 상품 조회 -->
 	 <select id="selectProduct" resultMap="product_rm">
-		 SELECT * FROM "PRODUCT"
-		 WHERE PRODUCT_NO = #{productNo}
+		 SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE,
+			PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO,
+			THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT, REGION_NAME, THEME_NAME
+		FROM "PRODUCT"
+		JOIN "THEME" USING(THEME_CODE)
+		WHERE PRODUCT_NO = #{productNo}
 	 </select>
 	
 </mapper>
