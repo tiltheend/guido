@@ -15,17 +15,16 @@
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
 </head>
-<body>
-
+<body th:object="${product}">
 
     <div class="detail--container">
 
         <section class="detail--top">
             
             <div class="detail--top__category">
-                <div>서울</div>
+                <div th:text="*{regionName}">서울</div>
                 <div>></div>
-                <div>한국의 궁 투어</div>
+                <div th:text="*{themeName}">테마명</div>
                 <div>></div>
                 <div>[창덕궁 달빛기행] 한국의 아름다움을 느끼며 떠나는 창덕궁 야간 투어</div>
             </div>

@@ -568,11 +568,16 @@ header .search-box-click-box button{
 
 
 /* ***** 테마 카테고리 ***** */
+.categori-icon-box-container{
+  display: flex;
+  justify-content: center;
+}
+
 .categori-icon-box {
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
   margin-top: 50px;
@@ -580,7 +585,6 @@ header .search-box-click-box button{
 }
 
 .categori-icon-box a {
-  margin-left: 50px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
