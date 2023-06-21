@@ -32,7 +32,6 @@ public class Product {
 	
 	private String regionName;			// 지역명
 	
-	private int guestCount;		// 게스트 수
 	private List<TourCourse> tourCourse;
 	private List<TourTheme> tourTheme;
 	
