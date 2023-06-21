@@ -197,6 +197,9 @@ header .search-box-click-box button{
   height: 72px;
   background-color: #B1D8DA;
 }
+.main--right__guest-minus, .main--right__guest-plus{
+  cursor: pointer;
+}
 
 
 
@@ -991,7 +994,6 @@ footer{
   font-size: 12px;
   display: flex; justify-content: space-around; align-items: center;
   background-color: #fff;
-  margin-top: 80px;
 }
 
 footer .footer-event-link{position: absolute; left: 50%; transform: translateX(-15px);} 

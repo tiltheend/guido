@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guido</title>
+
+    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" href="../css/admin/admin.css">
+    <style>
+        header {
+            width: 100%;
+            height: 80px;
+            background-color: #B1D8DA;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        임시헤더
+    </header>
+    <main>
+        <!-- 사이드 메뉴 -->
+        <th:block th:replace="~{admin/sideMenu}"></th:block>
+
+
+        <!-- 내용 컨테이너 -->
+        <div class="content-container monocolor4">
+            <div class="content-header">
+                <h1 class="content-title">가이드 요청 승인 관리</h1>
+                <div class="btn-container">
+                    <button class="btn btn5">승인하기</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="content-count-and-search">
+                <!-- 카운트 -->
+                <div class="count-container">총 <span>10</span>건</div>
+                <!-- 검색창 -->
+                <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
+            </div>
+
+            <!-- 테이블 -->
+            <table>
+
+                <!---------------------------------- 테이블 제목 ------------------------------>
+                <thead>
+                    <tr><th class="col-checkbox"><input type="checkbox" name="" id=""></th><th class="col-number">회원번호</th><th class="col-email">회원 이메일</th>
+                    <th class="col-date">요청일</th><th class="col-confirmationNo">확인증 번호</th><th class="col-approval">승인</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="여백"></tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>10</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>9</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>8</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>7</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>6</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>5</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>4</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>3</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>2</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td>1</td>
+                        <td>email@gmail.com</td>
+                        <td>2023-06-07</td>
+                        <td>HRD-20230531122740-73855</td>
+                        <td><button class="btn btn6"></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li><a href="#">&lt;&lt;</a></li>
+                    <li><a href="#">&lt;</a></li>
+                    <li><a href="#" class="current">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">6</a></li>
+                    <li><a href="#">7</a></li>
+                    <li><a href="#">8</a></li>
+                    <li><a href="#">9</a></li>
+                    <li><a href="#">10</a></li>
+                    <li><a href="#">&gt;</a></li>
+                    <li><a href="#">&gt;&gt;</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
