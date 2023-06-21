@@ -5,11 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.home.model.service.HomeService;
 
-@SessionAttributes({"loginUser"})
+/*@SessionAttributes({"loginUser"})*/
 @RequestMapping("/common")
 @Controller
 public class HomeController {
@@ -17,13 +16,20 @@ public class HomeController {
 	@Autowired
 	private HomeService service;
 	
-	// 상품 목록 조회
+	// 메인 페이지 이동
 	@GetMapping("/index")
-	public String selectProductList(/* @PathVariable("themeCode") int themeCode */) {
+	public String mainPage() {
+
+		return "common/index";
+	}
+	
+	// 상품 목록 조회
+	@GetMapping("/index/{themeCode}")
+	public String selectProductList(@PathVariable("themeCode") int themeCode) {
 		
-		/* System.out.println("themeCode: " + themeCode); */
+		System.out.println("themeCode: " + themeCode);
 		
-		return null;
+		return "/";
 	}
 
 }
