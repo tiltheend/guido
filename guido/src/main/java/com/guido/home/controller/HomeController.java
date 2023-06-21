@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.guido.home.model.service.HomeService;
 
 @SessionAttributes({"loginUser"})
-@RequestMapping("/")
+@RequestMapping("/common")
 @Controller
 public class HomeController {
 	
@@ -18,9 +18,9 @@ public class HomeController {
 	private HomeService service;
 	
 	// 상품 목록 조회
-//	@GetMapping
-//	public String selectProductList() {
-//		return null;
-//	}
+	@GetMapping("/index")
+	public String selectProductList() {
+		return null;
+	}
 
 }

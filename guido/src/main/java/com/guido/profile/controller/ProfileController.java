@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ProfileController {
 	
-	@GetMapping("/mypage")
-	public String mypage() {
+	@GetMapping("/mypage/T")
+	public String mypageTourist() {
 		return "profile/buyerProfile";
-//		return "profile/sellerProfile";
+	}
+	@GetMapping("/mypage/G")
+	public String mypageGuide() {
+		return "profile/sellerProfile";
 	}
 	
 }

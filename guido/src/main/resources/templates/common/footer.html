@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
 
     <footer>
             <div class="about-guido">
-            <img th:src="@{images/icons/footer_logo.svg}" alt="">
+            <img th:src="@{/images/icons/footer_logo.svg}" alt="">
 
             <a th:href="@{/}">개인정보 처리 방침 |</a>
             <a th:href="@{/}"> 이용약관 |</a>
@@ -42,7 +42,7 @@
         </div>    
         <div class="project-info">
             <div>프로젝트 정보 | 연락처</div> 
-            <img th:src="@{images/icons/upper_arrow.png}" alt="">
+            <img th:src="@{/images/icons/upper_arrow.png}" alt="">
         </div>
     </footer>
 
