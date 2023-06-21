@@ -60,7 +60,7 @@ public class FileUploadConfig implements WebMvcConfigurer {
 		String webPath = "/images/**";
 		
 		// 실제로 자원이 저장되어 있는 로컬 경로
-		String resourcePath = "file:///C:/uploadImages/";
+		String resourcePath = "file:///C:/guidoImages/";
 		
 		// 	/images/ 로 시작하는 요청이 오면 C:/uploadImages/ 와 연결
 		registry.addResourceHandler(webPath).addResourceLocations(resourcePath);

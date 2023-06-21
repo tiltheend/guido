@@ -27,6 +27,10 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
+    <div class="wirte-btn">
+        <img th:src="@{/images/icons/writeBtn.png}" alt="">
+    </div>
+
     <!-- ***** 메인 영역 슬라이드 ***** -->
 
     <div class="main--container">
@@ -109,72 +113,80 @@
     <!-- ***** 카테고리 아이콘 ***** -->
     <div class="categori-icon-box-container">
         <div class="categori-icon-box">
+            <div th:each="themeType : ${application.themeTypeList}">
+                <a href="#">
+                    <img th:src="${themeType.THEME_IMG}" alt="힐링 투어">
+                    <button th:text="${themeType.THEME_NAME}">테마 이름</button>
+                </a>
+            </div>
+            <!-- 
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/healing.png}" alt="힐링 투어">
                     <button>힐링 투어</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/kpop.png}" alt="k-pop 투어">
                     <button>k-pop 투어</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/gyeongbokgung.png}" alt="궁 투어">
                     <button>궁 투어</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/food.png}" alt="맛집 투어">
                     <button>맛집 투어</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/history.png}" alt="역사 투어">
                     <button>역사 투어</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/eco.png}" alt="에코 투어리즘">
                     <button>에코 투어리즘</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/hanok.png}" alt="한옥 체험">
                     <button>한옥 체험</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/hanbok.png}" alt="한복 체험">
                     <button>한복 체험</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/market.png}" alt="전통 시장 투어">
                     <button>전통 시장 투어</button>
                 </a>    
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/ski.png}" alt="스키장 투어">
                     <button>스키장 투어</button>
                 </a>    
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/surfing.png}" alt="서핑 투어">
                     <button>서핑 투어</button>
                 </a>    
-            </div>
+            </div> 
+            -->
         </div>
     </div>
 

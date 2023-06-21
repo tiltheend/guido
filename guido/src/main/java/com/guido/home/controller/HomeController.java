@@ -19,7 +19,10 @@ public class HomeController {
 	
 	// 상품 목록 조회
 	@GetMapping("/index")
-	public String selectProductList() {
+	public String selectProductList(/* @PathVariable("themeCode") int themeCode */) {
+		
+		/* System.out.println("themeCode: " + themeCode); */
+		
 		return null;
 	}
 

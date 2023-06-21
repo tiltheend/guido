@@ -419,6 +419,19 @@ header .search-box-click-box button{
 }
 
 
+.wirte-btn{
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+.wirte-btn img{
+  width: 40px;
+  height: 40px;
+}
+
 
 /* ***** 메인 슬라이드 ***** */
 /* li{
@@ -574,7 +587,7 @@ header .search-box-click-box button{
 }
 
 .categori-icon-box {
-  width: 70%;
+  width: 72%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
