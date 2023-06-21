@@ -29,6 +29,7 @@ let sellerReplyWirte; /* 리뷰 달기 박스 */
 document.addEventListener("DOMContentLoaded",()=>{
 
     /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
+    // 리뷰 달기
     reviewContentList=document.querySelectorAll(".seller-profile-top .review-list li>pre");
     reviewContentMore=document.querySelectorAll(".seller-profile-top .review-list li>div:last-of-type>p");
 
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             }
         }
     }
+    
     /* 더보기 버튼 누르면 상세 조회 */
     moreAndReply = document.querySelector(".more-and-reply>p");
     reviewMoreModal=document.querySelector(".seller-profile-top .review-more-modal");
@@ -48,6 +50,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     reviewerName = document.querySelector(".review-more-modal .reviewer-name");
     reviewerProfile = document.querySelector(".review-more-modal .reviewer");
     reviewerDate = document.querySelector(".review-more-modal .review-date");
+    reviewerRating = document.querySelector(".review-more-modal .review-rating");
 
     if(moreAndReply != null){
         moreAndReply.addEventListener("click",()=>{
@@ -65,6 +68,9 @@ document.addEventListener("DOMContentLoaded",()=>{
             
             // 리뷰 날짜 넣기
             reviewerDate.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerText;
+            
+            // 리뷰 별점 넣기
+            reviewerRating.innerHTML = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerHTML;
             
             // 모달 열기
             reviewMoreModal.style.display="flex";
