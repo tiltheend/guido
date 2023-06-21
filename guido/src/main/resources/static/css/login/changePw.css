@@ -1,0 +1,58 @@
+/* 전체 */
+.container_total{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 400px 0;
+}
+/* 비밀번호 변경하기 */
+.container_top_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.container_top_subTitle{
+    display: flex;
+    justify-content: start;
+    width: 420px;
+    font-weight: lighter;
+    margin: 10px 0 50px 0;
+}
+/* 입력 부분 */
+.container_middle_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container_middle_input>*{
+    width: 420px;
+    height: 55px;
+    border: 1px solid #c5c5c5;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 5px;
+    color: #5c5c5c;
+}
+
+/* 제출 버튼 */
+.container_bottom{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 45px;
+}
+.container_bottom_button{
+    width: 420px;
+    height: 55px;
+    background-color: #1c797d;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 18px;
+}
