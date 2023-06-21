@@ -2,6 +2,8 @@ package com.guido.product.model.dto;
 
 import java.util.List;
 
+import com.guido.common.dto.TourTheme;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,5 +34,6 @@ public class Product {
 	
 	
 	private List<TourCourse> tourCourse;
+	private List<TourTheme> tourTheme;
 	
 }
