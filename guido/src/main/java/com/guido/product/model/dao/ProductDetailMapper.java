@@ -3,7 +3,7 @@ package com.guido.product.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.guido.product.model.dto.Product;
+import com.guido.common.model.dto.Product;
 
 @Mapper
 public interface ProductDetailMapper {

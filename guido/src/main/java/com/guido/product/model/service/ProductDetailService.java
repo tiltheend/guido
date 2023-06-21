@@ -1,6 +1,6 @@
 package com.guido.product.model.service;
 
-import com.guido.product.model.dto.Product;
+import com.guido.common.model.dto.Product;
 
 public interface ProductDetailService {
 
