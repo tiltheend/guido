@@ -1,4 +1,4 @@
-package com.guido.product.model.dto;
+package com.guido.common.model.dto;
 
 
 import lombok.Getter;

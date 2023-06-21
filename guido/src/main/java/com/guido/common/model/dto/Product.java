@@ -1,8 +1,6 @@
-package com.guido.product.model.dto;
+package com.guido.common.model.dto;
 
 import java.util.List;
-
-import com.guido.common.dto.TourTheme;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +30,9 @@ public class Product {
 	private String guideLanguage;		// 가이드 지원 언어
 	private int viewCount;						// 조회수
 	
+	private String regionName;			// 지역명
 	
+	private int guestCount;		// 게스트 수
 	private List<TourCourse> tourCourse;
 	private List<TourTheme> tourTheme;
 	

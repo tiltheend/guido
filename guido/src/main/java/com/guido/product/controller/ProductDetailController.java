@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.guido.product.model.dto.Product;
+import com.guido.common.model.dto.Product;
 import com.guido.product.model.service.ProductDetailService;
 
 @Controller
