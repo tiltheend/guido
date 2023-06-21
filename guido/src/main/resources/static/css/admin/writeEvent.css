@@ -1,0 +1,99 @@
+.eventForm {
+    margin: 0 30px;
+}
+
+.write-header {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.red {
+    color: red;
+}
+
+
+#eventTitle {
+    border: 2px solid #C6DDDF;
+    border-radius: 16px;
+    height: 51px;
+    width: 100%;
+    padding: 20px;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#eventContent {
+    border: 2px solid #C6DDDF;
+    border-radius: 16px;
+    font-size: 18px;
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    resize: none;
+    margin-top: 20px;
+}
+
+.img-slide-area {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.img-area {
+    display: flex;
+    overflow: hidden;
+    width: max-content;
+    transition: transform 0.3s ease-in-out;
+}
+
+.img-box {
+    width: 360px;
+    height: 200px;
+    border: 2px solid #C6DDDF;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 20px 5px;
+    display: flex;
+}
+
+.img-area>.img-box:first-child {
+    margin-left: 0;
+}
+
+.img-slide-left-btn, .img-slide-right-btn{
+    background-color: transparent;
+    position: absolute;
+    top: 104px;
+}
+
+.img-slide-left-btn {
+    left: 10px;
+}
+
+.img-slide-right-btn {
+    right: 10px;
+}
+
+.plus-btn {
+    display: block;
+    margin: auto;
+    align-self: center;
+}
+
+.btn-area{
+    display: flex;
+    justify-content: end;
+    margin-top:20px;
+}
+
+.sbmt-btn{
+    background-color: #C6DDDF;
+    color: #0F4957;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 25px;
+    width: 100px;
+    height: 50px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
