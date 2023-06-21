@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guido</title>
+
+    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" href="../css/admin/admin.css">
+    <style>
+        header {
+            width: 100%;
+            height: 80px;
+            background-color: #B1D8DA;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        임시헤더
+    </header>
+    <main>
+        <!-- 사이드 메뉴 -->
+        <th:block th:replace="~{admin/sideMenu}"></th:block>
+
+
+        <!-- 내용 컨테이너 -->
+        <div class="content-container monocolor4">
+            <div class="content-header">
+                <h1 class="content-title">정산 관리</h1>
+            </div>
+            <hr>
+
+
+            <div>총 2건</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>상품 번호</th>
+                        <th>상품 제목</th>
+                        <th>구매자 이메일</th>
+                        <th>결제 금액(a)</th>
+                        <th>수수료 10%(b)</th>
+                        <th>총 정산 금액(a-b)</th>
+                        <th>정산 상태</th>
+                        <th>정산 완료일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>100</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>99</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>88</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>77</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>66</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>55</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>44</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>The Night tour of Chang.............................................</td>
+                        <td>user01@kh.or.kr</td>
+                        <td>250,000</td>
+                        <td>25,000</td>
+                        <td>225,000</td>
+                        <td>완료</td>
+                        <td>2023-06-02</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li><a href="#">&lt;&lt;</a></li>
+                    <li><a href="#">&lt;</a></li>
+                    <li><a href="#" class="current">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">6</a></li>
+                    <li><a href="#">7</a></li>
+                    <li><a href="#">8</a></li>
+                    <li><a href="#">9</a></li>
+                    <li><a href="#">10</a></li>
+                    <li><a href="#">&gt;</a></li>
+                    <li><a href="#">&gt;&gt;</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
