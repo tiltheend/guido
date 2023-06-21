@@ -70,6 +70,23 @@ svg{cursor: pointer; background-color: rgba(0, 0, 0, 0);}
 통일성을 위해 정해진 폰트 사이즈 안에서만 수정 부탁드립니다. */
 .font0{font-size: 32px;} /* 강조 컨텐츠  32px 너무 크니까 사용 지양 */
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.font1{font-size: 1.625rem;} /* 상세 페이지 제목 26px */
+.font2{font-size: 1.375rem;} /* 상세 페이지 내용 중요한 정보 22px */
+.font3{font-size: 1rem;} /* 헤더 컨텐츠 16px */
+.font4{font-size: 0.875rem;} /* 컨텐츠 내용 타이틀 14px */
+.font5{font-size: 0.75rem;} /* 가장 작은 컨텐츠 내용 본문 12px */
+=======
+.font1{font-size: 1.625rem;} /* 상세 페이지 제목 */
+.font2{font-size: 1.375rem;} /* 상세 페이지 내용 중요한 정보 */
+.font3{font-size: 1rem;} /* 헤더 컨텐츠 */
+.font4{font-size: 0.875rem;} /* 컨텐츠 내용 타이틀 */
+.font5{font-size: 0.75rem;} /* 가장 작은 컨텐츠 내용 본문 */
+
+.font6{font-size: 0.625rem;} /* 제일 작은 거 눈에 안띄니까 사용 지양 */
+>>>>>>> 5b2181cfbecf1e525c33a85c17b084651c05ec15
+=======
 .font1{font-size: 26px;} /* 상세 페이지 제목 */
 .font2{font-size: 22px;} /* 상세 페이지 내용 중요한 정보 */
 .font3{font-size: 16px;} /* 헤더 컨텐츠 */
@@ -77,6 +94,7 @@ svg{cursor: pointer; background-color: rgba(0, 0, 0, 0);}
 .font5{font-size: 12px;} /* 가장 작은 컨텐츠 내용 본문 */
 
 .font6{font-size: 10px;} /* 제일 작은 거 눈에 안띄니까 사용 지양 */
+>>>>>>> f104b2f5879a29130cce143822c77a1835afc15a
 
 
 /* 반응형 포맷 - 갖다 쓰세용!*/
