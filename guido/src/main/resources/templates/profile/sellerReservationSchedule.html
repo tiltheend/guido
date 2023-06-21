@@ -10,7 +10,7 @@
 
     <!-- 달력 -->
     <link th:href='@{/css/profile/calender_main.css}' rel='stylesheet' />
-    <script src='@{/js/profile/calender.js}'></script>
+    <script th:src='@{/js/profile/calender.js}'></script>
     <script th:src="@{/js/profile/calender_main.js}"></script>                   
 
     <style>
@@ -40,7 +40,7 @@
                         <!-- 프로필 편집 버튼 -->
                         <!-- <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon">  -->
                     </div>
-                    <h2 onclick="location.href='sellerProfile.html'">UserName</h2> <!-- 유저이름 -->
+                    <h2 onclick="location.href='/profile/mypage/G'">UserName</h2> <!-- 유저이름 -->
                 </div>
 
                 <div class="profile-seller-info"> <!-- 판매자 정보 (후기/평점/경력) -->
@@ -69,10 +69,10 @@
                 <button> <!-- 내 정보 수정 -->
                     <img th:src="@{/images/profile/myInfoEdit.png}" alt="">내 정보 수정
                 </button>
-                <button onclick="location.href='sellerReservationSchedule.html'"> <!-- 예약 일정 확인 --> 
+                <button onclick="location.href='/profile/guideReservationSchedule'"> <!-- 예약 일정 확인 --> 
                     <img th:src="@{/images/profile/reservationCalender.png}" alt="">예약 일정 확인
                 </button>
-                <button onclick="location.href='sellerReservation.html'"> <!-- 예약 내역 -->
+                <button onclick="location.href='/profile/guideReservation'"> <!-- 예약 내역 -->
                     <img th:src="@{/images/profile/reservationList.png}" alt="">예약 내역
                 </button>
             </div>

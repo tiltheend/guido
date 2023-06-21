@@ -25,7 +25,7 @@
     <header>임시헤더</header>
 
     <div class="buyer-profile-top">
-        <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
+        <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
 
             <div class="guide-banner"> <!-- 프로필 위 투어리스트 배너 -->
                 <img th:src="@{/images/profile/touristBanner.png}" alt="guideBanner"> <!-- 일반 가이드 -->
@@ -41,11 +41,11 @@
                         <!-- 프로필 편집 버튼 -->
                         <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
                     </div>
-                    <h2 onclick="location.href='buyerProfile.html'">UserName</h2> <!-- 유저이름 -->
+                    <h2 onclick="location.href='/profile/mypage/T'" th:text="*{userName}">UserName</h2> <!-- 유저이름 -->
                 </div>
 
                 <div class="user-email"> <!-- 유저 이메일 -->
-                    <p>tiltheend@gmail.com</p>
+                    <p th:text="*{userEmail}">tiltheend@gmail.com</p>
                 </div>
 
             </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
@@ -55,11 +55,11 @@
                     <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
                     <div>내 정보 수정</div>
                 </button>
-                <button onclick="location.href='buyerReservation.html'"> <!-- 예약 관리 --> 
+                <button onclick="location.href='/profile/touristReservation'"> <!-- 예약 관리 --> 
                     <img th:src="@{/images/profile/buyerReservation.png}" alt="">
                     <div>예약 관리</div> 
                 </button>
-                <button onclick="location.href='buyerWhisList.html'"> <!-- 위시리스트 -->
+                <button onclick="location.href='/profile/touristWishList'"> <!-- 위시리스트 -->
                     <img th:src="@{/images/profile/buyerWishList.png}" alt="">
                     <div>위시 리스트</div>
                 </button>

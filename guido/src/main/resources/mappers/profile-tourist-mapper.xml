@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guido.profile.model.dao.ProfileTouristMapper">
+	
+<!--
+	private int userNo; // 번호
+	private String userEmail; // 이메일(아이디)
+	private String userPassword; // 비밀번호
+	private String userName; // 이름
+	private String userTel; // 전화번호
+	private String profileImage; // 프로필 이미지
+	private String createDate; // 가입일
+	private String userType; // 타입(G: 가이드, T: 여행객, M: 관리자)
+	private String ; // 상태(Y: 미승인(가이드), N: 정상, B: 블락, D: 탈퇴)
+-->
+
+	
+	<resultMap id="user_rm" type="User">
+		<id property="userNo" column="USER_NO"/>
+		<result property="userEmail" column="USER_EMAIL"/>
+		<result property="userPassword" column="USER_PASSWORD"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="userType" column="USER_TYPE"/>
+		<result property="userState" column="USER_STATE"/>
+	</resultMap>
+	
+	<!-- 가이드인지 판매자인지 체크 ( userType: 1 == G / 0 == T) -->
+	<select id="userTypeCheck">
+		SELECT COUNT(*) 
+		FROM "USER"
+		WHERE USER_NO = #{memberNo}
+		AND USER_TYPE = 'G'
+	</select>
+	
+	<!-- 회원 정보 가져오기 (이메일, 이름, 프로필 이미지) -->
+	 <select id="userInfo" resultMap="user_rm">
+		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG
+		FROM "USER"
+		WHERE USER_NO = #{memberNo}
+	 </select>
+	 
+	
+</mapper>
