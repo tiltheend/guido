@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../css/login/login.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" th:href="@{/css/login/login.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
         header{width: 100%; height: 80px; background-color: #B1D8DA;}
     </style>
@@ -18,16 +18,19 @@
             <div class="container_top_title font0">로그인</div>
             <div class="container_top_subTitle font3">한 발짝 더 편리해지는 여행</div>
         </div>
-        <form action="#" method="post">
+        <form action="/user/login" method="post">
             <div class="container_middle">
                 <div class="container_middle_input">
-                    <input type="email" name="email" id="email" class="email font4" placeholder="이메일">
-                    <input type="password" name="password" id="password" class="password font4" placeholder="비밀번호">
+                    <input type="email" name="email" id="email" class="email font4" placeholder="이메일" autocomplete="off">
+                    <div class="pw-area">
+                        <input type="password" name="password"  id="password" class="password invisible font4" placeholder="비밀번호" autocomplete="off" >
+                        <img src="/images/signUp/invisible.png" id="showOrNotPw">
+                    </div>
                 </div>
                 <div class="container_middle_checkOrSignup">
                     <div class="chk1"><input type="checkbox" name="rememberId" id="rememberId"><label for="rememberId" class="box"></label><span class="font5 ment1">&nbsp&nbsp아이디 기억하기</span>
                     </div>
-                    <a href="../signUp/chooseMemberType.html"><div class="signUpLink font5">회원가입</div></a>
+                    <a th:href="@{/user/signUp/chooseMemberType}"><div class="signUpLink font5">회원가입</div></a>
                 </div>
             </div>
             <div class="container_bottom">
@@ -35,7 +38,7 @@
             </div>
         </form>
         <div class="container_bottom">
-            <div class="container_bottom_google"><img class="googleLogo" src="../images/signUp/google.png">
+            <div class="container_bottom_google"><img class="googleLogo" th:src="@{/images/signUp/google.png}" alt="G">
             <button class="googleLogin">&nbsp&nbsp구글로 로그인하기</button></div>
             <button class="openFindPwModal font3" id="show">Forgot your password?</button>
         </div>
@@ -52,8 +55,7 @@
                 <div class="modal_body">
                     <div class="modal_body_title font1">비밀번호를 잊으셨나요?</div>
                     <div class="modal_body_content font3">계정으로 사용하시는 이메일 주소를 입력해주시면, 비밀번호 재설정 링크를 보내드립니다.</div>
-                    <form action="#" method="get">
-                        <!-- 유효성 검사 필요 -->
+                    <form action="#" method="post">
                         <input type="email" name="modalEmail" id="modalEmail" class="modal_email font4" placeholder="이메일">
                         <button class="sendEmailBtn font3" id="sendEmailBtn">비밀번호 재설정 링크 전송</button>
                     </form>
@@ -77,6 +79,17 @@
             </div>
         </div>
     </div>
-    <script src="../js/login/login.js"></script>
+    <script>
+        const password = document.querySelector(".password");
+        const pwArea = document.querySelector(".pw-area");
+        
+        password.onfocus = function(e){
+            pwArea.style.border = "2px solid #1c797d";
+        }
+        password.onblur = function(e){
+            pwArea.style.border = "1px solid #c5c5c5";
+        }
+    </script>
+    <script th:src="@{/js/login/login.js}"></script>
 </body>
 </html>
