@@ -15,15 +15,14 @@
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
 </head>
-<body>
-
+<body th:object="${product}">
 
     <div class="detail--container">
 
         <section class="detail--top">
             
             <div class="detail--top__category">
-                <div>서울</div>
+                <div th:text="*{regionName}">서울</div>
                 <div>></div>
                 <div>한국의 궁 투어</div>
                 <div>></div>
