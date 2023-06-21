@@ -568,16 +568,27 @@ header .search-box-click-box button{
 
 
 /* ***** 테마 카테고리 ***** */
+.categori-icon-box-container{
+  display: flex;
+  justify-content: center;
+}
+
 .categori-icon-box {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  /* justify-content: space-around; */
   justify-content: center;
   align-items: center;
   text-align: center;
   margin-top: 50px;
   margin-bottom: 25px;
 }
+
+/* .categori-icon-box>div{
+  display: flex;
+  justify-content: center;
+} */
 
 .categori-icon-box a {
   margin-left: 50px;

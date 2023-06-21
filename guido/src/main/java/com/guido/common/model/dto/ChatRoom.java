@@ -1,4 +1,4 @@
-package com.guido.common.dto;
+package com.guido.common.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,10 +9,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class WishList {
-	
-	private int wishListNo;
-	private int userNo;
+public class ChatRoom {
+
+	private int chatRoomNo;
+	private String createDt;
 	private int productNo;
-	private String wishDt;
+	private int userNo;
 }
