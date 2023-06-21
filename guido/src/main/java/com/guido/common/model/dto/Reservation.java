@@ -1,4 +1,4 @@
-package com.guido.reservation.model.dto;
+package com.guido.common.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

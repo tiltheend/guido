@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-public class FavoriteRegion {
+public class TourTheme {
 
-	private int favoriteRegionNo;
-	private String regionName;
-	private int userNo;
+	private int themeCode;
+	private String themeName;
+	private String themeImg;
+
 }

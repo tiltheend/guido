@@ -1,4 +1,4 @@
-package com.guido.product.model.dto;
+package com.guido.common.model.dto;
 
 // 페이징 처리에 필요한 모든 값들을 저장 하고있는 객체
 public class Pagination {
