@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/profile/buyerWhisList.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/profile/buyerWhisList.css}">
 
     <!-- 슬릭 슬라이드 -->
-    <link rel="stylesheet" type="text/css" href="../css/profile/nabong_slick/nabongSlick.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profile/nabong_slick/nabongSlick.css}"/>
     
     <style>
         header{width: 100%; height: 80px; background-color: #B1D8DA;
@@ -23,7 +23,7 @@
         <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
 
             <div class="guide-banner"> <!-- 프로필 위 투어리스트 배너 -->
-                <img src="../images/profile/touristBanner.png" alt="guideBanner"> <!-- 일반 가이드 -->
+                <img th:src="@{/images/profile/touristBanner.png}" alt="guideBanner"> <!-- 일반 가이드 -->
             </div>
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
@@ -34,7 +34,7 @@
 
                         <input type="file" name="userProfileFile" id="userProfileFile">
                         <!-- 프로필 편집 버튼 -->
-                        <img src="../images/profile/profileEdit.png" alt="profileEditIcon" class="profile-edit-icon"> 
+                        <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
                     </div>
                     <h2 onclick="location.href='buyerProfile.html'">UserName</h2> <!-- 유저이름 -->
                 </div>
@@ -47,15 +47,15 @@
             
             <div class="seller-btn">
                 <button> <!-- 내 정보 수정 -->
-                    <img src="../images/profile/myInfoEdit.png" alt="">
+                    <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
                     <div>내 정보 수정</div>
                 </button>
                 <button onclick="location.href='buyerReservation.html'"> <!-- 예약 관리 --> 
-                    <img src="../images/profile/buyerReservation.png" alt="">
+                    <img th:src="@{/images/profile/buyerReservation.png}" alt="">
                     <div>예약 관리</div> 
                 </button>
                 <button onclick="location.href='buyerWhisList.html'"> <!-- 위시리스트 -->
-                    <img src="../images/profile/buyerWishList.png" alt="">
+                    <img th:src="@{/images/profile/buyerWishList.png}" alt="">
                     <div>위시 리스트</div>
                 </button>
             </div>
@@ -84,24 +84,24 @@
                             </div>
                         </div>
                         <div class="slide-btn">
-                            <img src="../images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
-                            <img src="../images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                            <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
+                            <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
                         <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" src="../images/profile/empty.png">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                         </div>
                         <div class="sales-text">
                             <div>
                                 <p>A trip to Jeju Island where...</p>
                                 <div>
-                                    <img src="../images/profile/slideStar.png" alt="slideStar">
+                                    <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                     <span>4.5</span>
                                 </div>
                             </div>
                             <div>
                                 <p>₩ 190,000 / total</p>
                                 <div>
-                                    <img src="../images/profile/location.png" alt="location">
+                                    <img th:src="@{/images/profile/location.png}" alt="location">
                                     <span>Jeju</span>
                                 </div>
                             </div>
@@ -128,24 +128,24 @@
                             </div>
                         </div>
                         <div class="slide-btn">
-                            <img src="../images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
-                            <img src="../images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                            <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
+                            <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
                         <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" src="../images/profile/empty.png">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                         </div>
                         <div class="sales-text">
                             <div>
                                 <p>A trip to Jeju Island where...</p>
                                 <div>
-                                    <img src="../images/profile/slideStar.png" alt="slideStar">
+                                    <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                     <span>4.5</span>
                                 </div>
                             </div>
                             <div>
                                 <p>₩ 190,000 / total</p>
                                 <div>
-                                    <img src="../images/profile/location.png" alt="location">
+                                    <img th:src="@{/images/profile/location.png}" alt="location">
                                     <span>Jeju</span>
                                 </div>
                             </div>
@@ -166,68 +166,24 @@
                             </div>
                         </div>
                         <div class="slide-btn">
-                            <img src="../images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
-                            <img src="../images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                            <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
+                            <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
                         <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" src="../images/profile/empty.png">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                         </div>
                         <div class="sales-text">
                             <div>
                                 <p>A trip to Jeju Island where...</p>
                                 <div>
-                                    <img src="../images/profile/slideStar.png" alt="slideStar">
+                                    <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                     <span>4.5</span>
                                 </div>
                             </div>
                             <div>
                                 <p>₩ 190,000 / total</p>
                                 <div>
-                                    <img src="../images/profile/location.png" alt="location">
-                                    <span>Jeju</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <!-- <div class="relative"></div> -->
-                        <div class="slider single-item">
-                            <div>
-                                <img src="">
-                                <h3>1</h3>
-                            </div>
-                            <div>
-                                <h3>2</h3>
-                            </div>
-                            <div>
-                                <h3>3</h3>
-                            </div>
-                            <div>
-                                <h3>4</h3>
-                            </div>
-                            <div>
-                                <h3>5</h3>
-                            </div>
-                        </div>
-                        <div class="slide-btn">
-                            <img src="../images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
-                            <img src="../images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
-                        </div>
-                        <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" src="../images/profile/empty.png">
-                        </div>
-                        <div class="sales-text">
-                            <div>
-                                <p>A trip to Jeju Island where...</p>
-                                <div>
-                                    <img src="../images/profile/slideStar.png" alt="slideStar">
-                                    <span>4.5</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p>₩ 190,000 / total</p>
-                                <div>
-                                    <img src="../images/profile/location.png" alt="location">
+                                    <img th:src="@{/images/profile/location.png}" alt="location">
                                     <span>Jeju</span>
                                 </div>
                             </div>
@@ -254,24 +210,68 @@
                             </div>
                         </div>
                         <div class="slide-btn">
-                            <img src="../images/profile/NextBtn.png" alt="slideNext" class="slick-slide-next">
-                            <img src="../images/profile/PreBtn.png" alt="slidePre" class="slick-slide-pre">
+                            <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
+                            <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
                         <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" src="../images/profile/empty.png">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                         </div>
                         <div class="sales-text">
                             <div>
                                 <p>A trip to Jeju Island where...</p>
                                 <div>
-                                    <img src="../images/profile/slideStar.png" alt="slideStar">
+                                    <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                     <span>4.5</span>
                                 </div>
                             </div>
                             <div>
                                 <p>₩ 190,000 / total</p>
                                 <div>
-                                    <img src="../images/profile/location.png" alt="location">
+                                    <img th:src="@{/images/profile/location.png}" alt="location">
+                                    <span>Jeju</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- <div class="relative"></div> -->
+                        <div class="slider single-item">
+                            <div>
+                                <img src="">
+                                <h3>1</h3>
+                            </div>
+                            <div>
+                                <h3>2</h3>
+                            </div>
+                            <div>
+                                <h3>3</h3>
+                            </div>
+                            <div>
+                                <h3>4</h3>
+                            </div>
+                            <div>
+                                <h3>5</h3>
+                            </div>
+                        </div>
+                        <div class="slide-btn">
+                            <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
+                            <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
+                        </div>
+                        <div class="add-wish-heart">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </div>
+                        <div class="sales-text">
+                            <div>
+                                <p>A trip to Jeju Island where...</p>
+                                <div>
+                                    <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
+                                    <span>4.5</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>₩ 190,000 / total</p>
+                                <div>
+                                    <img th:src="@{/images/profile/location.png}" alt="location">
                                     <span>Jeju</span>
                                 </div>
                             </div>
@@ -289,9 +289,9 @@
         </div>
     </div>
 
-    <script src="../js/profile/nabong_owl/jquery.min.js"></script>
-    <script src="../js/profile/nabong_slick/slick.js"></script>
-    <script src="../js/profile/buyerWhisList.js"></script>
+    <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script>
+    <script th:src="@{/js/profile/nabong_slick/slick.js}"></script>
+    <script th:src="@{/js/profile/buyerWhisList.js}"></script>
     
     <script>
         

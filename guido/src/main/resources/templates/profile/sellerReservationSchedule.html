@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/profile/sellerReservationSchedule.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/profile/sellerReservationSchedule.css}">
 
     <!-- 달력 -->
-    <link href='../css/profile/calender_main.css' rel='stylesheet' />
-    <script src='../js/profile/calender.js'></script>
-    <script src="../js/profile/calender_main.js"></script>                   
+    <link th:href='@{/css/profile/calender_main.css}' rel='stylesheet' />
+    <script src='@{/js/profile/calender.js}'></script>
+    <script th:src="@{/js/profile/calender_main.js}"></script>                   
 
     <style>
         header{width: 100%; height: 80px; background-color: #B1D8DA;
@@ -26,8 +26,8 @@
         <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
 
             <div class="guide-banner"> <!-- 프로필 위 가이드 배너 -->
-                <img src="../images/profile/guideBanner.png" alt="guideBanner" id="displayNone"> <!-- 일반 가이드 -->
-                <img src="../images/profile/superGuideBanner.png" alt="superGuideBanner"> <!-- 슈퍼 가이드 -->
+                <img th:src="@{/images/profile/guideBanner.png}" alt="guideBanner" id="displayNone"> <!-- 일반 가이드 -->
+                <img th:src="@{/images/profile/superGuideBanner.png}" alt="superGuideBanner"> <!-- 슈퍼 가이드 -->
             </div>
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
@@ -38,7 +38,7 @@
 
                         <!-- <input type="file" name="userProfileFile" id="userProfileFile"> -->
                         <!-- 프로필 편집 버튼 -->
-                        <!-- <img src="../images/profile/profileEdit.png" alt="profileEditIcon" class="profile-edit-icon">  -->
+                        <!-- <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon">  -->
                     </div>
                     <h2 onclick="location.href='sellerProfile.html'">UserName</h2> <!-- 유저이름 -->
                 </div>
@@ -67,13 +67,13 @@
             
             <div class="seller-btn">
                 <button> <!-- 내 정보 수정 -->
-                    <img src="../images/profile/myInfoEdit.png" alt="">내 정보 수정
+                    <img th:src="@{/images/profile/myInfoEdit.png}" alt="">내 정보 수정
                 </button>
                 <button onclick="location.href='sellerReservationSchedule.html'"> <!-- 예약 일정 확인 --> 
-                    <img src="../images/profile/reservationCalender.png" alt="">예약 일정 확인
+                    <img th:src="@{/images/profile/reservationCalender.png}" alt="">예약 일정 확인
                 </button>
                 <button onclick="location.href='sellerReservation.html'"> <!-- 예약 내역 -->
-                    <img src="../images/profile/reservationList.png" alt="">예약 내역
+                    <img th:src="@{/images/profile/reservationList.png}" alt="">예약 내역
                 </button>
             </div>
         </div> <!-- // profile-box (프로필 + 버튼) -->
