@@ -19,11 +19,11 @@
     <header>
       <!-- 메인 로고 -->
       <div class="logo"><a href="#"><img src="../images/productUpload/guido_test.png" alt="메인 로고"></a></div>
-      <div class="save"><button class="save-btn">저장 후 나가기</button></div>
+      <div class="save"><button tyle="submit" class="save-btn" id="submitBtn">저장 후 나가기</button></div>
 
       
   </header>
- 
+  <form action="/writePetition" method="post" enctype="multipart/form-data">
     <!-- 1페이지 -->
     <main id="page1" class="page current">
       <div class="greeting">
@@ -41,7 +41,7 @@
       <div id="tourDay">
         <div>몇 일 코스인가요?</div><br>
         <div class="input-container">
-          <input type="text" id="inputDay">일 
+          <input type="text" id="inputDay" name="productPackage">일 
         </div>
         <div class="input-container" id="inputWarning">
           <span class="error-message">숫자만 입력해주세요!</span>
@@ -194,49 +194,12 @@
           알려주세요.</span>
       </div>
       <div class="tour-theme">
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/healing.png" alt="힐링 투어">
-          <span>힐링투어</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/kpop.png" alt="K-pop 투어">
-          <span>K-pop 투어</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/gyeongbokgung.png" alt="궁 투어">
-          <span>궁 투어</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/food.png" alt="맛집 투어">
-          <span>맛집 투어</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/history.png" alt="역사 투어">
-          <span>역사 투어</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/eco.png" alt="힐링 투어">
-          <span>에코 투어리즘</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/hanok.png" alt="한옥 체험">
-          <span>한옥 체험</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/hanbok.png" alt="한복 체험">
-          <span>한복 체험</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/market.png" alt="전통 시장 투어">
-          <span>전통 시장 투어</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/ski.png" alt="힐링 투어">
-          <span>스키장 투어</span>
-        </span>
-        <span class="theme-img">
-          <img src="../images/productUpload/theme/surfing.png" alt="힐링 투어">
-          <span>서핑 투어</span>
+        <span th:each="tourTheme : ${tourTheme}" class="theme-img">
+           <input type="checkbox" name="tourTheme" class="hidden2" id="tourTheme${tourTheme.themeCode}" value="">
+          <img th:src="${tourTheme.themeImg}" alt="힐링 투어">
+          <!-- <span th:text="${tourTheme.themeName}">테마이름</span> -->
+         
+          <label th:text="${tourTheme.themeName}" class="theme-img" for="">테마이름</label>
         </span>
       </div>
     </main>
@@ -424,7 +387,7 @@
       </div>
       <div id="titleContainer">
         <div id="writeTitle">상품 이름</div>
-        <input type="text" name="title" id="inputTitle" onkeydown="return event.key != 'Enter';">
+        <input type="text" name="productName" id="inputTitle" onkeydown="return event.key != 'Enter';">
         <div id="titleCountContainer">
           <div id="titleCharCount">0</div>
             <div>/75</div>
@@ -441,7 +404,7 @@
       </div>
       <div id="contentContainer">
         <div id="writeTitle">여행 일정 및 상품 설명 작성</div>
-        <textarea name="content" id="inputContent" cols="30" rows="20" ></textarea>
+        <textarea name="productContent" id="inputContent" cols="30" rows="20" ></textarea>
         <div id="contentCountContainer">
           <div id="contentCharCount">0</div>
             <div>/1000</div>
@@ -480,7 +443,7 @@
         <span class="sub-title">가격에 미포함된 비용을 모두 작성해주세요. 작성하지 않는 비용이 발생할 시 패널티가 부과될 수 있습니다.</span>
       </div>
       <div class="write-add-price">
-        <input type="text" id="addPrice"><button id="addBtn">입력</button>
+        <input type="text" id="addPrice" name="productAddPrice"><button id="addBtn">입력</button>
       </div>
       <span id="addWarning" hidden><i class="fa-sharp fa-solid fa-bomb"></i>이미 입력한 정보입니다.</span>
           <div id="add-container">
@@ -596,9 +559,10 @@
         <div class="progress"></div>
       </div>
       <div class="progress-btn">
-        <button class="back-btn">이전</button>
-        <button class="next-btn">다음</button>
+        <button type="button" class="back-btn">이전</button>
+        <button type="button" class="next-btn">다음</button>
       </div>
+    </form>
     </footer>
   </body>
 

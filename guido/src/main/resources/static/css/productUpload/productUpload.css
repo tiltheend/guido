@@ -427,12 +427,15 @@ button:disabled:hover {
 .add-image2 > * {
   display: flex;
   justify-content: center;
-  border: 1px dashed rgb(176, 176, 176) !important;
+  border: 1px dashed rgb(176, 176, 176);
   margin-top: 20px;
   width: 48%;
   height: 288px;
   align-items: center;
   text-align: center;
+}
+.add-image2 > *:hover {
+  border: 1px solid black;
 }
 #addImage > img {
   width: 16px;
@@ -463,14 +466,15 @@ button:disabled:hover {
 
 #inputTitle {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
+  font-size: 1.2rem;
   /* margin-bottom: 10px; */
   outline: none;
   /* -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; */
   border: 2px solid black;
-  border-radius: 8px;
+  border-radius: 10px;
   transition-property: -ms-transform, -webkit-transform, transform,
     background-color, border-color !important;
   transition-duration: 0.25s !important;
@@ -947,4 +951,10 @@ ul {
   > div
   > span:nth-child(3) {
   width: 10%;
+}
+input[name='tourTheme']:checked + label {
+  border: 2px solid #2db400;
+  background-color: #2db400;
+  color: white;
+  font-weight: bold;
 }

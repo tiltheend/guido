@@ -8,9 +8,10 @@ const progressBar = document.querySelector('.progress');
 const btnContainer = document.getElementById('btnContainer');
 // const tourBox = document.getElementbyClassName('tour-box');
 var body = document.querySelector('body');
-
+// sbmtBtn.classList.add('.hidden');
 const updatePage = () => {
   nextBtn.disabled = false;
+
   progressBar.style.width = ((currentPage + 1) / pages.length) * 100 + '%';
   for (let i = 0; i < pages.length; i++)
     if (i == currentPage) {
@@ -29,7 +30,7 @@ const updatePage = () => {
   }
   if (currentPage == 2) {
     document.querySelector('.text3').innerHTML = '';
-    tourThemesCheck();
+    // tourThemesCheck();
     typing3();
   }
   if (currentPage == 4) {
@@ -227,27 +228,27 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 //3페이지
 const tourThemes = document.querySelectorAll('.theme-img');
-function tourThemesCheck() {
-  nextBtn.disabled = true;
-  tourThemes.forEach(function (tourTheme) {
-    tourTheme.addEventListener('click', function () {
-      // 배경색 초기화
-      tourThemes.forEach(function (theme) {
-        theme.style.backgroundColor = 'white';
-        theme.style.borderColor = '#5555';
-      });
+// function tourThemesCheck() {
+//   nextBtn.disabled = true;
+//   tourThemes.forEach(function (tourTheme) {
+//     tourTheme.addEventListener('click', function () {
+//       // 배경색 초기화
+//       tourThemes.forEach(function (theme) {
+//         theme.style.backgroundColor = 'white';
+//         theme.style.borderColor = '#5555';
+//       });
 
-      // 클릭한 span 요소의 배경색 변경
-      this.style.backgroundColor = 'rgb(185, 215, 218)';
-      this.style.borderColor = 'rgb(59, 119, 124)';
+//       // 클릭한 span 요소의 배경색 변경
+//       this.style.backgroundColor = 'rgb(185, 215, 218)';
+//       this.style.borderColor = 'rgb(59, 119, 124)';
 
-      // nextBtn 활성화
-      nextBtn.disabled = false;
-    });
-  });
-  // nextBtn.disabled = true;
-  // nextBtn.disabled = false;
-}
+//       // nextBtn 활성화
+//       nextBtn.disabled = false;
+//     });
+//   });
+//   // nextBtn.disabled = true;
+//   // nextBtn.disabled = false;
+// }
 // 초기값 설정
 
 // 4페이지
@@ -637,3 +638,5 @@ document.getElementById('feeInput').addEventListener('click', (e) => {
     e.target.style.borderColor = 'lightgray';
   }
 });
+
+//이미지 업로드
