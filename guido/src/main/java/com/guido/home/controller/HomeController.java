@@ -10,5 +10,10 @@ public class HomeController {
 	
 	@Autowired
 	private HomeService service;
+	
+	// 상품 목록 조회
+	public String selectProductList() {
+		return null;
+	}
 
 }
