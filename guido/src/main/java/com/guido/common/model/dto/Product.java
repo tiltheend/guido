@@ -23,7 +23,6 @@ public class Product {
 	private int minTourist;						// 최소 인원
 	
 	private int userNo;								// 작성 회원 번호
-	private int regionCode; 					// 지역 분류 코드
 	private int themeCode; 					// 테마 코드
 	private String productState;			// 상품 상태 (N:정상, B:블라인드, D:삭제)
 	private String createDate;				// 작성 일자
@@ -31,8 +30,7 @@ public class Product {
 	private int viewCount;						// 조회수
 	
 	private String regionName;			// 지역명
+	private String themeName;			// 테마명
 	
 	private List<TourCourse> tourCourse;
-	private List<TourTheme> tourTheme;
-	
 }
