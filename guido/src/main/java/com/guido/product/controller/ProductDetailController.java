@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Review;
@@ -33,7 +34,6 @@ public class ProductDetailController {
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
 		List<Review> reviewList = service.selectReviewList(productNo);
-		
 		
 		model.addAttribute("product", product);
 		model.addAttribute("guide", guide);

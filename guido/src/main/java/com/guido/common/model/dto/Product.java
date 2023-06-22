@@ -34,4 +34,5 @@ public class Product {
 	
 	private List<TourCourse> tourCourse;	// 여행 코스
 	private User user;		// 작성자
+	private List<File> imageList;			// 이미지 리스트
 }

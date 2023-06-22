@@ -143,7 +143,7 @@ body::-webkit-scrollbar-track {
 
 .owl-theme .owl-nav.disabled+.owl-dots{
     position: absolute;
-    top: 90%;
+    top: 93%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -578,28 +578,29 @@ box-shadow:  5px 5px 8px #e2e2e2,
 }
 
 
-/* 프로필 이미지 */
-.detail--img__profile{
-    width: 125px;
+
+.detail--img__profile-href{
+    display: block; 
+    width: 20%;
     overflow: hidden;
     position: relative; 
     margin-right: 20px;
 }
 
-.detail--img__profile::before {
+.detail--img__profile-href::before{
     content: "";
     display: block;
-    padding-top: calc(100%); /* 높이 대비 너비의 비율을 계산하여 적용 */
-  }
+    padding-top: calc(100%);
+}
 
-.detail--img__profile>img{  
+.detail--img__profile-href>img{  
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
+} 
 
 
 /* 프로필 슈퍼가이드 여부 딱지 */
@@ -612,7 +613,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
 
 .detail--content__profile{
     height: 100%;
-    width: 100%;
+    width: 80%;
 }
 
 /* 경력 + 평점 + 후기 div */
@@ -1256,6 +1257,18 @@ a {
         margin: 10px 0 0 10px;
       }
       
+      .detail--img__profile-href{
+        width: 40%;
+      }
+
+      .detail--content__profile{
+        width: 60%;
+    }
+
+    .owl-dots{
+        width: 500px;
+    }
+    
 }
 
 
@@ -1328,3 +1341,16 @@ a {
         margin-top: 5px;
     }
 }
+
+
+@media screen and (max-height : 570px){
+    .owl-theme .owl-nav.disabled+.owl-dots{
+        top: 88%;
+    }
+} 
+
+@media screen and (max-height : 390px){
+    .owl-theme .owl-nav.disabled+.owl-dots{
+        top: 83%;
+    }
+} 

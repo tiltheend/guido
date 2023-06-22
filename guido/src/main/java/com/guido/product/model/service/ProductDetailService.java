@@ -2,6 +2,7 @@ package com.guido.product.model.service;
 
 import java.util.List;
 
+import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Review;
@@ -35,5 +36,12 @@ public interface ProductDetailService {
 	 * @return pr
 	 */
 	PR selectPR(int userNo);
+
+
+//	/** 특정 상품 이미지 목록 조회
+//	 * @param productNo
+//	 * @return imageList
+//	 */
+//	List<File> selectImageList(int productNo);
 
 }

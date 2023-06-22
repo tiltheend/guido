@@ -21,14 +21,21 @@
 
         <section class="detail--top">
             
-            <div class="detail--top__category">
-                <div th:text="*{regionName}">서울</div>
-                <div>></div>
-                <div th:text="*{themeName}">테마명</div>
-                <div>></div>
-                <div th:text="*{productName}">상품명</div>
-            </div>
+            <div>
+                <div class="detail--top__category">
+                    <div th:text="*{regionName}">서울</div>
+                    <div>></div>
+                    <div th:text="*{themeName}">테마명</div>
+                    <div>></div>
+                    <div th:text="*{productName}">상품명</div>
+                </div>
 
+
+                <div class="detail--top__button">
+                    <div id="editBtn">수정</div>
+                    <div id="deleteBtn">삭제</div>
+                </div>
+            </div>
 
             <div class="detail--top__slide">
                 <div class="detail--silde__container">
@@ -39,21 +46,10 @@
 
                                 <div class="loop owl-carousel owl-theme">
     
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁2.jpg}">
+                                    <div class="item" th:each="image : *{imageList}">
+                                        <img class="detail--silde__item-img" th:src="${image.filePath}">
                                     </div>
 
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁1.jpg}">
-                                    </div>
-
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁3.jpg}">
-                                    </div>
-
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁4.jpg}">
-                                    </div>
                                 </div>
 
                             </div>
@@ -80,7 +76,6 @@
     
         <section class="detail--middle">
 
-
             <section  class="detail--left__content">
 
                 <!-- 상세 설명 -->
@@ -88,7 +83,7 @@
 
                     <div class="detail--text__title font1">
                         [[*{productName}]]
-                        <span class="detail--ongoing__title font4" th:if="${productState}=='N'">ongoing</span>
+                        <span class="detail--ongoing__title font4" th:if="*{productState}=='N'">ongoing</span>
                     </div>
 
 
@@ -126,10 +121,10 @@
                     
 
                     <div class="detail--div__collection">
-                        <!-- <div>
-                            <img th:src="/productDetail/duration_icon.svg" class="duration_icon">&nbsp; Duration: 10 hr(s) &nbsp; &nbsp; 
-                            <img th:src="/productDetail/dollar_icon.svg" class="dollar_icon"> 25
-                        </div> -->
+                        <div>
+                            <img th:src="@{/images/productDetail/duration_icon.svg}" class="duration_icon">&nbsp; Duration: 10 hr(s) &nbsp; &nbsp; 
+                            <img th:src="@{/images/productDetail/dollar_icon.svg}" class="dollar_icon"> 25
+                        </div>
                         <div>
                             <img th:src="@{/images/productDetail/language_icon.svg}">
                             <div>Guided language: [[${guide.languageSkill}]]</div>
@@ -166,7 +161,7 @@
                         <div class="detail--container__pr">
             
                             <div class="detail--item__pr" th:if="${pr.abroadExperience}">
-                                <img th:src="@{/images/profile/abroadExperience.png}">
+                                <img th:src="@{/images/userProfile/abroadExperience.png}">
                                 <div class="detail--item__pr-text">I have traveled to : [[${pr.abroadExperience}]]</div>
                             </div>
             
@@ -243,9 +238,9 @@
                     <div class="detail--middle__profile">
                         <div>
                             
-                            <div class="detail--img__profile">
-                                <img th:src="@{/images/productDetail/profile.jpg}">
-                            </div>
+                            <a href="#" class="detail--img__profile-href">
+                                    <img th:src="${guide.profileImage}">
+                            </a>
                             
     
                             <img th:if="${guide.superGuideFl=='Y'}" th:src="@{/images/productDetail/superguide_mark.png}" class="detail--div__super">
@@ -254,9 +249,9 @@
                             <div class="detail--content__profile">
                                 <div th:text="${guide.userName}">회원 이름</div>
                                 <div class="detail--innercontent__profile">
-                                    <div>경력(개월) <span>10</span></div>
-                                    <div>평점 <span>4.8</span></div>
-                                    <div>후기 <span>36</span></div>
+                                    <div th:utext="|경력(${#strings.setSplit(guide.careerDate, ',')[1]}) <span>${#strings.setSplit(guide.careerDate, ',')[0]}</span>|">경력(개월) 숫자</div>
+                                    <div>평점 <span th:text="${guide.starAverage}"></span></div>
+                                    <div>후기 <span th:text="${guide.reviewCount}"></span></div>
                                 </div>
                             </div>
     
@@ -337,137 +332,46 @@
                 <div class="detail--bottom__review" th:if="${#lists.size(reviewList) > 0}">
 
                     <div class="detail--title__review">
-                        Review <span>(36)</span>
+                        Review <span th:utext="|(${#lists.size(reviewList)})|">(리뷰 개수)</span>
                     </div>
             
-                    <div class="detail--item__review">
-                        <div class="detail--item__review-top">
+                    <th:block th:each="review : ${reviewList}">
 
-                            <div>
-                                <div class="detail--item__review-profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="detail--item__review-name">
-                                    John Doe
-                                </div>
+                        <div class="detail--item__review">
+                            <div class="detail--item__review-top">
 
-                                <div class="detail--item__review-top-second">
-                                    
-                                    <span class="detail--item__review-rating">
-                                        ⭐⭐⭐⭐⭐ 
-                                        <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
-                                    </span>
-                                    
-
-                                    <div class="detail--item__review-date">
-                                        2023/05/25
+                                <div>
+                                    <div class="detail--item__review-profile">
+                                        <img th:src="${review.profileImage}">
                                     </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="detail--item__review-bottom">
-                            <div class="detail--item__review-content">
-                                자세한 후기 내용~~~~
-                            </div>
-                        </div>
-
-                    </div>
-                    
-
-
-                    <div class="detail--item__review">
-                        <div class="detail--item__review-top">
-                            <div>
-                                <div class="detail--item__review-profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="detail--item__review-name">
-                                    John Doe
-                                </div>
-
-                                <div class="detail--item__review-top-second">
-                                    
-                                    <span class="detail--item__review-rating">
-                                        ⭐⭐⭐⭐⭐ 
-                                        <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
-                                    </span>
-
-                                    <div class="detail--item__review-date">
-                                        2023/05/25
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-        
-                        <div class="detail--item__review-bottom">
-                            <div class="detail--item__review-content">
-                                자세한 후기 내용~~~~
-                            </div>
-    
-                            <div class="detail--item__review--reply">
-                                <img th:src="@{/images/productDetail/reply.png}">
-                                <div>후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~
-                                    후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~
-                                    후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="detail--item__review">
-                        <div class="detail--item__review-top">
-                            <div>
-                                <div class="detail--item__review-profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="detail--item__review-name">
-                                    John Doe
                                 </div>
                                 
-                                <div class="detail--item__review-top-second">
-                                    
-                                    <span class="detail--item__review-rating">
-                                        ⭐⭐⭐⭐⭐ 
-                                        <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
-                                    </span>
+                                <div>
+                                    <div class="detail--item__review-name" th:text="${review.userName}">작성자 이름</div>
 
-                                    <div class="detail--item__review-date">
-                                        2023/05/25
+                                    <div class="detail--item__review-top-second">
+                                        
+                                        <span class="detail--item__review-rating">
+                                            ⭐⭐⭐⭐⭐ 
+                                            <span th:style=" 'width: ' + ${reivew.reviewStars} + '%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
+                                        </span>
+                                        
+
+                                        <div class="detail--item__review-date" th:text="${review.createDate}">작성일자</div>
+
                                     </div>
-
                                 </div>
-
                             </div>
-                        </div>
-        
-    
+
+
                             <div class="detail--item__review-bottom">
-                                <div class="detail--item__review-content">
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                </div>
-
+                                <div class="detail--item__review-content" th:text="${review.reviewMessage}">자세한 후기 내용</div>
                             </div>
-                    </div>
+
+                        </div>
+                        
+                    </th:block>
+
                     
                     <button type="button" class="detail--item__review-button">show more reviews</button>
 

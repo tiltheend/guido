@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Review;
@@ -24,5 +25,6 @@ public interface ProductDetailMapper {
 
 	// 자기소개 조회
 	PR selectPR(int userNo);
+
 	
 }
