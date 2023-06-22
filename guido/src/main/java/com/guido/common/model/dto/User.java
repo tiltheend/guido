@@ -33,4 +33,8 @@ public class User {
 	private String confirmationNo; // 확인증 번호
 	private String superGuideFl; // 슈퍼가이드 여부(N: 일반가이드, Y: 슈퍼가이드)
 	private PR pr; // 가이드 자기소개
+	
+	private int reviewCount;	// 받은 리뷰 개수
+	private String starAverage;		// 평균 별점
+	private String careerDate;		// 경력
 }

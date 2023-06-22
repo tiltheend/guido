@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/profile/nabong_owl/nabongPurchase_owl.css"> <!-- owl 슬라이드 -->
-    <link rel="stylesheet" href="../css/profile/buyerProfile.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/profile/nabong_owl/nabongPurchase_owl.css}"> <!-- owl 슬라이드 -->
+    <link rel="stylesheet" th:href="@{/css/profile/buyerProfile.css}">
     
     <!-- owl 슬라이드 -->
-    <script src="../js/profile/nabong_owl/jquery.min.js"></script>
-    <script src="../js/profile/nabong_owl/owl.carousel.js"></script>
-    <script src="../js/profile/nabong_owl/owl.carousel.min.js"></script>
+    <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script>
+    <script th:src="@{/js/profile/nabong_owl/owl.carousel.js}"></script>
+    <script th:src="@{/js/profile/nabong_owl/owl.carousel.min.js}"></script>
 
-    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
-
+    <script th:src="@{https://kit.fontawesome.com/f7459b8054.js}" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" th:href="@{/css/main.css}"> -->
     <style>
         header{width: 100%; height: 80px; background-color: #B1D8DA;
         position:absolute; top: 0;}
@@ -25,42 +25,45 @@
     <header>임시헤더</header>
 
     <div class="buyer-profile-top">
-        <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
+        <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
 
             <div class="guide-banner"> <!-- 프로필 위 투어리스트 배너 -->
-                <img src="../images/profile/touristBanner.png" alt="guideBanner"> <!-- 일반 가이드 -->
+                <img th:src="@{/images/profile/touristBanner.png}" alt="guideBanner"> <!-- 일반 가이드 -->
             </div>
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
-
-                <div class="profile-img-box"> <!-- 프로필+이름 -->
+                
+                <form class="profile-img-box" th:action="@{/profile/profileEdit}" method="POST" enctype="multipart/form-data"> <!-- 프로필+이름 -->
+                    <button class="profile-edit-btn">프로필 변경</button>
+                    <img src="../images/profile/profile_delete.png" alt="profile_delete" class="profile-delete">
                     <div class="profile-img">
-                        <img src="" alt=""> <!-- 프로필 사진 칸 -->
+                        <img th:unless="*{profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                        <img th:if="*{profileImage}" th:src="*{profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
 
-                        <input type="file" name="userProfileFile" id="userProfileFile">
+                        <input type="file" name="profileImage" id="userProfileFile" accept="image/*">
                         <!-- 프로필 편집 버튼 -->
-                        <img src="../images/profile/profileEdit.png" alt="profileEditIcon" class="profile-edit-icon"> 
+                        <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
                     </div>
-                    <h2 onclick="location.href='buyerProfile.html'">UserName</h2> <!-- 유저이름 -->
-                </div>
+                    <h2 onclick="location.href='/profile/mypage/T'" th:text="*{userName}">UserName</h2> <!-- 유저이름 -->
+                </form>
 
                 <div class="user-email"> <!-- 유저 이메일 -->
-                    <p>tiltheend@gmail.com</p>
+                    <p th:text="*{userEmail}">tiltheend@gmail.com</p>
                 </div>
 
             </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
             
             <div class="seller-btn">
                 <button> <!-- 내 정보 수정 -->
-                    <img src="../images/profile/myInfoEdit.png" alt="">
+                    <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
                     <div>내 정보 수정</div>
                 </button>
-                <button onclick="location.href='buyerReservation.html'"> <!-- 예약 관리 --> 
-                    <img src="../images/profile/buyerReservation.png" alt="">
+                <button onclick="location.href='/profile/touristReservation'"> <!-- 예약 관리 --> 
+                    <img th:src="@{/images/profile/buyerReservation.png}" alt="">
                     <div>예약 관리</div> 
                 </button>
-                <button onclick="location.href='buyerWhisList.html'"> <!-- 위시리스트 -->
-                    <img src="../images/profile/buyerWishList.png" alt="">
+                <button onclick="location.href='/profile/touristWishList'"> <!-- 위시리스트 -->
+                    <img th:src="@{/images/profile/buyerWishList.png}" alt="">
                     <div>위시 리스트</div>
                 </button>
             </div>
@@ -97,10 +100,10 @@
                         </div>
                     </div>
                     <div class="Previous">
-                        <img src="../images/profile/purchaseL-arrow.png" alt="purchaseL">
+                        <img th:src="@{/images/profile/purchaseL-arrow.png}" alt="purchaseL">
                     </div>
                     <div class="Next">
-                        <img src="../images/profile/purchaseR-arrow.png" alt="purchaseR">
+                        <img th:src="@{/images/profile/purchaseR-arrow.png}" alt="purchaseR">
                     </div>
                 </section>
 
@@ -284,7 +287,7 @@
                             </li>
                             <li class="seller-reply">
                                 <div> <!-- 답글 200 글자 제한 -->
-                                    <img src="../images/profile/replyIcon.png" alt="replyIcon">
+                                    <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
                                     <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200">안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!</textarea>
                                 </div>
                                 <div class="reply-edit">
@@ -294,7 +297,7 @@
                             </li>
                             <li class="seller-reply-wirte"> <!-- 리뷰 작성 박스 -->
                                 <div>
-                                    <img src="../images/profile/replyIcon.png" alt="replyIcon">
+                                    <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
                                     <textarea name="sellerReplyContent" id="sellerReplyContent"></textarea>
                                 </div>
                                 <div>
@@ -311,6 +314,8 @@
 
         </div>
     </div>
+
+    <!-- <th:block th:replace="~{common/footer}"></th:block> -->
 
     <script>
         $(document).ready(function() {
@@ -352,7 +357,19 @@
         }) 
 
     </script>
-    <!-- <script src="../js/profile/sellerProfile.js"></script>                    -->
-    <script src="../js/profile/buyerProfile.js"></script>                   
+    <script th:src="@{/js/profile/profileEdit.js}"></script>                   
+    <script th:src="@{/js/profile/buyerProfile.js}"></script>   
+
+    <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
+    <script th:inline="javascript">
+        // const message='[[${message}]]';
+
+        /* Natural Template */
+        const message = /*[[${message}]]*/  "전달 받은 message";
+        // 타임리프 해석    값(자료형이 알아서 해석)     사라짐(설명)
+        if(message != null){
+            alert(message);
+        }
+    </script>             
 </body>
 </html>

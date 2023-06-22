@@ -16,6 +16,7 @@ public class Product {
 	private int productNo;				// 상품 번호
 	private String productName;			// 상품명
 	private int productPackage;			// 상품 패키지(1.당일 N. N박N-1일)
+	private int tourDuration;			// 1Day 투어 진행시간
 	private String productContent; 		// 상품 상세 내용
 	private int productPrice;			// 상품 가격
 	private String productAddPrice;		// 추가 비용
@@ -34,5 +35,7 @@ public class Product {
 	
 	private String reviewStars;			// 리뷰 평점
 	
-//	private List<TourCourse> tourCourse;
+	private List<TourCourse> tourCourse;	// 여행 코스
+	private User user;		// 작성자
+	private List<File> imageList;			// 이미지 리스트
 }

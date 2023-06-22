@@ -8,9 +8,10 @@ const progressBar = document.querySelector('.progress');
 const btnContainer = document.getElementById('btnContainer');
 // const tourBox = document.getElementbyClassName('tour-box');
 var body = document.querySelector('body');
-
+// sbmtBtn.classList.add('.hidden');
 const updatePage = () => {
   nextBtn.disabled = false;
+
   progressBar.style.width = ((currentPage + 1) / pages.length) * 100 + '%';
   for (let i = 0; i < pages.length; i++)
     if (i == currentPage) {
@@ -29,7 +30,7 @@ const updatePage = () => {
   }
   if (currentPage == 2) {
     document.querySelector('.text3').innerHTML = '';
-    tourThemesCheck();
+    // tourThemesCheck();
     typing3();
   }
   if (currentPage == 4) {
@@ -61,6 +62,15 @@ nextBtn.addEventListener('click', () => {
 
 updatePage();
 
+// 당일투어 클릭 시 productyPackage = 1 (value = 1 로 지정)
+const onedayTourValue = document.querySelector('#onedayTour');
+function updateTourValue() {
+  onedayTourValue.value = '1';
+  if (input.value != 0) {
+    onedayTourValue.value = '0';
+  }
+}
+
 var selectedElement = null;
 
 function changeBackgroundColor(element) {
@@ -85,7 +95,9 @@ function changeBackgroundColor(element) {
 }
 const tourTypes = document.querySelectorAll('.tour-type');
 const inputTourDay = document.querySelector('#tourDay');
+const inputTourTime = document.querySelector('#tourTime');
 const inputDay = document.querySelector('#inputDay');
+const inputTime = document.querySelector('#inputTime');
 const inputWarning = document.querySelector('#inputWarning');
 // 초기값 설정
 
@@ -115,12 +127,27 @@ tourTypes.forEach(function (tourType) {
       inputTourDay.style.display = 'none';
       nextBtn.disabled = false;
     }
+
+    if (this.innerText === '당일투어') {
+      inputTourTime.style.display = 'block';
+
+      // Check if the input value is not empty
+      if (inputTime.value !== '') {
+        nextBtn.disabled = false;
+      } else {
+        nextBtn.disabled = true;
+      }
+    } else {
+      inputTourTime.style.display = 'none';
+      nextBtn.disabled = false;
+    }
   });
 
   nextBtn.disabled = true;
 });
 inputDay.addEventListener('input', function () {
   if (this.value !== '') {
+    inputTime.value = '';
     inputDay.addEventListener('input', function () {
       const value = inputDay.value;
 
@@ -134,6 +161,29 @@ inputDay.addEventListener('input', function () {
         inputWarning.style.display = 'none';
         inputDay.style.borderColor = 'white';
         inputDay.style.backgroundColor = 'white';
+      }
+    });
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.disabled = true;
+  }
+});
+inputTime.addEventListener('input', function () {
+  if (this.value !== '') {
+    inputDay.value = '';
+    inputTime.addEventListener('input', function () {
+      const value = inputTime.value;
+
+      if (!value || isNaN(value)) {
+        inputTime.style.borderColor = 'red';
+        inputTime.style.backgroundColor = 'rgb(255,232,232)';
+        inputWarning.style.display = 'flex';
+        nextBtn.disabled = true;
+      } else {
+        inputTime.style.backgroundColor = '';
+        inputWarning.style.display = 'none';
+        inputTime.style.borderColor = 'white';
+        inputTime.style.backgroundColor = 'white';
       }
     });
     nextBtn.disabled = false;
@@ -227,27 +277,27 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 //3페이지
 const tourThemes = document.querySelectorAll('.theme-img');
-function tourThemesCheck() {
-  nextBtn.disabled = true;
-  tourThemes.forEach(function (tourTheme) {
-    tourTheme.addEventListener('click', function () {
-      // 배경색 초기화
-      tourThemes.forEach(function (theme) {
-        theme.style.backgroundColor = 'white';
-        theme.style.borderColor = '#5555';
-      });
+// function tourThemesCheck() {
+//   nextBtn.disabled = true;
+//   tourThemes.forEach(function (tourTheme) {
+//     tourTheme.addEventListener('click', function () {
+//       // 배경색 초기화
+//       tourThemes.forEach(function (theme) {
+//         theme.style.backgroundColor = 'white';
+//         theme.style.borderColor = '#5555';
+//       });
 
-      // 클릭한 span 요소의 배경색 변경
-      this.style.backgroundColor = 'rgb(185, 215, 218)';
-      this.style.borderColor = 'rgb(59, 119, 124)';
+//       // 클릭한 span 요소의 배경색 변경
+//       this.style.backgroundColor = 'rgb(185, 215, 218)';
+//       this.style.borderColor = 'rgb(59, 119, 124)';
 
-      // nextBtn 활성화
-      nextBtn.disabled = false;
-    });
-  });
-  // nextBtn.disabled = true;
-  // nextBtn.disabled = false;
-}
+//       // nextBtn 활성화
+//       nextBtn.disabled = false;
+//     });
+//   });
+//   // nextBtn.disabled = true;
+//   // nextBtn.disabled = false;
+// }
 // 초기값 설정
 
 // 4페이지
@@ -506,6 +556,10 @@ function addElement() {
     var newElement = document.createElement('label');
     newElement.classList.add('added-element');
 
+    var newInputElement = document.createElement('input');
+    newInputElement.setAttribute('name', 'productAddPrice');
+    newInputElement.setAttribute('type', 'hidden');
+
     var deleteIcon = document.createElement('i');
     deleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-xmark');
     deleteIcon.style.color = '#000000';
@@ -518,7 +572,10 @@ function addElement() {
     newElement.innerHTML = value;
     newElement.appendChild(deleteIcon);
 
+    newInputElement.value = value;
+
     container.appendChild(newElement);
+    container.appendChild(newInputElement);
 
     input.value = '';
   }
@@ -559,8 +616,6 @@ window.onclick = function (event) {
 
 //숫자 이외 텍스트(문자포함) 막기
 
-feeInput.value = '₩35,000';
-
 // $('#feeInput').on('keydown', (e) => {
 //   let keyCode = e.keyCode || e.which;
 //   let allowedKeys = [8, 37, 39]; // 백스페이스(8), 왼쪽 화살표(37), 오른쪽 화살표(39)
@@ -575,6 +630,22 @@ feeInput.value = '₩35,000';
 //     e.preventDefault();
 //   }
 // });
+$('#inputDay').on('input', (e) => {
+  let v = e.currentTarget.value;
+  if (/[ㄱ-힣]+/.test(v)) {
+    e.currentTarget.value = v.replaceAll(/[ㄱ-힣]+/g, '');
+  } else {
+    e.currentTarget.value = v.replace(/[a-zA-Z]+|[^\w\s]|_/g, '');
+  }
+});
+$('#inputTime').on('input', (e) => {
+  let v = e.currentTarget.value;
+  if (/[ㄱ-힣]+/.test(v)) {
+    e.currentTarget.value = v.replaceAll(/[ㄱ-힣]+/g, '');
+  } else {
+    e.currentTarget.value = v.replace(/[a-zA-Z]+|[^\w\s]|_/g, '');
+  }
+});
 
 $('#feeInput').on('input', (e) => {
   let v = e.currentTarget.value;
@@ -593,8 +664,7 @@ function addCommas(input) {
     formattedValue = ',' + value.slice(-3) + formattedValue;
     value = value.slice(0, -3);
   }
-
-  formattedValue = value + formattedValue;
+  formattedValue = '₩' + value + formattedValue;
   input.value = formattedValue;
 }
 
@@ -626,8 +696,8 @@ document.addEventListener('click', (e) => {
     input.style.backgroundColor = '';
   }
 });
-
-document.getElementById('feeInput').addEventListener('click', (e) => {
+const feeInput = document.getElementById('feeInput');
+feeInput.addEventListener('click', (e) => {
   var input = document.getElementById('feeInput');
   var currentColor = input.style.borderColor;
 
@@ -637,3 +707,13 @@ document.getElementById('feeInput').addEventListener('click', (e) => {
     e.target.style.borderColor = 'lightgray';
   }
 });
+
+// document.getElementsByName('productPrice')[0].value = feeInput.value.replace(
+//   /[^0-9]/g,
+//   ''
+// ); 제출할 때 한번만 실행
+
+// .replace(/[^0-9]/g, '');
+
+// "document.getElementsByName('productPrice')[0].value" = extractedNumber;
+//이미지 업로드
