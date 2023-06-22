@@ -28,16 +28,12 @@ public class HomeController {
 
 		// 상품 목록 조회
 		List<Product> productList = service.selectProductList();
-
 		// 인기 여행지 목록 조회
 		List<Product> popularProductList = service.selectPopularProductList();
-		
 		// 슈퍼가이드 상품 목록 조회
 		List<Product> superProductList = service.selectSuperProductList();
-		
 		// 추천 상품 목록 조회
 		List<Product> recommProductList = service.selectRecommProductList();
-		
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("popularProductList", popularProductList);
@@ -45,6 +41,7 @@ public class HomeController {
 		model.addAttribute("recommProductList", recommProductList);
 		
 //		System.out.println(productList);
+		
 		
 		return "common/index";
 	}

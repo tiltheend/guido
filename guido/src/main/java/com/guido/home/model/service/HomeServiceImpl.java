@@ -20,47 +20,31 @@ public class HomeServiceImpl implements HomeService {
 	public List<Map<String, Object>> selectThemeTypeList() {
 		return mapper.selectThemeTypeList();
 	}
-
+	
 	
 	
 	// 상품 목록 조회
 	@Override
 	public List<Product> selectProductList() {
-		
-		// 1. 특정 테마의 삭제되지 않은 상품 수 조회
-		int listCount = mapper.getListCount();
-		
-		// 2. 특정 테마의 게시글 목록 조회
-		List<Product> productList = mapper.selectProductList();
-		
-		return productList;
+		return mapper.selectProductList();
 	}
 
 	// 인기 여행지 목록 조회
 	@Override
 	public List<Product> selectPopularProductList() {
-		
-		List<Product> popularProductList = mapper.selectPopularProductList();
-		
-		return popularProductList;
+		return mapper.selectPopularProductList();
 	}
 
 	// 슈퍼가이드 상품 목록 조회
 	@Override
 	public List<Product> selectSuperProductList() {
-		
-		List<Product> superProductList = mapper.selectSuperProductList();
-		
-		return superProductList;
+		return mapper.selectSuperProductList();
 	}
 
 	// 추천 상품 목록 조회
 	@Override
 	public List<Product> selectRecommProductList() {
-		
-		List<Product> recommProductList = mapper.selectRecommProductList();
-		
-		return recommProductList;
+		return mapper.selectRecommProductList();
 	}
 	
 	

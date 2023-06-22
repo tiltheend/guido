@@ -36,6 +36,8 @@ public class Product {
 	private String reviewStars;			// 리뷰 평점
 	
 	private List<TourCourse> tourCourse;	// 여행 코스
-	private User user;		// 작성자
+	private User user;						// 작성자
 	private List<File> imageList;			// 이미지 리스트
+	
+	private String superGuideFl; 		// 슈퍼가이드 여부(N: 일반가이드, Y: 슈퍼가이드)
 }

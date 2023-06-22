@@ -15,7 +15,7 @@ public interface HomeMapper {
 
 	
 	// 특정 테마의 삭제되지 않은 상품 수 조회
-	int getListCount();
+//	int getListCount();
 
 	// 상품 목록 조회
 	List<Product> selectProductList();
