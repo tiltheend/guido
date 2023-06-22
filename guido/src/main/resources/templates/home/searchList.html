@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,6 @@
     <title>Guido</title>
 
     <!-- css -->
-    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/searchList.css}">
 
     <!-- owl 슬라이드 -->
@@ -29,7 +28,18 @@
     <th:block th:replace="~{common/header}"></th:block>
 
     <!-- ***** 카테고리 아이콘 ***** -->
-    <div class="categori-icon-box">
+    <div class="categori-icon-box-container">
+        <div class="categori-icon-box">
+            <div th:each="themeType : ${application.themeTypeList}">
+                <a th:href="@{/common/index/{themeCode}(themeCode=${themeType.THEME_CODE})}">
+                <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
+                    <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
+                    <button th:text="${themeType.THEME_NAME}">테마 이름</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="categori-icon-box">
         <div>
             <img th:src="@{images/theme/healing.png}" alt="힐링 투어">
             <button>힐링 투어</button>
@@ -74,7 +84,7 @@
             <img th:src="@{images/theme/surfing.png}" alt="서핑 투어">
             <button>서핑 투어</button>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -416,13 +426,12 @@
         });
     </script>
     
+    <!-- 게시글 슬라이드 -->
+    <script th:src="@{/js/main/slide/slick.js}"></script>
     <script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
     <script th:src="@{/libraries/assets/js/app.js}"></script>
-    <script th:src="@{/js/calendar.js}"></script>
     
-    <script th:src="@{/js/profile/nabong_slick/slick.js}"></script>
-    
-    <script th:src="@{/js/header.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
+    <!-- js -->
+    <script th:src="@{/js/main/main.js}"></script>
 </body>
 </html>

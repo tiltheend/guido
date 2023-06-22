@@ -15,21 +15,27 @@
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
 </head>
-<body>
-
+<body th:object="${product}">
 
     <div class="detail--container">
 
         <section class="detail--top">
             
-            <div class="detail--top__category">
-                <div>서울</div>
-                <div>></div>
-                <div>한국의 궁 투어</div>
-                <div>></div>
-                <div>[창덕궁 달빛기행] 한국의 아름다움을 느끼며 떠나는 창덕궁 야간 투어</div>
-            </div>
+            <div>
+                <div class="detail--top__category">
+                    <div th:text="*{regionName}">서울</div>
+                    <div>></div>
+                    <div th:text="*{themeName}">테마명</div>
+                    <div>></div>
+                    <div th:text="*{productName}">상품명</div>
+                </div>
 
+
+                <div class="detail--top__button">
+                    <div id="editBtn">수정</div>
+                    <div id="deleteBtn">삭제</div>
+                </div>
+            </div>
 
             <div class="detail--top__slide">
                 <div class="detail--silde__container">
@@ -40,21 +46,10 @@
 
                                 <div class="loop owl-carousel owl-theme">
     
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁2.jpg}">
+                                    <div class="item" th:each="image : *{imageList}">
+                                        <img class="detail--silde__item-img" th:src="${image.filePath}">
                                     </div>
 
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁1.jpg}">
-                                    </div>
-
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁3.jpg}">
-                                    </div>
-
-                                    <div class="item">
-                                        <img class="detail--silde__item-img" th:src="@{/images/productDetail/경복궁4.jpg}">
-                                    </div>
                                 </div>
 
                             </div>
@@ -81,15 +76,14 @@
     
         <section class="detail--middle">
 
-
             <section  class="detail--left__content">
 
                 <!-- 상세 설명 -->
                 <div class="detail--middle__detail">
 
                     <div class="detail--text__title font1">
-                        [Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea
-                        <span class="detail--ongoing__title font4">ongoing</span>
+                        [[*{productName}]]
+                        <span class="detail--ongoing__title font4" th:if="*{productState}=='N'">ongoing</span>
                     </div>
 
 
@@ -103,12 +97,10 @@
 
                     </div>
 
-
-
                     <div class="detail--top__like">
                         <div class="detail--div__location">
                             <img th:src="@{/images/productDetail/location_icon.svg}">
-                            <div> Seoul - Changdeokgung Palace </div>
+                            <div> [[*{regionName}]] </div>
                         </div>
 
                         <!-- <label class="container">
@@ -129,13 +121,13 @@
                     
 
                     <div class="detail--div__collection">
-                        <!-- <div>
-                            <img th:src="/productDetail/duration_icon.svg" class="duration_icon">&nbsp; Duration: 10 hr(s) &nbsp; &nbsp; 
-                            <img th:src="/productDetail/dollar_icon.svg" class="dollar_icon"> 25
-                        </div> -->
+                        <div>
+                            <img th:src="@{/images/productDetail/duration_icon.svg}" class="duration_icon">&nbsp; Duration: 10 hr(s) &nbsp; &nbsp; 
+                            <img th:src="@{/images/productDetail/dollar_icon.svg}" class="dollar_icon"> 25
+                        </div>
                         <div>
                             <img th:src="@{/images/productDetail/language_icon.svg}">
-                            <div>Guided language: 日本語/中文</div>
+                            <div>Guided language: [[${guide.languageSkill}]]</div>
                         </div>
 
                         <div>
@@ -145,7 +137,7 @@
                     </div>
 
 
-                    <div class="detail--div__shortdescription">
+                    <!-- <div class="detail--div__shortdescription">
                         - Changdeokgung Moonlight Tour is a program where you can watch various parts of the palace with a professional commentator 
                         at Changdeokgung Palace, where greenery is harmonized under the silver moonlight, and commentary on each pavilion and 
                         traditional art performance.
@@ -154,78 +146,121 @@
                         Heejeong Party, Nakseonjae Pass, Sangryangjeong Pavilion, Buyongji Gate, Bullomun Gate, Aeryeonjeong Pavilion, Yeongyeongdang, and Jugwon Forest Road, giving special impression that can only be experienced in Changdeokgung Moonlight Trip.
                     </div>
                     
-
+                    
+                -->
 
                     
-                    <div class="detail--divisionline" id="section1"></div>
+                    <div class="detail--divisionline" id="section1" style="margin-top: 0;"></div>
             
     
                     <!-- 자기소개 -->
                     <div class="detail--middle__pr">
                         <div class="detail--title__pr">About Guide!</div>
 
-
-                        <div class="detail--middle__profile">
-                            <div>
-                                
-                                <div class="detail--img__profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                                
-    
-                                <img th:src="@{/images/productDetail/superguide_mark.png}" class="detail--div__super">
-    
-                                <div class="detail--content__profile">
-                                    <div>John Doe</div>
-                                    <div class="detail--innercontent__profile">
-                                        <div>경력(개월) <span>10</span></div>
-                                        <div>평점 <span>4.8</span></div>
-                                        <div>후기 <span>36</span></div>
-                                    </div>
-                                </div>
-    
-                            </div>
-    
-                            <div class="detail--ect__profile">
-                                <button id="contactGuide">가이드에게 연락하기</button>
-                                <div class="detail--div__warning"><span>!</span> 안전한 결제를 위해 가이두 웹사이트 외부에서 <br>
-                                    송금하거나 대화를 나누지 마세요.</div>
-                            </div>
-                        </div>
-
             
                         <div class="detail--container__pr">
             
-                            <div class="detail--item__pr">
-                                <img th:src="@{http://via.placeholder.com/30x30}">
-                                <div class="detail--item__pr-text">I have traveled to : Valencia, Spain</div>
+                            <div class="detail--item__pr" th:if="${pr.abroadExperience}">
+                                <img th:src="@{/images/userProfile/abroadExperience.png}">
+                                <div class="detail--item__pr-text">I have traveled to : [[${pr.abroadExperience}]]</div>
                             </div>
             
-                            <div class="detail--item__pr">
-                                <img th:src="@{http://via.placeholder.com/30x30}">
-                                <div class="detail--item__pr-text">Speaks English, French</div>
+                            <div class="detail--item__pr" th:if="${pr.subLang}">
+                                <img th:src="@{/images/profile/subLang.png}">
+                                <div class="detail--item__pr-text">Speaks [[${pr.subLang}]]</div>
                             </div>
             
-                            <div class="detail--item__pr">
-                                <img th:src="@{http://via.placeholder.com/30x30}">
-                                <div class="detail--item__pr-text">Favorite song : Les copains d'abord - Georges Brassens</div>
+                            <div class="detail--item__pr" th:if="${pr.favoriteSong}">
+                                <img th:src="@{/images/profile/favoriteSong.png}">
+                                <div class="detail--item__pr-text">Favorite song : [[${pr.favoriteSong}]]</div>
                             </div>
             
-                            <div class="detail--item__pr">
-                                <img th:src="@{http://via.placeholder.com/30x30}">
-                                <div class="detail--item__pr-text">I'm obsessed with: Cutting fruits vegetables in my recipes</div>
+                            <div class="detail--item__pr" th:if="${pr.dopamine}">
+                                <img th:src="@{/images/profile/dopamine.png}">
+                                <div class="detail--item__pr-text">My dopamine: [[${pr.dopamine}]]</div>
                             </div>
             
-                            <div class="detail--item__pr">
-                                <img th:src="@{http://via.placeholder.com/30x30}">
-                                <div class="detail--item__pr-text">Born in the 80s</div>
+                            <div class="detail--item__pr" th:if="${pr.birthYear}">
+                                <img th:src="@{/images/profile/birthDay.png}">
+                                <div class="detail--item__pr-text">Born in the [[${pr.birthYear}]]</div>
                             </div>
             
-                            <div class="detail--item__pr">
-                                <img th:src="@{http://via.placeholder.com/30x30}">
-                                <div class="detail--item__pr-text">My work: Interior architect</div>
+                            <div class="detail--item__pr" th:if="${pr.job}">
+                                <img th:src="@{/images/profile/job.png}">
+                                <div class="detail--item__pr-text">My work: [[${pr.job}]]</div>
                             </div>
             
+                            <div class="detail--item__pr" th:if="${pr.pets}">
+                                <img th:src="@{/images/profile/pets.png}">
+                                <div class="detail--item__pr-text">Live with [[${pr.pets}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.hobby}">
+                                <img th:src="@{/images/profile/hobby.png}">
+                                <div class="detail--item__pr-text">My hobby: [[${pr.hobby}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.mbti}">
+                                <img th:src="@{/images/profile/MBTI.png}">
+                                <div class="detail--item__pr-text">MBTI is: [[${pr.mbti}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.strength}">
+                                <img th:src="@{/images/profile/strength.png}">
+                                <div class="detail--item__pr-text">[[${pr.strength}]]</div>
+                            </div>
+                            
+                            <div class="detail--item__pr" th:if="${pr.tmi}">
+                                <img th:src="@{/images/profile/TMI.png}">
+                                <div class="detail--item__pr-text">TMI is [[${pr.tmi}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.major}">
+                                <img th:src="@{/images/profile/major.png}">
+                                <div class="detail--item__pr-text">I majored in [[${pr.major}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.uselessTalent}">
+                                <img th:src="@{/images/profile/uselessTalent.png}">
+                                <div class="detail--item__pr-text">[[${pr.uselessTalent}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.capList}">
+                                <img th:src="@{/images/profile/capList.png}">
+                                <div class="detail--item__pr-text">[[${pr.capList}]] as guide</div>
+                            </div>
+            
+                        </div>
+                    </div>
+
+
+
+                    <div class="detail--middle__profile">
+                        <div>
+                            
+                            <a href="#" class="detail--img__profile-href">
+                                    <img th:src="${guide.profileImage}">
+                            </a>
+                            
+    
+                            <img th:if="${guide.superGuideFl=='Y'}" th:src="@{/images/productDetail/superguide_mark.png}" class="detail--div__super">
+                            <img th:if="${guide.superGuideFl=='N'}" th:src="@{/images/productDetail/guide_mark.png}" class="detail--div__super">
+    
+                            <div class="detail--content__profile">
+                                <div th:text="${guide.userName}">회원 이름</div>
+                                <div class="detail--innercontent__profile">
+                                    <div th:utext="|경력(${#strings.setSplit(guide.careerDate, ',')[1]}) <span>${#strings.setSplit(guide.careerDate, ',')[0]}</span>|">경력(개월) 숫자</div>
+                                    <div>평점 <span th:text="${guide.starAverage}"></span></div>
+                                    <div>후기 <span th:text="${guide.reviewCount}"></span></div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="detail--ect__profile">
+                            <button id="contactGuide">가이드에게 연락하기</button>
+                            <div class="detail--div__warning"><span>!</span> 안전한 결제를 위해 가이두 웹사이트 외부에서 <br>
+                                송금하거나 대화를 나누지 마세요.</div>
                         </div>
                     </div>
 
@@ -234,25 +269,8 @@
                     <div class="detail--divisionline" id="section2"></div>
 
                     <div class="detail--title__detail">Tour Detail</div>
-                    <div class="detail--text__detail">
-                        [행사내용]
-                        가. 행사기간 : 4. 13.(목) ~ 6. 4.(일) 매주 목~일요일
-                        ※ 4.29.(토)～4.30.(일), 5.11.(목)∼5.12.(금) 제외
-                        
-                        나. 행사시간 : 1부 19:20 2부 20:00 *100분간
-                        다. 행사내용 : 창덕궁 야간탐방 및 전통예술공연 관람
-                        
-                        라. 참가인원 : 1일 150명 / 참가비 : 1인 30,000원
-                        
-                        마. 프로그램 소개
-                        ㅇ 야간기행 : 해설사의 이야기를 통해 창덕궁의 역사·문화·조경을 자연스럽게 체험할 수 있는 야간 기행
-                        ㅇ 각 장소별 특화된 전통예술공연 진행(상량정, 영화당, 연경당)
-                        ㅇ 안내해설 : 달빛기행을 위해 특화된 안내해설 제공
-                        ㅇ 관람동선 : 돈화문 → 진선문 → 인정전 → 희정당 → 낙선재 → 상량정 → 부용지→ 애련정과 애련지 → 연경당 → 후원 숲길 → 돈화문 
-                        
-                        바. 주최/주관 : 문화재청 궁능유적본부/ 한국문화재재단
-        
-                        사. 인터넷 예매,전화예매문의: 티켓링크 고객센터 1588-7890 / 프로그램 관련 문의: 1522-2295
+                    <div class="detail--text__detail" th:text="*{productContent}">
+                        상품 상세 내용
                     </div>
                 </div>
 
@@ -289,7 +307,7 @@
                     <div class="detail--description__precaution">
                         <ul>
                             <!-- 출발 인원 상품마다 다름!!!!!!  -->
-                            <li>본 투어의 최소 출발 인원은 n 명이며, 최소 출발 인원 미달 시 출발 3 일 전에 이메일을 통해 투어 취소를 안내드립니다.</li>
+                            <li>본 투어의 최소 출발 인원은 [[*{minTourist}]]명이며, 최소 출발 인원 미달 시 출발 3 일 전에 이메일을 통해 투어 취소를 안내드립니다.</li>
                             <li>태풍, 눈보라 등의 악천후의 경우 출발 1일 전 (현지 시간 18:00)에 투어 출발 가능 여부가 결정되며 이메일을 통해 안내드립니다.</li>
                             <li>일정에 차질이 생기지 않도록 지정된 장소에 10분 전까지 도착해주시기 바랍니다. 지각 시 기다리지 않습니다.</li>
                             <li>주문이 확정된 후에는 날짜를 임의로 변경할 수 없습니다. 발생하는 모든 손실에 대한 책임은 귀하에게 있습니다.</li>
@@ -307,144 +325,53 @@
                 
 
 
-                <div class="detail--divisionline" id="section5"></div>
+                <div class="detail--divisionline" id="section5" th:if="${#lists.size(reviewList) > 0}"></div>
 
 
                 <!-- 리뷰 -->
-                <div class="detail--bottom__review">
+                <div class="detail--bottom__review" th:if="${#lists.size(reviewList) > 0}">
 
                     <div class="detail--title__review">
-                        Review <span>(36)</span>
+                        Review <span th:utext="|(${#lists.size(reviewList)})|">(리뷰 개수)</span>
                     </div>
             
-                    <div class="detail--item__review">
-                        <div class="detail--item__review-top">
+                    <th:block th:each="review : ${reviewList}">
 
-                            <div>
-                                <div class="detail--item__review-profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="detail--item__review-name">
-                                    John Doe
-                                </div>
+                        <div class="detail--item__review">
+                            <div class="detail--item__review-top">
 
-                                <div class="detail--item__review-top-second">
-                                    
-                                    <span class="detail--item__review-rating">
-                                        ⭐⭐⭐⭐⭐ 
-                                        <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
-                                    </span>
-                                    
-
-                                    <div class="detail--item__review-date">
-                                        2023/05/25
+                                <div>
+                                    <div class="detail--item__review-profile">
+                                        <img th:src="${review.profileImage}">
                                     </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="detail--item__review-bottom">
-                            <div class="detail--item__review-content">
-                                자세한 후기 내용~~~~
-                            </div>
-                        </div>
-
-                    </div>
-                    
-
-
-                    <div class="detail--item__review">
-                        <div class="detail--item__review-top">
-                            <div>
-                                <div class="detail--item__review-profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="detail--item__review-name">
-                                    John Doe
-                                </div>
-
-                                <div class="detail--item__review-top-second">
-                                    
-                                    <span class="detail--item__review-rating">
-                                        ⭐⭐⭐⭐⭐ 
-                                        <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
-                                    </span>
-
-                                    <div class="detail--item__review-date">
-                                        2023/05/25
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-        
-                        <div class="detail--item__review-bottom">
-                            <div class="detail--item__review-content">
-                                자세한 후기 내용~~~~
-                            </div>
-    
-                            <div class="detail--item__review--reply">
-                                <img th:src="@{/images/productDetail/reply.png}">
-                                <div>후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~
-                                    후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~
-                                    후기에 대한 판매자의 리댓~~후기에 대한 판매자의 리댓~~
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="detail--item__review">
-                        <div class="detail--item__review-top">
-                            <div>
-                                <div class="detail--item__review-profile">
-                                    <img th:src="@{/images/productDetail/profile.jpg}">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="detail--item__review-name">
-                                    John Doe
                                 </div>
                                 
-                                <div class="detail--item__review-top-second">
-                                    
-                                    <span class="detail--item__review-rating">
-                                        ⭐⭐⭐⭐⭐ 
-                                        <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
-                                    </span>
+                                <div>
+                                    <div class="detail--item__review-name" th:text="${review.userName}">작성자 이름</div>
 
-                                    <div class="detail--item__review-date">
-                                        2023/05/25
+                                    <div class="detail--item__review-top-second">
+                                        
+                                        <span class="detail--item__review-rating">
+                                            ⭐⭐⭐⭐⭐ 
+                                            <span th:style=" 'width: ' + ${reivew.reviewStars} + '%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
+                                        </span>
+                                        
+
+                                        <div class="detail--item__review-date" th:text="${review.createDate}">작성일자</div>
+
                                     </div>
-
                                 </div>
-
                             </div>
-                        </div>
-        
-    
+
+
                             <div class="detail--item__review-bottom">
-                                <div class="detail--item__review-content">
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                    자세한 후기 내용~~~~자세한 후기 내용~~~~자세한 후기 내용~~~~
-                                </div>
-
+                                <div class="detail--item__review-content" th:text="${review.reviewMessage}">자세한 후기 내용</div>
                             </div>
-                    </div>
+
+                        </div>
+                        
+                    </th:block>
+
                     
                     <button type="button" class="detail--item__review-button">show more reviews</button>
 
@@ -529,7 +456,7 @@
                         <li><div></div> <a href="#section2">상품설명</a></li>
                         <li><div></div> <a href="#section3">일정소개</a> </li>
                         <li><div></div> <a href="#section4">구매 시 유의사항</a></li>
-                        <li><div></div> <a href="#section5">리뷰</a></li>
+                        <li th:if="${#lists.size(reviewList) > 0}"><div></div> <a href="#section5">리뷰</a></li>
                         <li><div></div> <a href="#section6">위치</a></li>
                     </ul>
                 </div>

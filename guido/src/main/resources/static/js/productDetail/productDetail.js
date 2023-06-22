@@ -54,9 +54,11 @@ window.addEventListener("scroll", ()=>{
     const section2 = scroll + document.getElementById("section2").getBoundingClientRect().top;
     const section3 = scroll + document.getElementById("section3").getBoundingClientRect().top;
     const section4 = scroll + document.getElementById("section4").getBoundingClientRect().top;
-    const section5 = scroll + document.getElementById("section5").getBoundingClientRect().top;
     const section6 = scroll + document.getElementById("section6").getBoundingClientRect().top;
-
+    
+    if(document.getElementById("section5")!=null){
+        var section5 = scroll + document.getElementById("section5").getBoundingClientRect().top;
+    }
 
     menuLi.forEach(function(li){
         li.classList.remove('scroll--active');
@@ -75,17 +77,36 @@ window.addEventListener("scroll", ()=>{
         
         menuLi[2].classList.add('scroll--active');
 
-    }else if(scroll >= section4 && scroll < section5){
+    }else if(scroll >= section4 && scroll < section6){
         
-        menuLi[3].classList.add('scroll--active');
-
-    }else if(scroll >= section5 && scroll < section6){
+        if(document.getElementById("section5")!=null){
+            
+            if(scroll >= section4 && scroll < section5){
         
-        menuLi[4].classList.add('scroll--active');
+                menuLi[3].classList.add('scroll--active');
+        
+            }else if(scroll >= section5 && scroll < section6){
+                
+                menuLi[4].classList.add('scroll--active');
+                
+            }
+            
+        }else{
+            menuLi[3].classList.add('scroll--active');
+        }
 
     }else if(scroll >= section6){
+
+        if(document.getElementById("section5")!=null){
+            
+            menuLi[5].classList.add('scroll--active');
+            
+        }else{
+            
+            menuLi[4].classList.add('scroll--active');
+        }
         
-        menuLi[5].classList.add('scroll--active');
+
 
     }
 
