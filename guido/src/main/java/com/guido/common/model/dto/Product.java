@@ -32,5 +32,7 @@ public class Product {
 	private String regionName;			// 지역명
 	private String themeName;			// 테마명
 	
-	private List<TourCourse> tourCourse;
+	private String reviewStars;			// 리뷰 평점
+	
+//	private List<TourCourse> tourCourse;
 }
