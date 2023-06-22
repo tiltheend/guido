@@ -155,15 +155,25 @@ input[name='tourItems']:checked + label {
   display: none;
 }
 #tourDay {
-  display: block;
-  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
   margin: 10px 0 0 auto;
+}
+#tourTime {
+  display: flex;
+  margin: 10px 0 auto 0;
+  align-items: flex-start;
 }
 #tourDay > div {
   font-size: 20px;
   margin-right: 40px;
 }
-#tourDay {
+#tourTime > div {
+  font-size: 20px;
+  margin-left: 40px;
+}
+#tourDay,
+#tourTime {
   display: none;
 }
 #inputWarning {
@@ -176,6 +186,19 @@ input[name='tourItems']:checked + label {
   margin-bottom: auto;
   display: block;
   text-align: right;
+}
+.input-container2 {
+  margin-bottom: auto;
+  display: block;
+  text-align: left;
+}
+.input-container2 > input {
+  margin-bottom: auto;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 0;
 }
 .input-container > input {
   margin-bottom: auto;
@@ -676,8 +699,14 @@ button:disabled {
   padding: 0;
   position: relative;
 }
-#inputDay {
-  border-bottom: 3px solid black;
+#inputDay,
+#inputTime {
+  border: 1px solid #333;
+  border-radius: 15px;
+  outline: none;
+  font-size: 30px;
+  text-align: center;
+  width: 100px;
 }
 
 /* 10페이지 상품 검토하기 */
