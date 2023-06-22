@@ -15,6 +15,30 @@ showOrNotPwImg.addEventListener("click",()=>{
     }
 });
 
+// 로그인 폼 비어있으면 제출 방지
+const loginForm = document.querySelector("#loginForm");
+const email = document.querySelector("#email");
+const loginBtn = document.querySelector(".login-btn");
+
+if(loginForm != null){
+    loginBtn.addEventListener("click",(e)=>{
+        if(email.value.trim().length==0){
+            alert("이메일을 입력해주세요.");
+            email.value="";
+            email.focus();
+            e.preventDefault();
+            return;
+        }
+        if(password.value.trim().length==0){
+            alert("비밀번호를 입력해주세요.");
+            password.value="";
+            password.focus();
+            e.preventDefault();
+            return;
+        }
+    });
+}
+
 // 비번 찾기 모달
 var show = document.querySelector('#show');
 var modalWindow = document.querySelector('#modalWindow');

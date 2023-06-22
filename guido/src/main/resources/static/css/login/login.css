@@ -1,4 +1,5 @@
 /* 전체 */
+/* 브라우저 기본 파란 테두리 없앰 */
 *,*:focus{outline:none;}
 .container_total{
     display: flex;
@@ -23,7 +24,6 @@
     margin: 20px 0 40px 0;
 }
 /* 입력 부분 */
-/* 브라우저 기본 파란 테두리 없앰 */
 .container_middle_input{
     display: flex;
     flex-direction: column;
@@ -53,11 +53,10 @@
     background-color: #1c797d;
 }
 /* 비번 input */
-/* .password{
-    border: none;
-    width: 350px;
-    background-image: url("/images/signUp/invisible.png");
-} */
+.pw-area>img{
+    max-width: 15px;
+    color: #1c797d;
+}
 .password{
     border: none;
     width: 350px;
@@ -90,7 +89,7 @@
     color: black;
 }
 input[type="checkbox"]:checked + label{
-    background: url("../../images/signUp/check.png") 0 0 no-repeat;
+    background: url("/images/signUp/check.png") 0 0 no-repeat;
     background-size: cover;
     border: none;
 }
@@ -107,7 +106,7 @@ input[type="checkbox"]:checked + label{
     justify-content: center;
     align-items: center;
 }
-.container_bottom_button{
+.login-btn{
     width: 420px;
     height: 55px;
     background-color: #1c797d;

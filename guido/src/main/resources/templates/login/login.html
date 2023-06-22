@@ -7,24 +7,21 @@
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/login/login.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;}
-    </style>
 </head>
 <body>
-    <header>guido</header>
+    <th:block th:replace="~{common/header}"></th:block>
     <div class="container_total">
         <div class="container_top">
             <div class="container_top_title font0">로그인</div>
             <div class="container_top_subTitle font3">한 발짝 더 편리해지는 여행</div>
         </div>
-        <form action="/user/login" method="post">
+        <form th:action="@{/user/login}" method="post" id="loginForm">
             <div class="container_middle">
                 <div class="container_middle_input">
-                    <input type="email" name="email" id="email" class="email font4" placeholder="이메일" autocomplete="off">
+                    <input type="text" name="userEmail" id="email" class="email font4" placeholder="이메일" autocomplete="off">
                     <div class="pw-area">
-                        <input type="password" name="password"  id="password" class="password invisible font4" placeholder="비밀번호" autocomplete="off" >
-                        <img src="/images/signUp/invisible.png" id="showOrNotPw">
+                        <input type="password" name="userPassword"  id="password" class="password invisible font4" placeholder="비밀번호" autocomplete="off" >
+                        <img th:src="@{/images/signUp/invisible.png}" id="showOrNotPw">
                     </div>
                 </div>
                 <div class="container_middle_checkOrSignup">
@@ -34,7 +31,7 @@
                 </div>
             </div>
             <div class="container_bottom">
-                <button class="container_bottom_button">로그인</button>
+                <button class="login-btn">로그인</button>
             </div>
         </form>
         <div class="container_bottom">
@@ -79,7 +76,9 @@
             </div>
         </div>
     </div>
+    <th:block th:replace="~{common/footer}"></th:block>
     <script>
+        // *비번 input(자식) focus 시 감싸는 div(부모) border 효과
         const password = document.querySelector(".password");
         const pwArea = document.querySelector(".pw-area");
         
