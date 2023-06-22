@@ -27,6 +27,10 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
+    <div class="wirte-btn">
+        <img th:src="@{/images/icons/writeBtn.png}" alt="">
+    </div>
+
     <!-- ***** 메인 영역 슬라이드 ***** -->
 
     <div class="main--container">
@@ -109,72 +113,33 @@
     <!-- ***** 카테고리 아이콘 ***** -->
     <div class="categori-icon-box-container">
         <div class="categori-icon-box">
+            <div th:each="themeType : ${application.themeTypeList}">
+                <a th:href="@{/common/index/{themeCode}(themeCode=${themeType.THEME_CODE})}">
+                <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
+                    <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
+                    <button th:text="${themeType.THEME_NAME}">테마 이름</button>
+                </a>
+            </div>
+            <!-- 
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/healing.png}" alt="힐링 투어">
                     <button>힐링 투어</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/kpop.png}" alt="k-pop 투어">
                     <button>k-pop 투어</button>
                 </a>
             </div>
             <div>
-                <a th:href="@{/}">
+                <a th:href="@{#}">
                     <img th:src="@{/images/theme/gyeongbokgung.png}" alt="궁 투어">
                     <button>궁 투어</button>
                 </a>
             </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/food.png}" alt="맛집 투어">
-                    <button>맛집 투어</button>
-                </a>
-            </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/history.png}" alt="역사 투어">
-                    <button>역사 투어</button>
-                </a>
-            </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/eco.png}" alt="에코 투어리즘">
-                    <button>에코 투어리즘</button>
-                </a>
-            </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/hanok.png}" alt="한옥 체험">
-                    <button>한옥 체험</button>
-                </a>
-            </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/hanbok.png}" alt="한복 체험">
-                    <button>한복 체험</button>
-                </a>
-            </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/market.png}" alt="전통 시장 투어">
-                    <button>전통 시장 투어</button>
-                </a>    
-            </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/ski.png}" alt="스키장 투어">
-                    <button>스키장 투어</button>
-                </a>    
-            </div>
-            <div>
-                <a th:href="@{/}">
-                    <img th:src="@{/images/theme/surfing.png}" alt="서핑 투어">
-                    <button>서핑 투어</button>
-                </a>    
-            </div>
+            -->
         </div>
     </div>
 
@@ -187,7 +152,7 @@
 
         <div class="product-post">
             <ul>
-                <li>
+                <li th:each="product : ${productList}">
                     <div class="slider single-item">
                         <div>
                             <img th:src="@{/images/sample1.png}">
@@ -208,22 +173,23 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p>A trip to Jeju Island where...</p>
+                            <p>[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
+                                <span>[[${product.reviewStars}]]</span>
                             </div>
                         </div>
                         <div>
                             <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
+                            <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p>₩ 190,000 / total</p>
+                            <p>₩ [[${product.productPrice}]] / total</p>
                         </div>
                     </div>
                 </li>
         
+                <!-- 
                 <li>
                     <div class="slider single-item">
                         <div>
@@ -260,228 +226,7 @@
                         </div>
                     </div>
                 </li>
-        
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample4.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-        
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample4.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-        
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-        
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample5.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-        
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample6.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-        
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample7.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample4.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
+                -->
             </ul>
         </div>
     </article>
@@ -498,91 +243,17 @@
     
         <div class="product-post">
             <ul>
-                <li>
+                <li th:each="product : ${popularProductList}">
                     <div class="slider single-item">
                         <div>
                             <img th:src="@{/images/sample1.png}">
                         </div>
                         <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
                             <img th:src="@{/images/sample2.png}">
                         </div>
                         <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
                             <img th:src="@{/images/sample3.png}">
                         </div>
-                        <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
                     </div>
                     <div class="slide-btn">
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
@@ -593,55 +264,18 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p>A trip to Jeju Island where...</p>
+                            <p>[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
+                                <span>[[${product.reviewStars}]]</span>
                             </div>
                         </div>
                         <div>
                             <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
+                            <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample4.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
+                            <p>₩ [[${product.productPrice}]] / total</p>
                         </div>
                     </div>
                 </li>
@@ -660,91 +294,17 @@
     <article class="main-post">
         <div class="product-post"> 
             <ul>
-                <li>
+                <li th:each="product : ${superProductList}">
                     <div class="slider single-item">
                         <div>
-                            <img th:src="@{/images/sample7.png}">
+                            <img th:src="@{/images/sample1.png}">
                         </div>
-                        <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
                         <div>
                             <img th:src="@{/images/sample2.png}">
                         </div>
                         <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
                             <img th:src="@{/images/sample3.png}">
                         </div>
-                        <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
                     </div>
                     <div class="slide-btn">
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
@@ -755,55 +315,18 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p>A trip to Jeju Island where...</p>
+                            <p>[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
+                                <span>[[${product.reviewStars}]]</span>
                             </div>
                         </div>
                         <div>
                             <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
+                            <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample6.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
+                            <p>₩ [[${product.productPrice}]] / total</p>
                         </div>
                     </div>
                 </li>
@@ -823,91 +346,17 @@
     
         <div class="product-post">
             <ul>
-                <li>
+                <li th:each="product : ${recommProductList}">
                     <div class="slider single-item">
                         <div>
                             <img th:src="@{/images/sample1.png}">
                         </div>
                         <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
                             <img th:src="@{/images/sample2.png}">
                         </div>
                         <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
                             <img th:src="@{/images/sample3.png}">
                         </div>
-                        <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
                     </div>
                     <div class="slide-btn">
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
@@ -918,55 +367,18 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p>A trip to Jeju Island where...</p>
+                            <p>[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
+                                <span>[[${product.reviewStars}]]</span>
                             </div>
                         </div>
                         <div>
                             <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
+                            <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-    
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample4.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/slide3.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
+                            <p>₩ [[${product.productPrice}]] / total</p>
                         </div>
                     </div>
                 </li>
