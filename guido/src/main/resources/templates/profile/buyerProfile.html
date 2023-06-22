@@ -239,9 +239,11 @@
                                 <div>
                                     <div> <!-- 리뷰 남긴 사람 프로필 -->
                                         <div class="reviewer">
-                                            <img src="">
+                                            <!-- <img src=""> -->
+                                            <img th:unless="@{user.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                            <img th:if="@{user.profileImage}" th:src="@{user.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                         </div>
-                                        <p class="reviewer-name">Anna</p>
+                                        <p class="reviewer-name" th:text="${user.userName}">Anna</p>
                                     </div>
                                     <div class="sale-review-info">
                                         <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
