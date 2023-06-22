@@ -32,5 +32,7 @@ public class Product {
 	private String regionName;			// 지역명
 	private String themeName;			// 테마명
 	
-	private List<TourCourse> tourCourse;
+	private List<TourCourse> tourCourse;	// 여행 코스
+	private User user;		// 작성자
+	private List<File> imageList;			// 이미지 리스트
 }
