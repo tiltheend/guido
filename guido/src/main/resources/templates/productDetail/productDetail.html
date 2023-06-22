@@ -410,8 +410,8 @@
 
                 </div>
 
-                <!-- 예약 옵션(시간) -->
-                <div class="detail--right__option">
+                <!-- 예약 옵션(시간) : 당일 투어의 경우에만 뜸 -->
+                <div class="detail--right__option" th:if="*{productPackage==1}">
                     <span>시간</span>
 
                     <div class="detail--item__option">
@@ -430,12 +430,16 @@
                 <div class="detail--right__price">
                     <span>인원 수</span>
                     <div class="detail--right__price-qty">
-                        <!-- 4000 (가격)만 달라짐 -->
-                        <div> KRW 4,000 / person</div>
+
+                        <!-- 1인당 가격 : n박 시 eachCost !=0 -->
+                        <div th:if="${eachCost}!=0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(eachCost, 3, 'COMMA')}">1박 이상 인당 가격=상품가격/인원수</span> / person</div>
+                        <!-- 1인당 가격 : 1박 시 eachCost == 0원 -->
+                        <div th:if="${eachCost}==0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA')}">1박 시 인당 가격</span> / person</div>
+                        
                         <div>
-                            <div class="detail--right__price-minus">&minus;</div>
+                            <div class="detail--right__price-minus priceBtn">&minus;</div>
                             <div class="detail--right__price-count" th:text="${guestCount}">게스트 수</div>
-                            <div class="detail--right__price-plus">&plus;</div>
+                            <div class="detail--right__price-plus priceBtn">&plus;</div>
                         </div>
                     </div>
                 </div>
@@ -443,7 +447,9 @@
 
                 <div class="detail--right__price-total">
                     <span>총 금액</span>
-                    <div>KRW 4,000</div>
+                    <div> &#8361; 
+                        <span id="totalCost"></span></div>
+
                 </div>
                 <!-- 예약 버튼 -->
                 <a th:href="@{/reservation/reservation.html}"><button class="detail--right__button">Reserve</button></a>
@@ -640,6 +646,12 @@
             $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
 
             });
+
+
+            const productPrice = /*[[*{productPrice}]]*/ [];
+            const package = /*[[${eachCost}]]*/ [];
+            const guestCount = /*[[${guestCount}]]*/ [];
+
         </script>
 
     </div>

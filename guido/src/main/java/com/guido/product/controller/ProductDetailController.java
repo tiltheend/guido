@@ -34,12 +34,18 @@ public class ProductDetailController {
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
 		List<Review> reviewList = service.selectReviewList(productNo);
+		int eachCost = 0;
+		
+		if(product.getProductPackage()!=1)
+			eachCost = (product.getProductPrice()/guestCount);
+		
 		
 		model.addAttribute("product", product);
 		model.addAttribute("guide", guide);
 		model.addAttribute("pr", pr);
 		model.addAttribute("guestCount", guestCount);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("eachCost", eachCost);
 		
 		return "productDetail/productDetail";
 	}
