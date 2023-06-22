@@ -10,7 +10,6 @@ AND USER_TYPE = 'G'
 ;
 
 -- 회원 정보 가져오기 (이메일, 이름, 프로필 이미지)
-
 SELECT USER_EMAIL, USER_NAME, PROFILE_IMG
 FROM "USER"
 WHERE USER_NO = 25

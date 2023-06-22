@@ -27,23 +27,26 @@
             </div>
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
-
-                <div class="profile-img-box"> <!-- 프로필+이름 -->
+                
+                <form class="profile-img-box" th:action="@{/profile/profileEdit}" method="POST" enctype="multipart/form-data"> <!-- 프로필+이름 -->
+                    <button class="profile-edit-btn">프로필 변경</button>
+                    <img src="../images/profile/profile_delete.png" alt="profile_delete" class="profile-delete">
                     <div class="profile-img">
-                        <img src="" alt=""> <!-- 프로필 사진 칸 -->
+                        <img th:unless="*{profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                        <img th:if="*{profileImage}" th:src="*{profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
 
-                        <input type="file" name="userProfileFile" id="userProfileFile">
+                        <input type="file" name="profileImage" id="userProfileFile" accept="image/*">
                         <!-- 프로필 편집 버튼 -->
                         <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
                     </div>
-                    <h2 onclick="location.href='/profile/mypage/T'">UserName</h2> <!-- 유저이름 -->
-                </div>
+                    <h2 onclick="location.href='/profile/mypage/T'" th:text="*{userName}">UserName</h2> <!-- 유저이름 -->
+                </form>
 
                 <div class="user-email"> <!-- 유저 이메일 -->
-                    <p>tiltheend@gmail.com</p>
+                    <p th:text="*{userEmail}">tiltheend@gmail.com</p>
                 </div>
 
-            </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
+            </div> <!-- // profile-left 프로필 왼쪽 박스 -->          
             
             <div class="seller-btn">
                 <button> <!-- 내 정보 수정 -->
@@ -292,12 +295,18 @@
     <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script>
     <script th:src="@{/js/profile/nabong_slick/slick.js}"></script>
     <script th:src="@{/js/profile/buyerWishList.js}"></script>
+    <script th:src="@{/js/profile/profileEdit.js}"></script>
     
-    <script>
-        
+    <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
+    <script th:inline="javascript">
+        // const message='[[${message}]]';
 
-
-        
-    </script>
+        /* Natural Template */
+        const message = /*[[${message}]]*/  "전달 받은 message";
+        // 타임리프 해석    값(자료형이 알아서 해석)     사라짐(설명)
+        if(message != null){
+            alert(message);
+        }
+    </script>  
 </body>
 </html>

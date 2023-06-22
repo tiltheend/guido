@@ -41,5 +41,13 @@
 		WHERE USER_NO = #{memberNo}
 	 </select>
 	 
+	<!-- 프로필 이미지 수정 -->
+	<update id="updateProfile" >
+		UPDATE "USER"
+		SET PROFILE_IMG= #{profileImage}
+		WHERE USER_NO= #{userNo}
+	</update>
+	
+	
 	
 </mapper>

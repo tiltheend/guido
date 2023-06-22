@@ -12,6 +12,10 @@ public interface ProfileTouristMapper {
 
 	// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지)
 	User userInfo(int memberNo);
+
+	// 프로필 이미지 수정
+	int updateProfile(User user);
+
 	
 
 }
