@@ -72,29 +72,17 @@
         <div class="profile_right"> <!-- 프로필 오른쪽 박스 -->
             
             <div class="purchase-history">
-                <h1>Purchase History (16)</h1>
+                <h1>Purchase History (<span th:text="${reservationCount}"></span>)</h1>
 
-                <section id="demos">
+                <section id="demos" th:if="${reservationList}">
                     <div class="row">
                         <div class="large-12 columns">
                             <div class="owl-carousel owl-theme">
-                                <div class="item">
-                                    <a href="#"><img src="" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href="#"><img src="" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href="#"><img src="" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href="#"><img src="" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href="#"><img src="" alt=""></a>
+                                <div class="item" th:each="r : ${reservationList}">
+                                    <a href="#"><img th:src="${r.thumbnail}" alt="reservationImg"></a>
                                 </div>
                                 <!-- <div class="item">
-                                    <h4>2</h4>
+                                    <a href="#"><img src="" alt=""></a>
                                 </div> -->
                             </div>
                         </div>

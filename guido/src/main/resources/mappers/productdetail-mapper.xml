@@ -167,6 +167,6 @@
 		WHERE PRODUCT_NO = #{productNo}
 		ORDER BY FILE_ORDER
 	 </select>
-		 
+	
 	
 </mapper>

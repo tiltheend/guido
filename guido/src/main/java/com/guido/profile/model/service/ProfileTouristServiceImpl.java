@@ -2,6 +2,7 @@ package com.guido.profile.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.User;
 import com.guido.common.utility.Util;
 import com.guido.profile.model.dao.ProfileTouristMapper;
@@ -29,19 +31,19 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	
 	// 가이드인지 판매자인지 체크 ( userType: 1 == G / 0 == T)
 	@Override
-	public int userTypeCheck(int memberNo) {
-		return mapper.userTypeCheck(memberNo);
+	public int userTypeCheck(int userNo) {
+		return mapper.userTypeCheck(userNo);
 	}
 
 	// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지)
 	@Override
-	public User userInfo(int memberNo) {
-		return mapper.userInfo(memberNo);
+	public User userInfo(int userNo) {
+		return mapper.userInfo(userNo);
 	}
 
 	// 프로필 이미지 수정
 	@Override
-	public int updateProfile(MultipartFile profileImage, int memberNo)  throws IllegalStateException, IOException {
+	public int updateProfile(MultipartFile profileImage, int userNo)  throws IllegalStateException, IOException {
 		
 		// 프로필 이미지 변경 실패 대비
 		// String temp = loginMember.getProfileImage(); // 이전 이미지 저장
@@ -50,7 +52,7 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		 String rename = null; // 변경 이름 저장 변수
 		
 		 User user = new User();
-		 user.setUserNo(memberNo);
+		 user.setUserNo(userNo);
 		 
 		 // System.out.println(user.getUserNo()+"나와??");
 		if(profileImage.getSize()>0) { // 업로드된 이미지가 있을 경우
@@ -90,6 +92,21 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		
 		return result; 
 	}
+
+	// 구매 내역 가져오기 (상품 번호, 썸네일)
+	@Override
+	public List<Reservation> reservationList(int userNo) {
+		return mapper.reservationList(userNo);
+	}
+
+	// 구매 수 카운트
+	@Override
+	public int reservationCount(int userNo) {
+		return mapper.reservationCount(userNo);
+	}
+	
+	
+	
 	
 	
 	

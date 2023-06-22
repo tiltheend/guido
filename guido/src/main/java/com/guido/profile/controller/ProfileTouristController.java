@@ -1,6 +1,7 @@
 package com.guido.profile.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.User;
 import com.guido.profile.model.service.ProfileTouristService;
 
@@ -48,11 +50,24 @@ public class ProfileTouristController {
 			model.addAttribute("user", user);
 			System.out.println(user.getUserName()+" 가이드 프로필");
 			
+			
 		} else if(userType == 0) { // 여행객 일 경우
 			path="profile/buyerProfile";
 			
 			model.addAttribute("user", user);
 			System.out.println(user.getUserName()+" 여행객 프로필");
+			
+			// 구매 내역 가져오기 (상품 번호, 썸네일)
+			List<Reservation> reservationList = service.reservationList(25);
+			model.addAttribute("reservationList", reservationList);
+			
+			for(Reservation r : reservationList) {
+				System.out.println(r.getThumbnail());					
+			}
+			
+			// 구매 수 카운트
+			int reservationCount = service.reservationCount(25);
+			model.addAttribute("reservationCount", reservationCount);
 			
 		} else {
 			path="/";

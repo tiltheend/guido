@@ -19,5 +19,7 @@ public class Reservation {
 	private String paymentMethod;
 	private int guestCount;
 	private int productDateNo;
+	
+	private String thumbnail; // 썸네일
 
 }

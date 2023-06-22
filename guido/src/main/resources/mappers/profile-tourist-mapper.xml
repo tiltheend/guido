@@ -26,11 +26,31 @@
 		<result property="userState" column="USER_STATE"/>
 	</resultMap>
 	
+	<resultMap  type="File" id="file_rm">
+		<id property="fileNo" column="FILE_NO" />
+	 	<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="fileOrder" column="FILE_ORDER" />
+	 	<result property="filePath" column="FILE_PATH" />
+	</resultMap>
+	
+	<resultMap  type="Reservation" id="reservation_rm">
+		<id property="reservationNo" column="RESERVATION_NO" />
+	 	<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="userNo" column="USER_NO" />
+	 	<result property="createDate" column="CREATE_DT" />
+	 	<result property="reservationState" column="RESERVATION_STATE" />
+	 	<result property="paymentMethod" column="PAYMENT_METHOD" />
+	 	<result property="guestCount" column="GUEST_COUNT" />
+	 	<result property="productDateNo" column="PRODUCT_DT_NO" />
+	 	
+	 	<result property="thumbnail" column="FILE_PATH" />
+	</resultMap>
+	
 	<!-- 가이드인지 판매자인지 체크 ( userType: 1 == G / 0 == T) -->
 	<select id="userTypeCheck">
 		SELECT COUNT(*) 
 		FROM "USER"
-		WHERE USER_NO = #{memberNo}
+		WHERE USER_NO = #{userNo}
 		AND USER_TYPE = 'G'
 	</select>
 	
@@ -38,7 +58,7 @@
 	 <select id="userInfo" resultMap="user_rm">
 		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG
 		FROM "USER"
-		WHERE USER_NO = #{memberNo}
+		WHERE USER_NO = #{userNo}
 	 </select>
 	 
 	<!-- 프로필 이미지 수정 -->
@@ -48,6 +68,20 @@
 		WHERE USER_NO= #{userNo}
 	</update>
 	
+	<!-- 구매 내역 가져오기 (상품 번호, 썸네일) -->
+	<select id="reservationList" resultMap="reservation_rm">
+		SELECT PRODUCT_NO, FILE_PATH
+		FROM "FILE"
+		JOIN RESERVATION USING (PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+		AND FILE_ORDER = 1
+	</select>
 	
+	<!-- 구매 수 카운트 -->
+	<select id="reservationCount" resultType="_int">
+		SELECT COUNT(PRODUCT_NO)
+		FROM RESERVATION
+		WHERE USER_NO = #{userNo}
+	</select>
 	
 </mapper>
