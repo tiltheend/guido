@@ -47,4 +47,27 @@
 		 SELECT * FROM THEME T
 	 </select>
 	
+	<insert id="productUpload" parameterType="Product" useGeneratedKeys="true">
+INSERT INTO PRODUCT
+(PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE, PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO, THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT, REGION_NAME, TOUR_DURATION)
+VALUES(SEQ_PRODUCT_NO.NEXTVAL,
+		 #{productName}, 
+		 #{productPackage}, 
+		 #{productContent}, 
+		 #{productPrice},
+		 #{productAddPrice}, 
+		  10, 
+		  20, 
+		  9, 
+		  7, 
+		  'N', 
+		  SYSDATE,
+		  'English',
+		  0,'서울',#{tourDuration})
+	</insert>
+	
+	
+	
 </mapper>
+
+
