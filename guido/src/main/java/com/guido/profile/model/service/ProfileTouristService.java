@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.Reservation;
+import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
 public interface ProfileTouristService {
@@ -40,5 +41,17 @@ public interface ProfileTouristService {
 	 * @return
 	 */
 	int reservationCount(int userNo);
+
+	/** 리뷰 내역 가져오기
+	 * @param userNo
+	 * @return
+	 */
+	List<Review> reviewList(int userNo);
+
+	/** 리뷰 수 카운트
+	 * @param userNo
+	 * @return
+	 */
+	int reviewCount(int userNo);
 
 }

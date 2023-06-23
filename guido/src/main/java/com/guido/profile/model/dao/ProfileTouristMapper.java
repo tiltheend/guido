@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.guido.common.model.dto.Reservation;
+import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
 @Mapper
@@ -24,6 +25,12 @@ public interface ProfileTouristMapper {
 
 	// 구매 수 카운트
 	int reservationCount(int userNo);
+
+	// 리뷰 내역 가져오기
+	List<Review> reviewList(int userNo);
+
+	// 리뷰 수 카운트
+	int reviewCount(int userNo);
 
 	
 

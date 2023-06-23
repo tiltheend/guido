@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.Reservation;
+import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.common.utility.Util;
 import com.guido.profile.model.dao.ProfileTouristMapper;
@@ -104,6 +105,20 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public int reservationCount(int userNo) {
 		return mapper.reservationCount(userNo);
 	}
+
+	// 리뷰 내역 가져오기
+	@Override
+	public List<Review> reviewList(int userNo) {
+		return mapper.reviewList(userNo);
+	}
+
+	// 리뷰 수 카운트
+	@Override
+	public int reviewCount(int userNo) {
+		return mapper.reviewCount(userNo);
+	}
+	
+	
 	
 	
 	

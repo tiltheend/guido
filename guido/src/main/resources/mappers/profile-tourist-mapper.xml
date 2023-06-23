@@ -46,6 +46,21 @@
 	 	<result property="thumbnail" column="FILE_PATH" />
 	</resultMap>
 	
+	<resultMap type="Review" id="review_rm">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="reviewMessage" column="REVIEW_MESSAGE"/>
+		<result property="reviewStars" column="REVIEW_STARS"/>
+		<result property="reviewDeleteFL" column="REVIEW_DEL_FL"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="userName" column="PROFILE_IMG"/>
+		<result property="profileImage" column="USER_NAME"/>
+		
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="reviewReply" column="REVIEW_REPLY"/>
+	</resultMap>
+	
 	<!-- 가이드인지 판매자인지 체크 ( userType: 1 == G / 0 == T) -->
 	<select id="userTypeCheck">
 		SELECT COUNT(*) 
@@ -83,5 +98,30 @@
 		FROM RESERVATION
 		WHERE USER_NO = #{userNo}
 	</select>
+	
+	 <!-- 리뷰 내역 가져오기 -->
+	 <select id="reviewList" resultMap="review_rm">
+		SELECT REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
+			   , TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
+			   , PRODUCT_NAME, REVIEW_REPLY
+		FROM "REVIEW" R
+		JOIN "USER" U ON(R.USER_NO = U.USER_NO)
+		JOIN "PRODUCT" USING (PRODUCT_NO)
+		WHERE U.USER_STATE = 'N'
+		AND U.USER_NO = #{userNo}
+		AND REVIEW_DEL_FL = 'N'
+		AND REVIEW_REPLY_DEL_FL = 'N'
+		ORDER BY 1 DESC
+		FETCH FIRST 3 ROWS ONLY
+	 </select>
+	 
+	 <!-- 리뷰 수 카운트 -->
+	 <select id="reviewCount" resultType="_int">
+		 SELECT COUNT(*)
+			FROM REVIEW
+			WHERE USER_NO = 25
+			AND REVIEW_REPLY_DEL_FL ='N'
+	 </select>
+	 
 	
 </mapper>
