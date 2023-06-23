@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset PW Link Email</title>
+    <style>
+        body{
+            margin: 0;
+            /* padding: 30px; */
+            width: 500px;
+            height: 500px;
+        }
+        table{
+            border-spacing: 40px;
+            border-collapse: separate;
+            width: 100%;
+        }
+        .resetPwLink{
+            width: 300px;
+            height: 40px;
+            background-color: #1c797d;
+            color: #fff;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+        .changePwB{
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .changePwB:visited{
+            color:#fff;
+        }
+        .footer{
+            width: 420px;
+            border-top: #5c5c5c 1px solid;
+        }
+        .guidoCom{
+            max-width: 80px;
+            border: none;
+        }
+        .email_content{
+            line-height: 2;
+        }
+        
+    </style>
+</head>
+<body>
+    <table>
+        <tr><td><img src="../images/signUp/guido.png"></td></tr>
+        <tr><td class="email_content">John Doe님, 안녕하세요?<br>비밀번호 재설정을 요청하셨습니다.<br>직접 요청한 적이 없다면 이 메일은 무시하세요.<br>아니라면 비밀번호를 다시 설정하실 수 있습니다.</td></tr>
+        <tr><td class="resetPwLink"><a href="../login/changePw.html" class="changePwB">비밀번호 재설정하기</a></td></tr>
+        <tr><td class="thankMent">감사합니다.<br><br>가이두 드림</td></tr>
+        <tr><td class="footer"><img src="../images/signUp/guidoCompany.jpeg" class="guidoCom"></td></tr>
+    </table>
+    
+</body>
+</html>

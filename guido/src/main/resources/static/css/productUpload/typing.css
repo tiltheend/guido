@@ -1,0 +1,47 @@
+.typing {
+  height: 55px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: flex-end;
+  font-size: 1.8rem;
+}
+
+.text {
+  font-size: 1.5rem;
+  /* margin-left: 0.6rem; */
+}
+
+.text::after {
+  content: '';
+  margin-left: 0.4rem;
+  border-right: 2px solid #777;
+  animation: cursor 0.9s infinite steps(2);
+}
+
+@keyframes cursor {
+  from {
+    border-right: 2px solid white;
+  }
+  to {
+    border-right: 2px solid #777;
+  }
+}
+
+/* ---------------------------------------- */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: Pretendard;
+}
+
+body {
+  height: 100vh;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #333;
+}

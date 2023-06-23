@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guido</title>
+
+    <link rel="stylesheet" th:href="@{/css/productDetail/productDetail.css}">
+    
+    <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.theme.default.min.css}">
+
+    <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
+    <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
+
+</head>
+<body th:object="${product}">
+
+    <div class="detail--container">
+
+        <section class="detail--top">
+            
+            <div>
+                <div class="detail--top__category">
+                    <div th:text="*{regionName}">서울</div>
+                    <div>></div>
+                    <div th:text="*{themeName}">테마명</div>
+                    <div>></div>
+                    <div th:text="*{productName}">상품명</div>
+                </div>
+
+
+                <div class="detail--top__button">
+                    <div id="editBtn">수정</div>
+                    <div id="deleteBtn">삭제</div>
+                </div>
+            </div>
+
+            <div class="detail--top__slide">
+                <div class="detail--silde__container">
+
+                    <section id="demos">
+                        <div class="row">
+                            <div class="large-12 columns">
+
+                                <div class="loop owl-carousel owl-theme">
+    
+                                    <div class="item" th:each="image : *{imageList}">
+                                        <img class="detail--silde__item-img" th:src="${image.filePath}">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        
+                        <div class="owl-carousel__prev">
+                            <img th:src="@{/images/productDetail/arrow_left.svg}">
+                        </div>
+                        
+                        <div class="owl-carousel__next">
+                            <img th:src="@{/images/productDetail/arrow_right.svg}">
+                        </div>
+
+
+                    </section>
+                    
+
+                </div>
+            </div>
+
+        </section>
+    
+    
+        <section class="detail--middle">
+
+            <section  class="detail--left__content">
+
+                <!-- 상세 설명 -->
+                <div class="detail--middle__detail">
+
+                    <div class="detail--text__title font1">
+                        [[*{productName}]]
+                        <span class="detail--ongoing__title font4" th:if="*{productState}=='N'">ongoing</span>
+                    </div>
+
+
+                    <div class="detail--div__rating">
+                        <div class="detail--number__rating">4.9</div>
+                        <div class="detail--stars__rating">
+                            ⭐⭐⭐⭐⭐ 
+                            <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <div class="detail--count__rating">(36)</div>
+
+                    </div>
+
+                    <div class="detail--top__like">
+                        <div class="detail--div__location">
+                            <img th:src="@{/images/productDetail/location_icon.svg}">
+                            <div> [[*{regionName}]] </div>
+                        </div>
+
+                        <!-- <label class="container">
+                            <input checked="checked" type="checkbox">
+                            <div class="checkmark">
+                                <svg viewBox="0 0 256 256">
+                                <rect fill="none" height="256" width="256"></rect>
+                                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#FFF" fill="none"></path></svg>
+                            </div>
+                            </label> -->
+
+                            <label class="container">
+                                <input type="checkbox">
+                                <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path></svg>
+                            </label>
+                            
+                    </div>
+                    
+
+                    <div class="detail--div__collection">
+                        <div>
+                            <img th:src="@{/images/productDetail/duration_icon.svg}" class="duration_icon">&nbsp; Duration: 10 hr(s) &nbsp; &nbsp; 
+                            <img th:src="@{/images/productDetail/dollar_icon.svg}" class="dollar_icon"> 25
+                        </div>
+                        <div>
+                            <img th:src="@{/images/productDetail/language_icon.svg}">
+                            <div>Guided language: [[${guide.languageSkill}]]</div>
+                        </div>
+
+                        <div>
+                            <img th:src="@{/images/productDetail/receive_dollars_icon.svg}">
+                            <div>Free cancellation 4 day(s) prior to selected date</div> 
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="detail--div__shortdescription">
+                        - Changdeokgung Moonlight Tour is a program where you can watch various parts of the palace with a professional commentator 
+                        at Changdeokgung Palace, where greenery is harmonized under the silver moonlight, and commentary on each pavilion and 
+                        traditional art performance.
+
+                        - Starting from Donhwamun, the main gate of Changdeokgung Palace, it travels through Jinseonmun Gate, Injeongjeon Hall, 
+                        Heejeong Party, Nakseonjae Pass, Sangryangjeong Pavilion, Buyongji Gate, Bullomun Gate, Aeryeonjeong Pavilion, Yeongyeongdang, and Jugwon Forest Road, giving special impression that can only be experienced in Changdeokgung Moonlight Trip.
+                    </div>
+                    
+                    
+                -->
+
+                    
+                    <div class="detail--divisionline" id="section1" style="margin-top: 0;"></div>
+            
+    
+                    <!-- 자기소개 -->
+                    <div class="detail--middle__pr">
+                        <div class="detail--title__pr">About Guide!</div>
+
+            
+                        <div class="detail--container__pr">
+            
+                            <div class="detail--item__pr" th:if="${pr.abroadExperience}">
+                                <img th:src="@{/images/userProfile/abroadExperience.png}">
+                                <div class="detail--item__pr-text">I have traveled to : [[${pr.abroadExperience}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.subLang}">
+                                <img th:src="@{/images/profile/subLang.png}">
+                                <div class="detail--item__pr-text">Speaks [[${pr.subLang}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.favoriteSong}">
+                                <img th:src="@{/images/profile/favoriteSong.png}">
+                                <div class="detail--item__pr-text">Favorite song : [[${pr.favoriteSong}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.dopamine}">
+                                <img th:src="@{/images/profile/dopamine.png}">
+                                <div class="detail--item__pr-text">My dopamine: [[${pr.dopamine}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.birthYear}">
+                                <img th:src="@{/images/profile/birthDay.png}">
+                                <div class="detail--item__pr-text">Born in the [[${pr.birthYear}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.job}">
+                                <img th:src="@{/images/profile/job.png}">
+                                <div class="detail--item__pr-text">My work: [[${pr.job}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.pets}">
+                                <img th:src="@{/images/profile/pets.png}">
+                                <div class="detail--item__pr-text">Live with [[${pr.pets}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.hobby}">
+                                <img th:src="@{/images/profile/hobby.png}">
+                                <div class="detail--item__pr-text">My hobby: [[${pr.hobby}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.mbti}">
+                                <img th:src="@{/images/profile/MBTI.png}">
+                                <div class="detail--item__pr-text">MBTI is: [[${pr.mbti}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.strength}">
+                                <img th:src="@{/images/profile/strength.png}">
+                                <div class="detail--item__pr-text">[[${pr.strength}]]</div>
+                            </div>
+                            
+                            <div class="detail--item__pr" th:if="${pr.tmi}">
+                                <img th:src="@{/images/profile/TMI.png}">
+                                <div class="detail--item__pr-text">TMI is [[${pr.tmi}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.major}">
+                                <img th:src="@{/images/profile/major.png}">
+                                <div class="detail--item__pr-text">I majored in [[${pr.major}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.uselessTalent}">
+                                <img th:src="@{/images/profile/uselessTalent.png}">
+                                <div class="detail--item__pr-text">[[${pr.uselessTalent}]]</div>
+                            </div>
+            
+                            <div class="detail--item__pr" th:if="${pr.capList}">
+                                <img th:src="@{/images/profile/capList.png}">
+                                <div class="detail--item__pr-text">[[${pr.capList}]] as guide</div>
+                            </div>
+            
+                        </div>
+                    </div>
+
+
+
+                    <div class="detail--middle__profile">
+                        <div>
+                            
+                            <a href="#" class="detail--img__profile-href">
+                                    <img th:src="${guide.profileImage}">
+                            </a>
+                            
+    
+                            <img th:if="${guide.superGuideFl=='Y'}" th:src="@{/images/productDetail/superguide_mark.png}" class="detail--div__super">
+                            <img th:if="${guide.superGuideFl=='N'}" th:src="@{/images/productDetail/guide_mark.png}" class="detail--div__super">
+    
+                            <div class="detail--content__profile">
+                                <div th:text="${guide.userName}">회원 이름</div>
+                                <div class="detail--innercontent__profile">
+                                    <div th:utext="|경력(${#strings.setSplit(guide.careerDate, ',')[1]}) <span>${#strings.setSplit(guide.careerDate, ',')[0]}</span>|">경력(개월) 숫자</div>
+                                    <div>평점 <span th:text="${guide.starAverage}"></span></div>
+                                    <div>후기 <span th:text="${guide.reviewCount}"></span></div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <div class="detail--ect__profile">
+                            <button id="contactGuide">가이드에게 연락하기</button>
+                            <div class="detail--div__warning"><span>!</span> 안전한 결제를 위해 가이두 웹사이트 외부에서 <br>
+                                송금하거나 대화를 나누지 마세요.</div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="detail--divisionline" id="section2"></div>
+
+                    <div class="detail--title__detail">Tour Detail</div>
+                    <div class="detail--text__detail" th:text="*{productContent}">
+                        상품 상세 내용
+                    </div>
+                </div>
+
+        
+                <div class="detail--divisionline" id="section3"></div>
+        
+            
+                <!-- 여행 일정 -->
+                <div class="detail--middle__date">
+                    <div class="detail--text__date-first">
+                        3 nights in Myung-dong, Seoul
+                    </div>
+
+                    <!-- 총 진행 날짜(범위) -->
+                    <div class="detail--text__date-second">
+                        21 Jun 2023 - 24 Jun 2023
+                    </div>
+                    
+                    <div class="detail--calendar__date">
+                        <img th:src="@{http://via.placeholder.com/600x330}">
+                    </div>
+                    
+                </div>
+
+
+
+                <div class="detail--divisionline" id="section4"></div>
+                
+                
+                <!-- 유의사항 -->
+                <div class="detail--bottom__precaution">
+                    <div class="detail--title__precaution">Precautions</div>
+                    
+                    <div class="detail--description__precaution">
+                        <ul>
+                            <!-- 출발 인원 상품마다 다름!!!!!!  -->
+                            <li>본 투어의 최소 출발 인원은 [[*{minTourist}]]명이며, 최소 출발 인원 미달 시 출발 3 일 전에 이메일을 통해 투어 취소를 안내드립니다.</li>
+                            <li>태풍, 눈보라 등의 악천후의 경우 출발 1일 전 (현지 시간 18:00)에 투어 출발 가능 여부가 결정되며 이메일을 통해 안내드립니다.</li>
+                            <li>일정에 차질이 생기지 않도록 지정된 장소에 10분 전까지 도착해주시기 바랍니다. 지각 시 기다리지 않습니다.</li>
+                            <li>주문이 확정된 후에는 날짜를 임의로 변경할 수 없습니다. 발생하는 모든 손실에 대한 책임은 귀하에게 있습니다.</li>
+                            <li>개인적인 사정, 지각 등의 사유로 투어에 참여하지 않거나 취소하는 경우 환불되지 않습니다.</li>
+                            <li>예약 시 정확한 정보(이름 + 인원수 + 전화번호 + WeChat ID + 탑승 장소)를 반드시 기재하여 투어에 영향을 미칠 수 있는 실수를 방지하시기 바랍니다.</li>
+                            <li>교통 상황, 날씨, 축제 및 당일 인파에 따라 각 여정의 도착 시간이 변경될 수 있습니다. 상기 또는 기타 불가항력 요인으로 인해 여정이 지연되거나 취소되는 경우 환불되지 않습니다. 이해해 주셔서 감사합니다.</li>
+                            <li>이 일정은 공유 투어입니다. 본 투어에 참여하는 고객은 각 명승지의 체류 시간을 준수하고 직원의 배치를 따라야 합니다.</li>
+                            <li>법을 위반하고 귀하의 권리에 영향을 미치지 않도록 한국의 현지 법률과 규정을 준수하고 한국 법에서 금지하는 품목을 휴대하지 마십시오.</li>
+                            <li>투어 중 여권과 귀중품은 안전하게 보관하시기 바랍니다. 분실, 도난, 파손 등이 발생하는 경우 발생하는 모든 손실에 대한 책임은 귀하에게 있습니다.</li>
+                            <li>투어 중 임의로 그룹에서 이탈하는 경우 거래가 무효 처리되며 수수료는 환불되지 않습니다. 그리고 그것이 재산 손실이나 개인 안전에 영향을 미칠 경우 그 결과는 귀하가 부담해야 합니다.</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+
+
+                <div class="detail--divisionline" id="section5" th:if="${#lists.size(reviewList) > 0}"></div>
+
+
+                <!-- 리뷰 -->
+                <div class="detail--bottom__review" th:if="${#lists.size(reviewList) > 0}">
+
+                    <div class="detail--title__review">
+                        Review <span th:utext="|(${#lists.size(reviewList)})|">(리뷰 개수)</span>
+                    </div>
+            
+                    <th:block th:each="review : ${reviewList}">
+
+                        <div class="detail--item__review">
+                            <div class="detail--item__review-top">
+
+                                <div>
+                                    <div class="detail--item__review-profile">
+                                        <img th:src="${review.profileImage}">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="detail--item__review-name" th:text="${review.userName}">작성자 이름</div>
+
+                                    <div class="detail--item__review-top-second">
+                                        
+                                        <span class="detail--item__review-rating">
+                                            ⭐⭐⭐⭐⭐ 
+                                            <span th:style=" 'width: ' + ${reivew.reviewStars} + '%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
+                                        </span>
+                                        
+
+                                        <div class="detail--item__review-date" th:text="${review.createDate}">작성일자</div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="detail--item__review-bottom">
+                                <div class="detail--item__review-content" th:text="${review.reviewMessage}">자세한 후기 내용</div>
+                            </div>
+
+                        </div>
+                        
+                    </th:block>
+
+                    
+                    <button type="button" class="detail--item__review-button">show more reviews</button>
+
+                </div>
+
+            </section>
+
+
+            <!-- 예약 사이드바 -->
+            <section class="detail--right__sidebar">
+
+                <!-- 예약 캘린더(날짜) -->
+                <div class="detail--right__calendar">
+
+                    <!-- <table class="scriptCalendar">
+                        <thead>
+                            <tr>
+                            <td class="calendarBtn" id="btnPrevCalendar">&#60;</td>
+                            <td colspan="5">
+                                <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
+                            </td>
+                            <td class="calendarBtn" id="nextNextCalendar">&#62;</td>
+                            </tr>
+                            <tr>
+                            <td>Sun</td>
+                            <td>Mon</td>
+                            <td>Tue</td>
+                            <td>Wed</td>
+                            <td>Thu</td>
+                            <td>Fri</td>
+                            <td>Sat</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        </table> -->
+
+                </div>
+
+                <!-- 예약 옵션(시간) -->
+                <div class="detail--right__option">
+                    <span>시간</span>
+
+                    <div class="detail--item__option">
+                        <input type="radio" name="option" id="option1" value="">
+                        <label class="option--active" for="option1">19:20 (25 left)</label>
+                        
+                        <input type="radio" name="option" id="option2" value="" disabled>
+                        <label for="option2">20:00</label>
+                        
+                        <input type="radio" name="option" id="option3" value="">
+                        <label for="option3">20:40 (46 left)</label>
+                    </div>
+                </div>
+                
+                <!-- 예약 가격 -->
+                <div class="detail--right__price">
+                    <span>인원 수</span>
+                    <div class="detail--right__price-qty">
+                        <!-- 4000 (가격)만 달라짐 -->
+                        <div> KRW 4,000 / person</div>
+                        <div>
+                            <div class="detail--right__price-minus">&minus;</div>
+                            <div class="detail--right__price-count" th:text="${guestCount}">게스트 수</div>
+                            <div class="detail--right__price-plus">&plus;</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="detail--right__price-total">
+                    <span>총 금액</span>
+                    <div>KRW 4,000</div>
+                </div>
+                <!-- 예약 버튼 -->
+                <a th:href="@{/reservation/reservation.html}"><button class="detail--right__button">Reserve</button></a>
+                
+
+
+                <div class="detail--right__scroll">
+                    <ul>
+                        <li><div></div> <a href="#section1">가이드 소개</a> </li>
+                        <li><div></div> <a href="#section2">상품설명</a></li>
+                        <li><div></div> <a href="#section3">일정소개</a> </li>
+                        <li><div></div> <a href="#section4">구매 시 유의사항</a></li>
+                        <li th:if="${#lists.size(reviewList) > 0}"><div></div> <a href="#section5">리뷰</a></li>
+                        <li><div></div> <a href="#section6">위치</a></li>
+                    </ul>
+                </div>
+
+            </section>
+                        
+
+        </section>
+    
+    
+        <section class="detail--bottom">
+
+
+            <div class="detail--divisionline"  id="section6"></div>
+            
+
+
+            <!-- 여행 코스(지도) -->
+            <div class="detail--bottom__map">
+                <div class="detail--text__map">
+                    Where you’ll be
+                </div>
+                
+                <div class="detail--img__map">
+                    <img th:src="@{/images/productDetail/지도.png}">
+                </div>
+            </div>
+            
+            
+
+            
+
+            <div class="detail--divisionline"></div>
+
+
+    
+            <!--여행 추천 -->
+            <div class="detail--bottom--recommend">
+                
+                <div class="detail--text__recommend">
+                    Recommended travel information, how about here?
+                </div>
+        
+                <div class="detail--list_recommend"> 
+                    
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/남산타워.jpg}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            Namsan Cable Car
+                        </div>
+                    </div>
+            
+        
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/광장시장.jpg}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            Gwangjang Market
+                        </div>
+                    </div>
+            
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/한복체험.jpg}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            Hanbok experience
+                        </div>
+                    </div>
+
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/경복궁생과방.jpg}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            Gyeongbokgung Palace Living Room
+                        </div>
+                    </div>
+                </div>
+    
+    
+            </div>
+    
+
+            <div class="detail--divisionline"></div>
+            
+    
+            <!-- 페스티벌 추천 -->
+            <div class="detail--bottom--festival">
+                
+                <div class="detail--text__recommend">
+                    How about a festival like this?
+                </div>
+                
+                <div class="detail--list_recommend"> 
+
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/글로벌EDM페스티벌.jpg}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            Don't Let Daddy Know 2023
+                        </div>
+                    </div>
+            
+    
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/피크페스티벌.jpg}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            Peak Festival
+                        </div>
+                    </div>
+            
+    
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/힙합플레이야.jpeg}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            HIPHOPPLAYA 2023
+                        </div>
+                    </div>
+    
+
+                    <div class="detail--item__recommend">
+                        <div class="detail--item__recommend-img">
+                            <img th:src="@{/images/productDetail/위버스콘.png}">
+                        </div>
+            
+                        <div class="detail--item__recommend-title">
+                            Weverse Concert
+                        </div>
+                    </div>
+
+                </div>
+                    
+
+    
+            </div>
+    
+        </section>
+
+        <script th:inline="javascript">
+            jQuery(document).ready(function($) {
+            $('.loop').owlCarousel({
+                center: true,
+                items: 3,
+                loop: true,
+                nav: false,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                mouseDrag: false,
+                margin: 10,
+                responsive: {
+                    0:{
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    }
+                }
+            });
+
+            const owl = $('.owl-carousel')
+
+            $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
+  
+            $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
+
+            });
+        </script>
+
+    </div>
+
+    <script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
+    <script th:src="@{/libraries/assets/js/app.js}"></script>
+    <script th:src="@{/js/productDetail/productDetail.js}"></script>
+    
+</body>
+</html>

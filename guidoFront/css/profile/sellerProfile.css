@@ -6,6 +6,7 @@
 /* ----- 판매자 프로필 ----- */
 .seller-profile-top{
     margin:80px;
+    margin-top: 160px;
     /* display: flex; justify-content: space-between; */
     display: flex; justify-content: space-around;
 }
@@ -145,7 +146,8 @@
     margin-bottom: 40px;
 }
 .seller-profile-top .sales-list-box li{
-    width: 100%;  height: 280px; background-color: #fff;
+    /* width: 100%;  */
+    height: 280px; background-color: #fff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex; 
     /* align-items: center; */
@@ -172,7 +174,8 @@
     font-size: 1.375rem; font-weight: normal;
     margin-bottom: 16px;
     width: 100%; text-align: left;
-    height: 64px;
+    height: 60px;
+    line-height: 30px;
     overflow: hidden;
     white-space: normal;
     text-overflow: ellipsis;
@@ -600,12 +603,14 @@
 }
 .seller-profile-top .review-more-modal textarea{/* 리뷰 내용 */
     font-size: 1rem;
-    margin: 12px 0;
-    width: 100%; height: 34vh;
+    margin: 20px 0;
+    width: 100%; height: 32vh;
     line-height: 26px;
     resize: none;
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 8px;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
 }
 
 
@@ -617,15 +622,94 @@
     }
     /* 프로필 오른쪽 박스 - 판매자 소개 */
     .seller-profile-top .profile_right .about-me{
-        grid-template-columns: repeat(1,1fr);
+        grid-template-columns: repeat(2,1fr);
     }
     .seller-profile-top .profile_right li{
-        margin-bottom: 40px; margin-right: 50px;
+        margin-bottom: 40px; margin-right: 0;
+    }
+    /* 판매자 프로필 아래로 상품 리뷰 오게  */
+    .seller-profile-top {
+        flex-direction: column;
+    }
+    .seller-profile-top .sales-list-more {
+        width: 100%;
+    }
+    .seller-profile-top .review-list-more {
+        width: 100%;
+    }
+    .seller-profile-top .review-list li ul li {
+        width: 100%;
+    }
+    .seller-profile-top .sales-list div {
+        width: 100%;
+    }
+    .seller-profile-top .sales-list-box li {
+        width: 100%;
+    }
+    .seller-profile-top .profile-box {
+        width: 100%;
+    }
+    .seller-profile-top .seller-review-box {
+        width: 100%;
+    }
+    .seller-profile-top .profile-box {
+        margin-bottom: 40px;
+        margin-top: 60px;
+    }
+    .seller-profile-top .profile-left {
+        position: relative;
+    }
+    .seller-profile-top .seller-btn {
+        /* position: absolute; */
+        /* bottom: 166px; right: 80px; */
+    }
+    /* 내정보 버튼 */
+    .seller-profile-top .seller-btn {
+        display: flex;
+        width: 83.5%;
+        justify-content: space-between;
+        margin: 0;
+        margin-top: 20px;
+        position: absolute;
+        top: 80px;
+    }
+    .seller-profile-top .seller-btn button {
+        justify-content: space-around;
+        padding: 0 20px;
+        margin-right: 20px;
+    }
+    .seller-profile-top .seller-btn button>img {
+        margin: 0;
+        margin-top: 12px; 
+    }
+    .seller-profile-top .seller-btn button:nth-of-type(2)>img{
+        margin: 0;
+        margin-top: 12px;
+    }
+    .seller-profile-top .seller-btn button:nth-of-type(3)>img{
+        margin: 0;
+        margin-top: 12px; 
+    }
+    .seller-profile-top .seller-btn button:last-of-type{
+        padding: 0 30px;
+    }
+    /* 자기소개 */
+    .seller-profile-top .profile_right {
+        margin-left: 0;
+    }
+
+    /* 상품 리스트 */
+    .seller-profile-top .sales-list-box .sale-img {
+        width: 260px;
+        height: 260px;
     }
 
 }
 
 @media screen and (max-width : 767px) {
+    .seller-profile-top {
+        margin: 61px;
+    }
     /* 프로필 오른쪽 박스 - 판매자 소개 */
     .seller-profile-top .profile_right .about-me{
         grid-template-columns: repeat(1,1fr);
@@ -633,5 +717,87 @@
     .seller-profile-top .profile_right li{
         margin-bottom: 40px; margin-right: 50px;
     }
+    .seller-profile-top .profile_right {
+        margin: 0;
+    }
+    /* 판매자 프로필 아래로 상품 리뷰 오게  */
 
+    .seller-profile-top .sales-list-more {
+        width: 80vw;
+    }
+    .seller-profile-top .review-list-more {
+        width: 80vw;
+    }
+    .seller-profile-top .review-list li ul li {
+        width: 80vw;
+    }
+    .seller-profile-top .sales-list div {
+        width: 80vw;
+    }
+    .seller-profile-top .sales-list-box .sale-content {
+        margin: 20px 10px;
+    }
+    .seller-profile-top .sales-list-box li {
+        width: 80vw;
+    }
+    .seller-profile-top .profile-box {
+        width: 80vw;
+        justify-content: center;
+    }
+    .seller-profile-top .profile-box {
+        margin: 0;
+        margin-top: 80px;
+    }
+    .seller-profile-top .profile-left {
+        position: relative;
+    }
+    .seller-profile-top .seller-btn {
+        position: inherit;
+    }
+    .seller-profile-top .profile_right h1 {
+        margin-top: 50px;
+    }
+    .seller-profile-top .seller-about{
+        margin-top: 80px;
+    }
+    /* 내정보 버튼 */
+    .seller-profile-top .seller-btn {
+        display: block;
+        width: 336px;
+    }
+    .seller-profile-top .seller-btn button {
+        justify-content:left;
+    }
+    .seller-profile-top .seller-btn button>img{
+        width: 35px; margin-top: 12px;
+        margin-left: 64px; margin-right: 30px;
+    }
+    .seller-profile-top .seller-btn button:nth-of-type(2)>img{
+        width: 32px; 
+        margin-left: 66px; margin-right: 32px;
+    }
+    .seller-profile-top .seller-btn button:nth-of-type(3)>img{
+        margin-left: 57px; margin-right: 29px;
+    }
+    /* 상품 리스트 */
+    .seller-profile-top .sales-list-box .sale-img {
+        min-width: 150px;
+        height: 150px;
+    }
+    .seller-profile-top .sales-list-box .sale-content>h2 {
+        font-size: 1rem;
+        line-height: 20px;
+        -webkit-line-clamp: 3;
+        
+    }
+    .seller-profile-top .sales-list-box .sale-content>p:first-of-type{
+        font-size: 0.875rem;
+    }
+    .seller-profile-top .sales-list-box .sale-content>p:last-of-type {
+        font-size: 0.875rem;
+    }
+    .seller-profile-top .sales-list-box .sale-content>p {
+        font-size: 0.875rem;
+    }
+    
 }

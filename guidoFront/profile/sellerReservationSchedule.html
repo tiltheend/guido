@@ -14,7 +14,8 @@
     <script src="../js/profile/calender_main.js"></script>                   
 
     <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;}
+        header{width: 100%; height: 80px; background-color: #B1D8DA;
+        position:absolute; top: 0;}
     </style>
 </head>
 <body>
@@ -86,12 +87,28 @@
                 </div>
 
                 <div id='calendar' style="width:1000px; height: 650px;"></div>
-
+                <!-- style="width:1000px; height: 650px;" -->
+                <!-- style="width:800px; height: 350px;" -->
             </div> <!-- // 판매자 일정 확인 -->
 
         </div>
     </div>
 
-    <!-- <script src="../js/profile/sellerProfile.js"></script>                    -->
+    <script>
+        // 캘린더 사이즈 조절
+        let calendarElement = document.getElementById('calendar');
+
+        function adjustCalendarSize() {
+            if (window.innerWidth <= 1100) {
+                calendarElement.style.width = '80vw';
+                calendarElement.style.height = '65vh';
+            } else {
+                calendarElement.style.width = '1000px';
+                calendarElement.style.height = '650px';
+            }
+        }
+
+        window.addEventListener('resize', adjustCalendarSize);
+    </script>
 </body>
 </html>

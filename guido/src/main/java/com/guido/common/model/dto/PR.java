@@ -11,6 +11,8 @@ import lombok.ToString;
 @ToString
 public class PR {
 	// 가이드 자기소개
+	
+		private int userNo;
 		private String birthYear;			// 출생연도
 		private String job;					// 직업
 		private String pets;				// 반려동물

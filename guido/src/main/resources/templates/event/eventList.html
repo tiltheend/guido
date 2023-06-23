@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guido</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/event/eventList.css}">
+
+    <!-- owl 슬라이드  -->
+    <!-- <link rel="stylesheet" th:href="@{css/main/docs.theme.min.css}"> -->
+
+    <!-- owl 슬라이드 -->
+    <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.theme.default.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/main/slide/owl.css}">
+
+    <!-- js -->
+    <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
+    <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
+
+</head>
+
+<body>
+
+    <th:block th:replace="~{common/header}"></th:block>
+
+
+    <div class="event-page">EVENT</div>
+    <hr>
+
+    <div class="local-trip-title">국내 여행 이벤트</div>
+    <div class="slide-container">
+        <section id="demos_1">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <a th:href="@{/}" class="slider-item-link">
+                                <img th:src="@{../images/slide1.png}" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a th:href="@{/}" class="slider-item-link">
+                                <img th:src="@{../images/slide2.png}" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a th:href="@{/}" class="slider-item-link">
+                                <img th:src="@{../images/slide3.png}" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a th:href="@{/}" class="slider-item-link">
+                                <img th:src="@{../images/slide1.png}" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a th:href="@{/}" class="slider-item-link">
+                                <img th:src="@{../images/slide2.png}" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a th:href="@{/}" class="slider-item-link">
+                                <img th:src="@{../images/slide3.png}" class="item-picture textImg">
+                            </a>
+                        </div>
+                        <!-- <div class="item">
+                            <h4>2</h4>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="popular-tour-title">인기 투어 이벤트</div>
+    <section id="demos_2">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <a th:href="@{/}" class="slider-item-link">
+                            <img th:src="@{../images/slide1.png}" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a th:href="@{/}" class="slider-item-link">
+                            <img th:src="@{../images/slide2.png}" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a th:href="@{/}" class="slider-item-link">
+                            <img th:src="@{../images/slide3.png}" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a th:href="@{/}" class="slider-item-link">
+                            <img th:src="@{../images/slide1.png}" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a th:href="@{/}" class="slider-item-link">
+                            <img th:src="@{../images/slide2.png}" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a th:href="@{/}" class="slider-item-link">
+                            <img th:src="@{../images/slide3.png}" class="item-picture textImg">
+                        </a>
+                    </div>
+                    <!-- <div class="item">
+                        <h4>2</h4>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="enroll-payment-title">회원 가입 & 결제 이벤트</div>
+    <div class="enroll-payment-event">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+
+
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+            loop: true,
+            items: 3,
+            dots: false,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 2,
+                    nav: false
+                },
+                1200: {
+                    items: 3,
+                    nav: true,
+                    loop: false,
+                    margin: 20
+                }
+            }
+            })
+        })
+    </script>
+
+    
+
+<script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
+<script th:src="@{/libraries/assets/js/app.js}"></script>
+
+<!-- js -->
+<script th:src="@{../js/eventList.js}"></script>
+
+</body>
+</html>
