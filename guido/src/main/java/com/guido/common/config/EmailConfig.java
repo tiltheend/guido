@@ -11,8 +11,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 //@PropertySource : 특정 properties 파일의 내용을 이용하겠다는 어노테이션
 
-@Configuration
-@PropertySource("classpath:/config.properties")
+//@Configuration
+//@PropertySource("classpath:/config.properties")
 public class EmailConfig {
 
 	//	@Value : properties 파일에서 키가 일치하는 부분의 value를 얻어와 대입

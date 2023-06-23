@@ -82,3 +82,8 @@
     width: 53px;
     height: 36px;
 }
+
+input:focus{
+    outline:2px solid #1C797D;
+    border: 2px solid #1C797D;
+}

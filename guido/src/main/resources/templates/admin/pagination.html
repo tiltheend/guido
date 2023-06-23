@@ -1,0 +1,68 @@
+<div class="pagination-container">
+    <!-- 검색 X인 경우의 페이지네이션 -->
+    <ul th:unless="${param.query}" class="pagination">
+        <!-- 첫 페이지로 이동 -->
+        <li><a th:href="@{{pageName}(pageName=${pageName})}">&lt;&lt;</a></li>
+        <!-- 이전 목록 마지막 번호로 이동 -->
+        <li><a th:href="@{{pageName}(pageName=${pageName}, cp=${map.pagination.prevPage})}">&lt;</a></li>
+
+        <!-- 특정 페이지로 이동 -->
+        <th:block th:each="i : ${#numbers.sequence(map.pagination.startPage, map.pagination.endPage)}">
+            <c:choose>
+                <li th:if="${i == map.pagination.currentPage}"><a class="current" th:text="${i}">현재 페이지 번호</a></li>
+                <li th:unless="${i == map.pagination.currentPage}"><a
+                        th:href="@{{pageName}(pageName=${pageName}, cp=${i})}" th:text="${i}">나머지 페이지 번호</a></li>
+            </c:choose>
+        </th:block>
+        <!-- 현재 보고있는 페이지 -->
+
+
+        <!-- 다음 목록 시작 번호로 이동 -->
+        <li><a th:href="@{{pageName}(pageName=${pageName}, cp=${map.pagination.nextPage})}">&gt;</a></li>
+        <!-- 끝 페이지로 이동 -->
+        <li><a th:href="@{{pageName}(pageName=${pageName},cp=${map.pagination.maxPage})}">&gt;&gt;</a></li>
+    </ul>
+
+
+
+
+
+
+    <!-- 검색 O인 경우의 페이지네이션 -->
+    <ul th:if="${param.query}" class="pagination">
+
+        <!-- 첫 페이지로 이동 -->
+        <li><a th:href="@{{pageName}(pageName=${pageName}, cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a>
+        </li>
+
+        <!-- 이전 목록 마지막 번호로 이동 -->
+        <li><a
+                th:href="@{{pageName}(pageName=${pageName}, cp=${map.pagination.prevPage}, key=${param.key}, query=${param.query})}">&lt;</a>
+        </li>
+
+        <!-- #numbers.sequence(시작, 끝 [,step]) -->
+        <!-- 특정 페이지로 이동 -->
+        <th:block th:each="i : ${#numbers.sequence(map.pagination.startPage, map.pagination.endPage, 1)}">
+            <!-- 현재 보고있는 페이지 -->
+            <li th:if="${i == map.pagination.currentPage}">
+                <a class="current" th:text="${i}">현재 페이지</a>
+            </li>
+
+            <!-- 현재 페이지를 제외한 나머지 -->
+            <li th:unless="${i == map.pagination.currentPage}">
+                <a th:href="@{{pageName}(pageName=${pageName}, cp=${i}, key=${param.key}, query=${param.query})}"
+                    th:text="${i}">현재 페이지</a>
+            </li>
+        </th:block>
+
+        <!-- 다음 목록 시작 번호로 이동 -->
+        <li>
+            <a th:href="@{{pageName}(pageName=${pageName}, cp=${map.pagination.nextPage}, key=${param.key}, query=${param.query})}">&gt;</a>
+        </li>
+
+        <!-- 끝 페이지로 이동 -->
+        <li>
+            <a th:href="@{{pageName}(pageName=${pageName}, cp=${map.pagination.maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a>
+        </li>
+    </ul>
+</div>

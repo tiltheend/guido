@@ -1,11 +1,15 @@
-package com.guido.admin.model.dto;
+package com.guido.common.model.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@NoArgsConstructor
 @Getter
 @Setter
-public class UserDTO {
+@ToString
+public class User {
 	// 공통
 	private int userNo; // 번호
 	private String userEmail; // 이메일(아이디)
@@ -28,5 +32,5 @@ public class UserDTO {
 	private String activityArea; // 활동지역
 	private String confirmationNo; // 확인증 번호
 	private String superGuideFl; // 슈퍼가이드 여부(N: 일반가이드, Y: 슈퍼가이드)
-	private PRDTO pr; // 가이드 자기소개
+	private PR pr; // 가이드 자기소개
 }

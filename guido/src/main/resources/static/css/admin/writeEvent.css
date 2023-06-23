@@ -2,6 +2,20 @@
     margin: 0 30px;
 }
 
+
+.name-and-period{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name-area{
+    flex-grow: 1;
+    margin-right: 30px;
+}
+
+
+
 .write-header {
     font-weight: bold;
     font-size: 20px;
@@ -52,9 +66,11 @@
     height: 200px;
     border: 2px solid #C6DDDF;
     border-radius: 10px;
-    display: inline-block;
     margin: 20px 5px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .img-area>.img-box:first-child {
@@ -75,12 +91,6 @@
     right: 10px;
 }
 
-.plus-btn {
-    display: block;
-    margin: auto;
-    align-self: center;
-}
-
 .btn-area{
     display: flex;
     justify-content: end;
@@ -96,4 +106,63 @@
     width: 100px;
     height: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.add-btn {
+    display: block;
+    margin: auto;
+    align-self: center;
+}
+
+.add-label{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.preview{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.preview:hover+.delete-btn {
+    display: block;
+}
+
+.delete-btn{
+    position: absolute;
+    top: 10px;
+    right:10px;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    border: 3px solid #0F4957;
+}
+
+.delete-btn:hover{
+    display: block;
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+.date {
+    border: 2px solid #C6DDDF;
+    border-radius: 16px;
+    height: 51px;
+    width: 200px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+input:focus {
+    border: 2px solid #0F4957;
 }

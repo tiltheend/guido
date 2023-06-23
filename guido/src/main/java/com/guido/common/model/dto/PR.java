@@ -1,6 +1,15 @@
-package com.guido.admin.model.dto;
+package com.guido.common.model.dto;
 
-public class PRDTO {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class PR {
 	// 가이드 자기소개
 		private String birthYear;			// 출생연도
 		private String job;					// 직업
