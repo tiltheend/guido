@@ -17,6 +17,7 @@ public class Event {
 	String eventContent;
 	String eventEndDt;
 	String createDt;
+	String state;
 	
 	List<File> fileList;
 }

@@ -26,98 +26,84 @@
     <main>
         <!-- 사이드 메뉴 -->
         <th:block th:replace="~{admin/sideMenu}"></th:block>
-
-
+        
         <!-- 내용 컨테이너 -->
-        <div class="content-container monocolor4">
+        <div class="content-container">
             <div class="content-header">
                 <h1 class="content-title">이벤트 작성</h1>
             </div>
             <hr>
 
-            <form class="eventForm">
-                <div class="write-header">이벤트 제목 <span class="red">*</span></div>
-                <input type="text" name="eventTitle" id="eventTitle" placeholder="이벤트 명과 이벤트 기간을 입력해주세요.">
+            <form class="event-write-form" th:action="@{eventWrite}" method="POST" id="eventWriteForm" enctype="multipart/form-data">
+                <div class="name-and-period">
+                    <div class="name-area">
+                        <div class="write-header">이벤트 제목 <span class="red">*</span></div>
+                        <input type="text" name="eventName" id="eventTitle" placeholder="이벤트 명과 이벤트 기간을 입력해주세요.">
+                    </div>
+                    <div class="period-container">
+                        <div class="write-header">이벤트 기간 <span class="red">*</span></div>
+                        <input type="date" id="today" class="date" readonly>
+                        <span> ~ </span>
+                        <input type="date" name="eventEndDt" id="eventEndDt" class="date">
+                    </div>
+                </div>
                 <div class="write-header">첨부 사진(<span class="count">1</span>/5) <span class="red">*</span></div>
                 <div class="img-slide-area">
                     <div class="img-area">
                         <div class="img-box">
-                            <img src="../images/admin/flat-color-icons_plus.svg" class="plus-btn">
-                            <img src="" alt="">
+                            <label for="img0" class="add-label">
+                                <img th:src="@{/images/admin/flat-color-icons_plus.svg}" class="add-btn">
+                            </label>
+                            <img class="preview hidden">
+                            <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
+                            <input type="file" name="files" class="input-image hidden" accept="image/*" id="img0">
                         </div>
-                        <div class="img-box"><img src="../images/admin/flat-color-icons_plus.svg" class="plus-btn"></div>
-                        <div class="img-box"><img src="../images/admin/flat-color-icons_plus.svg" class="plus-btn"></div>
-                        <div class="img-box"><img src="../images/admin/flat-color-icons_plus.svg" class="plus-btn"></div>
-                        <div class="img-box"><img src="../images/admin/flat-color-icons_plus.svg" class="plus-btn"></div>
+                        <div class="img-box">
+                            <label for="img1" class="add-label">
+                                <img th:src="@{/images/admin/flat-color-icons_plus.svg}" class="add-btn">
+                            </label>
+                            <img class="preview hidden">
+                            <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
+                            <input type="file" name="files" class="input-image hidden" accept="image/*" id="img1">
+                        </div>
+                        <div class="img-box">
+                            <label for="img2" class="add-label">
+                                <img th:src="@{/images/admin/flat-color-icons_plus.svg}" class="add-btn">
+                            </label>
+                            <img class="preview hidden">
+                            <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
+                            <input type="file" name="files" class="input-image hidden" accept="image/*" id="img2">
+                        </div>
+                        <div class="img-box">
+                            <label for="img3" class="add-label">
+                                <img th:src="@{/images/admin/flat-color-icons_plus.svg}" class="add-btn">
+                            </label>
+                            <img class="preview hidden">
+                            <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
+                            <input type="file" name="files" class="input-image hidden" accept="image/*" id="img3">
+                        </div>
+                        <div class="img-box">
+                            <label for="img4" class="add-label">
+                                <img th:src="@{/images/admin/flat-color-icons_plus.svg}" class="add-btn">
+                            </label>
+                            <img class="preview hidden">
+                            <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
+                            <input type="file" name="files" class="input-image hidden" accept="image/*" id="img4">
+                        </div>
                     </div>
                     <button type="button" class="img-slide-left-btn"><img src="../images/admin/slide_left_btn.svg" alt=""></button>
                     <button type="button" class="img-slide-right-btn"><img src="../images/admin/slide_right_btn.svg" alt=""></button>
                 </div>
                 <div class="write-header">이벤트 설명 <span class="red">*</span></div>
                 <textarea name="eventContent" id="eventContent" cols="30" rows="10" placeholder="이벤트에 대한 설명(이벤트명, 기간, 장소, 시간, 참여비, 문의처 등등) 을 상세히 작성해주세요."></textarea>
-
-                <div class="btn-area"><button type="submit" class="sbmt-btn">등록</button></div>
+                <div class="btn-area">
+                    <button type="submit" class="sbmt-btn">
+                        등록
+                    </button>
+                </div>
             </form>
         </div>
     </main>
-
-    <script>
-        const slideArea = document.querySelector('.img-slide-area');
-        const imgArea = document.querySelector('.img-area');
-        const imgBoxes = document.querySelectorAll('.img-box');
-        const leftBtn = document.querySelector('.img-slide-left-btn');
-        const rightBtn = document.querySelector('.img-slide-right-btn');
-        let currentIndex = 0;
-        const slideWidth = imgBoxes[0].offsetWidth;
-        let touchStartX = 0;
-        let touchMoveX = 0;
-
-        function slideLeft() {
-            currentIndex--;
-            if (currentIndex < 0) {
-                currentIndex = 0;
-            }
-            slideImages();
-        }
-
-        function slideRight() {
-            currentIndex++;
-            slideImages();
-        }
-
-        function slideImages() {
-            const slideDistance = slideWidth * currentIndex;
-            imgArea.style.transform = `translateX(${-slideDistance}px)`;
-            const end = imgArea.offsetWidth - slideArea.offsetWidth;
-            if(slideDistance > end) {
-                imgArea.style.transform = `translateX(-${end}px)`;
-                currentIndex = end / slideWidth;
-            }
-        }
-
-        function handleTouchStart(event) {
-        touchStartX = event.touches[0].clientX;
-        }
-
-        function handleTouchMove(event) {
-        touchMoveX = event.touches[0].clientX;
-        }
-
-        function handleTouchEnd() {
-        const touchDistance = touchMoveX - touchStartX;
-        const threshold = slideWidth / 2;
-
-        if (touchDistance > threshold) {
-            slideLeft();
-        } else if (touchDistance < -threshold) {
-            slideRight();
-        }
-        }
-        leftBtn.addEventListener('click', slideLeft);
-        rightBtn.addEventListener('click', slideRight);
-        slideArea.addEventListener('touchstart', handleTouchStart);
-        slideArea.addEventListener('touchmove', handleTouchMove);
-        slideArea.addEventListener('touchend', handleTouchEnd);
-    </script>
+    <script th:src="@{/js/admin/writeEvent.js}"></script>
 </body>
 </html>

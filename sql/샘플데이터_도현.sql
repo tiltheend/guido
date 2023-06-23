@@ -66,6 +66,9 @@ SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE
 FROM PRODUCT;
 
 SELECT * FROM PRODUCT;
+COMMIT;
+
+UPDATE PRODUCT SET TOUR_DURATION = 8 WHERE PRODUCT_NO IN (25,26,27,28);
 
 INSERT INTO PRODUCT
 (PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE, PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO, REGION_CODE, THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT)
@@ -77,7 +80,7 @@ VALUES(SEQ_PRODUCT_NO.NEXTVAL, '점점 빠져드는 문경 당일여행(점촌�
 '김룡사 - 경북 문경시 산북면 김룡리,운달산 자락 태고의 수림 속에 1400여년의 불맥을 이어온 김룡사(金龍寺)가 자리잡고 있다. 이 절은 신라 진평왕 10년(588년)에 운달조사(雲達祖師)가 창건하여 운봉사(雲峯寺)라 불리었으며,그후 사세를 확장해가다 인조 21년(1643년) 실화(失火)로 모두 소실되어 인조 27년(1649년)에 다시 옛 모습을 되찾았다.
 고모산성 - 문경시 마성면 신현리 고모산(姑母山)에 있는 포곡식 산성이다. 출토 유물로 보아 470년경에 처음 축조한 것으로 짐작되며, 이후 여러 차례 증축과 개축을 반복하였다. 경북팔경 중의 하나인 진남교반(鎭南橋畔)을 사이에 두고 어룡산(魚龍山)과 마주보고 있는 천연 요새이다.
 문경새재 - 백두대간의 조령산을 넘는 이 재는 예로부터 한강과 낙동강유역을 잇는 영남대로상의 가장 높고 험한 고개로 사회 ,문화, 경제의 유통과 국방상의 요충지였다. 새재는 『새도 날아서 넘기 힘든 고개』, 옛 문헌에 초점(草岾)이라고도 하여 『풀(억새)이 우거진 고개』 또는 하늘재와 이우리재 사이의 『새(사이)』, 새로 된 고개의 『새(新)재』등의 뜻이라고도 한다. 임진왜란 뒤에 이곳에 3개(주흘관, 조곡관, 조령관)의 관문(사적 제147호)을 설치하여 국방의 요새로 삼았다. 이곳은 자연경관이 빼어나고 유서 깊은 유적과 설화. 민요 등으로 이름 높은 곳이다. 이곳에는 나그네의 숙소인 원터, 신구 경상도관찰사가 관인을 주고받았다는 교귀정터 만이 남아 있는 것을 1999년 중창하였고 옛날에 산불을 막기 위하여 세워진 한글 표석 산불됴심비(지방문화재자료 제226호)가 남아 있다.',
-25900, null, 5, 20, 28, 1, 5, 'N', SYSDATE	, 'Chinese', 0	);
+25900, null, 5, 20, 28, '문경', 5, 'N', SYSDATE	, 'Chinese', 0	);
 
 INSERT INTO PRODUCT
 (PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE, PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO, REGION_CODE, THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT)
@@ -85,14 +88,14 @@ VALUES(SEQ_PRODUCT_NO.NEXTVAL, '느리게 걷는 영주, 당일치기 힐링여�
 '선비의 고장으로 잘 알려진 경상북도 영주시는 영주동을 중심으로 중앙선·경북선·영동선 철도가 통과하는 소백권과 태백권 교통의 중심지입니다. 단양, 안동, 예천, 영월 등과 접해있어서 다른 도시와 묶어서 여행을 다녀오기도 좋지만, 하루 종일 영주시를 느리게 걸으며 둘러보는 것도 아주 매력적이지요.',
 19900,
 '희방사 입장료: 어린이 600원, 청소년 및 군경 1000원, 성인 2000원&&소수서원 입장료 : 어른 3000원, 청소년 및 군인 2000원, 어린이 1000원&&부석사 입장료 : 어린이 800원, 청소년 및 군경 1000원, 성인 1200원',
-1, 5, 28, 1, 5, 'N', SYSDATE, 'Chinese', 0	);
+1, 5, 28, '영주', 5, 'N', SYSDATE, 'Chinese', 0	);
 INSERT INTO PRODUCT
 (PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE, PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO, REGION_CODE, THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT)
 VALUES(SEQ_PRODUCT_NO.NEXTVAL, '[남한산성]붉게 물드는 하늘을 감상하는 노을 명소', 1,
 '남한산성은 삼국시대부터 천연의 요새로 중요한 역할을 하던 곳입니다. 이곳의 노을 포인트는 국청사 성벽을 따라 2분 정도 올라가면 있는 서문 전망대인데요. 성벽에서 내려다보면 탁 트인 서울 시내와 성남시를 한눈에 조망할 수 있습니다. 서울에 내려앉는 붉은 노을을 감상할 수 있는 이곳에서 저녁 산책을 즐겨보세요.',
 30000,
 '[남한산성행궁]성인(만 19세~만 64세) 2,000원 / 청소년(만 7세~만 18세) 1,000원 / 만 6세 이하, 만 65세 이상 무료',
-5, 10, 27, 1, 1, 'N', SYSDATE, 'English', 0	);
+5, 10, 27, '서울', 1, 'N', SYSDATE, 'English', 0	);
 INSERT INTO PRODUCT
 (PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE, PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO, REGION_CODE, THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT)
 VALUES(SEQ_PRODUCT_NO.NEXTVAL, '아이유와 함께하는 서울 숲 나들이', 1,
@@ -105,7 +108,7 @@ VALUES(SEQ_PRODUCT_NO.NEXTVAL, '아이유와 함께하는 서울 숲 나들이',
 저를 가이드로 활용하면 시간과 비용을 절약할 수 있는 맞춤형 여행 계획을 세울 수 있습니다. 일생일대의 여행을 즐기실 수 있도록 일대일로 도와드립니다.',
 99000,
 null,
-1, 1, 27, 1, 1, 'N', SYSDATE, 'English', 0);
+1, 1, 27, '서울', 1, 'N', SYSDATE, 'English', 0);
 
 SELECT * FROM REGION R ;
 
@@ -128,7 +131,29 @@ FROM REVIEW;
 
 INSERT INTO REVIEW
 (REVIEW_NO, USER_NO, REVIEW_MESSAGE, REVIEW_STARS, REVIEW_DEL_FL, PRODUCT_NO, CREATE_DT)
+VALUES(SEQ_REVIEW_NO.NEXTVAL, 29, 'If you go to an uninhabited island, Choco Pie is sold for 1,200 won.
+But every time I dream of Snow White and the eight dwarfs living happily ever after.
+HOT, Happiness, Tokyo Olympics, everything is complicated
+I hope there is no damage from this typhoon.
+This is a really, really important issue.', 5, 'N', 27, SYSDATE);
+INSERT INTO REVIEW
+(REVIEW_NO, USER_NO, REVIEW_MESSAGE, REVIEW_STARS, REVIEW_DEL_FL, PRODUCT_NO, CREATE_DT)
+VALUES(SEQ_REVIEW_NO.NEXTVAL, 30, 'A lot of people came on this trip.
+Minsu, Seongcheol, and Myungsoo all had so much fun, and I was with you until the end
+I really wanted to be with all of you, but the manhole cover is right, I suddenly remembered that.
+Glutinous rice donuts. They are sold at Paris Baguette. What if Baskin Robbins had 44 flavors?
+In the same place as Home Alone, Kevin was alone.
+Clouds in clouds, cotton candy Everland. thank you', 5, 'N', 28, SYSDATE);
+
+COMMIT;
+INSERT INTO REVIEW
+(REVIEW_NO, USER_NO, REVIEW_MESSAGE, REVIEW_STARS, REVIEW_DEL_FL, PRODUCT_NO, CREATE_DT)
 VALUES(SEQ_REVIEW_NO.NEXTVAL, 0, '', 0, 'N'	, 0, SYSDATE);
+
+SELECT * FROM "USER" u ;
+
+SELECT * FROM PRODUCT P ;
+
 
 
 -- 관심 상품 (구매자)
@@ -154,8 +179,25 @@ FROM "FILE";
 
 INSERT INTO "FILE"
 (FILE_NO, PRODUCT_NO, FILE_ORDER, FILE_PATH)
-VALUES(SEQ_FILE_NO.NEXTVAL, 0, 0, '');
+VALUES(SEQ_FILE_NO.NEXTVAL, 28, NULL, NULL, 1, '/images/product/product28_image1');
+INSERT INTO "FILE"
+(FILE_NO, PRODUCT_NO, FILE_ORDER, FILE_PATH)
+VALUES(SEQ_FILE_NO.NEXTVAL, 28, NULL, NULL, 2, '/images/product/product28_image2');
+INSERT INTO "FILE"
+(FILE_NO, PRODUCT_NO, FILE_ORDER, FILE_PATH)
+VALUES(SEQ_FILE_NO.NEXTVAL, 28, NULL, NULL, 3, '/images/product/product28_image3');
+INSERT INTO "FILE"
+(FILE_NO, PRODUCT_NO, FILE_ORDER, FILE_PATH)
+VALUES(SEQ_FILE_NO.NEXTVAL, 28, NULL, NULL, 4, '/images/product/product28_image4');
+INSERT INTO "FILE"
+(FILE_NO, PRODUCT_NO, FILE_ORDER, FILE_PATH)
+VALUES(SEQ_FILE_NO.NEXTVAL, 28, NULL, NULL, 5, '/images/product/product28_image5');
+INSERT INTO "FILE"
+(FILE_NO, PRODUCT_NO, FILE_ORDER, FILE_PATH)
+VALUES(SEQ_FILE_NO.NEXTVAL, 28, NULL, NULL, 6, '/images/product/product28_image6');
 
+SELECT * FROM PRODUCT;
+SELECT * FROM "FILE";
 
 -- 상품 일정(옵션) (판매자)
 SELECT PRODUCT_DT_NO, PRODUCT_NO, PRODUCT_DT
@@ -164,3 +206,107 @@ FROM PRODUCT_DT;
 INSERT INTO PRODUCT_DT
 (PRODUCT_DT_NO, PRODUCT_NO, PRODUCT_DT)
 VALUES(SEQ_PRODUCT_DT_NO.NEXTVAL, 0, '');
+
+
+
+
+SELECT * FROM EVENT;
+
+SELECT * FROM "FILE";
+
+INSERT INTO EVENT VALUES(
+	SEQ_EVENT_NO.NEXTVAL, '임시 이벤트의 제목입니다.', '임시 이벤트의 내용입니다.', SYSDATE, SYSDATE, DEFAULT
+);
+
+SELECT * FROM "FILE";
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 1, NULL, 1, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 1, NULL, 2, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 2, NULL, 1, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 2, NULL, 2, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 3, NULL, 1, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 3, NULL, 2, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 4, NULL, 1, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 4, NULL, 2, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 5, NULL, 1, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+INSERT INTO "FILE" VALUES(SEQ_FILE_NO.NEXTVAL, NULL, 5, NULL, 2, 'https://caching.lottecinema.co.kr/Media/Event/04b0c7ae585e4af2b031ef2c623b193d.jpg');
+
+
+
+COMMIT;
+
+
+SELECT FILE_ORDER, FILE_PATH FROM "FILE"
+		WHERE PRODUCT_NO = 15
+		ORDER BY FILE_ORDER;
+		
+	
+SELECT * FROM EVENT;
+
+INSERT INTO EVENT VALUES(10001, '1','2','2023-06-30',SYSDATE,DEFAULT);
+
+ROLLBACK;
+
+SELECT * FROM "FILE";
+
+
+INSERT INTO "FILE"
+SELECT SEQ_FILE_NO.NEXTVAL, A.*
+FROM (			  
+		? EVENT_NO
+					, ? FILE_ORDER
+					, ? FILE_PATH
+				  UNION ALL  
+					? EVENT_NO
+					, ? FILE_ORDER
+					, ? FILE_PATH
+				 
+			) A
+			;
+SELECT *
+FROM "USER"
+NATURAL JOIN "TOURIST"
+WHERE USER_TYPE='T'
+ORDER BY USER_NO DESC
+;
+
+SELECT * FROM "USER" WHERE USER_TYPE='T' ORDER BY USER_NO;
+SELECT * FROM "TOURIST" ORDER BY USER_NO;
+
+SELECT USER_NO, USER_EMAIL, PASSPORT_NO, CREATE_DT, USER_STATE
+		FROM "USER"
+		NATURAL JOIN "TOURIST"
+		WHERE USER_TYPE='T'
+		ORDER BY USER_NO DESC;
+	
+SELECT * FROM "USER" WHERE USER_TYPE='T';
+	
+
+SELECT USER_NO, USER_EMAIL, PASSPORT_NO, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, USER_STATE
+	FROM "USER"
+	NATURAL JOIN "TOURIST"
+	WHERE USER_TYPE='T'
+	ORDER BY USER_NO DESC;
+	
+SELECT * FROM "USER" WHERE USER_TYPE='G';
+
+SELECT * FROM "GUIDE";
+
+SELECT * FROM "FILE" f ;
+
+SELECT * FROM "USER" WHERE USER_TYPE='T';
+
+UPDATE "USER" SET USER_STATE='D' WHERE USER_NO=5;
+
+COMMIT;
+
+SELECT * FROM PRODUCT;
+
+SELECT USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, USER_STATE, SUPER_GUIDE_FL 
+		FROM "USER"
+		NATURAL JOIN "GUIDE"
+		WHERE USER_TYPE='G'
+		ORDER BY USER_NO DESC;
+		
+SELECT * FROM PRODUCT;
+
+SELECT * FROM "FILE";
