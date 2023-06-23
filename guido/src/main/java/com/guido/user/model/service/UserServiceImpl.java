@@ -22,15 +22,20 @@ public class UserServiceImpl implements UserService {
 		
 		User loginUser = mapper.login(inputUser); // 조회해서
 		
-		if(loginUser != null) { // 일치하는 회원 있으면
+//		if(loginUser != null) { // 일치하는 회원 있으면
 //			if(bcrypt.matches(inputUser.getUserPassword(), loginUser.getUserPassword())) {
 //				loginUser.setUserPassword(null); // 보안 위해 로그인된 비번 정보 제거
 //			} else {
 //				loginUser = null; // 로그인 실패
 //			}
-			if(inputUser.getUserPassword() != loginUser.getUserPassword()) loginUser = null; //bcrypt 전 테스
+//		}
 			
+		//bcrypt 전 테스트
+		if(loginUser != null) {
+			System.out.println("로그인 된 회원 비번 : " + loginUser.getUserPassword());
+			if(!(inputUser.getUserPassword().equals(loginUser.getUserPassword()))) loginUser = null; // 비번 틀리면 로그인 실패!
 		}
+			
 		return loginUser;
 	}
 

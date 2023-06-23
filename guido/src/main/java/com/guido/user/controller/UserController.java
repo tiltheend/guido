@@ -1,5 +1,8 @@
 package com.guido.user.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,22 +57,27 @@ public class UserController {
 	//----------------
 	
 	// 로그인
+//	@ResponseBody
 	@PostMapping("/login")
 	public String login(User inputUser, Model model // loginUser Session scopes
-			, RedirectAttributes ra // 로그인 실패 시 alert message
+			, RedirectAttributes ra // 로그인 실패 시 redirect할 때 alert message
 			, @RequestHeader(value="referer") String referer // 로그인 실패 시 이전 주소(로그인x 메인)
 			, @RequestParam(value="rememberId", required=false) String rememberId // 아이디 저장
 			, HttpServletResponse resp // 쿠키 전달용 (서버->클라이언트)
 			) {
 		
 		User loginUser = service.login(inputUser);
-		String path = null;
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String path;
+				
 		if(loginUser != null) { // 로그인 성공
-			path = "common/main";
-			model.addAttribute("loginUser", loginUser);
 			
-			// cookie (아이디 기억하기 체크)
+			path = "redirect:/";
+			ra.addFlashAttribute("message", "즐거운 여행되세요!");
+			
+//			 cookie (아이디 기억하기 체크)
 			Cookie cookie =new Cookie("rememberId", loginUser.getUserEmail());
 			
 			if(rememberId != null)  cookie.setMaxAge(60*60*24*30); // 한달 유지
@@ -77,12 +85,27 @@ public class UserController {
 			
 			cookie.setPath("/");
 			resp.addCookie(cookie); // 클라이언트에 쿠키 전달
+			
 		}else { // 로그인 실패
-			path = "redirect:"+referer; // 이전 주소
+			
+			System.out.println("로그인 실패.....");
+			
+			path = "redirect:"+referer;  
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			path = "login/fail";
+			message = "<script>alert('아이디 또는 비밀번호가 일치하지 않습니다. 다시 시도해주세요.');</script>";
+			
 		}
+		
+		model.addAttribute("loginUser", loginUser);
+		
 		return path;
 	}
+	
+	// 로그아웃
+//	@GetMapping("/logout")
+//	public
+	
 	
 
 }
