@@ -27,7 +27,7 @@
 
 
         <!-- 내용 컨테이너 -->
-        <div class="content-container monocolor4">
+        <div class="content-container">
             <div class="content-header">
                 <h1 class="content-title">구매자 관리</h1>
                 <div class="btn-container">
@@ -53,7 +53,7 @@
                 <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
             </div>
             <!-- 카운트 -->
-            <div class="count-container">총 <span>10</span>건</div>
+            <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
 
             <!-- 테이블 -->
             <table>
@@ -62,112 +62,27 @@
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
                     <tr><th class="col-checkbox"><input type="checkbox" name="" id=""></th><th class="col-number">회원번호</th><th class="col-email">이메일</th>
-                    <th class="col-passportNo">여권번호</th><th class="col-date">작성일</th><th class="col-state">회원 상태</th></tr>
+                    <th class="col-passportNo">여권번호</th><th class="col-date">가입일</th><th class="col-state">회원 상태</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>10</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>정상</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>9</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>정상</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>8</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>정상</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>7</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>정상</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>6</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>블락</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>5</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>블락</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>4</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>탈퇴</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>3</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>탈퇴</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>2</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>탈퇴</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>1</td>
-                        <td>email@gmail.com</td>
-                        <td>여권번호</td>
-                        <td>2023-06-07</td>
-                        <td>탈퇴</td>
-                    </tr>
+                    <th:block th:each="user : ${map.list}" th:object="${user}">
+                        <tr>
+                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{userNo}"></td>
+                            <td th:text="*{userNo}">회원번호</td>
+                            <td th:text="*{userEmail}">이메일</td>
+                            <td th:text="*{passportNo}">여권번호</td>
+                            <td th:text="*{createDate}">가입일</td>
+                            <td th:text="*{userState == 'Y' ? '미승인' : (userState == 'N' ? '정상' : (userState == 'B' ? '블락' : (userState == 'D' ? '탈퇴' : '')))}"></td>
+                            <!-- <td th:text="${userState==N?'정상':(userState==Y?'미승인':(userState==B?'블락':(userState==D?'탈퇴':'')))}"></td> -->
+                        </tr>
+                    </th:block>
                 </tbody>
             </table>
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li><a href="#">&lt;&lt;</a></li>
-                    <li><a href="#">&lt;</a></li>
-                    <li><a href="#" class="current">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li><a href="#">&gt;</a></li>
-                    <li><a href="#">&gt;&gt;</a></li>
-                </ul>
-            </div>
+            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
+            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
         </div>
     </main>
+    <script th:src="@{/js/admin/admin.js}"></script>
 </body>
-
 </html>

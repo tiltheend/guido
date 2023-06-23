@@ -26,5 +26,7 @@ public interface ProductDetailMapper {
 	// 자기소개 조회
 	PR selectPR(int userNo);
 
+	// 특정 상품 옵션 목록 조회
+	List<String> selectOptionList(int productNo);
 	
 }
