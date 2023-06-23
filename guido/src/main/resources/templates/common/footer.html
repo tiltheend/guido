@@ -45,8 +45,20 @@
             <img th:src="@{/images/icons/upper_arrow.png}" alt="">
         </div>
     </footer>
+    <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
+    <script th:inline="javascript">
+        // const message='[[${message}]]';
+
+        /* Natural Template */
+        const message = /*[[${message}]]*/  "전달 받은 message";
+        // 타임리프 해석 값(자료형이 알아서 해석)     사라짐(설명)
+        if(message != null){
+            alert(message);
+        }
+    </script>   
 
     <script th:src="@{/js/main.js}"></script>
+
 </body>
 </html>
 
