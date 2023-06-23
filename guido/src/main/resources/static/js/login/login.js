@@ -60,3 +60,25 @@ close2.addEventListener("click",()=>{
     modal2.style.display = "none";
 })
 
+// 아이디 저장
+// 자바스크립트로 쿠키 얻어오기
+function getCookie(key){
+    const cookies = document.cookie;
+
+    const cookieList = cookies.split(";").map(cookie=>cookie.split("="));
+
+    const obj = {};
+    for(let i=0; i<cookieList.length; i++){
+        obj[cookieList[i][0]]=cookieList[i][1];
+    }
+    return obj[key];
+}
+// 쿠키에 rememberId가 있을 경우
+if(document.querySelector("input[name='userEmail']")!=null){
+    const rememberId = getCookie("rememberId");
+    if(rememberId != undefined){
+        document.querySelector("input[name='userEmail']").value = rememberId;
+        document.querySelector("input[name='rememberId']").checked = true;
+    }
+}
+

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.User;
@@ -19,6 +20,7 @@ import com.guido.user.model.service.UserService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/user")
 @SessionAttributes({"loginUser"})
@@ -92,8 +94,6 @@ public class UserController {
 			
 			path = "redirect:"+referer;  
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
-			path = "login/fail";
-			message = "<script>alert('아이디 또는 비밀번호가 일치하지 않습니다. 다시 시도해주세요.');</script>";
 			
 		}
 		
@@ -103,8 +103,11 @@ public class UserController {
 	}
 	
 	// 로그아웃
-//	@GetMapping("/logout")
-//	public
+	@GetMapping("/logout")
+	public String logout(SessionStatus status, HttpSession session) {
+		status.setComplete();
+		return "redirect:/";
+	}
 	
 	
 
