@@ -1,5 +1,3 @@
-
-
 /* ---- 긴 리뷰들만 더보기 상세 조회 모달 ---- */
 let moreAndReply; /* 더보기 버튼 */
 let reviewMoreModal; /* 더보기 모달 */
@@ -25,6 +23,7 @@ let reviewEditModalClose; /* 리뷰 수정 닫기 */
 let reviewSaleList; /* 리뷰 상품명 */
 let reviewSaleListContent; /* 리뷰 작성 글 */
 let reviewSaleListStar; /* 리뷰 별점 */
+
 
 document.addEventListener("DOMContentLoaded",()=>{
 

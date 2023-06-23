@@ -33,16 +33,18 @@
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
 
-                <div class="profile-img-box"> <!-- 프로필+이름 -->
+                <form class="profile-img-box" action=""> <!-- 프로필+이름 -->
+                    <button class="profile-edit-btn">프로필 변경</button>
+                    <img src="../images/profile/profile_delete.png" alt="profile_delete" class="profile-delete">
                     <div class="profile-img">
-                        <img src="" alt=""> <!-- 프로필 사진 칸 -->
+                        <img src="" alt="" class="img-content"> <!-- 프로필 사진 칸 -->
 
                         <input type="file" name="userProfileFile" id="userProfileFile">
                         <!-- 프로필 편집 버튼 -->
                         <img src="../images/profile/profileEdit.png" alt="profileEditIcon" class="profile-edit-icon"> 
                     </div>
                     <h2 onclick="location.href='buyerProfile.html'">UserName</h2> <!-- 유저이름 -->
-                </div>
+                </form>
 
                 <div class="user-email"> <!-- 유저 이메일 -->
                     <p>tiltheend@gmail.com</p>
