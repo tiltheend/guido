@@ -1,0 +1,191 @@
+/* -----------------구매자 프로필---------------------- */
+
+/* 임시로 하나씩 안보이게 하기 위해 잠시 주는 것!! */
+#displayNone{display: none;}
+
+/* ----- 구매자 프로필 ----- */
+.buyer-profile-top{
+    margin:80px;
+    /* display: flex; justify-content: space-between; */
+    display: flex; justify-content: space-around;
+}
+
+/* 프로필 위 가이드 배너 */
+.buyer-profile-top .guide-banner{margin-bottom: 4px;}
+.buyer-profile-top .guide-banner>img{height: 45px;}
+
+/* 프로필 왼쪽 박스 */
+.buyer-profile-top .profile-left{
+    width: 336px; border-radius: 5px; 
+    background-color: #F0F0F0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.buyer-profile-top .profile-img-box{ /* 프로필 사진 + 이름 */
+    width: 100%; height: 300px; border-bottom: 2px solid #fff;
+    display: flex; flex-direction: column; align-items: center;
+}
+.buyer-profile-top .profile-img-box>h2{ /* 유저 이름 */
+    font-size: 1.625rem; margin-top: 12px;
+}
+.buyer-profile-top .profile-img{
+    width: 180px; height: 180px; border-radius: 50%;
+    background-color: #B1D8DA; border: 2px solid #fff;
+    position: relative; margin-top: 32px;
+}
+
+.buyer-profile-top .profile-img>img:first-of-type{
+    width: 100%; height: 100%; border-radius: 50%;
+}
+/* 파일 첨부 버튼 안보이게 */
+.buyer-profile-top #userProfileFile{display: none;}
+.buyer-profile-top .profile-edit-icon{ /* 프로필 편집 아이콘 */
+    width: 32px; height: 32px; cursor: pointer;
+    position: absolute; bottom: 8px; right: 8px;
+}
+
+
+/* 유저 이메일 */
+.buyer-profile-top .user-email{
+    width: 100%; height: 60px; 
+    display: flex; align-items: center;}
+.buyer-profile-top .user-email p{width: 100%; text-align: center;}
+
+/* 구매자 버튼 */
+.buyer-profile-top .seller-btn{
+    width: 336px; margin-top: 8px;
+    margin-bottom: 80px;
+}
+.buyer-profile-top .seller-btn button{
+    width: 100%; height: 60px; border-radius: 10px;
+    background-color: #fff; color: #5C5C5C;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 12px; font-size: 1rem;
+    display: flex; align-content: center; 
+    /* justify-content: space-between; padding: 0 60px; */
+    border: 1px solid #F0F0F0; line-height: 58px;
+    text-align: center;
+}
+.buyer-profile-top .seller-btn button:hover{
+    font-size: 1.1rem;
+}
+.buyer-profile-top .seller-btn button>img{
+    width: 35px; margin-top: 12px;
+    margin-left: 84px; margin-right: 30px;
+}
+.buyer-profile-top .seller-btn button:nth-of-type(2)>img{
+    width: 31px; 
+    margin-left: 86px; margin-right: 32px;
+}
+.buyer-profile-top .seller-btn button:nth-of-type(3)>img{
+    width: 30px; margin-top: 14px;
+    margin-left: 87px; margin-right: 30px;
+}
+
+/* 프로필 오른쪽 박스 */
+.buyer-profile-top .profile_right{
+    margin-left: 80px; 
+    /* margin-right: 80px; */
+    display: flex;
+    justify-content: start;
+    width: 938px;
+}
+.profile-secession{
+    display: flex;
+    flex-direction: column;
+}
+.profile-secession-title{
+    margin-bottom: 10px;
+}
+.profile-secession-subtitle{
+    display: inline-flex;
+    flex-direction: row;
+    margin: 20px 0 0 10px;
+}
+.nbsp{
+    background-color: #0F4957;
+    border-radius: 3px;
+}
+.subtitle{
+    text-align: center;
+}
+.profile-secession-content{
+    margin: 30px 30px 30px 35px;
+}
+.profile-secession-content li{
+    list-style-type: decimal;
+    margin: 5px 0;
+}
+.profile-secession-check{
+    margin-left: 15px;
+    margin-bottom: 30px;
+}
+/* 체크박스 */
+.box{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #c5c5c5;
+}
+[type="checkbox"]{
+    display: none;
+}
+.box:hover{
+    cursor: pointer;
+    color: black;
+}
+input[type="checkbox"]:checked + label{
+    background: url("/src/main/resources/static/images/check.png") 0 0 no-repeat;
+    background-size: cover;
+    border: none;
+}
+.ment2{
+    color: #5c5c5c;
+    vertical-align: 2px;
+}
+/* 탈퇴 사유 */
+.profile-secession-radio{
+    margin: 30px 0 30px 15px;
+    display: flex;
+    flex-direction: column;
+}
+.profile-secession-radio>label{
+    margin: 5px 0;
+}
+.ment{
+    vertical-align: 2px;
+}
+button{
+    width: 150px;
+    height: 42px;
+    border-radius: 8px;
+    background-color: #1c797d;
+    color: #fff;
+}
+#reason5+textarea{
+    display: none;
+}
+#reason5:checked + textarea{
+    display: block;
+    border: 3px solid #1c7a7dbb;
+    margin: 5px 0 0 20px;
+    border-radius: 3px;
+    padding-left: 5px;
+    white-space: pre-wrap;
+    overflow: scroll;
+    width: 500px;
+    height: 50px;
+}
+
+
+
+@media screen and (max-width : 1024px) {
+    /* 구매자 프로필 */
+    .buyer-profile-top{
+        display: flex; justify-content: space-between;
+    }
+
+}
+
+@media screen and (max-width : 767px) {
+
+}

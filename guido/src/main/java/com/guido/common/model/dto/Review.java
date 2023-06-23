@@ -18,6 +18,13 @@ public class Review {
 	private int productNo;	// 상품 번호
 	private String createDate;	// 작성일
 	
-	private String userName;		// 회원 이름
+	// --------------- 테이블 끝!
+	
+	private String userName;			// 회원 이름
 	private String profileImage;		// 프로필 이미지
+	
+	private String productName;		// 상품명
+	private String reviewReply;		// 리뷰 답글
+	private double reviewStarsDouble;		// 리뷰 별점 (0.5 단위)
+	
 }

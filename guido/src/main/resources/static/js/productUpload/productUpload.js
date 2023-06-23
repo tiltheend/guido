@@ -29,23 +29,27 @@ const updatePage = () => {
     typing2();
   }
   if (currentPage == 2) {
+    document.querySelector('.text5').innerHTML = '';
+    typing5();
+  }
+  if (currentPage == 3) {
     document.querySelector('.text3').innerHTML = '';
     // tourThemesCheck();
     typing3();
   }
-  if (currentPage == 4) {
+  if (currentPage == 5) {
     document.querySelector('.text4').innerHTML = '';
     typing4();
   }
-  if (currentPage == 6) {
+  if (currentPage == 7) {
     titleCharCheck();
     inputTitle.focus();
   }
-  if (currentPage == 7) {
+  if (currentPage == 8) {
     contentCharCheck();
     inputContent.focus();
   }
-  if (currentPage == 10) {
+  if (currentPage == 11) {
     disableNextButton();
   }
 };
@@ -139,7 +143,7 @@ tourTypes.forEach(function (tourType) {
       }
     } else {
       inputTourTime.style.display = 'none';
-      nextBtn.disabled = false;
+      // nextBtn.disabled = false;
     }
   });
 
@@ -273,6 +277,10 @@ window.addEventListener('DOMContentLoaded', function () {
   var mainElement10 = document.getElementById('page11');
   if (mainElement10) {
     mainElement10.style.width = '850px';
+  }
+  var mainElement14 = document.getElementById('page15');
+  if (mainElement14) {
+    mainElement14.style.width = '90%';
   }
 });
 //3페이지
@@ -461,6 +469,7 @@ const titleCharCheck = () => {
     titleWarning.style.display = 'none';
   }
 };
+
 inputTitle.addEventListener('input', titleCharCheck);
 
 const inputContent = document.getElementById('inputContent'); // 제목 input
@@ -667,10 +676,17 @@ function addCommas(input) {
   formattedValue = '₩' + value + formattedValue;
   input.value = formattedValue;
 }
-
 document.getElementById('feeInput').addEventListener('input', (e) => {
   addCommas(e.target);
+  if (feeInput.value === '₩') {
+    nextBtn.disabled = true;
+  } else if (feeInput.value === '') {
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.disabled = false;
+  }
 });
+
 function addCurrencySymbol(input) {
   let value = input.value.replace(/[₩]/g, ''); // 기존의 ₩ 기호 제거
   let formattedValue = '₩' + value;
@@ -679,6 +695,10 @@ function addCurrencySymbol(input) {
 
 document.getElementById('feeInput').addEventListener('input', (e) => {
   addCurrencySymbol(e.target);
+  document.getElementsByName('productPrice')[0].value = feeInput.value.replace(
+    /[^0-9]/g,
+    ''
+  );
 });
 
 document.getElementById('feeInput').addEventListener('click', (e) => {
@@ -707,11 +727,6 @@ feeInput.addEventListener('click', (e) => {
     e.target.style.borderColor = 'lightgray';
   }
 });
-
-// document.getElementsByName('productPrice')[0].value = feeInput.value.replace(
-//   /[^0-9]/g,
-//   ''
-// ); 제출할 때 한번만 실행
 
 // .replace(/[^0-9]/g, '');
 
