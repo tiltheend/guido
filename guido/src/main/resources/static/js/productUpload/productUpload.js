@@ -36,6 +36,7 @@ const updatePage = () => {
   if (currentPage == 4) {
     document.querySelector('.text4').innerHTML = '';
     typing4();
+    checkFeeInput();
   }
   if (currentPage == 6) {
     titleCharCheck();
@@ -139,7 +140,7 @@ tourTypes.forEach(function (tourType) {
       }
     } else {
       inputTourTime.style.display = 'none';
-      nextBtn.disabled = false;
+      // nextBtn.disabled = false;
     }
   });
 
@@ -461,6 +462,7 @@ const titleCharCheck = () => {
     titleWarning.style.display = 'none';
   }
 };
+
 inputTitle.addEventListener('input', titleCharCheck);
 
 const inputContent = document.getElementById('inputContent'); // 제목 input
