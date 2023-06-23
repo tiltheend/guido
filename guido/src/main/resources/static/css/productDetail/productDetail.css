@@ -64,17 +64,42 @@ body::-webkit-scrollbar-track {
     margin-bottom: 4vh;
 }
 
+/* 상단 카테고리 + 수정삭제버튼 */
+.detail--top>div:nth-of-type(1){
+    display: flex;
+    margin-top: 2vh;
+}
+
+/* 상단 수정삭제 버튼 div */
+.detail--top__button{
+    display: flex;
+    width: 20%;
+    justify-content: flex-end;
+}
+
+.detail--top__button div{
+    width: 80px;
+    height: 30px;
+    background-color: #1C797D;
+    text-align: center;
+    margin: 0 5px;
+    line-height: 30px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+}
 
 /* 상단 카테고리 */
 .detail--top__category{
     display: flex;
-    margin-top: 2vh;
+    width: 80%;
 }
 
 
 .detail--top__category div{
     margin-right: 1vw;
     font-size: 1.1rem;
+    padding: 3px 0;
 }
 
 .detail--top__category>div:nth-of-type(1),
@@ -469,7 +494,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
     width: 100%;
     margin-top: 1vh;
     border-color: #F0F0F0;
-    border-style: solid none none none;
+    border-style: solid none;
     border-width: 2px;
     padding: 3vh 0;
 }
@@ -481,8 +506,26 @@ box-shadow:  5px 5px 8px #e2e2e2,
     margin-right: 3vw;
 }
 
+.detail--div__collection>div>span{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 .detail--div__collection img{
     margin-right: 0.5vw;
+}
+
+/* 모집 인원 */
+.detail--div__recruits{
+    display: flex;
+    align-items: center;
+    padding: 3vh 0;
+}
+
+.detail--div__recruits>img{
+    width: 17px;
+    height: 17px;
+    margin-left: 0.5vw;
 }
 
 

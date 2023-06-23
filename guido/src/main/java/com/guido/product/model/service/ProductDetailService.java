@@ -38,10 +38,11 @@ public interface ProductDetailService {
 	PR selectPR(int userNo);
 
 
-//	/** 특정 상품 이미지 목록 조회
-//	 * @param productNo
-//	 * @return imageList
-//	 */
-//	List<File> selectImageList(int productNo);
+	/** 특정 상품 옵션 목록 조회
+	 * @param productNo
+	 * @return optionList
+	 */
+	List<String> selectOptionList(int productNo);
+
 
 }

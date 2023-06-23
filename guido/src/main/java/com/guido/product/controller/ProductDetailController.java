@@ -34,6 +34,8 @@ public class ProductDetailController {
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
 		List<Review> reviewList = service.selectReviewList(productNo);
+	
+		
 		int eachCost = 0;
 		
 		if(product.getProductPackage()!=1)

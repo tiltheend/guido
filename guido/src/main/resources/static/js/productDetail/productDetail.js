@@ -2,15 +2,12 @@
 let totalCost = document.getElementById("totalCost");
 
 if(package==0){
+    /* 총 금액 : n박 시 = productPrice */
     totalCost.innerText = Number(productPrice)*Number(guestCount);
 }else{
+    /* 총 금액 : 1박 시 = 인원수 * productPrice */
     totalCost.innerText = productPrice;
 }
-
-console.log(package);
-console.log(guestCount);
-console.log(productPrice);
-console.log(productPrice*guestCount);
 
 
 
@@ -28,7 +25,6 @@ menuLinks.forEach(function(link) {
         window.scrollBy({ top: topOffset, behavior: 'smooth' });
     });
 });
-
 
 
 

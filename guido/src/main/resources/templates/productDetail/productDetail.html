@@ -30,10 +30,10 @@
                     <div th:text="*{productName}">상품명</div>
                 </div>
 
-
+                <!-- session.loginUser 존재할 때만 보이도록 하기 -->
                 <div class="detail--top__button">
-                    <div id="editBtn">수정</div>
-                    <div id="deleteBtn">삭제</div>
+                    <div id="editBtn">edit</div>
+                    <div id="deleteBtn">delete</div>
                 </div>
             </div>
 
@@ -88,12 +88,12 @@
 
 
                     <div class="detail--div__rating">
-                        <div class="detail--number__rating">4.9</div>
+                        <div class="detail--number__rating" th:text="*{productRating}">평균 별점</div>
                         <div class="detail--stars__rating">
                             ⭐⭐⭐⭐⭐ 
-                            <span style="width:80%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
+                            <span th:style="|width: *{reviewPercentage}%; display:inline-block; text-shadow: 0 0 0 #1C797D;|">⭐⭐⭐⭐⭐</span>
                         </div>
-                        <div class="detail--count__rating">(36)</div>
+                        <div class="detail--count__rating" th:text="|(*{reviewCount})|"></div>
 
                     </div>
 
@@ -121,9 +121,9 @@
                     
 
                     <div class="detail--div__collection">
-                        <div>
-                            <img th:src="@{/images/productDetail/duration_icon.svg}" class="duration_icon">&nbsp; Duration: 10 hr(s) &nbsp; &nbsp; 
-                            <img th:src="@{/images/productDetail/dollar_icon.svg}" class="dollar_icon"> 25
+                        <div th:if="${eachCost==0}">
+                            <img th:src="@{/images/productDetail/duration_icon.svg}" class="duration_icon">
+                            &nbsp; Duration:&nbsp;<span th:text="*{tourDuration}">10</span> &nbsp;hr(s) &nbsp; &nbsp; 
                         </div>
                         <div>
                             <img th:src="@{/images/productDetail/language_icon.svg}">
@@ -134,7 +134,18 @@
                             <img th:src="@{/images/productDetail/receive_dollars_icon.svg}">
                             <div>Free cancellation 4 day(s) prior to selected date</div> 
                         </div>
+
+                        <div th:if="${eachCost!=0}">
+                            <img th:src="@{/images/productDetail/recruits_icon.png}">
+                            <div>Number of recruits is between [[*{minTourist}]] and [[*{maxTourist}]] per package</div> 
+                        </div>
                     </div>
+                    
+                    <div th:if="${eachCost!=0}" class="detail--div__recruits">
+                        <img th:src="@{/images/productDetail/recruits_icon.png}">
+                        <div>Number of recruits is between [[*{minTourist}]] and [[*{maxTourist}]] per package</div> 
+                    </div>
+                
 
 
                     <!-- <div class="detail--div__shortdescription">
@@ -353,10 +364,9 @@
                                         
                                         <span class="detail--item__review-rating">
                                             ⭐⭐⭐⭐⭐ 
-                                            <span th:style=" 'width: ' + ${reivew.reviewStars} + '%; display:inline-block; text-shadow: 0 0 0 #1C797D">⭐⭐⭐⭐⭐</span>
+                                            <span th:style="|width: ${review.reviewStars}%; display:inline-block; text-shadow: 0 0 0 #1C797D;|">⭐⭐⭐⭐⭐</span>
                                         </span>
                                         
-
                                         <div class="detail--item__review-date" th:text="${review.createDate}">작성일자</div>
 
                                     </div>
@@ -411,24 +421,20 @@
                 </div>
 
                 <!-- 예약 옵션(시간) : 당일 투어의 경우에만 뜸 -->
-                <div class="detail--right__option" th:if="*{productPackage==1}">
-                    <span>시간</span>
+                <div class="detail--right__option" th:if="${#lists.size(product.optionList) > 0}">
+                    <span>Option</span>
 
                     <div class="detail--item__option">
-                        <input type="radio" name="option" id="option1" value="">
-                        <label class="option--active" for="option1">19:20 (25 left)</label>
-                        
-                        <input type="radio" name="option" id="option2" value="" disabled>
-                        <label for="option2">20:00</label>
-                        
-                        <input type="radio" name="option" id="option3" value="">
-                        <label for="option3">20:40 (46 left)</label>
+                        <th:block th:each="i : ${#numbers.sequence(0, #lists.size(product.optionList) - 1, 1)}">
+                            <input type="radio" name="option" th:id="|option${i+1}|" th:value="${product.optionList[i].optionNo}">
+                            <label class="option--active" th:for="|option${i+1}|" th:utext="|${product.optionList[i].optionName} (${product.optionList[i].optionRestCount} left)|"></label>
+                        </th:block>
                     </div>
                 </div>
                 
                 <!-- 예약 가격 -->
                 <div class="detail--right__price">
-                    <span>인원 수</span>
+                    <span>Guest</span>
                     <div class="detail--right__price-qty">
 
                         <!-- 1인당 가격 : n박 시 eachCost !=0 -->
@@ -446,7 +452,7 @@
 
 
                 <div class="detail--right__price-total">
-                    <span>총 금액</span>
+                    <span>Total</span>
                     <div> &#8361; 
                         <span id="totalCost"></span></div>
 
