@@ -40,6 +40,9 @@
 	</resultMap>
 
 
+
+
+
 	<!-- 테마 종류 조회 -->
 	<select id="selectThemeTypeList" resultType="map">
 		SELECT * FROM THEME ORDER BY 1
@@ -51,6 +54,8 @@
 		SELECT COUNT(*) FROM PRODUCT
 		WHERE PRODUCT_STATE = 'D'
 	</select>-->
+
+
 
 	<!-- 상품 목록 조회 -->
 	<select id="selectProductList" resultMap="product_rm">
@@ -69,12 +74,12 @@
 	  ]]>
 	</select>
 	
-	 <!-- 특정 상품 이미지 목록 조회 -->
-	 <select id="selectImageList" resultMap="file_rm">
-		 SELECT * FROM "FILE"
+	<!-- 특정 상품 이미지 목록 조회 -->
+	<select id="selectImageList" resultMap="file_rm">
+		SELECT * FROM "FILE"
 		WHERE PRODUCT_NO = #{productNo}
 		ORDER BY FILE_ORDER
-	 </select>
+	</select>
 
 	<!-- ********** 인기 여행지 목록 조회 ********** -->
 	<select id="selectPopularProductList" resultMap="product_rm">
@@ -126,6 +131,20 @@
 	    )
 	    WHERE ROWNUM <= 8
 	  ]]>
+	</select>
+	
+	
+	
+	<!-- 테마 검색 상품 목록 조회 -->
+	<select id="selectThemeProdList" resultMap="product_rm">
+		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, 
+		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
+		        FROM REVIEW 
+		        WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS
+		FROM PRODUCT P
+		WHERE P.PRODUCT_STATE = 'N'
+		AND THEME_CODE = #{themeCode}
+		ORDER BY P.CREATE_DT DESC
 	</select>
 
 </mapper>

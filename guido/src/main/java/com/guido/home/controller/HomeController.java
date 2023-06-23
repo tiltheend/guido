@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guido.common.model.dto.Product;
 import com.guido.home.model.service.HomeService;
@@ -42,24 +44,19 @@ public class HomeController {
 		
 //		System.out.println(productList);
 		
-		
 		return "common/index";
 	}
 	
 	
 	
-	// 검색상품 목록 조회
+	// 테마 검색 상품 목록 조회
 //	@GetMapping("/index/{themeCode}")
-//	public String selectProductList(@PathVariable("themeCode") int themeCode,
-//			Model model) {
-//		
-//		// 상품 목록 조회 서비스 
-//		List<Product> productList = service.selectProductList(themeCode);
-//		System.out.println(productList);
-//		
-//		model.addAttribute("productList", productList);
-//
-//		return "home/searchList";
-//	}
+//		List<Product> themeProdList = service.selectThemeProdList(themeCode);
+//	@GetMapping(value = "/index", produces = "application/json; charset=UTF-8")
+	@GetMapping(value = "/index/{themeCode}", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
+	    return service.selectThemeProdList(themeCode);
+	}
 
 }

@@ -10,7 +10,7 @@ public interface HomeService {
 	// 테마 종류 조회
 	List<Map<String, Object>> selectThemeTypeList();
 
-	
+
 	
 	// 상품 목록 조회
 	List<Product> selectProductList();
@@ -23,10 +23,13 @@ public interface HomeService {
 
 	// 추천 상품 목록 조회
 	List<Product> selectRecommProductList();
+
+	
+
+	// 테마 검색 상품 목록 조회
+	List<Product> selectThemeProdList(int themeCode);
 	
 	
-	// 검색상품 목록 조회
-//	List<Product> selectProductList(int themeCode);
 
 
 }
