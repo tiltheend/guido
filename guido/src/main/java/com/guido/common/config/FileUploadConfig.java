@@ -70,10 +70,4 @@ public class FileUploadConfig implements WebMvcConfigurer {
 	
 	
 	
-	
-
-	
-	
-	
-	
 }

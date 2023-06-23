@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guido.product.model.dao.ProductUploadMapper">
+	
+	<resultMap id="product_rm" type="Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productPackage" column="PRODUCT_PACKAGE"/>
+		<result property="productContent" column="PRODUCT_CONTENT"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="productAddPrice" column="PRODUCT_ADD_PRICE"/>
+		<result property="maxTourist" column="PRODUCT_MAX_TOURIST"/>
+		<result property="minTourist" column="PRODUCT_MIN_TOURIST"/>
+		
+		<result property="userNo" column="USER_NO"/>
+		<result property="themeCode" column="THEME_CODE"/>
+		<result property="productState" column="PRODUCT_STATE"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="guideLanguage" column="GUIDE_LANGUAGE"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+
+		<result property="regionName" column="REGION_NAME"/>
+		<result property="themeName" column="THEME_NAME"/>
+		
+		<collection property="tourCourse" select="selectTourCourseList" 
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="TourCourse"/>	
+	</resultMap>
+	
+	
+		<resultMap type="TourCourse" id="tourcourse_rm">
+		<id property="courseNo" column="COURSE_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="courseName" column="COURSE_NAME"/>
+		<result property="courseOrder" column="COURSE_ORDER"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="longitude" column="LONGITUDE"/>
+		<result property="bossCourseFL" column="BOSS_COURSE_FL"/>
+	</resultMap>
+	
+	<resultMap type="TourTheme" id="tourtheme_rm">
+		<id property="themeCode" column="THEME_CODE"/>
+		<result property="themeName" column="THEME_NAME"/>
+		<result property="themeImg" column="THEME_IMG"/>
+	</resultMap>
+	 
+	 <select id="selectTourTheme" resultMap="tourtheme_rm">
+		 SELECT * FROM THEME T
+	 </select>
+	
+</mapper>
