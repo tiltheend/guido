@@ -6,34 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>guido</title>
 </head>
+<style>
+  main a button{
+    width: 200px; height: 30px; background-color: #0F4957; color: #fff;
+    margin: 10px;
+  }
+</style>
 <body>
     <main th:object="${session.loginUser}">
       
       <!-- <th:block th:replace="~{common/header}"></th:block> -->
 
       <a th:href="@{/productDetail/product/15?guest=3}"
-        ><button>상품 상세 페이지</button></a
-      >
+        ><button>상품 상세 페이지</button></a> <br>
       <!-- <a th:href="@{/productDetail/product/1}"><button>상품 상세 페이지</button></a> -->
 
       <a th:href="@{/profile/25}"><button>구매자 프로필 페이지</button></a>
       <a th:href="@{/profile/mypage/G}"
         ><button>가이드 프로필 페이지</button></a
-      >
+      > <br>
 
       <!-- <a th:href="@{/common/index/{themeCode}}"><button>메인 페이지</button></a> -->
-      <a th:href="@{/common/index}"><button>메인 페이지</button></a>
+      <a th:href="@{/common/index}"><button>메인 페이지</button></a> 
 
-      <!-- <a th:href="@{/common/index/{themeCode}}"><button>메인 페이지</button></a> -->
-      <a th:href="@{/common/index}"><button>메인 페이지</button></a>
+      <br>
 
       <a th:href="@{/user/loginPage}"><button>로그인 페이지</button></a>
+
+      <br>
+
       <a th:href="@{/user/myPage/editInfo/guide}"><button>가이드 내정보수정 페이지</button></a>
       <a th:href="@{/user/myPage/editInfo/tourist}"><button>관광객 내정보수정 페이지</button></a>
 
 
+      <br>
+
       <a th:href="@{/product/upload}"><button>상품 등록 페이지</button></a>
       
+      <br>
+
       <a href="#"><button>관리자 페이지</button></a>
 
       <br>
@@ -43,6 +54,7 @@
           로그인 회원 이메일 : <div th:text="*{userEmail}"></div>
       </th:block>
 
+      <br>
       <a href="#"><button>관리자 페이지</button></a>
 
       
