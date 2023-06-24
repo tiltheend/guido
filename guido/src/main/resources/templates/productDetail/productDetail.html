@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>guido</title>
 
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/productDetail/productDetail.css}">
     
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
@@ -19,11 +20,13 @@
 
     <div class="detail--container">
 
+        [[${product.productNo}]]
+
         <section class="detail--top">
             
             <div>
                 <div class="detail--top__category">
-                    <div th:text="*{regionName}">서울</div>
+                    <div th:text="*{regionName}">지역명</div>
                     <div>></div>
                     <div th:text="*{themeName}">테마명</div>
                     <div>></div>
@@ -103,17 +106,9 @@
                             <div> [[*{regionName}]] </div>
                         </div>
 
-                        <!-- <label class="container">
-                            <input checked="checked" type="checkbox">
-                            <div class="checkmark">
-                                <svg viewBox="0 0 256 256">
-                                <rect fill="none" height="256" width="256"></rect>
-                                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#FFF" fill="none"></path></svg>
-                            </div>
-                            </label> -->
 
-                            <label class="container">
-                                <input type="checkbox">
+                            <label class="like--container">
+                                <input type="checkbox" id="wishHeart" th:checked="${wishOrNot}>0">
                                 <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path></svg>
                             </label>
                             
@@ -136,14 +131,15 @@
                         </div>
 
                         <div th:if="${eachCost!=0}">
-                            <img th:src="@{/images/productDetail/recruits_icon.png}">
-                            <div>Number of recruits is between [[*{minTourist}]] and [[*{maxTourist}]] per package</div> 
+                            <img th:src="@{/images/productDetail/recruits_icon.png}" class="recruits_icon">
+                            <div>Number of recruits is between <strong>[[*{minTourist}]]</strong> and <strong>[[*{maxTourist}]]</strong> per package</div> 
                         </div>
                     </div>
                     
-                    <div th:if="${eachCost!=0}" class="detail--div__recruits">
-                        <img th:src="@{/images/productDetail/recruits_icon.png}">
-                        <div>Number of recruits is between [[*{minTourist}]] and [[*{maxTourist}]] per package</div> 
+
+                    <div th:if="*{productAddPrice}" class="detail--div__extrafee">
+                        <img th:src="@{/images/productDetail/extra_fee_icon.png}">
+                        <div>Extra Fee : [[*{productAddPrice}]]&#8361;</div> 
                     </div>
                 
 
@@ -172,7 +168,7 @@
                         <div class="detail--container__pr">
             
                             <div class="detail--item__pr" th:if="${pr.abroadExperience}">
-                                <img th:src="@{/images/userProfile/abroadExperience.png}">
+                                <img th:src="@{/images/profile/abroadExperience.png}">
                                 <div class="detail--item__pr-text">I have traveled to : [[${pr.abroadExperience}]]</div>
                             </div>
             
@@ -233,7 +229,7 @@
             
                             <div class="detail--item__pr" th:if="${pr.uselessTalent}">
                                 <img th:src="@{/images/profile/uselessTalent.png}">
-                                <div class="detail--item__pr-text">[[${pr.uselessTalent}]]</div>
+                                <div class="detail--item__pr-text">Useless talent: [[${pr.uselessTalent}]]</div>
                             </div>
             
                             <div class="detail--item__pr" th:if="${pr.capList}">
@@ -383,7 +379,7 @@
                     </th:block>
 
                     
-                    <button type="button" class="detail--item__review-button">show more reviews</button>
+                    <button type="button" class="detail--item__review-button" th:if="${#lists.size(reviewList) > 4}">show more reviews</button>
 
                 </div>
 
@@ -645,7 +641,7 @@
                 }
             });
 
-            const owl = $('.owl-carousel')
+            const owl = $('.owl-carousel');
 
             $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
   
@@ -653,11 +649,12 @@
 
             });
 
-
-            const productPrice = /*[[*{productPrice}]]*/ [];
-            const package = /*[[${eachCost}]]*/ [];
-            const guestCount = /*[[${guestCount}]]*/ [];
-
+            const productPrice = /*[[${product.productPrice}]]*/"상품가격";
+            const package = /*[[${eachCost}]]*/"패키지종류(1박or1박이상)";
+            const guestCount = /*[[${guestCount}]]*/"게스트수";
+            let loginUserNo = /*[[${session.loginMember?.userNo}]]*/"로그인 회원 번호";
+            const productNo = /*[[${product.productNo}]]*/"";
+            
         </script>
 
     </div>

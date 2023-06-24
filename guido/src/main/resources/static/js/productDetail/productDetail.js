@@ -150,25 +150,46 @@ window.addEventListener("scroll", ()=>{
         }
         
 
-
     }
 
 });
 
 
 
+/* 관심상품 등록/제거 처리 */
+const wishHeart = document.getElementById("wishHeart");
+let check;      // 관심상품 등록 여부
+
+/* 관심 상품 등록O */
+if (wishHeart.checked) {
+    check = 1;
+} else {
+    /* 관심 상품 등록X */
+    check = 0;
+}
+
+const wishData = {"productNo" : productNo, "userNo": 18, "check": check};
+// const wishData = {"productNo" : Number(productNo), "userNo": loginUserNo, "check": check};
 
 
-/* 리뷰 3줄 이상 넘어갈 시 말줄임표 */
-// const reviewContent = document.querySelector(".detail--item__reivew-content");
-// const lineHeight = parseInt(window.getComputedStyle(reviewContent).getPropertyValue('line-height'), 10);
-// const maxHeight = lineHeight * 3; // 3줄의 높이
+wishHeart.addEventListener("click", ()=> {
+    
+    fetch("/productDetail/updateWish",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(wishData)
+    })
+    .then(resp=>resp.text())
+    .then(result=>{
 
-// const textLines = Math.floor(reviewContent.clientHeight / lineHeight);
+        if(result==0){
+            console.log("관심상품 등록 실패");
+        }
 
-// if (textLines > 3) {
-//     while (textLines > 3) {
-//         reviewContent.textContent = reviewContent.textContent.replace(/\W*\s(\S)*$/, '...');
-//         textLines = Math.floor(reviewContent.clientHeight / lineHeight);
-//     }
-// }
+        console.log("관심 상품 처리");
+
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+});

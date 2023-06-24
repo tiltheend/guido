@@ -2,10 +2,10 @@ package com.guido.product.model.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Review;
@@ -28,5 +28,17 @@ public interface ProductDetailMapper {
 
 	// 특정 상품 옵션 목록 조회
 	List<String> selectOptionList(int productNo);
+
+	
+	// 관심상품 등록 여부 체크
+	int selectWishCheck(Map<String, Integer> map);
+
+
+	// 관심 상품 등록
+	int insertProductWish(Map<String, Integer> map);
+
+	
+	// 관심 상품 해제
+	int deleteProductWish(Map<String, Integer> map);
 	
 }
