@@ -73,13 +73,6 @@
 
 .detail--top__category>div:nth-of-type(5){
     color: #C5C5C5;
-
-    overflow: hidden;
-    white-space: normal;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
 }
 
 
@@ -427,6 +420,8 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 상품 위치 txt */
 .detail--div__location>div{
     color: #777777;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -1297,6 +1292,28 @@ a {
     }
 }
 
+
+@media screen and (max-width : 860px){
+    .detail--top>div:nth-of-type(1){
+        display: block;
+    }
+
+    .detail--top__category{
+        width: 100%;
+    }
+
+    .detail--top__button{
+        width: 100%;
+    }
+
+    .detail--top__button div{
+        width: 60px;
+        margin-top: 40px;
+        margin-bottom: -10px;
+    }
+
+}
+    
 
 @media screen and (max-height : 570px){
     .owl-theme .owl-nav.disabled+.owl-dots{

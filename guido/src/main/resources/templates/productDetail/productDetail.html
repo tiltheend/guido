@@ -20,8 +20,6 @@
 
     <div class="detail--container">
 
-        [[${product.productNo}]]
-
         <section class="detail--top">
             
             <div>
@@ -103,7 +101,12 @@
                     <div class="detail--top__like">
                         <div class="detail--div__location">
                             <img th:src="@{/images/productDetail/location_icon.svg}">
-                            <div> [[*{regionName}]] </div>
+                            <div>
+                                <div>[[*{regionName}]]</div>
+                                <th:block th:if="${#lists.size(product.tourCourse) > 0}" th:each="course : *{tourCourse}">
+                                    <div th:if="${course.bossCourseFL=='Y'}">&nbsp; - [[${course.courseName}]]</div>
+                                </th:block>
+                            </div>
                         </div>
 
 
@@ -118,7 +121,7 @@
                     <div class="detail--div__collection">
                         <div th:if="${eachCost==0}">
                             <img th:src="@{/images/productDetail/duration_icon.svg}" class="duration_icon">
-                            &nbsp; Duration:&nbsp;<span th:text="*{tourDuration}">10</span> &nbsp;hr(s) &nbsp; &nbsp; 
+                            <div>Duration: [[*{tourDuration}]] hr(s)</div>
                         </div>
                         <div>
                             <img th:src="@{/images/productDetail/language_icon.svg}">
@@ -422,7 +425,7 @@
 
                     <div class="detail--item__option">
                         <th:block th:each="i : ${#numbers.sequence(0, #lists.size(product.optionList) - 1, 1)}">
-                            <input type="radio" name="option" th:id="|option${i+1}|" th:value="${product.optionList[i].optionNo}">
+                            <input type="radio" name="option" th:id="|option${i+1}|" th:value="${product.optionList[i].optionNo}" th:disabled="${product.optionList[i].optionRestCount==0}">
                             <label class="option--active" th:for="|option${i+1}|" th:utext="|${product.optionList[i].optionName} (${product.optionList[i].optionRestCount} left)|"></label>
                         </th:block>
                     </div>
@@ -454,7 +457,7 @@
 
                 </div>
                 <!-- 예약 버튼 -->
-                <a th:href="@{/reservation/reservation.html}"><button class="detail--right__button">Reserve</button></a>
+                <a th:href="@{/reservation/reserve}"><button class="detail--right__button" id="reserveBtn">Reserve</button></a>
                 
 
 
@@ -649,11 +652,11 @@
 
             });
 
-            const productPrice = /*[[${product.productPrice}]]*/"상품가격";
+
             const package = /*[[${eachCost}]]*/"패키지종류(1박or1박이상)";
             const guestCount = /*[[${guestCount}]]*/"게스트수";
             let loginUserNo = /*[[${session.loginMember?.userNo}]]*/"로그인 회원 번호";
-            const productNo = /*[[${product.productNo}]]*/"";
+            const product = /*[[${product}]]*/ "상품";
             
         </script>
 

@@ -1,10 +1,16 @@
 package com.guido.common.model.dto;
 
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class TourCourse {
 	
 	private int courseNo;					// 여행지 번호
