@@ -248,6 +248,15 @@ button:disabled:hover {
 .OUTLINE:hover {
   fill: rebeccapurple !important;
 }
+/* 카카오맵 여행 코스 */
+
+.course-container {
+  display: block;
+  width: 60%;
+  height: 100%;
+}
+
+/*  */
 /* 3페이지 */
 .tour-theme {
   display: flex;
@@ -986,4 +995,20 @@ input[name='tourTheme']:checked + label {
   background-color: #2db400;
   color: white;
   font-weight: bold;
+}
+
+#submitBtn {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+  /* border: 2px solid #333; */
+  background-color: #999;
+  border-radius: 15px;
+  width: 100px;
+  height: 45px;
+  font-size: 1rem;
+}
+#submitBtn:hover {
+  background-color: #408c8c;
+  color: white;
 }

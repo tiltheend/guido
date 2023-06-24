@@ -114,54 +114,27 @@
     <div class="categori-icon-box-container">
         <div class="categori-icon-box">
             <div th:each="themeType : ${application.themeTypeList}">
-                <a th:href="@{/common/index/{themeCode}(themeCode=${themeType.THEME_CODE})}">
+                <!-- <a th:href="@{#}"> -->
+                <a th:onclick="|loadProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
                 <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
                     <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
                     <button th:text="${themeType.THEME_NAME}">테마 이름</button>
                 </a>
             </div>
-            <!-- 
-            <div>
-                <a th:href="@{#}">
-                    <img th:src="@{/images/theme/healing.png}" alt="힐링 투어">
-                    <button>힐링 투어</button>
-                </a>
-            </div>
-            <div>
-                <a th:href="@{#}">
-                    <img th:src="@{/images/theme/kpop.png}" alt="k-pop 투어">
-                    <button>k-pop 투어</button>
-                </a>
-            </div>
-            <div>
-                <a th:href="@{#}">
-                    <img th:src="@{/images/theme/gyeongbokgung.png}" alt="궁 투어">
-                    <button>궁 투어</button>
-                </a>
-            </div>
-            -->
         </div>
     </div>
 
 
 
-
-
-    <!-- 게시글 -->
+    <!-- 상품 게시글 -->
     <article class="main-post">
 
         <div class="product-post">
-            <ul>
-                <li th:each="product : ${productList}">
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
+            <ul id="productListContainer">  
+                <li class="product-row" th:each="product : ${productList}">
+                    <div class="slider single-item"> 
+                        <div class="productImage" th:each="image : ${product.imageList}"> 
+                            <img th:src="${image.filePath}">
                         </div>
                     </div>
                     <div class="slide-btn">
@@ -172,7 +145,7 @@
                         <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                     </div>
                     <div class="sales-text">
-                        <div>
+                        <div> 
                             <p>[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
@@ -188,49 +161,10 @@
                         </div>
                     </div>
                 </li>
-        
-                <!-- 
-                <li>
-                    <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample8.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                    </div>
-                    <div class="slide-btn">
-                        <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                        <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
-                    </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                    </div>
-                    <div class="sales-text">
-                        <div>
-                            <p>A trip to Jeju Island where...</p>
-                            <div>
-                                <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
-                                <span>4.5</span>
-                            </div>
-                        </div>
-                        <div>
-                            <img th:src="@{/images/profile/location.png}" alt="location">
-                            <span>Jeju</span>
-                        </div>
-                        <div>
-                            <p>₩ 190,000 / total</p>
-                        </div>
-                    </div>
-                </li>
-                -->
             </ul>
         </div>
     </article>
-        
+    
     <hr>
     
     <div class="divide-main">
@@ -245,14 +179,8 @@
             <ul>
                 <li th:each="product : ${popularProductList}">
                     <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
+                        <div th:each="image : ${product.imageList}">
+                            <img th:src="${image.filePath}">
                         </div>
                     </div>
                     <div class="slide-btn">
@@ -283,7 +211,7 @@
         </div>
     </article>
     
-    
+    <hr>
     
     <div class="divide-main">
         <p>슈퍼 가이드 PICK</p>
@@ -296,14 +224,8 @@
             <ul>
                 <li th:each="product : ${superProductList}">
                     <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
+                        <div th:each="image : ${product.imageList}">
+                            <img th:src="${image.filePath}">
                         </div>
                     </div>
                     <div class="slide-btn">
@@ -334,7 +256,7 @@
         </div>
     </article>
 
-
+    <hr>
 
     <div class="divide-main">
         <p>추천 상품</p>
@@ -348,14 +270,8 @@
             <ul>
                 <li th:each="product : ${recommProductList}">
                     <div class="slider single-item">
-                        <div>
-                            <img th:src="@{/images/sample1.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample2.png}">
-                        </div>
-                        <div>
-                            <img th:src="@{/images/sample3.png}">
+                        <div th:each="image : ${product.imageList}">
+                            <img th:src="${image.filePath}">
                         </div>
                     </div>
                     <div class="slide-btn">
@@ -417,6 +333,37 @@
         $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
 
         });
+
+
+        // 테마 검색 상품 목록 조회
+/*         function loadProductByTheme(themeCode){
+    
+            var productListContainer = document.getElementById("productListContainer");
+            productListContainer.innerHTML = "";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/common/index" + themeCode, true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    if(xhr.status === 200){
+                        productListContainer.innerHTML = xhr.responseText;
+                    }else{
+                        console.error("Ajax request failed");
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        var themeIconLinks = document.getElementsByClassName("theme-icon-link");
+        Array.from(themeIconLinks).forEach(function (link) {
+            link.addEventListener("click", function(event) {
+                event.preventDefault(); 
+                var themeCode = this.getAttribute("data-theme-code");
+                loadProductByTheme(themeCode); 
+            });
+        }); */
+        
     </script>
 
     

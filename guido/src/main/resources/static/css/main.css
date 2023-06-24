@@ -808,13 +808,15 @@ hr{
   row-gap: 88px; column-gap: 20px; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  /* justify-content: space-around; (임시)게시글 왼쪽 정렬!!!! */
+  justify-content: flex-start;
 }
 .main-post .product-post>ul>li{
   /* width: 100%; */
   width: 300px; height: 360px;
   position: relative;
-  margin: 10px;
+  /* margin: 10px; (임시)게시글 왼쪽 정렬!!!! */
+  margin: 17px;
   margin-bottom: 20px;
 }
 .main-post .product-post .slider>div{

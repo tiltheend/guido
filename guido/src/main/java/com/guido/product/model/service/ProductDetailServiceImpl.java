@@ -46,4 +46,11 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 		return mapper.selectPR(userNo);
 	}
 
+
+	// 특정 상품 옵션 목록 조회
+	@Override
+	public List<String> selectOptionList(int productNo) {
+		return mapper.selectOptionList(productNo);
+	}
+
 }

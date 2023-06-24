@@ -7,6 +7,7 @@
 		<result property="productName" column="PRODUCT_NAME"/>
 		<result property="productPackage" column="PRODUCT_PACKAGE"/>
 		<result property="productContent" column="PRODUCT_CONTENT"/>
+		<result property="tourDuration" column="TOUR_DURATION"/>
 		<result property="productPrice" column="PRODUCT_PRICE"/>
 		<result property="productAddPrice" column="PRODUCT_ADD_PRICE"/>
 		<result property="maxTourist" column="PRODUCT_MAX_TOURIST"/>
@@ -21,12 +22,18 @@
 
 		<result property="regionName" column="REGION_NAME"/>
 		<result property="themeName" column="THEME_NAME"/>
+		<result property="productRating" column="PRODUCT_RATING"/>
+		<result property="reviewCount" column="REVIEW_COUNT"/>
+		<result property="reviewPercentage" column="REVIEW_PERCENTAGE"/>
 		
 		<collection property="tourCourse" select="selectTourCourseList" 
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="TourCourse"/>	
 	
 		<collection property="imageList" select="selectImageList"
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="File"/>
+		
+		<collection property="optionList" select="selectOptionList"
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="ProductOption"/>
 		
 	</resultMap>
 	
@@ -50,8 +57,8 @@
 		<result property="reviewDeleteFL" column="REVIEW_DEL_FL"/>
 		<result property="productNo" column="PRODUCT_NO"/>
 		<result property="createDate" column="CREATE_DT"/>
-		<result property="userName" column="PROFILE_IMG"/>
-		<result property="profileImage" column="USER_NAME"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
 	</resultMap>
 	
 	
@@ -96,6 +103,14 @@
 	</resultMap>
 	
 	
+	<resultMap  type="ProductOption" id="option_rm">
+		<id property="optionNo" column="OPTION_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="optionName" column="OPTION_NAME" />
+	 	<result property="optionRestCount" column="OPTION_REST" />
+	</resultMap>
+	
+	
 	<!-- 여행 코스 리스트 조회 -->
 	<select id="selectTourCourseList" resultMap="tourcourse_rm">
 		SELECT * FROM "TOUR_COURSE"
@@ -106,8 +121,18 @@
 	 <!--특정 상품 조회 -->
 	 <select id="selectProduct" resultMap="product_rm">
 		 SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE,
-			PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO,
-			THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT, REGION_NAME, THEME_NAME
+			PRODUCT_ADD_PRICE, PRODUCT_MIN_TOURIST, PRODUCT_MAX_TOURIST, USER_NO, TOUR_DURATION,
+			THEME_CODE, PRODUCT_STATE, CREATE_DT, GUIDE_LANGUAGE, VIEW_COUNT, REGION_NAME, THEME_NAME,
+			(SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
+				FROM "REVIEW" 
+				JOIN "PRODUCT" USING(PRODUCT_NO)
+				WHERE PRODUCT_NO = #{productNo}) PRODUCT_RATING,
+			(SELECT COUNT(*) FROM "REVIEW"
+				WHERE PRODUCT_NO = #{productNo}) REVIEW_COUNT,
+			(SELECT AVG(REVIEW_STARS)*20
+				FROM "REVIEW" 
+				JOIN "PRODUCT" USING(PRODUCT_NO)
+				WHERE PRODUCT_NO = #{productNo}) REVIEW_PERCENTAGE
 		FROM "PRODUCT"
 		JOIN "THEME" USING(THEME_CODE)
 		WHERE PRODUCT_NO = #{productNo}
@@ -166,6 +191,13 @@
 		 SELECT * FROM "FILE"
 		WHERE PRODUCT_NO = #{productNo}
 		ORDER BY FILE_ORDER
+	 </select>
+	 
+	 
+	 <select id="selectOptionList" resultMap="option_rm">
+		 SELECT * FROM "PRODUCT_OPTION"
+		 WHERE PRODUCT_NO = #{productNO}
+		ORDER BY OPTION_NAME
 	 </select>
 		 
 	

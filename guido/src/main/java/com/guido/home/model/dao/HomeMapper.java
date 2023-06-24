@@ -14,8 +14,6 @@ public interface HomeMapper {
 	List<Map<String, Object>> selectThemeTypeList();
 
 	
-	// 특정 테마의 삭제되지 않은 상품 수 조회
-	int getListCount();
 
 	// 상품 목록 조회
 	List<Product> selectProductList();
@@ -28,12 +26,13 @@ public interface HomeMapper {
 
 	// 추천 상품 목록 조회
 	List<Product> selectRecommProductList();
-	
-	
-	// 특정 테마의 삭제되지 않은 상품 수 조회
-//	int getListCount(int themeCode);
 
-	// 특정 테마의 게시글 목록 조회
-//	List<Product> selectProductList(int themeCode);
+
+	
+	// 테마 검색 상품 목록 조회
+	List<Product> selectThemeProdList(int themeCode);
+	
+	
+
 
 }

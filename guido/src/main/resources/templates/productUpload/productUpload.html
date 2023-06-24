@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,18 +12,20 @@
     <link rel="stylesheet" href="../css/productUpload/modal.css">
     <link rel="stylesheet" href="../css/productUpload/transition.css">
     <link rel="stylesheet" href="../css/productUpload/typing.css">
+    <link rel="stylesheet" href="../css/productUpload/tourCourse.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
     
   </head>
   <body>
     <header>
       <!-- 메인 로고 -->
       <div class="logo"><a href="/"><img src="../images/productUpload/guido_test.png" alt="메인 로고"></a></div>
-      <div class="save"><button tyle="submit" class="save-btn" id="submitBtn">저장 후 나가기</button></div>
+      
 
       
   </header>
-  <form action="/writePetition" method="post" enctype="multipart/form-data">
+  <form th:action="@{upload}" method="post" enctype="multipart/form-data">
     <!-- 1페이지 -->
     <main id="page1" class="page current">
       <div class="greeting">
@@ -46,7 +48,7 @@
         <div>몇 시간 코스인가요?</div><br>
 
         <div class="input-container2">
-          <input type="text" id="inputTime" name="productPackage">시간 
+          <input type="text" id="inputTime" name="tourDuration">시간 
         </div>
 
         <div class="input-container" id="inputWarning">
@@ -59,7 +61,7 @@
         <div>몇 일 코스인가요?</div><br>
 
         <div class="input-container">
-          <input type="text" id="inputDay" name="productPackage">일 
+          <input type="text" id="inputDay" name="">일 
         </div>
 
         <div class="input-container" id="inputWarning">
@@ -202,6 +204,80 @@
         </svg>
       </div>
     </main>
+
+    <!-- 카카오맵 여행 코스 지정 -->
+    <!-- <main id="page15" class="page">
+      <div class="greeting">
+
+        <div class="typing title">
+
+          <h4 class="text5"></h4>
+        </div>
+        <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span>
+  </div>
+<div class="course-container">
+
+
+
+  
+  <body>
+  <div class="map_wrap">
+      <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;border-radius: 15px; border: 5px solid black;"></div>
+  
+      <div id="menu_wrap" class="bg_white">
+          <div class="option">
+              <div>
+                  <form onsubmit="searchPlaces(); return false;">
+                      키워드 : <input type="text" value="KH정보교육원 종로지원" id="keyword" size="15"> 
+                      <button type="submit">검색하기</button> 
+                  </form>
+              </div>
+          </div>
+          <hr>
+          <ul id="placesList"></ul>
+          <div id="pagination"></div>
+      </div>
+  </div>
+  
+  <button id="complete">완료</button>
+  
+  <div id="map2" style="width:100%;height:350px;"></div>    
+  
+  
+  
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b=services"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b"></script>
+
+
+
+
+
+</div>
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main> -->
+
+    
+
+
+
+
+
+
     <!-- 3페이지 -->
     <main id="page3" class="page">
       <div class="greeting">
@@ -576,6 +652,8 @@
       </div>
       
     </main>
+    <div class="save"><button class="save-btn" id="submitBtn">제출하기</button></div>
+  </form>
     <footer>
       <div class="progress-bar">
         <div class="progress"></div>
@@ -584,15 +662,18 @@
         <button type="button" class="back-btn">이전</button>
         <button type="button" class="next-btn">다음</button>
       </div>
-    </form>
+   
     </footer>
   </body>
 
   <script src="../js/productUpload/productUpload.js"></script>
   <script src="../js/productUpload/calender.js"></script>
   <script src="../js/productUpload/typing.js"></script>
+  <script src="../js/productUpload/tourCourse.js"></script>
   <script
   src="https://kit.fontawesome.com/f7459b8054.js"
   crossorigin="anonymous"
 ></script>
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b"></script> -->
 </html>
