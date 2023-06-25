@@ -28,6 +28,15 @@ public interface HomeService {
 
 	// 테마 검색 상품 목록 조회
 	List<Product> selectThemeProdList(int themeCode);
+
+
+	
+	
+	
+	
+
+	// 검색 임시 //
+	List<Product> selectProductAll();
 	
 	
 

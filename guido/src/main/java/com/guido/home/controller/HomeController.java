@@ -50,13 +50,24 @@ public class HomeController {
 	
 	
 	// 테마 검색 상품 목록 조회
-//	@GetMapping("/index/{themeCode}")
-//		List<Product> themeProdList = service.selectThemeProdList(themeCode);
-//	@GetMapping(value = "/index", produces = "application/json; charset=UTF-8")
 	@GetMapping(value = "/index/{themeCode}", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
 	    return service.selectThemeProdList(themeCode);
+	}
+	
+	
+	
+	// 검색 페이지 이동
+	@GetMapping("/searchResult")
+	public String searchResult(Model model) {
+		
+		// 상품 목록 조회
+		List<Product> productList = service.selectProductAll();
+		
+		model.addAttribute("productList", productList);
+		
+		return "common/searchResult";
 	}
 
 }

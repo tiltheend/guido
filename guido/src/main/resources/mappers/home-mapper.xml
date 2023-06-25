@@ -146,5 +146,16 @@
 		AND THEME_CODE = #{themeCode}
 		ORDER BY P.CREATE_DT DESC
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- // 검색 임시 // -->
+	<select id="selectProductAll" resultMap="product_rm">
+		SELECT * FROM PRODUCT
+	</select>
 
 </mapper>
