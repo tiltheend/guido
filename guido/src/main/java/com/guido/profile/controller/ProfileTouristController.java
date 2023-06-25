@@ -31,9 +31,7 @@ public class ProfileTouristController {
 	private ProfileTouristService service;
 	
 	// 프로필 조회
-	// @GetMapping("/*")
-//	@GetMapping("mypage/*")
-	 @GetMapping("/{userNo:[0-9]+}")
+	@GetMapping("/{userNo:[0-9]+}")
 	public String mypageTourist(
 			@PathVariable("userNo") int userNo,
 			@SessionAttribute("loginUser") User loginUser,
@@ -69,7 +67,7 @@ public class ProfileTouristController {
 			// int reservationCount = service.reservationCount(userNo);
 			// model.addAttribute("reservationCount", reservationCount);
 			
-			// 나의 리뷰 내역 가져오기
+			// 내가 쓴 리뷰 내역 가져오기
 			List<Review> reviewList = service.reviewList(userNo);
 			
 			// 0.5 단위로 별점 바꾸기

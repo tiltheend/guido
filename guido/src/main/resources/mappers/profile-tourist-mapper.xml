@@ -99,7 +99,7 @@
 		WHERE USER_NO = #{userNo}
 	</select>
 	
-	 <!-- 리뷰 내역 가져오기 -->
+	 <!-- 내가 쓴 리뷰 내역 가져오기 -->
 	 <select id="reviewList" resultMap="review_rm">
 		SELECT REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
 			   , TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME

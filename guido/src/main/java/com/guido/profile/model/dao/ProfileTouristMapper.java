@@ -26,7 +26,7 @@ public interface ProfileTouristMapper {
 	// 구매 수 카운트
 	int reservationCount(int userNo);
 
-	// 리뷰 내역 가져오기
+	// 내가 쓴 리뷰 내역 가져오기
 	List<Review> reviewList(int userNo);
 
 	// 리뷰 수 카운트

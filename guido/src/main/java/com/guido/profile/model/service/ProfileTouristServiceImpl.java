@@ -104,7 +104,7 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		return mapper.reservationCount(userNo);
 	}
 
-	// 리뷰 내역 가져오기
+	// 내가 쓴 리뷰 내역 가져오기
 	@Override
 	public List<Review> reviewList(int userNo) {
 		return mapper.reviewList(userNo);

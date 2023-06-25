@@ -42,7 +42,7 @@ public interface ProfileTouristService {
 	 */
 	int reservationCount(int userNo);
 
-	/** 리뷰 내역 가져오기
+	/** 내가 쓴 리뷰 내역 가져오기
 	 * @param userNo
 	 * @return
 	 */
