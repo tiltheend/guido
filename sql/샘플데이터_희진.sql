@@ -104,6 +104,7 @@ INSERT INTO FAVORITE_REGION
 VALUES(SEQ_FAVORITE_REGION_NO.NEXTVAL, 6, 19);
 
 
+SELECT * FROM TOUR_COURSE;
 
 --------------------------------------------------------------------------------
 

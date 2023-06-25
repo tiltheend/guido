@@ -509,6 +509,11 @@ box-shadow:  5px 5px 8px #e2e2e2,
     margin-top: 45px;
 }
 
+/* 상품 투어 코스 */
+.detail--list__tourcourse{
+    margin-top: 50px;
+
+}
 
 /* 상품 일자 및 위치 간단 설명 */
 .detail--text__date-first{
@@ -1059,6 +1064,151 @@ a {
     fill: #E3474F;
   }
   
+
+
+
+  /* 투어 코스 지도 */
+  .map--wrap {
+    position: absolute;
+    left: 0;
+    bottom: 40px;
+    width: 288px;
+    height: 92px;
+    margin-left: -144px;
+    text-align: left;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 1.5;
+
+}
+.map--wrap * {padding: 0;margin: 0;}
+
+.map--wrap .map--info {
+    width: 286px;
+    height: 80px;
+    border-radius: 5px;
+    border-bottom: 2px solid #ccc;
+    border-right: 1px solid #ccc;
+    overflow: hidden;
+    background: #fff;
+}
+
+.map--wrap .map--info:nth-child(1) {
+    border: 0;
+    box-shadow: 0px 1px 2px #888;
+}
+
+.map--info .map--title {
+    padding: 5px 10px;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.map--info .map--body {
+    position: relative;
+    overflow: hidden;
+}
+
+.map--info .map--desc {
+    position: relative; 
+    padding: 12px; 
+    height: 50px;
+}
+
+.map--desc .map--ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.map--desc .jibun {
+    font-size: 11px;
+    color: #888;
+    margin-top: -2px;
+}
+
+.map--info:after {
+    content: '';
+    position: absolute;
+    margin-left: -12px;
+    left: 50%;
+    bottom: 0;
+    width: 22px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+
+
+
+/* 아코디언 테이블 */
+.tourcourse--container {
+    width: 600px;
+    margin: 30px 0;
+  }
+  
+  .panel-default>.panel-heading {
+    color: #333;
+    background-color: #fff;
+    border-color: #e4e5e7;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .panel-default>.panel-heading a {
+    display: block;
+    padding: 10px 15px;
+    font-size: 18px;
+  }
+  
+  .panel-default>.panel-heading a:after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    font-style: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    float: right;
+    transition: transform .25s linear;
+    -webkit-transition: -webkit-transform .25s linear;
+    
+    
+    top: -4px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.panel-default>.panel-heading a[aria-expanded="true"] {
+    background-color: #0F4957;
+    color: white;
+}
+
+.panel-default>.panel-heading a[aria-expanded="true"]:after {
+    content: "\2212";
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.panel-default>.panel-heading a[aria-expanded="false"]:after {
+    content: "\002b";
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.panel-body{
+    padding: 0;
+    position: relative; 
+    overflow: hidden;
+    width: 600px;
+    height: 300px;
+}
 
 
 
