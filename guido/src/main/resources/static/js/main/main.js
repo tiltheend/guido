@@ -57,8 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* 호버하면 슬라이드 도트 나오게 */
     // slickDot = document.querySelectorAll(".slick-dots");
-    // if (boardSlide.length > 0) {
-
+    // if (boardSlide.length > 0){
     //     for (let i = 0; i < boardSlide.length; i++) {
     //         slickDot[i].style.display = "none";
     //         boardSlide[i].addEventListener('mouseover', () => {
@@ -85,6 +84,35 @@ function toggleHeart() {
     let heartIcon = event.target;
     // heartIcon.setAtrribute("src",'');
     heartIcon.classList.toggle("selected");
+}
+
+
+
+// 상품 제목 15자 이상 ...
+document.addEventListener("DOMContentLoaded", function() {
+    var productNameElements = document.querySelectorAll(".product-name");
+    if (productNameElements) {
+        productNameElements.forEach(function(element) {
+            var productName = element.innerText;
+            if (productName.length > 23) {
+                productName = productName.substring(0, 23) + "...";
+                element.innerText = productName;
+            }
+        });
+    }
+});
+
+// 가격
+function addCommas(input) {
+    var value = input.value;
+    var formattedValue = "";
+  
+    while (value.length > 3) {
+      formattedValue = "," + value.slice(-3) + formattedValue;
+      value = value.slice(0, -3);
+    }
+    formattedValue = "`" + value + formattedValue;
+    input.value = formattedValue;
 }
 
 
@@ -154,10 +182,16 @@ function loadProductByTheme(themeCode) {
                 salesText.classList.add("sales-text");
 
                 const productNameDiv = document.createElement("div");
+                productNameDiv.classList.add("product-name"); //
 
                 const productName = document.createElement("p");
                 productName.textContent = themeProduct.productName;
                 productNameDiv.appendChild(productName);
+
+                // 상품 이름 글자수
+                if (productName.textContent.length > 23) {
+                    productName.textContent = productName.textContent.substring(0, 23) + "...";
+                }
 
                 const reviewDiv = document.createElement("div");
                 
@@ -173,7 +207,6 @@ function loadProductByTheme(themeCode) {
                 productNameDiv.appendChild(reviewDiv);
 
                 salesText.appendChild(productNameDiv);
-/* ---------------- */
 
                 const regionDiv = document.createElement("div");
 
@@ -191,7 +224,7 @@ function loadProductByTheme(themeCode) {
                 const priceDiv = document.createElement("div");
 
                 const priceText = document.createElement("p");
-                priceText.innerHTML = '₩ ${themeProduct.productPrice} / total';
+                priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
                 priceDiv.appendChild(priceText);
 
                 salesText.appendChild(priceDiv);
@@ -200,11 +233,21 @@ function loadProductByTheme(themeCode) {
 
                 productListContainer.appendChild(productRow);
             }
+
+            // 슬라이드 라이브러리 초기화
+            $('.single-item').slick({
+                dots: true,
+                dotsClass: "slick-dots"
+            });
+            
         })
         .catch(e => { console.log(e) });
 }
 
 
+
+
+  
 
 
 

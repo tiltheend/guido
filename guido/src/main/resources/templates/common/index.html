@@ -9,7 +9,10 @@
     <title>Guido</title>
 
     <!-- css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 
     <!-- owl 슬라이드 -->
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
@@ -21,6 +24,11 @@
     <!-- js -->
     <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
+
+    <!-- 테마 검색 -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+
 </head>
 
 <body>
@@ -146,7 +154,7 @@
                     </div>
                     <div class="sales-text">
                         <div> 
-                            <p>[[${product.productName}]]</p>
+                            <p class="product-name">[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                 <span>[[${product.reviewStars}]]</span>
@@ -157,7 +165,8 @@
                             <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p>₩ [[${product.productPrice}]] / total</p>
+                            <!-- <p>₩ [[${product.productPrice}]] / total</p> -->
+                            <p th:onclick="addCommas(input)">₩ [[${product.productPrice}]] / total</p>
                         </div>
                     </div>
                 </li>
@@ -192,7 +201,7 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p>[[${product.productName}]]</p>
+                            <p class="product-name">[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                 <span>[[${product.reviewStars}]]</span>
@@ -237,7 +246,7 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p>[[${product.productName}]]</p>
+                            <p class="product-name">[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                 <span>[[${product.reviewStars}]]</span>
@@ -283,7 +292,7 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p>[[${product.productName}]]</p>
+                            <p class="product-name">[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                 <span>[[${product.reviewStars}]]</span>
@@ -294,7 +303,8 @@
                             <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p>₩ [[${product.productPrice}]] / total</p>
+                            <!-- <p>₩ [[${product.productPrice}]] / total</p> -->
+                            <p id="productPrice">₩ [[${product.productPrice}]] / total</p>
                         </div>
                     </div>
                 </li>
@@ -334,35 +344,6 @@
 
         });
 
-
-        // 테마 검색 상품 목록 조회
-/*         function loadProductByTheme(themeCode){
-    
-            var productListContainer = document.getElementById("productListContainer");
-            productListContainer.innerHTML = "";
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/common/index" + themeCode, true);
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState === XMLHttpRequest.DONE){
-                    if(xhr.status === 200){
-                        productListContainer.innerHTML = xhr.responseText;
-                    }else{
-                        console.error("Ajax request failed");
-                    }
-                }
-            };
-            xhr.send();
-        }
-
-        var themeIconLinks = document.getElementsByClassName("theme-icon-link");
-        Array.from(themeIconLinks).forEach(function (link) {
-            link.addEventListener("click", function(event) {
-                event.preventDefault(); 
-                var themeCode = this.getAttribute("data-theme-code");
-                loadProductByTheme(themeCode); 
-            });
-        }); */
         
     </script>
 
