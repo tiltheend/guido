@@ -71,7 +71,7 @@
 	
 	<!-- 회원 정보 가져오기 (이메일, 이름, 프로필 이미지) -->
 	 <select id="userInfo" resultMap="user_rm">
-		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG
+		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG, USER_NO
 		FROM "USER"
 		WHERE USER_NO = #{userNo}
 	 </select>
@@ -119,7 +119,7 @@
 	 <select id="reviewCount" resultType="_int">
 		 SELECT COUNT(*)
 			FROM REVIEW
-			WHERE USER_NO = 25
+			WHERE USER_NO =  #{userNo}
 			AND REVIEW_REPLY_DEL_FL ='N'
 	 </select>
 	 

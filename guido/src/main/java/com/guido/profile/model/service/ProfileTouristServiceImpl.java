@@ -55,7 +55,6 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		 User user = new User();
 		 user.setUserNo(userNo);
 		 
-		 // System.out.println(user.getUserNo()+"나와??");
 		if(profileImage.getSize()>0) { // 업로드된 이미지가 있을 경우
 			
 			// 1) 파일 이름 저장
@@ -65,7 +64,6 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 			// loginMember.setProfileImage(webPath+profileImg);
 			
 			user.setProfileImage(webPath+rename);
-			// System.out.println(user.getProfileImage()+"나와??");
 			
 		} else { // 없는 경우(X 버튼)
 			// loginMember.setProfileImage(null);

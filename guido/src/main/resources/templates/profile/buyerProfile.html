@@ -34,26 +34,32 @@
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
                 
                 <form class="profile-img-box" th:action="@{/profile/profileEdit}" method="POST" enctype="multipart/form-data"> <!-- 프로필+이름 -->
-                    <button class="profile-edit-btn">프로필 변경</button>
-                    <img src="../images/profile/profile_delete.png" alt="profile_delete" class="profile-delete">
+                    <th:block th:if="${session.loginUser?.userNo == user.userNo}">
+                        <button class="profile-edit-btn">프로필 변경</button>
+                        <img th:src="@{/images/profile/profile_delete.png}" alt="profile_delete" class="profile-delete">
+                    </th:block>
                     <div class="profile-img">
                         <img th:unless="*{profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                         <img th:if="*{profileImage}" th:src="*{profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
 
-                        <input type="file" name="profileImage" id="userProfileFile" accept="image/*">
-                        <!-- 프로필 편집 버튼 -->
-                        <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
+                        <th:block th:if="${session.loginUser?.userNo == user.userNo}">
+                            <input type="file" name="profileImage" id="userProfileFile" accept="image/*">
+                            <!-- 프로필 편집 버튼 -->
+                            <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
+                        </th:block>
                     </div>
-                    <h2 onclick="location.href='/profile/mypage/T'" th:text="*{userName}">UserName</h2> <!-- 유저이름 -->
+                    <a th:href="@{/profile/{userNo}(userNo=${user.userNo})}">
+                        <h2 th:text="*{userName}">UserName</h2> <!-- 유저이름 -->
+                    </a>
                 </form>
 
                 <div class="user-email"> <!-- 유저 이메일 -->
-                    <p th:text="*{userEmail}">tiltheend@gmail.com</p>
+                    <p th:text="*{userEmail}">UserEmail</p>
                 </div>
 
             </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
             
-            <div class="seller-btn">
+            <div class="seller-btn" th:if="${session.loginUser?.userNo == user.userNo}">
                 <button> <!-- 내 정보 수정 -->
                     <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
                     <div>내 정보 수정</div>
@@ -74,40 +80,41 @@
             <div class="purchase-history">
                 <h1>Purchase History (<span th:text="${#lists.size(reservationList)}">구매내역 갯수</span>)</h1>
 
-                <section id="demos" th:if="${reservationList}">
-                    <div class="row">
-                        <div class="large-12 columns">
-                            <div class="owl-carousel owl-theme">
-                                <div class="item" th:each="reservation : ${reservationList}">
-                                    <a href="#"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
+                <th:block th:if="${#lists.size(reservationList) != 0}">
+                    <section id="demos">
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div class="owl-carousel owl-theme">
+                                    <div class="item" th:each="reservation : ${reservationList}">
+                                        <a href="#"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
+                                    </div>
+                                    <!-- <div class="item">
+                                        <a href="#"><img src="" alt=""></a>
+                                    </div> -->
                                 </div>
-                                <!-- <div class="item">
-                                    <a href="#"><img src="" alt=""></a>
-                                </div> -->
                             </div>
                         </div>
-                    </div>
-                    <div class="Previous">
-                        <img th:src="@{/images/profile/purchaseL-arrow.png}" alt="purchaseL">
-                    </div>
-                    <div class="Next">
-                        <img th:src="@{/images/profile/purchaseR-arrow.png}" alt="purchaseR">
-                    </div>
-                </section>
+                        <div class="Previous">
+                            <img th:src="@{/images/profile/purchaseL-arrow.png}" alt="purchaseL">
+                        </div>
+                        <div class="Next">
+                            <img th:src="@{/images/profile/purchaseR-arrow.png}" alt="purchaseR">
+                        </div>
+                    </section>
+                </th:block>
 
             </div>
 
             <!-- 리뷰 작성 모달 -->
-            <div class="review-write"> <!-- 불투명 배경 -->
+            <div class="review-write" th:if="${session.loginUser?.userNo == user.userNo}"> <!-- 불투명 배경 -->
                 <div> <!-- 하얀 배경 -->
                     <form action="">
                         <h2>Purchase History</h2>
-                        <select name="reviewSaleList" id="reviewSaleList">
+                        <select name="reviewSaleList" id="reviewSaleList" th:each="reservation : ${reservationList}">
                             <option selected="selected" disabled>후기를 작성할 상품을 선택해주세요.</option>
-                            <option>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</option>
-                            <option>상품1</option>
-                            <option>상품2</option>
-                            <option>상품3</option>
+                            <!-- <th:block th:if="${#lists.size(reservationList) != 0}" >
+                                <option th:text="${reservation.}">상품 목록</option>
+                            </th:block> -->
                         </select>
                         <div class="review-star-score"> <!-- 별점 주기 -->
                             <h3>Star Rating</h3>
@@ -152,7 +159,7 @@
             </div>
 
             <!-- 리뷰 수정 모달 -->
-            <div class="review-edit"> <!-- 불투명 배경 -->
+            <div class="review-edit" th:if="${session.loginUser?.userNo == user.userNo}"> <!-- 불투명 배경 -->
                 <div> <!-- 하얀 배경 -->
                     <form action="">
                         <h2>Purchase History</h2>
@@ -228,11 +235,11 @@
             <div class="my-review"> <!-- 구매자 리뷰 내역 -->
                 <div>
                     <h1>Review (<span th:text="${reviewCount}">리뷰 갯수</span>)</h1>
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
                     </svg>
                 </div>
-                <ul class="review-list" th:if="${reviewList}">
+                <ul class="review-list" th:if="${#lists.size(reviewList) != 0}">
                     <li>
                         <ul th:each="review : ${reviewList}">
                             <li class="reply-content">
@@ -240,7 +247,7 @@
                                     <div> <!-- 리뷰 남긴 사람 프로필 -->
                                         <div class="reviewer">
                                             <!-- <img src=""> -->
-                                            <img th:unless="${user.profileImage}" th:src="${/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                            <img th:unless="${user.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                             <img th:if="${user.profileImage}" th:src="${user.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                         </div>
                                         <p class="reviewer-name" th:text="${user.userName}">리뷰 작성자</p>
@@ -268,7 +275,7 @@
                                 <pre th:text="${review.reviewMessage}">그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre>
                                 <div class="more-and-reply">
                                     <p onclick="moreReviewFn(this)">더보기 +</p>
-                                    <div class="myreview-edit">
+                                    <div class="myreview-edit" th:if="${session.loginUser?.userNo == user.userNo}">
                                         <button class="review-edit-btn" onclick="reviewEditFn(this); return false;" type="button">Edit</button>
                                         <button class="review-delete-btn">Delete</button>
                                     </div>
@@ -285,7 +292,7 @@
                     
                     
                 </ul>
-                <button class="review-list-more">more reviews</button>
+                <button class="review-list-more" th:if="${#lists.size(reviewList) >= 3}">more reviews</button>
             </div>
 
         </div>
