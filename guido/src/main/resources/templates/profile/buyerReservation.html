@@ -17,7 +17,7 @@
     <header>임시헤더</header>
 
     <div class="buyer-profile-top">
-        <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
+        <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
 
             <div class="guide-banner"> <!-- 프로필 위 투어리스트 배너 -->
                 <img th:src="@{/images/profile/touristBanner.png}" alt="guideBanner"> <!-- 일반 가이드 -->
@@ -26,26 +26,33 @@
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
                 
                 <form class="profile-img-box" th:action="@{/profile/profileEdit}" method="POST" enctype="multipart/form-data"> <!-- 프로필+이름 -->
-                    <button class="profile-edit-btn">프로필 변경</button>
-                    <img src="../images/profile/profile_delete.png" alt="profile_delete" class="profile-delete">
+                    <th:block th:if="${session.loginUser?.userNo == user.userNo}">
+                        <button class="profile-edit-btn">프로필 변경</button>
+                        <img th:src="@{/images/profile/profile_delete.png}" alt="profile_delete" class="profile-delete">
+                    </th:block>
                     <div class="profile-img">
                         <img th:unless="*{profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                         <img th:if="*{profileImage}" th:src="*{profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
 
-                        <input type="file" name="profileImage" id="userProfileFile" accept="image/*">
-                        <!-- 프로필 편집 버튼 -->
-                        <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
+                        <th:block th:if="${session.loginUser?.userNo == user.userNo}">
+                            <input type="file" name="profileImage" id="userProfileFile" accept="image/*">
+                            <!-- 프로필 편집 버튼 -->
+                            <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
+                        </th:block>
                     </div>
-                    <h2 onclick="location.href='/profile/mypage/T'" th:text="*{userName}">UserName</h2> <!-- 유저이름 -->
+                    <a th:href="@{/profile/{userNo}(userNo=${user.userNo})}">
+                        <h2 th:text="*{userName}">UserName</h2> <!-- 유저이름 -->
+                    </a>
+                    <!-- th:href="@{/profile/{userNo}(userNo=${user.userNo})}" -->
                 </form>
 
                 <div class="user-email"> <!-- 유저 이메일 -->
                     <p th:text="*{userEmail}">tiltheend@gmail.com</p>
                 </div>
 
-            </div> <!-- // profile-left 프로필 왼쪽 박스 -->           
+            </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
             
-            <div class="seller-btn">
+            <div class="seller-btn" th:if="${session.loginUser?.userNo == user.userNo}">
                 <button> <!-- 내 정보 수정 -->
                     <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
                     <div>내 정보 수정</div>

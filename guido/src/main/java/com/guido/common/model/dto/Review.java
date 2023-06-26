@@ -24,6 +24,7 @@ public class Review {
 	private String profileImage;		// 프로필 이미지
 	
 	private String productName;		// 상품명
+	private String productDtNo;		// 상품 일정 번호
 	private String reviewReply;		// 리뷰 답글
 	private double reviewStarsDouble;		// 리뷰 별점 (0.5 단위)
 	

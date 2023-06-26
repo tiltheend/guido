@@ -6,13 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>guido</title>
 
+    
+    <link rel="stylesheet" th:href="@{/libraries/bootstrap/css/bootstrap.min.css}">
+    
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/productDetail/productDetail.css}">
     
+
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.theme.default.min.css}">
-
+    
+    <script th:src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+    
+    <script th:src="@{/libraries/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/libraries/bootstrap/js/bootstrap.js}"></script>
+    
     <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
+
+    <!-- <script type ="text/javascript" th:src="@{/js/productDetail/apiKey.js}"></script> -->
+
 
 </head>
 <body th:object="${product}">
@@ -23,7 +36,7 @@
             
             <div>
                 <div class="detail--top__category">
-                    <div th:text="*{regionName}">서울</div>
+                    <div th:text="*{regionName}">지역명</div>
                     <div>></div>
                     <div th:text="*{themeName}">테마명</div>
                     <div>></div>
@@ -100,30 +113,29 @@
                     <div class="detail--top__like">
                         <div class="detail--div__location">
                             <img th:src="@{/images/productDetail/location_icon.svg}">
-                            <div> [[*{regionName}]] </div>
-                        </div>
-
-                        <!-- <label class="container">
-                            <input checked="checked" type="checkbox">
-                            <div class="checkmark">
-                                <svg viewBox="0 0 256 256">
-                                <rect fill="none" height="256" width="256"></rect>
-                                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#FFF" fill="none"></path></svg>
+                            <div>
+                                <div>[[*{regionName}]]</div>
+                                <th:block th:if="${#lists.size(product.tourCourse) > 0}" th:each="course : *{tourCourse}">
+                                    <div th:if="${course.bossCourseFL=='Y'}">&nbsp; - [[${course.courseName}]]</div>
+                                </th:block>
                             </div>
-                            </label> -->
-
-                            <label class="container">
-                                <input type="checkbox">
+                        </div>
+                        
+                        
+                            <!-- 관심 상품 등록 -->
+                            <label class="like--container">
+                                <input type="checkbox" id="wishHeart" th:checked="${wishOrNot}>0">
                                 <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path></svg>
                             </label>
                             
                     </div>
                     
 
+                    <!-- 상품 기본 정보 -->
                     <div class="detail--div__collection">
                         <div th:if="${eachCost==0}">
                             <img th:src="@{/images/productDetail/duration_icon.svg}" class="duration_icon">
-                            &nbsp; Duration:&nbsp;<span th:text="*{tourDuration}">10</span> &nbsp;hr(s) &nbsp; &nbsp; 
+                            <div>Duration: [[*{tourDuration}]] hr(s)</div>
                         </div>
                         <div>
                             <img th:src="@{/images/productDetail/language_icon.svg}">
@@ -136,14 +148,15 @@
                         </div>
 
                         <div th:if="${eachCost!=0}">
-                            <img th:src="@{/images/productDetail/recruits_icon.png}">
-                            <div>Number of recruits is between [[*{minTourist}]] and [[*{maxTourist}]] per package</div> 
+                            <img th:src="@{/images/productDetail/recruits_icon.png}" class="recruits_icon">
+                            <div>Number of recruits is between <strong>[[*{minTourist}]]</strong> and <strong>[[*{maxTourist}]]</strong> per package</div> 
                         </div>
                     </div>
                     
-                    <div th:if="${eachCost!=0}" class="detail--div__recruits">
-                        <img th:src="@{/images/productDetail/recruits_icon.png}">
-                        <div>Number of recruits is between [[*{minTourist}]] and [[*{maxTourist}]] per package</div> 
+
+                    <div th:if="*{productAddPrice}" class="detail--div__extrafee">
+                        <img th:src="@{/images/productDetail/extra_fee_icon.png}">
+                        <div>Extra Fee : [[*{productAddPrice}]]&#8361;</div> 
                     </div>
                 
 
@@ -172,7 +185,7 @@
                         <div class="detail--container__pr">
             
                             <div class="detail--item__pr" th:if="${pr.abroadExperience}">
-                                <img th:src="@{/images/userProfile/abroadExperience.png}">
+                                <img th:src="@{/images/profile/abroadExperience.png}">
                                 <div class="detail--item__pr-text">I have traveled to : [[${pr.abroadExperience}]]</div>
                             </div>
             
@@ -233,7 +246,7 @@
             
                             <div class="detail--item__pr" th:if="${pr.uselessTalent}">
                                 <img th:src="@{/images/profile/uselessTalent.png}">
-                                <div class="detail--item__pr-text">[[${pr.uselessTalent}]]</div>
+                                <div class="detail--item__pr-text">Useless talent: [[${pr.uselessTalent}]]</div>
                             </div>
             
                             <div class="detail--item__pr" th:if="${pr.capList}">
@@ -245,7 +258,7 @@
                     </div>
 
 
-
+                    <!-- 판매자 프로필 -->
                     <div class="detail--middle__profile">
                         <div>
                             
@@ -279,13 +292,53 @@
 
                     <div class="detail--divisionline" id="section2"></div>
 
+
+
+                    <!-- 상품 상세 내용 -->
                     <div class="detail--title__detail">Tour Detail</div>
+                    
                     <div class="detail--text__detail" th:text="*{productContent}">
                         상품 상세 내용
                     </div>
-                </div>
 
-        
+                    <div class="detail--list__tourcourse font2" th:if="*{tourCourse}">
+                        <strong>🚩 tour course</strong>
+
+
+                        <!-- 아코디언 (코스 별 지도) -->
+                        <div class="tourcourse--container">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                                <th:block th:each="i : ${#numbers.sequence(0, #lists.size(product.tourCourse) - 1, 1)}">
+                                    
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" th:id="|heading${i+1}|">
+                                        <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" th:href="|#collapse${i+1}|" aria-expanded="false" th:aria-controls="|collapse${i+1}|"
+                                            th:onclick='|showTourcourseMap([[${product.tourCourse[i].latitude}]], [[${product.tourCourse[i].longitude}]], ${i+1})|'>
+                                            [[${product.tourCourse[i].courseName}]]
+                                        </a>
+                                        </h4>
+                                        </div>
+                                        <div th:id="|collapse${i+1}|" class="panel-collapse collapse" role="tabpanel" th:aria-labelledby="|heading${i+1}|">
+                                        <div class="panel-body">
+                                            <div th:id="|tourcourseMap${i+1}|" style="width:100%;height:100%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </th:block>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+
+            
                 <div class="detail--divisionline" id="section3"></div>
         
             
@@ -383,7 +436,7 @@
                     </th:block>
 
                     
-                    <button type="button" class="detail--item__review-button">show more reviews</button>
+                    <button type="button" class="detail--item__review-button" th:if="${#lists.size(reviewList) > 4}">show more reviews</button>
 
                 </div>
 
@@ -426,7 +479,7 @@
 
                     <div class="detail--item__option">
                         <th:block th:each="i : ${#numbers.sequence(0, #lists.size(product.optionList) - 1, 1)}">
-                            <input type="radio" name="option" th:id="|option${i+1}|" th:value="${product.optionList[i].optionNo}">
+                            <input type="radio" name="option" th:id="|option${i+1}|" th:value="${product.optionList[i].optionNo}" th:disabled="${product.optionList[i].optionRestCount==0}">
                             <label class="option--active" th:for="|option${i+1}|" th:utext="|${product.optionList[i].optionName} (${product.optionList[i].optionRestCount} left)|"></label>
                         </th:block>
                     </div>
@@ -458,7 +511,7 @@
 
                 </div>
                 <!-- 예약 버튼 -->
-                <a th:href="@{/reservation/reservation.html}"><button class="detail--right__button">Reserve</button></a>
+                <a th:href="@{/reservation/reserve}"><button class="detail--right__button" id="reserveBtn">Reserve</button></a>
                 
 
 
@@ -491,10 +544,8 @@
                 <div class="detail--text__map">
                     Where you’ll be
                 </div>
-                
-                <div class="detail--img__map">
-                    <img th:src="@{/images/productDetail/지도.png}">
-                </div>
+            
+                <div id="location--map"></div>
             </div>
             
             
@@ -645,7 +696,7 @@
                 }
             });
 
-            const owl = $('.owl-carousel')
+            const owl = $('.owl-carousel');
 
             $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
   
@@ -654,17 +705,23 @@
             });
 
 
-            const productPrice = /*[[*{productPrice}]]*/ [];
-            const package = /*[[${eachCost}]]*/ [];
-            const guestCount = /*[[${guestCount}]]*/ [];
+            const package = /*[[${eachCost}]]*/"패키지종류(1박or1박이상)";
+            const guestCount = /*[[${guestCount}]]*/"게스트수";
+            let loginUserNo = /*[[${session.loginMember?.userNo}]]*/"로그인 회원 번호";
+            const product = /*[[${product}]]*/ "상품";
 
+            // const MAP_API = config.apikey;
         </script>
 
     </div>
 
+    <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services}"></script>
+    <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키}"></script>
+
     <script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
     <script th:src="@{/libraries/assets/js/app.js}"></script>
     <script th:src="@{/js/productDetail/productDetail.js}"></script>
-    
+
+
 </body>
 </html>

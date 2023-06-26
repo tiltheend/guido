@@ -412,18 +412,7 @@ button:disabled:hover {
   padding: 3px;
   margin-left: 5px;
 }
-.add-image {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 1px dashed rgb(176, 176, 176) !important;
-  margin-top: 20px;
-  width: 99%;
-  height: 388px;
-  align-items: center;
-  text-align: center;
-}
-#addImage {
+#addImageBtn {
   display: flex;
   border: 2px solid #777;
   border-radius: 20px;
@@ -434,10 +423,110 @@ button:disabled:hover {
   margin: auto 0;
   margin: 10px;
 }
-#addImage > * {
+#addImageBtn > * {
   margin-right: 5px;
 }
-#page5 > div.add-image > div:nth-child(1) > img {
+#addImageBtn > img {
+  width: 16px;
+  height: 16px;
+}
+/* .img-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px dashed rgb(176, 176, 176) !important;
+  margin-top: 20px;
+  width: 99%;
+  height: 388px;
+  align-items: center;
+  text-align: center;
+} */
+.img-box {
+  /* display: flex; */
+  justify-content: space-between;
+  flex-direction: row;
+}
+.productImg {
+  width: 49%;
+  height: 230px;
+  display: inline-block;
+  text-align: center;
+  gap: 5px;
+
+  position: relative;
+}
+.productImg > label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  border-radius: 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+.productImg > label:hover {
+  border: 2px solid #555;
+}
+.input-image {
+  display: none;
+}
+/* 이미지 */
+.productImg img {
+  min-width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+/* 썸네일만 이미지 크게 */
+.thumbnail {
+  width: 99%;
+  height: 388px;
+}
+.delete-image {
+  position: absolute;
+  top: 10px;
+  right: 7px;
+  font-size: 30px;
+  color: black;
+  font-weight: bolder;
+  cursor: pointer;
+  display: none;
+}
+.add-image {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+.add-image-text {
+  position: absolute;
+  width: 100%;
+  bottom: 160px;
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+.add-image-text2 {
+  position: absolute;
+  width: 100%;
+  bottom: 120px;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #555;
+  text-decoration: underline;
+}
+.add-image-thumbnail {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  bottom: 200px;
+}
+.img-inner-img {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+/* #page5 > div.add-image > div:nth-child(1) > img {
   width: 63px;
   height: 63px;
 }
@@ -469,10 +558,6 @@ button:disabled:hover {
 .add-image2 > *:hover {
   border: 1px solid black;
 }
-#addImage > img {
-  width: 16px;
-  height: 16px;
-}
 
 #page5 > div:nth-child(4) img,
 #page5 > div:nth-child(5) img {
@@ -482,7 +567,7 @@ button:disabled:hover {
 #page5 > div:nth-child(5) > div:nth-child(3) {
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* 6페이지 */
 #titleContainer {
@@ -1011,4 +1096,12 @@ input[name='tourTheme']:checked + label {
 #submitBtn:hover {
   background-color: #408c8c;
   color: white;
+}
+
+label[for='img9'],
+label[for='img8'],
+label[for='img7'],
+label[for='img6'],
+label[for='img5'] {
+  display: none;
 }

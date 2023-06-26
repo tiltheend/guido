@@ -3,6 +3,7 @@ package com.guido.profile.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +37,7 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		return mapper.userTypeCheck(userNo);
 	}
 
-	// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지)
+	// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
 	@Override
 	public User userInfo(int userNo) {
 		return mapper.userInfo(userNo);
@@ -55,7 +56,6 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		 User user = new User();
 		 user.setUserNo(userNo);
 		 
-		 // System.out.println(user.getUserNo()+"나와??");
 		if(profileImage.getSize()>0) { // 업로드된 이미지가 있을 경우
 			
 			// 1) 파일 이름 저장
@@ -65,7 +65,6 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 			// loginMember.setProfileImage(webPath+profileImg);
 			
 			user.setProfileImage(webPath+rename);
-			// System.out.println(user.getProfileImage()+"나와??");
 			
 		} else { // 없는 경우(X 버튼)
 			// loginMember.setProfileImage(null);
@@ -106,7 +105,7 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		return mapper.reservationCount(userNo);
 	}
 
-	// 리뷰 내역 가져오기
+	// 내가 쓴 리뷰 내역 가져오기
 	@Override
 	public List<Review> reviewList(int userNo) {
 		return mapper.reviewList(userNo);
@@ -117,6 +116,21 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public int reviewCount(int userNo) {
 		return mapper.reviewCount(userNo);
 	}
+
+	// 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩)
+	@Override
+	public List<Review> myReviewMore(Map<String, Integer> request) {
+		return mapper.myReviewMore(request);
+	}
+
+	// 리뷰 안쓴 목록 가져오기
+	@Override
+	public List<Review> addReviewList(int userNo) {
+		return mapper.addReviewList(userNo);
+	}
+	
+	
+	
 	
 	
 	

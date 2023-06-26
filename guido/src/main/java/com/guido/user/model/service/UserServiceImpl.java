@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(User inputUser) {
 		// 암호화 확인
-//		System.out.println("암호화 확안 : " + bcrypt.encode(inputUser.getUserPassword()));
+//		System.out.println("암호화 확인 : " + bcrypt.encode(inputUser.getUserPassword()));
 		
 		User loginUser = mapper.login(inputUser); // 조회해서
 		
@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
 			
 		//bcrypt 전 테스트
 		if(loginUser != null) {
-			System.out.println("로그인 된 회원 비번 : " + loginUser.getUserPassword());
 			if(!(inputUser.getUserPassword().equals(loginUser.getUserPassword()))) loginUser = null; // 비번 틀리면 로그인 실패!
 		}
 			

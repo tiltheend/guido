@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.Product;
@@ -27,7 +29,7 @@ public class ProductUploadController {
 	public String productUpload(Model model
 //							 Product product
 //							 ,@SessionAttribute("loginMember") User loginMember
-//							 ,@RequestParam(value="productImages", required=true) List<MultipartFile> productImages
+//							 ,@RequestParam(value="images", required=true) List<MultipartFile> productImages
 //							 , RedirectAttributes ra
 							 ) throws IllegalStateException, IOException, Exception{
 		
@@ -47,27 +49,26 @@ public class ProductUploadController {
 		public String productUpload(
 							 Product product
 //							 ,@SessionAttribute("loginMember") User loginMember
-//							 ,@RequestParam(value="productImages", required=true) List<MultipartFile> productImages
+							 ,@RequestParam(value="images", required=true) List<MultipartFile> images
 							 , RedirectAttributes ra
 							 ) throws IllegalStateException, IOException, Exception{
 		
 			
 			
-			
+//		*로그인한 유저 번호 -> product에 세팅	
 //		product.setUserNo(loginMember.getUserNo());
-			
-//		int productNo = service.productUpload(product, productImages);
-		int productNo = service.productUpload(product);
+		   
+		int productNo = service.productUpload(product,images);
 		
 		String message = null;
 		String path = "redirect:";
 		
 		if(productNo > 0) {
 			message = "상품이 등록 되었습니다.";
-			path += "/product/" + productNo;
+			path += "/productDetail/" + "product/" + productNo;
 		}else {
 			message = "상품 등록 실패,";
-			path += "upload";
+			path += "/product/upload";
 		}
 		
 		ra.addFlashAttribute("message", message);
