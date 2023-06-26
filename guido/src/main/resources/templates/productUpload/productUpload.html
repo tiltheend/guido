@@ -464,7 +464,7 @@
         <div class="productImg thumbnail">
           <label for="img0">
             <img class="preview" src="" alt="">
-          </label>
+          
           <input
           type="file"
           name="images"
@@ -473,94 +473,28 @@
           accept="image/*"
         />
         <span class="delete-image">&times;</span>
-        </div>
-        <!-- <div>여기로 사진을 끌어다 놓으세요.</div>
-        <div>5장 이상의 사진을 선택하세요.</div>
-        <div>기기에서 업로드</div> -->
+        <div class="add-image add-image-thumbnail"><img src="../images/productUpload/add-image.png" alt="" class="img-inner-img"></div>
+        <span class="add-image-text">5장 이상의 사진을 선택하세요.</span>
+        <span class="add-image-text2">기기에서 업로드</span>
+      </label> 
+      </div>
+        <!-- <div>여기로 사진을 끌어다 놓으세요.</div> -->
+       
       </div>
 
-
+      <!-- 이미지 박스 foreach -->
       <div class="img-box">
-        <div class="productImg">
-          <label for="img1">
-            <img class="preview" src="" alt="">
+        <div th:each="index: ${#numbers.sequence(1, 9)}" class="productImg">
+          <label th:for="'img' + ${index}">
+            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*" />
+           <span class="delete-image">&times;</span>
+           <div class="add-image"><img src="../images/productUpload/plus.png" alt="" class="img-inner-img"></div>
           </label>
-          <input
-          type="file"
-          name="images"
-          class="input-image"
-          id="img1"
-          accept="image/*"
-        />
-        <span class="delete-image">&times;</span>
-        </div>
-
-
-
-        <div class="productImg">
-          <label for="img2">
-            <img class="preview" src="" alt="">
-          </label>
-          <input
-          type="file"
-          name="images"
-          class="input-image"
-          id="img2"
-          accept="image/*"
-        />
-        <span class="delete-image">&times;</span>
-        </div>
-
-
-
-
-        <div class="productImg">
-          <label for="img3">
-            <img class="preview" src="" alt="">
-          </label>
-          <input
-          type="file"
-          name="images"
-          class="input-image"
-          id="img3"
-          accept="image/*"
-        />
-        <span class="delete-image">&times;</span>
-        </div>
-
-
-
-        <div class="productImg">
-          <label for="img4">
-            <img class="preview" src="" alt="">
-          </label>
-          <input
-          type="file"
-          name="images"
-          class="input-image"
-          id="img4"
-          accept="image/*"
-        />
-        <span class="delete-image">&times;</span>
-        </div>
-
-
-
-
-        <div class="productImg">
-          <label for="img5">
-            <img class="preview" src="" alt="">
-          </label>
-          <input
-          type="file"
-          name="images"
-          class="input-image"
-          id="img5"
-          accept="image/*"
-        />
-        <span class="delete-image">&times;</span>
+          
         </div>
       </div>
+      
        
 
 

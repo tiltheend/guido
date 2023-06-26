@@ -268,7 +268,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var mainElement4 = document.getElementById('page5');
   if (mainElement4) {
-    mainElement4.style.width = '700px';
+    mainElement4.style.width = '600px';
   }
   var mainElement5 = document.getElementById('page6');
   if (mainElement5) {
@@ -747,6 +747,10 @@ feeInput.addEventListener('click', (e) => {
 const preview = document.getElementsByClassName('preview');
 const inputImage = document.getElementsByClassName('input-image');
 const deleteImage = document.getElementsByClassName('delete-image');
+const border = document.querySelectorAll('.productImg > label');
+const addImage = document.querySelectorAll('.add-image');
+const addImageText = document.querySelector('.add-image-text');
+const addImageText2 = document.querySelector('.add-image-text2');
 
 for (let i = 0; i < inputImage.length; i++) {
   //파일이 선택되거나, 선택 후 취소 되었을 때
@@ -763,12 +767,22 @@ for (let i = 0; i < inputImage.length; i++) {
       reader.onload = (e) => {
         // 파일을 다 읽은 후 수행
         preview[i].setAttribute('src', e.target.result);
+        border[i].style.border = 'none';
+        deleteImage[i].style.display = 'block';
+        addImage[i].style.display = 'none';
+        addImageText.style.display = 'none';
+        addImageText2.style.display = 'none';
       };
     } else {
       // 선택 후 취소 되었을 때
       // -> 선택된 파일 없음 -> 미리보기 삭제
 
       preview[i].removeAttribute('src');
+      border[i].style.border = '2px dashed #ccc';
+      deleteImage[i].style.display = 'none';
+      addImage[i].style.display = 'flex';
+      addImageText.style.display = 'block';
+      addImageText2.style.display = 'block';
     }
 
     deleteImage[i].addEventListener('click', () => {
@@ -776,7 +790,22 @@ for (let i = 0; i < inputImage.length; i++) {
         preview[i].removeAttribute('src');
 
         inputImage[i].value = '';
+        border[i].style.border = '2px dashed #ccc';
+        deleteImage[i].style.display = 'none';
+        addImage[i].style.display = 'flex';
+        addImageText.style.display = 'block';
+        addImageText2.style.display = 'block';
       }
     });
   });
+}
+// 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가 생성
+const imgId4 = document.getElementById('imgId4');
+const imgId5 = document.getElementById('imgId5');
+const imgId6 = document.getElementById('imgId6');
+const imgId7 = document.getElementById('imgId7');
+const imgId8 = document.getElementById('imgId8');
+
+if (imgId4.src == 'http://localhost/product/upload') {
+  imgId5.style.display = 'flex';
 }

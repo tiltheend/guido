@@ -451,6 +451,7 @@ button:disabled:hover {
   height: 230px;
   display: inline-block;
   text-align: center;
+  gap: 5px;
 
   position: relative;
 }
@@ -460,19 +461,22 @@ button:disabled:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px dashed #ccc;
+  border: 2px dashed #ccc;
+  border-radius: 15px;
+  margin: 5px;
   cursor: pointer;
 }
 .productImg > label:hover {
-  border: 1px solid black;
+  border: 2px solid #555;
 }
-/* .input-image {
+.input-image {
   display: none;
-} */
+}
 /* 이미지 */
 .productImg img {
-  max-width: 100%;
-  max-height: 100%;
+  min-width: 100%;
+  height: 100%;
+  border-radius: 12px;
 }
 
 /* 썸네일만 이미지 크게 */
@@ -482,10 +486,45 @@ button:disabled:hover {
 }
 .delete-image {
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 7px;
-  font-size: 20px;
+  font-size: 30px;
+  color: black;
+  font-weight: bolder;
   cursor: pointer;
+  display: none;
+}
+.add-image {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+.add-image-text {
+  position: absolute;
+  width: 100%;
+  bottom: 160px;
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+.add-image-text2 {
+  position: absolute;
+  width: 100%;
+  bottom: 120px;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #555;
+  text-decoration: underline;
+}
+.add-image-thumbnail {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  bottom: 200px;
+}
+.img-inner-img {
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 /* #page5 > div.add-image > div:nth-child(1) > img {
   width: 63px;
@@ -1057,4 +1096,12 @@ input[name='tourTheme']:checked + label {
 #submitBtn:hover {
   background-color: #408c8c;
   color: white;
+}
+
+label[for='img9'],
+label[for='img8'],
+label[for='img7'],
+label[for='img6'],
+label[for='img5'] {
+  display: none;
 }

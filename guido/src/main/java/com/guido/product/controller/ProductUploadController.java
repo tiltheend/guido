@@ -58,7 +58,6 @@ public class ProductUploadController {
 //		*로그인한 유저 번호 -> product에 세팅	
 //		product.setUserNo(loginMember.getUserNo());
 		   
-//		int productNo = service.productUpload(product, productImages);
 		int productNo = service.productUpload(product,images);
 		
 		String message = null;
@@ -69,7 +68,7 @@ public class ProductUploadController {
 			path += "/productDetail/" + "product/" + productNo;
 		}else {
 			message = "상품 등록 실패,";
-			path += "upload";
+			path += "/product/upload";
 		}
 		
 		ra.addFlashAttribute("message", message);
