@@ -1,4 +1,5 @@
 
+
 @media screen and (max-width : 1024px) {
     html{
         font-size: 16px;
@@ -468,15 +469,6 @@ box-shadow:  5px 5px 8px #e2e2e2,
 .detail--div__collection img{
     margin-right: 0.5vw;
 }
-
-/* .detail--div__collection>div div{
-    display: -webkit-box;
-    word-wrap: break-word;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    overflow: hidden; 
-} */
 
 
 .recruits_icon{
@@ -1214,6 +1206,27 @@ a {
 }
 
 
+/* 모든 투어 코스 좌표 지도 */
+#location--map{
+    width:100%;
+    height:450px; 
+    margin-top: 2vh;
+}
+
+/* 지도에 특정 마커 hover 시 나타나는 customOverlay */
+.customOverlay {
+    position: absolute;
+    left:50%;
+    transform:translateX(-50%);
+    bottom : 40px;
+    background-color: #231F20;
+    overflow: hidden;
+    font-size: 15px;
+    padding: 3px 8px;
+    border-radius: 3px; 
+    color: white;
+}
+
 
 /* 반응형 */
 
@@ -1479,3 +1492,19 @@ a {
         top: 83%;
     }
 } 
+
+
+@media screen and (max-width : 900px) {
+
+    .panel-body{
+        width: 100%;
+    }
+    
+    .panel-collapse{
+        width: 100%;
+    }
+    
+    .tourcourse--container {
+        width: 100%;
+    }
+}

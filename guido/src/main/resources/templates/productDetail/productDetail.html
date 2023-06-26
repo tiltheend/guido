@@ -7,7 +7,7 @@
     <title>guido</title>
 
     
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/libraries/bootstrap/css/bootstrap.min.css}">
     
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/productDetail/productDetail.css}">
@@ -16,9 +16,11 @@
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.theme.default.min.css}">
     
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <script th:src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+    
+    <script th:src="@{/libraries/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/libraries/bootstrap/js/bootstrap.js}"></script>
+    
     <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
@@ -542,10 +544,8 @@
                 <div class="detail--text__map">
                     Where you’ll be
                 </div>
-                
-                <div class="detail--img__map">
-                    <img th:src="@{/images/productDetail/지도.png}">
-                </div>
+            
+                <div id="location--map"></div>
             </div>
             
             
@@ -716,6 +716,7 @@
     </div>
 
     <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services}"></script>
+    <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키}"></script>
 
     <script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
     <script th:src="@{/libraries/assets/js/app.js}"></script>
