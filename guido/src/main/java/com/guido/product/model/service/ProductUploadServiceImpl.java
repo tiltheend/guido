@@ -60,12 +60,12 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 					File img = new File();
 					
 					String rename = Util.fileRename(images.get(i).getOriginalFilename());
-					System.out.println(filePath);
+					System.out.println(webPath);
 					System.out.println(rename);
 					
 					images.get(i).transferTo(new java.io.File(filePath+rename));
 					
-					img.setFilePath(filePath+rename); 
+					img.setFilePath(webPath+rename); 
 					img.setProductNo(productNo); 
 					img.setFileOrder(i); 
 			
