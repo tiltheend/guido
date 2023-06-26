@@ -61,4 +61,11 @@ public interface ProfileTouristService {
 	 */
 	List<Review> myReviewMore(Map<String, Integer> request);
 
+	/** 리뷰 안쓴 목록 가져오기
+	 * @param userNo
+	 * @return
+	 */
+	List<Review> addReviewList(int userNo);
+
+
 }

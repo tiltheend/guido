@@ -255,7 +255,7 @@ reviewMoreBtn.addEventListener("click", e => {
         if (moreReviewList.length < 4) {
             reviewMoreBtn.style.display = "none";
         }
-        
+
         if (moreReviewList.length > 0) {
             
             for (let i = 0; i < 3; i++) {
@@ -376,3 +376,60 @@ reviewMoreBtn.addEventListener("click", e => {
 
 });
 
+/* 리뷰 등록 */
+const reviewAddSubmit = document.querySelector(".review-write .review-add-submit");
+
+reviewAddSubmit.addEventListener("click", e => {
+    // 리뷰 쓰려는 상품의 상품 번호, 일정 번호
+    const selectedreviewSale = document.querySelector("#reviewSaleList option:checked");
+    const productNo = selectedreviewSale.getAttribute("data-productno");
+    const productDtNo = selectedreviewSale.getAttribute("data-productdtno");
+
+    if(selectedreviewSale.checked == false){
+        e.preventDefault();
+        alert("상품을 선택해주세요.")
+        return;
+    }
+
+    const reviewContent = document.getElementById("reviewContent").value;
+    if(reviewContent.trim.length == 0){
+        e.preventDefault();
+        alert("내용을 입력해주세요.");
+        reviewContent.focus();
+        reviewContent = ""; // 띄어쓰기, 개행문자 제거
+        return;
+    }
+    
+    // 체크된 별점
+    const selectedStarScore = document.querySelector(".star_score:checked").value;
+    if(selectedStarScore == null || selectedStarScore==0.0){
+        e.preventDefault();
+        alert("0.0 이상의 별점을 입력해주세요.");
+        return;
+    }
+
+    console.log("ㅎㅎ..");
+
+    fetch("/profile/addReview",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, 
+        body : JSON.stringify({
+            "productNo" : productNo,
+            "productDtNo" : productDtNo,
+            "reviewContent" : reviewContent,
+            "selectedStarScore" : selectedStarScore
+        })
+    })
+    .then(resp => resp.json())
+    .then(e => {
+        // 전송되면 리뷰 내용 삭제
+        reviewContent = "";
+        console.log("ㅎㅎ..");
+
+    })
+    .catch(err=>{
+        console.log(err);
+
+    });
+
+});

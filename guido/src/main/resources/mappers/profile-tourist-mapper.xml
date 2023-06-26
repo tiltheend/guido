@@ -58,6 +58,7 @@
 		<result property="profileImage" column="PROFILE_IMG"/>
 		
 		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productDtNo" column="PRODUCT_DT_NO"/>
 		<result property="reviewReply" column="REVIEW_REPLY"/>
 	</resultMap>
 	
@@ -140,6 +141,23 @@
 			)
 		<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
 			ORDER BY NUM
+	 </select>
+	 
+	 <!--  리뷰 안쓴 목록 가져오기 -->
+	 <select id="addReviewList" resultMap="review_rm">
+		SELECT RS.PRODUCT_NO PRODUCT_NO, P.PRODUCT_NAME PRODUCT_NAME, RS.PRODUCT_DT_NO PRODUCT_DT_NO, 
+		    (SELECT R.REVIEW_MESSAGE
+		    FROM REVIEW R
+		    WHERE R.PRODUCT_NO = RS.PRODUCT_NO
+		    AND R.USER_NO = 25
+		    AND R.REVIEW_MESSAGE IS NULL) AS REVIEW_MESSAGE
+		FROM RESERVATION RS
+		JOIN "PRODUCT" P ON RS.PRODUCT_NO = P.PRODUCT_NO
+		LEFT JOIN "REVIEW" R ON P.PRODUCT_NO = R.PRODUCT_NO
+		WHERE RS.USER_NO = 25
+		AND RS.RESERVATION_STATE = 'D'
+		AND R.REVIEW_NO IS NULL
+		ORDER BY RS.PRODUCT_NO DESC
 	 </select>
 	
 </mapper>

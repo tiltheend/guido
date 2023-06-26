@@ -36,6 +36,9 @@ public interface ProfileTouristMapper {
 	// 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩)
 	List<Review> myReviewMore(Map<String, Integer> request);
 
+	//  리뷰 안쓴 목록 가져오기
+	List<Review> addReviewList(int userNo);
+
 	
 
 }

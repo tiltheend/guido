@@ -108,13 +108,15 @@
             <!-- 리뷰 작성 모달 -->
             <div class="review-write" th:if="${session.loginUser?.userNo == user.userNo}"> <!-- 불투명 배경 -->
                 <div> <!-- 하얀 배경 -->
-                    <form action="">
+                    <form action="/profile/addReview" method="POST">
                         <h2>Purchase History</h2>
-                        <select name="reviewSaleList" id="reviewSaleList" th:each="reservation : ${reservationList}">
+                        <select name="reviewSaleList" id="reviewSaleList">
                             <option selected="selected" disabled>후기를 작성할 상품을 선택해주세요.</option>
-                            <!-- <th:block th:if="${#lists.size(reservationList) != 0}" >
-                                <option th:text="${reservation.}">상품 목록</option>
-                            </th:block> -->
+                            <th:block th:if="${addReviewList}" th:each="addReview : ${addReviewList}">
+                                <option th:text="${addReview.productName}"
+                                        th:data-productno="${addReview.productNo}"
+                                        th:data-productdtno="${addReview.productDtNo}">상품 목록</option>
+                            </th:block>
                         </select>
                         <div class="review-star-score"> <!-- 별점 주기 -->
                             <h3>Star Rating</h3>
@@ -152,7 +154,7 @@
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button>Submit</button>
+                            <button class="review-add-submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -235,7 +237,7 @@
             <div class="my-review"> <!-- 구매자 리뷰 내역 -->
                 <div>
                     <h1>Review (<span th:text="${reviewCount}">리뷰 갯수</span>)</h1>
-                    <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="review-add" th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
                     </svg>
                 </div>

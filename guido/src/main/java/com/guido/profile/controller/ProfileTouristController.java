@@ -84,6 +84,18 @@ public class ProfileTouristController {
 			int reviewCount = service.reviewCount(userNo);
 			model.addAttribute("reviewCount", reviewCount);
 			
+			// 리뷰 안쓴 목록 가져오기 (상품 번호, 상품 제목)
+			List<Review> addReviewList = service.addReviewList(userNo);
+			
+//			for(Review r : addReviewList) {
+//				System.out.println(r.getProductNo());
+//				System.out.println(r.getProductName());
+//				System.out.println(r.getProductDtNo());
+//			}
+			
+			model.addAttribute("addReviewList", addReviewList);
+			
+			
 		} else {
 			path="common/main";
 			System.out.println("혹시 관리자?");

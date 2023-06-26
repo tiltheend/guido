@@ -122,6 +122,13 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public List<Review> myReviewMore(Map<String, Integer> request) {
 		return mapper.myReviewMore(request);
 	}
+
+	// 리뷰 안쓴 목록 가져오기
+	@Override
+	public List<Review> addReviewList(int userNo) {
+		return mapper.addReviewList(userNo);
+	}
+	
 	
 	
 	
