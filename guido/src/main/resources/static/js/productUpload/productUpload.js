@@ -3,6 +3,7 @@ const prevBtn = document.querySelector('.back-btn');
 const nextBtn = document.querySelector('.next-btn');
 const sbmtBtn = document.getElementById('submitBtn');
 const pages = document.getElementsByClassName('page');
+const regionName = document.getElementById('regionName');
 
 const progressBar = document.querySelector('.progress');
 const btnContainer = document.getElementById('btnContainer');
@@ -29,8 +30,8 @@ const updatePage = () => {
     typing2();
   }
   if (currentPage == 2) {
-    document.querySelector('.text5').innerHTML = '';
-    typing5();
+    // document.querySelector('.text5').innerHTML = '';
+    // typing5();
   }
   if (currentPage == 3) {
     document.querySelector('.text3').innerHTML = '';
@@ -69,12 +70,22 @@ updatePage();
 // 당일투어 클릭 시 productyPackage = 1 (value = 1 로 지정)
 const onedayTourValue = document.querySelector('#onedayTour');
 function updateTourValue() {
+  onedayTourValue.setAttribute('name', 'productPackage');
   onedayTourValue.value = '1';
-  if (input.value != 0) {
-    onedayTourValue.value = '0';
-  }
+  // if (inputDay.value != 0) {
+  //   onedayTourValue.value = '';
+  //   // onedayTourValue.removeAttribute('name');
+  //   // inputTime.value = '';
+  // }
+}
+function updateTourValue2() {
+  onedayTourValue.value = '';
 }
 
+function updateTourValue3() {
+  onedayTourValue.removeAttribute('name');
+  inputTime.removeAttribute('name');
+}
 var selectedElement = null;
 
 function changeBackgroundColor(element) {
@@ -82,7 +93,7 @@ function changeBackgroundColor(element) {
     selectedElement.style.backgroundColor = '';
     selectedElement.style.borderColor = '';
   }
-
+  f;
   if (selectedElement === element) {
     selectedElement = null;
   } else {
@@ -217,6 +228,7 @@ for (let i = 0; i < clickElements.length; i++) {
 
     // 선택한 요소에 효과 설정
     city.innerText = textElements[i].innerHTML;
+    regionName.value = city.innerText;
     clickElements[i].style.fill = 'rgb(59, 119, 124)';
   });
 
@@ -732,3 +744,39 @@ feeInput.addEventListener('click', (e) => {
 
 // "document.getElementsByName('productPrice')[0].value" = extractedNumber;
 //이미지 업로드
+const preview = document.getElementsByClassName('preview');
+const inputImage = document.getElementsByClassName('input-image');
+const deleteImage = document.getElementsByClassName('delete-image');
+
+for (let i = 0; i < inputImage.length; i++) {
+  //파일이 선택되거나, 선택 후 취소 되었을 때
+  inputImage[i].addEventListener('change', (e) => {
+    const file = e.target.files[0]; // 선택된 파일의 데이터
+
+    if (file != undefined) {
+      // 파일이 선택 되었을 때
+      const reader = new FileReader(); // 파일을 읽는 객체
+
+      reader.readAsDataURL(file);
+      // 지정된 파일을 읽은 후 result 변수에 url 형식으로 저장
+
+      reader.onload = (e) => {
+        // 파일을 다 읽은 후 수행
+        preview[i].setAttribute('src', e.target.result);
+      };
+    } else {
+      // 선택 후 취소 되었을 때
+      // -> 선택된 파일 없음 -> 미리보기 삭제
+
+      preview[i].removeAttribute('src');
+    }
+
+    deleteImage[i].addEventListener('click', () => {
+      if (preview[i].getAttribute('src') != '') {
+        preview[i].removeAttribute('src');
+
+        inputImage[i].value = '';
+      }
+    });
+  });
+}

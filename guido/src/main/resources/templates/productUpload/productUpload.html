@@ -42,13 +42,13 @@
         <input type="hidden" id="onedayTour" name="productPackage" value="">
 
 
-        <span class="tour-type">1박 이상 패키지</span>
+        <span class="tour-type" id="tourBox" onclick="updateTourValue2()">1박 이상 패키지</span>
       </div>
       <div id="tourTime">
         <div>몇 시간 코스인가요?</div><br>
 
-        <div class="input-container2">
-          <input type="text" id="inputTime" name="tourDuration">시간 
+        <div class="input-container2" id="inputContainer2">
+          <input type="text" id="inputTime" name="tourDuration" >시간
         </div>
 
         <div class="input-container" id="inputWarning">
@@ -61,7 +61,7 @@
         <div>몇 일 코스인가요?</div><br>
 
         <div class="input-container">
-          <input type="text" id="inputDay" name="">일 
+          <input type="text" id="inputDay" name="productPackage" oninput="updateTourValue3()">일 
         </div>
 
         <div class="input-container" id="inputWarning">
@@ -78,7 +78,7 @@
           <h4 class="text2"></h4>
         </div>
         <span class="sub-title">선택한 지역 : </span><span id="space">000</span>
-        <!-- <script src="/js/testKorea.js"></script> -->
+        <input type="hidden" name="regionName" id="regionName" value="">
       </div>
       <div class="korea-map">
         <svg id="mySvg"
@@ -458,23 +458,113 @@
     
       <div class="add-image-div">
         <h3 class="title">5장 이상의 이미지를 선택해주세요.</h3>
-        <button type="button" id="addImage"><img src="../images/productUpload/plus.png" alt=""> 추가</button>
+        <button type="button" id="addImageBtn"><img src="" alt=""> 추가</button>
       </div>
-      <div class="add-image">
-        <div><img src="../images/productUpload/add-image.png" alt=""></div>
-        <div>여기로 사진을 끌어다 놓으세요.</div>
+      <div class="img-box">
+        <div class="productImg thumbnail">
+          <label for="img0">
+            <img class="preview" src="" alt="">
+          </label>
+          <input
+          type="file"
+          name="images"
+          class="input-image"
+          id="img0"
+          accept="image/*"
+        />
+        <span class="delete-image">&times;</span>
+        </div>
+        <!-- <div>여기로 사진을 끌어다 놓으세요.</div>
         <div>5장 이상의 사진을 선택하세요.</div>
-        <div>기기에서 업로드</div>
+        <div>기기에서 업로드</div> -->
       </div>
-      <div class="add-image2">
-        <div><img src="../images/productUpload/add-image.png" alt=""></div>
-        <div><img src="../images/productUpload/add-image.png" alt=""></div>
+
+
+      <div class="img-box">
+        <div class="productImg">
+          <label for="img1">
+            <img class="preview" src="" alt="">
+          </label>
+          <input
+          type="file"
+          name="images"
+          class="input-image"
+          id="img1"
+          accept="image/*"
+        />
+        <span class="delete-image">&times;</span>
+        </div>
+
+
+
+        <div class="productImg">
+          <label for="img2">
+            <img class="preview" src="" alt="">
+          </label>
+          <input
+          type="file"
+          name="images"
+          class="input-image"
+          id="img2"
+          accept="image/*"
+        />
+        <span class="delete-image">&times;</span>
+        </div>
+
+
+
+
+        <div class="productImg">
+          <label for="img3">
+            <img class="preview" src="" alt="">
+          </label>
+          <input
+          type="file"
+          name="images"
+          class="input-image"
+          id="img3"
+          accept="image/*"
+        />
+        <span class="delete-image">&times;</span>
+        </div>
+
+
+
+        <div class="productImg">
+          <label for="img4">
+            <img class="preview" src="" alt="">
+          </label>
+          <input
+          type="file"
+          name="images"
+          class="input-image"
+          id="img4"
+          accept="image/*"
+        />
+        <span class="delete-image">&times;</span>
+        </div>
+
+
+
+
+        <div class="productImg">
+          <label for="img5">
+            <img class="preview" src="" alt="">
+          </label>
+          <input
+          type="file"
+          name="images"
+          class="input-image"
+          id="img5"
+          accept="image/*"
+        />
+        <span class="delete-image">&times;</span>
+        </div>
       </div>
-      <div class="add-image2">
-        <div><img src="../images/productUpload/add-image.png" alt=""></div>
-        <div><img src="../images/productUpload/add-image.png" alt=""></div>
-        <div><img src="../images/productUpload/plus.png" alt=""><span>추가</span></div>
-      </div>
+       
+
+
+
     </main>
     <!-- 6페이지(상품 제목 정하기) -->
     <main id="page6" class="page">
