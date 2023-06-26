@@ -247,10 +247,10 @@
                                     <div> <!-- 리뷰 남긴 사람 프로필 -->
                                         <div class="reviewer">
                                             <!-- <img src=""> -->
-                                            <img th:unless="${user.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
-                                            <img th:if="${user.profileImage}" th:src="${user.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                            <img th:unless="${review.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                            <img th:if="${review.profileImage}" th:src="${review.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                         </div>
-                                        <p class="reviewer-name" th:text="${user.userName}">리뷰 작성자</p>
+                                        <p class="reviewer-name" th:text="${review.userName}">리뷰 작성자</p>
                                     </div>
                                     <div class="sale-review-info">
                                         <p th:text="${review.productName}">상품명</p>
@@ -272,7 +272,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <pre th:text="${review.reviewMessage}">그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre>
+                                <pre th:text="${review.reviewMessage}">리뷰내용</pre>
                                 <div class="more-and-reply">
                                     <p onclick="moreReviewFn(this)">더보기 +</p>
                                     <div class="myreview-edit" th:if="${session.loginUser?.userNo == user.userNo}">
@@ -284,15 +284,13 @@
                             <li class="seller-reply" th:if="${review.reviewReply}">
                                 <div> <!-- 답글 200 글자 제한 -->
                                     <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
-                                    <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200" th:text="${review.reviewReply}" readonly>안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!</textarea>
+                                    <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200" th:text="${review.reviewReply}" readonly>답글 내용</textarea>
                                 </div>
                             </li>
                         </ul>
                     </li>
-                    
-                    
                 </ul>
-                <button class="review-list-more" th:if="${#lists.size(reviewList) >= 3}">more reviews</button>
+                <button class="review-list-more" th:if="${reviewCount > 3}" type="button">more reviews</button>
             </div>
 
         </div>
@@ -340,8 +338,6 @@
         }) 
 
     </script>
-    <script th:src="@{/js/profile/profileEdit.js}"></script>                   
-    <script th:src="@{/js/profile/buyerProfile.js}"></script>   
 
     <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
     <script th:inline="javascript">
@@ -353,6 +349,15 @@
         if(message != null){
             alert(message);
         }
-    </script>             
+        const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
+        // if(loginUserNo == null){loginUserNo = "";}
+        const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
+        const reviewCount = /*[[${reviewCount}]]*/ "리뷰 갯수";
+    </script>       
+    </script>       
+    
+    <script th:src="@{/js/profile/profileEdit.js}"></script>                   
+    <script th:src="@{/js/profile/buyerProfile.js}"></script>   
+
 </body>
 </html>

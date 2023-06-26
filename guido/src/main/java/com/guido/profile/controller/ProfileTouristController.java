@@ -2,6 +2,7 @@ package com.guido.profile.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +45,7 @@ public class ProfileTouristController {
 		// 가이드인지 판매자인지 체크 ( userType: 1 == G / 0 == T)
 		int userType = service.userTypeCheck(userNo);
 		
-		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지)
+		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
 		User user = service.userInfo(userNo);
 		
 		if(userType == 1) { // 가이드 일 경우
@@ -113,15 +116,48 @@ public class ProfileTouristController {
 		return "redirect:buyerProfile";
 	}
 	
+	// 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩)
+	@ResponseBody
+	@PostMapping(value="/myReviewMore", produces="application/json; charset=UTF-8")
+	public List<Review> myReviewMore(@RequestBody Map<String, Integer> request){
+			
+		List<Review> moreReviewList = service.myReviewMore(request);
+		
+		// 0.5 단위로 별점 바꾸기
+		for(Review r : moreReviewList) {
+			r.setReviewStarsDouble(r.getReviewStars()/20.0);
+		}
+		
+		return moreReviewList;
+	}
+	
 	// 투어리스트 예약 관리 페이지로 이동
 	@GetMapping("/touristReservation")
-	public String touristReservation() {
+	public String touristReservation(
+			@SessionAttribute("loginUser") User loginUser,
+			Model model) {
+		
+		int userNo= loginUser.getUserNo();
+		
+		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
+		User user = service.userInfo(userNo);
+		model.addAttribute("user", user);
+		
 		return "profile/buyerReservation";
 	}
 	
 	// 투어리스트 위시 리스트로 이동
 	@GetMapping("/touristWishList")
-	public String touristWhisList() {
+	public String touristWhisList(
+			@SessionAttribute("loginUser") User loginUser,
+			Model model) {
+		
+		int userNo= loginUser.getUserNo();
+		
+		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
+		User user = service.userInfo(userNo);
+		model.addAttribute("user", user);
+		
 		return "profile/buyerWishList";
 	}
 	

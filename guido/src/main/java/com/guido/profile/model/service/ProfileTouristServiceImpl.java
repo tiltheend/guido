@@ -3,6 +3,7 @@ package com.guido.profile.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +37,7 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		return mapper.userTypeCheck(userNo);
 	}
 
-	// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지)
+	// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
 	@Override
 	public User userInfo(int userNo) {
 		return mapper.userInfo(userNo);
@@ -115,6 +116,14 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public int reviewCount(int userNo) {
 		return mapper.reviewCount(userNo);
 	}
+
+	// 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩)
+	@Override
+	public List<Review> myReviewMore(Map<String, Integer> request) {
+		return mapper.myReviewMore(request);
+	}
+	
+	
 	
 	
 	
