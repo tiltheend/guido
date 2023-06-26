@@ -27,6 +27,9 @@
 		<result property="reviewStars" column="REVIEW_STARS" />
 		<result property="superGuideFl" column="SUPER_GUIDE_FL" />
 		
+		<result property="courseName" column="COURSE_NAME" />
+		<result property="productDate" column="PRODUCT_DT" />
+		
 		<collection property="imageList" select="selectImageList"
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="File"/>
 	</resultMap>
@@ -156,6 +159,23 @@
 	<!-- // 검색 임시 // -->
 	<select id="selectProductAll" resultMap="product_rm">
 		SELECT * FROM PRODUCT
+	</select>
+
+	<select id="selectSearchResult" resultMap="product_rm">
+		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, 
+		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
+		        FROM REVIEW 
+		        WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS
+		FROM PRODUCT P
+		LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO 
+		LEFT JOIN PRODUCT_DT D ON P.PRODUCT_NO = D.PRODUCT_NO 
+		<![CDATA[ 
+		WHERE C.COURSE_NAME = #{courseName}
+		AND P.PRODUCT_MIN_TOURIST > #{minTourist}
+		AND P.PRODUCT_MAX_TOURIST < #{maxTourist}
+		AND D.PRODUCT_DT BETWEEN #{productDate} AND #{productDate}
+		]]>
+		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME
 	</select>
 
 </mapper>

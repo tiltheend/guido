@@ -37,6 +37,13 @@ public interface HomeService {
 
 	// 검색 임시 //
 	List<Product> selectProductAll();
+	List<Product> selectSearchResult(String location, String firstday, String lastday, int tourist);
+
+
+
+
+
+
 	
 	
 

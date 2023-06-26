@@ -65,6 +65,13 @@ public class HomeServiceImpl implements HomeService {
 	public List<Product> selectProductAll() {
 		return mapper.selectProductAll();
 	}
+	@Override
+	public List<Product> selectSearchResult(String location, String firstday, String lastday, int tourist) {
+		return mapper.selectSearchResult(location, firstday, lastday, tourist);
+	}
+
+
+
 	
 	
 

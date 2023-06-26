@@ -56,13 +56,13 @@ header .search-box-click{
 }
 
 .final-search-btn{
-  width: 90px; height: 48px;
+  width: 150px; height: 48px;
   background-color: #1C797D;
   border-radius: 50px;
   display: flex; 
   justify-content: center; 
   align-items: center;
-  text-align: center;
+  margin-right: 10px;
 }
 .final-search-btn svg{
   margin-right: 3px;
@@ -72,6 +72,9 @@ header .search-box-click-box button{
   font-size: 16px;
   font-weight: bold;
   background-color:transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .search-box-click-box div{
@@ -93,6 +96,15 @@ header .search-box-click-box button{
   background-position: 15px center;
   padding-left: 40px;
   outline: none;
+}
+.check-in-button-click input, .check-out-button-click input, .guest-button-click input{
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  display: flex;
+  text-align: center;
 }
 
 .where-btn-click, .in-btn-click, .out-btn-click, .guest-btn-click{
