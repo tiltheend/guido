@@ -1,3 +1,19 @@
+package com.guido.user.model.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class GoogleLoginServiceImpl implements GoogleLoginService{
+	
+	
+	
+	
+}
+
+
+
+
+// 첫번째 시도
 /*
 
 package com.guido.user.model.service;

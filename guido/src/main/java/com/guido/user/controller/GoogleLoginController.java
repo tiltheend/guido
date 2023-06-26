@@ -61,7 +61,7 @@ public class GoogleLoginController {
     
     
     @RequestMapping(value="/google/login/oauth", method = RequestMethod.GET)
-    public String googleLogin(@RequestParam(value = "code") String authCode){
+    public Map<String, Object> googleLogin(@RequestParam(value = "code") String authCode){
         RestTemplate restTemplate = new RestTemplate();
         GoogleRequest googleOAuthRequestParam = GoogleRequest
                 .builder()
@@ -77,8 +77,16 @@ public class GoogleLoginController {
         map.put("id_token",jwtToken);
         ResponseEntity<GoogleUserInfo> resultEntity2 = restTemplate.postForEntity("https://oauth2.googleapis.com/tokeninfo",
                 map, GoogleUserInfo.class);
-        String email=resultEntity2.getBody().getEmail();       
-        return email;
+        
+        String email=resultEntity2.getBody().getEmail();  
+        String picture=resultEntity2.getBody().getPicture();
+        
+        Map<String, Object> googleUser = new HashMap<>();
+        
+        googleUser.put("email", email);
+        googleUser.put("picture", picture);
+        
+        return googleUser;
     }
 
 }

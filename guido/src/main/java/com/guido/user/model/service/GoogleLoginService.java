@@ -2,6 +2,7 @@ package com.guido.user.model.service;
 
 public interface GoogleLoginService {
 
-	void googleLogin(String code);
+	// 첫번째 시도
+//	void googleLogin(String code);
 
 }
