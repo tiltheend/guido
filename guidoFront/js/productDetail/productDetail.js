@@ -93,17 +93,4 @@ window.addEventListener("scroll", ()=>{
 
 
 
-
-/* 리뷰 3줄 이상 넘어갈 시 말줄임표 */
-// const reviewContent = document.querySelector(".detail--item__reivew-content");
-// const lineHeight = parseInt(window.getComputedStyle(reviewContent).getPropertyValue('line-height'), 10);
-// const maxHeight = lineHeight * 3; // 3줄의 높이
-
-// const textLines = Math.floor(reviewContent.clientHeight / lineHeight);
-
-// if (textLines > 3) {
-//     while (textLines > 3) {
-//         reviewContent.textContent = reviewContent.textContent.replace(/\W*\s(\S)*$/, '...');
-//         textLines = Math.floor(reviewContent.clientHeight / lineHeight);
-//     }
-// }
+console.log(wishOrNot);

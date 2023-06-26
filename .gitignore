@@ -30,3 +30,7 @@ MANIFEST.MF
 settings.json
 
 config.properties
+
+
+#API 관련 파일
+apiKey.js
