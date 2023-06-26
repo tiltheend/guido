@@ -41,13 +41,10 @@ public class HomeController {
 		model.addAttribute("popularProductList", popularProductList);
 		model.addAttribute("superProductList", superProductList);
 		model.addAttribute("recommProductList", recommProductList);
-		
 //		System.out.println(productList);
 		
 		return "common/index";
 	}
-	
-	
 	
 	// 테마 검색 상품 목록 조회
 	@GetMapping(value = "/index/{themeCode}", produces = "application/json; charset=UTF-8")
@@ -58,16 +55,51 @@ public class HomeController {
 	
 	
 	
+	
+	
 	// 검색 페이지 이동
 	@GetMapping("/searchResult")
 	public String searchResult(Model model) {
 		
 		// 상품 목록 조회
 		List<Product> productList = service.selectProductAll();
-		
 		model.addAttribute("productList", productList);
-		
 		return "common/searchResult";
 	}
+	
+	// 테마 검색 상품 목록 조회
+	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
+	    return service.selectThemeProdList(themeCode);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -205,6 +205,10 @@
   background-color: transparent;
   font-size: 12px;
 }
+.categori-icon-box button:focus{
+  color: #1C797D;
+  text-decoration: underline;
+}
 
 hr{
   width: 68%;

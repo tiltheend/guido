@@ -9,13 +9,13 @@
     <title>Guido</title>
 
     <!-- css -->
+    <link rel="stylesheet" th:href="@{/css/main/searchResult.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/main/searchResult.css}">
 
     <!-- slick 슬라이드 -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main/slide/mainPostSlick.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main/slide/mainPostSlick.css}">
 
     <!-- js -->
     <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
@@ -31,7 +31,7 @@
         <div class="categori-icon-box">
             <div th:each="themeType : ${application.themeTypeList}">
                 <!-- <a th:href="@{#}"> -->
-                <a th:onclick="|loadProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
+                <a th:onclick="|loadMoreProducts(${themeType.THEME_CODE})|" class="theme-icon-link">
                 <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
                     <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
                     <button th:text="${themeType.THEME_NAME}">테마 이름</button>
@@ -44,7 +44,6 @@
 
     <!-- 상품 게시글 -->
     <article class="main-post">
-
         <div class="product-post">
             <ul id="productListContainer">  
                 <li class="product-row" th:each="product : ${productList}">

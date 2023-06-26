@@ -1,10 +1,11 @@
-
-
-
-
 /* ***** 테마 카테고리 ***** */
+.categori-icon-box-container{
+    display: flex;
+    justify-content: center;
+}
+
 .categori-icon-box {
-    width: 100%;
+    width: 72%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -14,8 +15,7 @@
     margin-bottom: 25px;
 }
 
-.categori-icon-box>div {
-    margin-left: 50px;
+.categori-icon-box a {
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -25,11 +25,11 @@
     text-align: center;
 }
 
-.categori-icon-box>div:first-child {
+.categori-icon-box>div:first-child{
     margin-left: 0px;
 }
 
-.categori-icon-box img {
+.categori-icon-box img{
     width: 40px;
 }
 
@@ -40,15 +40,6 @@
 .categori-icon-box button:focus{
     color: #1C797D;
     text-decoration: underline;
-}
-
-hr {
-    width: 68%;
-    margin: 0 auto;
-    margin-top: 100px;
-    background-color: #C5C5C5;
-    height: 1px;
-    border: 0;
 }
 
 
@@ -94,7 +85,8 @@ hr {
     row-gap: 88px; column-gap: 20px; */
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: space-around; (임시)게시글 왼쪽 정렬!!!! */
+    justify-content: flex-start;
 }
 
 .main-post .product-post>ul>li {

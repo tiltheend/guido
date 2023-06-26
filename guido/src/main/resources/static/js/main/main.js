@@ -250,56 +250,7 @@ function loadProductByTheme(themeCode) {
 
 
 
-  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* function loadProductByTheme(themeCode){
-    
-    var productListContainer = document.getElementById("productListContainer");
-    productListContainer.innerHTML = "";
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/common/index" + themeCode, true);
-    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
-                var response = JSON.parse(xhr.responseText); // JSON 데이터 파싱
-                productListContainer.innerHTML = xhr.responseText;
-            }else{
-                console.error("Ajax request failed");
-            }
-        }
-    };
-    xhr.send();
-}
-
-var themeIconLinks = document.getElementsByClassName("theme-icon-link");
-Array.from(themeIconLinks).forEach(function (link) {
-    link.addEventListener("click", function(event) {
-        event.preventDefault(); 
-        var themeCode = this.getAttribute("data-theme-code");
-        loadProductByTheme(themeCode); 
-    });
-}); */
 
 
 
