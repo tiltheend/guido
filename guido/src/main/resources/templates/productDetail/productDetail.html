@@ -22,6 +22,8 @@
     <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
+    <!-- <script type ="text/javascript" th:src="@{/js/productDetail/apiKey.js}"></script> -->
+
 
 </head>
 <body th:object="${product}">
@@ -310,16 +312,15 @@
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" th:id="|heading${i+1}|">
                                         <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" th:href="|#collapse${i+1}|" aria-expanded="false" th:aria-controls="|collapse${i+1}|">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" th:href="|#collapse${i+1}|" aria-expanded="false" th:aria-controls="|collapse${i+1}|"
+                                            th:onclick='|showTourcourseMap([[${product.tourCourse[i].latitude}]], [[${product.tourCourse[i].longitude}]], ${i+1})|'>
                                             [[${product.tourCourse[i].courseName}]]
                                         </a>
                                         </h4>
                                         </div>
                                         <div th:id="|collapse${i+1}|" class="panel-collapse collapse" role="tabpanel" th:aria-labelledby="|heading${i+1}|">
                                         <div class="panel-body">
-
-                                            <div id="tourcourseMap" style="width:100%;height:100%;"></div>
-                                            
+                                            <div th:id="|tourcourseMap${i+1}|" style="width:100%;height:100%;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -708,17 +709,18 @@
             const guestCount = /*[[${guestCount}]]*/"게스트수";
             let loginUserNo = /*[[${session.loginMember?.userNo}]]*/"로그인 회원 번호";
             const product = /*[[${product}]]*/ "상품";
-            
+
+            // const MAP_API = config.apikey;
         </script>
 
     </div>
 
-        
     <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services}"></script>
 
     <script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
     <script th:src="@{/libraries/assets/js/app.js}"></script>
     <script th:src="@{/js/productDetail/productDetail.js}"></script>
+
 
 </body>
 </html>

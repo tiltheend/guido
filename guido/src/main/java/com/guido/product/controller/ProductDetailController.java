@@ -63,6 +63,8 @@ public class ProductDetailController {
 		model.addAttribute("eachCost", eachCost);
 		model.addAttribute("wishOrNot", wishOrNot);
 		
+		System.out.println(product.getTourCourse());
+		
 		return "productDetail/productDetail";
 	}
 	

@@ -1073,19 +1073,19 @@ a {
     left: 0;
     bottom: 40px;
     width: 288px;
-    height: 92px;
+    height: 62px;
     margin-left: -144px;
     text-align: left;
     overflow: hidden;
     font-size: 12px;
     line-height: 1.5;
-
 }
+
 .map--wrap * {padding: 0;margin: 0;}
 
 .map--wrap .map--info {
     width: 286px;
-    height: 80px;
+    height: 45px;
     border-radius: 5px;
     border-bottom: 2px solid #ccc;
     border-right: 1px solid #ccc;
@@ -1114,7 +1114,6 @@ a {
 .map--info .map--desc {
     position: relative; 
     padding: 12px; 
-    height: 50px;
 }
 
 .map--desc .map--ellipsis {
@@ -1135,7 +1134,6 @@ a {
     position: absolute;
     margin-left: -12px;
     left: 50%;
-    bottom: 0;
     width: 22px;
     height: 12px;
     background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
@@ -1208,6 +1206,11 @@ a {
     overflow: hidden;
     width: 600px;
     height: 300px;
+}
+
+.panel-collapse{
+    overflow: hidden;
+    width: 598px;
 }
 
 
