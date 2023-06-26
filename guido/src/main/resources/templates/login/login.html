@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com"> -->
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/login/login.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -35,9 +36,14 @@
             </div>
         </form>
         <div class="container_bottom">
-            <div class="container_bottom_google"><img class="googleLogo" th:src="@{/images/signUp/google.png}" alt="G">
-            <button class="googleLogin">&nbsp&nbsp구글로 로그인하기</button></div>
-            <button class="openFindPwModal font3" id="show">Forgot your password?</button>
+            <form action="/google/login/oauth" method="post">
+                <!-- <a href="/google/login/oauth"> -->
+                    <div class="container_bottom_google"><img class="googleLogo" th:src="@{/images/signUp/google.png}" alt="G">
+                    <button class="googleLogin">&nbsp&nbsp구글로 로그인하기</button></div>
+                <!-- </a> -->
+                <button class="openFindPwModal font3" id="show">Forgot your password?</button>
+
+            </form>
         </div>
     </div>
     <!-- 비밀번호 잊으셨나요 모달 -->
@@ -90,5 +96,6 @@
         }
     </script>
     <script th:src="@{/js/login/login.js}"></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 </body>
 </html>

@@ -52,7 +52,9 @@
       <h1>확인</h1>
       <th:block th:if="${session.loginUser}">
           로그인 회원 이메일 : <div th:text="*{userEmail}"></div>
+          <a href="/user/logout"><button>로그아웃</button></a>
       </th:block>
+
 
       <br>
       <a href="#"><button>관리자 페이지</button></a>
