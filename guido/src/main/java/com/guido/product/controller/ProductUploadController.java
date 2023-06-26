@@ -66,7 +66,7 @@ public class ProductUploadController {
 		
 		if(productNo > 0) {
 			message = "상품이 등록 되었습니다.";
-			path += "/product/" + productNo;
+			path += "/productDetail/" + "product/" + productNo;
 		}else {
 			message = "상품 등록 실패,";
 			path += "upload";
