@@ -40,6 +40,9 @@ public interface HomeMapper {
 
 	List<Product> selectSearchResult(Map<String, Object> map);
 
+	// 헤더 위치 검색
+	List<Product> locationSearch(String location);
+
 
 
 

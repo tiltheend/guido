@@ -34,6 +34,9 @@ public interface HomeService {
 	// 검색 페이지
 	List<Product> selectSearchResult(Map<String, Object> map);
 
+	// 헤더 위치 검색
+	List<Product> locationSearch(String location);
+
 
 
 

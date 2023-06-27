@@ -106,22 +106,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// 가격 콤마
-function addCommas(input) {
-    var value = input.value;
-    var formattedValue = "";
-
-    while (value.length > 3) {
-        formattedValue = "," + value.slice(-3) + formattedValue;
-        value = value.slice(0, -3);
-    }
-    formattedValue = "`" + value + formattedValue;
-    input.value = formattedValue;
-}
-
-
-
-
 // 테마 검색 상품 목록 조회
 function loadProductByTheme(themeCode) {
 

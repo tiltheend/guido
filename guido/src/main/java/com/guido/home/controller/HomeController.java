@@ -86,6 +86,19 @@ public class HomeController {
 	}
 	
 	
+	// 헤더 위치 검색
+	@GetMapping(value="/locationSearch", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Product> locationSearch(String location){
+		
+		List<Product> a = service.locationSearch(location);
+		
+		System.out.println(a);
+		
+		return null;
+	}
+	
+	
 	// 테마 검색 상품 목록 조회
 //	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
 //	@ResponseBody
