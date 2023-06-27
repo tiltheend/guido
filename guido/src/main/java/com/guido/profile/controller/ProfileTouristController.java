@@ -155,6 +155,16 @@ public class ProfileTouristController {
 		// return 0;
 	}
 	
+	// 비동기로 리뷰 목록 불러오기 (최신 3개)
+	@ResponseBody
+	@PostMapping(value="/newReviewList", produces="application/json; charset=UTF-8")
+	public List<Review> newReviewList(@RequestBody int userNo){
+
+		List<Review> newReviewList = service.reviewList(userNo);
+		
+		return newReviewList;
+	}
+	
 	// 투어리스트 예약 관리 페이지로 이동
 	@GetMapping("/touristReservation")
 	public String touristReservation(

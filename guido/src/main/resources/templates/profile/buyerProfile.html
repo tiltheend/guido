@@ -109,7 +109,7 @@
             <div class="review-write" th:if="${session.loginUser?.userNo == user.userNo}"> <!-- 불투명 배경 -->
                 <div> <!-- 하얀 배경 -->
                     <form action="">
-                        <h2>Purchase History</h2>
+                        <h2>Purchase History</h2>  
                         <select name="reviewSaleList" id="reviewSaleList">
                             <option selected="selected" disabled>후기를 작성할 상품을 선택해주세요.</option>
                             <th:block th:if="${addReviewList}" th:each="addReview : ${addReviewList}">

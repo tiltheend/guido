@@ -15,7 +15,7 @@ public class Review {
 	private String reviewMessage;	// 리뷰 상세 내용
 	private int reviewStars;		// 리뷰 별점
 	private String reviewDeleteFL;	// 리뷰 삭제 여부
-	private int productNo;			// 상품 번호
+	s
 	private String createDate;		// 작성일
 
 	// --------------- 테이블 끝!

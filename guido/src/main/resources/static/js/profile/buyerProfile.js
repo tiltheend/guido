@@ -421,7 +421,6 @@ selectedStarScore.forEach(el => {
     });
 });
 
-
 reviewAddSubmit.addEventListener("click", e => {
     
     if(!checkObj.selectElement){
@@ -464,6 +463,8 @@ reviewAddSubmit.addEventListener("click", e => {
             if(result>0){
                 alert("리뷰가 등록 되었습니다.");
 
+                reviewWriteModal.style.display="none";
+
                 // 구매 상품 초기화
                 // selectElement = document.querySelector("#reviewSaleList");
                 // selectElement.selectedIndex = 0; // 선택 초기화
@@ -474,7 +475,6 @@ reviewAddSubmit.addEventListener("click", e => {
                 // document.querySelector('.review-write .score-span').innerText="0.0";
                 // reviewContent = "";
 
-                // reviewWriteModal.style.display="none";
 
                 location.href='/profile/'+loginUserNo;
 
@@ -500,3 +500,139 @@ reviewAddSubmit.addEventListener("click", e => {
     }
 
 });
+
+/* 비동기로 리뷰 목록 불러오기 (최신 3개) */
+function reviewListFn(){
+
+    fetch("/profile/newReviewList",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, 
+        body : JSON.stringify({
+            "userNo" : pageUserNo
+        })
+    })
+    .then(resp => resp.json())
+    .then(newReviewList => {
+
+        if (newReviewList.length < 4) {
+            reviewMoreBtn.style.display = "none";
+        }
+
+        if (newReviewList.length > 0) {
+            
+            for (let i = 0; i < 3; i++) {
+                const review = newReviewList[i];
+
+                if(review == null) break;
+
+                // 새로운 리뷰 아이템 생성
+                const newReviewItemUl = document.createElement("ul");
+
+                const newReviewItem = document.createElement("li");
+                newReviewItem.classList.add("reply-content");
+
+                // 리뷰 작성자 프로필 영역
+                const firstDiv = document.createElement("div");
+                const profileDiv = document.createElement("div");
+                const reviewerDiv = document.createElement("div");
+                reviewerDiv.classList.add("reviewer");
+                const imgContent = document.createElement("img");
+                imgContent.alt = "profileImage";
+                imgContent.classList.add("img-content");
+                imgContent.src = review.profileImage?review.profileImage:"/images/userProfile/basicUser.png";
+                reviewerDiv.appendChild(imgContent);
+                const reviewerName = document.createElement("p");
+                reviewerName.classList.add("reviewer-name");
+                reviewerName.textContent = review.userName;
+                profileDiv.appendChild(reviewerDiv);
+                profileDiv.appendChild(reviewerName);
+                firstDiv.appendChild(profileDiv);
+
+                console.log(review.reviewStarsDouble);
+                // 상품 정보 영역 (별점 + 날짜)
+                const saleReviewInfoDiv = document.createElement("div");
+                saleReviewInfoDiv.classList.add("sale-review-info");
+                const productName = document.createElement("p");
+                productName.textContent = review.productName;
+                const reviewRatingDiv = document.createElement("div");
+                reviewRatingDiv.classList.add("review-rating");
+                const reviewStarDiv = document.createElement("div");
+                reviewStarDiv.classList.add("review-star");
+                for (let j = 0; j < 10; j++) {
+                    const starInput = document.createElement("input");
+                    starInput.type = "radio";
+                    starInput.id = `starpoint_${j + 1}`;
+                    starInput.classList.add("star_radio");
+                    starInput.value = (j + 1) * 0.5;
+                    if (review.reviewStarsDouble === (j + 1) * 0.5) {
+                        console.log(review.reviewStarsDouble);
+                        starInput.checked = true;
+                    }
+                    // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;
+                    reviewStarDiv.appendChild(starInput);
+                }
+                const starpointBgSpan = document.createElement("span");
+                starpointBgSpan.classList.add("starpoint_bg");
+                
+                const reviewDateSpan = document.createElement("span");
+                reviewDateSpan.classList.add("review-date");
+                reviewDateSpan.textContent = review.createDate;
+                
+                reviewStarDiv.appendChild(starpointBgSpan);
+                
+                reviewRatingDiv.appendChild(reviewStarDiv);
+                reviewRatingDiv.appendChild(reviewDateSpan);
+
+                saleReviewInfoDiv.appendChild(productName);
+                saleReviewInfoDiv.appendChild(reviewRatingDiv);
+
+
+                // 리뷰 내용
+                const preReviewMessage = document.createElement("pre");
+                preReviewMessage.textContent = review.reviewMessage;
+                // 더보기 및 수정, 삭제 버튼
+                const moreAndReplyDiv = document.createElement("div");
+                moreAndReplyDiv.classList.add("more-and-reply");
+                const moreBtn = document.createElement("p");
+                moreBtn.textContent = "더보기 +";
+                moreBtn.onclick = moreReviewFn.bind(this);
+                const myReviewEditDiv = document.createElement("div");
+                myReviewEditDiv.classList.add("myreview-edit");
+
+                if (pageUserNo === loginUserNo) {
+                    const editBtn = document.createElement("button");
+                    editBtn.classList.add("review-edit-btn");
+                    editBtn.textContent = "Edit";
+                    editBtn.onclick = reviewEditFn.bind(this);
+                    const deleteBtn = document.createElement("button");
+                    deleteBtn.classList.add("review-delete-btn");
+                    deleteBtn.textContent = "Delete";
+                    myReviewEditDiv.appendChild(editBtn);
+                    myReviewEditDiv.appendChild(deleteBtn);
+                }
+                moreAndReplyDiv.appendChild(moreBtn);
+                moreAndReplyDiv.appendChild(myReviewEditDiv);
+                firstDiv.appendChild(saleReviewInfoDiv);
+
+                // 새로운 리뷰 아이템에 요소들 추가
+                // newReviewItem.appendChild(profileDiv);
+                newReviewItem.appendChild(firstDiv);
+                // newReviewItem.appendChild(saleReviewInfoDiv);
+                newReviewItem.appendChild(preReviewMessage);
+                newReviewItem.appendChild(moreAndReplyDiv);
+
+                // 리뷰 아이템을 리뷰 리스트에 추가
+                newReviewItemUl.appendChild(newReviewItem);
+                myReviewList.appendChild(newReviewItemUl);
+
+                
+            }
+        }
+
+    })
+    .catch(err=>{
+        console.log(err);
+        reviewMoreBtn.style.display="none";
+    });
+
+}
