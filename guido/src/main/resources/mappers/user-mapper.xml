@@ -28,6 +28,7 @@
 	</resultMap>
 	
 
+	<!-- 로그인 -->
 	<select id="login" resultMap="user_rm">
 		SELECT *
 		FROM (
@@ -39,6 +40,21 @@
 		LEFT JOIN "TOURIST" t ON u."USER_NO" = t."USER_NO" AND u."USER_TYPE" = 'T'
 		WHERE u."USER_STATE" = 'N'
 	</select>	
+	
+	<!-- 구글 로그인 - 가입된 회원인지 확인 -->
+	<select id="checkGoogleSignedup" resultMap="user_rm">
+		SELECT *
+		FROM (
+		    SELECT *
+		    FROM "USER"
+		    WHERE "USER_EMAIL" = #{googleEmail}
+		) u
+		LEFT JOIN "GUIDE" g ON u."USER_NO" = g."USER_NO" AND u."USER_TYPE" = 'G'
+		LEFT JOIN "TOURIST" t ON u."USER_NO" = t."USER_NO" AND u."USER_TYPE" = 'T'
+		WHERE u."USER_STATE" = 'N'
+	</select>	
+	
+	
 	
 	
 	
