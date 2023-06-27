@@ -58,14 +58,14 @@
                     <tr class="여백"></tr>
                     <th:block th:each="event : ${map.list}" th:object="${event}">
                         <tr>
-                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{eventNo}"></td>
-                            <td th:text="*{eventNo}">글번호</td>
-                            <td th:utext='|<a href="@{eventDetail}/*{eventNo}">*{eventName}</a>|'>글제목</td>
-                            <td th:text="*{createDt}">작성일</td>
-                            <td th:text="*{eventEndDt}">종료일</td>
+                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{EVENT_NO}"></td>
+                            <td th:text="*{EVENT_NO}">글번호</td>
+                            <td th:utext='|<a href="@{/event/eventDetail}/*{EVENT_NO}">*{EVENT_NAME}</a>|'>글제목</td>
+                            <td th:text="*{CREATE_DT}">작성일</td>
+                            <td th:text="*{EVENT_END_DT}">종료일</td>
                             <td>
-                                <button type="buttion" th:if='*{state=="N"}' class="btn btn3">블라인드</button>
-                                <button type="buttion" th:if='*{state=="B"}' class="btn btn4">블라인드 해제</button>
+                                <button type="buttion" th:if='*{EVENT_STATE=="N"}' class="btn btn3">블라인드</button>
+                                <button type="buttion" th:if='*{EVENT_STATE=="B"}' class="btn btn4">블라인드 해제</button>
                             </td>
                         </tr>
                     </th:block>

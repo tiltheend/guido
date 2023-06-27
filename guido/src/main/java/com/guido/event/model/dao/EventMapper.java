@@ -1,5 +1,10 @@
 package com.guido.event.model.dao;
 
-public interface EventMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+import com.guido.common.model.dto.Event;
+
+@Mapper
+public interface EventMapper {
+	Event selectEvent(int eventNo);
 }

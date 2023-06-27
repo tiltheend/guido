@@ -1,5 +1,7 @@
 package com.guido.common.model.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +12,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class QNA {
-	
 	private int qnaNo;
 	private String qnaEmail;
 	private String qnaTitle;
@@ -19,5 +20,7 @@ public class QNA {
 	private String qnaCheckFL;
 	private int userNo;
 	private String qnaAnswer;
+	private String qnaDate;
 	
+	private List<File> fileList;
 }

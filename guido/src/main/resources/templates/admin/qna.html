@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -42,124 +42,48 @@
 
             <div class="content-count-and-search">
                 <!-- 카운트 -->
-                <div class="count-container">총 <span>10</span>건</div>
+                <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
                 <!-- 검색창 -->
                 <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
             </div>
 
             <!-- 테이블 -->
-            <table>
+            <table id="table">
 
 
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
-                    <tr><th class="col-checkbox"><input type="checkbox" name="" id=""></th><th class="col-number">번호</th><th class="col-title">제목</th>
+                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">번호</th><th class="col-title">제목</th>
                         <th class="col-writer">작성자</th><th class="col-date">작성일</th><th class="col-ans">답변 상태</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>10</td>
-                        <td>샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><a th:href="@{writeAnswer}"><button class="btn btn3">답변하기</button></a></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>9</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>8</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>7</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>6</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>5</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>4</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>3</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>2</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">답변하기</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>1</td>
-                        <td>샘플 데이터의 제목입니다.</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn4">답변 완료</button></td>
-                    </tr>
+                    <th:block th:each="qna : ${map.list}" th:object="${qna}">
+                        <tr>
+                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{QNA_NO}"></td>
+                            <td th:text="*{QNA_NO}">번호</td>
+                            <td th:text="*{QNA_TITLE}">제목</td>
+                            <td th:text="*{QNA_EMAIL}">작성자</td>
+                            <td th:text="*{QNA_DATE}">등록일</td>
+                            <td>
+                                <a th:href="@{writeAnswer/}+*{QNA_NO}">
+                                    <button type="buttion" th:if='*{QNA_CHECK_FL=="N"}' class="btn btn3">답변하기</button>
+                                    <button type="buttion" th:if='*{QNA_CHECK_FL=="Y"}' class="btn btn4">답변완료</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block>
                 </tbody>
             </table>
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li><a href="#">&lt;&lt;</a></li>
-                    <li><a href="#">&lt;</a></li>
-                    <li><a href="#" class="current">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li><a href="#">&gt;</a></li>
-                    <li><a href="#">&gt;&gt;</a></li>
-                </ul>
-            </div>
+            
+            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
+            <!-- <th:block th:unless="${#lists.size(map.list) == 0}" th:replace="~{/admin/pagination}"/> -->
+            <th:block th:unless="${map.pagination.listCount == 0}" th:replace="~{/admin/pagination}"/>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>
+    <script th:inline="javascript">
+        const list = /*[[${map.list}]]*/"리스트";
+    </script>
 </body>
 </html>

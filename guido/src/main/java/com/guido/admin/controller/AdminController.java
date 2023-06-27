@@ -25,76 +25,20 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
-	@GetMapping("/eventList")
-	public String eventList(Model model
-			,@RequestParam(value="cp", defaultValue="1")int cp) {
-		model.addAttribute("map", service.selectEventList(cp));
-		model.addAttribute("pageName","eventList");
-		return "admin/eventList";
-	}
-	
-	@GetMapping("/touristManagement")
-	public String touristManagement (Model model
-			,@RequestParam(value="cp", defaultValue="1")int cp) {
-		model.addAttribute("map", service.selectTouristList(cp));
-		model.addAttribute("pageName","touristManagement");
-		return "admin/touristManagement";
-	}
-	
-	@GetMapping("/guideManagement")
-	public String guideManagement(Model model
-			,@RequestParam(value="cp", defaultValue="1")int cp) {
-		model.addAttribute("map",service.selectGuideList(cp));
-		model.addAttribute("pageName","guideManagement");
-		return "admin/guideManagement";
-	}
-	
-	@GetMapping("/guideApprovalRequest")
-	public String guideApprovalRequest(Model model) {
-		model.addAttribute("pageName","guideApprovalRequest");
-		return "admin/guideApprovalRequest";
-	}
-	
-	@GetMapping("/productManagement")
-	public String productManagement(Model model) {
-		model.addAttribute("pageName","productManagement");
-		return "admin/productManagement";
-	}
-	
-	@GetMapping("/settlementManagement")
-	public String settlementManagement(Model model) {
-		model.addAttribute("pageName","settlementManagement");
-		return "admin/settlementManagement";
-	}
-	
-	@GetMapping("/qna")
-	public String qna(Model model) {
-		model.addAttribute("pageName","qna");
-		return "admin/qna";
+	@GetMapping("/{pageName}")
+	public String listPage(
+			@PathVariable("pageName")String pageName,
+			Model model,@RequestParam(value="cp", defaultValue="1")int cp) {
+		
+		model.addAttribute("map", service.selectList(pageName,cp));
+		model.addAttribute("pageName",pageName);
+		
+		return "admin/"+pageName;
 	}
 	
 	@GetMapping("/writeEvent")
 	public String writeEvent(Model model) {
 		return "admin/writeEvent";
-	}
-	
-	@GetMapping("/writeAnswer")
-	public String writeAnswer(Model model) {
-		return "admin/writeAnswer";
-	}
-	
-	@GetMapping("/eventDetail")
-	public String eventDetail(Model model) {
-		return "admin/eventDetail";
-	}
-	
-	@GetMapping("/eventDetail/{eventNo}")
-	public String eventDetail(@PathVariable("eventNo") int eventNo,
-			Model model,
-			RedirectAttributes ra) {
-		model.addAttribute("event",service.selectEvent(eventNo));
-		
-		return "admin/eventDetail";
 	}
 	
 	@PostMapping("/eventWrite")
@@ -116,5 +60,15 @@ public class AdminController {
 		}
 		ra.addFlashAttribute("message",message);
 		return "redirect:eventList";
+	}
+	
+	
+	
+	@GetMapping("/writeAnswer/{qnaNo}")
+	public String writeAnswer(@PathVariable("qnaNo") int qnaNo,
+			Model model) {
+		model.addAttribute("qna",service.selectQNA(qnaNo));
+		
+		return "admin/writeAnswer";
 	}
 }
