@@ -181,7 +181,7 @@
 	</select>-->
 	
 	<!-- 검색 조건 일치하는 상품 목록 조회 -->
-	<select id="selectSearchResult" resultMap="product_rm">
+<!--	<select id="selectSearchResult" resultMap="product_rm">
 		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, 
 		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		        FROM REVIEW 
@@ -191,11 +191,82 @@
 		LEFT JOIN PRODUCT_DT D ON P.PRODUCT_NO = D.PRODUCT_NO 
 		<![CDATA[ 
 			WHERE P.PRODUCT_STATE = 'N'
-			AND (C.COURSE_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR P.PRODUCT_NAME LIKE '%${location}%' OR P.PRODUCT_CONTENT LIKE '%${location}%')
+			AND (C.COURSE_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR P.PRODUCT_NAME LIKE '%${location}%')
 			AND (D.PRODUCT_DT BETWEEN TO_DATE('${firstday}', 'YYYY-MM-DD') AND TO_DATE('${lastday}', 'YYYY-MM-DD'))
 			AND P.PRODUCT_MAX_TOURIST <= '${tourist}'
 		]]>
 		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME
+	</select>-->
+	<!-- 검색 조건 일치하는 상품 목록 조회 -->
+	<select id="selectSearchResult" resultMap="product_rm">
+		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, 
+		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
+		        FROM REVIEW 
+		        WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS
+		FROM PRODUCT P
+		LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO 
+		LEFT JOIN PRODUCT_DT D ON P.PRODUCT_NO = D.PRODUCT_NO 
+		WHERE P.PRODUCT_STATE = 'N'
+		
+			<choose>
+				<when test="location != ''"> 
+					AND (P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
+				</when>
+			</choose>
+			<choose>
+				<when test="firstday != ''"> 
+					<![CDATA[  
+					AND D.PRODUCT_DT >= TO_DATE('${firstday}', 'YYYY-MM-DD') 
+					]]>
+				</when>
+			</choose>
+			<choose>
+				<when test="lastday != ''"> 
+					<![CDATA[ 
+					AND D.PRODUCT_DT <= TO_DATE('${lastday}', 'YYYY-MM-DD')
+					]]> 
+				</when>
+			</choose>
+			<choose>
+				<when test="tourist != ''"> 
+					AND '${tourist}' BETWEEN P.PRODUCT_MIN_TOURIST AND P.PRODUCT_MAX_TOURIST
+				</when>
+			</choose>
+		
+		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME
 	</select>
+	
+<!--			AND (
+				
+				(P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
+				
+				OR (D.PRODUCT_DT >= TO_DATE('${firstday}', 'YYYY-MM-DD'))
+				
+				OR (D.PRODUCT_DT <= TO_DATE('${lastday}', 'YYYY-MM-DD'))
+				
+				OR (P.PRODUCT_MAX_TOURIST <= '${tourist}')
+				
+				OR ((P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%') AND D.PRODUCT_DT >= TO_DATE('${firstday}', 'YYYY-MM-DD'))
+				
+				OR ((P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%') AND D.PRODUCT_DT <= TO_DATE('${lastday}', 'YYYY-MM-DD'))
+				
+				OR ((P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%') AND P.PRODUCT_MAX_TOURIST <= '${tourist}')
+				
+				OR (D.PRODUCT_DT BETWEEN TO_DATE('${firstday}', 'YYYY-MM-DD') AND TO_DATE('${lastday}', 'YYYY-MM-DD'))
+				
+				OR (D.PRODUCT_DT >= TO_DATE('${firstday}', 'YYYY-MM-DD') AND P.PRODUCT_MAX_TOURIST <= '${tourist}')
+				
+				OR (D.PRODUCT_DT <= TO_DATE('${lastday}', 'YYYY-MM-DD') AND P.PRODUCT_MAX_TOURIST <= '${tourist}')
+				
+				OR ((P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%') AND D.PRODUCT_DT BETWEEN TO_DATE('${firstday}', 'YYYY-MM-DD') AND TO_DATE('${lastday}', 'YYYY-MM-DD'))
+				
+				OR ((P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%') AND D.PRODUCT_DT >= TO_DATE('${firstday}', 'YYYY-MM-DD') AND P.PRODUCT_MAX_TOURIST <= '${tourist}')
+				
+				OR ((P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%') AND D.PRODUCT_DT <= TO_DATE('${lastday}', 'YYYY-MM-DD') AND P.PRODUCT_MAX_TOURIST <= '${tourist}')
+				
+				OR (D.PRODUCT_DT BETWEEN TO_DATE('${firstday}', 'YYYY-MM-DD') AND TO_DATE('${lastday}', 'YYYY-MM-DD') AND P.PRODUCT_MAX_TOURIST <= '${tourist}')
+				
+				OR ((P.PRODUCT_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%') AND D.PRODUCT_DT BETWEEN TO_DATE('${firstday}', 'YYYY-MM-DD') AND TO_DATE('${lastday}', 'YYYY-MM-DD') AND P.PRODUCT_MAX_TOURIST <= '${tourist}')
+			)-->
 
 </mapper>

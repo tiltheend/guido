@@ -73,7 +73,7 @@ guestButtonClick.addEventListener('click', () => {
 
 
 /* *** 게스트 수 업다운 *** */
-// 마이너스 버튼 클릭 이벤트 핸들러
+/* // 마이너스 버튼 클릭 이벤트 핸들러
 document.querySelector('.main--right__guest-minus').addEventListener('click', function() {
   // 현재 게스트 수 가져오기
   var guestCountElement = document.querySelector('.main--right__guest-count');
@@ -95,7 +95,36 @@ document.querySelector('.main--right__guest-plus').addEventListener('click', fun
   // 게스트 수 증가시키기
   guestCount++;
   guestCountElement.innerHTML = guestCount;
+}); */
+
+const guestCountElement = document.querySelector('.main--right__guest-count');
+const guestInput = document.querySelector('input[name="tourist"]');
+
+// 감소 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-minus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    if (count > 0) {
+        count--;
+        guestCountElement.textContent = count;
+        updateGuestText(count);
+        guestInput.value = count; // input 태그에 값 설정
+    }
 });
+
+// 증가 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-plus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    count++;
+    guestCountElement.textContent = count;
+    updateGuestText(count);
+    guestInput.value = count; // input 태그에 값 설정
+});
+
+// 게스트 텍스트 업데이트 함수
+function updateGuestText(count) {
+    const guestText = document.querySelector('.guest-button-click input');
+    guestText.textContent = `게스트 ${count}명`;
+}
 
 /* 
 function toggleModal(modal) {

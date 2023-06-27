@@ -31,7 +31,9 @@ header .chatting-icon, header .alarm-icon{margin-right: 20px;}
   cursor: Default;
 }
 
-
+.search-box-click{
+  min-width: 844px;
+}
 
 
 /* *** header 밑으로 길어지는 부분 *** */

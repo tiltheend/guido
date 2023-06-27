@@ -75,12 +75,10 @@ public class HomeController {
 		map.put("firstday", firstday);
 		map.put("lastday", lastday);
 		map.put("tourist", tourist);
-		
-		System.out.println(map);
+//		System.out.println(map);
 		
 		List<Product> searchResultList = service.selectSearchResult(map);
-		
-		System.out.println(searchResultList);
+//		System.out.println(searchResultList);
 		
 		model.addAttribute("searchResultList", searchResultList);
 		

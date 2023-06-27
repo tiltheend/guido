@@ -82,8 +82,7 @@
                                 <span>[[${product.regionName}]]</span>
                             </div>
                             <div>
-                                <!-- <p>₩ [[${product.productPrice}]] / total</p> -->
-                                <p th:onclick="addCommas(input)">₩ [[${product.productPrice}]] / total</p>
+                                <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
                             </div>
                         </div>
                     </li>
