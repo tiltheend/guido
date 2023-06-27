@@ -24,3 +24,6 @@ plusBtn.addEventListener("click", ()=>{
   
   });
 
+
+  /* 연락처 value 넣기 */
+  document.getElementById("phone").value = loginUserTel;
