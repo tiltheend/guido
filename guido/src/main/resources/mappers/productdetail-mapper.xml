@@ -38,7 +38,7 @@
 	</resultMap>
 	
 	
-		<resultMap type="TourCourse" id="tourcourse_rm">
+	<resultMap type="TourCourse" id="tourcourse_rm">
 		<id property="courseNo" column="COURSE_NO"/>
 		<result property="productNo" column="PRODUCT_NO"/>
 		<result property="courseName" column="COURSE_NAME"/>

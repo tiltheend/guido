@@ -2,7 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.guido.reservation.model.dao.ReservationMapper">
 	
+	<resultMap type="ProductDate" id="product_date_rm">
+		<id property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="availability" column="PRODUCT_DT_AVAILABILITY"/>
+	</resultMap>
 	
-	 
+	
+	<!-- 예약 가능한 일정인지 확인 (1: 가능, 0: 불가능) -->
+	<select id="selectDateInRange" resultType="_int">
+		SELECT COUNT(*) FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT = #{productDate}
+		AND PRODUCT_DT_AVAILABILITY = 'Y'
+	</select>
+	
+
+	<select id="selectMainCourseName" resultType="string">
+		SELECT COURSE_NAME FROM TOUR_COURSE
+		WHERE PRODUCT_NO = #{productNo}
+		AND BOSS_COURSE_FL = 'Y'
+	</select>	 
 	
 </mapper>

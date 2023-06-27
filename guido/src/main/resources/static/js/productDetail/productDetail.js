@@ -2,10 +2,10 @@
 let totalCost = document.getElementById("totalCost");
 
 if(package==0){
-    /* 총 금액 : n박 시 = productPrice */
+    /* 총 금액 : 1박 시 = 인원수 * productPrice */
     totalCost.innerText = Number(product.productPrice)*Number(guestCount);
 }else{
-    /* 총 금액 : 1박 시 = 인원수 * productPrice */
+    /* 총 금액 : n박 시 = productPrice */
     totalCost.innerText = product.productPrice;
 }
 
@@ -38,7 +38,6 @@ plusBtn.addEventListener("click", ()=>{
   
   const count = document.querySelector(".detail--right__price-count");
 
-  /* 최대 인원수 제한 */
   count.innerText = Number(count.innerText) + 1;
 
 }); 
@@ -51,8 +50,9 @@ minusBtn.addEventListener("click", ()=>{
   const count = document.querySelector(".detail--right__price-count");
   
   /* 최소 인원수 제한 */
-  if(Number(count.innerText)>1)
-    count.innerText = Number(count.innerText) - 1;
+  if(Number(count.innerText)>1){
+      count.innerText = Number(count.innerText) - 1;
+  }
 
 });
 
@@ -210,7 +210,6 @@ function guestCountWarning(count){
 }
 
 
-
 guestCountWarning(guestCount);
 
 
@@ -218,17 +217,27 @@ const reserveBtn = document.getElementById("reserveBtn");
 
 /* 예약 버튼 클릭 시 게스트 최대 최소 인원 수 기준을 충족하지 못하면 제출 막기 */
 reserveBtn.addEventListener("click", e=>{
-    
+
+
+    /* 비로그인 유저 예약 막기 */
+    if(loginUserNo == null){
+        e.preventDefault();
+        alert("로그인 후 이용 가능합니다.");
+        return;
+    }
+
     /* 게스트 수 최소 인원 미만 */
     if(inputGuestCount.innerText<product.minTourist){
         e.preventDefault();
-        alert("최소 " + product.minTourist + "명 이상 예약 가능.");
+        alert("최소 " + product.minTourist + "명 이상 예약 가능합니다");
+        return;
     }
     
     /* 게스트 수 최대 인원 초과 */
     if(inputGuestCount.innerText>product.maxTourist){
         e.preventDefault();
-        alert("예약 가능한 최대 인원 수를 초과.");
+        alert("예약 가능한 최대 인원 수를 초과합니다.");
+        return;
     }
     
 
@@ -258,11 +267,21 @@ reserveBtn.addEventListener("click", e=>{
         if(optionRestCount<inputGuestCount.innerText){
             alert("현재 예약 가능한 인원 수를 초과");
             e.preventDefault();
+            return;
         }
-
-
     }
 
+    /* 날짜 미선택 시 */
+
+
+    const guestHidden = document.getElementById("guestHidden");
+    const dateHidden = document.getElementById("dateHidden");
+
+    guestHidden.value = inputGuestCount.innerText;
+    dateHidden.value = "2023-07-27";
+
+    console.log(guestHidden.value);
+    console.log(dateHidden.value);
 });
 
 
@@ -349,7 +368,7 @@ if(Object.keys(product.tourCourse).length != 0){
     let mapContainer = document.getElementById('location--map'), // 지도를 표시할 div  
         mapOption = { 
             center: new kakao.maps.LatLng(mainCourseX, mainCourseY), // 지도의 중심좌표
-            level: 6 // 지도의 확대 레벨
+            level: 5 // 지도의 확대 레벨
         };
     
     let locationMap = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
@@ -427,6 +446,6 @@ if(Object.keys(product.tourCourse).length != 0){
         locationMap.setBounds(bounds);
     });
 
-
-
 }
+
+
