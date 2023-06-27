@@ -1,8 +1,5 @@
 package com.guido.user.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,8 +70,6 @@ public class UserController {
 		
 		User loginUser = service.login(inputUser);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
 		RedirectView path;
 				
 		if(loginUser != null) { // 로그인 성공
@@ -99,8 +94,6 @@ public class UserController {
 			model.addAttribute("loginUser", loginUser);
 			
 		}else { // 로그인 실패
-			
-			System.out.println("로그인 실패.....");
 			
 			path = new RedirectView(referer);  
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");

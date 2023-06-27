@@ -51,7 +51,15 @@
       <hr>
       <h1>확인</h1>
       <th:block th:if="${session.loginUser}">
-          로그인 회원 이메일 : <div th:text="*{userEmail}"></div>
+          회원 이메일 : <div th:text="*{userEmail}"></div>
+          <br>
+          회원 유형 :
+          <th:block th:switch="${session.loginUser.userType}">
+            <p th:case="T">관광객</p>
+            <p th:case="G">가이드</p>
+            <p th:case="*">관리자</p>
+          </th:block>
+          <br>
           <a href="/user/logout"><button>로그아웃</button></a>
       </th:block>
 
