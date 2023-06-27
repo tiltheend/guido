@@ -37,7 +37,7 @@ public class ProfileTouristController {
 	@GetMapping("/{userNo:[0-9]+}")
 	public String mypageTourist(
 			@PathVariable("userNo") int userNo,
-			@SessionAttribute("loginUser") User loginUser,
+			// @SessionAttribute("loginUser") User loginUser,
 			Model model
 			) {
 		
@@ -87,12 +87,6 @@ public class ProfileTouristController {
 			// 리뷰 안쓴 목록 가져오기 (상품 번호, 상품 제목)
 			List<Review> addReviewList = service.addReviewList(userNo);
 			
-//			for(Review r : addReviewList) {
-//				System.out.println(r.getProductNo());
-//				System.out.println(r.getProductName());
-//				System.out.println(r.getProductDtNo());
-//			}
-			
 			model.addAttribute("addReviewList", addReviewList);
 			
 			
@@ -124,8 +118,7 @@ public class ProfileTouristController {
 		
 		ra.addFlashAttribute("message",message);
 		
-
-		return "redirect:buyerProfile";
+		return "redirect:/profile/"+userNo;
 	}
 	
 	// 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩)
