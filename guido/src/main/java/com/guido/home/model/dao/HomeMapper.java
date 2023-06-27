@@ -34,11 +34,14 @@ public interface HomeMapper {
 
 
 
-	
-	
-	// 검색 임시 // 
-	List<Product> selectProductAll();
-	List<Product> selectSearchResult(String location, String firstday, String lastday, int tourist);
+	// 검색 페이지
+	// 삭제되지 않고 검색 조건 일치하는 상품 수
+//	int getSearchListCount(String location, String firstday, String lastday, int tourist);
+
+	List<Product> selectSearchResult(Map<String, Object> map);
+
+
+
 
 
 

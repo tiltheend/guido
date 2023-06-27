@@ -60,22 +60,28 @@ public class HomeServiceImpl implements HomeService {
 	
 	
 	
-	// 검색 임시 //
+	// 검색 페이지
+//	@Override
+//	public List<Product> selectSearchResult(String location, String firstday, String lastday, int tourist) {
+//		
+//		// 삭제되지 않고 검색 조건 일치하는 상품 수
+////		int listCount = mapper.getSearchListCount(location, firstday, lastday, tourist);
+//		
+//		// 검색 조건 일치하는 상품 목록 조회
+//		List<Product> productList = mapper.selectSearchResult(location, firstday, lastday, tourist);
+//		
+//		return productList;
+//	}
+
+
 	@Override
-	public List<Product> selectProductAll() {
-		return mapper.selectProductAll();
-	}
-	@Override
-	public List<Product> selectSearchResult(String location, String firstday, String lastday, int tourist) {
-		return mapper.selectSearchResult(location, firstday, lastday, tourist);
+	public List<Product> selectSearchResult(Map<String, Object> map) {
+		return mapper.selectSearchResult(map);
 	}
 
 
 
 	
-	
-
-
 
 
 }

@@ -31,21 +31,15 @@ public interface HomeService {
 
 
 	
-	
-	
-	
-
-	// 검색 임시 //
-	List<Product> selectProductAll();
-	List<Product> selectSearchResult(String location, String firstday, String lastday, int tourist);
+	// 검색 페이지
+	List<Product> selectSearchResult(Map<String, Object> map);
 
 
 
 
 
 
-	
-	
 
 
+;
 }

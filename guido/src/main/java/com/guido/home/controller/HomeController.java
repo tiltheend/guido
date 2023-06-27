@@ -1,5 +1,6 @@
 package com.guido.home.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,19 +67,22 @@ public class HomeController {
 							, @RequestParam(value="location", required=false) String location
 							, @RequestParam(value="firstday", required=false) String firstday
 							, @RequestParam(value="lastday", required=false) String lastday
-							, @RequestParam(value="tourist", required=false) int tourist
-	/* , @RequestParam("courseName") String courseName */
+							, @RequestParam(value="tourist", required=false) String tourist
 							) {
 		
-		List<Product> searchResult = service.selectSearchResult(location, firstday, lastday, tourist);
+		Map<String, Object> map = new HashMap<>();
+		map.put("location", location);
+		map.put("firstday", firstday);
+		map.put("lastday", lastday);
+		map.put("tourist", tourist);
 		
-		model.addAttribute("searchResult", searchResult);
+		System.out.println(map);
 		
-		System.out.println(location);
-		System.out.println(firstday);
-		System.out.println(lastday);
-		System.out.println(tourist);
-		System.out.println(searchResult);
+		List<Product> searchResultList = service.selectSearchResult(map);
+		
+		System.out.println(searchResultList);
+		
+		model.addAttribute("searchResultList", searchResultList);
 		
 		return "common/searchResult";
 	}
@@ -90,23 +94,6 @@ public class HomeController {
 //	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
 //	    return service.selectThemeProdList(themeCode);
 //	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

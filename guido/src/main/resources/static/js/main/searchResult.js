@@ -123,7 +123,7 @@ function addCommas(input) {
 
 
 // 테마 검색 상품 목록 조회 + 무한 스크롤 (X)
-/* var page = 1;
+var page = 1;
 var loading = false;
 
 function loadMoreProducts(themeCode) {
@@ -274,7 +274,7 @@ window.addEventListener("scroll", function() {
         loadMoreProducts();
     }
 });
- */
+
 
 
 
