@@ -83,5 +83,41 @@
 			) A
 	</insert>
 	
+	<!-- 게시글 여행상품 수정-->
+	<update id="productEdit">
+		UPDATE "PRODUCT" SET
+		PRODUCT_NAME = #{productName},
+		PRODUCT_CONTENT = #{productContent},
+		PRODUCT_PACKAGE = #{productPackage},
+		PRODUCT_PRICE = #{productPrice},
+		PRODUCT_ADD_PRICE = #{productAddPrice}
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
+	
+	<!-- 이미지 삭제 -->
+   <delete id="imageDelete">
+      DELETE FROM FILE
+      WHERE PRODUCT_NO = #{productNo}
+      AND FILE_ORDER IN(${deleteList})
+   </delete>
+   
+   <!-- 이미지 수정 -->
+   <update id="imageUpdate">
+      UPDATE FILE SET
+      FILE_PATH = #{filePath},
+      WHERE PRODUCT_NO = #{productNo}
+      AND FILE_ORDER = #{productOrder}
+   </update>
+   
+   
+   <!-- 이미지 삽입 -->
+   <insert id="imageInsert">
+      INSERT INTO FILE
+      VALUES(SEQ_FILE_NO.NEXTVAL, #{filePath},
+         #{fileOrder}, #{productNo}
+      )
+   </insert>
+	
+	
 </mapper>
 

@@ -7,23 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.TourTheme;
+import com.guido.product.model.service.ProductDetailService;
 import com.guido.product.model.service.ProductUploadService;
 
 @Controller
 //@SessionAttributes({"loginUser"})
-@RequestMapping("/product")
+//@RequestMapping("/product")
 public class ProductUploadController {
 
 	@Autowired
 	private ProductUploadService service;
+	
+	@Autowired // 여행상품 수정 시 상세조회 서비스 호출용 의존성 주입~!
+	private ProductDetailService productDetailService;
 	
 	@GetMapping("/upload")
 	public String productUpload(Model model
@@ -68,7 +72,7 @@ public class ProductUploadController {
 			path += "/productDetail/" + "product/" + productNo;
 		}else {
 			message = "상품 등록 실패,";
-			path += "/product/upload";
+			path += "/upload";
 		}
 		
 		ra.addFlashAttribute("message", message);
@@ -76,6 +80,48 @@ public class ProductUploadController {
 		return path;
 	}
 		
+		
+		//여행 상품 수정 화면 전환
+		@GetMapping("/productDetail/product/{productNo}/edit")
+		public String productEdit(
+				@PathVariable("productNo") int productNo
+				,Model model) {
+			
+			Product product = productDetailService.selectProduct(productNo);
+			model.addAttribute("product", product);
+			
+			return "productUpload/productEdit";
+		}
+		
+		// 여행상품 수정
+		@PostMapping("/productDetail/product/{productNo}/edit")
+		public String productEdit(
+				Product product
+				,@RequestParam(value="deleteList", required=false) String deleteList
+				,@RequestParam(value="images", required=false) List<MultipartFile> images
+				,@PathVariable("productNo") int productNo
+				,RedirectAttributes ra)throws IllegalStateException, IOException{
+	
+				product.setProductNo(productNo);
+	
+				int rowCount = service.productEdit(product,images,deleteList);
+				
+				String message = null;
+				String path = "redirect:";
+				
+				if(rowCount > 0) {
+					message = "상품이 수정 되었습니다.";
+					path += "/productDetail/" + "product/" + productNo;
+				}else {
+					message = "상품 수정 실패,";
+					path += "edit";
+				}
+				
+				ra.addFlashAttribute("message", message);
+				
+				return path;
+		}
+
 		
 	
 }

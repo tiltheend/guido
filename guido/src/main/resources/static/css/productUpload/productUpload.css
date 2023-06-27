@@ -456,15 +456,15 @@ button:disabled:hover {
   position: relative;
 }
 .productImg > label {
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 2px dashed #ccc;
-  border-radius: 15px;
-  margin: 5px;
+  border-radius: 5px;
   cursor: pointer;
+  margin: 6px 3px;
 }
 .productImg > label:hover {
   border: 2px solid #555;
@@ -476,7 +476,7 @@ button:disabled:hover {
 .productImg img {
   min-width: 100%;
   height: 100%;
-  border-radius: 12px;
+  border-radius: 5px;
 }
 
 /* 썸네일만 이미지 크게 */
@@ -486,9 +486,9 @@ button:disabled:hover {
 }
 .delete-image {
   position: absolute;
-  top: 10px;
-  right: 7px;
-  font-size: 30px;
+  top: 12px;
+  right: 12px;
+  font-size: 1.6rem;
   color: black;
   font-weight: bolder;
   cursor: pointer;
@@ -1104,4 +1104,10 @@ label[for='img7'],
 label[for='img6'],
 label[for='img5'] {
   display: none;
+}
+input[name='tourTheme']:checked {
+  border: 2px solid #2db400;
+  background-color: #2db400;
+  color: white;
+  font-weight: bold;
 }

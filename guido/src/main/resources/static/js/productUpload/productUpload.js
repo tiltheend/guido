@@ -32,6 +32,8 @@ const updatePage = () => {
   if (currentPage == 2) {
     // document.querySelector('.text5').innerHTML = '';
     // typing5();
+    // tourThemeSelectCheck();
+    tourBoxCheck();
   }
   if (currentPage == 3) {
     document.querySelector('.text3').innerHTML = '';
@@ -42,15 +44,15 @@ const updatePage = () => {
     document.querySelector('.text4').innerHTML = '';
     typing4();
   }
-  if (currentPage == 7) {
+  if (currentPage == 6) {
     titleCharCheck();
     inputTitle.focus();
   }
-  if (currentPage == 8) {
+  if (currentPage == 7) {
     contentCharCheck();
     inputContent.focus();
   }
-  if (currentPage == 11) {
+  if (currentPage == 10) {
     disableNextButton();
   }
 };
@@ -87,6 +89,7 @@ function updateTourValue3() {
   inputTime.removeAttribute('name');
 }
 var selectedElement = null;
+const tourThemeItems = document.querySelectorAll('[name="tourTheme"]');
 
 function changeBackgroundColor(element) {
   if (selectedElement) {
@@ -101,12 +104,16 @@ function changeBackgroundColor(element) {
     element.style.backgroundColor = 'rgb(185, 215, 218)';
     element.style.borderColor = 'rgb(59, 119, 124)';
   }
-  // const tourBoxCheck = () => {
-  //   let count = 0;
-  //   tourBox.forEach((element) => {
-  //     if()
-  //   });
-  // };
+  const tourBoxCheck = () => {
+    let count = 0;
+    tourThemeItems.forEach((element) => {
+      if (count < 1 || count > 1) {
+        nextBtn.disabled = true;
+      } else {
+        nextBtn.disabled = false;
+      }
+    });
+  };
 }
 const tourTypes = document.querySelectorAll('.tour-type');
 const inputTourDay = document.querySelector('#tourDay');
@@ -206,6 +213,8 @@ inputTime.addEventListener('input', function () {
     nextBtn.disabled = true;
   }
 });
+
+// 여행 테마 선택 체크박스
 
 // 지도
 
@@ -749,8 +758,8 @@ const inputImage = document.getElementsByClassName('input-image');
 const deleteImage = document.getElementsByClassName('delete-image');
 const border = document.querySelectorAll('.productImg > label');
 const addImage = document.querySelectorAll('.add-image');
-const addImageText = document.querySelector('.add-image-text');
-const addImageText2 = document.querySelector('.add-image-text2');
+const addImage2 = document.querySelectorAll('.add-image2');
+const addImage3 = document.querySelectorAll('.add-image3');
 
 for (let i = 0; i < inputImage.length; i++) {
   //파일이 선택되거나, 선택 후 취소 되었을 때
@@ -770,8 +779,8 @@ for (let i = 0; i < inputImage.length; i++) {
         border[i].style.border = 'none';
         deleteImage[i].style.display = 'block';
         addImage[i].style.display = 'none';
-        addImageText.style.display = 'none';
-        addImageText2.style.display = 'none';
+        addImage2[i].style.display = 'none';
+        addImage3[i].style.display = 'none';
       };
     } else {
       // 선택 후 취소 되었을 때
@@ -780,9 +789,9 @@ for (let i = 0; i < inputImage.length; i++) {
       preview[i].removeAttribute('src');
       border[i].style.border = '2px dashed #ccc';
       deleteImage[i].style.display = 'none';
-      addImage[i].style.display = 'flex';
-      addImageText.style.display = 'block';
-      addImageText2.style.display = 'block';
+      addImage[i].style.display = 'block';
+      addImage2[i].style.display = 'block';
+      addImage3[i].style.display = 'block';
     }
 
     deleteImage[i].addEventListener('click', () => {
@@ -792,9 +801,9 @@ for (let i = 0; i < inputImage.length; i++) {
         inputImage[i].value = '';
         border[i].style.border = '2px dashed #ccc';
         deleteImage[i].style.display = 'none';
-        addImage[i].style.display = 'flex';
-        addImageText.style.display = 'block';
-        addImageText2.style.display = 'block';
+        addImage[i].style.display = 'block';
+        addImage2[i].style.display = 'block';
+        addImage3[i].style.display = 'block';
       }
     });
   });
@@ -806,6 +815,18 @@ const imgId6 = document.getElementById('imgId6');
 const imgId7 = document.getElementById('imgId7');
 const imgId8 = document.getElementById('imgId8');
 
-if (imgId4.src == 'http://localhost/product/upload') {
-  imgId5.style.display = 'flex';
-}
+// const tourThemeItems = document.querySelectorAll('[name="tourTheme"]');
+// const tourThemeSelectCheck = () => {
+//   let count = 0;
+//   // 기본 카테고리 확인
+//   tourThemeItems.forEach((tourThemeItem) => {
+//     if (tourThemeItem.checked) {
+//       count++;
+//     }
+//   });
+//   if (count < 1 || count > 5) {
+//     nextBtn.disabled = true;
+//   } else {
+//     nextBtn.disabled = false;
+//   }
+// };

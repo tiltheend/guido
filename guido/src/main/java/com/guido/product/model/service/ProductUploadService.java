@@ -17,4 +17,7 @@ public interface ProductUploadService {
 
 	int productUpload(Product product, List<MultipartFile> images)throws IllegalStateException, IOException;
 
+
+	int productEdit(Product product, List<MultipartFile> images, String deleteList)throws IllegalStateException, IOException;
+
 }

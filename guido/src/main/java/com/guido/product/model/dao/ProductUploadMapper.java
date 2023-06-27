@@ -1,6 +1,7 @@
 package com.guido.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,6 +24,34 @@ public interface ProductUploadMapper {
 	 * @param uploadList
 	 * @return
 	 */
-	int insertImageList(List<File> uploadList);
+	public int insertImageList(List<File> uploadList);
+
+	
+	/** 이미지 수정
+	 * @param img
+	 * @return
+	 */
+	public int imageUpdate(File img);
+
+	
+	/**이미지 삽입
+	 * @param img
+	 * @return
+	 */
+	public int imageInsert(File img);
+
+	
+	/**이미지 삭제
+	 * @param deleteMap
+	 * @return
+	 */
+	public int imageDelete(Map<String, Object> deleteMap);
+
+	
+	/**게시글 수정
+	 * @param product
+	 * @return rowCount
+	 */
+	public int productEdit(Product product);
 
 }

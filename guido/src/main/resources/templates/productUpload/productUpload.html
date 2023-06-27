@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/productUpload/productUpload.css" />
-    <link rel="stylesheet" href="../css/productUpload/main.css">
-    <link rel="stylesheet" href="../css/productUpload/style.css">
-    <link rel="stylesheet" href="../css/productUpload/calender.css">
-    <link rel="stylesheet" href="../css/productUpload/modal.css">
-    <link rel="stylesheet" href="../css/productUpload/transition.css">
-    <link rel="stylesheet" href="../css/productUpload/typing.css">
-    <link rel="stylesheet" href="../css/productUpload/tourCourse.css">
+    <link rel="stylesheet" th:href="@{/css/productUpload/productUpload.css}" />
+    <link rel="stylesheet" th:href="@{/css/productUpload/main.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/style.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/calender.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/transition.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/typing.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/tourCourse.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    
     
@@ -20,12 +20,12 @@
   <body>
     <header>
       <!-- 메인 로고 -->
-      <div class="logo"><a href="/"><img src="../images/productUpload/guido_test.png" alt="메인 로고"></a></div>
+      <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
       
 
       
   </header>
-  <form th:action="@{upload}" method="post" enctype="multipart/form-data">
+  <form th:action="@{upload}" method="post" enctype="multipart/form-data" id="productUploadFrm">
     <!-- 1페이지 -->
     <main id="page1" class="page current">
       <div class="greeting">
@@ -289,6 +289,7 @@
           >여행의 주요 테마를 선택하여 여행객들에게 가이드님의 여행 컨셉에 대해
           알려주세요.</span>
       </div>
+      
       <div class="tour-theme">
         <span th:each="tourTheme : ${tourTheme}" class="theme-img">
            <input type="checkbox" name="tourTheme" class="hidden2" id="tourTheme${tourTheme.themeCode}" value="">
@@ -298,6 +299,8 @@
           <label th:text="${tourTheme.themeName}" class="theme-img" for="">테마이름</label>
         </span>
       </div>
+
+
     </main>
     <!-- 4페이지 (상품 기본 정보 등록)-->
     <main id="page4" class="page">
@@ -342,19 +345,19 @@
         </div>
         <br>
         <div class="basic-info">
-          <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon"><img src="../images/productUpload/income.png"></span><span>예상수입</span></span>
+          <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon"><img th:src="@{/images/productUpload/income.png}"></span><span>예상수입</span></span>
             <span class="income">예상수입</span>
             <span class="income">수수료 10%</span>
             <span class="income">예상 정산 금액</span>
         </div><hr>
         <div class="basic-info">
-          <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon"><img src="../images/productUpload/income.png" alt="" hidden></span><span>최소수입</span></span>
+          <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon"><img th:src="@{/images/productUpload/income.png}" alt="" hidden></span><span>최소수입</span></span>
             <span id="minPrice">0</span>
             <span id="minFee">0</span>
             <span id="minTotal">0</span>
         </div>
         <div class="basic-info">
-          <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon"><img src="../images/productUpload/income.png" alt="" hidden></span><span>최대수입</span></span>
+          <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon"><img th:src="@{/images/productUpload/income.png}" alt="" hidden></span><span>최대수입</span></span>
             <span id="maxPrice">0</span>
             <span id="maxFee">0</span>
             <span id="maxTotal">0</span>
@@ -457,8 +460,8 @@
       </div>
     
       <div class="add-image-div">
-        <h3 class="title">5장 이상의 이미지를 선택해주세요.</h3>
-        <button type="button" id="addImageBtn"><img src="" alt=""> 추가</button>
+        <h3 class="title"></h3>
+        <button type="button" id="addImageBtn"><img th:src="@{/images/productUpload/plus.png}" alt=""> 추가</button>
       </div>
       <div class="img-box">
         <div class="productImg thumbnail">
@@ -473,9 +476,12 @@
           accept="image/*"
         />
         <span class="delete-image">&times;</span>
-        <div class="add-image add-image-thumbnail"><img src="../images/productUpload/add-image.png" alt="" class="img-inner-img"></div>
-        <span class="add-image-text">5장 이상의 사진을 선택하세요.</span>
-        <span class="add-image-text2">기기에서 업로드</span>
+        <div class="add-image add-image-thumbnail"><img th:src="@{/images/productUpload/add-image.png}" alt="" class="img-inner-img"></div>
+        <!-- <span class="add-image add-image-text"><span>5장 이상의 사진을 선택하세요.</span></span> -->
+        <!-- <span class="add-image add-image-text">5장 이상의 사진을 선택하세요.</span>
+        <span class="add-image add-image-text2">기기에서 업로드</span> -->
+        <div class="add-image3 add-image-text">5장 이상의 사진을 선택하세요.</div>
+        <div class="add-image2 add-image-text2">기기에서 업로드</div>
       </label> 
       </div>
         <!-- <div>여기로 사진을 끌어다 놓으세요.</div> -->
@@ -489,7 +495,9 @@
             <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
             <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*" />
            <span class="delete-image">&times;</span>
-           <div class="add-image"><img src="../images/productUpload/plus.png" alt="" class="img-inner-img"></div>
+           <div class="add-image"><img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img"></div>
+           <div class="add-image2"></div>
+           <div class="add-image3"></div>
           </label>
           
         </div>
@@ -541,22 +549,9 @@
         <h1 class="title">이제 여행 일정과 가이드 상품에 대한 설명을 작성해주세요!</h1>
         <span class="sub-title"></span>
       </div>
-      <table class="scriptCalendar">
-        <thead>
-            <tr>
-                <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
-                <td colspan="5">
-                    <span id="calYear">YYYY</span>년
-                    <span id="calMonth">M</span>월
-                </td>
-                <td class="calendarBtn" id="nextNextCalendar">&#62;&#62;</td>
-            </tr>
-            <tr>
-                <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    
+				
+	
     </main>
     <!-- 8페이지 구매 시 유의사항 작성 -->
     <main id="page8" class="page">
@@ -639,7 +634,7 @@
       </div>
       <div class="confirm-container" onclick="openModal()">
         <div class="confirm-image-container">
-          <img src="../images/productUpload/main_thumnail.jpg" alt="thumnail">
+          <img th:src="@{/images/productUpload/main_thumnail.jpg}" alt="thumnail">
         </div>
         <div class="confirm-text-container">
           <div>
@@ -656,13 +651,13 @@
       <div id="modal" class="modal">
         <div class="modal-content">
           <div id="modalChang"></i><span>미리보기 전체</span> </div>
-          <div class="item"><img src="../images/productUpload/main_thumnail.jpg" alt=""></div>
+          <div class="item"><img th:src="@{/images/productUpload/main_thumnail.jpg}" alt=""></div>
           <div class="item modal-text"><span>Seoul Changdeok Palace tour(2hour) with Jayden Guide</span></div>
-          <div class="item"><img src="../images/productUpload/guide.jpg" alt=""></div>
+          <div class="item"><img th:src="@{/images/productUpload/guide.jpg}" alt=""></div>
           <div class="item modal-text item-sub"><span>5 ~ 20 people </span></div>
           <div class="item modal-text item-sub"><span>Price per person : USD 30</span></div>
           <div class="item item-title modal-text">Travel theme</div>
-          <div class="item item-tour-theme modal-text item-sub"><img src="../images/productUpload/theme/gyeongbokgung.png" alt=""><span>Palace tour</span></div>
+          <div class="item item-tour-theme modal-text item-sub"><img th:src="@{/images/productUpload/theme/gyeongbokgung.png}" alt=""><span>Palace tour</span></div>
           <div class="item item-title modal-text"><span>Additional Cost</span></div>
           <div class="item modal-text item-sub"><span>Entrance fee to Changdeok Palace (USD 4)</span></div>
           <div class="item item-title modal-text"><span>Location</span></div>
@@ -690,10 +685,11 @@
     </footer>
   </body>
 
-  <script src="../js/productUpload/productUpload.js"></script>
-  <script src="../js/productUpload/calender.js"></script>
-  <script src="../js/productUpload/typing.js"></script>
-  <script src="../js/productUpload/tourCourse.js"></script>
+  <script th:src="@{/js/productUpload/productUpload.js}"></script>
+  <!-- <script src="../js/productUpload/calender.js"></script> -->
+  <script th:src="@{/js/productUpload/typing.js}"></script>
+  <script th:src="@{/js/productUpload/tourCourse.js}"></script>
+ 
   <script
   src="https://kit.fontawesome.com/f7459b8054.js"
   crossorigin="anonymous"
