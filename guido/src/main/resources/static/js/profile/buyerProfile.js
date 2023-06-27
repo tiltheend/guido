@@ -19,12 +19,26 @@ let addReview; /* 리뷰 열기 + */
 let reviewWriteModal; /* 리뷰 모달 */
 let reviewModalClose; /* 리뷰 닫기 */
 
+let reviewAddSubmit; /* 리뷰 등록 */
+let selectElement; /* 리뷰 쓰려는 상품의 상품 번호, 일정 번호 */
+let reviewContent; /* 리뷰 내용 */
+
+let selectedStarScore; /* 리뷰작성 별점 input */
+let selectedScore; /* 별점 */
+
 let reviewEdit; /* 리뷰 수정 */
 let reviewEditModal; /* 리뷰 수정 모달 */
 let reviewEditModalClose; /* 리뷰 수정 닫기 */
 let reviewSaleList; /* 리뷰 상품명 */
 let reviewSaleListContent; /* 리뷰 작성 글 */
 let reviewSaleListStar; /* 리뷰 별점 */
+
+
+const checkObj = {
+    "selectElement" : false,
+    "selectedStarScore" : false,
+    "reviewContent" : false
+};
 
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -51,9 +65,19 @@ document.addEventListener("DOMContentLoaded",()=>{
         reviewModalClose = document.querySelector(".review-modal-close");
         addReview.addEventListener('click',()=>{
             reviewWriteModal.style.display="flex";
+
+            // 라디오 버튼 초기 선택 해제
+            Array.from(document.querySelectorAll("input[name='starScore']")).forEach(radioButton => radioButton.checked = false);
+            document.querySelector('.review-write .score-span').innerText="0.0";
             // 모달 닫기
             reviewModalClose.addEventListener('click',()=>{
                 reviewWriteModal.style.display="none";
+                selectElement = document.querySelector("#reviewSaleList");
+                selectElement.selectedIndex = 0; // 선택 초기화
+                checkObj.selectElement = false;
+                checkObj.selectedStarScore = false;
+
+                selectedScore=null;
             });
 
         });
@@ -153,13 +177,6 @@ function moreReviewFn(el){
     
     // 모달 열기
     reviewMoreModal.style.display="flex";
-
-    // 현재 스크롤 위치 저장
-    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-    // 스크롤 위치 고정
-    document.body.style.overflow = "hidden";
-    document.documentElement.scrollTop = scrollPosition;
     
     // 모달 닫기
     reviewMoreModalClose = document.querySelector(".buyer-profile-top .review-more-modal .review-modal-close");
@@ -167,9 +184,6 @@ function moreReviewFn(el){
         e.preventDefault;
 
         reviewMoreModal.style.display="none";
-
-        document.body.style.overflow = "";
-        window.scrollTo(0, scrollPosition);
     });
 }
 
@@ -212,22 +226,19 @@ function reviewEditFn(el){
     reviewEditModal.style.display="flex";
 
     // 현재 스크롤 위치 저장
-    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    // scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
     // 스크롤 위치 고정
-    document.body.style.overflow = "hidden";
-    document.documentElement.scrollTop = scrollPosition;
-
-    
+    // document.body.style.overflow = "hidden";
+    // document.documentElement.scrollTop = scrollPosition;
 
     // 모달 닫기
     reviewEditModalClose.addEventListener('click',e=>{
 
         e.preventDefault;
         reviewEditModal.style.display="none";
-
-        document.body.style.overflow = "";
-        window.scrollTo(0, scrollPosition);
+        // document.body.style.overflow = "";
+        // window.scrollTo(0, scrollPosition);
 
     });
 
@@ -367,7 +378,6 @@ reviewMoreBtn.addEventListener("click", e => {
             }
         }
 
-
     })
     .catch(err=>{
         console.log(err);
@@ -377,59 +387,116 @@ reviewMoreBtn.addEventListener("click", e => {
 });
 
 /* 리뷰 등록 */
-const reviewAddSubmit = document.querySelector(".review-write .review-add-submit");
+reviewAddSubmit = document.querySelector(".review-write .review-add-submit");
+
+// 리뷰 쓰려는 상품의 상품 번호, 일정 번호
+selectElement = document.querySelector("#reviewSaleList");
+let productNo;
+let productDtNo;
+// 상품 선택
+selectElement.addEventListener("change", function() {
+    // 선택된 option 요소
+    let selectedOption = this.options[this.selectedIndex];
+    
+    // 속성 값 가져오기
+    productNo = selectedOption.getAttribute("data-productno");
+    productDtNo = selectedOption.getAttribute("data-productdtno");
+
+    if(productNo){
+        if(productDtNo){
+            checkObj.selectElement = true;
+        }
+    }
+});
+
+// 별점
+selectedStarScore = document.querySelectorAll(".review-write input[name='starScore']");
+// 라디오 버튼 체크 변경 이벤트 처리
+selectedStarScore.forEach(el => {
+    el.addEventListener("change", () => {
+        if (el.checked) {
+            selectedScore = el.value;
+            if(selectedScore) checkObj.selectedStarScore = true;
+        }
+    });
+});
+
 
 reviewAddSubmit.addEventListener("click", e => {
-    // 리뷰 쓰려는 상품의 상품 번호, 일정 번호
-    const selectedreviewSale = document.querySelector("#reviewSaleList option:checked");
-    const productNo = selectedreviewSale.getAttribute("data-productno");
-    const productDtNo = selectedreviewSale.getAttribute("data-productdtno");
-
-    if(selectedreviewSale.checked == false){
+    
+    if(!checkObj.selectElement){
         e.preventDefault();
         alert("상품을 선택해주세요.")
         return;
     }
 
-    const reviewContent = document.getElementById("reviewContent").value;
-    if(reviewContent.trim.length == 0){
+    reviewContent = document.getElementById("reviewContent").value;
+    if(reviewContent.trim().length == 0){
         e.preventDefault();
         alert("내용을 입력해주세요.");
         reviewContent.focus();
         reviewContent = ""; // 띄어쓰기, 개행문자 제거
         return;
     }
-    
-    // 체크된 별점
-    const selectedStarScore = document.querySelector(".star_score:checked").value;
-    if(selectedStarScore == null || selectedStarScore==0.0){
+    checkObj.reviewContent = true;
+
+    if(!checkObj.selectedStarScore){
         e.preventDefault();
-        alert("0.0 이상의 별점을 입력해주세요.");
+        alert("별점을 선택해주세요.");
         return;
     }
 
-    console.log("ㅎㅎ..");
+    if(confirm("리뷰 등록하시겠습니까?")){
 
-    fetch("/profile/addReview",{
-        method : "POST",
-        headers : {"Content-Type" : "application/json"}, 
-        body : JSON.stringify({
-            "productNo" : productNo,
-            "productDtNo" : productDtNo,
-            "reviewContent" : reviewContent,
-            "selectedStarScore" : selectedStarScore
+        fetch("/profile/addReview",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify({
+                "productNo" : productNo,
+                "productDtNo" : productDtNo,
+                "reviewMessage" : reviewContent,
+                "reviewStarsDouble" : selectedScore
+            })
         })
-    })
-    .then(resp => resp.json())
-    .then(e => {
-        // 전송되면 리뷰 내용 삭제
-        reviewContent = "";
-        console.log("ㅎㅎ..");
+        .then(resp => resp.text())
+        .then(result => {
+            
+            if(result>0){
+                alert("리뷰가 등록 되었습니다.");
 
-    })
-    .catch(err=>{
-        console.log(err);
+                // 구매 상품 초기화
+                // selectElement = document.querySelector("#reviewSaleList");
+                // selectElement.selectedIndex = 0; // 선택 초기화
+        
+                // 전송되면 리뷰 내용 삭제
+                // 라디오 버튼 초기 선택 해제
+                // Array.from(document.querySelectorAll("input[name='starScore']")).forEach(radioButton => radioButton.checked = false);
+                // document.querySelector('.review-write .score-span').innerText="0.0";
+                // reviewContent = "";
 
-    });
+                // reviewWriteModal.style.display="none";
+
+                location.href='/profile/'+loginUserNo;
+
+            } else if (result=0){
+                alert("리뷰 작성 실패");
+            }
+
+        })
+        .catch(err=>{
+            console.log(err);
+            reviewContent = "";
+            // 구매 상품 초기화
+            selectElement = document.querySelector("#reviewSaleList");
+            selectElement.selectedIndex = 0; // 선택 초기화
+            // 라디오 버튼 초기 선택 해제
+            Array.from(document.querySelectorAll("input[name='starScore']")).forEach(radioButton => radioButton.checked = false);
+            document.querySelector('.review-write .score-span').innerText="0.0";
+        });
+
+    } else {
+        e.preventDefault();
+        return;
+    }
 
 });

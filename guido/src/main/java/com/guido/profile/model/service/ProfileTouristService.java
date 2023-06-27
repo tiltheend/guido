@@ -67,5 +67,11 @@ public interface ProfileTouristService {
 	 */
 	List<Review> addReviewList(int userNo);
 
+	/** 리뷰 작성
+	 * @param review
+	 * @return
+	 */
+	int addReview(Review review);
+
 
 }

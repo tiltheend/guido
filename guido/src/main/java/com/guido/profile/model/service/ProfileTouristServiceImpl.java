@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.Reservation;
@@ -128,6 +129,15 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public List<Review> addReviewList(int userNo) {
 		return mapper.addReviewList(userNo);
 	}
+
+	// 리뷰 작성
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int addReview(Review review) {
+		return mapper.addReview(review);
+	}
+	
+	
 	
 	
 	

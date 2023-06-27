@@ -108,7 +108,7 @@
             <!-- 리뷰 작성 모달 -->
             <div class="review-write" th:if="${session.loginUser?.userNo == user.userNo}"> <!-- 불투명 배경 -->
                 <div> <!-- 하얀 배경 -->
-                    <form action="/profile/addReview" method="POST">
+                    <form action="">
                         <h2>Purchase History</h2>
                         <select name="reviewSaleList" id="reviewSaleList">
                             <option selected="selected" disabled>후기를 작성할 상품을 선택해주세요.</option>
@@ -154,7 +154,7 @@
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button class="review-add-submit">Submit</button>
+                            <button class="review-add-submit" type="button">Submit</button>
                         </div>
                     </form>
                 </div>

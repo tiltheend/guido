@@ -136,6 +136,25 @@ public class ProfileTouristController {
 		return moreReviewList;
 	}
 	
+	// 리뷰 작성
+	@ResponseBody
+	@PostMapping(value="/addReview",produces="application/json")
+	public int addReview(@RequestBody Review review,
+			@SessionAttribute("loginUser") User loginUser){
+
+		review.setUserNo(loginUser.getUserNo());
+	
+		System.out.println(review.getProductNo());
+		System.out.println(review.getProductDtNo());
+		System.out.println(review.getReviewStarsDouble());
+		System.out.println(review.getReviewMessage());
+		System.out.println(review.getUserNo());
+		int result = service.addReview(review);
+		
+		return result;
+		// return 0;
+	}
+	
 	// 투어리스트 예약 관리 페이지로 이동
 	@GetMapping("/touristReservation")
 	public String touristReservation(
