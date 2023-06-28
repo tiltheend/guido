@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -41,121 +41,38 @@
 
             <div class="content-count-and-search">
                 <!-- 카운트 -->
-                <div class="count-container">총 <span>10</span>건</div>
+                <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
                 <!-- 검색창 -->
                 <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
             </div>
 
             <!-- 테이블 -->
-            <table>
+            <table id="table">
 
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
-                    <tr><th class="col-checkbox"><input type="checkbox" name="" id=""></th><th class="col-number">상품 번호</th><th class="col-email">판매자 이메일</th>
+                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">상품 번호</th><th class="col-email">판매자 이메일</th>
                     <th class="col-title">제목</th><th class="col-date">등록일</th><th class="col-blind">블라인드</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>10</td>
-                        <td>email@gmail.com</td>
-                        <td>강원도 양양에서 즐기는 서핑여행</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>9</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>8</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>7</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>6</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>5</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>4</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>3</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>2</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn3">블라인드</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>1</td>
-                        <td>email@gmail.com</td>
-                        <td>전통문화예술체험 나만의 수제 도장 만들러 가지마가지마가지마아직너를위해바보처럼살아가는데</td>
-                        <td>2023-06-07</td>
-                        <td><button class="btn btn4">블라인드 해제</button></td>
-                    </tr>
+                    <th:block th:each="product : ${map.list}" th:object="${product}">
+                        <tr>
+                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{PRODUCT_NO}"></td>
+                            <td th:text="*{PRODUCT_NO}">회원번호</td>
+                            <td th:text="*{USER_EMAIL}">이메일</td>
+                            <td th:text="*{PRODUCT_NAME}">제목</td>
+                            <td th:text="*{CREATE_DT}">등록일</td>
+                            <td>
+                                <button type="buttion" th:if='*{PRODUCT_STATE=="N"}' class="btn btn3">블라인드</button>
+                                <button type="buttion" th:if='*{PRODUCT_STATE=="B"}' class="btn btn4">블라인드 해제</button>
+                            </td>
+                        </tr>
+                    </th:block>
                 </tbody>
             </table>
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li><a href="#">&lt;&lt;</a></li>
-                    <li><a href="#">&lt;</a></li>
-                    <li><a href="#" class="current">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li><a href="#">&gt;</a></li>
-                    <li><a href="#">&gt;&gt;</a></li>
-                </ul>
-            </div>
+            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
+            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>

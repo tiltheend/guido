@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -58,12 +58,12 @@
             <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
 
             <!-- 테이블 -->
-            <table>
+            <table id="table">
 
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
                     <tr>
-                        <th class="col-checkbox"><input type="checkbox" name="" id=""></th><th class="col-number">회원번호</th><th class="col-email">이메일</th>
+                        <th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">회원번호</th><th class="col-email">이메일</th>
                         <th class="col-schedule">일정</th><th class="col-date">가입일</th><th class="col-state">회원 상태</th><th class="col-super-guide">슈퍼 가이드</th>
 
                     </tr>
@@ -72,14 +72,14 @@
                     <tr class="여백"></tr>
                     <th:block th:each="user : ${map.list}" th:object="${user}">
                         <tr>
-                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{userNo}"></td>
-                            <td th:text="*{userNo}">회원번호</td>
-                            <td th:text="*{userEmail}">이메일</td>
+                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{USER_NO}"></td>
+                            <td th:text="*{USER_NO}">회원번호</td>
+                            <td th:text="*{USER_EMAIL}">이메일</td>
                             <td><img th:src="@{/images/admin/symbol-calendar.svg}"></td>
-                            <td th:text="*{createDate}">가입일</td>
+                            <td th:text="*{CREATE_DT}">가입일</td>
                             <!-- <td th:text="*{userState == 'N' ?'정상':(userState==Y?'미승인':(userState==B?'블락':(userState==D?'탈퇴':'')))}"></td> -->
-                            <td th:text="*{userState == 'Y' ? '미승인' : (userState == 'N' ? '정상' : (userState == 'B' ? '블락' : (userState == 'D' ? '탈퇴' : '')))}"></td>
-                            <td><img th:src="*{superGuideFl == 'N' ? '/images/admin/generalGuide.svg' : '/images/admin/superGuide.svg'}"></td>
+                            <td th:text="*{USER_STATE == 'Y' ? '미승인' : (USER_STATE == 'N' ? '정상' : (USER_STATE == 'B' ? '블락' : (USER_STATE == 'D' ? '탈퇴' : '')))}"></td>
+                            <td><img th:src="*{SUPER_GUIDE_FL == 'N' ? '/images/admin/generalGuide.svg' : '/images/admin/superGuide.svg'}"></td>
                         </tr>
                     </th:block>
                 </tbody>

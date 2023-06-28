@@ -54,10 +54,11 @@
 		<result property="reviewDeleteFL" column="REVIEW_DEL_FL"/>
 		<result property="productNo" column="PRODUCT_NO"/>
 		<result property="createDate" column="CREATE_DT"/>
-		<result property="userName" column="PROFILE_IMG"/>
-		<result property="profileImage" column="USER_NAME"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
 		
 		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productDtNo" column="PRODUCT_DT_NO"/>
 		<result property="reviewReply" column="REVIEW_REPLY"/>
 	</resultMap>
 	
@@ -69,9 +70,9 @@
 		AND USER_TYPE = 'G'
 	</select>
 	
-	<!-- 회원 정보 가져오기 (이메일, 이름, 프로필 이미지) -->
+	<!-- 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버) -->
 	 <select id="userInfo" resultMap="user_rm">
-		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG
+		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG, USER_NO
 		FROM "USER"
 		WHERE USER_NO = #{userNo}
 	 </select>
@@ -99,7 +100,7 @@
 		WHERE USER_NO = #{userNo}
 	</select>
 	
-	 <!-- 리뷰 내역 가져오기 -->
+	 <!-- 내가 쓴 리뷰 내역 가져오기 -->
 	 <select id="reviewList" resultMap="review_rm">
 		SELECT REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
 			   , TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
@@ -119,9 +120,44 @@
 	 <select id="reviewCount" resultType="_int">
 		 SELECT COUNT(*)
 			FROM REVIEW
-			WHERE USER_NO = 25
+			WHERE USER_NO =  #{userNo}
 			AND REVIEW_REPLY_DEL_FL ='N'
 	 </select>
 	 
+	 <!-- 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩) -->
+	 <select id="myReviewMore" resultMap="review_rm">
+		SELECT * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY REVIEW_NO DESC) AS NUM
+					,REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
+				  	, TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
+				   , PRODUCT_NAME, REVIEW_REPLY
+			FROM "REVIEW" R
+			JOIN "USER" U ON(R.USER_NO = U.USER_NO)
+			JOIN "PRODUCT" USING (PRODUCT_NO)
+			WHERE U.USER_STATE = 'N'
+			AND U.USER_NO = #{pageUserNo}
+			AND REVIEW_DEL_FL = 'N'
+			AND REVIEW_REPLY_DEL_FL = 'N'
+			)
+		<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
+			ORDER BY NUM
+	 </select>
+	 
+	 <!--  리뷰 안쓴 목록 가져오기 -->
+	 <select id="addReviewList" resultMap="review_rm">
+		SELECT RS.PRODUCT_NO PRODUCT_NO, P.PRODUCT_NAME PRODUCT_NAME, RS.PRODUCT_DT_NO PRODUCT_DT_NO, 
+		    (SELECT R.REVIEW_MESSAGE
+		    FROM REVIEW R
+		    WHERE R.PRODUCT_NO = RS.PRODUCT_NO
+		    AND R.USER_NO = 25
+		    AND R.REVIEW_MESSAGE IS NULL) AS REVIEW_MESSAGE
+		FROM RESERVATION RS
+		JOIN "PRODUCT" P ON RS.PRODUCT_NO = P.PRODUCT_NO
+		LEFT JOIN "REVIEW" R ON P.PRODUCT_NO = R.PRODUCT_NO
+		WHERE RS.USER_NO = 25
+		AND RS.RESERVATION_STATE = 'D'
+		AND R.REVIEW_NO IS NULL
+		ORDER BY RS.PRODUCT_NO DESC
+	 </select>
 	
 </mapper>

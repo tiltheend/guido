@@ -19,7 +19,7 @@ import com.guido.common.exception.FileUploadException;
 import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Pagination;
-import com.guido.common.model.dto.User;
+import com.guido.common.model.dto.QNA;
 import com.guido.common.utility.Util;
 
 
@@ -36,34 +36,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private AdminMapper mapper;
-	
-	
-	@Override
-	public Map<String, Object> selectEventList(int cp) {
-		int listCount = mapper.getListCount("EVENT");
-		Pagination pagination = new Pagination(listCount, cp);
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		List<Event> list = mapper.selectEventList(null,rowBounds);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("pagination", pagination);
-		map.put("list", list);
-		
-		return map;
-	}
-	
-	// 이벤트 디테일 페이지
-	@Override
-	public Event selectEvent(int eventNo) {
-		// 이벤트 번호로 이벤트 셀렉트 
-		Event event = mapper.selectEvent(eventNo);
-		// 0번 인덱스는 썸네일이므로 삭제.
-		if(!event.getFileList().isEmpty())
-			event.getFileList().remove(0);
-		return event;
-	}
 	
 	
 	
@@ -100,35 +72,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public Map<String, Object> selectTouristList(int cp) {
-		int listCount = mapper.getUserListCount("T");
-		
+	public Map<String, Object> selectList(String pageName, int cp) {
+		int listCount = mapper.getListCount(pageName);
 		Pagination pagination = new Pagination(listCount, cp);
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		List<User> list = mapper.selectTouristList(null,rowBounds);
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		map.put("list", mapper.selectList(pageName, rowBounds));
 		map.put("pagination", pagination);
-		map.put("list", list);
-		
 		return map;
 	}
 	
 	@Override
-	public Map<String, Object> selectGuideList(int cp) {
-		int listCount = mapper.getUserListCount("G");
-		
-		Pagination pagination = new Pagination(listCount, cp);
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		List<User> list = mapper.selectGuideList(null,rowBounds);
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("pagination", pagination);
-		map.put("list", list);
-		System.out.println(list);
-		
-		return map;
+	public QNA selectQNA(int qnaNo) {
+		QNA qna = mapper.selectQNA(qnaNo);
+		System.out.println(qna);
+		return qna;
 	}
+	
 }

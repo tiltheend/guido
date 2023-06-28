@@ -1,6 +1,7 @@
 package com.guido.product.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.PR;
@@ -43,6 +44,23 @@ public interface ProductDetailService {
 	 * @return optionList
 	 */
 	List<String> selectOptionList(int productNo);
+
+	
+
+	/** 관심 상품 등록 여부 체크
+	 * @param map
+	 * @return wishOrNot
+	 */
+	int selectWishCheck(Map<String, Integer> map);
+
+
+
+	/** 관심 상품 등록 처리
+	 * @param map
+	 * @return
+	 */
+	int updateWish(Map<String, Integer> map);
+
 
 
 }

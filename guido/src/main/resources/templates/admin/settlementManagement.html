@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -37,7 +37,7 @@
 
 
             <div>총 2건</div>
-            <table>
+            <table id="table">
                 <thead>
                     <tr>
                         <th>상품 번호</th>
@@ -154,24 +154,9 @@
                 </tbody>
             </table>
 
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li><a href="#">&lt;&lt;</a></li>
-                    <li><a href="#">&lt;</a></li>
-                    <li><a href="#" class="current">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li><a href="#">&gt;</a></li>
-                    <li><a href="#">&gt;&gt;</a></li>
-                </ul>
-            </div>
+            
+            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
+            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
         </div>
     </main>
 </body>
