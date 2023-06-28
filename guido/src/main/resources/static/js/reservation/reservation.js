@@ -26,4 +26,16 @@ plusBtn.addEventListener("click", ()=>{
 
 
   /* 연락처 value 넣기 */
-  document.getElementById("phone").value = loginUserTel;
+  // document.getElementById("phone").value = loginUserTel;
+
+
+/* 결제 버튼을 클릭했을 때 약관동의 미체크 시 제출 막기 */
+  const paymentBtn = document.querySelector(".reservation--btn__bottom");
+
+  paymentBtn.addEventListener("click", (e)=>{
+    
+    if(document.querySelector("input[type='checkbox']").checked == false)
+      e.preventDefault();
+  });
+
+

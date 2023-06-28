@@ -7,7 +7,6 @@
     <title>guido</title>
     
     <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/intlTelInput.css}">
-    <!-- <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/demo.css}"> -->
 
     <link rel="stylesheet" th:href="@{/css/reservation/reservation.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -137,7 +136,7 @@
                         <div>연락처</div>
                         <div><input id="phone" name="phone" type="tel"/></div>
                         <div>비상 연락망</div>
-                        <div><input type="text" class="orderer--emergency"></div>
+                        <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 kakaotalk@kakao.kr"></div>
                     </div>
 
 
@@ -163,39 +162,39 @@
 
     </div>
     
-
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
     <script th:inline="javascript">
-      const input = document.querySelector("#phone");
-      window.intlTelInput(input, {
-          // allowDropdown: false,
-        // autoInsertDialCode: true,
-        // autoPlaceholder: "off",
-        // dropdownContainer: document.body,
-        // excludeCountries: ["us"],
-        // formatOnDisplay: false,
-        // geoIpLookup: function(callback) {
-        //   fetch("https://ipapi.co/json")
-        //     .then(function(res) { return res.json(); })
-        //     .then(function(data) { callback(data.country_code); })
-        //     .catch(function() { callback("us"); });
-        // },
-        // hiddenInput: "full_number",
-        // initialCountry: "auto",
-        // localizedCountries: { 'de': 'Deutschland' },
-        // nationalMode: false,
-        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        // placeholderNumberType: "MOBILE",
-        // preferredCountries: ['cn', 'jp'],
-        separateDialCode: true,
-        // showFlags: false,
-        utilsScript: "/libraries/intl-tel-input/build/js/utils.js"
-    });
+        const input = document.querySelector("#phone");
+        var iti = window.intlTelInput(input, {
+            allowDropdown: false,
+            autoInsertDialCode: true,
+            // autoPlaceholder: "off",
+            // dropdownContainer: document.body,
+            // excludeCountries: ["us"],
+            // formatOnDisplay: false,
+            // geoIpLookup: function(callback) {
+            //   fetch("https://ipapi.co/json")
+            //     .then(function(res) { return res.json(); })
+            //     .then(function(data) { callback(data.country_code); })
+            //     .catch(function() { callback("us"); });
+            // },
+            // hiddenInput: "full_number",
+            initialCountry: "kr",
+            // localizedCountries: { 'de': 'Deutschland' },
+            // nationalMode: false,
+            // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            // placeholderNumberType: "MOBILE",
+            // preferredCountries: ['cn', 'jp'],
+            separateDialCode: true,
+            // showFlags: false,
+            utilsScript: "/libraries/intl-tel-input/build/js/utils.js"
+        });
 
+        let loginUserTel = /*[[${session.loginUser?.userTel}]]*/ "로그인 회원 번호";
+        if(loginUserTel == null) loginUserTel = "";
 
-    let loginUserTel = /*[[${session.loginUser?.userTel}]]*/ "로그인 회원 번호";
+        iti.setNumber(loginUserTel);        // 전화번호를 입력 상자에 설정
 
-    if(loginUserTel == null) loginUserTel = "";
 
     </script>
 

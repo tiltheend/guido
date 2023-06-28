@@ -1,8 +1,5 @@
 package com.guido.reservation.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.Product;
-import com.guido.common.model.dto.User;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.reservation.model.service.ReservationService;
 
@@ -34,16 +28,11 @@ public class ReservationController {
 	public String reserve(@PathVariable("productNo") int productNo, 
 			@RequestParam(value="guests", required=false, defaultValue="1") int guests, 
 			@RequestParam(value="date", required=false) String date, 
-			@RequestParam(value="option", required=false, defaultValue="-1") int optionNo,
-			@SessionAttribute(value="loginUser", required=false) User loginUser, Model model) {
+			@RequestParam(value="option", required=false, defaultValue="-1") int optionNo, Model model) {
 		
 		
-		// 비로그인 회원
-		if(loginUser == null) {
-			return "redirect:/user/loginPage";
-		}
 		
-		// 상품 번호, 예약 일자 존재 X
+		// 예약 일자 존재 X
 		if(date.equals("")) {
 			return "common/main";
 		}
