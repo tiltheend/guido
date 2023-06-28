@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide Sign Up</title>
-    <link rel="stylesheet" href="../css/signUp/signUpAsGuide.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;}
-    </style>
+    <link rel="stylesheet" th:href="@{/css/signUp/signUpAsGuide.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>guido</header>
+    <th:block rh:replace="~{common/header}"></th:block>
     <div class="container_total">
         <div class="container_top">
             <div class="container_top_title font0">회원 가입</div>
         </div>
-        <form action="#" method="post">
+        <form action="/signUp/guide" method="post">
         <div class="container_middle">
             <div class="container_middle_input">
                 <input type="email" name="email" id="email" class="email font4" placeholder="이메일"  maxlength="30" autocomplete="off">
@@ -28,7 +25,7 @@
                 <input type="text" name="contact" id="contact" class="contact font4" placeholder="전화번호">
                 <input type="text" name="passport" id="passport" class="confirmation font4" placeholder="관광 통역 안내사 확인증 번호">
             </div>
-            <a href="https://www.q-net.or.kr/man001.do?id=man00103&gSite=L&gId=37&redir=https%3A%2F%2Fwww.q-net.or.kr%2Fiss002.do%3Fid%3Diss00201%26gSite%3DL%26gId%3D37" target="_blank"><div class="qNet font5">* 잠깐! 아직 확인서를 발급 받지 못하셨나요? 이곳에서 발급 받으세요.</div></a>
+            <a th:href="@{https://www.q-net.or.kr/man001.do?id=man00103&gSite=L&gId=37&redir=https%3A%2F%2Fwww.q-net.or.kr%2Fiss002.do%3Fid%3Diss00201%26gSite%3DL%26gId%3D37}" target="_blank"><div class="qNet font5">* 잠깐! 아직 확인서를 발급 받지 못하셨나요? 이곳에서 발급 받으세요.</div></a>
             <div class="container_middle_check">
                 <div class="chk1"><input type="checkbox" name="infoAgree" id="infoAgree"><label for="infoAgree" class="box"></label><span class="font5 ment1">&nbsp&nbsp개인정보 수집 및 이용에 동의합니다.</span></div>
                 <div class="chk2">
@@ -40,6 +37,7 @@
         </div>
         </form>
     </div>
+    <th:block th:replace="~{common/footer}"></th:block>
     
 </body>
 </html>

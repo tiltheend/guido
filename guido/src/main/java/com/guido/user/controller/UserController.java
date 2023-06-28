@@ -41,6 +41,17 @@ public class UserController {
 		return "signUp/chooseMemberType";
 	}
 	
+	// 가이드 회원가입
+	@GetMapping("/signUp/guidePage")
+	public String guideSignupPage() {
+		return "signUp/signUpAsGuide";
+	}
+	// 관광객 회원가입
+	@GetMapping("/signUp/touristPage")
+	public String touristSignupPage() {
+		return "signUp/signUpAsTourist";
+	}
+	
 	//--------------------------------
 	
 	// 임시 내정보수정 페이지 이동
