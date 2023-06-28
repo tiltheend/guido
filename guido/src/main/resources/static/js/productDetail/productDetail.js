@@ -161,40 +161,44 @@ window.addEventListener("scroll", ()=>{
 
 
 /* 관심상품 등록/제거 처리 */
-const wishHeart = document.getElementById("wishHeart");
-let check;      // 관심상품 등록 여부
-
-/* 관심 상품 등록O */
-if (wishHeart.checked) {
-    check = 1;
-} else {
-    /* 관심 상품 등록X */
-    check = 0;
-}
-
-const wishData = {"productNo" : product.productNo, "userNo": 18, "check": check};
-// const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
-
-
-wishHeart.addEventListener("click", ()=> {
+if(document.getElementById("wishHeart")!=null){
     
-    fetch("/productDetail/updateWish",{
-        method : "POST",
-        headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify(wishData)
-    })
-    .then(resp=>resp.text())
-    .then(result=>{
-
-        if(result==0){
-            console.log("관심상품 등록 실패");
-        }
-
-    })
-    .catch(err=>{
-        console.log(err);
-    })
-});
+    const wishHeart = document.getElementById("wishHeart");
+    let check;      // 관심상품 등록 여부
+    
+    /* 관심 상품 등록O */
+    if (wishHeart.checked) {
+        check = 1;
+    } else {
+        /* 관심 상품 등록X */
+        check = 0;
+    }
+    
+    const wishData = {"productNo" : product.productNo, "userNo": 18, "check": check};
+    // const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
+    
+    
+    wishHeart.addEventListener("click", ()=> {
+        
+        fetch("/productDetail/updateWish",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(wishData)
+        })
+        .then(resp=>resp.text())
+        .then(result=>{
+    
+            if(result==0){
+                console.log("관심상품 등록 실패");
+            }
+    
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    });
+    
+}
 
 
 /* 게스트 최대/최소 인원 수 경고 */
@@ -271,7 +275,16 @@ reserveBtn.addEventListener("click", e=>{
         }
     }
 
+    /* 여행객이 아닌 경우 */
+    if(loginUserType!='T'){
+        alert("tourist 계정으로 접속해주세요");
+        e.preventDefault();
+        return;
+    }
+
+
     /* 날짜 미선택 시 */
+
 
 
     const guestHidden = document.getElementById("guestHidden");

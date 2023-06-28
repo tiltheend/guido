@@ -156,14 +156,7 @@
                                 <div>Number of recruits is between <strong>[[*{minTourist}]]</strong> and <strong>[[*{maxTourist}]]</strong> per package</div> 
                             </div>
                         </div>
-                        
-    
-                        <div th:if="*{productAddPrice}" class="detail--div__extrafee">
-                            <img th:src="@{/images/productDetail/extra_fee_icon.png}">
-                            <div>Extra Fee : [[*{productAddPrice}]]&#8361;</div> 
-                        </div>
                     
-    
                         
                         <div class="detail--divisionline" id="section1" style="margin-top: 0;"></div>
                 
@@ -290,6 +283,19 @@
                         
                         <div class="detail--text__detail" th:text="*{productContent}">
                             상품 상세 내용
+                        </div>
+
+
+
+                        <!--     
+                        <div th:if="*{productAddNotes}" class="detail--div__extrafee">
+                            <img th:src="@{/images/productDetail/extra_fee_icon.png}">
+                            <div>Extra Fee : [[*{productAddNotes}]]&#8361;</div> 
+                        </div> -->
+                        
+
+                        <div class="detail--text__addnotes">
+                            Additional Notes
                         </div>
     
                         <div class="detail--list__tourcourse font2" th:if="*{tourCourse}">
@@ -713,6 +719,7 @@
             const package = /*[[${eachCost}]]*/"패키지종류(1박or1박이상)";
             const guestCount = /*[[${guestCount}]]*/"게스트수";
             const loginUserNo = /*[[${session.loginUser?.userNo}]]*/"로그인 회원 번호";
+            const loginUserType = /*[[${session.loginUser?.userType}]]*/"로그인 회원 타입";
             const product = /*[[${product}]]*/ "상품";
 
             // const MAP_API = config.apikey;

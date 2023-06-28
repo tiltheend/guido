@@ -447,9 +447,9 @@ box-shadow:  5px 5px 8px #e2e2e2,
 .detail--div__collection{
     display: flex;
     width: 100%;
-    margin-top: 1vh;
+    margin-top: 2vh;
     border-color: #F0F0F0;
-    border-style: solid none;
+    border-style: solid none none none;
     border-width: 2px;
     padding: 3vh 0;
 }
@@ -595,7 +595,8 @@ box-shadow:  5px 5px 8px #e2e2e2,
 
 .detail--img__profile-href{
     display: block; 
-    width: 20%;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
     position: relative; 
     margin-right: 20px;

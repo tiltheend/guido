@@ -26,7 +26,7 @@ public class User {
 	private String primaryLanguage; // 주 사용 언어
 	private String emergencyContact; // 비상 연락처
 	private String faceImg; 		// 얼굴 인증 사진
-	private int countryCallingCode;	// 국제전화 국가번호
+	private String countryCode;	 // 국제전화 국가번호
 
 	// 가이드
 	private String languageSkill; 	// 구사 가능 언어

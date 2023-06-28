@@ -70,6 +70,8 @@ public class ProductDetailController {
 		model.addAttribute("eachCost", eachCost);
 		model.addAttribute("wishOrNot", wishOrNot);
 		
+		System.out.println(loginUser);
+		
 		return "productDetail/productDetail";
 	}
 	
