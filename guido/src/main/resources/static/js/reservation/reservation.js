@@ -39,3 +39,21 @@ plusBtn.addEventListener("click", ()=>{
   });
 
 
+
+const reservationDateDiv = document.querySelector(".reservation--date__decription>div");
+
+if(package==1){
+  
+  reservationDateDiv.innerText = reservationDate;
+  
+}else{
+  
+  reservationDate.setDate(reservationDate.getDate() + 2);
+  
+  const month = String(createDt.getMonth() + 1).padStart(2, "0");
+  const day = String(createDt.getDate()).padStart(2, "0");
+  
+  const twoDaysLater = `${month}-${day}`;
+  
+  reservationDateDiv.innerText = reservationDate + " - " + twoDaysLater;
+}

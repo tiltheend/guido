@@ -501,10 +501,21 @@ box-shadow:  5px 5px 8px #e2e2e2,
     margin-top: 45px;
 }
 
-/* 상품 투어 코스 */
-.detail--list__tourcourse{
-    margin-top: 50px;
 
+/* 상품 투어 코스, 상품 추가 참고 사항 */
+.detail--list__tourcourse, .detail--text__addnotes{
+    margin-top: 50px;
+}
+
+/* 상품 추가 참고 사항 ul */
+.detail--text__addnotes>ul{
+    margin-top: 25px;
+    list-style-type: circle;
+}
+
+.detail--text__addnotes>ul li{
+    font-size: 1.1rem;
+    margin-left: 20px;
 }
 
 /* 상품 일자 및 위치 간단 설명 */
@@ -702,7 +713,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 유의사항 설명 div */
 .detail--description__precaution{
     margin-top: 4vh;
-    padding: 3vw;
+    padding: 30px;
     background-color: #F0F0F0;
     border-radius: 10px;
 }

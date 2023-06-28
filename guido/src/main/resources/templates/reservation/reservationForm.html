@@ -43,7 +43,7 @@
                 <div class="reservation--container__info">
 
                     <div class="reservation--img__product">
-                        <img src="/images/productDetail/경복궁2.jpg">
+                        <img th:src="*{imageList[0].filePath}">
                     </div>
                     
                     <div class="reservation--decription__product">
@@ -196,6 +196,9 @@
         if(loginUserTel == null) loginUserTel = "";
         
         iti.setNumber(loginUserTel);        // 전화번호를 입력 상자에 설정
+
+        const reservationDate = /*[[${reservationDate}]]*/"예약 일자";
+        const package = /*[[${product.productPackage}]]*/"당일 or n일";
         
     </script>
 

@@ -1,5 +1,6 @@
 package com.guido.product.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,15 @@ public class ProductDetailController {
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
 		List<Review> reviewList = service.selectReviewList(productNo);
-		int wishOrNot = -1;
+		
+		// 구분자로 문자열 쪼개기
+		List<String> addNotesList = null;
+		
+		if(product.getProductAddNotes()!=null) {
+			addNotesList = Arrays.asList(product.getProductAddNotes().split("\\^\\^\\^"));
+		}
+		
+		int wishOrNot = -1;		// 관심 등록
 		
 		if(loginUser!=null) {
 			
@@ -62,6 +71,7 @@ public class ProductDetailController {
 			eachCost = (product.getProductPrice()/guestCount);
 		
 		
+		
 		model.addAttribute("product", product);
 		model.addAttribute("guide", guide);
 		model.addAttribute("pr", pr);
@@ -69,8 +79,8 @@ public class ProductDetailController {
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("eachCost", eachCost);
 		model.addAttribute("wishOrNot", wishOrNot);
-		
-		System.out.println(loginUser);
+		model.addAttribute("addNotesList", addNotesList);
+	
 		
 		return "productDetail/productDetail";
 	}

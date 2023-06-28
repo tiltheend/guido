@@ -69,6 +69,7 @@ public class ReservationController {
 		
 		model.addAttribute("guestCount", guests);
 		model.addAttribute("product", product);
+		model.addAttribute("reservationDate", date);
 		model.addAttribute("mainCourse", mainCourse);
 		
 		
