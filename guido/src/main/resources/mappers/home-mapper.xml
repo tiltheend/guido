@@ -212,12 +212,19 @@
 	</select>
 	
 	<!-- 헤더 위치 검색 -->
-	<select id="locationSearch" resultType="map">
-		SELECT REGION_NAME, COURSE_NAME
-		FROM PRODUCT P
-		LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO
-		WHERE P.PRODUCT_STATE = 'N'
-		AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
+	<select id="locationSearch" resultType="String">
+		SELECT DISTINCT column_alias
+		FROM (
+		    SELECT 
+		        CASE
+		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN C.COURSE_NAME
+		            ELSE P.REGION_NAME
+		        END AS column_alias
+		    FROM PRODUCT P
+		    LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO
+		    WHERE P.PRODUCT_STATE = 'N'
+		    AND (C.COURSE_NAME LIKE '%${location}%' OR P.REGION_NAME LIKE '%${location}%')
+		)
 	</select>
 
 

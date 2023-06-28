@@ -328,7 +328,9 @@
     margin-top: 4px;
   } */
   .main-post .product-post .sales-text div:first-child{
-    display: flex; justify-content: space-between;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
   }
   .main-post .product-post .sales-text>div>div{
     display: flex; align-items: center;
@@ -721,7 +723,9 @@
       margin-top: 4px;
     } */
     .main-post .product-post .sales-text div:first-child{
-      display: flex; justify-content: space-between;
+      display: flex; 
+      justify-content: space-between;
+      align-items: center;
     }
     .main-post .product-post .sales-text>div>div{
       display: flex; align-items: center;

@@ -89,13 +89,14 @@ public class HomeController {
 	// 헤더 위치 검색
 	@GetMapping(value="/locationSearch", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public List<Product> locationSearch(String location){
+	public List<String> locationSearch(@RequestParam(value="location", required=false) String location){
 		
-		List<Product> a = service.locationSearch(location);
+//		System.out.println(location);
+//		List<String> a = service.locationSearch(location);
+//		System.out.println(a);
 		
-		System.out.println(a);
-		
-		return null;
+		return service.locationSearch(location);
+//		return null;
 	}
 	
 	

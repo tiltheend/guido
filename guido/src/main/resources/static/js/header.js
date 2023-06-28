@@ -72,31 +72,8 @@ guestButtonClick.addEventListener('click', () => {
 });
 
 
+
 /* *** 게스트 수 업다운 *** */
-/* // 마이너스 버튼 클릭 이벤트 핸들러
-document.querySelector('.main--right__guest-minus').addEventListener('click', function() {
-  // 현재 게스트 수 가져오기
-  var guestCountElement = document.querySelector('.main--right__guest-count');
-  var guestCount = parseInt(guestCountElement.innerHTML);
-
-  // 게스트 수가 0보다 크면 감소시키기
-  if (guestCount > 0) {
-    guestCount--;
-    guestCountElement.innerHTML = guestCount;
-  }
-});
-
-// 플러스 버튼 클릭 이벤트 핸들러
-document.querySelector('.main--right__guest-plus').addEventListener('click', function() {
-  // 현재 게스트 수 가져오기
-  var guestCountElement = document.querySelector('.main--right__guest-count');
-  var guestCount = parseInt(guestCountElement.innerHTML);
-
-  // 게스트 수 증가시키기
-  guestCount++;
-  guestCountElement.innerHTML = guestCount;
-}); */
-
 const guestCountElement = document.querySelector('.main--right__guest-count');
 const guestInput = document.querySelector('input[name="tourist"]');
 
@@ -134,23 +111,11 @@ function toggleModal(modal) {
 
 
 /* *** 모달창 닫기 *** */
-/* const modalsBG = document.querySelectorAll('.modal'); */
-
-/* modalsBG.forEach(modal => {
-  modal.addEventListener('click', () => {
-    modal.style.display = 'none';
-    mainSearchBox.style.display = 'flex';
-    searchBoxClickBox.style.display = 'none';
-  });
-}); */
-
 document.addEventListener('DOMContentLoaded', function() {
-  // 모달 요소들을 가져옵니다.
+
   var modals = document.querySelectorAll('.modal');
 
-  // 각 모달 요소에 이벤트 리스너를 추가합니다.
   modals.forEach(function(modal) {
-    // 모달 이외의 영역을 클릭하면 모달이 닫히도록 합니다.
     modal.addEventListener('click', function(event) {
       if (event.target === modal) {
         modal.style.display = 'none';
@@ -160,8 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
-
 
 
 
@@ -256,4 +219,65 @@ document.addEventListener('DOMContentLoaded', function() {
     clickDivs[3].classList.add('clicked');
   });
 });
+
+
+
+/* ***** 헤더 위치 검색 ajax ***** */
+document.addEventListener("DOMContentLoaded", () =>{
+
+  const location = document.querySelector('input[name="location"]');
+  const whereModal = document.querySelector(".locations");
+
+  location.addEventListener("input", e => {
+    if(location.value.trim().length > 0){
+      fetch("/common/locationSearch?location=" + location.value.trim())
+      .then(resp => resp.json())
+      .then(locationList => {
+        console.log(locationList);
+
+        if(locationList.length > 0){
+
+          whereModal.classList.remove("locations");
+          whereModal.innerHTML = "";
+
+          for(let list of locationList){
+            const locationDiv = document.createElement("div");
+
+            const locationImg = document.createElement("img");
+            locationImg.src = "/images/icons/location_pin.svg";
+
+            const locationText = document.createTextNode(list);
+
+            locationDiv.appendChild(locationImg);
+            locationDiv.appendChild(locationText);
+
+            whereModal.appendChild(locationDiv);
+          }
+
+        }else{
+          whereModal.classList.add("locations");
+        }
+      })
+      .catch(err => console.log(err));
+
+    }else{
+      whereModal.classList.add("locations");
+    }
+  })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
