@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.common.model.dto.Product;
+import com.guido.common.utility.Util;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.reservation.model.service.ReservationService;
 
@@ -71,6 +72,8 @@ public class ReservationController {
 		model.addAttribute("product", product);
 		model.addAttribute("reservationDate", date);
 		model.addAttribute("mainCourse", mainCourse);
+		
+//		System.out.println(Util.createReservationNo());
 		
 		
 		return "reservation/reservationForm";

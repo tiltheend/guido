@@ -81,15 +81,15 @@
                             <div>Guests</div>
                             
                             <div class="quantity">
-                                <button id="guestsMinusBtn">
+                                <button id="guestsMinusBtn" type="button" class="guestBtn">
                                   <svg fill="none" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
                                   </svg>
                                 </button>
 
-                                <label id="guestsQnt" th:text="${guestCount}">2</label>
+                                <label id="guestsQnt" th:text="${guestCount}">게스트 수</label>
 
-                                <button id="guestsPlusBtn">
+                                <button id="guestsPlusBtn" type="button" class="guestBtn">
                                   <svg fill="none" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
                                   </svg>
@@ -113,11 +113,11 @@
 
                     <div class="payment__info--container">
                         <div>총 결제 금액</div>
-                        <div>KRW&nbsp;<strong th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA')}">209,000</strong></div>
+                        <div>KRW&nbsp;<strong id="totalPaymentCost"></strong></div>
                         <div>총 주문 금액</div>
-                        <div>KRW 190,000</div>
+                        <div id="totalReservationCost"></div>
                         <div>수수료</div>
-                        <div>KRW 19,000</div>
+                        <div id="commission">KRW 19,000</div>
                     </div>
 
                 </div>
@@ -136,7 +136,7 @@
                         <div>연락처</div>
                         <div><input id="phone" name="phone" type="tel"/></div>
                         <div>비상 연락망</div>
-                        <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 kakaotalk@kakao.kr"></div>
+                        <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 guido@gmail.com"></div>
                     </div>
 
 
@@ -156,7 +156,7 @@
                     <div class="reservation--text__bottom">주문 내용을 확인하였으며 약관에 동의합니다.</div>
                 </div>
 
-                <a th:href="@{/reservation/reservationDetails.html}"><button class="reservation--btn__bottom">209,000 won payment</button></a>
+                <a th:href="@{/reservation/reservationDetails.html}"><button class="reservation--btn__bottom"></button></a>
 
         </div>
 
@@ -199,6 +199,9 @@
 
         const reservationDate = /*[[${reservationDate}]]*/"예약 일자";
         const package = /*[[${product.productPackage}]]*/"당일 or n일";
+        const minTourist = /*[[${product.minTourist}]]*/"최소 인원";
+        const maxTourist = /*[[${product.maxTourist}]]*/"최대 인원";
+        const price = /*[[${product.productPrice}]]*/"상품 가격";
         
     </script>
 

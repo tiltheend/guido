@@ -28,7 +28,7 @@ menuLinks.forEach(function(link) {
 
 
 
-/* 예약 1박 시 인원 수 증가 버튼 클릭 이벤트 */
+/* 예약 인원 수 증가 버튼 클릭 이벤트 */
 const plusBtn = document.querySelector(".detail--right__price-plus");
 const minusBtn = document.querySelector(".detail--right__price-minus");
 
@@ -197,7 +197,7 @@ if(document.getElementById("wishHeart")!=null){
             console.log(err);
         })
     });
-    
+
 }
 
 

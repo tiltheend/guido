@@ -14,7 +14,7 @@
 
 
 .reservation--container{
-    width: 70vw;
+    width: 60vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,6 +81,10 @@ input[type="checkbox"] {
     width: 100%;
 }
 
+
+.reservation--summary__decription>div>div, .reservation--location__decription>div{
+    font-size: 1.1rem;
+}
 
 
 /* 예약 상품 카테고리 */
@@ -173,12 +177,12 @@ color: #5C5C5C;
 /* 예약상품 날짜 */
 .reservation--date__decription>div{
     font-size: 1.3rem;
-    margin-bottom: 5vh;
+    margin-bottom: 50px;
 }
 
 /* 예약상품 가이드언어, 취소 수수료div */
 .reservation--summary__decription>div{
-    margin-bottom: 1vh;
+    margin-bottom: 10px;
 }
 
 
@@ -191,7 +195,7 @@ color: #5C5C5C;
 
 /* 위치 div */
 .reservation--location__decription{
-    margin-bottom: 5vh;
+    margin-bottom: 30px;
 }
 
 
@@ -206,9 +210,9 @@ color: #5C5C5C;
 
 /* 예약 상품 대표 사진 */
 .reservation--img__product{
-    width: 38vw;
-    min-width: 350px;
-    height: 400px;
+    width: 25vw;
+    min-width: 300px;
+    height: 330px;
     overflow: hidden;
     position: relative; 
     border-radius: 15px;
@@ -311,7 +315,7 @@ color: #5C5C5C;
     border: none;
     background-color: #f0f0f0;
     padding: 0.35rem 0.7rem;
-    border-radius: 2px;
+    border-radius: 3px;
     font-size: 1rem;
     width: 230px;
 }
@@ -352,7 +356,7 @@ input:focus {
 /* 결제 버튼 */
 .reservation--btn__bottom{
     background-color: #0F4957;
-    width: 70vw;
+    width: 60vw;
     height: 65px;
     color: #ffffff;
     font-size: 1.4rem;
@@ -406,7 +410,20 @@ input:focus {
   }
 
 
-@media screen and (max-width : 767px) {
+  @media screen and (max-width : 1340px) {
+  .reservation--container,
+  .reservation--btn__bottom
+  {
+    width: 75vw;
+  }
+
+  
+  .reservation--summary__decription>div>div, .reservation--location__decription>div{
+    font-size: 1.1rem;
+}
+}
+
+@media screen and (max-width : 900px) {
     
     .reservation--payment__info>table{
         width: 50%;
@@ -495,8 +512,8 @@ input:focus {
     }
 
     .reservation--date__decription>div{
-        font-size: 1.2rem;
-        margin-top: 40px;
+        font-size: 1.1rem;
+        margin-top: 30px;
     }
 
     .reservation--top__title{
@@ -525,6 +542,14 @@ input:focus {
         width: 1rem;
         height: 1rem;
     }
+
+    .reservation--container,
+    .reservation--btn__bottom
+    {
+        width: 72vw;
+    }
+
+
 
 }
 
