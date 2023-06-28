@@ -14,7 +14,6 @@
 	private String ; // 상태(Y: 미승인(가이드), N: 정상, B: 블락, D: 탈퇴)
 -->
 
-	
 	<resultMap id="user_rm" type="User">
 		<id property="userNo" column="USER_NO"/>
 		<result property="userEmail" column="USER_EMAIL"/>
@@ -104,7 +103,7 @@
 	 <select id="reviewList" resultMap="review_rm">
 		SELECT REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
 			   , TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
-			   , PRODUCT_NAME, REVIEW_REPLY
+			   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
 		FROM "REVIEW" R
 		JOIN "USER" U ON(R.USER_NO = U.USER_NO)
 		JOIN "PRODUCT" USING (PRODUCT_NO)
@@ -130,7 +129,7 @@
 			SELECT ROW_NUMBER() OVER (ORDER BY REVIEW_NO DESC) AS NUM
 					,REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
 				  	, TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
-				   , PRODUCT_NAME, REVIEW_REPLY
+				   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
 			FROM "REVIEW" R
 			JOIN "USER" U ON(R.USER_NO = U.USER_NO)
 			JOIN "PRODUCT" USING (PRODUCT_NO)
@@ -161,5 +160,20 @@
 			(REVIEW_NO, USER_NO, REVIEW_MESSAGE, REVIEW_STARS, REVIEW_DEL_FL, PRODUCT_NO, CREATE_DT)
 			VALUES(SEQ_REVIEW_NO.NEXTVAL, #{userNo}, #{reviewMessage}, #{reviewStarsDouble}, 'N', #{productNo}, SYSDATE)
 	 </insert>
+	 
+	 <!-- 리뷰 삭제 -->
+	 <delete id="reviewDel">
+		 DELETE FROM REVIEW
+			WHERE PRODUCT_NO = #{productNo}
+			AND USER_NO = #{userNo}
+	 </delete>
+	
+	<!-- 리뷰 수정 -->
+	<update id="reviewEdit">
+		UPDATE REVIEW
+		SET REVIEW_MESSAGE=#{reviewMessage}, REVIEW_STARS=#{reviewStarsDouble}
+		WHERE PRODUCT_NO= #{productNo}
+		AND USER_NO = #{userNo}
+	</update>
 	
 </mapper>

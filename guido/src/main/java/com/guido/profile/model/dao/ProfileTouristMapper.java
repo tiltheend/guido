@@ -42,6 +42,12 @@ public interface ProfileTouristMapper {
 	// 리뷰 작성
 	int addReview(Review review);
 
+	// 리뷰 삭제
+	int reviewDel(Review review);
+
+	// 리뷰 수정
+	int reviewEdit(Review review);
+
 	
 
 }

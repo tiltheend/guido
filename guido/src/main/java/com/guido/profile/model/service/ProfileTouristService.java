@@ -73,5 +73,17 @@ public interface ProfileTouristService {
 	 */
 	int addReview(Review review);
 
+	/** 리뷰 삭제
+	 * @param review
+	 * @return
+	 */
+	int reviewDel(Review review);
+
+	/** 리뷰 수정
+	 * @param review
+	 * @return
+	 */
+	int reviewEdit(Review review);
+
 
 }

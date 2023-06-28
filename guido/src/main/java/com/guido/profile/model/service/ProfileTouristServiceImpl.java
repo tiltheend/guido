@@ -136,6 +136,19 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public int addReview(Review review) {
 		return mapper.addReview(review);
 	}
+
+	// 리뷰 삭제
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int reviewDel(Review review) {
+		return mapper.reviewDel(review);
+	}
+
+	// 리뷰 수정
+	@Override
+	public int reviewEdit(Review review) {
+		return mapper.reviewEdit(review);
+	}
 	
 	
 	

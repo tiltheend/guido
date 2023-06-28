@@ -144,15 +144,10 @@ public class ProfileTouristController {
 
 		review.setUserNo(loginUser.getUserNo());
 	
-		System.out.println(review.getProductNo());
-		System.out.println(review.getProductDtNo());
-		System.out.println(review.getReviewStarsDouble());
-		System.out.println(review.getReviewMessage());
-		System.out.println(review.getUserNo());
 		int result = service.addReview(review);
 		
 		return result;
-		// return 0;
+		
 	}
 	
 	// 비동기로 리뷰 목록 불러오기 (최신 3개)
@@ -161,8 +156,43 @@ public class ProfileTouristController {
 	public List<Review> newReviewList(@RequestBody int userNo){
 
 		List<Review> newReviewList = service.reviewList(userNo);
+		int reviewCount = service.reviewCount(userNo);
+		for(Review r : newReviewList) {
+			r.setReviewCount(reviewCount);
+		}
 		
 		return newReviewList;
+	}
+	
+	// 리뷰 삭제
+	@ResponseBody
+	@PostMapping(value="/reviewDel",produces="application/json; charset=UTF-8")
+	public int reviewDel(@RequestBody int productNo,
+			@SessionAttribute("loginUser") User loginUser){
+
+		Review review = new Review();
+		review.setUserNo(loginUser.getUserNo());
+		review.setProductNo(productNo);
+		
+		int result = service.reviewDel(review);
+		
+		return result;
+		
+	}
+	
+	// 리뷰 수정
+	@ResponseBody
+	@PostMapping(value="/reviewEdit",produces="application/json; charset=UTF-8")
+	public int reviewEdit(@RequestBody Review review,
+			@SessionAttribute("loginUser") User loginUser){
+
+		review.setUserNo(loginUser.getUserNo());
+		
+		int result = service.reviewEdit(review);
+		
+		System.out.println(review);
+		return result;
+		
 	}
 	
 	// 투어리스트 예약 관리 페이지로 이동

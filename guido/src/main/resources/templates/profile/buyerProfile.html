@@ -154,7 +154,7 @@
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button class="review-add-submit" type="button">Submit</button>
+                            <button class="review-add-submit" type="button" onclick="reviewAddFn(this)">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -165,7 +165,7 @@
                 <div> <!-- 하얀 배경 -->
                     <form action="">
                         <h2>Purchase History</h2>
-                        <input type="text" name="reviewSaleList" id="reviewSaleList">
+                        <input type="text" name="reviewSaleList" id="reviewSaleList" readonly>
         
                         <div class="review-star-score"> <!-- 별점 수정 -->
                             <h3>Star Rating</h3>
@@ -203,7 +203,7 @@
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button>Submit</button>
+                            <button class="review-edit-submit" onclick="reviewEditSubmitFn(this)" type="button">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -255,7 +255,7 @@
                                         <p class="reviewer-name" th:text="${review.userName}">리뷰 작성자</p>
                                     </div>
                                     <div class="sale-review-info">
-                                        <p th:text="${review.productName}">상품명</p>
+                                        <p th:text="${review.productName}" th:data-productno="${review.productNo}">상품명</p>
                                         <div class="review-rating">
                                             <div class="review-star">
                                                 <input type="radio" id="starpoint_1" class="star_radio" value="0.5" th:checked="${review.reviewStarsDouble == 0.5}">
@@ -279,7 +279,7 @@
                                     <p onclick="moreReviewFn(this)">더보기 +</p>
                                     <div class="myreview-edit" th:if="${session.loginUser?.userNo == user.userNo}">
                                         <button class="review-edit-btn" onclick="reviewEditFn(this); return false;" type="button">Edit</button>
-                                        <button class="review-delete-btn">Delete</button>
+                                        <button class="review-delete-btn" onclick="reviewDelFn(this); return false;" type="button">Delete</button>
                                     </div>
                                 </div>
                             </li>
@@ -292,7 +292,8 @@
                         </ul>
                     </li>
                 </ul>
-                <button class="review-list-more" th:if="${reviewCount > 3}" type="button">more reviews</button>
+                <button class="review-list-more" type="button" th:if="${reviewCount > 3}">more reviews</button>
+                <!-- <button class="review-list-more" th:if="${reviewCount > 3}" type="button">more reviews</button> -->
             </div>
 
         </div>
