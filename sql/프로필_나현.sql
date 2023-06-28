@@ -128,4 +128,13 @@ WHERE PRODUCT_NO =0
 AND USER_NO =25
 ;
 
+-- 리뷰 수정
+UPDATE REVIEW
+SET REVIEW_MESSAGE='수정쓰?', REVIEW_STARS=4.5
+WHERE PRODUCT_NO= 19
+AND USER_NO = 25
+;
+
+COMMIT;
+-- 즐거운 여행이였습니다. 한국에 또 오고 싶어요~ 3.5 19
 
