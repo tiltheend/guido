@@ -24,11 +24,16 @@
         <!-- 메인 로고 -->
         <div class="logo"><a th:href="@{/}"><img th:src="@{/images/guido_test.png}" alt="메인 로고"></a></div>
 
+        <!-- [[${location}]]
+        [[${term}]]
+        [[${tourist}]]
+        [[${firstday}]] -->
+
         <!-- 메인 검색 (where, when, guest) -->
         <div class="main-search-box">
-            <button type="button" class="where-button">Where</button>
-            <button type="button" class="when-button">When</button>
-            <button type="button" class="guest-button">Guest</button>
+            <button type="button" class="where-button" th:text="${location}?${location}:'Where'">Where</button>
+            <button type="button" class="when-button" th:text="${term}?(${term}=='same'?${firstday}:${term}):'When'">When</button>
+            <button type="button" class="guest-button" th:text="${tourist}?${tourist}:'Guest'">Guest</button>
             <!-- <div class="search-icon"> -->
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="32" height="32" rx="16" fill="#1C797D"/>
@@ -205,6 +210,8 @@
 
 
     </form>
+
+
 
     <script th:src="@{/js/header.js}"></script>
     <!-- <script th:src="@{/js/main.js}"></script> -->

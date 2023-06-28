@@ -252,6 +252,11 @@ document.addEventListener("DOMContentLoaded", () =>{
             locationDiv.appendChild(locationText);
 
             whereModal.appendChild(locationDiv);
+
+            // 클릭 이벤트 핸들러 추가
+            locationDiv.addEventListener("click", () => {
+              location.value = list; // 클릭된 항목의 값을 input 태그에 설정
+            });
           }
 
         }else{
@@ -264,6 +269,14 @@ document.addEventListener("DOMContentLoaded", () =>{
       whereModal.classList.add("locations");
     }
   })
+});
+
+// 클릭 이벤트 핸들러 추가
+whereModal.addEventListener("click", e => {
+  if (e.target.tagName === "DIV") { // 클릭된 요소가 div인지 확인
+    const clickedItem = e.target.textContent; // 클릭된 항목의 텍스트 가져오기
+    location.value = clickedItem; // input 태그에 값을 설정
+  }
 });
 
 

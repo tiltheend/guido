@@ -237,10 +237,14 @@ header .search-box-click-box button{
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.where-modal div div{
+  cursor: pointer;
+}
+
 /* ** Where 모달창 ** */
 .where-modal{
   display: flex;
-  width: 380px; height: 360px;
+  width: 380px;
   background-color: #fff;
   border-radius: 20px;
   margin-top: 24px;

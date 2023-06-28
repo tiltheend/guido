@@ -80,13 +80,30 @@ public class HomeController {
 		List<Product> searchResultList = service.selectSearchResult(map);
 //		System.out.println(searchResultList);
 		
+		
+		
+		String term = null;
+		
+		if(firstday!=""&&lastday!=""&&firstday.equals(lastday)) {
+			term = "same";
+		}
+		
+		if(!firstday.equals(lastday)) {
+			term = firstday + " ~ " + lastday;
+		}
+		
+		
 		model.addAttribute("searchResultList", searchResultList);
+		model.addAttribute("location", location);
+		model.addAttribute("term", term);
+		model.addAttribute("tourist", tourist);
+		
 		
 		return "common/searchResult";
 	}
 	
 	
-	// 헤더 위치 검색
+	// 위치 검색 시 드롭박스 리스트 조회
 	@GetMapping(value="/locationSearch", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public List<String> locationSearch(@RequestParam(value="location", required=false) String location){

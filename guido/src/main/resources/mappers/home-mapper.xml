@@ -217,8 +217,8 @@
 		FROM (
 		    SELECT 
 		        CASE
-		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN C.COURSE_NAME
-		            ELSE P.REGION_NAME
+		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN TRIM(C.COURSE_NAME)
+		            ELSE TRIM(P.REGION_NAME)
 		        END AS column_alias
 		    FROM PRODUCT P
 		    LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO
