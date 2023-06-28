@@ -9,6 +9,7 @@ const progressBar = document.querySelector('.progress');
 const btnContainer = document.getElementById('btnContainer');
 // const tourBox = document.getElementbyClassName('tour-box');
 var body = document.querySelector('body');
+document.getElementById('page1').display = 'none';
 // sbmtBtn.classList.add('.hidden');
 const updatePage = () => {
   nextBtn.disabled = false;
@@ -23,36 +24,34 @@ const updatePage = () => {
 
   prevBtn.style.display = 'block';
 
+  // if (currentPage == 0) {
+  //   document.querySelector('.text2').innerHTML = '';
+  //   typing2();
+  // }
+  // if (currentPage == 1) {
+  //   // document.querySelector('.text5').innerHTML = '';
+  //   // typing5();
+  //   // tourThemeSelectCheck();
+  //   // tourBoxCheck();
+  // }
   if (currentPage == 0) {
-  }
-  if (currentPage == 1) {
-    document.querySelector('.text2').innerHTML = '';
-    typing2();
-  }
-  if (currentPage == 2) {
-    // document.querySelector('.text5').innerHTML = '';
-    // typing5();
-    // tourThemeSelectCheck();
-    // tourBoxCheck();
-  }
-  if (currentPage == 3) {
     document.querySelector('.text3').innerHTML = '';
     // tourThemesCheck();
-    typing3();
+    // typing3();
   }
-  if (currentPage == 5) {
+  if (currentPage == 2) {
     document.querySelector('.text4').innerHTML = '';
-    typing4();
+    // typing4();
   }
-  if (currentPage == 6) {
+  if (currentPage == 4) {
     titleCharCheck();
     inputTitle.focus();
   }
-  if (currentPage == 7) {
+  if (currentPage == 5) {
     contentCharCheck();
     inputContent.focus();
   }
-  if (currentPage == 10) {
+  if (currentPage == 8) {
     disableNextButton();
   }
 };
@@ -70,24 +69,7 @@ nextBtn.addEventListener('click', () => {
 updatePage();
 
 // 당일투어 클릭 시 productyPackage = 1 (value = 1 로 지정)
-const onedayTourValue = document.querySelector('#onedayTour');
-function updateTourValue() {
-  onedayTourValue.setAttribute('name', 'productPackage');
-  onedayTourValue.value = '1';
-  // if (inputDay.value != 0) {
-  //   onedayTourValue.value = '';
-  //   // onedayTourValue.removeAttribute('name');
-  //   // inputTime.value = '';
-  // }
-}
-function updateTourValue2() {
-  onedayTourValue.value = '';
-}
 
-function updateTourValue3() {
-  onedayTourValue.removeAttribute('name');
-  inputTime.removeAttribute('name');
-}
 var selectedElement = null;
 const tourThemeItems = document.querySelectorAll('[name="tourTheme"]');
 
@@ -115,159 +97,15 @@ function changeBackgroundColor(element) {
     });
   };
 }
-const tourTypes = document.querySelectorAll('.tour-type');
-const inputTourDay = document.querySelector('#tourDay');
-const inputTourTime = document.querySelector('#tourTime');
-const inputDay = document.querySelector('#inputDay');
-const inputTime = document.querySelector('#inputTime');
-const inputWarning = document.querySelector('#inputWarning');
-// 초기값 설정
-
-tourTypes.forEach(function (tourType) {
-  tourType.addEventListener('click', function () {
-    // 배경색 초기화
-    tourTypes.forEach(function (type) {
-      type.style.backgroundColor = '';
-      type.style.borderColor = '';
-    });
-
-    // 클릭한 span 요소의 배경색 변경
-    this.style.backgroundColor = 'rgb(185, 215, 218)';
-    this.style.borderColor = 'rgb(59, 119, 124)';
-
-    // Check if the clicked span is the "1박 이상 패키지"
-    if (this.innerText === '1박 이상 패키지') {
-      inputTourDay.style.display = 'block';
-
-      // Check if the input value is not empty
-      if (inputDay.value !== '') {
-        nextBtn.disabled = false;
-      } else {
-        nextBtn.disabled = true;
-      }
-    } else {
-      inputTourDay.style.display = 'none';
-      nextBtn.disabled = false;
-    }
-
-    if (this.innerText === '당일투어') {
-      inputTourTime.style.display = 'block';
-
-      // Check if the input value is not empty
-      if (inputTime.value !== '') {
-        nextBtn.disabled = false;
-      } else {
-        nextBtn.disabled = true;
-      }
-    } else {
-      inputTourTime.style.display = 'none';
-      // nextBtn.disabled = false;
-    }
-  });
-
-  nextBtn.disabled = true;
-});
-inputDay.addEventListener('input', function () {
-  if (this.value !== '') {
-    inputTime.value = '';
-    inputDay.addEventListener('input', function () {
-      const value = inputDay.value;
-
-      if (!value || isNaN(value)) {
-        inputDay.style.borderColor = 'red';
-        inputDay.style.backgroundColor = 'rgb(255,232,232)';
-        inputWarning.style.display = 'flex';
-        nextBtn.disabled = true;
-      } else {
-        inputDay.style.backgroundColor = '';
-        inputWarning.style.display = 'none';
-        inputDay.style.borderColor = 'white';
-        inputDay.style.backgroundColor = 'white';
-      }
-    });
-    nextBtn.disabled = false;
-  } else {
-    nextBtn.disabled = true;
-  }
-});
-inputTime.addEventListener('input', function () {
-  if (this.value !== '') {
-    inputDay.value = '';
-    inputTime.addEventListener('input', function () {
-      const value = inputTime.value;
-
-      if (!value || isNaN(value)) {
-        inputTime.style.borderColor = 'red';
-        inputTime.style.backgroundColor = 'rgb(255,232,232)';
-        inputWarning.style.display = 'flex';
-        nextBtn.disabled = true;
-      } else {
-        inputTime.style.backgroundColor = '';
-        inputWarning.style.display = 'none';
-        inputTime.style.borderColor = 'white';
-        inputTime.style.backgroundColor = 'white';
-      }
-    });
-    nextBtn.disabled = false;
-  } else {
-    nextBtn.disabled = true;
-  }
-});
-
 // 여행 테마 선택 체크박스
 
-// 지도
-
-const textElements = document.getElementsByClassName('TEXT');
-const clickElements = document.getElementsByClassName('OUTLINE');
-const city = document.getElementById('space');
-
-for (let i = 0; i < clickElements.length; i++) {
-  clickElements[i].addEventListener('click', () => {
-    // 기존 클릭한 요소의 효과 초기화
-    for (let j = 0; j < clickElements.length; j++) {
-      if (i !== j) {
-        clickElements[j].style.fill = '#333';
-        clickElements[j].style.transform = 'none';
-
-        clickElements[j].style.fill = '#333';
-        clickElements[j].style.transform = 'none';
-      }
-    }
-
-    // 선택한 요소에 효과 설정
-    city.innerText = textElements[i].innerHTML;
-    regionName.value = city.innerText;
-    clickElements[i].style.fill = 'rgb(59, 119, 124)';
-  });
-
-  textElements[i].addEventListener('click', () => {
-    // 기존 클릭한 요소의 효과 초기화
-    for (let j = 0; j < clickElements.length; j++) {
-      if (i !== j) {
-        clickElements[j].style.fill = '#333';
-        clickElements[j].style.transform = 'none';
-
-        clickElements[j].style.fill = '#333';
-        clickElements[j].style.transform = 'none';
-      }
-    }
-
-    // 선택한 요소에 효과 설정
-    city.innerText = textElements[i].innerHTML;
-    clickElements[i].style.fill = 'rgb(59, 119, 124)';
-  });
-}
-// function disableNextButton() {
-//   nextBtn.disabled = true;
-// }
 //2페이지일 때 width 800px로 조정
 window.addEventListener('DOMContentLoaded', function () {
   var mainElement = document.getElementById('page2');
   if (mainElement) {
     mainElement.style.width = '800px';
   }
-  var mainElement2 = document.getElementById('page3');
+  var mainElement2 = document.getElementById('page1');
   if (mainElement2) {
     mainElement2.style.width = '750px';
   }

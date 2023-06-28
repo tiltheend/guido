@@ -55,15 +55,39 @@ public class ProductUploadController {
 //							 ,@SessionAttribute("loginMember") User loginMember
 							 ,@RequestParam(value="images", required=true) List<MultipartFile> images
 							 , RedirectAttributes ra
+							 , @RequestParam(value="productAddPrice", required=false) List<String> additionalList
 							 ) throws IllegalStateException, IOException, Exception{
 		
 			
 			
 //		*로그인한 유저 번호 -> product에 세팅	
 //		product.setUserNo(loginMember.getUserNo());
-		   
-		int productNo = service.productUpload(product,images);
 		
+		
+		product.setProductAddPrice(String.join("^^^", additionalList));
+			
+		int productNo = service.productUpload(product,images);
+	
+		System.out.println(product);
+		System.out.println(product.getProductAddPrice());
+		System.out.println(additionalList);
+		System.out.println(additionalList.get(0));
+		System.out.println(additionalList.get(1));
+		System.out.println(additionalList.get(2));
+
+		
+		
+	
+		
+		
+//	        String[] arr = str.split(",");
+//	        
+//	        for (String item : arr) {
+//	        	additionalList.add(item.trim());
+//	        }
+//		
+//        System.out.println(additionalList);
+        
 		String message = null;
 		String path = "redirect:";
 		
@@ -90,7 +114,10 @@ public class ProductUploadController {
 			Product product = productDetailService.selectProduct(productNo);
 			model.addAttribute("product", product);
 			
-			return "productUpload/productEdit";
+//			System.out.println(product.getImageList().get(0).getFilePath());
+			System.out.println(product.getProductAddPrice());
+			
+			return "productUpload/productEdit2";
 		}
 		
 		// 여행상품 수정
@@ -99,6 +126,7 @@ public class ProductUploadController {
 				Product product
 				,@RequestParam(value="deleteList", required=false) String deleteList
 				,@RequestParam(value="images", required=false) List<MultipartFile> images
+				,@RequestParam(value="productAddPrice", required=false) List<String> additionalList
 				,@PathVariable("productNo") int productNo
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
 	
