@@ -126,12 +126,14 @@ sendEmailBtn.addEventListener("click",e=>{
 
 })
 
+// 비번 찾기 - 이메일 입력 모달 x버튼
 close.addEventListener("click",()=>{
     modal1.style.display = "none";
     modalEmail.value="";
     modalEmail.style.border = "1px solid #c5c5c5";
     errorMsg.innerHTML = "";
 })
+// 임시 비번 메일 전송 완료 x버튼
 close2.addEventListener("click",()=>{
     modal2.style.display = "none";
     modalEmail.value="";

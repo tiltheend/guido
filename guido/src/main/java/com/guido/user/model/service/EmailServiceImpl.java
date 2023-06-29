@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.guido.common.model.dto.User;
 import com.guido.user.model.dao.EmailMapper;
 
 import jakarta.mail.Message;
@@ -51,7 +52,7 @@ public class EmailServiceImpl implements EmailService{
 	@Override
 	public String createTempPw() {
 		String key = "";
-		for(int i=0 ; i< 6 ; i++) {
+		for(int i=0 ; i< 10 ; i++) {
 			int sel1 = (int)(Math.random() * 3); // 0:숫자 / 1,2:영어
 			if(sel1 == 0) {
 				int num = (int)(Math.random() * 10); // 0~9
@@ -75,6 +76,10 @@ public class EmailServiceImpl implements EmailService{
 		// 임시 비번 생성 
 		String tempPw = createTempPw();
 		
+		// 임시 비번 요청한 유저 name
+		String user = mapper.selectUser(email);
+		System.out.println(user);
+		
 		try {
 			// 인증 메일
 			MimeMessage mail = mailSender.createMimeMessage();
@@ -84,12 +89,25 @@ public class EmailServiceImpl implements EmailService{
 			String charset = "UTF-8";
 			// 메일 내용
 			String mailContent = 
-					"<p>안녕하세요. <strong>Guido</strong>를 찾아주셔서 감사합니다.</p>" +
-					"<p>요청하신 임시 비밀번호를 발급했습니다.</p>" + 
-					"<br>" + 
-					"<p>임시 비밀번호 : "+"<h3 style='color:green'>" + tempPw + "</h3></p>" +
-					"<br>" +
-					"<p>임시 비밀번호로 로그인 후, 개인 정보 보호를 위해 반드시 비밀번호를 변경해주세요!</p>";
+					
+					
+					"<table style='border-spacing:10px;width:100%;border:2px solid #1c797d;border-radius:15px;box-shadow:2px 2px 2px #c5c5c5;padding:10px'>" + 
+						"<tr><td><img src='https://github.com/tiltheend/guido/blob/main/guido/src/main/resources/static/images/signUp/guido.png'></td></tr>" +
+				        "<tr><td >" + user + "님, 안녕하세요?</td></tr>" + 
+				        "<tr><td>요청하신 임시 비밀번호를 발급했습니다.</td></tr>" +
+				        "<tr><td></td></tr>" +
+				        "<tr><td>임시 비밀번호 : </td></tr>" +
+				        "<tr><td style='color:#1c797d;font-weight:bold;font-size:20px'>"+ tempPw +"</td></tr>" +
+				        "<tr><td></td></tr>" +
+				        "<tr><td>임시 비밀번호로 로그인 후, 개인 정보 보호를 위해 반드시 비밀번호를 변경해주세요!</td></tr>" +
+				        "<tr><td></td></tr>" +
+				        "<tr><td>감사합니다.</td></tr>" +
+				        "<tr><td></td></tr>" +
+				        "<tr><td style='border-bottom:#c5c5c5 1px solid'>가이두 드림</td></tr>" +
+				        "<tr><td></td></tr>" +
+				        "<tr><td><img src='https://github.com/tiltheend/guido/blob/main/guido/src/main/resources/static/images/signUp/guidoCompany.jpeg'></td></tr>" +
+
+	   			    "</table>";
 					
 				// 송신자(보내는 사람) 지정
 				mail.setFrom(new InternetAddress(fromEmail, fromUsername));

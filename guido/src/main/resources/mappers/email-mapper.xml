@@ -31,6 +31,10 @@
 		UPDATE "USER" SET "USER_PASSWORD" = #{tempPw} WHERE "USER_EMAIL" = #{email}
 	</update>
 	
+	<select id="selectUser">
+		SELECT "USER_NAME" FROM "USER" WHERE "USER_EMAIL" = #{email}
+	</select>
+	
 	
 	
 	
