@@ -19,8 +19,9 @@
         <form th:action="@{/user/reset/password}" method="post">
             <div class="container_middle">
                 <div class="container_middle_input">
-                    <input type="password" name="password" id="password" class="password font4" placeholder="비밀번호">
-                    <input type="text" name="pwCheck" id="pwCheck" class="pwCheck font4" placeholder="비밀번호 확인">
+                    <input type="password" name="originPassword" id="originPassword" class="password font4" placeholder="현재 비밀번호">
+                    <input type="password" name="newPassword" id="newPassword" class="password font4" placeholder="새 비밀번호">
+                    <input type="text" name="pwCheck" id="pwCheck" class="pwCheck font4" placeholder="새 비밀번호 확인">
                 </div>
             </div>
             <div class="container_bottom">

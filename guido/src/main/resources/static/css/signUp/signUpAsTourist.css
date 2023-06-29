@@ -69,6 +69,9 @@
 [type="checkbox"]{
     display: none;
 }
+.container_middle_check>div{
+    margin: 5px 0;
+}
 .ment1,.ment2{
     color: #5c5c5c;
     vertical-align: 3px;
@@ -82,6 +85,8 @@ input[type="checkbox"]:checked + label{
     background-size: cover;
     border: none;
 }
+.required{
+    color:forestgreen; vertical-align: 3px;}
 /* 제출 버튼 */
 .container_bottom{
     height: 80px;

@@ -17,7 +17,7 @@
         <form action="/signUp/guide" method="post">
         <div class="container_middle">
             <div class="container_middle_input">
-                <input type="email" name="email" id="email" class="email font4" placeholder="이메일"  maxlength="30" autocomplete="off">
+                <input type="email" name="email" id="email" class="email font4" placeholder="이메일"  maxlength="30" autocomplete="off" required>
                 <input type="password" name="password" id="password" class="password font4" placeholder="비밀번호">
                 <input type="text" name="pwCheck" id="pwCheck" class="pwCheck font4" placeholder="비밀번호 확인">
                 <input type="text" name="gender" id="gender" class="gender font4" placeholder="성별">
@@ -27,9 +27,10 @@
             </div>
             <a th:href="@{https://www.q-net.or.kr/man001.do?id=man00103&gSite=L&gId=37&redir=https%3A%2F%2Fwww.q-net.or.kr%2Fiss002.do%3Fid%3Diss00201%26gSite%3DL%26gId%3D37}" target="_blank"><div class="qNet font5">* 잠깐! 아직 확인서를 발급 받지 못하셨나요? 이곳에서 발급 받으세요.</div></a>
             <div class="container_middle_check">
-                <div class="chk1"><input type="checkbox" name="infoAgree" id="infoAgree"><label for="infoAgree" class="box"></label><span class="font5 ment1">&nbsp&nbsp개인정보 수집 및 이용에 동의합니다.</span></div>
+                <div class="chk0"><input type="checkbox" name="infoAgree1" id="infoAgree1"><label for="infoAgree1" class="box"></label><span class="font5 ment1">&nbsp&nbsp이용약관 동의</span><span class="required font5">&nbsp[필수]</span></div>
+                <div class="chk1"><input type="checkbox" name="infoAgree2" id="infoAgree2"><label for="infoAgree2" class="box"></label><span class="font5 ment1">&nbsp&nbsp개인정보 수집 및 이용 동의</span><span class="font5 required">&nbsp[필수]</span></div>
                 <div class="chk2">
-                <input type="checkbox" name="adverAgree" id="adverAgree"><label for="adverAgree" class="box"></label><span class="font5 ment2">&nbsp&nbsp마케팅 이메일 수신을 원합니다.(선택)</span></div>
+                <input type="checkbox" name="adverAgree" id="adverAgree"><label for="adverAgree" class="box"></label><span class="font5 ment2">&nbsp&nbsp마케팅 이메일 수신 동의 [선택]</span></div>
             </div>
         </div>
         <div class="container_bottom">

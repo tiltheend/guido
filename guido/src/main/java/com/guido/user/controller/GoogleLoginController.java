@@ -108,7 +108,7 @@ public class GoogleLoginController {
         }else { // 가입된 회원 아니면 (이메일, 프로필 사진 가지고 회원가입 화면으로) 
         	path = "redirect:/user/signUp/chooseMemberType";
         	// 유저 타입 고르는 화면으로 구글 유저 정보 가져가서 -> 회원가입 페이지로 이동.
-        	ra.addFlashAttribute("message", "Guido 회원이 아니군요! 구글 이메일로 회원 가입 후 로그인을 이용해주세요.");
+        	ra.addFlashAttribute("message", "첫 방문을 환영합니다! Guido 사용을 위해 필수 정보 입력과 약관 동의 체크를 해주세요.");
         	Map<String, Object> googleUserInfo = new HashMap<>();
         	googleUserInfo.put("email", email);
         	googleUserInfo.put("picture", picture);

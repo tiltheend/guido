@@ -33,7 +33,7 @@
 
       <br/>
 
-      <a th:href="@{/user/loginPage}"><button>로그인 페이지</button></a>
+      <a th:href="@{/user/loginPage}"><button id="loginBtn">로그인 페이지</button></a>
 
       <br/>
 
@@ -70,5 +70,16 @@
     </main>
 
     <th:block th:replace="~{/common/footer}"></th:block>
+    <script th:inline="javascript">
+      const loginBtn = document.getElementById("loginBtn");
+      const loginUser = /*[[${session.loginUser}]]*/ "로그인된 유저"
+      loginBtn.addEventListener('click',e=>{
+        if(loginUser){
+          loginBtn.parentElement.href = "http://localhost/";
+          alert("이미 로그인 되어있습니다.");
+        } 
+      })
+
+    </script>
   </body>
 </html>
