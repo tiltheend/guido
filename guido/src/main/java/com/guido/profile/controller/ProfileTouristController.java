@@ -37,7 +37,6 @@ public class ProfileTouristController {
 	@GetMapping("/{userNo:[0-9]+}")
 	public String mypageTourist(
 			@PathVariable("userNo") int userNo,
-			// @SessionAttribute("loginUser") User loginUser,
 			Model model
 			) {
 		
@@ -204,6 +203,11 @@ public class ProfileTouristController {
 		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
 		User user = service.userInfo(userNo);
 		model.addAttribute("user", user);
+		
+		// 구매 내역 가져오기 (상품 번호, 썸네일)
+		// List<Reservation> reservationList = service.reservationList(userNo);
+		// model.addAttribute("reservationList", reservationList);
+		
 		
 		return "profile/buyerReservation";
 	}
