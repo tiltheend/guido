@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +29,15 @@ import com.guido.product.model.service.ProductDetailService;
 @Controller
 @RequestMapping("/productDetail")
 @SessionAttributes("{loginUser}")
+@PropertySource("classpath:/config.properties")
 public class ProductDetailController {
 	
 	@Autowired
 	private ProductDetailService service;
+	
+	
+	@Value("${kakao.map.apikey}")
+	private String apiKey;
 	
 	
 	// 상품 상세 조회
@@ -80,6 +87,7 @@ public class ProductDetailController {
 		model.addAttribute("eachCost", eachCost);
 		model.addAttribute("wishOrNot", wishOrNot);
 		model.addAttribute("addNotesList", addNotesList);
+		model.addAttribute("apiKey", apiKey);
 	
 		
 		return "productDetail/productDetail";

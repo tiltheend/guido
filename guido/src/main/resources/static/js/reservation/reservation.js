@@ -107,11 +107,3 @@ if(package==1){
   reservationDateDiv.innerText = reservationDate + " - " + twoDaysLater;
 }
 
-
-
-const guestsMinusBtn = document.getElementById("guestsMinusBtn");
-const guestsPlusBtn = document.getElementById("guestsPlusBtn");
-
-
-maxTourist
-minTourist

@@ -293,8 +293,6 @@ reserveBtn.addEventListener("click", e=>{
     guestHidden.value = inputGuestCount.innerText;
     dateHidden.value = "2023-07-27";
 
-    console.log(guestHidden.value);
-    console.log(dateHidden.value);
 });
 
 
