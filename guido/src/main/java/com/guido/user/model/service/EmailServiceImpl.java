@@ -91,9 +91,10 @@ public class EmailServiceImpl implements EmailService{
 			String mailContent = 
 					
 					
-					"<table style='border-spacing:10px;width:100%;border:2px solid #1c797d;border-radius:15px;box-shadow:2px 2px 2px #c5c5c5;padding:10px'>" + 
-						"<tr><td><img src='https://github.com/tiltheend/guido/blob/main/guido/src/main/resources/static/images/signUp/guido.png'></td></tr>" +
-				        "<tr><td >" + user + "님, 안녕하세요?</td></tr>" + 
+					"<table style='border-spacing:10px;width:100%;padding:10px'>" + 
+						"<tr><td><img src='https://i.imgur.com/pQWCBfL.png'></td></tr>" +
+						"<tr><td></td></tr>" +
+				        "<tr><td >" + user + "님, 안녕하세요? Guido 입니다.</td></tr>" + 
 				        "<tr><td>요청하신 임시 비밀번호를 발급했습니다.</td></tr>" +
 				        "<tr><td></td></tr>" +
 				        "<tr><td>임시 비밀번호 : </td></tr>" +
@@ -103,9 +104,10 @@ public class EmailServiceImpl implements EmailService{
 				        "<tr><td></td></tr>" +
 				        "<tr><td>감사합니다.</td></tr>" +
 				        "<tr><td></td></tr>" +
-				        "<tr><td style='border-bottom:#c5c5c5 1px solid'>가이두 드림</td></tr>" +
+				        "<tr><td>가이두 드림</td></tr>" +
 				        "<tr><td></td></tr>" +
-				        "<tr><td><img src='https://github.com/tiltheend/guido/blob/main/guido/src/main/resources/static/images/signUp/guidoCompany.jpeg'></td></tr>" +
+				        "<tr><td><img src='https://i.imgur.com/PcUN2ne.png'></td></tr>" +
+				        "<tr><td><img src='https://i.imgur.com/lpqS2eL.png'></td></tr>" +
 
 	   			    "</table>";
 					
