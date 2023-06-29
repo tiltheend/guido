@@ -86,7 +86,8 @@
                             <div class="large-12 columns">
                                 <div class="owl-carousel owl-theme">
                                     <div class="item" th:each="reservation : ${reservationList}">
-                                        <a href="#"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
+                                        <!-- <a href="#"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a> -->
+                                        <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
                                     </div>
                                     <!-- <div class="item">
                                         <a href="#"><img src="" alt=""></a>
