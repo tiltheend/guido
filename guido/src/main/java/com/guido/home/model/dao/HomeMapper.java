@@ -31,6 +31,29 @@ public interface HomeMapper {
 	
 	// 테마 검색 상품 목록 조회
 	List<Product> selectThemeProdList(int themeCode);
+
+
+
+	// 검색 페이지
+	// 삭제되지 않고 검색 조건 일치하는 상품 수
+//	int getSearchListCount(String location, String firstday, String lastday, int tourist);
+
+	List<Product> selectSearchResult(Map<String, Object> map);
+
+	// 헤더 위치 검색
+	List<String> locationSearch(String location);
+
+	// 검색 페이지 테마 검색 상품 목록 조회  
+	List<Product> selectSearchThemeProdList(int themeCode);
+
+
+
+
+
+
+
+
+
 	
 	
 

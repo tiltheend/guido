@@ -1,0 +1,843 @@
+/* ***** 테마 카테고리 ***** */
+.categori-icon-box-container{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .categori-icon-box {
+    width: 72%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 25px;
+  }
+  
+  .categori-icon-box a {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .categori-icon-box>div:first-child{
+    margin-left: 0px;
+  }
+  
+  .categori-icon-box img{
+    width: 40px;
+  }
+  
+  .categori-icon-box button {
+    background-color: transparent;
+    font-size: 12px;
+  }
+  .categori-icon-box button:focus{
+    color: #1C797D;
+    text-decoration: underline;
+  }
+  
+  hr{
+    width: 68%;
+    margin: 0 auto;
+    margin-top: 100px;
+    background-color: #C5C5C5;
+    height: 1px;
+    border: 0;
+  }
+  
+  
+  
+  
+  
+  /* ***** 게시글 슬라이드 ***** */
+  .container--inner__top__left{
+    /* border: 1px solid brown; */
+    width: 300px;
+    height: 370px;
+    display: flex;
+    justify-content: start;
+    margin-right: 50px;
+  
+  }
+  
+  .carousel-wrapper{
+    width: 300px;
+    height: 280px;
+    overflow: hidden;
+  }
+  
+  .carousel-wrapper > .carousel {
+    display: flex;
+    position: relative;
+    transition-duration: 0.3s;
+  }
+  
+  .prev{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: bolder;
+    border: none;
+    background-color: #d8e2f0;
+    box-shadow:2px 2px 2px #8e8d8d;
+    position: absolute;
+    z-index: 100;
+    margin-top: 135px;
+    margin-left: 5px;
+    /* transition-duration: 0.2s; */
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  .next{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: bolder;
+    border: none;
+    background-color: #d8e2f0;
+    box-shadow:2px 2px 2px #c2c2c2;
+    position: absolute;
+    z-index: 100;
+    margin-left: 265px;
+    margin-top: 135px;
+    /* transition-duration: 0.2s; */
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  
+  .container--inner__top__left img{
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 280px;
+    max-height: 280px;
+    border-radius: 10px;
+  }
+  
+  
+  
+  /* ***** 게시글 슬라이드 ***** */
+  
+  /* 게시글 감싸는 article */
+  .main-post{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%; 
+    flex-wrap: wrap;
+  }
+  
+  /* 게시글 사진 */
+  /* .main-post-item{
+    width: 296px; height: 296px;
+    margin: 40px 16px 0px 16px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background-color: #F0F0F0;
+    cursor: pointer;
+  }
+  
+  .post-img-area{
+    position: absolute;
+    transition: left 0.5s ease-out; 
+  }
+  
+  .post-img-area img{
+    width: 296px; height: 296px;
+    border-radius: 10px;
+  } */
+  
+  /* .main-post-item>img:last-child{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px; height: 21px;
+  } */
+  /* .heart-icon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 21px;
+    background-image: url('/guidoFront/images/icons/like.png'); 
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+  }
+  .heart-icon.selected {
+    background-image: url('/guidoFront/images/icons/liked.png'); 
+  } */
+  
+  /* 슬라이드들 옆으로 정렬 */
+  /* .post-img-area li:not(:last-child){
+    float: left;
+  }
+  
+  .post-img-area li{
+    float: left;
+  } */
+  
+  /* 슬라이드 화살표 */
+  /* .slide-arrow span{
+    position:absolute;
+    background-color: #F0F0F050;
+    color: black;
+    text-align: center;
+    border-radius: 50%;
+    padding: 3px 10px;
+    top: 50%;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+  }
+  .slide-arrow span:hover{
+    background-color: #F0F0F090;
+  }
+  .main-prev{
+    left: 5px;
+  }
+  .main-next{
+    right: 5px;
+  } */
+  
+  
+  
+  /* ***** 게시글 슬라이드 ***** */
+  .main-post .product-post .slider{
+    width: 300px; height: 280px;
+    background-color: #FFE69A;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    /* overflow: visible; */
+    /* position: relative; */
+  }
+  .main-post .product-post .slider div{
+    width: 300px; height: 280px;
+  }
+  .main-post .product-post>ul{
+    width: 70vw;
+    /* width: 1260px; */
+    /* display: grid;
+    grid-template-columns: repeat(4,1fr);
+    row-gap: 88px; column-gap: 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; (임시)게시글 왼쪽 정렬!!!! */
+    justify-content: flex-start;
+  }
+  .main-post .product-post>ul>li{
+    /* width: 100%; */
+    width: 300px; height: 360px;
+    position: relative;
+    /* margin: 10px; (임시)게시글 왼쪽 정렬!!!! */
+    margin: 17px;
+    margin-bottom: 20px;
+  }
+  .main-post .product-post .slider>div{
+    width: 300px; height: 280px;
+    border-radius: 10px;
+    border: none;
+  }
+  .main-post .product-post .slider>div>img{
+    /* width: 100%; height: 100%; */
+    width: 300px; height: 280px;
+    border-radius: 10px;
+  }
+  .single-item>div>img{
+    width: 300px; height: 280px;
+  }
+  
+  
+  /* 슬라이드 버튼 */
+  .main-post .product-post .slide-btn{
+    width: 100%; 
+    display: none;
+  }
+  .main-post .product-post .slide-btn>img{ 
+    width: 32px; height: 32px;
+    cursor: pointer;
+  }
+  .main-post .product-post .slide-btn>img:first-of-type{
+    position: absolute;
+    top: 134px; right: 4px;
+  }
+  .main-post .product-post .slide-btn>img:last-of-type{
+    position: absolute;
+    top: 134px; left: 4px;
+  }
+  
+  /* 위시 하트 */
+  .main-post .product-post .add-wish-heart{
+    width: 100%; 
+  }
+  .main-post .product-post .add-wish-heart>img{ 
+    width: 30px; height: 30px;
+    cursor: pointer;
+    border: none;
+  }
+  .main-post .product-post .add-wish-heart>img:first-of-type{ 
+    position: absolute;
+    top: 12px; right: 12px;
+  }
+  .main-post .product-post .add-wish-heart>img:last-of-type{ 
+    position: absolute;
+    top: 12px; right: 12px;
+  }
+  
+  .heart-icon{
+    background-image: url('/images/profile/heartNone.png'); 
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+  }
+  .heart-icon.selected{
+    background-image: url('/images/profile/heartClick.png'); 
+  }
+  
+  
+  /* 게시글 텍스트 */
+  .main-post .product-post .sales-text{
+    width: 100%; padding: 4px;
+    display: flex; flex-direction: column;
+    position: absolute;
+    top: 285px;
+  }
+  .main-post .product-post .sales-text>div:nth-child(1)>p{
+    font-weight: bold;
+  }
+  .main-post .product-post .sales-text>div:nth-child(1) img{
+    width: 12px; margin-right: 4px;
+  }
+  .main-post .product-post .sales-text>div:nth-child(2){
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+  .main-post .product-post .sales-text>div:nth-child(2) img{
+    width: 12px; height: 15px; margin-right: 4px;
+  }
+  /* .main-post .product-post .sales-text>div:nth-child(3) p{
+    margin-top: 4px;
+  } */
+  .main-post .product-post .sales-text div:first-child{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+  }
+  .main-post .product-post .sales-text>div>div{
+    display: flex; align-items: center;
+  }
+  /* .main-post .product-post .sales-text>div{
+    margin-bottom: 4px;
+  } */
+  .main-post .product-post .sales-text>div span{
+    font-size: 0.875rem; line-height: 21px;
+  }
+  .main-post .product-post .sales-text div:last-child p{
+    line-height: 21px;
+  }
+  .main-post .product-post .sales-text>div:nth-of-type(2)>p{
+    font-weight: bold;
+  }
+  .main-post .product-post .sales-text>div:nth-of-type(1)>div{ /* 별점 */
+    color: #1C797D;
+  }
+  .main-post .product-post .sales-text>div:nth-of-type(2)>div{ /* 장소 */
+    color: #5C5C5C;
+  }
+  .main-post .product-post .sales-text>div>div>img:nth-of-type(2){
+    padding-top: 2px;
+  }
+  
+  /* ********************************************************** */
+  
+  
+  
+  
+  /* 게시글 제목 */
+  .main-post-title{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    cursor: pointer;
+  }
+  
+  /* 상품 이름 */
+  .main-post p{ 
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  /* 별 */
+  .main-post-title img{ 
+    width: 16px; height: 16px;
+    margin-right: 5px;
+  }
+  
+  /* 상품 가격 */
+  .main-post>div>p{ 
+    font-weight: bold;
+    margin-left: 25px;
+  }
+  
+  
+  /* 인기 여행지, 슈퍼가이드 추천 여행지 */
+  .divide-main{
+    height: 80px;
+    display: flex;/* ***** 테마 카테고리 ***** */
+    .categori-icon-box-container{
+      display: flex;
+      justify-content: center;
+    }
+    
+    .categori-icon-box {
+      width: 72%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 25px;
+    }
+    
+    .categori-icon-box a {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .categori-icon-box>div:first-child{
+      margin-left: 0px;
+    }
+    
+    .categori-icon-box img{
+      width: 40px;
+    }
+    
+    .categori-icon-box button {
+      background-color: transparent;
+      font-size: 12px;
+    }
+    .categori-icon-box button:focus{
+      color: #1C797D;
+      text-decoration: underline;
+    }
+    
+    hr{
+      width: 68%;
+      margin: 0 auto;
+      margin-top: 100px;
+      background-color: #C5C5C5;
+      height: 1px;
+      border: 0;
+    }
+    
+    
+    
+    
+    
+    /* ***** 게시글 슬라이드 ***** */
+    .container--inner__top__left{
+      /* border: 1px solid brown; */
+      width: 300px;
+      height: 370px;
+      display: flex;
+      justify-content: start;
+      margin-right: 50px;
+    
+    }
+    
+    .carousel-wrapper{
+      width: 300px;
+      height: 280px;
+      overflow: hidden;
+    }
+    
+    .carousel-wrapper > .carousel {
+      display: flex;
+      position: relative;
+      transition-duration: 0.3s;
+    }
+    
+    .prev{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-weight: bolder;
+      border: none;
+      background-color: #d8e2f0;
+      box-shadow:2px 2px 2px #8e8d8d;
+      position: absolute;
+      z-index: 100;
+      margin-top: 135px;
+      margin-left: 5px;
+      /* transition-duration: 0.2s; */
+      opacity: 0.6;
+      cursor: pointer;
+    }
+    .next{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-weight: bolder;
+      border: none;
+      background-color: #d8e2f0;
+      box-shadow:2px 2px 2px #c2c2c2;
+      position: absolute;
+      z-index: 100;
+      margin-left: 265px;
+      margin-top: 135px;
+      /* transition-duration: 0.2s; */
+      opacity: 0.6;
+      cursor: pointer;
+    }
+    
+    .container--inner__top__left img{
+      min-width: 300px;
+      max-width: 300px;
+      min-height: 280px;
+      max-height: 280px;
+      border-radius: 10px;
+    }
+    
+    
+    
+    /* ***** 게시글 슬라이드 ***** */
+    
+    /* 게시글 감싸는 article */
+    .main-post{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      width: 80%; 
+      flex-wrap: wrap;
+    }
+    
+    /* 게시글 사진 */
+    /* .main-post-item{
+      width: 296px; height: 296px;
+      margin: 40px 16px 0px 16px;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      background-color: #F0F0F0;
+      cursor: pointer;
+    }
+    
+    .post-img-area{
+      position: absolute;
+      transition: left 0.5s ease-out; 
+    }
+    
+    .post-img-area img{
+      width: 296px; height: 296px;
+      border-radius: 10px;
+    } */
+    
+    /* .main-post-item>img:last-child{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 25px; height: 21px;
+    } */
+    /* .heart-icon{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 25px;
+      height: 21px;
+      background-image: url('/guidoFront/images/icons/like.png'); 
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+    }
+    .heart-icon.selected {
+      background-image: url('/guidoFront/images/icons/liked.png'); 
+    } */
+    
+    /* 슬라이드들 옆으로 정렬 */
+    /* .post-img-area li:not(:last-child){
+      float: left;
+    }
+    
+    .post-img-area li{
+      float: left;
+    } */
+    
+    /* 슬라이드 화살표 */
+    /* .slide-arrow span{
+      position:absolute;
+      background-color: #F0F0F050;
+      color: black;
+      text-align: center;
+      border-radius: 50%;
+      padding: 3px 10px;
+      top: 50%;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+    }
+    .slide-arrow span:hover{
+      background-color: #F0F0F090;
+    }
+    .main-prev{
+      left: 5px;
+    }
+    .main-next{
+      right: 5px;
+    } */
+    
+    
+    
+    /* ***** 게시글 슬라이드 ***** */
+    .main-post .product-post .slider{
+      width: 300px; height: 280px;
+      background-color: #FFE69A;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      /* overflow: visible; */
+      /* position: relative; */
+    }
+    .main-post .product-post .slider div{
+      width: 300px; height: 280px;
+    }
+    .main-post .product-post>ul{
+      width: 70vw;
+      /* width: 1260px; */
+      /* display: grid;
+      grid-template-columns: repeat(4,1fr);
+      row-gap: 88px; column-gap: 20px; */
+      display: flex;
+      flex-wrap: wrap;
+      /* justify-content: space-around; (임시)게시글 왼쪽 정렬!!!! */
+      justify-content: flex-start;
+    }
+    .main-post .product-post>ul>li{
+      /* width: 100%; */
+      width: 300px; height: 360px;
+      position: relative;
+      /* margin: 10px; (임시)게시글 왼쪽 정렬!!!! */
+      margin: 17px;
+      margin-bottom: 20px;
+    }
+    .main-post .product-post .slider>div{
+      width: 300px; height: 280px;
+      border-radius: 10px;
+      border: none;
+    }
+    .main-post .product-post .slider>div>img{
+      /* width: 100%; height: 100%; */
+      width: 300px; height: 280px;
+      border-radius: 10px;
+    }
+    .single-item>div>img{
+      width: 300px; height: 280px;
+    }
+    
+    
+    /* 슬라이드 버튼 */
+    .main-post .product-post .slide-btn{
+      width: 100%; 
+      display: none;
+    }
+    .main-post .product-post .slide-btn>img{ 
+      width: 32px; height: 32px;
+      cursor: pointer;
+    }
+    .main-post .product-post .slide-btn>img:first-of-type{
+      position: absolute;
+      top: 134px; right: 4px;
+    }
+    .main-post .product-post .slide-btn>img:last-of-type{
+      position: absolute;
+      top: 134px; left: 4px;
+    }
+    
+    /* 위시 하트 */
+    .main-post .product-post .add-wish-heart{
+      width: 100%; 
+    }
+    .main-post .product-post .add-wish-heart>img{ 
+      width: 30px; height: 30px;
+      cursor: pointer;
+      border: none;
+    }
+    .main-post .product-post .add-wish-heart>img:first-of-type{ 
+      position: absolute;
+      top: 12px; right: 12px;
+    }
+    .main-post .product-post .add-wish-heart>img:last-of-type{ 
+      position: absolute;
+      top: 12px; right: 12px;
+    }
+    
+    .heart-icon{
+      background-image: url('/images/profile/heartNone.png'); 
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+    }
+    .heart-icon.selected{
+      background-image: url('/images/profile/heartClick.png'); 
+    }
+    
+    
+    /* 게시글 텍스트 */
+    .main-post .product-post .sales-text{
+      width: 100%; padding: 4px;
+      display: flex; flex-direction: column;
+      position: absolute;
+      top: 285px;
+    }
+    .main-post .product-post .sales-text>div:nth-child(1)>p{
+      font-weight: bold;
+    }
+    .main-post .product-post .sales-text>div:nth-child(1) img{
+      width: 12px; margin-right: 4px;
+    }
+    .main-post .product-post .sales-text>div:nth-child(2){
+      display: flex;
+      text-align: center;
+      align-items: center;
+    }
+    .main-post .product-post .sales-text>div:nth-child(2) img{
+      width: 12px; height: 15px; margin-right: 4px;
+    }
+    /* .main-post .product-post .sales-text>div:nth-child(3) p{
+      margin-top: 4px;
+    } */
+    .main-post .product-post .sales-text div:first-child{
+      display: flex; 
+      justify-content: space-between;
+      align-items: center;
+    }
+    .main-post .product-post .sales-text>div>div{
+      display: flex; align-items: center;
+    }
+    /* .main-post .product-post .sales-text>div{
+      margin-bottom: 4px;
+    } */
+    .main-post .product-post .sales-text>div span{
+      font-size: 0.875rem; line-height: 21px;
+    }
+    .main-post .product-post .sales-text div:last-child p{
+      line-height: 21px;
+    }
+    .main-post .product-post .sales-text>div:nth-of-type(2)>p{
+      font-weight: bold;
+    }
+    .main-post .product-post .sales-text>div:nth-of-type(1)>div{ /* 별점 */
+      color: #1C797D;
+    }
+    .main-post .product-post .sales-text>div:nth-of-type(2)>div{ /* 장소 */
+      color: #5C5C5C;
+    }
+    .main-post .product-post .sales-text>div>div>img:nth-of-type(2){
+      padding-top: 2px;
+    }
+    
+    /* ********************************************************** */
+    
+    
+    
+    
+    /* 게시글 제목 */
+    .main-post-title{
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-around;
+      cursor: pointer;
+    }
+    
+    /* 상품 이름 */
+    .main-post p{ 
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    /* 별 */
+    .main-post-title img{ 
+      width: 16px; height: 16px;
+      margin-right: 5px;
+    }
+    
+    /* 상품 가격 */
+    .main-post>div>p{ 
+      font-weight: bold;
+      margin-left: 25px;
+    }
+    
+    
+    /* 인기 여행지, 슈퍼가이드 추천 여행지 */
+    .divide-main{
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    
+    .divide-main p{
+      font-size: 22px;
+    }
+    
+    .divide-main img{
+      width: 30px;
+      margin-left: 5px;
+    }
+    
+    /* more */
+    .post-more{
+      font-size: 12px;
+      right: 17%;
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .post-more button{
+      background-color: transparent;
+    }
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .divide-main p{
+    font-size: 22px;
+  }
+  
+  .divide-main img{
+    width: 30px;
+    margin-left: 5px;
+  }
+  
+  /* more */
+  .post-more{
+    font-size: 12px;
+    right: 17%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .post-more button{
+    background-color: transparent;
+  }

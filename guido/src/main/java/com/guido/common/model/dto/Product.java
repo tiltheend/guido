@@ -46,5 +46,8 @@ public class Product {
 	private int reviewPercentage;		// 리뷰 퍼센테이지
 
 	private String superGuideFl; 		// 슈퍼가이드 여부(N: 일반가이드, Y: 슈퍼가이드)
+	
+	private String courseName;		// 여행지 키워드
+	private String productDate;		// 날짜
 
 }
