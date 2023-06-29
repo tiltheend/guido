@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>International Telephone Input</title>
+    <link rel="stylesheet" href="build/css/intlTelInput.css" />
+  </head>
+
+  <body>
+    <h1>International Telephone Input</h1>
+    <form>
+      <input id="phone" name="phone" type="tel" />
+      <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    국가 코드 : <div id="result"></div>
+
+    <script src="build/js/intlTelInput.js"></script>
+    <script>
+      var input = document.querySelector("#phone");
+      var iti = window.intlTelInput(input, {
+        // allowDropdown: false,
+        // autoInsertDialCode: true,
+        // autoPlaceholder: "off",
+        // dropdownContainer: document.body,
+        // excludeCountries: ["us"],
+        // formatOnDisplay: false,
+        // geoIpLookup: function(callback) {
+        //   fetch("https://ipapi.co/json")
+        //     .then(function(res) { return res.json(); })
+        //     .then(function(data) { callback(data.country_code); })
+        //     .catch(function() { callback("us"); });
+        // },
+        // hiddenInput: "full_number",
+        // initialCountry: "auto",
+        // localizedCountries: { 'de': 'Deutschland' },
+        // nationalMode: false,
+        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        // placeholderNumberType: "MOBILE",
+        // preferredCountries: ['cn', 'jp'],
+        separateDialCode: true,
+        // showFlags: false,
+        utilsScript: "build/js/utils.js"
+      });
+
+
+      function submitForm() {
+      var selectedCountryData = iti.getSelectedCountryData();
+      var countryCode = selectedCountryData.iso2;
+      // 선택한 국가의 국가 코드
+      document.getElementById("result").innerText = countryCode;
+      console.log("국가 코드:", countryCode);
+      
+      // 여기서부터는 제출 로직을 추가하면 됩니다.
+      // ...
+    }
+
+    const countryName = "Korea"
+    iti.setCountry(countryName);
+
+
+    </script>
+  </body>
+</html>

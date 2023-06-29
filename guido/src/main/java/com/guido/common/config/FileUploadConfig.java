@@ -64,7 +64,7 @@ public class FileUploadConfig implements WebMvcConfigurer {
 //		String resourcePath = "file:///C:/guidoImages/";
 		
 		// 지영 맥북
-//		String resourcePath = "file:///Users/jy_green/Desktop/project/guidoImages/";
+		String resourcePath = "file:///Users/jy_green/Desktop/project/guidoImages/";
 //		/Users/jy_green/Desktop/project/guidoImages/
 		
 		// 나현 맥북

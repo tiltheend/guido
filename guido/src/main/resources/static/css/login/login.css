@@ -196,6 +196,12 @@ input[type="checkbox"]:checked + label{
     justify-content: center;
     padding: 0 20px
 }
+.hr{
+    width: 90%;
+    background-color: #c5c5c5;
+    height: 1px;
+    margin-top: 0px;
+}
 .modal_body{
     width: 500px;
     height: 360px;
@@ -220,6 +226,14 @@ input[type="checkbox"]:checked + label{
     border: 1px solid #c5c5c5;
     color: #5C5C5C;
     padding: 10px;
+}
+.inputError{
+    color: red;
+    margin: 0 10px 20px 5px;
+    /* margin-left: 5px;  */
+    /* margin-top: 0; */
+    /* display: none; */
+    visibility: hidden;
 }
 .sendEmailBtn{
     height: 42px;

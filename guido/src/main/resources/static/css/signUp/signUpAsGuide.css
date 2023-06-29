@@ -46,6 +46,9 @@
     flex-direction: column;
     margin: 20px 10px 30px 10px;
 }
+.container_middle_check>div{
+    margin: 5px 0;
+}
 .box{
     display: inline-block;
     width: 12px;
@@ -68,6 +71,8 @@ input[type="checkbox"]:checked + label{
     background-size: cover;
     border: none;
 }
+.required{
+    color:forestgreen; vertical-align: 3px;}
 
 /* 제출 버튼 */
 .container_bottom{

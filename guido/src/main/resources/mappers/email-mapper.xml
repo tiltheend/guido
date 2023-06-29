@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.guido.user.model.dao.UserMapper">
+<mapper namespace="com.guido.user.model.dao.EmailMapper">
 	
 	<resultMap id="user_rm" type="User">
 		<!-- 공통 -->
@@ -18,7 +18,6 @@
 		<result property="primaryLanguage" column="PRIMARY_LANGUAGE"/>
 		<result property="emergencyContact" column="EMERGENCY_CONTACT"/>
 		<result property="faceImg" column="FACE_IMG"/>
-		<result property="countryCode" column="COUNTRY_CODE"/>
 		<!-- 가이드 -->
 		<result property="languageSkill" column="LANGUAGE_SKILL"/>
 		<result property="activityArea" column="ACTIVITY_AREA"/>
@@ -28,32 +27,13 @@
 		<!-- <result property="pr" column=""/> -->
 	</resultMap>
 	
-
-	<!-- 로그인 -->
-	<select id="login" resultMap="user_rm">
-		SELECT *
-		FROM (
-		    SELECT *
-		    FROM "USER"
-		    WHERE "USER_EMAIL" = #{userEmail}
-		) u
-		LEFT JOIN "GUIDE" g ON u."USER_NO" = g."USER_NO" AND u."USER_TYPE" = 'G'
-		LEFT JOIN "TOURIST" t ON u."USER_NO" = t."USER_NO" AND u."USER_TYPE" = 'T'
-		WHERE u."USER_STATE" = 'N'
-	</select>	
+	<update id="changeTempPw">
+		UPDATE "USER" SET "USER_PASSWORD" = #{tempPw} WHERE "USER_EMAIL" = #{email}
+	</update>
 	
-	<!-- 구글 로그인 - 가입된 회원인지 확인 -->
-	<select id="checkGoogleSignedup" resultMap="user_rm">
-		SELECT *
-		FROM (
-		    SELECT *
-		    FROM "USER"
-		    WHERE "USER_EMAIL" = #{googleEmail}
-		) u
-		LEFT JOIN "GUIDE" g ON u."USER_NO" = g."USER_NO" AND u."USER_TYPE" = 'G'
-		LEFT JOIN "TOURIST" t ON u."USER_NO" = t."USER_NO" AND u."USER_TYPE" = 'T'
-		WHERE u."USER_STATE" = 'N'
-	</select>	
+	<select id="selectUser">
+		SELECT "USER_NAME" FROM "USER" WHERE "USER_EMAIL" = #{email}
+	</select>
 	
 	
 	
