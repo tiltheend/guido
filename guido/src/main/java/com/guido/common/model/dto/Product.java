@@ -19,7 +19,7 @@ public class Product {
 	private int tourDuration;			// 1Day 투어 진행시간
 	private String productContent; 		// 상품 상세 내용
 	private int productPrice;			// 상품 가격
-	private String productAddPrice;		// 추가 비용
+	private String productAddNotes;		// 추가 참고 사항
 	private int maxTourist;				// 최대 인원
 	private int minTourist;				// 최소 인원
 	
@@ -46,5 +46,8 @@ public class Product {
 	private int reviewPercentage;		// 리뷰 퍼센테이지
 
 	private String superGuideFl; 		// 슈퍼가이드 여부(N: 일반가이드, Y: 슈퍼가이드)
+	
+	private String courseName;		// 여행지 키워드
+	private String productDate;		// 날짜
 
 }

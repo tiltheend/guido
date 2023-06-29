@@ -40,4 +40,19 @@ public class Util {
 	}
 
 	
+	
+	// 예약 번호 생성
+	public static String createReservationNo() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String date = sdf.format(new java.util.Date(System.currentTimeMillis()));
+
+		int ranNum = (int) (Math.random() * 1000000); 
+
+		String str = "-" + String.format("%06d", ranNum);
+
+		return date + str;
+		
+	}
+	
 }

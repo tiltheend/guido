@@ -42,7 +42,6 @@ font-weight: 100 / 400 / 700; 사용가능
 
 /* 기본 세팅 */
 *{padding: 0; margin: 0; 
-    /* font-family: 'Noto Sans KR', sans-serif; */
     font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 box-sizing: border-box;}
 ul,ol{list-style: none;}

@@ -37,7 +37,6 @@ public class ProfileTouristController {
 	@GetMapping("/{userNo:[0-9]+}")
 	public String mypageTourist(
 			@PathVariable("userNo") int userNo,
-			@SessionAttribute("loginUser") User loginUser,
 			Model model
 			) {
 		
@@ -87,12 +86,6 @@ public class ProfileTouristController {
 			// 리뷰 안쓴 목록 가져오기 (상품 번호, 상품 제목)
 			List<Review> addReviewList = service.addReviewList(userNo);
 			
-//			for(Review r : addReviewList) {
-//				System.out.println(r.getProductNo());
-//				System.out.println(r.getProductName());
-//				System.out.println(r.getProductDtNo());
-//			}
-			
 			model.addAttribute("addReviewList", addReviewList);
 			
 			
@@ -124,8 +117,7 @@ public class ProfileTouristController {
 		
 		ra.addFlashAttribute("message",message);
 		
-
-		return "redirect:buyerProfile";
+		return "redirect:/profile/"+userNo;
 	}
 	
 	// 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩)
@@ -143,6 +135,63 @@ public class ProfileTouristController {
 		return moreReviewList;
 	}
 	
+	// 리뷰 작성
+	@ResponseBody
+	@PostMapping(value="/addReview",produces="application/json")
+	public int addReview(@RequestBody Review review,
+			@SessionAttribute("loginUser") User loginUser){
+
+		review.setUserNo(loginUser.getUserNo());
+	
+		int result = service.addReview(review);
+		
+		return result;
+		
+	}
+	
+	// 비동기로 리뷰 목록 불러오기 (최신 3개)
+	@ResponseBody
+	@PostMapping(value="/newReviewList", produces="application/json; charset=UTF-8")
+	public List<Review> newReviewList(@RequestBody int userNo){
+
+		List<Review> newReviewList = service.reviewList(userNo);
+		int reviewCount = service.reviewCount(userNo);
+		for(Review r : newReviewList) {
+			r.setReviewCount(reviewCount);
+		}
+		
+		return newReviewList;
+	}
+	
+	// 리뷰 삭제
+	@ResponseBody
+	@PostMapping(value="/reviewDel",produces="application/json; charset=UTF-8")
+	public int reviewDel(@RequestBody int productNo,
+			@SessionAttribute("loginUser") User loginUser){
+
+		Review review = new Review();
+		review.setUserNo(loginUser.getUserNo());
+		review.setProductNo(productNo);
+		
+		int result = service.reviewDel(review);
+		
+		return result;
+		
+	}
+	
+	// 리뷰 수정
+	@ResponseBody
+	@PostMapping(value="/reviewEdit",produces="application/json; charset=UTF-8")
+	public int reviewEdit(@RequestBody Review review,
+			@SessionAttribute("loginUser") User loginUser){
+
+		review.setUserNo(loginUser.getUserNo());
+		
+		int result = service.reviewEdit(review);
+
+		return result;
+	}
+	
 	// 투어리스트 예약 관리 페이지로 이동
 	@GetMapping("/touristReservation")
 	public String touristReservation(
@@ -154,6 +203,11 @@ public class ProfileTouristController {
 		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
 		User user = service.userInfo(userNo);
 		model.addAttribute("user", user);
+		
+		// 구매 내역 가져오기 (상품 번호, 썸네일)
+		// List<Reservation> reservationList = service.reservationList(userNo);
+		// model.addAttribute("reservationList", reservationList);
+		
 		
 		return "profile/buyerReservation";
 	}

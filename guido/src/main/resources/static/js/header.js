@@ -72,56 +72,46 @@ guestButtonClick.addEventListener('click', () => {
 });
 
 
+
 /* *** 게스트 수 업다운 *** */
-// 마이너스 버튼 클릭 이벤트 핸들러
-document.querySelector('.main--right__guest-minus').addEventListener('click', function() {
-  // 현재 게스트 수 가져오기
-  var guestCountElement = document.querySelector('.main--right__guest-count');
-  var guestCount = parseInt(guestCountElement.innerHTML);
+const guestCountElement = document.querySelector('.main--right__guest-count');
+const guestInput = document.querySelector('input[name="tourist"]');
 
-  // 게스트 수가 0보다 크면 감소시키기
-  if (guestCount > 0) {
-    guestCount--;
-    guestCountElement.innerHTML = guestCount;
-  }
+// 감소 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-minus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    if (count > 0) {
+        count--;
+        guestCountElement.textContent = count;
+        updateGuestText(count);
+        guestInput.value = count; // input 태그에 값 설정
+    }
 });
 
-// 플러스 버튼 클릭 이벤트 핸들러
-document.querySelector('.main--right__guest-plus').addEventListener('click', function() {
-  // 현재 게스트 수 가져오기
-  var guestCountElement = document.querySelector('.main--right__guest-count');
-  var guestCount = parseInt(guestCountElement.innerHTML);
-
-  // 게스트 수 증가시키기
-  guestCount++;
-  guestCountElement.innerHTML = guestCount;
+// 증가 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-plus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    count++;
+    guestCountElement.textContent = count;
+    updateGuestText(count);
+    guestInput.value = count; // input 태그에 값 설정
 });
 
-/* 
-function toggleModal(modal) {
-  modal.classList.toggle('show');
-} 
-*/
+// 게스트 텍스트 업데이트 함수
+function updateGuestText(count) {
+    const guestText = document.querySelector('.guest-button-click input');
+    guestText.textContent = `게스트 ${count}명`;
+}
+
+
 
 
 /* *** 모달창 닫기 *** */
-/* const modalsBG = document.querySelectorAll('.modal'); */
-
-/* modalsBG.forEach(modal => {
-  modal.addEventListener('click', () => {
-    modal.style.display = 'none';
-    mainSearchBox.style.display = 'flex';
-    searchBoxClickBox.style.display = 'none';
-  });
-}); */
-
 document.addEventListener('DOMContentLoaded', function() {
-  // 모달 요소들을 가져옵니다.
+
   var modals = document.querySelectorAll('.modal');
 
-  // 각 모달 요소에 이벤트 리스너를 추가합니다.
   modals.forEach(function(modal) {
-    // 모달 이외의 영역을 클릭하면 모달이 닫히도록 합니다.
     modal.addEventListener('click', function(event) {
       if (event.target === modal) {
         modal.style.display = 'none';
@@ -131,8 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
-
 
 
 
@@ -227,4 +215,81 @@ document.addEventListener('DOMContentLoaded', function() {
     clickDivs[3].classList.add('clicked');
   });
 });
+
+
+
+/* ***** 헤더 위치 검색 ajax ***** */
+document.addEventListener("DOMContentLoaded", () =>{
+
+  const location = document.querySelector('input[name="location"]');
+  const whereModal = document.querySelector(".locations");
+
+
+  location.addEventListener("keyup", e => {
+
+    const searchTerm = location.value.trim();
+
+    if(searchTerm.length > 0){
+      fetch("/common/locationSearch?location=" + searchTerm)
+      .then(resp => resp.json())
+      .then(locationList => {
+        console.log(locationList);
+
+        if(locationList.length > 0){
+
+          whereModal.classList.remove("locations");
+          whereModal.innerHTML = "";
+
+          for(let list of locationList){
+            const locationDiv = document.createElement("div");
+
+            const locationImg = document.createElement("img");
+            locationImg.src = "/images/icons/location_pin.svg";
+
+            const locationText = document.createTextNode(list);
+
+            locationDiv.appendChild(locationImg);
+            locationDiv.appendChild(locationText);
+
+            whereModal.appendChild(locationDiv);
+
+            // 클릭 이벤트 핸들러 추가
+            locationDiv.addEventListener("click", () => {
+              location.value = list; 
+              /* document.querySelector(".where-modal").style.display = "none"; */
+              document.querySelector('input[name="firstday"]').focus();
+            });
+          }
+
+        }else{
+          whereModal.classList.add("locations");
+        }
+      })
+      .catch(err => console.log(err));
+
+    }else{
+      whereModal.classList.add("locations");
+    }
+  })
+});
+
+// 클릭 이벤트 핸들러 추가
+whereModal.addEventListener("click", e => {
+  if (e.target.tagName === "div") { // 클릭된 요소가 div인지 확인
+    const clickedItem = e.target.textContent; // 클릭된 항목의 텍스트 가져오기
+    location.value = clickedItem; // input 태그에 값을 설정
+    /* document.querySelector(".where-modal").style.display = "none"; */
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
 

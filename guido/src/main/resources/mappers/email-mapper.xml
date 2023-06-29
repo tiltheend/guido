@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guido.user.model.dao.EmailMapper">
+	
+	<resultMap id="user_rm" type="User">
+		<!-- 공통 -->
+		<id property="userNo" column="USER_NO"/>
+		<result property="userEmail" column="USER_EMAIL"/>
+		<result property="userPassword" column="USER_PASSWORD"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="userType" column="USER_TYPE"/>
+		<result property="userState" column="USER_STATE"/>
+		<!-- 투어리스트 -->
+		<result property="passportNo" column="PASSPORT_NO"/>
+		<result property="primaryLanguage" column="PRIMARY_LANGUAGE"/>
+		<result property="emergencyContact" column="EMERGENCY_CONTACT"/>
+		<result property="faceImg" column="FACE_IMG"/>
+		<!-- 가이드 -->
+		<result property="languageSkill" column="LANGUAGE_SKILL"/>
+		<result property="activityArea" column="ACTIVITY_AREA"/>
+		<result property="confirmationNo" column="CONFIRMATION_NO"/>
+		<result property="superGuideFl" column="SUPER_GUIDE_FL"/>
+		<!-- 가이드 pr 필요하면 작성해서 사용 -->
+		<!-- <result property="pr" column=""/> -->
+	</resultMap>
+	
+	<update id="changeTempPw">
+		UPDATE "USER" SET "USER_PASSWORD" = #{tempPw} WHERE "USER_EMAIL" = #{email}
+	</update>
+	
+	<select id="selectUser">
+		SELECT "USER_NAME" FROM "USER" WHERE "USER_EMAIL" = #{email}
+	</select>
+	
+	
+	
+	
+	
+</mapper>

@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Member Type</title>
-    <link rel="stylesheet" href="../css/signUp/chooseMemberType.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;}
-    </style>
+    <link rel="stylesheet" th:href="@{/css/signUp/chooseMemberType.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>guido</header>
+    <th:block th:replace="~{common/header}"></th:block>
     <div class="container_total">
         <div class="container_top">
             <div class="container_top_title">회원 가입</div>
             <div class="container_top_chooseM">회원 유형을 선택해주세요.</div>
         </div>
         <div class="container_bottom">
-            <a href="../signUp/signUpAsTourist.html"><div class="container_bottom_left">
-                <div class="container_bottom_left_icon"><img src="../images/signUp/tourist.png"></div>
+            <a th:href="@{/user/signUp/touristPage}"><div class="container_bottom_left">
+                <div class="container_bottom_left_icon"><img th:src="@{/images/signUp/tourist.png}"></div>
                 <div class="container_bottom_left_tourist">Tourist</div>
             </div></a>
-            <a href="../signUp/signUpAsGuide.html">
+            <a th:href="@{/user/signUp/guidePage}">
             <div class="container_bottom_right">
-                <div class="container_bottom_right_icon"><img src="../images/signUp/guide.png"></div>
+                <div class="container_bottom_right_icon"><img th:src="@{/images/signUp/guide.png}"></div>
                 <div class="container_bottom_right_guide">Guide</div>
             </div></a>
         </div>
     </div>
+    <th:block th:replace="~{common/footer}"></th:block>
+    <script>
+        
+    </script>
 </body>
 </html>

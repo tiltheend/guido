@@ -28,8 +28,24 @@ public interface HomeService {
 
 	// 테마 검색 상품 목록 조회
 	List<Product> selectThemeProdList(int themeCode);
-	
-	
 
 
+	
+	// 검색 페이지
+	List<Product> selectSearchResult(Map<String, Object> map);
+
+	// 헤더 위치 검색
+	List<String> locationSearch(String location);
+
+	// 검색 페이지 테마 검색 상품 목록 조회 
+	List<Product> selectSearchThemeProdList(int themeCode);
+
+
+
+
+
+
+
+
+;
 }

@@ -1,3 +1,41 @@
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  background: none;
+}
+
+#phone
+{
+  height: 35px;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 100%;
+  color: inherit;
+}
+
+#phone[disabled]
+{
+  background-color: #eee;
+}
+
+#phone,
+select {
+  border: 1px solid #ccc;
+  width: 230px;
+  font-size: 16px;
+}
+
+::placeholder,
+:-ms-input-placeholder {
+  color: #bbb;
+}
+
+
 .iti {
   position: relative;
   display: inline-block;

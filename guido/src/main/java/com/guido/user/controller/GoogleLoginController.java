@@ -4,23 +4,31 @@ package com.guido.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.guido.common.model.dto.User;
 import com.guido.user.model.dto.GoogleRequest;
 import com.guido.user.model.dto.GoogleResponse;
 import com.guido.user.model.dto.GoogleUserInfo;
+import com.guido.user.model.service.GoogleLoginService;
 
-
-@RestController
-@CrossOrigin("*")
+@SessionAttributes({"loginUser","googleUserInfo"})
+@Controller
+//@CrossOrigin("*")
 public class GoogleLoginController {
 	
 	// 구글 로그인
@@ -30,6 +38,9 @@ public class GoogleLoginController {
 		// 3. Google 승인서버(Authorization Server)에 Authorization Code로 Access Token과 교환
 		// 4. Access Token으로 Google 자원서버(Resource Server)에 유저자원(유저정보) 요청
 		// 5. 유저자원(유저정보) 반환
+	
+	@Autowired
+	private GoogleLoginService service;
 	
 	
     @Value("${google.client.id}")
@@ -48,6 +59,7 @@ public class GoogleLoginController {
 //    }
     
     // redirectView
+    @ResponseBody
     @RequestMapping(value="/google/login/oauth", method = RequestMethod.POST)
     public RedirectView googleLogin(){
     	
@@ -59,9 +71,9 @@ public class GoogleLoginController {
     	return redirectView;
     }
     
-    
+    // 구글 로그인 / 이메일 이용 회원가입
     @RequestMapping(value="/google/login/oauth", method = RequestMethod.GET)
-    public Map<String, Object> googleLogin(@RequestParam(value = "code") String authCode){
+    public String googleLogin(@RequestParam(value = "code") String authCode, Model model, RedirectAttributes ra){
         RestTemplate restTemplate = new RestTemplate();
         GoogleRequest googleOAuthRequestParam = GoogleRequest
                 .builder()
@@ -81,14 +93,37 @@ public class GoogleLoginController {
         String email=resultEntity2.getBody().getEmail();  
         String picture=resultEntity2.getBody().getPicture();
         
-        Map<String, Object> googleUser = new HashMap<>();
+        //---------------
         
-        googleUser.put("email", email);
-        googleUser.put("picture", picture);
+        // 가입된 회원인지 확인
+        User googleUser = service.checkGoogleSignedup(email);
         
-        return googleUser;
+        String path = null;
+        
+        // 가입된 회원이면 로그인
+        if(googleUser != null) {
+        	path = "redirect:/";
+        	model.addAttribute("loginUser", googleUser);
+        	ra.addFlashAttribute("message", "즐거운 여행되세요!");
+        }else { // 가입된 회원 아니면 (이메일, 프로필 사진 가지고 회원가입 화면으로) 
+        	path = "redirect:/user/signUp/chooseMemberType";
+        	// 유저 타입 고르는 화면으로 구글 유저 정보 가져가서 -> 회원가입 페이지로 이동.
+        	ra.addFlashAttribute("message", "첫 방문을 환영합니다! Guido 사용을 위해 필수 정보 입력과 약관 동의 체크를 해주세요.");
+        	Map<String, Object> googleUserInfo = new HashMap<>();
+        	googleUserInfo.put("email", email);
+        	googleUserInfo.put("picture", picture);
+        	model.addAttribute("googleUserInfo", googleUserInfo);
+        }
+        return path;
     }
 
+    // 임시 chooseMemberType 맵핑
+    @GetMapping("/signUp/chooseMemberType")
+    public String dd(RedirectAttributes ra) {
+    	return "signUp/chooseMemberType";
+    }
+    
+    
 }
 
 

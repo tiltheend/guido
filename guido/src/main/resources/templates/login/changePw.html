@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Password</title>
-    <link rel="stylesheet" href="../css/login/changePw.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;}
-    </style>
+    <link rel="stylesheet" th:href="@{/css/login/changePw.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>guido</header>
+    <th:block th:replace="~{common/header}"></th:block>
     <div class="container_total">
         <div class="container_top">
             <div class="container_top_title font0">비밀번호 변경하기</div>
+            <!-- 유효성 검사 -->
             <div class="container_top_subTitle font3">비밀번호를 재설정하세요.<br>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</div>
         </div>
-        <form action="#" method="post">
+        <form th:action="@{/user/reset/password}" method="post">
             <div class="container_middle">
                 <div class="container_middle_input">
-                    <input type="password" name="password" id="password" class="password font4" placeholder="비밀번호">
-                    <input type="text" name="pwCheck" id="pwCheck" class="pwCheck font4" placeholder="비밀번호 확인">
+                    <input type="password" name="originPassword" id="originPassword" class="password font4" placeholder="현재 비밀번호">
+                    <input type="password" name="newPassword" id="newPassword" class="password font4" placeholder="새 비밀번호">
+                    <input type="text" name="pwCheck" id="pwCheck" class="pwCheck font4" placeholder="새 비밀번호 확인">
                 </div>
             </div>
             <div class="container_bottom">
                 <button class="container_bottom_button">변경하기</button>
             </div>
         </form>
+    <th:block th:replace="~{common/footer}"></th:block>
 </body>
 </html>

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com"> -->
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/login/login.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -50,16 +49,18 @@
         <div class="window" id="modalWindow">
             <div class="popup">
                 <div class="modal_top">
-                    <div class="modal_title font3">비밀번호 재설정</div>
+                    <div class="modal_title font3">비밀번호 찾기</div>
                     <button id="close" class="close">&times;</button>
                 </div>
-                <hr>
+                <hr class="hr">
                 <div class="modal_body">
                     <div class="modal_body_title font1">비밀번호를 잊으셨나요?</div>
-                    <div class="modal_body_content font3">계정으로 사용하시는 이메일 주소를 입력해주시면, 비밀번호 재설정 링크를 보내드립니다.</div>
-                    <form action="#" method="post">
-                        <input type="email" name="modalEmail" id="modalEmail" class="modal_email font4" placeholder="이메일">
-                        <button class="sendEmailBtn font3" id="sendEmailBtn">비밀번호 재설정 링크 전송</button>
+                    <div class="modal_body_content font3">계정으로 사용하는 이메일 주소를 입력하면, 임시 비밀번호를 보내드립니다.</div>
+                    <!-- ajax -->
+                    <form>
+                        <input type="text" name="modalEmail" id="modalEmail" class="modal_email font4" placeholder="이메일">
+                        <div class="inputError font5">까꿍</div>
+                        <button class="sendEmailBtn font3" id="sendEmailBtn" type="button">임시 비밀번호 발급</button>
                     </form>
                 </div>
             </div>
@@ -70,13 +71,13 @@
         <div class="window" id="modalWindow">
             <div class="popup">
                 <div class="modal_top">
-                    <div class="modal_title font3">비밀번호 재설정</div>
+                    <div class="modal_title font3">비밀번호 찾기</div>
                     <button id="close2" class="close">&times;</button>
                 </div>
-                <hr>
+                <hr  class="hr">
                 <div class="modal_body">
-                    <div class="modal_body_title font1">이메일 전송 성공</div>
-                    <div class="modal_body_content font3">이메일 주소로 비밀번호 재설정 링크를 보내드렸습니다.<br>이메일을 확인하세요.</div>
+                    <div class="modal_body_title font1">임시 비밀번호 발급</div>
+                    <div class="modal_body_content font3">계정 이메일로 임시 비밀번호를 보내드렸습니다.<br><br>메일을 확인하고 새 비밀번호로 변경해주세요.</div>
                 </div>
             </div>
         </div>

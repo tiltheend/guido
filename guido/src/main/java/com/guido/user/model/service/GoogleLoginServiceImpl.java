@@ -1,11 +1,22 @@
 package com.guido.user.model.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.guido.common.model.dto.User;
+import com.guido.user.model.dao.UserMapper;
 
 @Service
 public class GoogleLoginServiceImpl implements GoogleLoginService{
 	
+	@Autowired
+	private UserMapper mapper;
 	
+	// 구글 로그인 - 가입된 회원인지 확인
+	@Override
+	public User checkGoogleSignedup(String googleEmail) {
+		return mapper.checkGoogleSignedup(googleEmail);
+	}
 	
 	
 }
