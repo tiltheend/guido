@@ -189,10 +189,8 @@ public class ProfileTouristController {
 		review.setUserNo(loginUser.getUserNo());
 		
 		int result = service.reviewEdit(review);
-		
-		System.out.println(review);
+
 		return result;
-		
 	}
 	
 	// 투어리스트 예약 관리 페이지로 이동

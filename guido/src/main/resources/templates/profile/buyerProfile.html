@@ -154,7 +154,7 @@
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button class="review-add-submit" type="button" onclick="reviewAddFn(this)">Submit</button>
+                            <button class="review-add-submit" onclick="reviewAddFn(event)">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -196,14 +196,14 @@
                             </div>
                             <span class="score-span"></span>
                         </div>
-                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요." maxlength="1000">그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</textarea>
+                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요." maxlength="1000"></textarea>
                         <div class="write-count">
                             <span class="over-error"><i class="fa-sharp fa-solid fa-bomb"></i> 500자 이하로 작성해주세요.</span>
                             <div><span id="count">0</span> / 500</div>
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button class="review-edit-submit" onclick="reviewEditSubmitFn(this)" type="button">Submit</button>
+                            <button class="review-edit-submit" onclick="reviewEditSubmitFn(event)" type="button">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -292,7 +292,7 @@
                         </ul>
                     </li>
                 </ul>
-                <button class="review-list-more" type="button" th:if="${reviewCount > 3}">more reviews</button>
+                <button class="review-list-more" type="button">more reviews</button>
                 <!-- <button class="review-list-more" th:if="${reviewCount > 3}" type="button">more reviews</button> -->
             </div>
 

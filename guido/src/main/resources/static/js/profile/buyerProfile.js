@@ -21,10 +21,13 @@ let reviewModalClose; /* 리뷰 닫기 */
 
 let reviewAddSubmit; /* 리뷰 등록 */
 let selectElement; /* 리뷰 쓰려는 상품의 상품 번호, 일정 번호 */
-let reviewContent; /* 리뷰 내용 */
+let reviewContent; /* 리뷰 내용 등록 */
+let reviewContentEdit; /* 리뷰 내용 수정 */
+
 
 let selectedStarScore; /* 리뷰작성 별점 input */
-let selectedScore; /* 별점 */
+let selectedScore; /* 별점 등록 */
+let selectedScoreEdit; /* 별점 수정 */
 
 let reviewEdit; /* 리뷰 수정 */
 let reviewEditModal; /* 리뷰 수정 모달 */
@@ -34,15 +37,8 @@ let reviewSaleListContent; /* 리뷰 작성 글 */
 let reviewSaleListStar; /* 리뷰 별점 */
 
 
-const checkObj = {
-    "selectElement" : false,
-    "selectedStarScore" : false,
-    "reviewContent" : false
-};
-
-
+/* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
 function reviewMoreFn(){
-    /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
     reviewContentList=document.querySelectorAll(".buyer-profile-top .review-list li>pre");
     reviewContentMore=document.querySelectorAll(".buyer-profile-top .review-list li>div:last-of-type>p");
 
@@ -56,13 +52,14 @@ function reviewMoreFn(){
 }
 document.addEventListener("DOMContentLoaded",()=>{
 
-    reviewMoreFn();
+    reviewMoreFn(); /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
+    reviewMoreBtnFn(); /* 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
 
     /* 리뷰 등록하기 */
     addReview = document.querySelector(".my-review>div>svg");
     reviewWriteModal = document.querySelector(".buyer-profile-top .review-write");
 
-    // 리뷰 모달 열기
+    // 리뷰 등록 모달 열기
     if(addReview != null){
         reviewModalClose = document.querySelector(".review-write .review-modal-close");
         addReview.addEventListener('click',()=>{
@@ -76,6 +73,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                 reviewWriteModal.style.display="none";
                 selectElement = document.querySelector(".review-write #reviewSaleList");
                 selectElement.selectedIndex = 0; // 선택 초기화
+                
                 checkObj.selectElement = false;
                 checkObj.selectedStarScore = false;
 
@@ -86,64 +84,77 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
 
     // 리뷰 글자수 제한 (500) 디비 바꾸기~~
-    let reviewContent = document.querySelector(".review-write #reviewContent");
+    let reviewContentNum = document.querySelector(".review-write #reviewContent");
     let reviewCount = document.querySelector(".review-write #count");
     let reviewWrite = document.querySelector(".review-write .write-count");
 
-    reviewContent.addEventListener("input",(e)=>{ // 리뷰 작성
+    if(reviewContentNum != null){
 
-        // e.target : 이벤트가 발생한 요소 (==#content)
-        reviewCount.innerText=e.target.value.length;
-        if(e.target.value.length>500){
-            reviewCount.classList.add("error");
-            reviewWrite.classList.add("error");
-            document.querySelector(".review-write .write-count .over-error").style.fontSize="0.875rem";
-        } else {
-            reviewCount.classList.remove("error");
-            reviewWrite.classList.remove("error");
-            document.querySelector(".review-write .write-count .over-error").style.fontSize="0";
-        }
+        reviewContentNum.addEventListener("input",(e)=>{ // 리뷰 작성
 
-    });
+            // e.target : 이벤트가 발생한 요소 (==#content)
+            reviewCount.innerText=e.target.value.length;
+            if(e.target.value.length>500){
+                reviewCount.classList.add("error");
+                reviewWrite.classList.add("error");
+                document.querySelector(".review-write .write-count .over-error").style.fontSize="0.875rem";
+            } else {
+                reviewCount.classList.remove("error");
+                reviewWrite.classList.remove("error");
+                document.querySelector(".review-write .write-count .over-error").style.fontSize="0";
+            }
+
+        });
+    }
 
     // 리뷰 글자수 제한 (500) 디비 바꾸기~~
-    let reviewContentEdit = document.querySelector(".review-edit #reviewContent");
+    let reviewContentEditNum = document.querySelector(".review-edit #reviewContent");
     let reviewCountEdit = document.querySelector(".review-edit #count");
     let reviewWriteEdit = document.querySelector(".review-edit .write-count");
 
-    reviewContentEdit.addEventListener("input",(e)=>{ // 리뷰 수정
 
-        // e.target : 이벤트가 발생한 요소 (==#content)
-        reviewCountEdit.innerText=e.target.value.length;
-        if(e.target.value.length>500){
-            reviewCountEdit.classList.add("error");
-            reviewWriteEdit.classList.add("error");
-            document.querySelector(".review-edit .write-count .over-error").style.fontSize="0.875rem";
-        } else {
-            reviewCountEdit.classList.remove("error");
-            reviewWriteEdit.classList.remove("error");
-            document.querySelector(".review-edit .write-count .over-error").style.fontSize="0";
-        }
+    if(reviewContentEditNum != null){
+        
+        reviewContentEditNum.addEventListener("input",(e)=>{ // 리뷰 수정
+    
+            // e.target : 이벤트가 발생한 요소 (==#content)
+            reviewCountEdit.innerText=e.target.value.length;
+            if(e.target.value.length>500){
+                reviewCountEdit.classList.add("error");
+                reviewWriteEdit.classList.add("error");
+                document.querySelector(".review-edit .write-count .over-error").style.fontSize="0.875rem";
+            } else {
+                reviewCountEdit.classList.remove("error");
+                reviewWriteEdit.classList.remove("error");
+                document.querySelector(".review-edit .write-count .over-error").style.fontSize="0";
+            }
+    
+        });
+    }
 
-    });
     
 
     // 리뷰 별점 실시간 값 출력
     let starScoreList = document.getElementsByName('starScore');
 
-    for(let i of starScoreList){
-        i.addEventListener("input",()=>{
-            document.querySelector('.review-write .score-span').innerText= i.value;
-        });
+    if(starScoreList !=null) {
+        for(let i of starScoreList){
+            i.addEventListener("input",()=>{
+                document.querySelector('.review-write .score-span').innerText= i.value;
+            });
+        }
     }
 
     let starScoreListEdit = document.querySelectorAll('.star_score');
 
-    for(let i of starScoreListEdit){
-        i.addEventListener("input",()=>{
-            document.querySelector('.review-edit .score-span').innerText= i.value;
-        });
+    if(starScoreListEdit !=null) {
+        for(let i of starScoreListEdit){
+            i.addEventListener("input",()=>{
+                document.querySelector('.review-edit .score-span').innerText= i.value;
+            });
+        }
     }
+
 })
 
 // 리뷰 긴 것 더보기 상세 조회
@@ -188,8 +199,6 @@ function moreReviewFn(el){
         reviewMoreModal.style.display="none";
     });
 }
-
-
 
 
 /* 리뷰 더보기 js */
@@ -346,40 +355,59 @@ if(reviewMoreBtn !=null) {
     });
 }
 
-/* 리뷰 등록 */
+// 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
+function reviewMoreBtnFn(){
+    let reviewCountSpan = document.querySelector(".my-review>div>h1>span").innerText;
+    
+    if(reviewCountSpan<=3){
+        reviewMoreBtn.style.display="none";
+    } else {
+        reviewMoreBtn.style.display="block";
+    }
+}
 
-function reviewAddFn(e){
-    // 리뷰 쓰려는 상품의 상품 번호, 일정 번호
-    selectElement = document.querySelector(".review-write #reviewSaleList");
-    let productNo;
-    let productDtNo;
-    // 상품 선택
-    selectElement.addEventListener("change", function() {
-        // 선택된 option 요소
-        let selectedOption = this.options[this.selectedIndex];
-        
-        // 속성 값 가져오기
-        productNo = selectedOption.getAttribute("data-productno");
-        productDtNo = selectedOption.getAttribute("data-productdtno");
 
-        if(productNo){
-            if(productDtNo){
-                checkObj.selectElement = true;
-            }
+let checkObj = {
+    selectElement : false,
+    selectedStarScore : false,
+    reviewContent : false
+};
+
+// 리뷰 쓰려는 상품의 상품 번호, 일정 번호
+selectElement = document.querySelector(".review-write #reviewSaleList");
+let productNo;
+let productDtNo;
+// 상품 선택
+selectElement.addEventListener("change", function() {
+    // 선택된 option 요소
+    let selectedOption = this.options[this.selectedIndex];
+    
+    // 속성 값 가져오기
+    productNo = selectedOption.getAttribute("data-productno");
+    productDtNo = selectedOption.getAttribute("data-productdtno");
+
+    if(productNo){
+        if(productDtNo){
+            checkObj.selectElement = true;
+        }
+    }
+});
+
+// 별점
+selectedStarScore = document.querySelectorAll(".review-write input[name='starScore']");
+// 라디오 버튼 체크 변경 이벤트 처리
+selectedStarScore.forEach(star => {
+    star.addEventListener("change", () => {
+        if (star.checked) {
+            selectedScore = star.value;
+            if(selectedScore) checkObj.selectedStarScore = true;
         }
     });
+});
 
-    // 별점
-    selectedStarScore = document.querySelectorAll(".review-write input[name='starScore']");
-    // 라디오 버튼 체크 변경 이벤트 처리
-    selectedStarScore.forEach(el => {
-        el.addEventListener("change", () => {
-            if (el.checked) {
-                selectedScore = el.value;
-                if(selectedScore) checkObj.selectedStarScore = true;
-            }
-        });
-    });
+/* 리뷰 등록 */
+function reviewAddFn(e){
+    
 
     if(!checkObj.selectElement){
         e.preventDefault();
@@ -391,7 +419,7 @@ function reviewAddFn(e){
     if(reviewContent.trim().length == 0){
         e.preventDefault();
         alert("내용을 입력해주세요.");
-        reviewContent.focus();
+        document.querySelector(".review-write #reviewContent").focus();
         reviewContent = ""; // 띄어쓰기, 개행문자 제거
         return;
     }
@@ -424,7 +452,7 @@ function reviewAddFn(e){
                 reviewWriteModal.style.display="none";
 
                 reviewListFn();
-
+                reviewMoreBtnFn();
                 // location.href='/profile/'+loginUserNo;
 
             } else if (result=0){
@@ -449,14 +477,12 @@ function reviewAddFn(e){
     }
 }
 
-reviewAddSubmit = document.querySelector(".review-write .review-add-submit");
+// reviewAddSubmit = document.querySelector(".review-write .review-add-submit");
 
-reviewAddSubmit.addEventListener("click", e => {
-
-});
+// reviewAddSubmit.addEventListener("click", e => {});
 
 /* 비동기로 리뷰 목록 불러오기 (최신 3개) */
-function reviewListFn(){
+function reviewListFn(e){
 
     fetch("/profile/newReviewList",{
         method : "POST",
@@ -592,6 +618,7 @@ function reviewListFn(){
                 myReviewList.appendChild(newReviewItemUl);
                 
                 reviewMoreFn();
+                reviewMoreBtnFn();
             }
 
         }
@@ -621,19 +648,17 @@ function reviewDelFn(el){
     })
     .then(resp => resp.text())
     .then(result => {
+        reviewMoreBtnFn();
+        if(result>0){
+            alert("리뷰가 삭제 되었습니다.");
 
-        
-            if(result>0){
-                alert("리뷰가 삭제 되었습니다.");
+            reviewListFn();
+            // location.href='/profile/'+loginUserNo;
 
-                reviewListFn();
-
-                // location.href='/profile/'+loginUserNo;
-
-            } else if (result=0){
-                alert("리뷰 삭제 실패");
-            }
-        })
+        } else if (result=0){
+            alert("리뷰 삭제 실패");
+        }
+    })
         .catch(err=>{
             console.log(err);
         });
@@ -700,47 +725,52 @@ function reviewEditFn(el){
 }
 
 // 리뷰 수정
-function reviewEditSubmitFn(el){
+function reviewEditSubmitFn(e){
     // 리뷰 지우려는 상품의 상품 번호
-    let productNo;
+    let productNoEdit;
 
     // 속성 값 가져오기
-    productNo = parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.getAttribute("data-productno");
-    
+    productNoEdit = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.getAttribute("data-productno");
+
     // 별점
     let editStarScore = document.querySelectorAll(".review-edit input[name='starScore']");
+    selectedScoreEdit = document.querySelector('.review-edit .score-span').innerText;
+
     // 라디오 버튼 체크 변경 이벤트 처리
-    editStarScore.forEach(el => {
-        el.addEventListener("change", () => {
-            if (el.checked) {
-                selectedScore = el.value;
+    editStarScore.forEach(star => {
+        star.addEventListener("change", () => {
+            if (star.checked) {
+                selectedScoreEdit = star.value;
             }
         });
     });
 
-    reviewContent = document.querySelector(".review-edit #reviewContent").value;
-    if(reviewContent.trim().length == 0){
+    reviewContentEdit = document.querySelector(".review-edit #reviewContent").value;
+    if(reviewContentEdit.trim().length == 0){
         e.preventDefault();
         alert("내용을 입력해주세요.");
-        reviewContent.focus();
-        reviewContent = ""; // 띄어쓰기, 개행문자 제거
+        document.querySelector(".review-edit #reviewContent").focus();
+        reviewContentEdit = ""; // 띄어쓰기, 개행문자 제거
         return;
     }
 
-    if(selectedScore==0.0){
+    console.log(reviewContentEdit);
+
+    if(selectedScoreEdit==0.0){
         e.preventDefault();
         alert("별점을 선택해주세요.");
         return;
     }
+
 
     if(confirm("수정 하시겠습니까?")){
         fetch("/profile/reviewEdit",{
             method : "POST",
             headers : {"Content-Type" : "application/json"}, 
             body : JSON.stringify({
-                "productNo" : productNo,
-                "reviewMessage" : reviewContent,
-                "reviewStarsDouble" : selectedScore
+                "productNo" : productNoEdit,
+                "reviewMessage" : reviewContentEdit,
+                "reviewStarsDouble" : selectedScoreEdit
             })
         })
         .then(resp => resp.text())
@@ -749,17 +779,25 @@ function reviewEditSubmitFn(el){
             if(result>0){
                 alert("리뷰가 수정 되었습니다.");
 
+                reviewEditModal.style.display="none";
+
                 reviewListFn();
 
                 // location.href='/profile/'+loginUserNo;
 
             } else if (result=0){
                 alert("리뷰 수정 실패");
+                e.preventDefault();
             }
         })
         .catch(err=>{
+            e.preventDefault();
             console.log(err);
         });
+    
+    } else {
+        e.preventDefault();
+        return;
     }
 
 }
