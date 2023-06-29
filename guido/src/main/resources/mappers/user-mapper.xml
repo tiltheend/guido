@@ -18,6 +18,7 @@
 		<result property="primaryLanguage" column="PRIMARY_LANGUAGE"/>
 		<result property="emergencyContact" column="EMERGENCY_CONTACT"/>
 		<result property="faceImg" column="FACE_IMG"/>
+		<result property="countryCode" column="COUNTRY_CODE"/>
 		<!-- 가이드 -->
 		<result property="languageSkill" column="LANGUAGE_SKILL"/>
 		<result property="activityArea" column="ACTIVITY_AREA"/>

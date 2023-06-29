@@ -9,7 +9,7 @@
 		<result property="productContent" column="PRODUCT_CONTENT"/>
 		<result property="tourDuration" column="TOUR_DURATION"/>
 		<result property="productPrice" column="PRODUCT_PRICE"/>
-		<result property="productAddPrice" column="PRODUCT_ADD_PRICE"/>
+		<result property="productAddNotes" column="PRODUCT_ADD_PRICE"/>
 		<result property="maxTourist" column="PRODUCT_MAX_TOURIST"/>
 		<result property="minTourist" column="PRODUCT_MIN_TOURIST"/>
 		
@@ -38,7 +38,7 @@
 	</resultMap>
 	
 	
-		<resultMap type="TourCourse" id="tourcourse_rm">
+	<resultMap type="TourCourse" id="tourcourse_rm">
 		<id property="courseNo" column="COURSE_NO"/>
 		<result property="productNo" column="PRODUCT_NO"/>
 		<result property="courseName" column="COURSE_NAME"/>
@@ -69,6 +69,7 @@
 		<result property="createDate" column="CREATE_DT"/>
 		<result property="languageSkill" column="LANGUAGE_SKILL"/>
 		<result property="superGuideFl" column="SUPER_GUIDE_FL"/>
+		<result property="countryCode" column="COUNTRY_CODE"/>
 		
 		<result property="reviewCount" column="REVIEW_COUNT"/>
 		<result property="starAverage" column="STARS_AVERAGE"/>
