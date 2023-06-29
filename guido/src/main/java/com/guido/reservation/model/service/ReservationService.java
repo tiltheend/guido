@@ -2,6 +2,8 @@ package com.guido.reservation.model.service;
 
 import java.util.Map;
 
+import com.guido.common.model.dto.ProductOption;
+
 public interface ReservationService {
 
 	
@@ -18,5 +20,13 @@ public interface ReservationService {
 	 * @return mainCourse
 	 */
 	String selectMainCourseName(Integer productNo);
+
+
+
+	/** 예약하려는 상품의 옵션 조회
+	 * @param optionNo
+	 * @return option
+	 */
+	ProductOption selectProductOption(int optionNo);
 
 }

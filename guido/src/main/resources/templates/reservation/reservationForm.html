@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" th:href="@{/css/reservation/reservation.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    
 </head>
 <body th:object="${product}">
 
@@ -21,7 +23,6 @@
     
             <div class="reservation--top">
                 <div class="reservation--top__title">예약/결제</div>
-                
                 <div class="reservation--top__divisionline"></div>
             </div>
             
@@ -54,7 +55,7 @@
         
     
                             <div class="reservation--date__decription">
-                                <div>2023년 6월 7일 - 6월 9일</div>
+                                <div></div>
                             </div>
     
                             
@@ -168,8 +169,9 @@
         
     </form>
 
-    
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
+    
     <script th:inline="javascript">
         const input = document.querySelector("#phone");
         const loginUserCountryCode = /*[[${session.loginUser?.countryCode}]]*/ "로그인 회원 국가 코드";
@@ -209,6 +211,8 @@
         const minTourist = /*[[${product.minTourist}]]*/"최소 인원";
         const maxTourist = /*[[${product.maxTourist}]]*/"최대 인원";
         const price = /*[[${product.productPrice}]]*/"상품 가격";
+        const selectedTime = /*[[${option?.optionName}]]*/"옵션명";
+        const impCode = /*[[${impCode}]]*/"포트원 가맹점 식별코드"
         
     </script>
 

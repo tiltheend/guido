@@ -1,6 +1,8 @@
 package com.guido.reservation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.common.model.dto.Product;
-import com.guido.common.utility.Util;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.reservation.model.service.ReservationService;
 
 @Controller
 @RequestMapping("/reservation")
 @SessionAttributes("{loginUser}")
+@PropertySource("classpath:/config.properties")
 public class ReservationController {
 
 	@Autowired
@@ -24,6 +27,11 @@ public class ReservationController {
 
 	@Autowired
 	private ProductDetailService productService;
+	
+	
+	@Value("${portone.imp.code}")
+	private String impCode;
+	
 	
 	@GetMapping("/reservationform/{productNo}")
 	public String reserve(@PathVariable("productNo") int productNo, 
@@ -66,15 +74,19 @@ public class ReservationController {
 		
 		
 		String mainCourse = service.selectMainCourseName(productNo);
+		ProductOption option = null;
 		
+		if(optionNo!=-1)
+			option = service.selectProductOption(optionNo);
 		
 		model.addAttribute("guestCount", guests);
 		model.addAttribute("product", product);
 		model.addAttribute("reservationDate", date);
 		model.addAttribute("mainCourse", mainCourse);
+		model.addAttribute("selectedTime", option);
+		model.addAttribute("impCode", impCode);
 		
 //		System.out.println(Util.createReservationNo());
-		
 		
 		return "reservation/reservationForm";
 	}

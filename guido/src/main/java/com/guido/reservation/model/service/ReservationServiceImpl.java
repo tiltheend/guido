@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.guido.common.model.dto.ProductOption;
 import com.guido.reservation.model.dao.ReservationMapper;
 
 @Service
@@ -24,5 +25,12 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public String selectMainCourseName(Integer productNo) {
 		return mapper.selectMainCourseName(productNo);
+	}
+
+
+	// 상품의 옵션 조회
+	@Override
+	public ProductOption selectProductOption(int optionNo) {
+		return mapper.selectProductOption(optionNo);
 	}
 }

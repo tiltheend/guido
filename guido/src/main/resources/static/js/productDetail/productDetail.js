@@ -225,7 +225,6 @@ reserveBtn.addEventListener("click", e=>{
 
     /* 비로그인 유저 예약 막기 */
     if(loginUserNo == null){
-        e.preventDefault();
         alert("로그인 후 이용 가능합니다.");
         return;
     }
@@ -291,7 +290,7 @@ reserveBtn.addEventListener("click", e=>{
     const dateHidden = document.getElementById("dateHidden");
 
     guestHidden.value = inputGuestCount.innerText;
-    dateHidden.value = "2023-07-27";
+    dateHidden.value = "2023-12-31";
 
 });
 

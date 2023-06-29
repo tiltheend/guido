@@ -88,22 +88,65 @@ showTotalResevationCost();
   });
 
 
+
 /* 예약하고자 하는 날짜 출력 */
 const reservationDateDiv = document.querySelector(".reservation--date__decription>div");
+const orderDate = new Date(reservationDate);
 
 if(package==1){
-  
-  reservationDateDiv.innerText = reservationDate;
+
+    reservationDateDiv.innerText = reservationDate + " (" + selectedTime + ")";
   
 }else{
+
+  // 투어 마지막 날 계산
+  const newYear = orderDate.getFullYear();
+  const newMonth = ('0' + (orderDate.getMonth() + 1)).slice(-2);
+  const newDay = ('0' + orderDate.getDate()).slice(-2);
   
-  reservationDate.setDate(reservationDate.getDate() + 2);
+  const formattedDate = newYear + '년 ' + newMonth + '월 ' + newDay + '일';
   
-  const month = String(createDt.getMonth() + 1).padStart(2, "0");
-  const day = String(createDt.getDate()).padStart(2, "0");
   
-  const twoDaysLater = `${month}-${day}`;
+  orderDate.setDate(orderDate.getDate() + package-1);
   
-  reservationDateDiv.innerText = reservationDate + " - " + twoDaysLater;
+  const lastYear = orderDate.getFullYear();
+  const lastMonth = String(orderDate.getMonth() + 1).padStart(package-1, "0");
+  const lastDay = String(orderDate.getDate()).padStart(package-1, "0");
+  
+
+let twoDaysLater;
+
+if (lastYear !== newYear) {
+  twoDaysLater = `${lastYear}년 ${lastMonth}월 ${lastDay}일`;
+} else {
+  twoDaysLater = `${lastMonth}월 ${lastDay}일`;
+}
+  
+  reservationDateDiv.innerText = formattedDate + " ~ " + twoDaysLater;
 }
 
+
+  // 결제(포트원) 가맹점 식별 코드 
+  IMP.init(impCode); 
+
+
+
+// // 결제 요청
+// function requestPay() {
+
+//   IMP.request_pay({
+//     pg: "kcp.{상점ID}",
+//     pay_method: "card",
+//     merchant_uid: "ORD20180131-0000011",   // 주문번호
+//     name: "노르웨이 회전 의자",
+//     amount: 64900,                         // 숫자 타입
+//     buyer_email: "gildong@gmail.com",
+//     buyer_name: "홍길동",
+//     buyer_tel: "010-4242-4242",
+//     buyer_addr: "서울특별시 강남구 신사동",
+//     buyer_postcode: "01181"
+//   }, function (rsp) { // callback
+//     //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+
+//   });
+// }

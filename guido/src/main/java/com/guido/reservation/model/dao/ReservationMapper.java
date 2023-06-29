@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.guido.common.model.dto.ProductOption;
+
 @Mapper
 public interface ReservationMapper {
 
@@ -12,6 +14,9 @@ public interface ReservationMapper {
 
 	// 상품의 메인 코스명
 	String selectMainCourseName(Integer productNo);
+
+	// 상품의 옵션 조회
+	ProductOption selectProductOption(int optionNo);
 	
 
 }

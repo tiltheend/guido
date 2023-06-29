@@ -37,7 +37,6 @@ public class ProfileTouristController {
 	@GetMapping("/{userNo:[0-9]+}")
 	public String mypageTourist(
 			@PathVariable("userNo") int userNo,
-			@SessionAttribute("loginUser") User loginUser,
 			Model model
 			) {
 		
