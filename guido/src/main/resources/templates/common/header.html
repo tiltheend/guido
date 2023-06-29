@@ -31,9 +31,9 @@
 
         <!-- 메인 검색 (where, when, guest) -->
         <div class="main-search-box">
-            <button type="button" class="where-button" th:text="${location}?${location}:'Where'">Where</button>
+            <button type="button" class="where-button" th:text="${location != null and location != ''}?${location}:'Where'">Where</button>
             <button type="button" class="when-button" th:text="${term}?(${term}=='same'?${firstday}:${term}):'When'">When</button>
-            <button type="button" class="guest-button" th:text="${tourist}?${tourist}:'Guest'">Guest</button>
+            <button type="button" class="guest-button" th:text="${tourist != null  and tourist != ''}?${tourist}:'Guest'">Guest</button>
             <!-- <div class="search-icon"> -->
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="32" height="32" rx="16" fill="#1C797D"/>
@@ -114,11 +114,8 @@
     <div class="where-modal-bg modal"> <!-- 바탕 부분 -->
         <div class="where-modal"> <!-- 모달창 -->
             <div class="locations">
-                <!-- <div><img th:src="@{/images/icons/location_pin.svg}" alt=""> 검색어 포함되어 있는 지역명/여행코스</div>
-                <div><img th:src="@{/images/icons/location_pin.svg}" alt=""> 검색어 포함되어 있는 지역명/여행코스</div>
-                <div><img th:src="@{/images/icons/location_pin.svg}" alt=""> 검색어 포함되어 있는 지역명/여행코스</div>
-                <div><img th:src="@{/images/icons/location_pin.svg}" alt=""> 검색어 포함되어 있는 지역명/여행코스</div>
-                <div><img th:src="@{/images/icons/location_pin.svg}" alt=""> 검색어 포함되어 있는 지역명/여행코스</div> -->
+                <div><img th:src="@{/images/icons/location_pin.svg}" alt="">유연한 검색</div>
+                <!-- <div><img th:src="@{/images/icons/location_pin.svg}" alt=""> 검색어 포함되어 있는 지역명/여행코스</div> -->
             </div>
         </div>
     </div>

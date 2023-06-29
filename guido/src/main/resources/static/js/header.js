@@ -103,11 +103,7 @@ function updateGuestText(count) {
     guestText.textContent = `게스트 ${count}명`;
 }
 
-/* 
-function toggleModal(modal) {
-  modal.classList.toggle('show');
-} 
-*/
+
 
 
 /* *** 모달창 닫기 *** */
@@ -228,9 +224,13 @@ document.addEventListener("DOMContentLoaded", () =>{
   const location = document.querySelector('input[name="location"]');
   const whereModal = document.querySelector(".locations");
 
-  location.addEventListener("input", e => {
-    if(location.value.trim().length > 0){
-      fetch("/common/locationSearch?location=" + location.value.trim())
+
+  location.addEventListener("keyup", e => {
+
+    const searchTerm = location.value.trim();
+
+    if(searchTerm.length > 0){
+      fetch("/common/locationSearch?location=" + searchTerm)
       .then(resp => resp.json())
       .then(locationList => {
         console.log(locationList);
@@ -255,7 +255,9 @@ document.addEventListener("DOMContentLoaded", () =>{
 
             // 클릭 이벤트 핸들러 추가
             locationDiv.addEventListener("click", () => {
-              location.value = list; // 클릭된 항목의 값을 input 태그에 설정
+              location.value = list; 
+              /* document.querySelector(".where-modal").style.display = "none"; */
+              document.querySelector('input[name="firstday"]').focus();
             });
           }
 
@@ -273,15 +275,12 @@ document.addEventListener("DOMContentLoaded", () =>{
 
 // 클릭 이벤트 핸들러 추가
 whereModal.addEventListener("click", e => {
-  if (e.target.tagName === "DIV") { // 클릭된 요소가 div인지 확인
+  if (e.target.tagName === "div") { // 클릭된 요소가 div인지 확인
     const clickedItem = e.target.textContent; // 클릭된 항목의 텍스트 가져오기
     location.value = clickedItem; // input 태그에 값을 설정
+    /* document.querySelector(".where-modal").style.display = "none"; */
   }
 });
-
-
-
-
 
 
 

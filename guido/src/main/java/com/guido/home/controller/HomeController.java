@@ -59,8 +59,6 @@ public class HomeController {
 	
 	
 	
-	
-	
 	// 검색 페이지
 	@GetMapping("/index")
 	public String searchResult(Model model
@@ -80,24 +78,14 @@ public class HomeController {
 		List<Product> searchResultList = service.selectSearchResult(map);
 //		System.out.println(searchResultList);
 		
-		
-		
 		String term = null;
-		
-		if(firstday!=""&&lastday!=""&&firstday.equals(lastday)) {
-			term = "same";
-		}
-		
-		if(!firstday.equals(lastday)) {
-			term = firstday + " ~ " + lastday;
-		}
-		
+		if(firstday!=""&&lastday!=""&&firstday.equals(lastday)) term = "same";
+		if(!firstday.equals(lastday)) term = firstday + " ~ " + lastday;
 		
 		model.addAttribute("searchResultList", searchResultList);
 		model.addAttribute("location", location);
 		model.addAttribute("term", term);
 		model.addAttribute("tourist", tourist);
-		
 		
 		return "common/searchResult";
 	}
@@ -107,27 +95,20 @@ public class HomeController {
 	@GetMapping(value="/locationSearch", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public List<String> locationSearch(@RequestParam(value="location", required=false) String location){
-		
-//		System.out.println(location);
-//		List<String> a = service.locationSearch(location);
-//		System.out.println(a);
-		
 		return service.locationSearch(location);
-//		return null;
 	}
 	
 	
-	// 테마 검색 상품 목록 조회
-//	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
-//	@ResponseBody
-//	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
-//	    return service.selectThemeProdList(themeCode);
-//	}
+	// 검색 페이지 테마 검색 상품 목록 조회
+	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
+	    return service.selectSearchThemeProdList(themeCode);
+	}
 	
 	
 	
-	
-	
+
 	
 	
 	

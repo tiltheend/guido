@@ -37,6 +37,9 @@ public interface HomeService {
 	// 헤더 위치 검색
 	List<String> locationSearch(String location);
 
+	// 검색 페이지 테마 검색 상품 목록 조회 
+	List<Product> selectSearchThemeProdList(int themeCode);
+
 
 
 

@@ -31,7 +31,7 @@
         <div class="categori-icon-box">
             <div th:each="themeType : ${application.themeTypeList}">
                 <!-- <a th:href="@{#}"> -->
-                <a th:onclick="|loadMoreProducts(${themeType.THEME_CODE})|" class="theme-icon-link">
+                <a th:onclick="|loadSelectedProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
                 <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
                     <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
                     <button th:text="${themeType.THEME_NAME}">테마 이름</button>

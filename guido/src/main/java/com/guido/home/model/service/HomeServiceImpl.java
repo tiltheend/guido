@@ -72,6 +72,12 @@ public class HomeServiceImpl implements HomeService {
 		return mapper.locationSearch(location);
 	}
 
+	// 검색 페이지 테마 검색 상품 목록 조회 
+	@Override
+	public List<Product> selectSearchThemeProdList(int themeCode) {
+		return mapper.selectSearchThemeProdList(themeCode);
+	}
+
 
 
 	
