@@ -65,7 +65,7 @@ public class ProductUploadController {
 //		product.setUserNo(loginMember.getUserNo());
 		
 		
-		product.setProductAddPrice(String.join("^^^", additionalList));
+		product.setProductAddNotes(String.join("^^^", additionalList));
 			
 		int productNo = service.productUpload(product,images);
 	
@@ -108,9 +108,9 @@ public class ProductUploadController {
 			
 			List<String> addNotesList = null;
 			
-			if(product.getProductAddPrice()!=null) {
+			if(product.getProductAddNotes()!=null) {
 			
-				addNotesList = Arrays.asList(product.getProductAddPrice().split("\\^\\^\\^"));
+				addNotesList = Arrays.asList(product.getProductAddNotes().split("\\^\\^\\^"));
 				
 			}
 			
@@ -139,7 +139,7 @@ public class ProductUploadController {
 				,@PathVariable("productNo") int productNo
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
 	
-				product.setProductAddPrice(String.join("^^^", additionalList));
+				product.setProductAddNotes(String.join("^^^", additionalList));
 				product.setProductNo(productNo);
 	
 				int rowCount = service.productEdit(product,images,deleteList);

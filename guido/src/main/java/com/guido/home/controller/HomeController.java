@@ -100,11 +100,11 @@ public class HomeController {
 	
 	
 	// 검색 페이지 테마 검색 상품 목록 조회
-	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
-	    return service.selectSearchThemeProdList(themeCode);
-	}
+//	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
+//	@ResponseBody
+//	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
+//	    return service.selectSearchThemeProdList(themeCode);
+//	}
 	
 	
 	
