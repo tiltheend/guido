@@ -1,4 +1,4 @@
-<div class="pagination-container">
+<div th:unless="${map.pagination.listCount == 0}" class="pagination-container">
     <!-- 검색 X인 경우의 페이지네이션 -->
     <ul th:unless="${param.query}" class="pagination">
         <!-- 첫 페이지로 이동 -->

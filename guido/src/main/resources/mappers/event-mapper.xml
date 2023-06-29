@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.guido.home.model.dao.HomeMapper">
+<mapper namespace="com.guido.event.model.dao.EventMapper">
 	
+	<resultMap type="Event" id="event_rm">
+		<id property="eventNo" column="EVENT_NO"/>
+		<result property="eventName" column="EVENT_NAME"/>
+		<result property="eventContent" column="EVENT_CONTENT"/>
+		<result property="eventEndDt" column="EVENT_END_DT"/>
+		<result property="createDt" column="CREATE_DT"/>
+		<result property="state" column="EVENT_STATE"/>
+		<collection property="fileList"
+					select="selectFileList"
+					column="EVENT_NO"
+					javaType="java.util.ArrayList"
+					ofType="File"/>
+	</resultMap>
 	
+	<resultMap type="File" id="file_rm">
+		<id property="fileNo" column="FILE_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="eventNo" column="EVENT_NO"/>
+		<result property="qnaNo" column="QNA_NO"/>
+		<result property="fileOrder" column="FILE_ORDER"/>
+		<result property="filePath" column="FILE_PATH"/>
+	</resultMap>
 	
+	<select id="selectEvent" resultMap="event_rm">
+		SELECT EVENT_NO, EVENT_NAME, EVENT_CONTENT, TO_CHAR(CREATE_DT,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') CREATE_DT
+		FROM EVENT
+		WHERE EVENT_NO=#{eventNo}
+	</select>
 	
+	<select id="selectFileList" resultMap="file_rm">
+		SELECT FILE_ORDER, FILE_PATH FROM "FILE"
+		WHERE EVENT_NO = #{eventNo}
+		ORDER BY FILE_ORDER
+	</select>
 </mapper>

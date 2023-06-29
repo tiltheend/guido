@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,121 +40,35 @@
 
             <div class="content-count-and-search">
                 <!-- 카운트 -->
-                <div class="count-container">총 <span>10</span>건</div>
+                <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
                 <!-- 검색창 -->
                 <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
             </div>
 
             <!-- 테이블 -->
-            <table>
+            <table id="table">
 
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
-                    <tr><th class="col-checkbox"><input type="checkbox" name="" id=""></th><th class="col-number">회원번호</th><th class="col-email">회원 이메일</th>
+                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">회원번호</th><th class="col-email">회원 이메일</th>
                     <th class="col-date">요청일</th><th class="col-confirmationNo">확인증 번호</th><th class="col-approval">승인</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>10</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>9</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>8</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>7</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>6</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>5</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>4</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>3</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>2</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td>1</td>
-                        <td>email@gmail.com</td>
-                        <td>2023-06-07</td>
-                        <td>HRD-20230531122740-73855</td>
-                        <td><button class="btn btn6"></button></td>
-                    </tr>
+                    <th:block th:each="user : ${map.list}" th:object="${user}">
+                        <tr>
+                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{USER_NO}"></td>
+                            <td th:text="*{USER_NO}">회원번호</td>
+                            <td th:text="*{USER_EMAIL}">이메일</td>
+                            <td th:text="*{CREATE_DT}">가입일</td>
+                            <td th:text="*{CONFIRMATION_NO}"></td>
+                            <td><button class="btn btn6"></button></td>
+                        </tr>
+                    </th:block>
                 </tbody>
             </table>
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li><a href="#">&lt;&lt;</a></li>
-                    <li><a href="#">&lt;</a></li>
-                    <li><a href="#" class="current">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li><a href="#">&gt;</a></li>
-                    <li><a href="#">&gt;&gt;</a></li>
-                </ul>
-            </div>
+            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
+            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>
