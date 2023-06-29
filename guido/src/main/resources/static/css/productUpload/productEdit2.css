@@ -145,7 +145,7 @@ footer {
   border-radius: 10px;
   cursor: pointer;
 }
-input[name='themeCode']:checked + label {
+input[name='tourItems']:checked + label {
   border: 2px solid rgb(59, 119, 124);
   background-color: rgb(185, 215, 218);
   color: white;
@@ -279,10 +279,6 @@ button:disabled:hover {
   transition-property: -ms-transform, -webkit-transform, transform,
     background-color, border-color !important;
   transition-duration: 0.25s !important;
-}
-
-input[type='radio']:checked + .theme-img {
-  background-color: red;
 }
 
 #page3 > div.tour-theme img {
@@ -1079,14 +1075,11 @@ ul {
   > span:nth-child(3) {
   width: 10%;
 }
-/* .selected {
-  border: 2px solid #0f4957;
-  background-color: #408c8c;
+input[name='tourTheme']:checked + label {
+  border: 2px solid #2db400;
+  background-color: #2db400;
   color: white;
   font-weight: bold;
-} */
-input[type='radio']:checked {
-  background-color: red;
 }
 
 #submitBtn {
@@ -1111,4 +1104,10 @@ label[for='img7'],
 label[for='img6'],
 label[for='img5'] {
   display: none;
+}
+input[name='tourTheme']:checked {
+  border: 2px solid #2db400;
+  background-color: #2db400;
+  color: white;
+  font-weight: bold;
 }
