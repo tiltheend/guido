@@ -69,14 +69,16 @@
 					 #{productContent}, 
 					 #{productPrice},
 					 #{productAddPrice}, 
-					  10, 
-					  20, 
+					  #{minTourist}, 
+					  #{maxTourist}, 
 					  9,
-					  7, 
+					 #{themeCode}, 
 					  'N', 
 					  SYSDATE,
 					  'English',
-					  0,#{regionName},#{tourDuration})
+					  0,
+					  #{regionName},
+					  #{tourDuration})
 	</insert>
 	
 	<!-- 여행 상품 이미지 리스트 삽입-->
@@ -97,7 +99,6 @@
 		UPDATE "PRODUCT" SET
 		PRODUCT_NAME = #{productName},
 		PRODUCT_CONTENT = #{productContent},
-		PRODUCT_PACKAGE = #{productPackage},
 		PRODUCT_PRICE = #{productPrice},
 		PRODUCT_ADD_PRICE = #{productAddPrice}
 		WHERE PRODUCT_NO = #{productNo}
@@ -105,7 +106,7 @@
 	
 	 <!-- 특정 상품 이미지 목록 조회 -->
 	 <select id="selectImageList" resultMap="file_rm">
-		 SELECT * FROM "FILE"
+		SELECT * FROM "FILE"
 		WHERE PRODUCT_NO = #{productNo}
 		ORDER BY FILE_ORDER
 	 </select>

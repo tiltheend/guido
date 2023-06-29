@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>여행 상품 수정</title>
     <link rel="stylesheet" th:href="@{/css/productUpload/productEdit2.css}" />
     <link rel="stylesheet" th:href="@{/css/productUpload/main.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/style.css}">
@@ -21,7 +21,6 @@
     <header>
       <!-- 메인 로고 -->
       <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
-      
   </header>
   <form th:action="@{/productDetail/product/${productNo}/edit}" method="post" enctype="multipart/form-data" id="productUploadFrm">
     <!-- 1페이지 -->
@@ -112,14 +111,14 @@
           알려주세요.</span>
       </div>
       
-      <div class="tour-theme">
-        <span th:each="tourTheme : ${tourTheme}" class="theme-img">
-           <input type="checkbox" name="tourTheme" class="hidden2" id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeName}">
+      <div div class="tour-theme">
+        <label th:each="tourTheme : ${tourTheme}" class="theme-img">
+           <input type="radio" name="themeCode" class="hidden2" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
           <img th:src="${tourTheme.themeImg}" alt="힐링 투어">
           <!-- <span th:text="${tourTheme.themeName}">테마이름</span> -->
          
-          <label th:text="${tourTheme.themeName}" class="theme-img" for="">테마이름</label>
-        </span>
+          <span th:text="${tourTheme.themeName}" class="theme-img" for="">테마이름</span>
+        </label>
       </div>
 
 
@@ -299,14 +298,10 @@
         />
         <span class="delete-image">&times;</span>
         <div class="add-image add-image-thumbnail"><img th:src="@{/images/productUpload/add-image.png}" alt="" class="img-inner-img"></div>
-        <!-- <span class="add-image add-image-text"><span>5장 이상의 사진을 선택하세요.</span></span> -->
-        <!-- <span class="add-image add-image-text">5장 이상의 사진을 선택하세요.</span>
-        <span class="add-image add-image-text2">기기에서 업로드</span> -->
         <div class="add-image3 add-image-text">5장 이상의 사진을 선택하세요.</div>
         <div class="add-image2 add-image-text2">기기에서 업로드</div>
       </label> 
       </div>
-        <!-- <div>여기로 사진을 끌어다 놓으세요.</div> -->
        
       </div>
 
@@ -386,10 +381,14 @@
       </div>
       <span id="addWarning" hidden><i class="fa-sharp fa-solid fa-bomb"></i>이미 입력한 정보입니다.</span>
           <div id="add-container">
-            <label class="added-element">
-              <input type="hidden" name="productAddPrice" value="">
-              <i class="fa-sharp fa-solid fa-xmark" style="color: rgb(0,0,0);"></i>
-            </label>
+           <!-- 반복 생성할 코드 -->
+            <th:block th:each="item : ${addNotesList}">
+              <label class="added-element" th:text="${item}">
+                <input type="hidden" name="productAddPrice" value="">
+                <i class="fa-sharp fa-solid fa-xmark" style="color: rgb(0, 0, 0);"></i>
+              </label>
+            </th:block>
+
           </div>
      
     </main>
@@ -516,7 +515,7 @@
   <script th:src="@{/js/productUpload/tourCourse.js}"></script>
  
   <script
-  src="https://kit.fontawesome.com/f7459b8054.js"
+  th:src="@{https://kit.fontawesome.com/f7459b8054.js}"
   crossorigin="anonymous"
 ></script>
 <script th:inline="javascript">
@@ -524,18 +523,18 @@
 
   const previewList = document.querySelectorAll("img.preview");
 
-  const productAddPrice =  /*[[${product.productAddPrice}]]*/ ;
+  const addNotesList =  /*[[${addNotesList}]]*/ [];
 
-  const addPriceList = productAddPrice.split("^^^");
+  // const addNotesList = /*[[${addNotesList}]]*/ ;
+  // const addPriceList = productAddPrice.split("^^^");
   // console.log(addPriceArray);
   // console.log(productAddPrice);
-  console.log(productAddPrice);
-  console.log(addPriceList);
+  // console.log(productAddPrice);
+  console.log(addNotesList);
 
   for(let img of imageList){
       previewList[img.fileOrder].src = img.filePath;
   }
-console.log(addPriceList[0])
 
 
 </script>

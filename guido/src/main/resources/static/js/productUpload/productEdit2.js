@@ -601,6 +601,9 @@ const addImage3 = document.querySelectorAll('.add-image3');
 
 for (let i = 0; i < inputImage.length; i++) {
   //파일이 선택되거나, 선택 후 취소 되었을 때
+  addImage2[i].style.display = 'none';
+  addImage[i].style.display = 'none';
+  addImage3[i].style.display = 'none';
   inputImage[i].addEventListener('change', (e) => {
     const file = e.target.files[0]; // 선택된 파일의 데이터
 

@@ -1,6 +1,7 @@
 package com.guido.product.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,17 +70,6 @@ public class ProductUploadController {
 		int productNo = service.productUpload(product,images);
 	
 		System.out.println(product);
-		System.out.println(product.getProductAddPrice());
-		System.out.println(additionalList);
-		System.out.println(additionalList.get(0));
-		System.out.println(additionalList.get(1));
-		System.out.println(additionalList.get(2));
-
-		
-		
-	
-		
-		
 //	        String[] arr = str.split(",");
 //	        
 //	        for (String item : arr) {
@@ -111,11 +101,30 @@ public class ProductUploadController {
 				@PathVariable("productNo") int productNo
 				,Model model) {
 			
+			
+			
 			Product product = productDetailService.selectProduct(productNo);
+			List<TourTheme> tourTheme = service.selectTourTheme();
+			
+			List<String> addNotesList = null;
+			
+			if(product.getProductAddPrice()!=null) {
+			
+				addNotesList = Arrays.asList(product.getProductAddPrice().split("\\^\\^\\^"));
+				
+			}
+			
 			model.addAttribute("product", product);
+			model.addAttribute("addNotesList", addNotesList);
+			model.addAttribute("tourTheme", tourTheme);
 			
 //			System.out.println(product.getImageList().get(0).getFilePath());
-			System.out.println(product.getProductAddPrice());
+//			System.out.println(product.getProductAddPrice());
+			
+			// 구분자로 문자열 나누기(addNotes)
+		
+			System.out.println(product);
+
 			
 			return "productUpload/productEdit2";
 		}
@@ -130,6 +139,7 @@ public class ProductUploadController {
 				,@PathVariable("productNo") int productNo
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
 	
+				product.setProductAddPrice(String.join("^^^", additionalList));
 				product.setProductNo(productNo);
 	
 				int rowCount = service.productEdit(product,images,deleteList);
@@ -142,7 +152,7 @@ public class ProductUploadController {
 					path += "/productDetail/" + "product/" + productNo;
 				}else {
 					message = "상품 수정 실패,";
-					path += "edit";
+					path += "/productDetail/" + "product/" + productNo + "/edit";
 				}
 				
 				ra.addFlashAttribute("message", message);

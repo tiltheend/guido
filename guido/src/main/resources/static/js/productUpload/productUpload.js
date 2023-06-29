@@ -44,15 +44,15 @@ const updatePage = () => {
     document.querySelector('.text4').innerHTML = '';
     typing4();
   }
-  if (currentPage == 6) {
+  if (currentPage == 5) {
     titleCharCheck();
     inputTitle.focus();
   }
-  if (currentPage == 7) {
+  if (currentPage == 6) {
     contentCharCheck();
     inputContent.focus();
   }
-  if (currentPage == 10) {
+  if (currentPage == 9) {
     disableNextButton();
   }
 };
@@ -329,134 +329,6 @@ const tourThemes = document.querySelectorAll('.theme-img');
 // }
 // 초기값 설정
 
-// 4페이지
-let minPrice = document.getElementById('minPrice');
-let minFee = document.getElementById('minFee');
-let minTotal = document.getElementById('minTotal');
-let maxPrice = document.getElementById('maxPrice');
-let maxFee = document.getElementById('maxFee');
-let maxTotal = document.getElementById('maxTotal');
-
-const minusBtn = document.querySelector('#minusBtn');
-const plusBtn = document.querySelector('#plusBtn');
-
-const priceRange = document.getElementById('priceRange');
-const price = document.getElementById('price');
-
-priceRange.addEventListener('input', function () {
-  var result1 = document.getElementById('minResult');
-  var value1 = parseInt(result1.innerHTML);
-  var result2 = document.getElementById('maxResult');
-  var value2 = parseInt(result2.innerHTML);
-
-  price.textContent = priceRange.value;
-  minPrice.innerText = '₩ ' + value1 * price.textContent + ' 원';
-  minFee.innerText = '₩ ' + (value1 * price.textContent) / 10 + ' 원';
-  minTotal.innerText = '₩ ' + value1 * price.textContent * 0.9 + ' 원';
-  minPrice.innerText = '₩ ' + value1 * price.textContent + ' 원';
-  minFee.innerText = '₩ ' + (value1 * price.textContent) / 10 + ' 원';
-  minTotal.innerText = '₩ ' + value1 * price.textContent * 0.9 + ' 원';
-
-  maxPrice.innerText = '₩ ' + value2 * price.textContent + ' 원';
-  maxFee.innerText = '₩ ' + (value2 * price.textContent) / 10 + ' 원';
-  maxTotal.innerText = '₩ ' + value2 * price.textContent * 0.9 + ' 원';
-  maxPrice.innerText = '₩ ' + value2 * price.textContent + ' 원';
-  maxFee.innerText = '₩ ' + (value2 * price.textContent) / 10 + ' 원';
-  maxTotal.innerText = '₩ ' + value2 * price.textContent * 0.9 + ' 원';
-});
-
-function minusMin() {
-  var result = document.getElementById('minResult');
-  var value = parseInt(result.innerHTML);
-  if (value > 0) {
-    value--;
-    result.innerHTML = value;
-    document.getElementById('maxWarning').style.display = 'none';
-  }
-
-  minPrice.innerText = '₩ ' + value * price.textContent + ' 원';
-  minFee.innerText = '₩ ' + (value * price.textContent) / 10 + ' 원';
-  minTotal.innerText = '₩ ' + value * price.textContent * 0.9 + ' 원';
-}
-
-function plusMin() {
-  var minResult = parseInt(document.getElementById('minResult').innerHTML);
-  var maxResult = parseInt(document.getElementById('maxResult').innerHTML);
-  var result = document.getElementById('minResult');
-  var value = parseInt(result.innerHTML);
-
-  if (minResult >= maxResult) {
-    document.getElementById('maxWarning').style.display = 'flex';
-  } else {
-    value++;
-    result.innerHTML = value;
-    document.getElementById('maxWarning').style.display = 'none';
-  }
-  minPrice.innerText = '₩ ' + value * price.textContent + ' 원';
-  minFee.innerText = '₩ ' + (value * price.textContent) / 10 + ' 원';
-  minTotal.innerText = '₩ ' + value * price.textContent * 0.9 + ' 원';
-}
-
-function minusMax() {
-  var minResult = parseInt(document.getElementById('minResult').innerHTML);
-  var maxResult = parseInt(document.getElementById('maxResult').innerHTML);
-  var result = document.getElementById('maxResult');
-  var value = parseInt(result.innerHTML);
-
-  if (maxResult > minResult) {
-    if (value > 0) {
-      value--;
-      result.innerHTML = value;
-    }
-  } else {
-    document.getElementById('maxWarning').style.display = 'flex';
-  }
-  maxPrice.innerText = '₩ ' + value * price.textContent + ' 원';
-  maxFee.innerText = '₩ ' + (value * price.textContent) / 10 + ' 원';
-  maxTotal.innerText = '₩ ' + value * price.textContent * 0.9 + ' 원';
-}
-
-function plusMax() {
-  var minResult = parseInt(document.getElementById('minResult').innerHTML);
-  var maxResult = parseInt(document.getElementById('maxResult').innerHTML);
-  var result = document.getElementById('maxResult');
-  var value = parseInt(result.innerHTML);
-  value++;
-  result.innerHTML = value;
-  document.getElementById('maxWarning').style.display = 'none';
-  if (maxResult > minResult) {
-    document.getElementById('maxWarning').style.display = 'none';
-  }
-  maxPrice.innerText = '₩ ' + value * price.textContent + ' 원';
-  maxFee.innerText = '₩ ' + (value * price.textContent) / 10 + ' 원';
-  maxTotal.innerText = '₩ ' + value * price.textContent * 0.9 + ' 원';
-}
-
-document
-  .querySelector('#priceRange')
-  .addEventListener('input', function (event) {
-    var gradient_value = 100 / event.target.attributes.max.value;
-    event.target.style.background =
-      'linear-gradient(to right, #1a1a1a 0%, #1a1a1a ' +
-      gradient_value * event.target.value +
-      '%, rgb(236, 236, 236) ' +
-      gradient_value * event.target.value +
-      '%, rgb(236, 236, 236) 100%)';
-  });
-
-// function plusMin() {
-//   var minResult = parseInt(document.getElementById('minResult').innerHTML);
-//   var maxResult = parseInt(document.getElementById('maxResult').innerHTML);
-
-//   if (minResult > maxResult) {
-//     var result = document.getElementById('minResult');
-//     var value = parseInt(result.innerHTML);
-//     value--;
-//     result.innerHTML = value;
-//   } else {
-//     document.getElementById('maxWarning').style.display = 'flex';
-//   }
-// }
 //6페이지
 const inputTitle = document.getElementById('inputTitle'); // 제목 input
 const titleCountContainer = document.getElementById('titleCountContainer'); // 제목 글자 수 카운트컨테이너
@@ -808,7 +680,10 @@ for (let i = 0; i < inputImage.length; i++) {
     });
   });
 }
-// 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가 생성
+// 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가
+const imgId1 = document.getElementById('imgId1');
+const imgId2 = document.getElementById('imgId2');
+const imgId3 = document.getElementById('imgId3');
 const imgId4 = document.getElementById('imgId4');
 const imgId5 = document.getElementById('imgId5');
 const imgId6 = document.getElementById('imgId6');
@@ -830,3 +705,6 @@ const imgId8 = document.getElementById('imgId8');
 //     nextBtn.disabled = false;
 //   }
 // };
+if (imgId1.src !== '') {
+  alert('Please enter');
+}
