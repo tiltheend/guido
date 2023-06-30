@@ -19,6 +19,8 @@ import com.guido.common.model.dto.TourTheme;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.product.model.service.ProductUploadService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 //@SessionAttributes({"loginUser"})
 //@RequestMapping("/product")
@@ -65,7 +67,7 @@ public class ProductUploadController {
 //		product.setUserNo(loginMember.getUserNo());
 		
 		
-		product.setProductAddPrice(String.join("^^^", additionalList));
+		product.setProductAddNotes(String.join("^^^", additionalList));
 			
 		int productNo = service.productUpload(product,images);
 	
@@ -108,9 +110,9 @@ public class ProductUploadController {
 			
 			List<String> addNotesList = null;
 			
-			if(product.getProductAddPrice()!=null) {
+			if(product.getProductAddNotes()!=null) {
 			
-				addNotesList = Arrays.asList(product.getProductAddPrice().split("\\^\\^\\^"));
+				addNotesList = Arrays.asList(product.getProductAddNotes().split("\\^\\^\\^"));
 				
 			}
 			
@@ -137,9 +139,10 @@ public class ProductUploadController {
 				,@RequestParam(value="images", required=false) List<MultipartFile> images
 				,@RequestParam(value="productAddPrice", required=false) List<String> additionalList
 				,@PathVariable("productNo") int productNo
+				,HttpSession session
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
 	
-				product.setProductAddPrice(String.join("^^^", additionalList));
+				product.setProductAddNotes(String.join("^^^", additionalList));
 				product.setProductNo(productNo);
 	
 				int rowCount = service.productEdit(product,images,deleteList);
@@ -152,7 +155,7 @@ public class ProductUploadController {
 					path += "/productDetail/" + "product/" + productNo;
 				}else {
 					message = "상품 수정 실패,";
-					path += "/productDetail/" + "product/" + productNo + "/edit";
+					path += "edit";
 				}
 				
 				ra.addFlashAttribute("message", message);

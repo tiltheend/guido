@@ -9,11 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.User;
 import com.guido.home.model.service.HomeService;
 
 
@@ -28,7 +33,9 @@ public class HomeController {
 	
 	// 메인 페이지 이동 + 상품 목록 조회
 	@GetMapping("/home")
-	public String mainPage(Model model) {
+	public String mainPage(Model model
+//						, @RequestParam("productNo") int productNo
+						, @SessionAttribute(value="loginUser", required=false) User loginUser) {
 
 		// 상품 목록 조회
 		List<Product> productList = service.selectProductList();
@@ -45,6 +52,20 @@ public class HomeController {
 		// 추천 상품 목록 조회
 		List<Product> recommProductList = service.selectRecommProductList();
 		model.addAttribute("recommProductList", recommProductList);
+		
+		
+		// 관심상품 등록 여부 체크
+//		int wishOrNot = -1;
+//		
+//		if(loginUser != null) {
+//			
+//			Map<String, Object> map = new HashMap<>();
+//			map.put("productNo", productNo);
+//			map.put("userNo", loginUser.getUserNo());
+//			
+//			wishOrNot = service.selectWishListCheck(map);
+//		}
+//		model.addAttribute("wishOrNot", wishOrNot);		
 		
 		return "common/index";
 	}
@@ -100,10 +121,19 @@ public class HomeController {
 	
 	
 	// 검색 페이지 테마 검색 상품 목록 조회
-	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
+//	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
+//	@ResponseBody
+//	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
+//	    return service.selectSearchThemeProdList(themeCode);
+//	}
+	
+	
+	
+	// 관심상품 등록
+	@PostMapping("/updateWishList")
 	@ResponseBody
-	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
-	    return service.selectSearchThemeProdList(themeCode);
+	public int updateWish(@RequestBody Map<String, Integer> paramMap) {
+		return service.updateWishList(paramMap);
 	}
 	
 	

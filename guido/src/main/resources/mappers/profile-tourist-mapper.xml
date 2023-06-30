@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.guido.profile.model.dao.ProfileTouristMapper">
-	
-<!--
-	private int userNo; // 번호
-	private String userEmail; // 이메일(아이디)
-	private String userPassword; // 비밀번호
-	private String userName; // 이름
-	private String userTel; // 전화번호
-	private String profileImage; // 프로필 이미지
-	private String createDate; // 가입일
-	private String userType; // 타입(G: 가이드, T: 여행객, M: 관리자)
-	private String ; // 상태(Y: 미승인(가이드), N: 정상, B: 블락, D: 탈퇴)
--->
+
 
 	<resultMap id="user_rm" type="User">
 		<id property="userNo" column="USER_NO"/>
@@ -43,6 +32,8 @@
 	 	<result property="productDateNo" column="PRODUCT_DT_NO" />
 	 	
 	 	<result property="thumbnail" column="FILE_PATH" />
+	 	<result property="productName" column="PRODUCT_NAME" />
+	 	<result property="productDate" column="PRODUCT_DT" />
 	</resultMap>
 	
 	<resultMap type="Review" id="review_rm">
@@ -175,5 +166,41 @@
 		WHERE PRODUCT_NO= #{productNo}
 		AND USER_NO = #{userNo}
 	</update>
+	
+	<!-- 구매 내역 가져오기 (자세한) -->
+	<select id="myReservation" resultMap="reservation_rm">
+		SELECT RESERVATION_NO, R.PRODUCT_NO, R.USER_NO, RESERVATION_STATE, R.PRODUCT_DT_NO,
+		    (SELECT FILE_PATH FROM "FILE" F 
+		    WHERE F.PRODUCT_NO = R.PRODUCT_NO
+		    AND F.FILE_ORDER = 1) AS FILE_PATH,
+		    (SELECT PD.PRODUCT_DT FROM PRODUCT_DT PD
+		    WHERE PD.PRODUCT_DT_NO = R.PRODUCT_DT_NO) AS PRODUCT_DT,
+		    (SELECT P.PRODUCT_NAME FROM PRODUCT P
+		    WHERE P.PRODUCT_NO = R.PRODUCT_NO) AS PRODUCT_NAME
+		FROM RESERVATION R
+		WHERE R.USER_NO = #{userNo}
+		ORDER BY R.PRODUCT_NO DESC
+		FETCH FIRST 3 ROWS ONLY
+	</select>
+
+	 <!-- 구매자 예약 목록 더보기 (3개씩) -->
+	 <select id="myReservationMore" resultMap="reservation_rm">
+		SELECT * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY R.PRODUCT_NO) AS NUM,
+				RESERVATION_NO, R.PRODUCT_NO, R.USER_NO, RESERVATION_STATE, R.PRODUCT_DT_NO,
+			    (SELECT FILE_PATH FROM "FILE" F 
+			    WHERE F.PRODUCT_NO = R.PRODUCT_NO
+			    AND F.FILE_ORDER = 1) AS FILE_PATH,
+			    (SELECT PD.PRODUCT_DT FROM PRODUCT_DT PD
+			    WHERE PD.PRODUCT_DT_NO = R.PRODUCT_DT_NO) AS PRODUCT_DT,
+			    (SELECT P.PRODUCT_NAME FROM PRODUCT P
+			    WHERE P.PRODUCT_NO = R.PRODUCT_NO) AS PRODUCT_NAME
+			FROM RESERVATION R
+			WHERE R.USER_NO = 25
+			ORDER BY R.PRODUCT_NO
+			)
+		<![CDATA[ WHERE NUM > #{startReservationNum} ]]>
+			ORDER BY NUM
+	 </select>
 	
 </mapper>

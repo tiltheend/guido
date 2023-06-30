@@ -492,7 +492,7 @@ button:disabled:hover {
   color: black;
   font-weight: bolder;
   cursor: pointer;
-  display: none;
+  /* display: none; */
 }
 .add-image {
   position: absolute;

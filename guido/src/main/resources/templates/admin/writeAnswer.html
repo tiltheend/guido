@@ -52,14 +52,15 @@
                         <a th:href="@{file.filePath}" data-lightbox="gallery"><img th:src="@{file.filePath}"></img></a>
                     </th:block>
                 </div>
-                <form>
+                <form th:action="@{/admin/writeAnswer}" method="POST">
                     <div class="answer-area">
                         <div>
                             <img th:src="@{/images/admin/material-symbols_reply.svg}" alt="">
                         </div>
-                        <textarea name="answer" id="answer" th:text="${qna.qnaAnswer}"></textarea>
+                        <textarea name="qnaAnswer" id="answer" th:text="${qna.qnaAnswer}"></textarea>
                     </div>
                     <div class="btn-area"><button type="submit" class="sbmt-btn">등록</button></div>
+                    <input type="hidden" name="qnaNo" th:value="${qna.qnaNo}">
                 </form>
             </div>
         </div>

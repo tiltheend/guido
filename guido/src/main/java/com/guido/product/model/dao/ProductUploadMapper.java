@@ -48,7 +48,7 @@ public interface ProductUploadMapper {
 	public int imageDelete(Map<String, Object> deleteMap);
 
 	
-	/**게시글 수정
+	/**상품 수정
 	 * @param product
 	 * @return rowCount
 	 */

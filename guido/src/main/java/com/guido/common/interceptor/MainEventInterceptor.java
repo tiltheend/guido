@@ -1,40 +1,40 @@
 package com.guido.common.interceptor;
 
-import java.util.List;import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.guido.home.model.service.HomeService;
+import com.guido.admin.model.service.AdminService;
+import com.guido.common.model.dto.Event;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ThemeTypeInterceptor implements HandlerInterceptor{
-
+public class MainEventInterceptor implements HandlerInterceptor {
 	@Autowired
-	private HomeService service;
+	private AdminService service;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+
 		ServletContext application = request.getServletContext();
-		
-		if(application.getAttribute("themeTypeList") == null) {
-			
-			System.out.println("THEME_TYPE 조회 서비스 호출");
-			
-			List<Map<String, Object>> themeTypeList = service.selectThemeTypeList();
-			
-			System.out.println(themeTypeList);
-			
-			application.setAttribute("themeTypeList", themeTypeList);
-			
+
+		if (application.getAttribute("mainEventList") == null) {
+
+			System.out.println("MainEvent 조회 서비스 호출");
+
+			List<Event> mainEventList = service.selectMainEventList();
+
+			System.out.println(mainEventList);
+
+			application.setAttribute("mainEventList", mainEventList);
+
 		}
-		
+
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}
 
@@ -49,6 +49,4 @@ public class ThemeTypeInterceptor implements HandlerInterceptor{
 			throws Exception {
 		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}
-	
-	
 }

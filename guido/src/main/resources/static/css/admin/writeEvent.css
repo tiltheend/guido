@@ -42,7 +42,7 @@
     border-radius: 16px;
     font-size: 18px;
     width: 100%;
-    height: 200px;
+    height: 150px;
     padding: 20px;
     resize: none;
     margin-top: 20px;
@@ -163,6 +163,39 @@
     padding: 20px;
 }
 
-input:focus {
+
+
+
+
+.clr-field {
+    margin: 10px 0;
+}
+
+.clr-field button {
+    width: 30px;
+    height: 30px;
+    left: 10px;
+    right: auto;
+    border-radius: 10px;
+}
+
+#clr {
+    width: 200px;
+    height: 50px;
+    border: 2px solid #B1D8DA;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding-left: 50px;
+}
+
+#eventTitle:focus,
+#eventTitle:hover,
+#eventContent:focus,
+#eventContent:hover,
+.date:focus,.date:hover,
+#clr:focus, #clr:hover,
+.img-box:hover {
+    outline: none;
     border: 2px solid #0F4957;
 }

@@ -65,10 +65,6 @@ public class ProfileTouristController {
 			List<Reservation> reservationList = service.reservationList(userNo);
 			model.addAttribute("reservationList", reservationList);
 			
-			// 구매 수 카운트
-			// int reservationCount = service.reservationCount(userNo);
-			// model.addAttribute("reservationCount", reservationCount);
-			
 			// 내가 쓴 리뷰 내역 가져오기
 			List<Review> reviewList = service.reviewList(userNo);
 			
@@ -204,12 +200,50 @@ public class ProfileTouristController {
 		User user = service.userInfo(userNo);
 		model.addAttribute("user", user);
 		
-		// 구매 내역 가져오기 (상품 번호, 썸네일)
-		// List<Reservation> reservationList = service.reservationList(userNo);
-		// model.addAttribute("reservationList", reservationList);
+		// 구매 내역 가져오기 (자세한)
+		// (예약 번호, 회원 번호 (예약), 주문 처리 상태 (Y: 예약 완료, N: 예약 취소, D: 구매확정)
+		// 선택한 상품 일정 번호, 썸네일, 상품 날짜, 상품명
+		// + 추가 예정 : 예약 번호 + 상품가격
 		
+		 List<Reservation> reservationList = service.myReservation(userNo);
+		 model.addAttribute("reservationList", reservationList);
+		 
+		// 구매 수 카운트
+		 int reservationCount = service.reservationCount(userNo);
+		 model.addAttribute("reservationCount", reservationCount);
+		 
+		 // System.out.println(reservationList);
 		
 		return "profile/buyerReservation";
+	}
+	
+	// 구매자 예약 목록 더보기 (3개씩)
+	@ResponseBody
+	@PostMapping(value="/myReservationMore", produces="application/json; charset=UTF-8")
+	public List<Reservation> myReservationMore(@RequestBody int startReservationNum){
+			
+		List<Reservation> moreReservationMore = service.myReservationMore(startReservationNum);
+		
+		for(Reservation r : moreReservationMore) {
+			// System.out.println(r);
+		}
+		
+		return moreReservationMore;
+	}
+	// 비동기로 예약 목록 불러오기 (최신 3개)
+	@ResponseBody
+	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
+	public List<Reservation> newReservationList(@RequestBody int userNo){
+
+		List<Reservation> newReservationList = service.myReservation(userNo);
+		int reservationCount = service.reservationCount(userNo);
+		
+		for(Reservation r : newReservationList) {
+			r.setReservationCount(reservationCount);
+			System.out.println(r);
+		}
+		
+		return newReservationList;
 	}
 	
 	// 투어리스트 위시 리스트로 이동

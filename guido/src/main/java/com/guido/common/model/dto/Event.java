@@ -18,6 +18,8 @@ public class Event {
 	String eventEndDt;
 	String createDt;
 	String state;
+	String bgColor;
+	int mainBannerOrder;
 	
 	List<File> fileList;
 }
