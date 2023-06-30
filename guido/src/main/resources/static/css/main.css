@@ -442,10 +442,10 @@ hr{
 }
 
 /* 위시 하트 */
-.main-post .product-post .add-wish-heart{
+/* .main-post .product-post .add-wish-heart{
   width: 100%; 
 }
-.main-post .product-post .add-wish-heart>img{ 
+.main-post .product-post .add-wish-heart svg{ 
   width: 30px; height: 30px;
   cursor: pointer;
   border: none;
@@ -467,7 +467,45 @@ hr{
 }
 .heart-icon.selected{
   background-image: url('/images/profile/heartClick.png'); 
+} */
+  /* 좋아요 버튼 */
+  .like--container{
+    margin-top: 5vh;
 }
+
+  .like--container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .like--container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .like--container svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    transition: all 0.3s;
+    fill: #666;
+  }
+  
+  .like--container svg:hover {
+    transform: scale(1.1);
+  }
+  
+  .like--container input:checked ~ svg {
+    fill: #E3474F;
+  }
+  /* 진 */
 
 
 /* 게시글 텍스트 */
