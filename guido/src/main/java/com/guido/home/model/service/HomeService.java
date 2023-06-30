@@ -41,6 +41,15 @@ public interface HomeService {
 	List<Product> selectSearchThemeProdList(int themeCode);
 
 
+	
+	// 관심상품 등록 여부 체크
+	int selectWishListCheck(Map<String, Object> map);
+	
+	// 관심상품 등록
+	int updateWishList(Map<String, Integer> paramMap);
+
+
+
 
 
 

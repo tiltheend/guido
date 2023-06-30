@@ -12,37 +12,43 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ThemeTypeInterceptor/* implements HandlerInterceptor */{
-	/*
-	 * @Autowired private HomeService service;
-	 * 
-	 * @Override public boolean preHandle(HttpServletRequest request,
-	 * HttpServletResponse response, Object handler) throws Exception {
-	 * 
-	 * ServletContext application = request.getServletContext();
-	 * 
-	 * if(application.getAttribute("themeTypeList") == null) {
-	 * 
-	 * // System.out.println("THEME_TYPE 조회 서비스 호출");
-	 * 
-	 * List<Map<String, Object>> themeTypeList = service.selectThemeTypeList();
-	 * 
-	 * // System.out.println(themeTypeList);
-	 * 
-	 * application.setAttribute("themeTypeList", themeTypeList);
-	 * 
-	 * }
-	 * 
-	 * return HandlerInterceptor.super.preHandle(request, response, handler); }
-	 * 
-	 * @Override public void postHandle(HttpServletRequest request,
-	 * HttpServletResponse response, Object handler, ModelAndView modelAndView)
-	 * throws Exception { HandlerInterceptor.super.postHandle(request, response,
-	 * handler, modelAndView); }
-	 * 
-	 * @Override public void afterCompletion(HttpServletRequest request,
-	 * HttpServletResponse response, Object handler, Exception ex) throws Exception
-	 * { HandlerInterceptor.super.afterCompletion(request, response, handler, ex); }
-	 * 
-	 */
+public class ThemeTypeInterceptor implements HandlerInterceptor{
+
+	@Autowired
+	private HomeService service;
+
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		
+		ServletContext application = request.getServletContext();
+		
+		if(application.getAttribute("themeTypeList") == null) {
+			
+			System.out.println("THEME_TYPE 조회 서비스 호출");
+			
+			List<Map<String, Object>> themeTypeList = service.selectThemeTypeList();
+			
+			System.out.println(themeTypeList);
+			
+			application.setAttribute("themeTypeList", themeTypeList);
+			
+		}
+		
+		return HandlerInterceptor.super.preHandle(request, response, handler);
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+	}
+	
+	
 }
