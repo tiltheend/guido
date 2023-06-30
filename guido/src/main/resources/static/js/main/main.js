@@ -166,7 +166,9 @@ function loadProductByTheme(themeCode) {
             heartCheckbox.setAttribute("id", "wishHeart");
             
             // 여기에 실제 상태에 따른 checked 속성 추가
-            heartCheckbox.checked = themeProduct.wishOrNot > 0;
+            if(themeProduct.wishOrNot > 0){
+                heartCheckbox.checked;
+            }
         
             const heartSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             heartSvg.setAttribute("id", "Layer_1");
