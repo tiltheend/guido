@@ -301,7 +301,6 @@
 
 
     </main>
-    </main>
     <!-- 가격 설정 페이지(페이지 수정해야함) -->
     <main id="page13" class="page">
       <div class="greeting">
@@ -427,10 +426,10 @@
 
       <!-- 이미지 박스 foreach -->
       <div class="img-box">
-        <div th:each="index: ${#numbers.sequence(1, 9)}" class="productImg">
+        <div th:each="index: ${#numbers.sequence(1, 4)}" class="productImg">
           <label th:for="'img' + ${index}">
             <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
-            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*" />
+            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
            <span class="delete-image">&times;</span>
            <div class="add-image"><img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img"></div>
            <div class="add-image2"></div>
@@ -438,7 +437,17 @@
           </label>
           
         </div>
-        <span style="border: 2px solid black;">이미지 추가</span>
+        <div th:each="index: ${#numbers.sequence(5, 9)}" class="productImg plus-image">
+          <label th:for="'img' + ${index}">
+            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
+           <span class="delete-image">&times;</span>
+           <div class="add-image"><img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img"></div>
+           <div class="add-image2"></div>
+           <div class="add-image3"></div>
+          </label>
+          
+        </div>
       </div>
       
        

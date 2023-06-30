@@ -19,6 +19,8 @@ import com.guido.common.model.dto.TourTheme;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.product.model.service.ProductUploadService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 //@SessionAttributes({"loginUser"})
 //@RequestMapping("/product")
@@ -137,6 +139,7 @@ public class ProductUploadController {
 				,@RequestParam(value="images", required=false) List<MultipartFile> images
 				,@RequestParam(value="productAddPrice", required=false) List<String> additionalList
 				,@PathVariable("productNo") int productNo
+				,HttpSession session
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
 	
 				product.setProductAddNotes(String.join("^^^", additionalList));
@@ -152,7 +155,7 @@ public class ProductUploadController {
 					path += "/productDetail/" + "product/" + productNo;
 				}else {
 					message = "상품 수정 실패,";
-					path += "/productDetail/" + "product/" + productNo + "/edit";
+					path += "edit";
 				}
 				
 				ra.addFlashAttribute("message", message);

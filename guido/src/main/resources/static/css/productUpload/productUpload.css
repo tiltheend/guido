@@ -1105,10 +1105,6 @@ input[type='radio']:checked {
   color: white;
 }
 
-label[for='img9'],
-label[for='img8'],
-label[for='img7'],
-label[for='img6'],
-label[for='img5'] {
+.plus-image {
   display: none;
 }

@@ -8,7 +8,7 @@
 		<result property="productPackage" column="PRODUCT_PACKAGE"/>
 		<result property="productContent" column="PRODUCT_CONTENT"/>
 		<result property="productPrice" column="PRODUCT_PRICE"/>
-		<result property="productAddPrice" column="PRODUCT_ADD_PRICE"/>
+		<result property="productAddNotes" column="PRODUCT_ADD_PRICE"/>
 		<result property="maxTourist" column="PRODUCT_MAX_TOURIST"/>
 		<result property="minTourist" column="PRODUCT_MIN_TOURIST"/>
 		
@@ -68,9 +68,9 @@
 					 #{productPackage}, 
 					 #{productContent}, 
 					 #{productPrice},
-					 #{productAddPrice}, 
-					  #{minTourist}, 
-					  #{maxTourist}, 
+					 #{productAddNotes}, 
+					  10, 
+					  13, 
 					  9,
 					 #{themeCode}, 
 					  'N', 
