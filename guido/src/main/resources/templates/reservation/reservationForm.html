@@ -19,6 +19,7 @@
     <form th:action="@{/reservation/reserve}" method="POST">
 
 
+
         <div class="reservation--container">
     
             <div class="reservation--top">
@@ -139,7 +140,10 @@
                             <div>예약자명</div>
                             <div th:text="*{userName}">회원 이름</div>
                             <div>연락처</div>
-                            <div><input id="phone" name="phone" type="tel"/></div>
+                            <div class="phone--div__hover">
+                                <input id="phone" name="phone" type="tel"/>
+                                <p class="arrow_box">연락처는 내 정보 수정에서 변경  가능합니다.</p>
+                            </div>
                             <div>비상 연락망</div>
                             <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 guido@gmail.com"></div>
                         </div>
@@ -161,8 +165,17 @@
                         <div class="reservation--text__bottom">주문 내용을 확인하였으며 약관에 동의합니다.</div>
                     </div>
     
-                    <button class="reservation--btn__bottom"></button>
+                    <button class="reservation--btn__bottom" type="button"></button>
     
+            </div>
+
+            
+            <!-- 모달 창 -->
+            <div id="paymentModal" class="modal">
+                <div class="modal-container">
+                <span class="close" onclick="toggleModal()">&times;</span>
+                <h2>모달 창</h2>
+                </div>
             </div>
     
         </div>
@@ -174,7 +187,7 @@
     
     <script th:inline="javascript">
         const input = document.querySelector("#phone");
-        const loginUserCountryCode = /*[[${session.loginUser?.countryCode}]]*/ "로그인 회원 국가 코드";
+        const userCountryCode = /*[[${session.loginUser?.countryCode}]]*/ "로그인 회원 국가 코드";
         
         var iti = window.intlTelInput(input, {
             allowDropdown: false,
@@ -190,7 +203,7 @@
             //     .catch(function() { callback("us"); });
             // },
             // hiddenInput: "full_number",
-            initialCountry: loginUserCountryCode,
+            initialCountry: userCountryCode,
             // localizedCountries: { 'de': 'Deutschland' },
             // nationalMode: false,
             // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
@@ -201,10 +214,13 @@
             utilsScript: "/libraries/intl-tel-input/build/js/utils.js"
         });
 
-        const loginUserTel = /*[[${session.loginUser?.userTel}]]*/ "로그인 회원 번호";
-        if(loginUserTel == null) loginUserTel = "";
+        const userTel = /*[[${session.loginUser?.userTel}]]*/ "로그인 회원 번호";
+        if(userTel == null) userTel = "";
         
-        iti.setNumber(loginUserTel);        // 전화번호를 입력 상자에 설정
+        iti.setNumber(userTel);        // 전화번호를 입력 상자에 설정
+
+        const userName = /*[[${session.loginUser?.userName}]]*/ "로그인 회원 이름";
+        const userEmail = /*[[${session.loginUser?.userEmail}]]*/ "로그인 회원 이름";
 
         const reservationDate = /*[[${reservationDate}]]*/"예약 일자";
         const package = /*[[${product.productPackage}]]*/"당일 or n일";
@@ -213,6 +229,10 @@
         const price = /*[[${product.productPrice}]]*/"상품 가격";
         const selectedTime = /*[[${option?.optionName}]]*/"옵션명";
         const impCode = /*[[${impCode}]]*/"포트원 가맹점 식별코드"
+        const merchantUid = /*[[${merchantUid}]]*/"주문 번호"
+        const pgMid = /*[[${pgMid}]]*/"상점 ID"
+        const productName = /*[[${product.productName}]]*/"상점 ID"
+        
         
     </script>
 

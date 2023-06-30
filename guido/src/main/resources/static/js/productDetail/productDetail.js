@@ -459,3 +459,7 @@ if(Object.keys(product.tourCourse).length != 0){
 }
 
 
+/* 블라인드 게시글 스크롤 막기 처리 */
+if(product.productState=='B'){
+    document.querySelector("body").style.overflow = 'hidden';
+}

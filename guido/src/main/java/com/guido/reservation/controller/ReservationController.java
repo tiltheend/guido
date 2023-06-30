@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.ProductOption;
+import com.guido.common.utility.Util;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.reservation.model.service.ReservationService;
 
@@ -32,6 +33,10 @@ public class ReservationController {
 	@Value("${portone.imp.code}")
 	private String impCode;
 	
+	@Value("${portone.pg.mid}")
+	private String pgMid;
+	
+
 	
 	@GetMapping("/reservationform/{productNo}")
 	public String reserve(@PathVariable("productNo") int productNo, 
@@ -75,6 +80,7 @@ public class ReservationController {
 		
 		String mainCourse = service.selectMainCourseName(productNo);
 		ProductOption option = null;
+		String merchantUid = Util.createReservationNo();
 		
 		if(optionNo!=-1)
 			option = service.selectProductOption(optionNo);
@@ -85,8 +91,9 @@ public class ReservationController {
 		model.addAttribute("mainCourse", mainCourse);
 		model.addAttribute("selectedTime", option);
 		model.addAttribute("impCode", impCode);
+		model.addAttribute("merchantUid", merchantUid);
+		model.addAttribute("pgMid", pgMid);
 		
-//		System.out.println(Util.createReservationNo());
 		
 		return "reservation/reservationForm";
 	}

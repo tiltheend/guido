@@ -116,6 +116,7 @@
 	<select id="selectTourCourseList" resultMap="tourcourse_rm">
 		SELECT * FROM "TOUR_COURSE"
 		WHERE PRODUCT_NO = #{productNo}
+		ORDER BY COURSE_ORDER
 	</select>
 	 
 	 
