@@ -72,7 +72,7 @@
             
             <div class="reservation-list"> <!-- 구매자 예약 상품 -->
                 <div> <!-- 제목 -->
-                    <h1>Reservation (<span th:text="${#lists.size(reservationList)}">구매내역 갯수</span>)</h1>
+                    <h1>Reservation (<span th:text="${reservationCount}">구매내역 갯수</span>)</h1>
                 </div>
 
                 <ul class="reservation-list-box">
@@ -128,17 +128,14 @@
         </div>
     </div>
     <script th:src="@{/js/profile/profileEdit.js}"></script>
+    <script th:src="@{/js/profile/buyerReservation.js}"></script>
     
-    <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
     <script th:inline="javascript">
-        // const message='[[${message}]]';
 
-        /* Natural Template */
         const message = /*[[${message}]]*/  "전달 받은 message";
-        // 타임리프 해석    값(자료형이 알아서 해석)     사라짐(설명)
-        if(message != null){
-            alert(message);
-        }
+        if(message != null) alert(message);
+
+        const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
     </script>  
 </body>
 </html>

@@ -91,5 +91,11 @@ public interface ProfileTouristService {
 	 */
 	List<Reservation> myReservation(int userNo);
 
+	/** 구매자 예약 목록 더보기 (3개씩)
+	 * @param startReservationNum
+	 * @return
+	 */
+	List<Reservation> myReservationMore(int startReservationNum);
+
 
 }

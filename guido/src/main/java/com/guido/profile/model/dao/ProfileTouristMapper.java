@@ -51,6 +51,9 @@ public interface ProfileTouristMapper {
 	// 구매 내역 가져오기 (자세한)
 	List<Reservation> myReservation(int userNo);
 
+	// 구매자 예약 목록 더보기 (3개씩)
+	List<Reservation> myReservationMore(int startReservationNum);
+
 	
 
 }

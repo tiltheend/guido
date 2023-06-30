@@ -27,5 +27,7 @@ public class Reservation {
 	private String thumbnail; // 썸네일 (파일 오더 1번)
 	private String productName; // 상품명
 	private String productDate; // 상품 날짜
+	private int reservationCount; // 예약 수
+	
 
 }
