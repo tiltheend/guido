@@ -149,17 +149,12 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public int reviewEdit(Review review) {
 		return mapper.reviewEdit(review);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// 구매 내역 가져오기 (자세한)
+	@Override
+	public List<Reservation> myReservation(int userNo) {
+		return mapper.myReservation(userNo);
+	}
 	
 	
 }

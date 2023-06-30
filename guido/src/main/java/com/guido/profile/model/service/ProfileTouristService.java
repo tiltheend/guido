@@ -85,5 +85,11 @@ public interface ProfileTouristService {
 	 */
 	int reviewEdit(Review review);
 
+	/** 구매 내역 가져오기 (자세한)
+	 * @param userNo
+	 * @return
+	 */
+	List<Reservation> myReservation(int userNo);
+
 
 }

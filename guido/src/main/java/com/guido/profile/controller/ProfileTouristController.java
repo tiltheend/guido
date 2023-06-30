@@ -204,10 +204,15 @@ public class ProfileTouristController {
 		User user = service.userInfo(userNo);
 		model.addAttribute("user", user);
 		
-		// 구매 내역 가져오기 (상품 번호, 썸네일)
-		// List<Reservation> reservationList = service.reservationList(userNo);
-		// model.addAttribute("reservationList", reservationList);
+		// 구매 내역 가져오기 (자세한)
+		// (예약 번호, 회원 번호 (예약), 주문 처리 상태 (Y: 예약 완료, N: 예약 취소, D: 구매확정)
+		// 선택한 상품 일정 번호, 썸네일, 상품 날짜, 상품명
+		// + 추가 예정 : 예약 번호 + 상품가격
 		
+		 List<Reservation> reservationList = service.myReservation(userNo);
+		 model.addAttribute("reservationList", reservationList);
+		 
+		 System.out.println(reservationList);
 		
 		return "profile/buyerReservation";
 	}
