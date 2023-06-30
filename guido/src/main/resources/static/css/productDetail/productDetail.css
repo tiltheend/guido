@@ -1243,6 +1243,67 @@ a {
 }
 
 
+/* 블라인드된 게시글 */
+.reservation--blind{
+    background-color: rgba(255, 255, 255, 0.9); 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding-top: 200px;
+    align-items: center;
+}
+
+/* 블라인드 아이콘 */
+.blind--icon{
+    width: 34px;
+    height: 34px;
+    margin:8px 10px 0 0;
+}
+
+
+.reservation--blind__top,
+.reservation--blind__bottom{
+    width: 600px;
+    text-align: center;
+}
+
+.reservation--blind__top>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation--blind__top>h2{
+    margin-top: 5px;
+}
+
+
+.reservation--blind__bottom{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.reservation--blind__buttons{
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+    margin-top: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+
 /* 반응형 */
 
 @media screen and (max-width : 767px) {

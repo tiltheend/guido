@@ -1,4 +1,10 @@
 
+
+/* 전화번호 입력 필드 읽기 전용으로 변경 */
+document.getElementById("phone").setAttribute("disabled", true);
+document.getElementById("phone").setAttribute("style", "padding-left: 85px;");
+
+
 const plusBtn = document.getElementById("guestsPlusBtn");
 const minusBtn = document.getElementById("guestsMinusBtn");
 const guestsQnt = document.getElementById("guestsQnt");
@@ -84,8 +90,21 @@ showTotalResevationCost();
     if(document.querySelector("input[type='checkbox']").checked == false){
       alert("약관 동의에 체크해주세요");
       e.preventDefault();
+      return;
     }
+
+    toggleModal();
+
   });
+  
+  
+/* 모달창 띄우기 */
+const modal = document.getElementById("paymentModal");
+
+// 모달 창 토글
+function toggleModal() {
+  modal.style.display = (modal.style.display === "block") ? "none" : "block";
+}
 
 
 
@@ -127,23 +146,30 @@ if (lastYear !== newYear) {
 
 
   // 결제(포트원) 가맹점 식별 코드 
-  IMP.init(impCode); 
+  
+  
+  // 결제 요청
+  function requestCardPay() {
+  
+    IMP.init(impCode); 
 
+  
+    IMP.request_pay({
+      pg: "kcp." + pgMid,     // 상점 ID
+      pay_method: "card",
+      merchant_uid: merchantUid,   // 주문번호
+      name: productName,    // 상품명
+      // amount: Number(totalPaymentCost.innerText),
+      amount: 200,
+      buyer_email: userEmail,
+      buyer_name: loginUserName,
+      buyer_tel: userTel,
+      m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 결제 완료 후 리디렉션 될 URL
+    }, function (rsp) { // callback
+      //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
 
-// 결제 요청
-function requestCardPay() {
-
-  IMP.request_pay({
-    pg: "kcp.{" + pgMid +"}",     // 상점 ID
-    pay_method: "card",
-    merchant_uid: merchantUid,   // 주문번호
-    name: productName,    // 상품명
-    amount: 64900,                         // 숫자 타입
-    buyer_email: "gildong@gmail.com",
-    buyer_name: "홍길동",
-    buyer_tel: "010-4242-4242",
-  }, function (rsp) { // callback
-    //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+      console.log(rsp);
 
   });
 }
+
