@@ -130,7 +130,8 @@
 				ORDER BY USER_NO DESC
 			</when>
 			<when test="pageName == 'guideApprovalRequest'">
-				USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, CONFIRMATION_NO FROM "USER"
+				USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, CONFIRMATION_NO
+				FROM "USER"
 				NATURAL JOIN "GUIDE"
 				WHERE USER_TYPE='G'
 				AND USER_STATE='Y'
@@ -148,6 +149,8 @@
 			</when>
 		</choose>
 	</select>
+	
+	
 	
 	<select id="selectEvent" resultMap="event_rm">
 		SELECT EVENT_NO, EVENT_NAME, EVENT_CONTENT, TO_CHAR(CREATE_DT,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') CREATE_DT
@@ -179,7 +182,7 @@
 	</insert>
 	
 	<select id="selectQNA" resultMap="qna_rm">
-		SELECT * FROM QNA WHERE QNA_NO=#{qna_no}
+		SELECT * FROM QNA WHERE QNA_NO=#{qnaNo}
 	</select>
 	
 	<select id="selectQnaFileList" resultMap="file_rm">
@@ -187,4 +190,17 @@
 		WHERE QNA_NO = #{qnaNo}
 		ORDER BY FILE_ORDER 
 	</select>
+	
+	<update id="writeAnswer">
+		UPDATE QNA SET QNA_ANSWER = #{qnaAnswer}, QNA_CHECK_FL = 'Y' WHERE QNA_NO = #{qnaNo}
+	</update>
+	
+	<!--<update id="approveGuide">
+		UPDATE "USER" SET USER_STATE='N' WHERE USER_NO = ${userNo}
+	</update>-->
+	
+	<update id="approveGuide" parameterType="java.util.List">
+	  UPDATE "USER" SET USER_STATE='N' WHERE USER_STATE='Y' AND USER_NO IN
+	  <foreach item="userNo" collection="list" open="(" separator="," close=")">#{userNo}</foreach>
+	</update>
 </mapper>
