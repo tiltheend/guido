@@ -18,6 +18,14 @@ public interface ProductUploadService {
 	int productUpload(Product product, List<MultipartFile> images)throws IllegalStateException, IOException;
 
 
+	/** 여행 상품 수정 서비스
+	 * @param product
+	 * @param images
+	 * @param deleteList
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	int productEdit(Product product, List<MultipartFile> images, String deleteList)throws IllegalStateException, IOException;
 
 }

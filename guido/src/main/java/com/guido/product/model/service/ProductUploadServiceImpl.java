@@ -40,7 +40,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	}
 	
 	
-
+	//여행 상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int productUpload(Product product, List<MultipartFile> images)  throws IllegalStateException, IOException {
@@ -94,10 +94,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	//여행 상품 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productEdit(
-			Product product
-			,List<MultipartFile> images
-			,String deleteList) throws IllegalStateException, IOException {
+	public int productEdit(Product product, List<MultipartFile> images, String deleteList) throws IllegalStateException, IOException {
 		
 		int rowCount = mapper.productEdit(product);
 		

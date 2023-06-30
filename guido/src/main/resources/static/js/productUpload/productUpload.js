@@ -637,7 +637,6 @@ for (let i = 0; i < inputImage.length; i++) {
   //파일이 선택되거나, 선택 후 취소 되었을 때
   inputImage[i].addEventListener('change', (e) => {
     const file = e.target.files[0]; // 선택된 파일의 데이터
-
     if (file != undefined) {
       // 파일이 선택 되었을 때
       const reader = new FileReader(); // 파일을 읽는 객체
@@ -705,6 +704,42 @@ const imgId8 = document.getElementById('imgId8');
 //     nextBtn.disabled = false;
 //   }
 // };
-if (imgId1.src !== '') {
-  alert('Please enter');
+
+// const imageCheck = () => {
+//   if (
+//     preview[0].getAttribute('src') !== '' &&
+//     preview[1].getAttribute('src') !== '' &&
+//     preview[2].getAttribute('src') !== '' &&
+//     preview[3].getAttribute('src') !== '' &&
+//     preview[4].getAttribute('src') !== ''
+//   ) {
+//     alert('Please select');
+//   }
+// };
+const plusImage = document.querySelector('.plus-image');
+// const labels = document.querySelectorAll(
+//   "label[for='img9'], label[for='img8'], label[for='img7'], label[for='img6'], label[for='img5']"
+// );
+
+// for (let i = 0; i < preview.length; i++) {
+//   inputImage[i].addEventListener('change', () => {
+//     if (
+//       preview[1].getAttribute('src') !== '' &&
+//       preview[2].getAttribute('src') !== '' &&
+//       preview[3].getAttribute('src') !== '' &&
+//       preview[4].getAttribute('src') !== ''
+//     )
+//       plusImage.style.display = 'block';
+//   });
+// }
+const img4 = document.querySelector('#img4');
+
+if (imgId4.getAttribute('src') !== '') {
+  if (
+    imgId1.getAttribute('src') !== '' &&
+    imgId2.getAttribute('src') !== '' &&
+    imgId3.getAttribute('src') !== ''
+  ) {
+    plusImage.style.display = 'block';
+  }
 }
