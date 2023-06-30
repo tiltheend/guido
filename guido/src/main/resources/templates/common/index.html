@@ -52,7 +52,7 @@
     
                                     <div class="item">
                                         <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
+                                            <img class="detail--silde__item-img" th:src="@{/images/main.PNG}">
                                         </a>
                                     </div>
 
@@ -158,7 +158,7 @@
                             <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                             <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
-                        <div class="add-wish-heart">
+                        <div class="add-wish-heart" th:if="${session.loginUser}">
                             <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                         </div>
                         <div class="sales-text">

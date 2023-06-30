@@ -270,6 +270,29 @@
 		
 		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_MIN_TOURIST, P.PRODUCT_MAX_TOURIST
 	</select>
+	
+	
+	
+	<!-- 관심 상품 등록 체크-->
+	<select id="selectWishListCheck" resultType="_int">
+		SELECT COUNT(*) 
+		FROM "WISHLIST"
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_NO = #{productNo}
+	</select>
+	
+	<!-- 관심 상품 등록 -->
+	<insert id="insertWishList">
+		INSERT INTO "WISHLIST"
+		VALUES(SEQ_WISHLIST_NO.NEXTVAL, #{userNo}, #{productNo}, DEFAULT)
+	</insert>
+		 
+	<!-- 관심 상품 해제 -->
+	<delete id="deleteWishList">
+		DELETE FROM "WISHLIST"
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_NO = #{productNo}
+	</delete>
 
 
 </mapper>

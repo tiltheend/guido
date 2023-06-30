@@ -47,6 +47,19 @@ public interface HomeMapper {
 	List<Product> selectSearchThemeProdList(int themeCode);
 
 
+	
+	// 관심상품 등록 여부 체크
+	int selectWishListCheck(Map<String, Object> map);
+	
+	// 관심상품 등록
+	int insertWishList(Map<String, Integer> paramMap);
+
+	// 관심상품 해제
+	int deleteWishList(Map<String, Integer> paramMap);
+
+
+
+
 
 
 
