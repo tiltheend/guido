@@ -30,85 +30,49 @@
 /* 입력 부분 */
 
 /* ----- uiverse ----- */
-.group {
+.inputGroup {
+    /* font-family: 'Segoe UI', sans-serif; */
+    margin: 1em 0 1em 0;
+    max-width: 190px;
     position: relative;
 }
-.input {
-font-size: 16px;
-padding: 10px 10px 10px 5px;
-display: block;
-width: 200px;
-border: none;
-border-bottom: 1px solid #515151;
-background: transparent;
-}
-.input:focus {
-outline: none;
-}
-label {
-color: #999;
-font-size: 18px;
-font-weight: normal;
-position: absolute;
-pointer-events: none;
-left: 5px;
-top: 10px;
-transition: 0.2s ease all;
--moz-transition: 0.2s ease all;
--webkit-transition: 0.2s ease all;
-}
-.input:focus ~ label, .input:valid ~ label {
-top: -20px;
-font-size: 14px;
-color: #5264AE;
-}
-.bar {
-position: relative;
-display: block;
-width: 200px;
-}
-.bar:before, .bar:after {
-content: '';
-height: 2px;
-width: 0;
-bottom: 1px;
-position: absolute;
-background: #5264AE;
-transition: 0.2s ease all;
--moz-transition: 0.2s ease all;
--webkit-transition: 0.2s ease all;
-}
-.bar:before {
-left: 50%;
-}
-.bar:after {
-right: 50%;
-}
-.input:focus ~ .bar:before, .input:focus ~ .bar:after {
-width: 50%;
-}
-.highlight {
-position: absolute;
-height: 60%;
-width: 100px;
-top: 25%;
-left: 0;
-pointer-events: none;
-opacity: 0.5;
-}
-.input:focus ~ .highlight {
-animation: inputHighlighter 0.3s ease;
+
+.inputGroup input {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 1px solid #c5c5c5;
+    background-color: transparent;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: -0.2rem;
 }
 
-@keyframes inputHighlighter {
-    from {
-        background: #5264AE;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
+.inputGroup label {
+    font-size: 0.875rem;
+    position: absolute;
+    left: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: #898888;
 }
+
+.inputGroup :is(input:focus, input:valid)~label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    border-radius: 40%;
+    background-color: #fff;
+    color: #1c797d
+}
+
+.inputGroup :is(input:focus, input:valid) {
+    border-color: #1c797d;
+}
+
 
 
 /* 원래 내가 작성 */
@@ -181,5 +145,11 @@ input[type="checkbox"]:checked + label{
     background-color: #1c797d;
     border-radius: 8px;
     color: #fff;
+}
+
+/* ----------------- */
+/* 이메일 */
+.emailPart{
+    
 }
 

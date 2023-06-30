@@ -21,23 +21,15 @@
         <div class="container_middle">
             <div class="container_middle_input">
                 <!-- email -->
-                <div class="emailPart">
-                    <div class="inputGroup">
-                        <input type="text" id="email" name="userEmail" autocomplete="off" required>
-                        <label for="inputAuth">이메일</label>
-                    </div>
-                    <button type="button" id="sendAuthBtn">인증번호 전송</button>
-                </div>
-                <div class="signUp-message font4" id="emailMessage">에러 메세지</div>
+                <input type="email" name="userEmail" id="email" class="email font4" placeholder="이메일" maxlength="30" autocomplete="off"><button type="button" id="sendAuthBtn">인증번호 전송</button>
+                <div class="signUp-message font4" id="emailMessage"></div>
                 <!-- 인증번호 -->
-                <div class="authPart">
-                    <div class="inputGroup">
-                        <input type="text" id="inputAuth" autocomplete="off" required>
-                        <label for="inputAuth">인증번호</label>
-                    </div>
-                    <button type="button" id="sendAuthBtn">인증 확인</button>
+                <div class="group">
+                    <input type="text" id="inputAuth" class="input" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>인증번호</label>
                 </div>
-                <div class="signUp-message font4" id="emailMessage">시한 폭탄</div>
 
                 <input type="password" name="password" id="password" class="password font4" placeholder="비밀번호">
                 <div class="signUp-message font4" id="passwordMessage"></div>
