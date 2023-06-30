@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tourist Sign Up</title>
+    <!-- <link rel="stylesheet" th:href="@{/css/signUp/signUpAsTourist.css}"> -->
     <link rel="stylesheet" th:href="@{/css/signUp/signUpAsTourist.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/demo.css}"/>
@@ -19,8 +20,17 @@
         <form th:action="@{/signUp/tourist}" method="post">
         <div class="container_middle">
             <div class="container_middle_input">
-                <input type="email" name="email" id="email" class="email font4" placeholder="이메일" maxlength="30" autocomplete="off">
+                <!-- email -->
+                <input type="email" name="userEmail" id="email" class="email font4" placeholder="이메일" maxlength="30" autocomplete="off"><button type="button" id="sendAuthBtn">인증번호 전송</button>
                 <div class="signUp-message font4" id="emailMessage"></div>
+                <!-- 인증번호 -->
+                <div class="group">
+                    <input type="text" id="inputAuth" class="input" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>인증번호</label>
+                </div>
+
                 <input type="password" name="password" id="password" class="password font4" placeholder="비밀번호">
                 <div class="signUp-message font4" id="passwordMessage"></div>
                 <input type="text" name="pwCheck" id="pwCheck" class="pwCheck font4" placeholder="비밀번호 확인">
@@ -34,13 +44,11 @@
                 <!-- 전화번호 -->
                 <!-- <input type="text" name="contact" id="contact" class="contact font4" placeholder="전화번호"> -->
                 <input id="phone" name="phone" type="tel" /><button type="button" id="submitBtn">Submit</button>
-                <!-- <iframe src="/guidoFront/libraries/intl-tel-input/demoJY.html" frameborder="0"></iframe> -->
                 <div class="signUp-message font4" id="contactMessage"></div>
                 <!-- 비상 연락처 -->
-                <!-- <input type="text" name="emergencyCo" id="emergencyCo" class="emergencyCo font4" placeholder="비상 연락처"> -->
+                <input type=" text" name="emergencyCo" id="emergencyCo" class="emergencyCo font4" placeholder="비상 연락처">
                 <!-- <div class="phone2-area">
                     <input id="phone2" name="phone2" type="tel" /><button type="button" id="submitBtn2">Submit</button> -->
-                    <!-- <iframe src="/guidoFront/libraries/intl-tel-input/demoJY.html" frameborder="0"></iframe> -->
                     <div class="signUp-message font4" id="emergencyCoMessage"></div>
                 </div>
             </div>
