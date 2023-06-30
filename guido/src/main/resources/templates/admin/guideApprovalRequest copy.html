@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://thymeleaf.org">
-
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,15 +30,13 @@
         <!-- 내용 컨테이너 -->
         <div class="content-container">
             <div class="content-header">
-                <h1 class="content-title">1:1 문의사항</h1>
+                <h1 class="content-title">가이드 승인 요청 관리</h1>
                 <div class="btn-container">
-                    <a href="./writeEvent.html"><button id='writeEventBtn' class="btn btn1">글 작성</button></a>
-                    <button class="btn btn2">블라인드</button>
+                    <button class="btn btn5 approve-checked">승인하기</button>
                 </div>
             </div>
 
             <hr>
-
 
             <div class="content-count-and-search">
                 <!-- 카운트 -->
@@ -50,40 +48,29 @@
             <!-- 테이블 -->
             <table id="table">
 
-
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
-                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">번호</th><th class="col-title">제목</th>
-                        <th class="col-writer">작성자</th><th class="col-date">작성일</th><th class="col-ans">답변 상태</th></tr>
+                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">회원번호</th><th class="col-email">회원 이메일</th>
+                    <th class="col-date">요청일</th><th class="col-confirmationNo">확인증 번호</th><th class="col-approval">승인</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
-                    <th:block th:each="qna : ${map.list}" th:object="${qna}">
+                    <th:block th:each="user : ${map.list}" th:object="${user}">
                         <tr>
-                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{QNA_NO}"></td>
-                            <td th:text="*{QNA_NO}">번호</td>
-                            <td th:text="*{QNA_TITLE}">제목</td>
-                            <td th:text="*{QNA_EMAIL}">작성자</td>
-                            <td th:text="*{QNA_DATE}">등록일</td>
-                            <td>
-                                <a th:href="@{writeAnswer/}+*{QNA_NO}">
-                                    <button type="buttion" th:if='*{QNA_CHECK_FL=="N"}' class="btn btn3">답변하기</button>
-                                    <button type="buttion" th:if='*{QNA_CHECK_FL=="Y"}' class="btn btn4">답변완료</button>
-                                </a>
-                            </td>
+                            <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{USER_NO}"></td>
+                            <td th:text="*{USER_NO}">회원번호</td>
+                            <td th:text="*{USER_EMAIL}">이메일</td>
+                            <td th:text="*{CREATE_DT}">가입일</td>
+                            <td th:text="*{CONFIRMATION_NO}"></td>
+                            <td><button class="btn btn6 approve-btn"><!-- 승인버튼 --></button></form></td>
                         </tr>
                     </th:block>
                 </tbody>
             </table>
-            
             <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <!-- <th:block th:unless="${#lists.size(map.list) == 0}" th:replace="~{/admin/pagination}"/> -->
-            <th:block th:unless="${map.pagination.listCount == 0}" th:replace="~{/admin/pagination}"/>
+            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>
-    <script th:inline="javascript">
-        const list = /*[[${map.list}]]*/"리스트";
-    </script>
 </body>
 </html>

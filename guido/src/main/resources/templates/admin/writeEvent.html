@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
-
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/admin/admin.css">
-    <link rel="stylesheet" href="../css/admin/writeEvent.css">
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/writeEvent.css}">
     <style>
         header {
             width: 100%;
@@ -34,7 +34,7 @@
             </div>
             <hr>
 
-            <form class="event-write-form" th:action="@{eventWrite}" method="POST" id="eventWriteForm" enctype="multipart/form-data">
+            <form class="event-write-form" th:action="@{/admin/writeEvent}" method="POST" id="eventWriteForm" enctype="multipart/form-data">
                 <div class="name-and-period">
                     <div class="name-area">
                         <div class="write-header">이벤트 제목 <span class="red">*</span></div>
@@ -94,8 +94,13 @@
                     <button type="button" class="img-slide-left-btn"><img src="../images/admin/slide_left_btn.svg" alt=""></button>
                     <button type="button" class="img-slide-right-btn"><img src="../images/admin/slide_right_btn.svg" alt=""></button>
                 </div>
+                <div class="write-header">썸네일 배경 색상 지정</div>
+                <div class="clr-field">
+                    <button class="clr-field" aria-labelledby="clr-open-label"></button>
+                    <input type="text" data-coloris id="clr" name="bgColor">
+                </div>
                 <div class="write-header">이벤트 설명 <span class="red">*</span></div>
-                <textarea name="eventContent" id="eventContent" cols="30" rows="10" placeholder="이벤트에 대한 설명(이벤트명, 기간, 장소, 시간, 참여비, 문의처 등등) 을 상세히 작성해주세요."></textarea>
+                <textarea name="eventContent" id="eventContent" placeholder="이벤트에 대한 설명(이벤트명, 기간, 장소, 시간, 참여비, 문의처 등등) 을 상세히 작성해주세요."></textarea>
                 <div class="btn-area">
                     <button type="submit" class="sbmt-btn">
                         등록
@@ -104,6 +109,7 @@
             </form>
         </div>
     </main>
+    <script th:src="@{https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js}"></script>
     <script th:src="@{/js/admin/writeEvent.js}"></script>
 </body>
 </html>

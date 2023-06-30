@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
 
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/admin/admin.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <style>
         header {
             width: 100%;
@@ -30,9 +30,9 @@
         <!-- 내용 컨테이너 -->
         <div class="content-container">
             <div class="content-header">
-                <h1 class="content-title">가이드 요청 승인 관리</h1>
+                <h1 class="content-title">가이드 승인 요청 관리</h1>
                 <div class="btn-container">
-                    <button class="btn btn5">승인하기</button>
+                    <button class="btn btn5 approve-checked">승인하기</button>
                 </div>
             </div>
 
@@ -62,7 +62,9 @@
                             <td th:text="*{USER_EMAIL}">이메일</td>
                             <td th:text="*{CREATE_DT}">가입일</td>
                             <td th:text="*{CONFIRMATION_NO}"></td>
-                            <td><button class="btn btn6"></button></td>
+                            <td>
+                                <button class="btn btn6 row-btn"><!-- 승인버튼 --></button>
+                            </td>
                         </tr>
                     </th:block>
                 </tbody>
