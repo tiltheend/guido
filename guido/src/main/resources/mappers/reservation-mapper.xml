@@ -2,7 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.guido.reservation.model.dao.ReservationMapper">
 	
+	<resultMap type="ProductDate" id="product_date_rm">
+		<id property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="availability" column="PRODUCT_DT_AVAILABILITY"/>
+	</resultMap>
 	
-	 
+	
+	<resultMap type="ProductOption" id="option_rm">
+		<id property="optionNo" column="OPTION_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="optionName" column="OPTION_NAME"/>
+		<result property="optionRestCount" column="OPTION_REST"/>
+	</resultMap>
+	
+	
+	
+	
+	<!-- 예약 가능한 일정인지 확인 (1: 가능, 0: 불가능) -->
+	<select id="selectDateInRange" resultType="_int">
+		SELECT COUNT(*) FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT = #{productDate}
+		AND PRODUCT_DT_AVAILABILITY = 'Y'
+	</select>
+	
+
+	<!-- 메인 코스명 조회 -->
+	<select id="selectMainCourseName" resultType="string">
+		SELECT COURSE_NAME FROM TOUR_COURSE
+		WHERE PRODUCT_NO = #{productNo}
+		AND BOSS_COURSE_FL = 'Y'
+	</select>	 
+	
+	
+	<!-- 선택 옵션 조회 -->
+	<select id="selectProductOption" resultMap="option_rm">
+		SELECT * FROM PRODUCT_OPTION
+		WHERE OPTION_NO = #{optionNo}
+	</select>
 	
 </mapper>

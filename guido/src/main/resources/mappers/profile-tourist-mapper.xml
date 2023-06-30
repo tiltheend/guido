@@ -14,7 +14,6 @@
 	private String ; // 상태(Y: 미승인(가이드), N: 정상, B: 블락, D: 탈퇴)
 -->
 
-	
 	<resultMap id="user_rm" type="User">
 		<id property="userNo" column="USER_NO"/>
 		<result property="userEmail" column="USER_EMAIL"/>
@@ -104,7 +103,7 @@
 	 <select id="reviewList" resultMap="review_rm">
 		SELECT REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
 			   , TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
-			   , PRODUCT_NAME, REVIEW_REPLY
+			   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
 		FROM "REVIEW" R
 		JOIN "USER" U ON(R.USER_NO = U.USER_NO)
 		JOIN "PRODUCT" USING (PRODUCT_NO)
@@ -130,7 +129,7 @@
 			SELECT ROW_NUMBER() OVER (ORDER BY REVIEW_NO DESC) AS NUM
 					,REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
 				  	, TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
-				   , PRODUCT_NAME, REVIEW_REPLY
+				   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
 			FROM "REVIEW" R
 			JOIN "USER" U ON(R.USER_NO = U.USER_NO)
 			JOIN "PRODUCT" USING (PRODUCT_NO)
@@ -145,19 +144,36 @@
 	 
 	 <!--  리뷰 안쓴 목록 가져오기 -->
 	 <select id="addReviewList" resultMap="review_rm">
-		SELECT RS.PRODUCT_NO PRODUCT_NO, P.PRODUCT_NAME PRODUCT_NAME, RS.PRODUCT_DT_NO PRODUCT_DT_NO, 
-		    (SELECT R.REVIEW_MESSAGE
-		    FROM REVIEW R
-		    WHERE R.PRODUCT_NO = RS.PRODUCT_NO
-		    AND R.USER_NO = 25
-		    AND R.REVIEW_MESSAGE IS NULL) AS REVIEW_MESSAGE
-		FROM RESERVATION RS
-		JOIN "PRODUCT" P ON RS.PRODUCT_NO = P.PRODUCT_NO
-		LEFT JOIN "REVIEW" R ON P.PRODUCT_NO = R.PRODUCT_NO
-		WHERE RS.USER_NO = 25
-		AND RS.RESERVATION_STATE = 'D'
-		AND R.REVIEW_NO IS NULL
-		ORDER BY RS.PRODUCT_NO DESC
+		SELECT R.PRODUCT_NO, R.USER_NO, PRODUCT_DT_NO, PRODUCT_NAME, RV.REVIEW_MESSAGE 
+		FROM RESERVATION R
+		JOIN PRODUCT P ON (R.PRODUCT_NO=P.PRODUCT_NO)
+		LEFT JOIN "REVIEW" RV ON (R.PRODUCT_NO = RV.PRODUCT_NO)
+		WHERE R.USER_NO = #{userNo}
+		AND R.RESERVATION_STATE = 'D'
+		AND RV.REVIEW_MESSAGE IS NULL 
+		ORDER BY R.CREATE_DT DESC 
 	 </select>
+	 
+	 <!-- 리뷰 작성 -->
+	 <insert id="addReview">
+		 INSERT INTO REVIEW
+			(REVIEW_NO, USER_NO, REVIEW_MESSAGE, REVIEW_STARS, REVIEW_DEL_FL, PRODUCT_NO, CREATE_DT)
+			VALUES(SEQ_REVIEW_NO.NEXTVAL, #{userNo}, #{reviewMessage}, #{reviewStarsDouble}, 'N', #{productNo}, SYSDATE)
+	 </insert>
+	 
+	 <!-- 리뷰 삭제 -->
+	 <delete id="reviewDel">
+		 DELETE FROM REVIEW
+			WHERE PRODUCT_NO = #{productNo}
+			AND USER_NO = #{userNo}
+	 </delete>
+	
+	<!-- 리뷰 수정 -->
+	<update id="reviewEdit">
+		UPDATE REVIEW
+		SET REVIEW_MESSAGE=#{reviewMessage}, REVIEW_STARS=#{reviewStarsDouble}
+		WHERE PRODUCT_NO= #{productNo}
+		AND USER_NO = #{userNo}
+	</update>
 	
 </mapper>

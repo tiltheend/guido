@@ -26,7 +26,8 @@ public class Review {
 	private String productName;		// 상품명
 	private String productDtNo;		// 상품 일정 번호
 	private String reviewReply;		// 리뷰 답글
-	private double reviewStarsDouble;		// 리뷰 별점 (0.5 단위)
+	private double reviewStarsDouble;	// 리뷰 별점 (0.5 단위)
+	private int reviewCount; // 리뷰 수
 	
 
 }

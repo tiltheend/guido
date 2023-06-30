@@ -1,16 +1,4 @@
 
-/* 기본 세팅 */
-*{
-    padding: 0; 
-    margin: 0; 
-    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-    box-sizing: border-box;
-}
-    
-ul,ol{list-style: none;}
-a{color: #000; text-decoration: none;}
-button{border: none; user-select: none; cursor: pointer;}
-svg{cursor: pointer; background-color: rgba(0, 0, 0, 0);}
 
 @media screen and (max-width : 1024px) {
     html{
@@ -24,30 +12,9 @@ svg{cursor: pointer; background-color: rgba(0, 0, 0, 0);}
     }
 }
 
-.font1{font-size: 1.625rem;} /* 상세 페이지 제목 */
-.font2{font-size: 1.375rem;} /* 상세 페이지 내용 중요한 정보 */
-.font3{font-size: 1rem;} /* 헤더 컨텐츠 */
-.font4{font-size: 0.875rem;} /* 컨텐츠 내용 타이틀 */
-.font5{font-size: 0.75rem;} /* 가장 작은 컨텐츠 내용 본문 */
-
-body::-webkit-scrollbar {
-    width: 8px;  /* 스크롤바의 너비 */
-}
-
-body::-webkit-scrollbar-thumb {
-    height: 10%; /* 스크롤바의 길이 */
-    background: #D9D9D9; /* 스크롤바의 색상 */
-    
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-track {
-    background: #f0f0f05d;  /*스크롤바 뒷 배경 색상*/
-}
-
 
 .reservation--container{
-    width: 70vw;
+    width: 60vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,14 +29,14 @@ input[type="checkbox"]+label {
     width: 1.2rem;
     height: 1.2rem;
     cursor: pointer;
-    background: url('/guidoFront/images/reservation/checkbox.png') no-repeat 0 0px / contain;
+    background: url('/images/reservation/checkbox.png') no-repeat 0 0px / contain;
 }
 
 input[type='checkbox']:checked+label {
     cursor: pointer;
     width: 1.2rem;
     height: 1.2rem;
-    background: url('/guidoFront/images/reservation/checkedbox.png') no-repeat 0 0px / contain;
+    background: url('/images/reservation/checkedbox.png') no-repeat 0 0px / contain;
 }
 
 input[type="checkbox"] {
@@ -103,7 +70,7 @@ input[type="checkbox"] {
 
 /* 예약 상품, 결제 정보, 주문자 정보 txt */
 .reservation--text{
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -115,16 +82,21 @@ input[type="checkbox"] {
 }
 
 
+.reservation--summary__decription>div>div, .reservation--location__decription>div{
+    font-size: 1.1rem;
+}
+
 
 /* 예약 상품 카테고리 */
 .reservation--category__product{
     display: flex;
+    margin-top: 30px;
 }
 
 .reservation--category__product div{
-    margin-right: 1rem;
+    margin-right: 0.7rem;
     white-space: nowrap;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 .reservation--category__product div:nth-of-type(5){
@@ -156,7 +128,7 @@ color: #5C5C5C;
 
 
 .reservation--title__product{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin: 10px 0 40px 0;
 }
 
@@ -196,22 +168,21 @@ color: #5C5C5C;
 
 
 /* 에약상품 몇박 */
-.reservation--date__decription>div:nth-of-type(1){
+/* .reservation--date__decription>div:nth-of-type(1){
     font-size: 1.5rem;    
     font-weight: bold;
     margin-bottom: 1vh;
-}
+} */
 
 /* 예약상품 날짜 */
-.reservation--date__decription>div:nth-of-type(2){
-    color: #777777;
+.reservation--date__decription>div{
     font-size: 1.3rem;
-    margin-bottom: 5vh;
+    margin-bottom: 50px;
 }
 
 /* 예약상품 가이드언어, 취소 수수료div */
 .reservation--summary__decription>div{
-    margin-bottom: 1vh;
+    margin-bottom: 10px;
 }
 
 
@@ -224,7 +195,7 @@ color: #5C5C5C;
 
 /* 위치 div */
 .reservation--location__decription{
-    margin-bottom: 5vh;
+    margin-bottom: 30px;
 }
 
 
@@ -239,8 +210,9 @@ color: #5C5C5C;
 
 /* 예약 상품 대표 사진 */
 .reservation--img__product{
-    width: 38vw;
-    height: 400px;
+    width: 25vw;
+    min-width: 300px;
+    height: 330px;
     overflow: hidden;
     position: relative; 
     border-radius: 15px;
@@ -273,12 +245,13 @@ color: #5C5C5C;
 
 /* 예약 상품 guests 인원 증감버튼 div */
 .reservation--quests__decription>div:nth-of-type(2){
-    width: 9vw;
+    width: 8vw;
     min-width: 130px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 50px;
+    margin-left: 60px;
 }
 
 
@@ -310,39 +283,29 @@ color: #5C5C5C;
 }
 
 
-/* 결제 정보 text 회색 글씨 */
-.reservation--color__info td{
+/* 결제 정보 div 하위 컨테이너,
+주문자 정보 div 하위 컨테이너 */
+.payment__info--container,
+.orderer__info--container{
+    display: grid;
+    width: 380px;
+    row-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(50%, auto));
+    margin-top: 30px;
+}
+
+
+.payment__info--container div,
+.orderer__info--container div{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.payment__info--container div:nth-child(n+3){
     color: #5C5C5C;
 }
 
-
-/* 결제 정보 하위 div 2개 */
-.reservation--payment__info>div:nth-of-type(2){
-    display: flex;
-}
-
-
-/* 테이블 크기 지정 */
-.reservation--payment__info>table{
-    width: 500px;
-    height: 120px;
-}
-
-.reservation--orderer__info>table{
-    width: 730px;
-    height: 120px;
-}
-
-
-.reservation--payment__info>table tr td,
-.reservation--orderer__info>table tr td{
-    font-size: 1.3rem;
-}
-
-
-td{
-    white-space:nowrap;
-}
 
 
 
@@ -354,6 +317,13 @@ td{
     padding: 0.35rem 0.7rem;
     border-radius: 3px;
     font-size: 1rem;
+    width: 230px;
+}
+
+
+.orderer--emergency{
+    height: 35px;
+    border: 1px solid #ccc;
 }
 
 input:focus {
@@ -379,14 +349,14 @@ input:focus {
 
 /* 약관 동의 text */
 .reservation--text__bottom{
-    margin-left: 0.5vw;
+    margin-left: 10px;
     font-size: 1.2rem;
 }
 
 /* 결제 버튼 */
 .reservation--btn__bottom{
     background-color: #0F4957;
-    width: 70vw;
+    width: 60vw;
     height: 65px;
     color: #ffffff;
     font-size: 1.4rem;
@@ -407,7 +377,7 @@ input:focus {
     height: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin: auto;
+    /* margin: auto; */
     background-color: #ffffff;
     border: 1px solid #e5e5e5;
     border-radius: 7px;
@@ -438,9 +408,22 @@ input:focus {
     background-color: transparent;
     padding-bottom: 2px;
   }
-  
 
-@media screen and (max-width : 767px) {
+
+  @media screen and (max-width : 1340px) {
+  .reservation--container,
+  .reservation--btn__bottom
+  {
+    width: 75vw;
+  }
+
+  
+  .reservation--summary__decription>div>div, .reservation--location__decription>div{
+    font-size: 1.1rem;
+}
+}
+
+@media screen and (max-width : 900px) {
     
     .reservation--payment__info>table{
         width: 50%;
@@ -483,36 +466,90 @@ input:focus {
     
     .reservation--btn__bottom{
         height: 50px;
+        font-size: 1.2rem;
     }
     
+    .quantity{
+        margin: 0;
+    }
     
     .reservation--quests__decription{
-        margin-top: 20px;
-        display: block;
-        width: 50px;
+        margin-top: 40px;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
     }
 
 
-.reservation--location__decription>img,
-.reservation--summary__decription>div>img,
-.reservation--summary__decription>div:nth-of-type(2)>img{
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
+    .reservation--location__decription>img,
+    .reservation--summary__decription>div>img,
+    .reservation--summary__decription>div:nth-of-type(2)>img{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
 
-.reservation--quests__decription>div:nth-of-type(2){
-    width: 120px;
-    margin-top: 20px;
-}
+    .reservation--quests__decription>div:nth-of-type(2){
+        width: 120px;
+        margin-left: 150px;
+        height: 40px;
+    }
 
-.reservation--date__decription{
-    margin-top: 20px;
-}
+    .reservation--date__decription{
+        margin-top: 20px;
+    }
 
-.quantity label{
-    font-size: 23px;
-}
+    .quantity label{
+        font-size: 23px;
+    }
+
+    .reservation--summary__decription>div>div, .reservation--location__decription>div{
+        font-size: 1rem;
+    }
+
+    .reservation--text{
+        font-size: 1.3rem;
+    }
+
+    .reservation--date__decription>div{
+        font-size: 1.1rem;
+        margin-top: 30px;
+    }
+
+    .reservation--top__title{
+        font-size: 1.4rem;
+    }
+
+    .reservation--quests__decription>div:nth-of-type(1){
+        font-size: 1.4rem;
+    }
+
+    .reservation--text__bottom{
+        font-size: 1rem;
+    }
+
+    .payment__info--container,
+    .orderer__info--container{
+    width: 250px;
+    }
+
+    .reservation--form__bottom{
+        margin-top: 60px;
+    }
+
+    input[type='checkbox']:checked+label,
+    input[type="checkbox"]+label{
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .reservation--container,
+    .reservation--btn__bottom
+    {
+        width: 72vw;
+    }
+
+
 
 }
 

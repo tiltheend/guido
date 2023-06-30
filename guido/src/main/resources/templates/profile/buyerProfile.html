@@ -86,7 +86,8 @@
                             <div class="large-12 columns">
                                 <div class="owl-carousel owl-theme">
                                     <div class="item" th:each="reservation : ${reservationList}">
-                                        <a href="#"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
+                                        <!-- <a href="#"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a> -->
+                                        <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
                                     </div>
                                     <!-- <div class="item">
                                         <a href="#"><img src="" alt=""></a>
@@ -108,8 +109,8 @@
             <!-- 리뷰 작성 모달 -->
             <div class="review-write" th:if="${session.loginUser?.userNo == user.userNo}"> <!-- 불투명 배경 -->
                 <div> <!-- 하얀 배경 -->
-                    <form action="/profile/addReview" method="POST">
-                        <h2>Purchase History</h2>
+                    <form action="">
+                        <h2>Purchase History</h2>  
                         <select name="reviewSaleList" id="reviewSaleList">
                             <option selected="selected" disabled>후기를 작성할 상품을 선택해주세요.</option>
                             <th:block th:if="${addReviewList}" th:each="addReview : ${addReviewList}">
@@ -154,7 +155,7 @@
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button class="review-add-submit">Submit</button>
+                            <button class="review-add-submit" onclick="reviewAddFn(event)">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -165,7 +166,7 @@
                 <div> <!-- 하얀 배경 -->
                     <form action="">
                         <h2>Purchase History</h2>
-                        <input type="text" name="reviewSaleList" id="reviewSaleList">
+                        <input type="text" name="reviewSaleList" id="reviewSaleList" readonly>
         
                         <div class="review-star-score"> <!-- 별점 수정 -->
                             <h3>Star Rating</h3>
@@ -196,14 +197,14 @@
                             </div>
                             <span class="score-span"></span>
                         </div>
-                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요." maxlength="1000">그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</textarea>
+                        <textarea name="reviewContent" id="reviewContent" placeholder="여행은 즐거우셨나요? 당신의 경험과 가이드에 대한 자세한 이야기를 들려주세요." maxlength="1000"></textarea>
                         <div class="write-count">
                             <span class="over-error"><i class="fa-sharp fa-solid fa-bomb"></i> 500자 이하로 작성해주세요.</span>
                             <div><span id="count">0</span> / 500</div>
                         </div>
                         <div>
                             <button class="review-modal-close" type="button">Close</button>
-                            <button>Submit</button>
+                            <button class="review-edit-submit" onclick="reviewEditSubmitFn(event)" type="button">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -255,7 +256,7 @@
                                         <p class="reviewer-name" th:text="${review.userName}">리뷰 작성자</p>
                                     </div>
                                     <div class="sale-review-info">
-                                        <p th:text="${review.productName}">상품명</p>
+                                        <p th:text="${review.productName}" th:data-productno="${review.productNo}">상품명</p>
                                         <div class="review-rating">
                                             <div class="review-star">
                                                 <input type="radio" id="starpoint_1" class="star_radio" value="0.5" th:checked="${review.reviewStarsDouble == 0.5}">
@@ -279,7 +280,7 @@
                                     <p onclick="moreReviewFn(this)">더보기 +</p>
                                     <div class="myreview-edit" th:if="${session.loginUser?.userNo == user.userNo}">
                                         <button class="review-edit-btn" onclick="reviewEditFn(this); return false;" type="button">Edit</button>
-                                        <button class="review-delete-btn">Delete</button>
+                                        <button class="review-delete-btn" onclick="reviewDelFn(this); return false;" type="button">Delete</button>
                                     </div>
                                 </div>
                             </li>
@@ -292,7 +293,8 @@
                         </ul>
                     </li>
                 </ul>
-                <button class="review-list-more" th:if="${reviewCount > 3}" type="button">more reviews</button>
+                <button class="review-list-more" type="button">more reviews</button>
+                <!-- <button class="review-list-more" th:if="${reviewCount > 3}" type="button">more reviews</button> -->
             </div>
 
         </div>
