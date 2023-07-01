@@ -22,7 +22,7 @@
       <!-- 메인 로고 -->
       <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
   </header>
-  <form th:action="@{/productDetail/product/${productNo}/edit}" method="post" enctype="multipart/form-data" id="productEditFrm">
+  <form th:action="@{edit}" method="post" enctype="multipart/form-data" id="productEditFrm">
     <!-- 1페이지 -->
     
 
@@ -382,7 +382,7 @@
            <!-- 반복 생성할 코드 -->
             <th:block th:each="item : ${addNotesList}">
               <label class="added-element" th:text="${item}">
-                <input type="hidden" name="productAddPrice" value="">
+                <input type="hidden" name="productAddNotes" value="">
                 <i class="fa-sharp fa-solid fa-xmark" style="color: rgb(0, 0, 0);"></i>
               </label>
             </th:block>

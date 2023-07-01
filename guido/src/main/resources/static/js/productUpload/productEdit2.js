@@ -583,10 +583,10 @@ const imgId8 = document.getElementById('imgId8');
 
 const productEditFrm = document.getElementById('productEditFrm');
 
-// productEditFrm.addEventListener('click', (e) => {
-//   // input type='hidden' 태그에
-//   //deleteSet에 저장된 값을 "1,2,3" 형태로 변경해서 저장
-//   document.querySelector("[name='deleteList']").value = Array.from(deleteSet);
+productEditFrm.addEventListener('click', (e) => {
+  // input type='hidden' 태그에
+  //deleteSet에 저장된 값을 "1,2,3" 형태로 변경해서 저장
+  document.querySelector("[name='deleteList']").value = Array.from(deleteSet);
 
-//   e.preventDefault();
-// });
+  // e.preventDefault();
+});

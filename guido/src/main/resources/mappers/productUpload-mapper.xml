@@ -100,7 +100,8 @@
 		PRODUCT_NAME = #{productName},
 		PRODUCT_CONTENT = #{productContent},
 		PRODUCT_PRICE = #{productPrice},
-		PRODUCT_ADD_PRICE = #{productAddPrice}
+		THEME_CODE = #{themeCode},
+		PRODUCT_ADD_PRICE = #{productAddNotes}
 		WHERE PRODUCT_NO = #{productNo}
 	</update>
 	
@@ -113,25 +114,25 @@
 	
 	<!-- 이미지 삭제 -->
    <delete id="imageDelete">
-      DELETE FROM FILE
+      DELETE FROM "FILE"
       WHERE PRODUCT_NO = #{productNo}
       AND FILE_ORDER IN(${deleteList})
    </delete>
    
    <!-- 이미지 수정 -->
    <update id="imageUpdate">
-      UPDATE FILE SET
-      FILE_PATH = #{filePath},
+      UPDATE "FILE" SET
+      FILE_PATH = #{filePath}
       WHERE PRODUCT_NO = #{productNo}
-      AND FILE_ORDER = #{productOrder}
+      AND FILE_ORDER = #{fileOrder}
    </update>
    
    
    <!-- 이미지 삽입 -->
    <insert id="imageInsert">
-      INSERT INTO FILE
-      VALUES(SEQ_FILE_NO.NEXTVAL, #{filePath},
-         #{fileOrder}, #{productNo}
+      INSERT INTO "FILE"
+      VALUES(SEQ_FILE_NO.NEXTVAL, #{productNo}, DEFAULT, DEFAULT,
+         #{fileOrder}, #{filePath}
       )
    </insert>
 	
