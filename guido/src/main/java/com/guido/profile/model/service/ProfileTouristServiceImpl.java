@@ -158,8 +158,8 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 
 	// 구매자 예약 목록 더보기 (3개씩)
 	@Override
-	public List<Reservation> myReservationMore(int startReservationNum) {
-		return mapper.myReservationMore(startReservationNum);
+	public List<Reservation> myReservationMore(Map<String, Integer> map) {
+		return mapper.myReservationMore(map);
 	}
 	
 	

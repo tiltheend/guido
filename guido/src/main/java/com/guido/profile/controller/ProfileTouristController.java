@@ -1,6 +1,7 @@
 package com.guido.profile.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -220,31 +221,29 @@ public class ProfileTouristController {
 	// 구매자 예약 목록 더보기 (3개씩)
 	@ResponseBody
 	@PostMapping(value="/myReservationMore", produces="application/json; charset=UTF-8")
-	public List<Reservation> myReservationMore(@RequestBody int startReservationNum){
+	public List<Reservation> myReservationMore(@RequestBody int startReservationNum,
+			@SessionAttribute("loginUser") User loginUser){
 			
-		List<Reservation> moreReservationMore = service.myReservationMore(startReservationNum);
+		Map<String, Integer> map = new HashMap<>();
 		
-		for(Reservation r : moreReservationMore) {
-			// System.out.println(r);
-		}
+		map.put("startReservationNum", startReservationNum);
+		map.put("userNo",loginUser.getUserNo());
+		
+		List<Reservation> moreReservationMore = service.myReservationMore(map);
 		
 		return moreReservationMore;
 	}
+	
 	// 비동기로 예약 목록 불러오기 (최신 3개)
-	@ResponseBody
-	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
-	public List<Reservation> newReservationList(@RequestBody int userNo){
-
-		List<Reservation> newReservationList = service.myReservation(userNo);
-		int reservationCount = service.reservationCount(userNo);
-		
-		for(Reservation r : newReservationList) {
-			r.setReservationCount(reservationCount);
-			System.out.println(r);
-		}
-		
-		return newReservationList;
-	}
+//	@ResponseBody
+//	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
+//	public List<Reservation> newReservationList(@RequestBody int userNo){
+//
+//		List<Reservation> newReservationList = service.myReservation(userNo);
+//		int reservationCount = service.reservationCount(userNo);
+//		
+//		return newReservationList;
+//	}
 	
 	// 투어리스트 위시 리스트로 이동
 	@GetMapping("/touristWishList")
