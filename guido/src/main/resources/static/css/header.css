@@ -9,7 +9,7 @@ header{
 
 header .main-search-box{position: absolute; left: 50%; transform: translateX(-150px);} 
 header .logo{margin-left: 100px; user-select: none;}
-header .main-icons-box{display: flex; margin-right: 100px;}
+header .main-icons-box{display: flex; margin-right: 100px; justify-content: flex-end;}
 
 header .logo img{width: 87px;}
 
@@ -152,7 +152,7 @@ header .search-box-click-box button{
 
 /* check-in */
 .search-box-click > div:nth-child(2){
-  /* width: 150px; */
+  width: 300px;
   height: 60px;
   background-color: none;
   border-radius: 50px;
@@ -462,19 +462,19 @@ header .search-box-click-box button{
 
 
 /* calendar */
-body {
+/*body {
   color: #000;
   overflow-x: hidden;
   height: 100%;
   background-repeat: no-repeat;
-}
+}*/
 
-.container {
+/*.container {
 padding-top: 120px;
 padding-bottom: 120px;
-}
+}*/
 
-input {
+.input-group input {
   padding: 10px 15px !important;
   border: 1px solid lightgrey !important;
   border-radius: 10px;
@@ -486,7 +486,7 @@ input {
   position: relative;
 }
 
-input:focus {
+.input-group input:focus {
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
@@ -494,20 +494,20 @@ input:focus {
   outline-width: 0;
 }
 
-::placeholder {
+.form-control ::placeholder {
   color: #BDBDBD;
   opacity: 1;
 }
 
-:-ms-input-placeholder {
+.form-control :-ms-input-placeholder {
   color: #BDBDBD;
 }
 
-::-ms-input-placeholder {
+.form-control ::-ms-input-placeholder {
   color: #BDBDBD;
 }
 
-button:focus {
+.input-group button:focus {
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
@@ -527,7 +527,7 @@ left: 0;
 
 .datepicker table tr td.today, span.focused {
 border-radius: 50% !important;
-background-image: linear-gradient(#FFF3E0, #FFE0B2);
+background-color: #B1D8DA;
 }
 
 .datepicker table tr td.today.range {
@@ -561,10 +561,10 @@ color: #fff !important;
 
 .range-start, .range-end {
 border-radius: 50% !important;
-background-image: linear-gradient(#FFA726, #FFA726) !important;
+background-image: linear-gradient(#1C797D, #1C797D) !important;
 }
 
-.prev, .next, .datepicker-switch {
+.table-condensed .prev, .table-condensed .next, .datepicker-switch {
 border-radius: 0 !important;
 padding: 10px 10px 10px 10px !important;
 text-transform: uppercase;
@@ -572,7 +572,7 @@ font-size: 14px;
 opacity: 0.8;
 }
 
-.prev:hover, .next:hover, .datepicker-switch:hover {
+.table-condensed .prev:hover, .table-condensed .next:hover, .datepicker-switch:hover {
 background-color: inherit !important;
 opacity: 1;
 }

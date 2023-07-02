@@ -3565,11 +3565,12 @@
   }
   
   .input-group {
-    position: relative;
+    /* position: relative; */
+    position: absolute;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     -ms-flex-align: stretch;
     align-items: stretch;
     width: 100%;
