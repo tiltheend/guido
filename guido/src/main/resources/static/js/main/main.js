@@ -166,7 +166,7 @@ function loadProductByTheme(themeCode) {
             heartCheckbox.setAttribute("id", "wishHeart");
             
             // 여기에 실제 상태에 따른 checked 속성 추가
-             if(themeProduct.wishOrNot > 0){
+            if(themeProduct.wishOrNot > 0){
                 heartCheckbox.checked;
             }
         
