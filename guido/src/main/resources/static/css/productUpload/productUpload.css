@@ -1016,6 +1016,8 @@ ul {
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 20px;
+  margin-left: 20px;
 }
 .accordion__num {
   font-size: 1rem;
@@ -1045,19 +1047,41 @@ ul {
   height: 8.2rem;
   width: 100%;
   padding-top: 1rem;
+  padding: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  align-items: center;
+}
+#page13 > div.set-fee > ul > li:nth-child(2) > p > input[type='text'] {
+  height: 50%;
+  width: 10%;
+  text-align: center;
+  outline: none;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  font-size: 1.5rem;
+}
+#page13 > div.set-fee > ul > li:nth-child(2) > p > span {
+  text-align: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 .accordion__li:nth-of-type(2) :target ~ .accordion__content {
   height: 13rem;
   padding-top: 1rem;
 }
 .accordion__li:last-child :target ~ .accordion__content {
-  height: 15.4rem;
+  /* height: 15.4rem; */
   padding-top: 1rem;
+  padding: 20px;
 }
 #page13 > div.set-fee > ul > li:nth-child(2) > a.open-accordion > div > div {
   justify-content: space-between;
   display: flex;
   margin: 0 20px;
+  padding: 20px;
 }
 #page13
   > div.set-fee
@@ -1106,5 +1130,43 @@ input[type='radio']:checked {
 }
 
 .plus-image {
+  display: none;
+}
+.set-people-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 200px;
+}
+.minTouristNum,
+.maxTouristNum,
+.maxTouristNum2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+}
+.minInput,
+.maxInput,
+.maxInput2 {
+  outline: none;
+  width: 70px;
+  height: 70px;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  font-size: 1.5rem;
+}
+.inputPeopleNum {
+  display: flex;
+  justify-content: space-between;
+}
+#maxMinWarn {
+  color: red;
+  display: none;
+}
+.maxTouristNum2 {
   display: none;
 }

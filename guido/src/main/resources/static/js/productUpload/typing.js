@@ -2,12 +2,14 @@ const $text = document.querySelector('.text');
 const $text2 = document.querySelector('.text2');
 const $text3 = document.querySelector('.text3');
 const $text4 = document.querySelector('.text4');
+const $text5 = document.querySelector('.text5');
 // const $text5 = document.querySelector('.text5');
 // 글자 모음
 const letters = ['Jayden 가이드님! 환영합니다.'];
 const letters2 = ['이제 가이드 하실 지역을 선택해주세요!'];
 const letters3 = ['여행 테마를 선택해주세요!'];
 const letters4 = ['이제 요금을 설정하세요.'];
+const letters5 = ['여행 기본 정보를 입력해주세요.'];
 // const letters5 = ['여행 코스는 어디인가요?'];
 // 글자 입력 속도
 const speed = 50;
@@ -61,6 +63,16 @@ const typing4 = async () => {
 
   await wait(1000);
 };
+const typing5 = async () => {
+  const letter5 = letters5[i].split('');
+
+  while (letter5.length) {
+    await wait(speed);
+    $text5.innerHTML += letter5.shift();
+  }
+
+  await wait(1000);
+};
 
 // const typing5 = async () => {
 //   const letter5 = letters5[i].split('');
@@ -98,4 +110,5 @@ setTimeout(typing, 1000);
 setTimeout(typing2, 1000);
 setTimeout(typing3, 1000);
 setTimeout(typing4, 1000);
+setTimeout(typing5, 1000);
 // setTimeout(typing5, 1000);

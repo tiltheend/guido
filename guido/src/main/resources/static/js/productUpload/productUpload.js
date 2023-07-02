@@ -34,25 +34,28 @@ const updatePage = () => {
     // typing5();
     // tourThemeSelectCheck();
     // tourBoxCheck();
-  }
-  if (currentPage == 3) {
     document.querySelector('.text3').innerHTML = '';
     // tourThemesCheck();
     typing3();
   }
-  if (currentPage == 5) {
+  if (currentPage == 3) {
+    document.querySelector('.text5').innerHTML = '';
+    nextBtn.disabled = true;
+    typing5();
+  }
+  if (currentPage == 4) {
     document.querySelector('.text4').innerHTML = '';
     typing4();
   }
-  if (currentPage == 5) {
+  if (currentPage == 6) {
     titleCharCheck();
     inputTitle.focus();
   }
-  if (currentPage == 6) {
+  if (currentPage == 7) {
     contentCharCheck();
     inputContent.focus();
   }
-  if (currentPage == 9) {
+  if (currentPage == 10) {
     disableNextButton();
   }
 };
@@ -82,6 +85,7 @@ function updateTourValue() {
 }
 function updateTourValue2() {
   onedayTourValue.value = '';
+  onedayTourValue.removeAttribute('name');
 }
 
 function updateTourValue3() {
@@ -273,7 +277,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var mainElement3 = document.getElementById('page4');
   if (mainElement3) {
-    mainElement3.style.width = '800px';
+    mainElement3.style.width = '500px';
   }
   var mainElement4 = document.getElementById('page5');
   if (mainElement4) {
@@ -742,4 +746,111 @@ if (imgId4.getAttribute('src') !== '') {
   ) {
     plusImage.style.display = 'block';
   }
+}
+
+$('#minInput').on('input', (e) => {
+  let v = e.currentTarget.value;
+  if (/[ㄱ-힣]+/.test(v)) {
+    e.currentTarget.value = v.replaceAll(/[ㄱ-힣]+/g, '');
+  } else {
+    e.currentTarget.value = v.replace(/[a-zA-Z]+|[^\w\s]|_/g, '');
+  }
+});
+$('#maxInput').on('input', (e) => {
+  let v = e.currentTarget.value;
+  if (/[ㄱ-힣]+/.test(v)) {
+    e.currentTarget.value = v.replaceAll(/[ㄱ-힣]+/g, '');
+  } else {
+    e.currentTarget.value = v.replace(/[a-zA-Z]+|[^\w\s]|_/g, '');
+  }
+});
+$('#maxInput2').on('input', (e) => {
+  let v = e.currentTarget.value;
+  if (/[ㄱ-힣]+/.test(v)) {
+    e.currentTarget.value = v.replaceAll(/[ㄱ-힣]+/g, '');
+  } else {
+    e.currentTarget.value = v.replace(/[a-zA-Z]+|[^\w\s]|_/g, '');
+  }
+});
+const minInput = document.getElementById('minInput');
+const maxInput = document.getElementById('maxInput');
+const maxMinWarn = document.getElementById('maxMinWarn');
+const minTouristNum = document.querySelectorAll('.minTouristNum');
+const maxTouristNum = document.querySelectorAll('.maxTouristNum');
+const maxTouristNum2 = document.querySelectorAll('.maxTouristNum2');
+const maxInput2 = document.getElementById('maxInput2');
+const maxTouristName = document.querySelector('[name="maxTourist"]');
+const minTouristName = document.querySelector('[name="minTourist"]');
+
+function validateMinMaxInput() {
+  maxInput2.style.display = 'none';
+  const minVal = Number(minInput.value);
+  const maxVal = Number(maxInput.value);
+
+  if (
+    minVal <= maxVal &&
+    minVal !== 0 &&
+    maxVal !== 0 &&
+    minInput.value !== '' &&
+    maxInput.value !== ''
+    // minVal &&
+    // maxVal <= 30
+  ) {
+    maxMinWarn.style.display = 'none';
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.disabled = true;
+    maxMinWarn.style.display = 'block';
+  }
+  maxTouristName.value = maxVal;
+  minTouristName.value = minVal;
+}
+inputDay.addEventListener('input', () => {
+  if (inputDay.value > 0) {
+    minTouristNum[0].style.display = 'none';
+    minTouristNum[1].style.display = 'none';
+    minInput.style.display = 'none';
+    maxTouristNum[0].style.display = 'none';
+    maxTouristNum[1].style.display = 'none';
+    maxInput.style.display = 'none';
+    maxTouristNum2[0].style.display = 'block';
+    maxTouristNum2[1].style.display = 'block';
+  } else {
+    minTouristNum[0].style.display = 'block';
+    minTouristNum[1].style.display = 'block';
+  }
+  maxTouristName.value = '';
+  minTouristName.value = '';
+});
+
+inputTime.addEventListener('input', () => {
+  if (inputTime.value > 0) {
+    minTouristNum[0].style.display = 'block';
+    minTouristNum[1].style.display = 'block';
+    minInput.style.display = 'block';
+    maxTouristNum[0].style.display = 'block';
+    maxTouristNum[1].style.display = 'block';
+    maxInput.style.display = 'block';
+    maxTouristNum2[0].style.display = 'none';
+    maxTouristNum2[1].style.display = 'none';
+  } else {
+    minTouristNum[0].style.display = 'none';
+    minTouristNum[1].style.display = 'none';
+  }
+  maxTouristName.value = '';
+});
+
+minInput.addEventListener('input', validateMinMaxInput);
+maxInput.addEventListener('input', validateMinMaxInput);
+maxInput2.addEventListener('input', validateMinMaxInput2);
+function validateMinMaxInput2() {
+  const maxVal2 = Number(maxInput2.value);
+
+  if (maxVal2 > 0) {
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.disabled = true;
+  }
+  maxTouristName.value = maxVal2;
+  minTouristName.value = 0;
 }

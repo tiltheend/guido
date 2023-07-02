@@ -301,8 +301,32 @@
 
 
     </main>
+    <!-- 최소 최대 인원 설정 -->
+    <main id="page4" class="page">
+      <div class="greeting">
+        <!-- <h1 class="title typing">Jayden</h1> -->
+        <div class="typing title">
+         
+          <h4 class="text5"></h4>
+        </div>
+        <div class="inputPeopleNum"><span class="sub-title">언제든지 변경하실 수 있습니다.</span><span id="maxMinWarn">최소인원은 최대인원보다 많을 수 없습니다.</span></div>
+      </div>
+      <div class="set-fee">
+       <div class="set-people-container">
+        <span class="minTouristNum">최소인원</span><input type="text" class="minTouristNum minInput minMaxCheck" id="minInput">
+        <input type="hidden" name="minTourist" value="">
+        <span class="maxTouristNum">최대인원</span><input type="text" class="maxTouristNum maxInput minMaxCheck" id="maxInput">
+        <span class="maxTouristNum2">최대인원</span><input type="text" class="maxTouristNum2 maxInput2" id="maxInput2">
+        <input type="hidden" name="maxTourist" value="">
+        
+        
+      </div>
+  
+      </div>
+      
+    </main>
     <!-- 가격 설정 페이지(페이지 수정해야함) -->
-    <main id="page13" class="page">
+    <main id="page5" class="page">
       <div class="greeting">
         <!-- <h1 class="title typing">Jayden</h1> -->
         <div class="typing title">
@@ -326,7 +350,7 @@
             <div>
               <div>
                 <h5 class="accordion__title">
-                  1인당 가격
+                  예상 수입
                 </h5>
               </div>
              
@@ -337,7 +361,7 @@
               <div>
                 <span class="accordion__num"></span>
                 <h5 class="accordion__title">
-                  1인당 가격
+                  예상 수입
                 </h5>
               </div>
             
@@ -347,38 +371,6 @@
             Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id
             volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna
             fringilla urna porttitor rhoncus dolor purus non.
-          </p>
-        </li>
-        <li class="accordion__li">
-          <span class="target" id="accordion2"></span>
-          <a href="#accordion2" class="open-accordion" title="open">
-            <div>
-              <div>
-                <span class="accordion__num">02</span>
-                <h5 class="accordion__title">
-                  Feugiat scelerisque varius morbi enim nunc?
-                </h5>
-              </div>
-              <i class="fas fa-chevron-down"></i>
-            </div>
-          </a>
-          <a href="#accordion" class="close-accordion" title="close">
-            <div>
-              <div>
-                <span class="accordion__num">02</span>
-                <h5 class="accordion__title">
-                  Feugiat scelerisque varius morbi enim nunc?
-                </h5>
-              </div>
-              <i class="fas fa-chevron-up"></i>
-            </div>
-          </a>
-          <p class="accordion__content">
-            Dolor sit amet consectetur adipiscing elit pellentesque habitant
-            morbi. Id interdum velit laoreet id donec ultrices. Fringilla
-            phasellus faucibus scelerisque eleifend donec pretium. Est
-            pellentesque elit ullamcorper dignissim. Mauris ultrices eros in
-            cursus turpis massa tincidunt dui.
           </p>
         </li>
        
@@ -635,7 +627,7 @@
   <script th:src="@{/js/productUpload/productUpload.js}"></script>
   <!-- <script src="../js/productUpload/calender.js"></script> -->
   <script th:src="@{/js/productUpload/typing.js}"></script>
-  <script th:src="@{/js/productUpload/tourCourse.js}"></script>
+  <!-- <script th:src="@{/js/productUpload/tourCourse.js}"></script> -->
  
   <script
   src="https://kit.fontawesome.com/f7459b8054.js"
