@@ -1158,6 +1158,9 @@ input[type='radio']:checked {
   border: 1px solid lightgray;
   border-radius: 15px;
   font-size: 1.5rem;
+  transition-property: -ms-transform, -webkit-transform, transform,
+    background-color, border-color !important;
+  transition-duration: 0.25s !important;
 }
 .inputPeopleNum {
   display: flex;

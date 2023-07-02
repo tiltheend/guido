@@ -798,9 +798,12 @@ function validateMinMaxInput() {
   ) {
     maxMinWarn.style.display = 'none';
     nextBtn.disabled = false;
+    minInput.style.backgroundColor = '#b1d8da';
+    maxInput.style.backgroundColor = '#b1d8da';
   } else {
     nextBtn.disabled = true;
     maxMinWarn.style.display = 'block';
+    minInput.style.backgroundColor = 'rgb(252, 171, 171)';
   }
   maxTouristName.value = maxVal;
   minTouristName.value = minVal;
@@ -848,8 +851,10 @@ function validateMinMaxInput2() {
 
   if (maxVal2 > 0) {
     nextBtn.disabled = false;
+    maxInput2.style.backgroundColor = '#b1d8da';
   } else {
     nextBtn.disabled = true;
+    maxInput2.style.backgroundColor = 'rgb(252, 171, 171)';
   }
   maxTouristName.value = maxVal2;
   minTouristName.value = 0;
