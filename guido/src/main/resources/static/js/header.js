@@ -73,39 +73,6 @@ guestButtonClick.addEventListener('click', () => {
 
 
 
-/* *** 게스트 수 업다운 *** */
-const guestCountElement = document.querySelector('.main--right__guest-count');
-const guestInput = document.querySelector('input[name="tourist"]');
-
-// 감소 버튼 클릭 이벤트 처리
-document.querySelector('.main--right__guest-minus').addEventListener('click', () => {
-    let count = parseInt(guestCountElement.textContent);
-    if (count > 0) {
-        count--;
-        guestCountElement.textContent = count;
-        updateGuestText(count);
-        guestInput.value = count; // input 태그에 값 설정
-    }
-});
-
-// 증가 버튼 클릭 이벤트 처리
-document.querySelector('.main--right__guest-plus').addEventListener('click', () => {
-    let count = parseInt(guestCountElement.textContent);
-    count++;
-    guestCountElement.textContent = count;
-    updateGuestText(count);
-    guestInput.value = count; // input 태그에 값 설정
-});
-
-// 게스트 텍스트 업데이트 함수
-function updateGuestText(count) {
-    const guestText = document.querySelector('.guest-button-click input');
-    guestText.textContent = `게스트 ${count}명`;
-}
-
-
-
-
 /* *** 모달창 닫기 *** */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -218,6 +185,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+/* *** 게스트 수 업다운 *** */
+const guestCountElement = document.querySelector('.main--right__guest-count');
+const guestInput = document.querySelector('input[name="tourist"]');
+
+// 감소 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-minus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    if (count > 0) {
+        count--;
+        guestCountElement.textContent = count;
+        updateGuestText(count);
+        guestInput.value = count; // input 태그에 값 설정
+    }
+});
+
+// 증가 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-plus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    count++;
+    guestCountElement.textContent = count;
+    updateGuestText(count);
+    guestInput.value = count; // input 태그에 값 설정
+});
+
+// 게스트 텍스트 업데이트 함수
+function updateGuestText(count) {
+    const guestText = document.querySelector('.guest-button-click input');
+    guestText.textContent = `게스트 ${count}명`;
+}
+
+
+
 /* ***** 헤더 위치 검색 ajax ***** */
 document.addEventListener("DOMContentLoaded", () =>{
 
@@ -284,7 +283,15 @@ whereModal.addEventListener("click", e => {
 
 
 
+// 캘린더
+$(document).ready(function(){
 
+  $('.input-daterange').datepicker({
+      format: 'yyyy-mm-dd',
+      todayHighlight: true,
+      startDate: '0d'
+  });
+});
 
 
 
