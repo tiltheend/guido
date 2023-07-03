@@ -77,10 +77,12 @@
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
-		          (SELECT COUNT(*) 
-					FROM "WISHLIST"
-					WHERE USER_NO = #{userNo}
-					AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+		          <if test="userNo != null">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
 		  FROM PRODUCT P
 		  WHERE P.PRODUCT_STATE = 'N'
 		  ORDER BY P.CREATE_DT DESC
