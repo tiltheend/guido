@@ -11,7 +11,7 @@ public class AjaxServiceImpl implements AjaxService{
 	@Autowired
 	private AjaxMapper mapper;
 
-	// 이메이 중복 검사 
+	// 이메일 중복 검사 
 	@Override
 	public int checkEmail(String email) {
 		return mapper.checkEmail(email);

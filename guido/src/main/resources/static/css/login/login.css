@@ -197,7 +197,7 @@ input[type="checkbox"]:checked + label{
     padding: 0 20px
 }
 .hr{
-    width: 90%;
+    /* width: 90%; */
     background-color: #c5c5c5;
     height: 1px;
     margin-top: 0px;
