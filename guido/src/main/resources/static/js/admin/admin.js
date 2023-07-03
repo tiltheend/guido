@@ -66,3 +66,47 @@ if(approveBtn !== null)
         else
             alert('선택된 체크박스가 없습니다.')
     })
+
+/*********************************************************************************/
+function setMainBanner(eventNo, order) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/admin/setMainBanner');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if(xhr.status === 200) {
+            alert('성공하였습니다.');
+        } else {
+            alert('실패');
+        }
+        location.reload()
+    };
+    xhr.send(JSON.stringify({'eventNo':eventNo,'order':order}));
+}
+
+const setMainBannerBtn = document.querySelectorAll('.set-main-banner');
+let selectedEventNo = document.getElementById('selectedEventNo');
+setMainBannerBtn.forEach(btn=>{
+    btn.addEventListener('click', () => {
+        const userNo = btn.closest('tr').querySelector('.checkbox').value;
+        selectedEventNo.innerText=userNo;
+        const modal = document.getElementById("modal");
+        modal.style.display = "block";
+    
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none"; // 모달 숨기기
+            }
+        }
+    });
+})
+
+const modalSubmit = document.querySelector('.modal-submit');
+const modalCancel = document.querySelector('.modal-cancel');
+const modalSelect = document.querySelector('#modalSelect');
+
+modalSubmit.addEventListener('click',()=>{
+    setMainBanner(selectedEventNo.innerText,modalSelect.value);
+})
+
+
+/*********************************************************************************/

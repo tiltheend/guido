@@ -24,9 +24,6 @@
     <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
-    <!-- <script type ="text/javascript" th:src="@{/js/productDetail/apiKey.js}"></script> -->
-
-
 </head>
 <body th:object="${product}">
 
@@ -67,7 +64,7 @@
                     </div>
 
                     <!-- session.loginUser 존재할 때만 보이도록 하기 -->
-                    <div class="detail--top__button" th:if="${session.loginUser}==*{userNo}">
+                    <div class="detail--top__button" th:if="${session.loginUser.userNo}==*{userNo}">
                         <div id="editBtn">edit</div>
                         <div id="deleteBtn">delete</div>
                     </div>
@@ -188,7 +185,7 @@
                                 <div class="detail--title__pr">About Guide!</div>
         
                     
-                                <div class="detail--container__pr">
+                                <div class="detail--container__pr"  th:if="${#lists.size(pr) > 0}">
                     
                                     <div class="detail--item__pr" th:if="${pr.abroadExperience}">
                                         <img th:src="@{/images/profile/abroadExperience.png}">
@@ -581,9 +578,6 @@
                     <div id="location--map"></div>
                 </div>
                 
-                
-
-                
 
                 <div class="detail--divisionline"></div>
 
@@ -598,57 +592,30 @@
             
                     <div class="detail--list_recommend"> 
                         
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/남산타워.jpg}">
-                            </div>
+                        <div class="detail--item__recommend" th:each="recommend : ${recommendList}">
+                            <a th:href="@{/productDetail/product/{productNo}(productNo=${recommend.productNo})}">
+                                <div class="detail--item__recommend-img">
+                                    <img th:if="${#lists.size(recommend.imageList) > 0}" th:src="${recommend.imageList[0]?.filePath}">
+                                </div>
+                            </a>
                 
-                            <div class="detail--item__recommend-title">
-                                Namsan Cable Car
+                            <div class="detail--item__recommend-title" th:text="${recommend.productName}">
+                                    상품명
                             </div>
                         </div>
                 
             
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/광장시장.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Gwangjang Market
-                            </div>
-                        </div>
-                
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/한복체험.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Hanbok experience
-                            </div>
-                        </div>
-
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/경복궁생과방.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Gyeongbokgung Palace Living Room
-                            </div>
-                        </div>
                     </div>
         
         
                 </div>
         
 
-                <div class="detail--divisionline"></div>
+                <!-- <div class="detail--divisionline"></div> -->
                 
         
                 <!-- 페스티벌 추천 -->
-                <div class="detail--bottom--festival">
+                <!-- <div class="detail--bottom--festival">
                     
                     <div class="detail--text__recommend">
                         How about a festival like this?
@@ -703,7 +670,7 @@
                         
 
         
-                </div>
+                </div> -->
                 
             </section>
             
@@ -744,7 +711,6 @@
             const loginUserType = /*[[${session.loginUser?.userType}]]*/"로그인 회원 타입";
             const product = /*[[${product}]]*/ "상품";
             
-            // const MAP_API = config.apikey;
             </script>
 
     </div>

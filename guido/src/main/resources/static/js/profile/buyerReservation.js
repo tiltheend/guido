@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     reservationMoreBtnFn(); /* 더보기 버튼 css */
 });
 
+
+
 if(reservationMoreBtn !=null) {
     reservationMoreBtn.addEventListener("click", e => {
         let startReservationNum = myReviewList.childElementCount;
-        console.log(startReservationNum);
+
         fetch("/profile/myReservationMore",{
             method : "POST",
             headers : {"Content-Type" : "application/json"}, 
@@ -17,20 +19,96 @@ if(reservationMoreBtn !=null) {
         })
         .then(resp => resp.json())
         .then(myReservationMore => {
-            console.log("더보기 성공쓰~~");
             
             if (myReservationMore.length < 4) {
                 reservationMoreBtn.style.display = "none";
             }
     
-            for (let i = 0; i <myReservationMore.length; i++) {
+            for (let i = 0; i <3; i++) {
                 const reservation = myReservationMore[i];
-    
-                if(reservation == null) break;
-                console.log("더보기"+reservation);
-                reservationMoreBtnFn();
+                
+               // if(reservation == null) break;
+
+                const li = document.createElement("li");
+
+                // 예약 번호
+                const reservationNumberDiv = document.createElement("div");
+                const reservationNumberSpan1 = document.createElement("span");
+                const reservationNumberSpan2 = document.createElement("span");
+                reservationNumberSpan1.textContent = "예약 번호";
+                reservationNumberSpan2.textContent = "12345678-12345678";
+                // 나중에 예약 번호로 바꾸기
+
+                reservationNumberDiv.appendChild(reservationNumberSpan1);
+                reservationNumberDiv.appendChild(reservationNumberSpan2);
+
+                li.appendChild(reservationNumberDiv);
+
+                // 주문 처리
+                const orderProcessingDiv = document.createElement("div");
+                const orderProcessingSpan = document.createElement("span");
+                orderProcessingSpan.textContent = "주문 처리";
+                orderProcessingDiv.appendChild(orderProcessingSpan);
+                
+                // 예약 상태
+                // const stateDiv = document.createElement("div");
+                const state = reservation.reservationState;
+                const stateSpan = document.createElement("span");
+                if (state === 'Y') {
+                    stateSpan.textContent = "예약 완료";
+                } else if (state === 'N') {
+                    stateSpan.textContent = "예약 취소";
+                } else if (state === 'D') {
+                    stateSpan.textContent = "구매확정 완료";
+                }
+                orderProcessingDiv.appendChild(stateSpan);
+
+                li.appendChild(orderProcessingDiv);
+                // li.appendChild(stateDiv);
+
+                // 이미지 및 내용 요소
+                const imageDiv = document.createElement("div");
+                imageDiv.className = "reservation-img";
+                const imageLink = document.createElement("a");
+                const image = document.createElement("img");
+                const contentDiv = document.createElement("div");
+                contentDiv.className = "reservation-content";
+                const dateH2 = document.createElement("h2");
+                const titleH2 = document.createElement("h2");
+                const priceSpan1 = document.createElement("span");
+                const priceSpan2 = document.createElement("span");
+
+                imageLink.href = `/productDetail/product/${reservation.productNo}`;
+                image.src = reservation.thumbnail;
+                image.alt = "reservationImg";
+                dateH2.textContent = reservation.productDate;
+                titleH2.textContent = reservation.productName;
+                priceSpan1.textContent = "KRW";
+                priceSpan2.textContent = "000,000";
+                // 나중에 가격 바꾸기!
+
+                imageLink.appendChild(image);
+                imageDiv.appendChild(imageLink);
+                contentDiv.appendChild(dateH2);
+                contentDiv.appendChild(titleH2);
+                contentDiv.appendChild(priceSpan1);
+                contentDiv.appendChild(priceSpan2);
+
+                const flexDiv = document.createElement("div");
+                flexDiv.className = "flex-direction-row";
+                flexDiv.appendChild(imageDiv);
+                flexDiv.appendChild(contentDiv);
+
+                li.appendChild(flexDiv);
+
+                // 기존 li 요소 뒤에 추가
+                const existingLiElements = myReviewList.querySelectorAll("li");
+                const lastLiElement = existingLiElements[existingLiElements.length - 1];
+                myReviewList.insertBefore(li, lastLiElement.nextSibling);
+                
             }
 
+            reservationMoreBtnFn();
     
         })
         .catch(err=>{
@@ -41,7 +119,7 @@ if(reservationMoreBtn !=null) {
     });
 }
 
-/* 비동기로 구매 목록 불러오기 (최신 3개) */
+/* 비동기로 구매 목록 불러오기 (최신 3개) 
 function reviewListFn(){
 
     fetch("/profile/newReservationList",{
@@ -69,7 +147,6 @@ function reviewListFn(){
                 const reservation = newReservationList[i];
     
                 if(reservation == null) break;
-                console.log("비동기"+reservation);
 
                 reservationMoreBtnFn();
             }
@@ -83,6 +160,7 @@ function reviewListFn(){
     });
 
 };
+*/
 
 //  구매 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
 function reservationMoreBtnFn(){

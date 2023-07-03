@@ -40,5 +40,12 @@ public interface ProductDetailMapper {
 	
 	// 관심 상품 해제
 	int deleteProductWish(Map<String, Integer> map);
+
+	// 인기 상품 랜덤 조회
+	List<Product> selectPopularList();
+
+	
+	// 추천 상품 조회 - 가이드 언어 일치하는 상품 랜덤으로
+	List<Product> selectRecommendList(int userNo);
 	
 }

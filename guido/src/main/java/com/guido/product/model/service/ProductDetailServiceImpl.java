@@ -78,4 +78,18 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 		return result;
 	}
 
+
+	// 인기 상품 랜덤 조회
+	@Override
+	public List<Product> selectPopularList() {
+		return mapper.selectPopularList();
+	}
+
+
+	// 추천 상품 조회 - 가이드 언어 일치하는 상품 랜덤으로
+	@Override
+	public List<Product> selectRecommendList(int userNo) {
+		return mapper.selectRecommendList(userNo);
+	}
+
 }

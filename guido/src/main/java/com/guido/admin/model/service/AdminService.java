@@ -20,5 +20,7 @@ public interface AdminService {
 
 	int approveGuide(List<Integer> userNoList);
 
-	List<Event> selectMainEventList();
+	List<Map<String,String>> selectMainEventList();
+
+	int setMainBanner(Map<String, Object> data);
 }

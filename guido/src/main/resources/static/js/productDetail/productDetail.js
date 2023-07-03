@@ -174,7 +174,7 @@ if(document.getElementById("wishHeart")!=null){
         check = 0;
     }
     
-    const wishData = {"productNo" : product.productNo, "userNo": 18, "check": check};
+    const wishData = {"productNo" : product.productNo, "userNo": loginUserNo, "check": check};
     // const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
     
     
@@ -463,3 +463,7 @@ if(Object.keys(product.tourCourse).length != 0){
 if(product.productState=='B'){
     document.querySelector("body").style.overflow = 'hidden';
 }
+
+document.getElementById('editBtn').addEventListener('click', function () {
+    location.href = location.pathname + '/edit';
+});
