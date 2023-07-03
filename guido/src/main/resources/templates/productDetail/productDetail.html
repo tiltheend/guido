@@ -592,57 +592,30 @@
             
                     <div class="detail--list_recommend"> 
                         
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/남산타워.jpg}">
-                            </div>
+                        <div class="detail--item__recommend" th:each="recommend : ${recommendList}">
+                            <a th:href="@{/productDetail/product/{productNo}(productNo=${recommend.productNo})}">
+                                <div class="detail--item__recommend-img">
+                                    <img th:if="${#lists.size(recommend.imageList) > 0}" th:src="${recommend.imageList[0]?.filePath}">
+                                </div>
+                            </a>
                 
-                            <div class="detail--item__recommend-title">
-                                Namsan Cable Car
+                            <div class="detail--item__recommend-title" th:text="${recommend.productName}">
+                                    상품명
                             </div>
                         </div>
                 
             
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/광장시장.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Gwangjang Market
-                            </div>
-                        </div>
-                
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/한복체험.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Hanbok experience
-                            </div>
-                        </div>
-
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/경복궁생과방.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Gyeongbokgung Palace Living Room
-                            </div>
-                        </div>
                     </div>
         
         
                 </div>
         
 
-                <div class="detail--divisionline"></div>
+                <!-- <div class="detail--divisionline"></div> -->
                 
         
                 <!-- 페스티벌 추천 -->
-                <div class="detail--bottom--festival">
+                <!-- <div class="detail--bottom--festival">
                     
                     <div class="detail--text__recommend">
                         How about a festival like this?
@@ -697,7 +670,7 @@
                         
 
         
-                </div>
+                </div> -->
                 
             </section>
             
