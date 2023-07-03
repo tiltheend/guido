@@ -19,99 +19,102 @@
     <form th:action="@{/reservation/reserve}" method="POST">
 
 
+        <div class="reservation--top">
+            <div class="reservation--top__title">예약/결제</div>
+        </div>
 
         <div class="reservation--container">
     
-            <div class="reservation--top">
-                <div class="reservation--top__title">예약/결제</div>
-                <div class="reservation--top__divisionline"></div>
-            </div>
-            
-            
-    
-            
             <div class="reservation--middle">
-    
+                
                 <div class="reservation--product__middle">
-    
-                    <div class="reservation--text">예약 상품</div>
-    
-                    <div class="reservation--category__product">
-                        <div th:text="*{regionName}">지역명</div>
-                        <div>></div>
-                        <div th:text="*{themeName}">테마명</div>
-                    </div>
-    
-    
-                   <a href=""><div class="reservation--title__product" th:text="*{productName}"></div></a> 
-    
-    
-                    <div class="reservation--container__info">
-    
-                        <div class="reservation--img__product">
-                            <img th:src="*{imageList[0].filePath}">
+                    
+                    <div class="reservation--product__info">
+
+                        <div class="reservation--text">예약 상품</div>
+                        
+                        <div class="reservation--category__product">
+                            <div th:text="*{regionName}">지역명</div>
+                            <div>></div>
+                            <div th:text="*{themeName}">테마명</div>
                         </div>
                         
-                        <div class="reservation--decription__product">
+                        
+                        <a th:href="@{/productDetail/product/{productNo}(productNo=*{productNo})}">
+                            <div class="reservation--title__product" th:text="*{productName}"></div>
+                        </a>
+                        
+                        
+                        <div class="reservation--container__info">
+                            
+                            <a th:href="@{/productDetail/product/{productNo}(productNo=*{productNo})}">
+                                <div class="reservation--img__product">
+                                    <img th:src="*{imageList[0].filePath}">
+                                </div>
+                            </a>
+                            
+                            <div class="reservation--decription__product">
         
-    
-                            <div class="reservation--date__decription">
-                                <div></div>
-                            </div>
-    
-                            
-                            <div class="reservation--location__decription">
-                                <img src="/images/productDetail/location_icon.svg">
-                                <div>[[*{regionName}]] - [[${mainCourse}]]</div>
-                            </div>
-    
-    
-                            <div class="reservation--summary__decription">
-    
-                                <div>
-                                    <img src="/images/productDetail/language_icon.svg">
-                                    <div>Guided language: [[*{guideLanguage}]]</div>
+                                <div class="reservation--date__decription">
+                                    <div></div>
                                 </div>
-    
-                                <div>
-                                    <img src="/images/productDetail/receive_dollars_icon.svg">
-                                    <div>Free cancellation 4 day(s) prior to selected date</div>
-                                </div>
-    
-                            </div>
-    
-    
-    
-                            <!-- 인원수 조정에 따른 가격 변동은 1박 상품의 경우에만 일어남 -->
-                            <div class="reservation--quests__decription">
-                                <div>Guests</div>
+        
                                 
-                                <div class="quantity">
-                                    <button id="guestsMinusBtn" type="button" class="guestBtn">
-                                      <svg fill="none" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
-                                      </svg>
-                                    </button>
-    
-                                    <label id="guestsQnt" th:text="${guestCount}">게스트 수</label>
-    
-                                    <button id="guestsPlusBtn" type="button" class="guestBtn">
-                                      <svg fill="none" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
-                                      </svg>
-                                    </button>
-    
-                                  </div>
+                                <div class="reservation--location__decription">
+                                    <img th:src="@{/images/productDetail/location_icon.svg}">
+                                    <div>[[*{regionName}]] - [[${mainCourse}]]</div>
+                                </div>
+        
+        
+                                <div class="reservation--summary__decription">
+        
+                                    <div>
+                                        <img th:src="@{/images/productDetail/language_icon.svg}">
+                                        <div>Guided language: [[*{guideLanguage}]]</div>
+                                    </div>
+        
+                                    <div>
+                                        <img th:src="@{/images/productDetail/receive_dollars_icon.svg}">
+                                        
+                                        <div>Free cancellation 4 day(s) prior to selected date</div>
+                                    </div>
+        
+                                </div>
+        
+        
+        
+                                <!-- 인원수 조정에 따른 가격 변동은 1박 상품의 경우에만 일어남 -->
+                                <div class="reservation--quests__decription">
+                                    <div>Guests</div>
+                                    
+                                    <div class="quantity">
+                                        <button id="guestsMinusBtn" type="button" class="guestBtn">
+                                          <svg fill="none" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
+                                          </svg>
+                                        </button>
+        
+                                        <label id="guestsQnt" th:text="${guestCount}">게스트 수</label>
+        
+                                        <button id="guestsPlusBtn" type="button" class="guestBtn">
+                                          <svg fill="none" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
+                                          </svg>
+                                        </button>
+        
+                                      </div>
+                                </div>
+        
                             </div>
-    
-                        </div>
-    
-    
+
                     </div>
+                    
     
     
-                    <div class="reservation--divisionline"></div>
-                            
+                </div>
+    
+    
+                    
                             
                     <div class="reservation--payment__info">
                         <div class="reservation--text">결제 정보</div>
@@ -128,11 +131,6 @@
     
                     </div>
                     
-    
-    
-                    <div class="reservation--divisionline"></div>
-    
-    
                     <div class="reservation--orderer__info">
                         <div class="reservation--text">주문자 정보</div>
     
@@ -152,7 +150,13 @@
                     </div>
 
 
-                    <div class="reservation--divisionline"></div>
+                    <div class="reservation--request">
+                        <div class="reservation--text">요청 사항</div>
+
+                       <textarea name="request" id="request" 
+                       placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다."></textarea>
+                    </div>
+
 
                     <div class="reservation--method__payment">
                         <div class="reservation--text">결제 수단</div>
@@ -161,7 +165,7 @@
 
                             <div class="method--radio__btn">
                                 <input id="card" type="radio" name="payment" value="card">
-                                <label for="card">신용카드</label>
+                                <label for="card">신용/체크카드</label>
                             </div>
 
                             <div class="method--radio__btn">
@@ -172,7 +176,7 @@
                         </div>
 
                     </div>
-    
+
                 </div>
     
             </div>
@@ -181,24 +185,122 @@
             <div class="reservation--bottom">
     
                     <div class="reservation--form__bottom"> 
-                        <input type="checkbox" id="reservationAgree">
+                        <!-- <input type="checkbox" id="reservationAgree">
                         <label for="reservationAgree"></label>
     
-                        <div class="reservation--text__bottom">주문 내용을 확인하였으며 약관에 동의합니다.</div>
+                        <div class="reservation--text__bottom">주문 내용을 확인하였으며 약관에 동의합니다.</div> -->
+                    
+
+                        <div class="reservation--tou">
+                            <div>
+                                <span>개인정보 수집ㆍ이용에 동의합니다 (필수)</span>
+                                <span class="tou--detail" onclick="toggleModal('pa')">자세히 보기</span>
+                            </div>
+                            <label class="tou--checkbox__container">
+                                <input type="checkbox">
+                                <div class="tou--checkmark"></div>
+                            </label>
+                        </div>
+                        <div class="reservation--divisionline"></div>
+
+                        <div class="reservation--tou">
+                            <div>
+                                <span>개인정보의 제3자 제공에 동의합니다 (필수)</span>
+                                <span class="tou--detail" onclick="toggleModal('ua')">자세히 보기</span>
+                            </div>
+                            <label class="tou--checkbox__container">
+                                <input type="checkbox">
+                                <div class="tou--checkmark"></div>
+                            </label>
+                        </div>
+                        <div class="reservation--divisionline"></div>
+
+                        <div class="reservation--tou">
+                            <div><strong>구매 조건을 모두 확인하였으며, 거래 진행에 동의합니다.</strong></div>
+                            <label class="tou--checkbox__container">
+                                <input type="checkbox" id="touAllCheck">
+                                <div class="tou--checkmark"></div>
+                            </label>
+                        </div>
+                        
+                        <div class="reservation--warning">
+                            <img th:src="@{/images/reservation/tou_alert.png}">
+                            <div>귀하는 동의를 거부할 수 있으며, 동의 거부 시 서비스 이용이 제한될 수 있습니다.</div>
+                        </div>
+                    
                     </div>
+
     
-                    <button class="reservation--btn__bottom" type="button"></button>
+                    <button class="reservation--btn__bottom" type="button" disabled
+                        onclick="toggleModal('pm')"></button>
     
             </div>
 
             
-            <!-- 모달 창 -->
+            <!-- 결제 모달 창 -->
             <div id="paymentModal" class="modal">
                 <div class="modal-container">
-                <span class="close" onclick="toggleModal()">&times;</span>
-                <h2>모달 창</h2>
+                <div class="close" onclick="toggleModal('pm')">&times;</div>
+                <h5>결제 모달 창</h5>
                 </div>
             </div>
+
+            <div id="provideAgreeModal" class="modal">
+                <div class="modal-container">
+                    <div>
+                        <div class="close" onclick="toggleModal('pa')">&times;</div>
+                        <h5>개인정보 수집ㆍ이용 동의</h5>
+                    </div>
+
+                    <div class="modal--content">
+회사는 원활한 서비스 이용을 위하여 다음과 같이 개인정보를 수집하여 이용합니다.</p>
+
+수집·이용 목적
+1. 여행, 관광(숙박, 액티비티 등), 교통(항공, 해운, 철도, 렌터카 등) 예약서비스 제공 및 지원
+2. 예약 상품 배송
+3. 대금결제 및 정산
+
+수집항목
+1. 예약자 및 여행자의 이름(영문), 국적, 이메일 주소, 전화번호, 여권번호, 투어 일자 정보
+2. 신용카드번호
+3. 유효기간, 계약자와의 관계
+
+보유·이용 기간
+서비스 제공 종료 후 3개월까지 (단, 관련 법령에 의해 개인정보를 보유하여야 하는 경우를 제외하고, 
+이미 발생한 민원 처리 등 수집·이용 목적 범위 내에서 회원 탈퇴 이후에도 개인정보를 이용하여야 할 필요가 있는 
+경우에는 그 목적 달성 후 파기) 귀하는 동의를 거부할 수 있으며, 동의 거부 시 서비스 이용이 제한될 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div id="useAgreeModal" class="modal">
+                <div class="modal-container">
+                    <div>
+                        <div class="close" onclick="toggleModal('ua')">&times;</div>
+                        <h5>개인정보 제3자 제공 동의</h5>
+                    </div>
+
+                    <div class="modal--content">
+회사는 원활한 서비스 이용을 위하여 다음과 같이 귀하의 개인정보를 다음과 같이 제공합니다.
+
+제공받는 자
+여행, 관광(숙박, 액티비티 등), 교통(항공, 해운, 철도, 렌터카 등) 예약 서비스 및 공급업체
+
+개인정보 제공항목
+예약자 및 여행자 이름(영문), 국적, 전화번호, 이메일
+
+개인정보 제공 목적
+서비스 예약 및 예약 관리
+국외이전 여부
+업체별 상이함
+보유 및 이용기간
+예약 확정 후 3개월까지
+귀하는 동의를 거부할 수 있으며, 동의 거부 시 서비스 이용이 제한될 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+
     
         </div>
         

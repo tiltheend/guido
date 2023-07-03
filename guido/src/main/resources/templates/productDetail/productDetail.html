@@ -64,7 +64,7 @@
                     </div>
 
                     <!-- session.loginUser 존재할 때만 보이도록 하기 -->
-                    <div class="detail--top__button" th:if="${session.loginUser}==*{userNo}">
+                    <div class="detail--top__button" th:if="${session.loginUser.userNo}==*{userNo}">
                         <div id="editBtn">edit</div>
                         <div id="deleteBtn">delete</div>
                     </div>
@@ -185,7 +185,7 @@
                                 <div class="detail--title__pr">About Guide!</div>
         
                     
-                                <div class="detail--container__pr">
+                                <div class="detail--container__pr"  th:if="${#lists.size(pr) > 0}">
                     
                                     <div class="detail--item__pr" th:if="${pr.abroadExperience}">
                                         <img th:src="@{/images/profile/abroadExperience.png}">
