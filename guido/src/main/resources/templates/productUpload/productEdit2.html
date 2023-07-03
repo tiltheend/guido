@@ -22,7 +22,7 @@
       <!-- 메인 로고 -->
       <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
   </header>
-  <form th:action="@{/productDetail/product/${productNo}/edit}" method="post" enctype="multipart/form-data" id="productUploadFrm">
+  <form th:action="@{edit}" method="post" enctype="multipart/form-data" id="productEditFrm">
     <!-- 1페이지 -->
     
 
@@ -115,8 +115,6 @@
         <label th:each="tourTheme : ${tourTheme}" class="theme-img">
            <input type="radio" name="themeCode" class="hidden2" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
           <img th:src="${tourTheme.themeImg}" alt="힐링 투어">
-          <!-- <span th:text="${tourTheme.themeName}">테마이름</span> -->
-         
           <span th:text="${tourTheme.themeName}" class="theme-img" for="">테마이름</span>
         </label>
       </div>
@@ -297,9 +295,9 @@
           accept="image/*"
         />
         <span class="delete-image">&times;</span>
-        <div class="add-image add-image-thumbnail"><img th:src="@{/images/productUpload/add-image.png}" alt="" class="img-inner-img"></div>
-        <div class="add-image3 add-image-text">5장 이상의 사진을 선택하세요.</div>
-        <div class="add-image2 add-image-text2">기기에서 업로드</div>
+        <!-- <div class="add-image add-image-thumbnail"><img th:src="@{/images/productUpload/add-image.png}" alt="" class="img-inner-img"></div> -->
+        <!-- <div class="add-image3 add-image-text">5장 이상의 사진을 선택하세요.</div> -->
+        <!-- <div class="add-image2 add-image-text2">기기에서 업로드</div> -->
       </label> 
       </div>
        
@@ -312,9 +310,9 @@
             <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
             <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*" />
            <span class="delete-image">&times;</span>
-           <div class="add-image"><img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img"></div>
-           <div class="add-image2"></div>
-           <div class="add-image3"></div>
+           <!-- <div class="add-image"><img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img"></div> -->
+           <!-- <div class="add-image2"></div> -->
+           <!-- <div class="add-image3"></div> -->
           </label>
           
         </div>
@@ -384,7 +382,7 @@
            <!-- 반복 생성할 코드 -->
             <th:block th:each="item : ${addNotesList}">
               <label class="added-element" th:text="${item}">
-                <input type="hidden" name="productAddPrice" value="">
+                <input type="hidden" name="productAddNotes" value="">
                 <i class="fa-sharp fa-solid fa-xmark" style="color: rgb(0, 0, 0);"></i>
               </label>
             </th:block>
@@ -496,6 +494,11 @@
       
     </main>
     <div class="save"><button class="save-btn" id="submitBtn">제출하기</button></div>
+
+    <!-- 기존 이미지가 있다가 삭제된 이미지의 순서를 기록 -->
+    <input type="hidden" name="deleteList" value="">
+
+    <!-- <input type="hidden" name="cp" value="${}"> -->
   </form>
     <footer>
       <div class="progress-bar">

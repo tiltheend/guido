@@ -281,6 +281,7 @@ td {
 .col-state{width:150px;}
 .col-approval{width:150px;}
 .col-confirmationNo{width:150px;}
+.col-main-banner{width:150px;}
 
 /* 페이지네이션 */
 
@@ -372,7 +373,7 @@ td {
 }
 
 
-#modalCalendar {
+#modal {
     display: none;
     /* 초기에는 모달을 숨김 */
     position: fixed;
@@ -389,7 +390,7 @@ td {
     /* 반투명한 배경색 */
 }
 
-#calendarArea {
+#modalContent {
     background-color: white;
     margin: 10% auto;
     padding: 20px;

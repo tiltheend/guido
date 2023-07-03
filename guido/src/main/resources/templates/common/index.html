@@ -9,10 +9,8 @@
     <title>Guido</title>
 
     <!-- css -->
-    <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 
     <!-- owl 슬라이드 -->
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
@@ -53,6 +51,7 @@
                                     <div class="item">
                                         <a th:href="@{/event/eventList}">
                                             <img class="detail--silde__item-img" th:src="@{#}">
+                                            <!-- <img class="detail--silde__item-img" th:src="@{/images/test2.PNG}"> -->
                                         </a>
                                     </div>
 
@@ -159,7 +158,11 @@
                             <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
                         <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <!-- <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}"> -->
+                            <!-- <label class="like--container" th:if="${session.loginUser}">
+                                <input type="checkbox" id="wishHeart" th:checked="${wishOrNot}>0">
+                                <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path></svg>
+                            </label> -->
                         </div>
                         <div class="sales-text">
                             <div> 
@@ -325,7 +328,7 @@
 
     <th:block th:replace="~{common/footer}"></th:block>
 
-    <script>
+    <script th:inline="javascript">
         
         jQuery(document).ready(function($) {
         $('.loop').owlCarousel({
@@ -353,6 +356,8 @@
 
         });
 
+        let loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인한 회원 번호";
+        if(loginMemberNo == null) loginMemberNo = "";
         
     </script>
 

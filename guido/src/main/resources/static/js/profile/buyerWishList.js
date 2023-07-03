@@ -84,7 +84,49 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleHeart() {
     let heartIcon = event.target;
     // heartIcon.setAtrribute("src",'');
-    heartIcon.classList.toggle("selected");
-}
+    // heartIcon.classList.toggle("selected");
+    
+    /* 관심상품 등록/제거 처리 */
+    if(document.querySelector(".heart-icon")!=null){
+        
+        let check;      // 관심상품 등록 여부
+        
+        let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
 
+        /* 관심 상품 등록 O */
+        if (heartIcon.classList.contains("selected")) {
+            check = 1;
+        } else {
+            /* 관심 상품 등록X */
+            check = 0;
+        }
+        
+        let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
+
+        fetch("/profile/updateWish",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(wishData)
+        })
+        .then(resp=>resp.text())
+        .then(result=>{
+    
+            if(result==1){
+                if (heartIcon.classList.contains("selected")) {
+                    heartIcon.classList.remove("selected");
+                } else {
+                    heartIcon.classList.add("selected");
+                }
+                console.log("위시 성공?");
+            } else {
+                console.log("관심상품 등록 실패");
+            }
+    
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+    }
+}
 

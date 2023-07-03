@@ -832,12 +832,18 @@ box-shadow:  5px 5px 8px #e2e2e2,
 
 /* 리뷰 상세 내용 div */
 .detail--item__review-content{
-    background-color: #F0F0F0;
     width: 100%;
     border-radius: 10px;
-    padding: 20px;
     min-width: 500px;
     font-size: 1.1rem;
+    padding: 2px;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 
@@ -885,6 +891,8 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 리뷰 댓글 하단 div */
 .detail--item__review-bottom{
     width: 80%;
+    background-color: #F0F0F0;
+    padding: 18px;
 }
 
 /* 리뷰 댓글 */
@@ -1241,6 +1249,67 @@ a {
     border-radius: 3px; 
     color: white;
 }
+
+
+/* 블라인드된 게시글 */
+.reservation--blind{
+    background-color: rgba(255, 255, 255, 0.9); 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding-top: 200px;
+    align-items: center;
+}
+
+/* 블라인드 아이콘 */
+.blind--icon{
+    width: 34px;
+    height: 34px;
+    margin:8px 10px 0 0;
+}
+
+
+.reservation--blind__top,
+.reservation--blind__bottom{
+    width: 600px;
+    text-align: center;
+}
+
+.reservation--blind__top>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation--blind__top>h2{
+    margin-top: 5px;
+}
+
+
+.reservation--blind__bottom{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.reservation--blind__buttons{
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+    margin-top: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
 
 
 /* 반응형 */

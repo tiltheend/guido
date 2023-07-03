@@ -1,6 +1,7 @@
 package com.guido.profile.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
@@ -64,10 +66,6 @@ public class ProfileTouristController {
 			// 구매 내역 가져오기 (상품 번호, 썸네일)
 			List<Reservation> reservationList = service.reservationList(userNo);
 			model.addAttribute("reservationList", reservationList);
-			
-			// 구매 수 카운트
-			// int reservationCount = service.reservationCount(userNo);
-			// model.addAttribute("reservationCount", reservationCount);
 			
 			// 내가 쓴 리뷰 내역 가져오기
 			List<Review> reviewList = service.reviewList(userNo);
@@ -204,13 +202,49 @@ public class ProfileTouristController {
 		User user = service.userInfo(userNo);
 		model.addAttribute("user", user);
 		
-		// 구매 내역 가져오기 (상품 번호, 썸네일)
-		// List<Reservation> reservationList = service.reservationList(userNo);
-		// model.addAttribute("reservationList", reservationList);
+		// 구매 내역 가져오기 (자세한)
+		// (예약 번호, 회원 번호 (예약), 주문 처리 상태 (Y: 예약 완료, N: 예약 취소, D: 구매확정)
+		// 선택한 상품 일정 번호, 썸네일, 상품 날짜, 상품명
+		// + 추가 예정 : 예약 번호 + 상품가격
 		
+		 List<Reservation> reservationList = service.myReservation(userNo);
+		 model.addAttribute("reservationList", reservationList);
+		 
+		// 구매 수 카운트
+		 int reservationCount = service.reservationCount(userNo);
+		 model.addAttribute("reservationCount", reservationCount);
+		 
+		 // System.out.println(reservationList);
 		
 		return "profile/buyerReservation";
 	}
+	
+	// 구매자 예약 목록 더보기 (3개씩)
+	@ResponseBody
+	@PostMapping(value="/myReservationMore", produces="application/json; charset=UTF-8")
+	public List<Reservation> myReservationMore(@RequestBody int startReservationNum,
+			@SessionAttribute("loginUser") User loginUser){
+			
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("startReservationNum", startReservationNum);
+		map.put("userNo",loginUser.getUserNo());
+		
+		List<Reservation> moreReservationMore = service.myReservationMore(map);
+		
+		return moreReservationMore;
+	}
+	
+	// 비동기로 예약 목록 불러오기 (최신 3개)
+//	@ResponseBody
+//	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
+//	public List<Reservation> newReservationList(@RequestBody int userNo){
+//
+//		List<Reservation> newReservationList = service.myReservation(userNo);
+//		int reservationCount = service.reservationCount(userNo);
+//		
+//		return newReservationList;
+//	}
 	
 	// 투어리스트 위시 리스트로 이동
 	@GetMapping("/touristWishList")
@@ -224,7 +258,41 @@ public class ProfileTouristController {
 		User user = service.userInfo(userNo);
 		model.addAttribute("user", user);
 		
+		// 위시리스트 가져오기
+		// 상품 이름, 상품 가격, 지역 이름, 패키지 박수(1박이면 total, 2박 이상이면 /per), 별점
+		// productName, productPrice, regionName, productPackage(상품 패키지(1.당일 N. N박N-1일)), reviewStars
+		
+		List<Product> myWishList = service.myWishList(userNo);
+		
+		for(Product p : myWishList) { // 위시리스트
+			p.setWishOrNot(1);
+		}
+		
+		model.addAttribute("myWishList", myWishList);
+		
+//		int wishOrNot = -1;		// 관심 등록
+//
+//		Map<String, Integer> map = new HashMap<>();
+//		map.put("productNo", productNo);
+//		
+//		map.put("userNo", loginUser.getUserNo());
+//		
+//		wishOrNot = service.selectWishCheck(map);
+//
+//
+//		model.addAttribute("wishOrNot", wishOrNot);
+		
 		return "profile/buyerWishList";
 	}
+	
+	
+	// 관심상품 등록 처리
+	@PostMapping("/updateWish")
+	@ResponseBody
+	public int updateWish(@RequestBody Map<String, Integer> map) {
+		
+		return service.updateWish(map);
+	}
+	
 	
 }

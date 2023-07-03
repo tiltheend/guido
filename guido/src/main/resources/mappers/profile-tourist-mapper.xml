@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.guido.profile.model.dao.ProfileTouristMapper">
-	
-<!--
-	private int userNo; // 번호
-	private String userEmail; // 이메일(아이디)
-	private String userPassword; // 비밀번호
-	private String userName; // 이름
-	private String userTel; // 전화번호
-	private String profileImage; // 프로필 이미지
-	private String createDate; // 가입일
-	private String userType; // 타입(G: 가이드, T: 여행객, M: 관리자)
-	private String ; // 상태(Y: 미승인(가이드), N: 정상, B: 블락, D: 탈퇴)
--->
+
 
 	<resultMap id="user_rm" type="User">
 		<id property="userNo" column="USER_NO"/>
@@ -43,6 +32,8 @@
 	 	<result property="productDateNo" column="PRODUCT_DT_NO" />
 	 	
 	 	<result property="thumbnail" column="FILE_PATH" />
+	 	<result property="productName" column="PRODUCT_NAME" />
+	 	<result property="productDate" column="PRODUCT_DT" />
 	</resultMap>
 	
 	<resultMap type="Review" id="review_rm">
@@ -59,6 +50,38 @@
 		<result property="productName" column="PRODUCT_NAME"/>
 		<result property="productDtNo" column="PRODUCT_DT_NO"/>
 		<result property="reviewReply" column="REVIEW_REPLY"/>
+	</resultMap>
+	
+	<!-- Product resultMap-->
+	<resultMap type="Product" id="product_rm">
+		<id property="productNo" column="PRODUCT_NO" />
+
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="productPackage" column="PRODUCT_PACKAGE" />
+		<result property="productContent" column="PRODUCT_CONTENT" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+		<result property="productAddPrice" column="PRODUCT_ADD_PRICE" />
+		<result property="maxTourist" column="PRODUCT_MAX_TOURIST" />
+		<result property="minTourist" column="PRODUCT_MIN_TOURIST" />
+		
+		<result property="userNo" column="USER_NO" />
+		<result property="themeCode" column="THEME_CODE" />
+		<result property="productState" column="PRODUCT_STATE" />
+		<result property="createDate" column="CREATE_DT" />
+		<result property="guideLanguage" column="GUIDE_LANGUAGE" />
+		<result property="viewCount" column="VIEW_COUNT" />
+		
+		<result property="regionName" column="REGION_NAME" />
+		<result property="themeName" column="THEME_NAME" />
+		
+		<result property="reviewStars" column="REVIEW_STARS" />
+		<result property="superGuideFl" column="SUPER_GUIDE_FL" />
+		
+		<result property="courseName" column="COURSE_NAME" />
+		<result property="productDate" column="PRODUCT_DT" />
+		
+		<collection property="imageList" select="selectImageList"
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="File"/>
 	</resultMap>
 	
 	<!-- 가이드인지 판매자인지 체크 ( userType: 1 == G / 0 == T) -->
@@ -176,4 +199,88 @@
 		AND USER_NO = #{userNo}
 	</update>
 	
+	<!-- 구매 내역 가져오기 (자세한) -->
+	<select id="myReservation" resultMap="reservation_rm">
+		SELECT R.RESERVATION_NO, R.PRODUCT_NO, R.USER_NO, R.RESERVATION_STATE,
+		  R.PRODUCT_DT_NO, F.FILE_PATH, PD.PRODUCT_DT, P.PRODUCT_NAME
+		FROM RESERVATION R
+		  LEFT JOIN (SELECT PRODUCT_NO, FILE_PATH, FILE_ORDER,
+		    ROW_NUMBER() OVER (PARTITION BY PRODUCT_NO ORDER BY FILE_ORDER) AS RN
+		    FROM "FILE") F ON F.PRODUCT_NO = R.PRODUCT_NO AND F.RN = 1
+		  JOIN PRODUCT_DT PD ON PD.PRODUCT_DT_NO = R.PRODUCT_DT_NO
+		  JOIN PRODUCT P ON P.PRODUCT_NO = R.PRODUCT_NO
+		WHERE R.USER_NO = #{userNo}
+		ORDER BY PD.PRODUCT_DT DESC
+		FETCH FIRST 3 ROWS ONLY
+	</select>
+
+	 <!-- 구매자 예약 목록 더보기 (3개씩) -->
+	 <select id="myReservationMore" resultMap="reservation_rm">
+		SELECT * FROM (
+		  SELECT
+		    ROW_NUMBER() OVER (ORDER BY PD.PRODUCT_DT DESC) AS NUM,
+		    R.RESERVATION_NO, R.PRODUCT_NO, R.USER_NO,
+		    R.RESERVATION_STATE, R.PRODUCT_DT_NO,
+		    F.FILE_PATH, PD.PRODUCT_DT, P.PRODUCT_NAME
+		  FROM
+		    RESERVATION R
+		    JOIN PRODUCT_DT PD ON PD.PRODUCT_DT_NO = R.PRODUCT_DT_NO
+		    JOIN PRODUCT P ON P.PRODUCT_NO = R.PRODUCT_NO
+		    LEFT JOIN (
+		      SELECT PRODUCT_NO, FILE_PATH, FILE_ORDER,
+		        ROW_NUMBER() OVER (PARTITION BY PRODUCT_NO ORDER BY FILE_ORDER) AS RN
+		      FROM "FILE"
+		    ) F ON F.PRODUCT_NO = R.PRODUCT_NO AND F.RN = 1
+		  WHERE R.USER_NO = #{userNo}
+		  ORDER BY PD.PRODUCT_DT DESC
+		)
+		<![CDATA[ WHERE NUM > #{startReservationNum} ]]>
+			ORDER BY NUM
+	 </select>
+	 
+ 	<!-- 특정 상품 이미지 목록 조회 -->
+	<select id="selectImageList" resultMap="file_rm">
+		SELECT * FROM "FILE"
+		WHERE PRODUCT_NO = #{productNo}
+		ORDER BY FILE_ORDER
+	</select>
+	
+	<!-- 위시리스트 불러오기 -->
+	<select id="myWishList" resultMap="product_rm">
+		SELECT W.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
+		  NVL(TO_CHAR(AVG(R.REVIEW_STARS), 'FM9.09'), '0.0') AS REVIEW_STARS,
+		  P.PRODUCT_STATE
+		FROM WISHLIST W
+		JOIN PRODUCT P ON P.PRODUCT_NO = W.PRODUCT_NO
+		LEFT JOIN REVIEW R ON R.PRODUCT_NO = W.PRODUCT_NO
+		WHERE W.USER_NO = #{userNo}
+		AND P.PRODUCT_STATE = 'N'
+		GROUP BY W.WISHLIST_NO, W.PRODUCT_NO, P.PRODUCT_NAME,
+		P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE, P.PRODUCT_STATE
+		ORDER BY W.WISHLIST_NO DESC
+	</select>
+	
+		 <!-- 관심 상품 등록 체크-->
+	 <select id="selectWishCheck" resultType="_int">
+		 SELECT COUNT(*) 
+		FROM "WISHLIST"
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_NO = #{productNo}
+	 </select>
+	 
+	 
+	 <!-- 관심 상품 등록 -->
+	 <insert id="insertProductWish">
+		 INSERT INTO "WISHLIST"
+		VALUES(SEQ_WISHLIST_NO.NEXTVAL, #{userNo}, #{productNo}, DEFAULT)
+	 </insert>
+	 
+		 
+	<!-- 관심 상품 해제 -->
+	 <delete id="deleteProductWish">
+		 DELETE FROM "WISHLIST"
+		 WHERE USER_NO = #{userNo}
+		 AND PRODUCT_NO = #{productNo}
+	 </delete>
+	 
 </mapper>

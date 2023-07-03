@@ -72,65 +72,33 @@
             
             <div class="reservation-list"> <!-- 구매자 예약 상품 -->
                 <div> <!-- 제목 -->
-                    <h1>Reservation</h1>
+                    <h1>Reservation (<span th:text="${reservationCount}">구매내역 갯수</span>)</h1>
                 </div>
 
                 <ul class="reservation-list-box">
-                    <li>
-                        <div>
-                            <span>예약 번호</span><span>20230602-0002063</span>
-                        </div>
-                        <div>
-                            <span>주문 처리</span><span>결제 완료</span>
-                        </div>
-                        <div class="flex-direction-row">
-                            <div class="reservation-img">
-                                <!-- <img src="" alt=""> -->
-                            </div>
-                            <div class="reservation-content">
-                                <h2>2023년 6월 7일 - 6월 9일</h2>
-                                <h2>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</h2>
-                                <span>KRW</span><span>209,000</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
+
+                    <li th:each="reservation : ${reservationList}">
                         <div>
                             <span>예약 번호</span><span>12345678-12345678</span>
                         </div>
-                        <div>
-                            <span>주문 처리</span><span>요청 대기</span>
+                        <!-- (Y: 예약 완료, N: 예약 취소, D: 구매확정 완료) -->
+                        <div th:with="state = ${reservation.reservationState}">
+                            <span>주문 처리</span>
+                            <span th:if="${state=='Y'}">예약 완료</span>
+                            <span th:if="${state=='N'}">예약 취소</span>
+                            <span th:if="${state=='D'}">구매확정 완료</span>
                         </div>
                         <div class="flex-direction-row">
                             <div class="reservation-img">
-                                <!-- <img src="" alt=""> -->
+                                <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
                             </div>
                             <div class="reservation-content">
-                                <h2>0000년 0월 0일 - 0월 0일</h2>
-                                <h2>상품 제목</h2>
+                                <h2 th:text="${reservation.productDate}">0000년 0월 0일 - 0월 0일</h2>
+                                <h2 th:text="${reservation.productName}">상품 제목</h2>
                                 <span>KRW</span><span>000,000</span>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div>
-                            <span>예약 번호</span><span>12345678-12345678</span>
-                        </div>
-                        <div>
-                            <span>주문 처리</span><span>요청 대기</span>
-                        </div>
-                        <div class="flex-direction-row">
-                            <div class="reservation-img">
-                                <!-- <img src="" alt=""> -->
-                            </div>
-                            <div class="reservation-content">
-                                <h2>0000년 0월 0일 - 0월 0일</h2>
-                                <h2>상품 제목</h2>
-                                <span>KRW</span><span>000,000</span>
-                            </div>
-                        </div>
-                    </li>
-                    
                 </ul>
 
                 <button class="reservation-list-more">more sales list</button>
@@ -140,17 +108,14 @@
         </div>
     </div>
     <script th:src="@{/js/profile/profileEdit.js}"></script>
+    <script th:src="@{/js/profile/buyerReservation.js}"></script>
     
-    <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
     <script th:inline="javascript">
-        // const message='[[${message}]]';
 
-        /* Natural Template */
         const message = /*[[${message}]]*/  "전달 받은 message";
-        // 타임리프 해석    값(자료형이 알아서 해석)     사라짐(설명)
-        if(message != null){
-            alert(message);
-        }
+        if(message != null) alert(message);
+
+        const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
     </script>  
 </body>
 </html>

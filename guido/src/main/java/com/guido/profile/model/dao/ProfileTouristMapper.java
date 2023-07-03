@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
@@ -47,6 +48,25 @@ public interface ProfileTouristMapper {
 
 	// 리뷰 수정
 	int reviewEdit(Review review);
+
+	// 구매 내역 가져오기 (자세한)
+	List<Reservation> myReservation(int userNo);
+
+	// 구매자 예약 목록 더보기 (3개씩)
+	List<Reservation> myReservationMore(Map<String, Integer> map);
+
+	// // 위시리스트 가져오기
+	List<Product> myWishList(int userNo);
+	
+	
+	// 관심상품 등록 여부 체크
+	int selectWishCheck(Map<String, Integer> map);
+
+	// 관심 상품 등록
+	int insertProductWish(Map<String, Integer> map);
+
+	// 관심 상품 해제
+	int deleteProductWish(Map<String, Integer> map);
 
 	
 

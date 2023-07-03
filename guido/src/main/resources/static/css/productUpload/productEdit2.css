@@ -492,7 +492,7 @@ button:disabled:hover {
   color: black;
   font-weight: bolder;
   cursor: pointer;
-  display: none;
+  /* display: none; */
 }
 .add-image {
   position: absolute;
@@ -1110,4 +1110,7 @@ input[name='tourTheme']:checked {
   background-color: #2db400;
   color: white;
   font-weight: bold;
+}
+.day-fee {
+  display: none;
 }

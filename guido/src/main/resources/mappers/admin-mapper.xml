@@ -19,6 +19,8 @@
 		<result property="eventEndDt" column="EVENT_END_DT"/>
 		<result property="createDt" column="CREATE_DT"/>
 		<result property="state" column="EVENT_STATE"/>
+		<result property="bgColor" column="BG_COLOR"/>
+		<result property="mainBannerOrder" column="MAIN_BANNER_ORDER"/>
 		<collection property="fileList"
 					select="selectFileList"
 					column="EVENT_NO"
@@ -111,7 +113,7 @@
 		SELECT
 		<choose>
 			<when test="pageName == 'eventList'">
-				EVENT_NO, EVENT_NAME, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, TO_CHAR(EVENT_END_DT, 'YYYY-MM-DD') EVENT_END_DT, EVENT_STATE
+				EVENT_NO, EVENT_NAME, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, TO_CHAR(EVENT_END_DT, 'YYYY-MM-DD') EVENT_END_DT, EVENT_STATE, BG_COLOR, NVL2(MAIN_BANNER_ORDER,MAIN_BANNER_ORDER,'0') MAIN_BANNER_ORDER
 				FROM EVENT
 				ORDER BY EVENT_NO DESC
 			</when>
@@ -130,7 +132,8 @@
 				ORDER BY USER_NO DESC
 			</when>
 			<when test="pageName == 'guideApprovalRequest'">
-				USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, CONFIRMATION_NO FROM "USER"
+				USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, CONFIRMATION_NO
+				FROM "USER"
 				NATURAL JOIN "GUIDE"
 				WHERE USER_TYPE='G'
 				AND USER_STATE='Y'
@@ -148,6 +151,8 @@
 			</when>
 		</choose>
 	</select>
+	
+	
 	
 	<select id="selectEvent" resultMap="event_rm">
 		SELECT EVENT_NO, EVENT_NAME, EVENT_CONTENT, TO_CHAR(CREATE_DT,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') CREATE_DT
@@ -179,7 +184,7 @@
 	</insert>
 	
 	<select id="selectQNA" resultMap="qna_rm">
-		SELECT * FROM QNA WHERE QNA_NO=#{qna_no}
+		SELECT * FROM QNA WHERE QNA_NO=#{qnaNo}
 	</select>
 	
 	<select id="selectQnaFileList" resultMap="file_rm">
@@ -187,4 +192,41 @@
 		WHERE QNA_NO = #{qnaNo}
 		ORDER BY FILE_ORDER 
 	</select>
+	
+	<update id="writeAnswer">
+		UPDATE QNA SET QNA_ANSWER = #{qnaAnswer}, QNA_CHECK_FL = 'Y' WHERE QNA_NO = #{qnaNo}
+	</update>
+	
+	<!--<update id="approveGuide">
+		UPDATE "USER" SET USER_STATE='N' WHERE USER_NO = ${userNo}
+	</update>-->
+	
+	<update id="approveGuide" parameterType="java.util.List">
+	  UPDATE "USER" SET USER_STATE='N' WHERE USER_STATE='Y' AND USER_NO IN
+	  <foreach item="userNo" collection="list" open="(" separator="," close=")">#{userNo}</foreach>
+	</update>
+	
+	<select id="selectMainEventList" resultType="map">
+		<![CDATA[  
+		SELECT NVL(EVENT_NO,0) EVENT_NO, DUMMY_MAIN_BANNER_ORDER AS MAIN_BANNER_ORDER, NVL2(BG_COLOR, BG_COLOR, '#ffffff') AS BG_COLOR
+		FROM(
+		        SELECT LEVEL AS DUMMY_MAIN_BANNER_ORDER
+					FROM DUAL
+					CONNECT BY LEVEL <= 8
+		) DUMMY_SEQ
+		LEFT JOIN "EVENT" ON
+		DUMMY_MAIN_BANNER_ORDER = MAIN_BANNER_ORDER
+		ORDER BY MAIN_BANNER_ORDER
+		]]>
+	</select>
+	
+	<update id="deleteMainBanner">
+		UPDATE "EVENT" SET MAIN_BANNER_ORDER = NULL WHERE MAIN_BANNER_ORDER = #{order}
+	</update>
+	
+	
+	<update id="setMainBanner">
+		UPDATE "EVENT" SET MAIN_BANNER_ORDER = #{order} WHERE EVENT_NO = #{eventNo}
+	</update>
+	
 </mapper>

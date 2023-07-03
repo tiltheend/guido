@@ -19,7 +19,6 @@ import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.utility.Util;
 import com.guido.product.model.dao.ProductUploadMapper;
-import com.guido.product.model.exception.ImageDeleteException;
 
 @Service
 @PropertySource("classpath:/config.properties")
@@ -40,7 +39,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	}
 	
 	
-
+	//여행 상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int productUpload(Product product, List<MultipartFile> images)  throws IllegalStateException, IOException {
@@ -94,10 +93,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	//여행 상품 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productEdit(
-			Product product
-			,List<MultipartFile> images
-			,String deleteList) throws IllegalStateException, IOException {
+	public int productEdit(Product product, List<MultipartFile> images, String deleteList) throws IllegalStateException, IOException {
 		
 		int rowCount = mapper.productEdit(product);
 		
@@ -114,7 +110,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				rowCount = mapper.imageDelete(deleteMap);
 				
 				if(rowCount == 0) {
-					throw new ImageDeleteException();
+					throw new FileUploadException();
 				}
 			}
 			
@@ -150,13 +146,13 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				}
 			
 			}
-		
-		if(!uploadList.isEmpty()) {
-			for(int i=0 ; i<uploadList.size();i++) {
-				int index = uploadList.get(i).getFileOrder();
 				
-				String rename = Util.fileRename(images.get(i).getOriginalFilename());
-				images.get(i).transferTo(new java.io.File(filePath+rename));
+				if(!uploadList.isEmpty()) {
+					for(int i=0 ; i<uploadList.size();i++) {
+						int index = uploadList.get(i).getFileOrder();
+						
+						String rename = Util.fileRename(images.get(i).getOriginalFilename());
+						images.get(i).transferTo(new java.io.File(filePath+rename));
 			}	
 		}
 	}

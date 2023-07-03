@@ -1,50 +1,16 @@
 /********************************* 체크박스 로직 *********************************/
-
-// /* 전체 선택 체크박스 */
-// const checkAll = document.querySelector('#checkAll');
-
-// /* 체크박스 리스트 */
-// const checkboxes = document.querySelectorAll('.checkbox');
-
-// // '전체 선택 체크박스' 값 변화시 이벤트
-// checkAll.addEventListener('change', () => {
-//     if (checkAll.checked) { // '전체 선택 체크박스' 체크시 모든 체크박스 체크
-//         checkboxes.forEach(checkBox => {
-//             checkBox.checked = true;
-//         })
-//     } else { // '전체 선택 체크박스' 체크 해제시 모든 체크박스 체크 해제
-//         checkboxes.forEach(checkBox => {
-//             checkBox.checked = false;
-//         });
-//     }
-// });
-
-// // 체크박스 리스트
-// checkboxes.forEach(checkbox => {
-//     checkbox.addEventListener('change', e => { // 체크박스 값 변화시 이벤트
-//         // 체크박스 체크 해제시 
-//         if (!e.target.checked) {
-//             // '전체 선택 체크박스' 체크 해제
-//             checkAll.checked = false;
-//         }
-//     });
-// });
-
-/*********************************************************************************/
-
-
-const selectAllCheckbox = document.querySelector('#checkAll');
-const checkboxList = document.querySelectorAll('.checkbox');
+const checkAllCheckbox = document.querySelector('#checkAll');
+const checkboxes = document.querySelectorAll('.checkbox');
 const table = document.querySelector('#table');
 
 // '전체 선택 체크박스' 값 변화시 이벤트
-selectAllCheckbox.addEventListener('change', () => {
-    toggleCheckboxes(selectAllCheckbox.checked);
+checkAllCheckbox.addEventListener('change', () => {
+    toggleCheckboxes(checkAllCheckbox.checked);
 });
 
 // 체크박스 상태 변경 함수
 function toggleCheckboxes(checked) {
-    checkboxList.forEach((checkbox) => {
+    checkboxes.forEach((checkbox) => {
         checkbox.checked = checked;
     });
 }
@@ -53,7 +19,94 @@ function toggleCheckboxes(checked) {
 table.addEventListener('change', (event) => {
     if (event.target.classList.contains('checkbox')) {
         if (!event.target.checked) {
-            selectAllCheckbox.checked = false;
+            checkAllCheckbox.checked = false;
         }
     }
 });
+/*********************************************************************************/
+
+function approveGuide(userNoList) {
+    if(!confirm(userNoList+'번 가이드 승인처리 하시겠습니까?')){
+        return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/admin/approveGuide');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if(xhr.status === 200) {
+            alert('승인 성공하였습니다.');
+        } else {
+            alert('승인 실패');
+        }
+        location.reload()
+    };
+    xhr.send(JSON.stringify(userNoList));
+}
+
+const rowBtns = document.querySelectorAll('.row-btn');
+if(rowBtns !== null)
+rowBtns.forEach(btn => {
+    btn.addEventListener('click',() => {
+        const userNo = [btn.closest('tr').querySelector('.checkbox').value];
+        approveGuide(userNo);
+    });
+});
+
+const approveBtn = document.querySelector('.approve-checked');
+if(approveBtn !== null)
+    approveBtn.addEventListener('click', () => {
+        const userNoList = [];
+        checkboxes.forEach(checkbox => {
+            if(checkbox.checked) {
+                userNoList.push(checkbox.value);
+            }
+        })
+        if(userNoList.length !== 0)
+            approveGuide(userNoList);
+        else
+            alert('선택된 체크박스가 없습니다.')
+    })
+
+/*********************************************************************************/
+function setMainBanner(eventNo, order) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/admin/setMainBanner');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if(xhr.status === 200) {
+            alert('성공하였습니다.');
+        } else {
+            alert('실패');
+        }
+        location.reload()
+    };
+    xhr.send(JSON.stringify({'eventNo':eventNo,'order':order}));
+}
+
+const setMainBannerBtn = document.querySelectorAll('.set-main-banner');
+let selectedEventNo = document.getElementById('selectedEventNo');
+setMainBannerBtn.forEach(btn=>{
+    btn.addEventListener('click', () => {
+        const userNo = btn.closest('tr').querySelector('.checkbox').value;
+        selectedEventNo.innerText=userNo;
+        const modal = document.getElementById("modal");
+        modal.style.display = "block";
+    
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none"; // 모달 숨기기
+            }
+        }
+    });
+})
+
+const modalSubmit = document.querySelector('.modal-submit');
+const modalCancel = document.querySelector('.modal-cancel');
+const modalSelect = document.querySelector('#modalSelect');
+
+modalSubmit.addEventListener('click',()=>{
+    setMainBanner(selectedEventNo.innerText,modalSelect.value);
+})
+
+
+/*********************************************************************************/
