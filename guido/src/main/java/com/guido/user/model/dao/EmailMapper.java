@@ -20,9 +20,12 @@ public interface EmailMapper {
 	// 회원가입-인증 번호 보내기
 	int authEmail(String email);
 
-	// 인증번호 
-	int updateAuthKey(Map<String, String> map); // 재전송 시
+	// 인증 번호 디비에 저장
+	int updateAuthKey(Map<String, String> map); // 재전송 시 덮어 씌우기
 	int insertAuthKey(Map<String, String> map); // 첫 전송 시
+
+	// 인증 번호 확인 
+	int checkAuthKey(Map<String, Object> authMap);
 
 
 

@@ -27,13 +27,17 @@
 		<!-- <result property="pr" column=""/> -->
 	</resultMap>
 	
+	<!-- 임시 비번 -->
 	<update id="changeTempPw">
 		UPDATE "USER" SET "USER_PASSWORD" = #{tempPw} WHERE "USER_EMAIL" = #{email}
 	</update>
 	
-	<select id="selectUser">
+	<!-- 임시 비번 요청한 유저 -->
+	<select id="selectUser" resultType="string">
 		SELECT "USER_NAME" FROM "USER" WHERE "USER_EMAIL" = #{email}
 	</select>
+	
+	<!-- 인증 번호 저장 -->
 	
 	<update id="updateAuthKey">
 		UPDATE "AUTH_KEY" SET CODE = #{authKey}, CREATE_TIME = SYSDATE WHERE EMAIL=#{email}
@@ -43,6 +47,10 @@
 		INSERT INTO "AUTH_KEY" VALUES(SEQ_AUTH_KEY_NO.NEXTVAL, #{authKey}, #{email}, DEFAULT)
 	</insert>
 	
+	<!-- 인증 번호 확인 -->
+	<select id="checkAuthKey" resultType="_int">
+		SELECT COUNT(*) FROM "AUTH_KEY" WHERE "EMAIL"=#{email} AND "CODE"=#{inputAuth}
+	</select>
 	
 	
 	

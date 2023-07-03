@@ -198,7 +198,10 @@ public class EmailServiceImpl implements EmailService{
 	}
 	
 	
-	
+	@Override
+	public int checkAuthKey(Map<String, Object> authMap) {
+		return mapper.checkAuthKey(authMap);
+	}
 	
 	
 	

@@ -85,7 +85,7 @@ let authTimer;
 let authMin;
 let authSec;
 // 인증 번호 발송 성공 이메일 저장
-let authEmail;
+let authenticEmail;
 
 sendAuthBtn.addEventListener("click",()=>{
     authMin = 9;
@@ -100,7 +100,7 @@ sendAuthBtn.addEventListener("click",()=>{
         .then(result=>{
             if(result>0){ // 이메일 전송 됐으면
                 console.log("인증 번호 발송 성공");
-                authEmail = email.value;
+                authenticEmail = email.value;
             }else{ // 이메일 전송 실패
                 console.log("인증 번호 발송 실패");
             }
@@ -118,6 +118,13 @@ sendAuthBtn.addEventListener("click",()=>{
 
         authTimer = window.setInterval(()=>{
             authMessage.innerText = (authMin<10 ? "0"+authMin : authMin) + ":" + (authSec<10 ? "0"+authSec : authSec);
+            
+            // 남은 시간 0분 0초
+            if(authMin==0 && authSec==0){
+                chk.auth = false;
+                clearInterval(authTimer);
+                return;
+            }
 
             // 분 숫자 감소
             if(authSec==0){
@@ -127,17 +134,41 @@ sendAuthBtn.addEventListener("click",()=>{
 
             authSec--;
 
-            // 남은 시간 0분 0초
-            if(authMin==0 && authSec==0){
-                chk.auth = false;
-                clearInterval(authTimer);
-                return;
-            }
         },1000)
         
     }else{
         alert("사용 가능한 이메일을 작성해주세요.");
         email.focus();
+    }
+});
+
+// 인증 번호 확인
+const inputAuth = document.querySelector("#inputAuth");
+const checkAuthBtn = document.querySelector("#checkAuthBtn");
+
+checkAuthBtn.addEventListener("click",()=>{
+    if(authMin>0 || authSec>0){ // 유효 시간 내
+        // 여러 값 보낼 때
+        const dataMap = {"inputAuth":inputAuth.value, "email":authenticEmail}
+        const query = new URLSearchParams(dataMap).toString();
+        fetch("/sendEmail/checkAuthKey?" + query)
+        .then(resp=>resp.text())
+        .then(result=>{
+            if(result>0){
+                // alert("인증 완료 되었습니다.");
+                clearInterval(authTimer);
+                authMessage.innerText = "인증 완료 되었습니다.";
+                authMessage.classList.add("possible-message");
+                authMessage.classList.remove("for-authTimer");
+                chk.auth = true;
+            }else{
+                alert("인증번호가 일치하지 않습니다.");
+                chk.auth = false;
+            }
+        })
+        .catch(err=>console.log(err));
+    }else{
+        alert("인증 시간이 만료되었습니다. 인증 번호를 다시 발급 받으세요.");
     }
 });
 
