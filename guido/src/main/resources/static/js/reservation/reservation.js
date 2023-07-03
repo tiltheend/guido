@@ -131,31 +131,54 @@ if (lastYear !== newYear) {
   reservationDateDiv.innerText = formattedDate + " ~ " + twoDaysLater;
 }
 
+function requestPay(){
 
-  // 결제(포트원) 가맹점 식별 코드 
+  const checkedMethod = document.querySelector('input[name="payment"]:checked');
+
+  if(checkedMethod.value=='card')
+    requestCardPay();
+}
   
   
   // 결제 요청
+  var IMP = window.IMP;
+  IMP.init(impCode); 
+
   function requestCardPay() {
   
-    IMP.init(impCode); 
-
-  
     IMP.request_pay({
-      pg: "kcp." + pgMid,     // 상점 ID
+      pg: "html5_inicis." + pgMid,     // 상점 ID
       pay_method: "card",
       merchant_uid: merchantUid,   // 주문번호
       name: productName,    // 상품명
       // amount: Number(totalPaymentCost.innerText),
-      amount: 200,
+      amount: 100,
       buyer_email: userEmail,
-      buyer_name: loginUserName,
+      buyer_name: userName,
       buyer_tel: userTel,
-      m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 결제 완료 후 리디렉션 될 URL
-    }, function (rsp) { // callback
-      //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-
-      console.log(rsp);
+    }, 
+    
+    rsp => {
+      if (rsp.success) {   
+        // axios로 HTTP 요청
+        axios({
+          url: "/reservation/liquidate",
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          data: {
+            imp_uid: rsp.imp_uid,
+            merchant_uid: rsp.merchant_uid,
+            amount: 100,
+            productName: productName,
+            paymentMethod: 'C'            
+          }
+        }).then((data) => {
+          // 서버 결제 API 성공시 로직
+        })
+      } else {
+        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+        window.location.reload(); 
+      }
 
   });
 }
@@ -217,10 +240,12 @@ formElements.forEach(function(element) {
 });
 
 
-var details = document.querySelectorAll('.tou--detail');
+const details = document.querySelectorAll('.tou--detail');
 details.forEach(function(detail) {
   detail.addEventListener('click', function() {
-    var content = this.parentElement.parentElement.nextElementSibling;
+    const content = this.parentElement.parentElement.nextElementSibling;
     content.classList.toggle('open');
   });
 });
+
+

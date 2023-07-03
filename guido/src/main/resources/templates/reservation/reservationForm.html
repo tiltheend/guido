@@ -11,7 +11,11 @@
     <link rel="stylesheet" th:href="@{/css/reservation/reservation.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+
 </head>
 <body th:object="${product}">
 
@@ -279,8 +283,15 @@
             <!-- 결제 모달 창 -->
             <div id="paymentModal" class="modal">
                 <div class="modal-container">
-                <div class="close" onclick="toggleModal()">&times;</div>
-                <h5>결제 모달 창</h5>
+                    <div class="close" onclick="toggleModal()">&times;</div>
+                    <div class="modal--content">
+                        <div class="modal--content__text">총 결제금액</div>
+                        <div class="modal--content__cost">72,900원</div>
+
+                        <div class="modal--content__line"></div>
+                        <div class="modal--content__text2">개인 판매 상품으로 거래 관련 사항은 판매자에게 문의할 수 있습니다.</div>
+                        <button id="nowPay" type="button" onclick="requestPay()">바로 결제하기</button>
+                    </div>
                 </div>
             </div>
 
@@ -291,7 +302,6 @@
         
     </form>
 
-    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
     
     <script th:inline="javascript">
@@ -329,7 +339,7 @@
         iti.setNumber(userTel);        // 전화번호를 입력 상자에 설정
 
         const userName = /*[[${session.loginUser?.userName}]]*/ "로그인 회원 이름";
-        const userEmail = /*[[${session.loginUser?.userEmail}]]*/ "로그인 회원 이름";
+        const userEmail = /*[[${session.loginUser?.userEmail}]]*/ "로그인 회원 이메일";
 
         const reservationDate = /*[[${reservationDate}]]*/"예약 일자";
         const package = /*[[${product.productPackage}]]*/"당일 or n일";

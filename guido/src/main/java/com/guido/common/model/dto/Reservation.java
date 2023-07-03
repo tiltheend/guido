@@ -22,6 +22,9 @@ public class Reservation {
 	private int productDateNo;			// 선택한 상품 일정 번호
 	private int optionNo;		// 선택한 옵션 번호
 	
+	private String requestContent;
+	private String orderNumber;
+	
 	// --------------- 테이블 끝!
 	
 	private String thumbnail; // 썸네일 (파일 오더 1번)
