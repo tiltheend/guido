@@ -33,6 +33,9 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		.addPathPatterns("/**")   // 가로챌 경로 지정(여러개 작성 시 콤마로 구분)
 		.excludePathPatterns("/css/**", "/image/**", "/js/**");  // 가로채지 않을 경로
 
+		registry.addInterceptor(mainEventInterceptor())
+		.addPathPatterns("/**")   // 가로챌 경로 지정(여러개 작성 시 콤마로 구분)
+		.excludePathPatterns("/css/**", "/image/**", "/js/**");  // 가로채지 않을 경로
 		// Bean으로 등록된 BoardTypeInterceptor를 얻어와 인터셉터로 등록
 //		registry.addInterceptor(interceptor메소드명())
 //		.addPathPatterns("/**")   // 가로챌 경로 지정(여러개 작성 시 콤마로 구분)

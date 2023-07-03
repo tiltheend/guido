@@ -1,13 +1,13 @@
 package com.guido.common.interceptor;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.guido.admin.model.service.AdminService;
-import com.guido.common.model.dto.Event;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class MainEventInterceptor implements HandlerInterceptor {
 
 			System.out.println("MainEvent 조회 서비스 호출");
 
-			List<Event> mainEventList = service.selectMainEventList();
+			List<Map<String,String>> mainEventList = service.selectMainEventList();
 
 			System.out.println(mainEventList);
 

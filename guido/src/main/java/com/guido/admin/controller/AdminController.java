@@ -2,6 +2,7 @@ package com.guido.admin.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.guido.admin.model.service.AdminService;
 import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.QNA;
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @SessionAttributes({ "loginMember" })
@@ -87,4 +91,23 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("승인 실패");
 		}
 	}
+	
+	@PostMapping("/setMainBanner")
+	@ResponseBody
+	public ResponseEntity<String> setMainBanner(@RequestBody Map<String,Object> data,
+			HttpServletRequest request) {
+		System.out.println(data);
+		int result = service.setMainBanner(data);
+		
+		if(result > 0) {
+			ServletContext application = request.getServletContext();
+			application.setAttribute("mainEventList", service.selectMainEventList());
+			
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("승인 실패");
+		}
+	}
+	
+	
 }

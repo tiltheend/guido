@@ -1,6 +1,7 @@
 package com.guido.admin.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -25,5 +26,9 @@ public interface AdminMapper {
 
 	int approveGuide(List<Integer> userNoList);
 
-	List<Event> selectMainEventList();
+	List<Map<String,String>> selectMainEventList();
+
+	int deleteMainBanner(Object order);
+	int setMainBanner(Map<String, Object> data);
+
 }

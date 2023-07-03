@@ -52,7 +52,7 @@
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
                     <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">번호</th><th class="col-title">제목</th>
-                    <th class="col-date">작성일</th><th class="col-date">종료일</th><th class="col-blind">블라인드</th></tr>
+                    <th class="col-date">작성일</th><th class="col-date">종료일</th><th class="col-blind">블라인드</th><th class="col-main-banner">메인 배너 설정</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
@@ -67,13 +67,59 @@
                                 <button type="buttion" th:if='*{EVENT_STATE=="N"}' class="btn btn3">블라인드</button>
                                 <button type="buttion" th:if='*{EVENT_STATE=="B"}' class="btn btn4">블라인드 해제</button>
                             </td>
+                            <td>
+                                <button type="buttion" th:unless='*{MAIN_BANNER_ORDER}' class="btn btn3 set-main-banner">메인 배너 설정</button>
+                                <button type="buttion" th:if='*{MAIN_BANNER_ORDER}' th:text="|*{MAIN_BANNER_ORDER}번째 메인 배너|" class="btn btn4 main-banner"></button>
+                            </td>
                         </tr>
                     </th:block>
                 </tbody>
             </table>
-
+        
             <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
+            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}" />
+            <div th:text="${application.mainEventList}"></div>
+        </div>
+        <!-- <div id="modal" class="modal">
+            <div id="modalContent" th:object="${application.mainEventList}">
+                <h1>메인 배너 설정</h1>
+                <hr>
+                <span id="selectedEventNo">1</span>번 이벤트를
+                <select name="" id="">
+                    <option>선택</option>
+                    <option value="1">1번째</option>
+                    <option value="2">2번째</option>
+                    <option value="3">3번째</option>
+                    <option value="4">4번째</option>
+                    <option value="5">5번째</option>
+                    <option value="6">6번째</option>
+                    <option value="7">7번째</option>
+                    <option value="8">8번째</option>
+                </select>
+                메인 배너로 설정할까요?
+                <div>
+                    <button class="btn btn1">확인</button>
+                    <button class="btn btn2">취소</button>
+                </div>
+            </div>
+        </div> -->
+        <div id="modal" class="modal">
+            <div id="modalContent">
+                <h1>메인 배너 설정</h1>
+                <hr>
+                <span id="selectedEventNo">1</span>번 이벤트를
+                <select name="modalSelect" id="modalSelect">
+                    <option>선택</option>
+                    <option th:each="mainEvent : ${application.mainEventList}" th:value="${mainEvent.MAIN_BANNER_ORDER}"
+                        th:text="|${mainEvent.MAIN_BANNER_ORDER}번째 (${mainEvent.EVENT_NO != 0 ? mainEvent.EVENT_NO+'번 이벤트' : '비어있음'})|">
+                    </option>
+                </select>
+                메인 배너로 설정할까요?
+                <div>
+                    <button class="btn btn1 modal-submit">확인</button>
+                    <button class="btn btn2 modal-cancel">취소</button>
+                </div>
+            </div>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>
