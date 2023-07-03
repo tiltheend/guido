@@ -15,11 +15,18 @@ public class EmailController {
 	@Autowired
 	private EmailService service;
 	
-	// 임시 비번 보내기
+	// 비번을 잊어버리셨나요? - 임시 비번 보내기
 	@GetMapping("/tempPw")
 	@ResponseBody
 	public int sendTempPw(String email) {
 		return service.sendTempPw(email);
+	}
+	
+	// 회원가입 시 메일 인증번호 발송
+	@GetMapping("/authEmail")
+	@ResponseBody
+	public int authEmail(String email) {
+		return service.authEmail(email);
 	}
 	
 	

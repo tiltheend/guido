@@ -35,6 +35,15 @@
 		SELECT "USER_NAME" FROM "USER" WHERE "USER_EMAIL" = #{email}
 	</select>
 	
+	<update id="updateAuthKey">
+		UPDATE "AUTH_KEY" SET CODE = #{authKey}, CREATE_TIME = SYSDATE WHERE EMAIL=#{email}
+	</update>
+	
+	<insert id="insertAuthKey">
+		INSERT INTO "AUTH_KEY" VALUES(SEQ_AUTH_KEY_NO.NEXTVAL, #{authKey}, #{email}, DEFAULT)
+	</insert>
+	
+	
 	
 	
 	
