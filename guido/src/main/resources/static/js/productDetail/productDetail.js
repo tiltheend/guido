@@ -174,7 +174,7 @@ if(document.getElementById("wishHeart")!=null){
         check = 0;
     }
     
-    const wishData = {"productNo" : product.productNo, "userNo": 18, "check": check};
+    const wishData = {"productNo" : product.productNo, "userNo": loginUserNo, "check": check};
     // const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
     
     
