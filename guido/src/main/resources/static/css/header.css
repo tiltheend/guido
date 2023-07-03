@@ -152,7 +152,7 @@ header .search-box-click-box button{
 
 /* check-in */
 .search-box-click > div:nth-child(2){
-  width: 300px;
+  width: 155px;
   height: 60px;
   background-color: none;
   border-radius: 50px;
@@ -250,7 +250,7 @@ header .search-box-click-box button{
   width: 380px;
   background-color: #fff;
   border-radius: 20px;
-  margin-top: 24px;
+  margin-top: 14px;
   position: fixed;
   left: 500px;
   z-index: 300;
@@ -327,9 +327,9 @@ header .search-box-click-box button{
 
 /* ** Guest 모달창 ** */
 .guest-modal{
-  width: 320px; height: 110px;
+  width: 300px; height: 73px;
   background-color: #fff;
-  margin-top: 24px;
+  margin-top: 14px;
   border-radius: 20px;
   display: flex;
   justify-content: space-around;
@@ -363,6 +363,12 @@ header .search-box-click-box button{
   margin-left: 20px;
 }
 
+.final-search-btn button{
+  color: #fff;
+  font-weight: normal;
+}
+
+
 
 /* ***** 헤더 아이콘 모달창 ***** */
 /* 마이페이지 */
@@ -380,6 +386,8 @@ header .search-box-click-box button{
   display: none;
 }
 .mypage-modal>div{
+  display: flex;
+  flex-direction: column;
   margin: 20px;
   font-size: 16px;
 }
@@ -475,14 +483,12 @@ padding-bottom: 120px;
 }*/
 
 .input-group input {
-  padding: 10px 15px !important;
-  border: 1px solid lightgrey !important;
-  border-radius: 10px;
-  box-sizing: border-box;
-  background-color: #fff !important;
+  width: 150px;
+  /* padding: 10px 15px !important; */
+  background-color: transparent;
   color: #2C3E50;
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-size: 16px;
+  /* letter-spacing: 1px; */
   position: relative;
 }
 
@@ -490,7 +496,7 @@ padding-bottom: 120px;
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border: 1px solid #512DA8;
+  /* border: 1px solid #512DA8; */
   outline-width: 0;
 }
 
@@ -518,6 +524,7 @@ padding-bottom: 120px;
 background-color: #fff;
 border: none;
 border-radius: 0 !important;
+margin-top: 50px;
 }
 
 .datepicker-dropdown {
@@ -586,4 +593,25 @@ width: 100%;
 .btn-black:hover {
 color: #fff !important;
 background-color: #000 !important;
+}
+
+
+
+/* .datepicker-dropdown .dropdown-menu .datepicker-orient-left .datepicker-orient-bottom{
+  margin-top: 130px;
+} */
+.datepicker{
+  top: 130px;
+}
+
+.datepicker{
+  border-radius: 25px !important;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.datepicker::before {
+  content: none;
+}
+.datepicker::after {
+  content: none;
 }

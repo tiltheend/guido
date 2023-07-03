@@ -6,9 +6,9 @@
 
  .datepicker {
   padding: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
   direction: ltr;
 }
 .datepicker-inline {
@@ -442,7 +442,7 @@
 .input-daterange input {
   text-align: center;
 }
-.input-daterange input:first-child {
+/* .input-daterange input:first-child {
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
@@ -451,7 +451,7 @@
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
   border-radius: 0 3px 3px 0;
-}
+} */
 .input-daterange .add-on {
   display: inline-block;
   width: auto;

@@ -8,15 +8,17 @@
     
     <title>Guido</title>
 
-    <!-- css -->
-    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-
+    
     <!-- 캘린더 -->
     <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap-datepicker.css}">
     <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap-responsive.css}">
-    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js}"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+    <!-- <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js}"></script> -->
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"></script>
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js}"></script>
 
@@ -61,32 +63,20 @@
                     </button>
                 </div>
 
-
-                <!-- <div class="container px-1 px-sm-5 mx-auto">
-                    <div class="flex-sm-row flex-column d-flex">
-                        <div class="col-sm-9 col-12 px-0 mb-2"> -->
-
-                <div class="input-group input-daterange">
-                    <div class="click-div in-btn-click">
-                        <button type="button" class="check-in-button-click">
-                            Start-day
-                            <br>
-                            <input type="text" class="form-control" name="firstday" placeholder="날짜 추가" readonly> 
-                        </button>
-                    </div>
-                    <div class="click-div out-btn-click">
-                        <button type="button" class="check-out-button-click">
-                            Last-day
-                            <br>
-                            <input type="text" class="form-control" name="lastday" placeholder="날짜 추가" readonly> 
-                        </button>
-                    </div>
+                <div class="click-div in-btn-click input-group input-daterange">
+                    <button type="button" class="check-in-button-click">
+                        Start-day
+                        <br>
+                        <input type="text" class="form-control" name="firstday" placeholder="날짜 추가" readonly> 
+                    </button>
                 </div>
-
-                        <!-- </div>
-                    </div>
-                </div> -->
-
+                <div class="click-div out-btn-click input-group input-daterange">
+                    <button type="button" class="check-out-button-click">
+                        Last-day
+                        <br>
+                        <input type="text" class="form-control" name="lastday" placeholder="날짜 추가" readonly> 
+                    </button>
+                </div>
                 <!-- <div class="click-div in-btn-click">
                     <button type="button" class="check-in-button-click">
                         Start-day
@@ -102,11 +92,8 @@
                     </button>
                 </div> -->
 
-
-
-
                 <div class="click-div guest-btn-click">
-                    <button type="button" class="guest-button-click input-daterange">
+                    <button type="button" class="guest-button-click">
                         Guest
                         <br>
                         <input type="text" name="tourist" placeholder="인원 추가" readonly>
