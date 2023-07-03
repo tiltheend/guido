@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
@@ -161,6 +162,37 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	public List<Reservation> myReservationMore(Map<String, Integer> map) {
 		return mapper.myReservationMore(map);
 	}
+
+	
+	// 위시리스트 가져오기
+	@Override
+	public List<Product> myWishList(int userNo) {
+		return mapper.myWishList(userNo);
+	}
+	
+	// 관심 상품 등록 여부 체크
+	@Override
+	public int selectWishCheck(Map<String, Integer> map) {
+		return mapper.selectWishCheck(map);
+	}
+
+
+	// 관심 상품 등록 처리
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateWish(Map<String, Integer> map) {
+	
+		int result = 0;
+		
+		// 관심상품 등록 X
+		if(map.get("check")==0)
+			result = mapper.insertProductWish(map);
+		else
+			result = mapper.deleteProductWish(map);
+		
+		return result;
+	}
+	
 	
 	
 }

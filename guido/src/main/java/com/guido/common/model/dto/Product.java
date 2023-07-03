@@ -50,4 +50,6 @@ public class Product {
 	private String courseName;		// 여행지 키워드
 	private String productDate;		// 날짜
 
+	private int wishOrNot;		// 위시 여부
+	
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
@@ -257,7 +258,38 @@ public class ProfileTouristController {
 		User user = service.userInfo(userNo);
 		model.addAttribute("user", user);
 		
+		// 위시리스트 가져오기
+		// 상품 이름, 상품 가격, 지역 이름, 패키지 박수(1박이면 total, 2박 이상이면 /per), 별점
+		// productName, productPrice, regionName, productPackage(상품 패키지(1.당일 N. N박N-1일)), reviewStars
+		List<Product> myWishList = service.myWishList(userNo);
+		model.addAttribute("myWishList", myWishList);
+		
+		for(Product p : myWishList) { // 위시리스트
+			p.setWishOrNot(1);
+		}
+		
+//		int wishOrNot = -1;		// 관심 등록
+//
+//		Map<String, Integer> map = new HashMap<>();
+//		map.put("productNo", productNo);
+//		
+//		map.put("userNo", loginUser.getUserNo());
+//		
+//		wishOrNot = service.selectWishCheck(map);
+//
+//
+//		model.addAttribute("wishOrNot", wishOrNot);
+		
 		return "profile/buyerWishList";
 	}
+	
+	
+	// 관심상품 등록 처리
+	@PostMapping("/updateWish")
+	@ResponseBody
+	public int updateWish(@RequestBody Map<String, Integer> map) {
+		return service.updateWish(map);
+	}
+	
 	
 }
