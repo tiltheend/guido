@@ -83,26 +83,26 @@ function showTotalResevationCost(){
 showTotalResevationCost();
 
 
-
-/* 결제 버튼을 클릭했을 때 약관동의 미체크 시 제출 막기 */
-  paymentBtn.addEventListener("click", (e)=>{
-    
-    if(document.querySelector("input[type='checkbox']").checked == false){
-      alert("약관 동의에 체크해주세요");
-      e.preventDefault();
-      return;
-    }
-
-    toggleModal();
-
-  });
-  
   
 /* 모달창 띄우기 */
-const modal = document.getElementById("paymentModal");
 
 // 모달 창 토글
-function toggleModal() {
+function toggleModal(type) {
+  
+  let modal;
+
+  /* 개인정보 수집, 이용 동의 */
+  if(type=='ua')
+    modal = document.getElementById("useAgreeModal");
+
+  /* 결제 */
+  if(type=='pm')
+    modal = document.getElementById("paymentModal");
+  
+  /* 개인정보 3자 제공 동의 */
+  if(type=='pa')
+    modal = document.getElementById("provideAgreeModal");
+  
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
 }
 
@@ -173,3 +173,58 @@ if (lastYear !== newYear) {
   });
 }
 
+/* 유의사항 전체 동의 */
+// 마지막 체크박스가 변경되었을 때 전체 동의 체크박스 상태 업데이트
+function updateCheckAll() {
+  const toucheckboxes = document.querySelectorAll("input[type='checkbox']");
+  const lastCheckbox = toucheckboxes[toucheckboxes.length - 1];
+
+  // 마지막 체크박스의 상태에 따라 모든 체크박스를 업데이트
+  if (lastCheckbox.checked) {
+    toucheckboxes.forEach(function(checkbox) {
+      checkbox.checked = true;
+    });
+  } else {
+    toucheckboxes.forEach(function(checkbox) {
+      checkbox.checked = false;
+    });
+  }
+}
+
+// 마지막 체크박스의 변경 이벤트에 updateCheckAll 함수 연결
+const touAllCheck = document.getElementById("touAllCheck"); // 여기에 마지막 체크박스의 id를 입력해야 합니다.
+
+touAllCheck.addEventListener("change", updateCheckAll);
+
+
+
+
+// 라디오 버튼과 체크박스의 상태 변화를 감지하여 제출 버튼 활성화
+function checkFormStatus() {
+  const touRadioBtn = document.querySelectorAll("input[type='radio']");
+  const touCheckBoxes = document.querySelectorAll("input[type='checkbox']");
+
+  // 라디오 버튼과 체크박스 중 하나라도 선택되었는지 확인
+  const radioSelected = Array.from(touRadioBtn).some(function(radio) {
+    return radio.checked;
+  });
+
+  const checkboxesChecked = Array.from(touCheckBoxes).every(function(checkbox) {
+    return checkbox.checked;
+  });
+
+  // 제출 버튼 활성화 상태 업데이트
+  if (radioSelected && checkboxesChecked) {
+    paymentBtn.disabled = false;
+  } else {
+    paymentBtn.disabled = true;
+  }
+}
+
+// 라디오 버튼과 체크박스의 변경 이벤트에 checkFormStatus 함수 연결
+const touRadioBtn = document.querySelectorAll("input[type='radio']");
+const touCheckBoxes = document.querySelectorAll("input[type='checkbox']");
+const formElements = [...touRadioBtn, ...touCheckBoxes];
+formElements.forEach(function(element) {
+  element.addEventListener("change", checkFormStatus);
+});

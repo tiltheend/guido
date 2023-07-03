@@ -832,12 +832,18 @@ box-shadow:  5px 5px 8px #e2e2e2,
 
 /* 리뷰 상세 내용 div */
 .detail--item__review-content{
-    background-color: #F0F0F0;
     width: 100%;
     border-radius: 10px;
-    padding: 20px;
     min-width: 500px;
     font-size: 1.1rem;
+    padding: 2px;
+
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 
@@ -885,6 +891,8 @@ box-shadow:  5px 5px 8px #e2e2e2,
 /* 리뷰 댓글 하단 div */
 .detail--item__review-bottom{
     width: 80%;
+    background-color: #F0F0F0;
+    padding: 18px;
 }
 
 /* 리뷰 댓글 */

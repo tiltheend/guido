@@ -61,5 +61,18 @@ public interface ProductDetailService {
 	int updateWish(Map<String, Integer> map);
 
 
+	/** 인기상품 랜덤으로 조회 
+	 * @return recommendList
+	 */
+	List<Product> selectPopularList();
+
+
+	/** 추천 상품 조회 - 가이드 언어 일치하는 상품 랜덤으로
+	 * @param userNo
+	 * @return recommendList
+	 */
+	List<Product> selectRecommendList(int userNo);
+
+
 
 }
