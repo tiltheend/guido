@@ -260,7 +260,7 @@
 		ORDER BY W.WISHLIST_NO DESC
 	</select>
 	
-		 <!-- 관심 상품 등록 체크-->
+	 <!-- 관심 상품 등록 체크-->
 	 <select id="selectWishCheck" resultType="_int">
 		 SELECT COUNT(*) 
 		FROM "WISHLIST"

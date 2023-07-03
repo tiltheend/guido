@@ -25,11 +25,11 @@ public class ThemeTypeInterceptor implements HandlerInterceptor{
 		
 		if(application.getAttribute("themeTypeList") == null) {
 			
-			System.out.println("THEME_TYPE 조회 서비스 호출");
+//			System.out.println("THEME_TYPE 조회 서비스 호출");
 			
 			List<Map<String, Object>> themeTypeList = service.selectThemeTypeList();
 			
-			System.out.println(themeTypeList);
+//			System.out.println(themeTypeList);
 			
 			application.setAttribute("themeTypeList", themeTypeList);
 			

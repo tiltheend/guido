@@ -25,11 +25,11 @@ public class MainEventInterceptor implements HandlerInterceptor {
 
 		if (application.getAttribute("mainEventList") == null) {
 
-			System.out.println("MainEvent 조회 서비스 호출");
+//			System.out.println("MainEvent 조회 서비스 호출");
 
 			List<Map<String,String>> mainEventList = service.selectMainEventList();
 
-			System.out.println(mainEventList);
+//			System.out.println(mainEventList);
 
 			application.setAttribute("mainEventList", mainEventList);
 

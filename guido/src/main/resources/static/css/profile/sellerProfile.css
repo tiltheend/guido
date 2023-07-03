@@ -84,8 +84,13 @@
 .seller-profile-top .profile-seller-info .seller-info>h2{
     font-size: 1.625rem;
 }
+.seller-profile-top .profile-seller-info .seller-info>h2>span{
+    font-size: 1rem;
+}
+
+
 .seller-profile-top .profile-seller-info div:last-of-type>p:last-of-type{
-    font-size: 0.625rem;
+    /* font-size: 0.625rem; */
 }
 
 /* 유저 이메일 */
