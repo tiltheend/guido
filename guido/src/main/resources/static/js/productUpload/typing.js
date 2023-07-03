@@ -3,9 +3,14 @@ const $text2 = document.querySelector('.text2');
 const $text3 = document.querySelector('.text3');
 const $text4 = document.querySelector('.text4');
 const $text5 = document.querySelector('.text5');
+const loginName = document.querySelector('#loginName').innerText;
+// const loginUserName = /*[[${session.loginUser.userName}]]*/ [];
+
+console.log(loginName);
 // const $text5 = document.querySelector('.text5');
 // 글자 모음
-const letters = ['Jayden 가이드님! 환영합니다.'];
+const letters = [];
+letters.push(loginName + ' 가이드님, 환영합니다');
 const letters2 = ['이제 가이드 하실 지역을 선택해주세요!'];
 const letters3 = ['여행 테마를 선택해주세요!'];
 const letters4 = ['이제 요금을 설정하세요.'];

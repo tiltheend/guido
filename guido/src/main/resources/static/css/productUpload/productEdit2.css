@@ -1111,3 +1111,6 @@ input[name='tourTheme']:checked {
   color: white;
   font-weight: bold;
 }
+.day-fee {
+  display: none;
+}

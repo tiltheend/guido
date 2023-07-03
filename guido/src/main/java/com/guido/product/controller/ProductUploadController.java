@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.TourTheme;
+import com.guido.common.model.dto.User;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.product.model.service.ProductUploadService;
 
 @Controller
-//@SessionAttributes({"loginUser"})
+@SessionAttributes({"loginUser"})
 //@RequestMapping("/product")
 public class ProductUploadController {
 
@@ -53,7 +56,7 @@ public class ProductUploadController {
 		@PostMapping("/upload")
 		public String productUpload(
 							 Product product
-//							 ,@SessionAttribute("loginMember") User loginMember
+							 ,@SessionAttribute("loginMember") User loginMember
 							 ,@RequestParam(value="images", required=true) List<MultipartFile> images
 							 , RedirectAttributes ra
 							 , @RequestParam(value="productAddPrice", required=false) List<String> additionalList
@@ -62,7 +65,7 @@ public class ProductUploadController {
 			
 			
 //		*로그인한 유저 번호 -> product에 세팅	
-//		product.setUserNo(loginMember.getUserNo());
+		product.setUserNo(loginMember.getUserNo());
 		
 		
 		product.setProductAddNotes(String.join("^^^", additionalList));
