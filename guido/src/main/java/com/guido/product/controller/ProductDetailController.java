@@ -51,7 +51,21 @@ public class ProductDetailController {
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
 		List<Review> reviewList = service.selectReviewList(productNo);
+		List<Product> recommendList = null;
 		
+		
+		// 비로그인 유저 => 인기 상품 랜덤으로 조회
+		if(loginUser==null)
+			recommendList = service.selectPopularList();
+		else {
+			// 추천 상품 조회
+			recommendList = service.selectRecommendList(loginUser.getUserNo());
+			
+			if(recommendList.isEmpty())
+				recommendList = service.selectPopularList();
+		}
+		
+
 		// 구분자로 문자열 쪼개기
 		List<String> addNotesList = null;
 		
@@ -88,6 +102,7 @@ public class ProductDetailController {
 		model.addAttribute("wishOrNot", wishOrNot);
 		model.addAttribute("addNotesList", addNotesList);
 		model.addAttribute("apiKey", apiKey);
+		model.addAttribute("recommendList", recommendList);
 	
 		
 		return "productDetail/productDetail";
