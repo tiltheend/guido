@@ -260,4 +260,27 @@
 		ORDER BY W.WISHLIST_NO DESC
 	</select>
 	
+		 <!-- 관심 상품 등록 체크-->
+	 <select id="selectWishCheck" resultType="_int">
+		 SELECT COUNT(*) 
+		FROM "WISHLIST"
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_NO = #{productNo}
+	 </select>
+	 
+	 
+	 <!-- 관심 상품 등록 -->
+	 <insert id="insertProductWish">
+		 INSERT INTO "WISHLIST"
+		VALUES(SEQ_WISHLIST_NO.NEXTVAL, #{userNo}, #{productNo}, DEFAULT)
+	 </insert>
+	 
+		 
+	<!-- 관심 상품 해제 -->
+	 <delete id="deleteProductWish">
+		 DELETE FROM "WISHLIST"
+		 WHERE USER_NO = #{userNo}
+		 AND PRODUCT_NO = #{productNo}
+	 </delete>
+	 
 </mapper>

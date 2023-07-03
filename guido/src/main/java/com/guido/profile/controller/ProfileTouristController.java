@@ -261,12 +261,14 @@ public class ProfileTouristController {
 		// 위시리스트 가져오기
 		// 상품 이름, 상품 가격, 지역 이름, 패키지 박수(1박이면 total, 2박 이상이면 /per), 별점
 		// productName, productPrice, regionName, productPackage(상품 패키지(1.당일 N. N박N-1일)), reviewStars
+		
 		List<Product> myWishList = service.myWishList(userNo);
-		model.addAttribute("myWishList", myWishList);
 		
 		for(Product p : myWishList) { // 위시리스트
 			p.setWishOrNot(1);
 		}
+		
+		model.addAttribute("myWishList", myWishList);
 		
 //		int wishOrNot = -1;		// 관심 등록
 //
@@ -288,6 +290,7 @@ public class ProfileTouristController {
 	@PostMapping("/updateWish")
 	@ResponseBody
 	public int updateWish(@RequestBody Map<String, Integer> map) {
+		
 		return service.updateWish(map);
 	}
 	

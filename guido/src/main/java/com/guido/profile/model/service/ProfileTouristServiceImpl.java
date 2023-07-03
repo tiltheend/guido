@@ -185,10 +185,14 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 		int result = 0;
 		
 		// 관심상품 등록 X
-		if(map.get("check")==0)
+		if(map.get("check")==0) {			
 			result = mapper.insertProductWish(map);
-		else
+			// System.out.println("위시 할거지롱~");
+		}
+		else {
 			result = mapper.deleteProductWish(map);
+			// System.out.println("위시 뺼거지롱~");
+		}
 		
 		return result;
 	}

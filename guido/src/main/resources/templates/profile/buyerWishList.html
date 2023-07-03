@@ -80,8 +80,7 @@
 
                 <ul>
                     <li th:each="product : ${myWishList}">
-                        <!-- <div class="relative"></div> -->
-                        <div class="slider single-item">
+                        <div class="slider single-item" th:data-productno="${product.productNo}">
                             <div th:each="image : ${product.imageList}">
                                 <img th:src="${image.filePath}">
                             </div>
@@ -90,8 +89,9 @@
                             <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                             <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
-                        <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                            <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                         </div>
                         <div class="sales-text">
                             <div>
@@ -126,14 +126,10 @@
     
     <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
     <script th:inline="javascript">
-        // const message='[[${message}]]';
-
-        /* Natural Template */
         const message = /*[[${message}]]*/  "전달 받은 message";
-        // 타임리프 해석    값(자료형이 알아서 해석)     사라짐(설명)
-        if(message != null){
-            alert(message);
-        }
+        if(message != null) alert(message);
+
+        const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
     </script>  
 </body>
 </html>
