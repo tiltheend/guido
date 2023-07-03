@@ -13,7 +13,7 @@ public interface HomeService {
 
 	
 	// 상품 목록 조회
-	List<Product> selectProductList();
+	List<Product> selectProductList(int userNo);
 
 	// 인기 여행지 목록 조회
 	List<Product> selectPopularProductList();
@@ -46,7 +46,11 @@ public interface HomeService {
 	int selectWishListCheck(Map<String, Object> map);
 	
 	// 관심상품 등록
-	int updateWishList(Map<String, Integer> paramMap);
+	int updateWish(Map<String, Integer> paramMap);
+
+
+	// 관심상품 등록 여부 체크
+	List<Product> mainWishCheck(int userNo);
 
 
 

@@ -445,7 +445,7 @@ hr{
 .main-post .product-post .add-wish-heart{
   width: 100%; 
 }
-.main-post .product-post .add-wish-heart svg{ 
+.main-post .product-post .add-wish-heart>img{ 
   width: 30px; height: 30px;
   cursor: pointer;
   border: none;
@@ -460,13 +460,13 @@ hr{
 }
 
 .heart-icon{
-  background-image: url('/images/icons/like.png'); 
+  background-image: url('/images/profile/heartNone.png'); 
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .heart-icon.selected{
-  background-image: url('/images/icons/liked.png'); 
+  background-image: url('/images/profile/heartClick.png'); 
 }
   /* 좋아요 버튼 */
 /*   .like--container{

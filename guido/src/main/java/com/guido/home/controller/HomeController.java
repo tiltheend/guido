@@ -22,7 +22,7 @@ import com.guido.common.model.dto.User;
 import com.guido.home.model.service.HomeService;
 
 
-/*@SessionAttributes({"loginUser"})*/
+@SessionAttributes({"loginUser"})
 @RequestMapping("/common")
 @Controller
 public class HomeController {
@@ -37,8 +37,10 @@ public class HomeController {
 //						, @RequestParam("productNo") int productNo
 						, @SessionAttribute(value="loginUser", required=false) User loginUser) {
 
+		int userNo= loginUser.getUserNo();
+		
 		// 상품 목록 조회
-		List<Product> productList = service.selectProductList();
+		List<Product> productList = service.selectProductList(userNo);
 		model.addAttribute("productList", productList); // + 위시
 		
 		// 인기 여행지 목록 조회
@@ -53,6 +55,15 @@ public class HomeController {
 		List<Product> recommProductList = service.selectRecommProductList();
 		model.addAttribute("recommProductList", recommProductList);
 		
+		
+		// 관심상품 등록
+//		List<Product> mainWish = service.mainWishCheck(userNo);
+//		
+//		for(Product p : mainWish) {
+//			p.setWishOrNot(1);
+//		}
+//		
+//		model.addAttribute("mainWish", mainWish);
 		
 		// 관심상품 등록 여부 체크
 //		int wishOrNot = -1;
@@ -133,7 +144,9 @@ public class HomeController {
 	@PostMapping("/updateWishList")
 	@ResponseBody
 	public int updateWish(@RequestBody Map<String, Integer> paramMap) {
-		return service.updateWishList(paramMap);
+		
+		System.out.println(paramMap);
+		return service.updateWish(paramMap);
 	}
 	
 	

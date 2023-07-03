@@ -26,8 +26,8 @@ public class HomeServiceImpl implements HomeService {
 	
 	// 상품 목록 조회
 	@Override
-	public List<Product> selectProductList() {
-		return mapper.selectProductList();
+	public List<Product> selectProductList(int userNo) {
+		return mapper.selectProductList(userNo);
 	}
 
 	// 인기 여행지 목록 조회
@@ -87,17 +87,27 @@ public class HomeServiceImpl implements HomeService {
 	// 관심상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int updateWishList(Map<String, Integer> paramMap) {
+	public int updateWish(Map<String, Integer> paramMap) {
 		
 		int result = 0;
 		
+		// 관심상품 등록 X
 		if(paramMap.get("check") == 0) {
-			result = mapper.insertWishList(paramMap);
+			result = mapper.insertMainWish(paramMap);
+			
+		// 관심상품 등록 O
 		} else {
-			result = mapper.deleteWishList(paramMap);
+			result = mapper.deleteMainWish(paramMap);
 		}
 		
 		return result;
+	}
+
+
+	// 관심상품 등록 여부 체크
+	@Override
+	public List<Product> mainWishCheck(int userNo) {
+		return mapper.mainWishCheck(userNo);
 	}
 
 
