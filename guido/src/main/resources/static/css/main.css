@@ -245,7 +245,7 @@ hr{
   transition-duration: 0.3s;
 }
 
-.prev{
+/* .prev{
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -257,7 +257,7 @@ hr{
   z-index: 100;
   margin-top: 135px;
   margin-left: 5px;
-  /* transition-duration: 0.2s; */
+  transition-duration: 0.2s;
   opacity: 0.6;
   cursor: pointer;
 }
@@ -273,10 +273,10 @@ hr{
   z-index: 100;
   margin-left: 265px;
   margin-top: 135px;
-  /* transition-duration: 0.2s; */
+  transition-duration: 0.2s;
   opacity: 0.6;
   cursor: pointer;
-}
+} */
 
 .container--inner__top__left img{
   min-width: 300px;
@@ -442,7 +442,7 @@ hr{
 }
 
 /* 위시 하트 */
-/* .main-post .product-post .add-wish-heart{
+.main-post .product-post .add-wish-heart{
   width: 100%; 
 }
 .main-post .product-post .add-wish-heart svg{ 
@@ -460,16 +460,16 @@ hr{
 }
 
 .heart-icon{
-  background-image: url('/images/profile/heartNone.png'); 
+  background-image: url('/images/icons/like.png'); 
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .heart-icon.selected{
-  background-image: url('/images/profile/heartClick.png'); 
-} */
+  background-image: url('/images/icons/liked.png'); 
+}
   /* 좋아요 버튼 */
-  .like--container{
+/*   .like--container{
     margin-top: 5vh;
 }
 
@@ -504,7 +504,7 @@ hr{
   
   .like--container input:checked ~ svg {
     fill: #E3474F;
-  }
+  } */
   /* 진 */
 
 

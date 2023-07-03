@@ -158,7 +158,7 @@ function loadProductByTheme(themeCode) {
             addWishHeart.classList.add("add-wish-heart");
 
 
-            const heartLabel = document.createElement("label");
+            /* const heartLabel = document.createElement("label");
             heartLabel.classList.add("like--container");
         
             const heartCheckbox = document.createElement("input");
@@ -166,7 +166,9 @@ function loadProductByTheme(themeCode) {
             heartCheckbox.setAttribute("id", "wishHeart");
             
             // 여기에 실제 상태에 따른 checked 속성 추가
-            heartCheckbox.checked = themeProduct.wishOrNot > 0;
+            if(themeProduct.wishOrNot > 0){
+                heartCheckbox.checked;
+            }
         
             const heartSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             heartSvg.setAttribute("id", "Layer_1");
@@ -184,16 +186,16 @@ function loadProductByTheme(themeCode) {
             heartLabel.appendChild(heartSvg);
             addWishHeart.appendChild(heartLabel);
         
-            productRow.appendChild(addWishHeart);
+            productRow.appendChild(addWishHeart); */
 
 
-            /* const heartIcon = document.createElement("img");
+            const heartIcon = document.createElement("img");
             heartIcon.classList.add("heart-icon");
             heartIcon.setAttribute("src", "/images/profile/empty.png");
             heartIcon.setAttribute("onclick", "toggleHeart()");
             addWishHeart.appendChild(heartIcon);
 
-            productRow.appendChild(addWishHeart); */
+            productRow.appendChild(addWishHeart);
 
             const salesText = document.createElement("div");
             salesText.classList.add("sales-text");
@@ -264,7 +266,7 @@ function loadProductByTheme(themeCode) {
 
 
 /* 관심상품 등록/제거 처리 */
-if(document.getElementById("wishHeart") != null){
+/* if(document.getElementById("wishHeart") != null){
     
     const wishHeart = document.getElementById("wishHeart");
     let check;   
@@ -296,7 +298,7 @@ if(document.getElementById("wishHeart") != null){
             console.log(err);
         })
     });
-}
+} */
 
 
 

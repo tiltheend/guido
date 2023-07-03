@@ -64,7 +64,7 @@ public class HomeServiceImpl implements HomeService {
 		return mapper.selectSearchResult(map);
 	}
 
-	// 헤더 위치 검색
+	// 위치 검색 시 드롭박스 리스트 조회
 	@Override
 	public List<String> locationSearch(String location) {
 		return mapper.locationSearch(location);
