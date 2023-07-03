@@ -463,3 +463,7 @@ if(Object.keys(product.tourCourse).length != 0){
 if(product.productState=='B'){
     document.querySelector("body").style.overflow = 'hidden';
 }
+
+document.getElementById('editBtn').addEventListener('click', function () {
+    location.href = location.pathname + '/edit';
+});

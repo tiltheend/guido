@@ -86,16 +86,6 @@ function changeBackgroundColor(element) {
     element.style.backgroundColor = 'rgb(185, 215, 218)';
     element.style.borderColor = 'rgb(59, 119, 124)';
   }
-  const tourBoxCheck = () => {
-    let count = 0;
-    tourThemeItems.forEach((element) => {
-      if (count < 1 || count > 1) {
-        nextBtn.disabled = true;
-      } else {
-        nextBtn.disabled = false;
-      }
-    });
-  };
 }
 // 여행 테마 선택 체크박스
 
@@ -583,10 +573,10 @@ const imgId8 = document.getElementById('imgId8');
 
 const productEditFrm = document.getElementById('productEditFrm');
 
-// productEditFrm.addEventListener('click', (e) => {
-//   // input type='hidden' 태그에
-//   //deleteSet에 저장된 값을 "1,2,3" 형태로 변경해서 저장
-//   document.querySelector("[name='deleteList']").value = Array.from(deleteSet);
+productEditFrm.addEventListener('click', (e) => {
+  // input type='hidden' 태그에
+  //deleteSet에 저장된 값을 "1,2,3" 형태로 변경해서 저장
+  document.querySelector("[name='deleteList']").value = Array.from(deleteSet);
 
-//   e.preventDefault();
-// });
+  // e.preventDefault();
+});

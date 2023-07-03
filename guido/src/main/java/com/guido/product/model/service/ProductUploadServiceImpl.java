@@ -19,7 +19,6 @@ import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.utility.Util;
 import com.guido.product.model.dao.ProductUploadMapper;
-import com.guido.product.model.exception.ImageDeleteException;
 
 @Service
 @PropertySource("classpath:/config.properties")
@@ -111,7 +110,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				rowCount = mapper.imageDelete(deleteMap);
 				
 				if(rowCount == 0) {
-					throw new ImageDeleteException();
+					throw new FileUploadException();
 				}
 			}
 			
@@ -147,13 +146,13 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				}
 			
 			}
-		
-		if(!uploadList.isEmpty()) {
-			for(int i=0 ; i<uploadList.size();i++) {
-				int index = uploadList.get(i).getFileOrder();
 				
-				String rename = Util.fileRename(images.get(i).getOriginalFilename());
-				images.get(i).transferTo(new java.io.File(filePath+rename));
+				if(!uploadList.isEmpty()) {
+					for(int i=0 ; i<uploadList.size();i++) {
+						int index = uploadList.get(i).getFileOrder();
+						
+						String rename = Util.fileRename(images.get(i).getOriginalFilename());
+						images.get(i).transferTo(new java.io.File(filePath+rename));
 			}	
 		}
 	}

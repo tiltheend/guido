@@ -42,8 +42,6 @@ header .save .save-btn {
   width: 130px;
   border: 1px solid lightgray;
   border-radius: 20px;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 header .save .save-btn:hover {
@@ -97,8 +95,6 @@ footer {
   font-weight: bold;
   box-shadow: 5px 5px 5px gray;
   cursor: pointer;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 .tour-box > *:hover {
@@ -276,8 +272,6 @@ button:disabled:hover {
   text-align: center;
   box-shadow: 5px 5px 5px gray;
   cursor: pointer;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 
@@ -596,8 +590,6 @@ input[type='radio']:checked + .theme-img {
   appearance: none; */
   border: 2px solid black;
   border-radius: 10px;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 
@@ -657,8 +649,6 @@ button:disabled {
   border: 2px solid black;
   border-radius: 8px;
   font-size: 1.2rem;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 
@@ -725,8 +715,6 @@ button:disabled {
   cursor: pointer;
   padding: 25px;
   padding-left: 15px;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 #add-container > *:hover {
@@ -929,7 +917,6 @@ button:disabled {
 .card-form:hover .card {
   transform: rotateY(180deg);
 }
-
 /* 요금 설정 */
 
 .set-fee-container > div {
@@ -937,6 +924,17 @@ button:disabled {
   height: 100px;
   /* display: block; */
   display: flex;
+}
+#feeInput:hover {
+  background-color: #a5c8c8;
+  transition-duration: 0.55s !important;
+}
+#feeInput:not(hover) {
+  background-color: #fff;
+  transition-duration: 0.55s !important;
+}
+.fee-container:hover {
+  border: rgb(47, 46, 46);
 }
 
 #feeInput,
@@ -970,7 +968,13 @@ ul {
   padding: 0;
   background: black;
 } */
-
+#page5 > div.set-fee > ul > li > a.open-accordion > div > div > h5 {
+  padding: 20px;
+}
+#page5 > div.set-fee > ul > li > a.close-accordion > div > div > h5 {
+  padding: 20px;
+  margin-left: -20px;
+}
 .target {
   display: block;
   /* top: 0;
@@ -1016,13 +1020,14 @@ ul {
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 20px;
 }
 .accordion__num {
   font-size: 1rem;
   margin-right: 1.3rem;
 }
 .accordion__title {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 .accordion__li i {
   font-size: 1.3rem;
@@ -1053,6 +1058,7 @@ ul {
 .accordion__li:last-child :target ~ .accordion__content {
   height: 15.4rem;
   padding-top: 1rem;
+  padding: 20px;
 }
 #page13 > div.set-fee > ul > li:nth-child(2) > a.open-accordion > div > div {
   justify-content: space-between;
@@ -1105,6 +1111,50 @@ input[type='radio']:checked {
   color: white;
 }
 
+.set-people-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 200px;
+}
+.minTouristNum,
+.maxTouristNum,
+.maxTouristNum2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+}
+.minInput,
+.maxInput,
+.maxInput2 {
+  outline: none;
+  width: 70px;
+  height: 70px;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  font-size: 1.5rem;
+
+  transition-duration: 0.25s !important;
+}
+.inputPeopleNum {
+  display: flex;
+  justify-content: space-between;
+}
+#maxMinWarn {
+  color: red;
+  display: none;
+}
+.maxTouristNum2 {
+  display: none;
+}
 .plus-image {
   display: none;
+}
+
+.hrLine {
+  border-bottom: 1px dashed lightgray;
 }
