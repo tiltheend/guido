@@ -41,42 +41,20 @@ public class HomeController {
 		
 		// 상품 목록 조회
 		List<Product> productList = service.selectProductList(userNo);
-		model.addAttribute("productList", productList); // + 위시
+		model.addAttribute("productList", productList); 
 		
 		// 인기 여행지 목록 조회
-		List<Product> popularProductList = service.selectPopularProductList();
+		List<Product> popularProductList = service.selectPopularProductList(userNo);
 		model.addAttribute("popularProductList", popularProductList);
 		
 		// 슈퍼가이드 상품 목록 조회
-		List<Product> superProductList = service.selectSuperProductList();
+		List<Product> superProductList = service.selectSuperProductList(userNo);
 		model.addAttribute("superProductList", superProductList);
 		
 		// 추천 상품 목록 조회
-		List<Product> recommProductList = service.selectRecommProductList();
+		List<Product> recommProductList = service.selectRecommProductList(userNo);
 		model.addAttribute("recommProductList", recommProductList);
 		
-		
-		// 관심상품 등록
-//		List<Product> mainWish = service.mainWishCheck(userNo);
-//		
-//		for(Product p : mainWish) {
-//			p.setWishOrNot(1);
-//		}
-//		
-//		model.addAttribute("mainWish", mainWish);
-		
-		// 관심상품 등록 여부 체크
-//		int wishOrNot = -1;
-//		
-//		if(loginUser != null) {
-//			
-//			Map<String, Object> map = new HashMap<>();
-//			map.put("productNo", productNo);
-//			map.put("userNo", loginUser.getUserNo());
-//			
-//			wishOrNot = service.selectWishListCheck(map);
-//		}
-//		model.addAttribute("wishOrNot", wishOrNot);		
 		
 		return "common/index";
 	}
@@ -131,29 +109,13 @@ public class HomeController {
 	}
 	
 	
-	// 검색 페이지 테마 검색 상품 목록 조회
-//	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
-//	@ResponseBody
-//	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
-//	    return service.selectSearchThemeProdList(themeCode);
-//	}
-	
-	
 	
 	// 관심상품 등록
 	@PostMapping("/updateWishList")
 	@ResponseBody
 	public int updateWish(@RequestBody Map<String, Integer> paramMap) {
-		
-		System.out.println(paramMap);
 		return service.updateWish(paramMap);
 	}
-	
-	
-	
-
-	
-	
 	
 	
 	

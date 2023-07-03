@@ -33,7 +33,7 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <div class="wirte-btn">
+    <div class="wirte-btn" th:if="${session.loginUser.userNo}==*{userNo}">
         <img th:src="@{/images/icons/writeBtn.png}" alt="">
     </div>
 
@@ -134,6 +134,7 @@
 
 
     <!-- 상품 게시글 -->
+    <div class="post-more"><button type="button">more +</button></div>
     <article class="main-post">
 
         <div class="product-post">
@@ -197,7 +198,7 @@
         <div class="product-post">
             <ul>
                 <li th:each="product : ${popularProductList}">
-                    <div class="slider single-item">
+                    <div class="slider single-item" th:data-productno="${product.productNo}">
                         <div th:each="image : ${product.imageList}">
                             <img th:src="${image.filePath}">
                         </div>
@@ -206,8 +207,9 @@
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                    <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                        <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                     </div>
                     <div class="sales-text">
                         <div>
@@ -242,7 +244,7 @@
         <div class="product-post"> 
             <ul>
                 <li th:each="product : ${superProductList}">
-                    <div class="slider single-item">
+                    <div class="slider single-item" th:data-productno="${product.productNo}">
                         <div th:each="image : ${product.imageList}">
                             <img th:src="${image.filePath}">
                         </div>
@@ -251,8 +253,9 @@
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                    <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                        <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                     </div>
                     <div class="sales-text">
                         <div>
@@ -288,7 +291,7 @@
         <div class="product-post">
             <ul>
                 <li th:each="product : ${recommProductList}">
-                    <div class="slider single-item">
+                    <div class="slider single-item" th:data-productno="${product.productNo}">
                         <div th:each="image : ${product.imageList}">
                             <img th:src="${image.filePath}">
                         </div>
@@ -297,8 +300,9 @@
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                    <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                        <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
                     </div>
                     <div class="sales-text">
                         <div>
@@ -353,8 +357,9 @@
 
         });
 
+
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
-        
+        if(loginUserNo == null) loginUserNo = "";
         
     </script>
 

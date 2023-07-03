@@ -32,20 +32,20 @@ public class HomeServiceImpl implements HomeService {
 
 	// 인기 여행지 목록 조회
 	@Override
-	public List<Product> selectPopularProductList() {
-		return mapper.selectPopularProductList();
+	public List<Product> selectPopularProductList(int userNo) {
+		return mapper.selectPopularProductList(userNo);
 	}
 
 	// 슈퍼가이드 상품 목록 조회
 	@Override
-	public List<Product> selectSuperProductList() {
-		return mapper.selectSuperProductList();
+	public List<Product> selectSuperProductList(int userNo) {
+		return mapper.selectSuperProductList(userNo);
 	}
 
 	// 추천 상품 목록 조회
 	@Override
-	public List<Product> selectRecommProductList() {
-		return mapper.selectRecommProductList();
+	public List<Product> selectRecommProductList(int userNo) {
+		return mapper.selectRecommProductList(userNo);
 	}
 
 
@@ -78,11 +78,7 @@ public class HomeServiceImpl implements HomeService {
 
 
 	
-	// 관심상품 등록 여부 체크
-	@Override
-	public int selectWishListCheck(Map<String, Object> map) {
-		return mapper.selectWishListCheck(map);
-	}
+
 	
 	// 관심상품 등록
 	@Transactional(rollbackFor = Exception.class)
@@ -103,6 +99,12 @@ public class HomeServiceImpl implements HomeService {
 		return result;
 	}
 
+	
+	// 관심상품 등록 여부 체크
+	@Override
+	public int selectWishListCheck(Map<String, Object> map) {
+		return mapper.selectWishListCheck(map);
+	}
 
 	// 관심상품 등록 여부 체크
 	@Override

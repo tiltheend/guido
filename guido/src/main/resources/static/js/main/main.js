@@ -106,6 +106,10 @@ function toggleHeart() {
         
         let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
 
+        const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
+
+        console.log(selected);
+
         fetch("/common/updateWishList",{
             method : "POST",
             headers : {"Content-Type" : "application/json"},
@@ -113,12 +117,19 @@ function toggleHeart() {
         })
         .then(resp=>resp.text())
         .then(result=>{
-    
+            
+
             if(result==1){
                 if (heartIcon.classList.contains("selected")) {
                     heartIcon.classList.remove("selected");
+                    for(i of selected){
+                        i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
+                    }
                 } else {
                     heartIcon.classList.add("selected");
+                    for(i of selected){
+                        i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
+                    }
                 }
                 console.log("위시 성공?");
             } else {

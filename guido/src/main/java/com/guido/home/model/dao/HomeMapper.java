@@ -19,13 +19,13 @@ public interface HomeMapper {
 	List<Product> selectProductList(int userNo);
 
 	// 인기 여행지 목록 조회
-	List<Product> selectPopularProductList();
+	List<Product> selectPopularProductList(int userNo);
 
 	// 슈퍼가이드 상품 목록 조회
-	List<Product> selectSuperProductList();
+	List<Product> selectSuperProductList(int userNo);
 
 	// 추천 상품 목록 조회
-	List<Product> selectRecommProductList();
+	List<Product> selectRecommProductList(int userNo);
 
 
 	
