@@ -930,5 +930,5 @@ function validateMinMaxInput2() {
     maxInput2.style.backgroundColor = 'rgb(252, 171, 171)';
   }
   maxTouristName.value = maxVal2;
-  minTouristName.value = 0;
+  minTouristName.value = 1;
 }

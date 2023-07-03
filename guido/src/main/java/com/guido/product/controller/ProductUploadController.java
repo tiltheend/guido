@@ -56,7 +56,7 @@ public class ProductUploadController {
 		@PostMapping("/upload")
 		public String productUpload(
 							 Product product
-							 ,@SessionAttribute("loginMember") User loginMember
+							 ,@SessionAttribute("loginUser") User loginUser
 							 ,@RequestParam(value="images", required=true) List<MultipartFile> images
 							 , RedirectAttributes ra
 							 , @RequestParam(value="productAddPrice", required=false) List<String> additionalList
@@ -65,7 +65,7 @@ public class ProductUploadController {
 			
 			
 //		*로그인한 유저 번호 -> product에 세팅	
-		product.setUserNo(loginMember.getUserNo());
+		product.setUserNo(loginUser.getUserNo());
 		
 		
 		product.setProductAddNotes(String.join("^^^", additionalList));

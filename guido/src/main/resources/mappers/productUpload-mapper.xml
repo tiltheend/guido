@@ -71,7 +71,7 @@
 					 #{productAddNotes}, 
 					  #{minTourist}, 
 					  #{maxTourist}, 
-					  9,
+					  #{userNo},
 					 #{themeCode}, 
 					  'N', 
 					  SYSDATE,
