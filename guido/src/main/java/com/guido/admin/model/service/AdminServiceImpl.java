@@ -102,7 +102,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Event> selectMainEventList() {
+	public List<Map<String,String>> selectMainEventList() {
 		return mapper.selectMainEventList();
+	}
+	
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int setMainBanner(Map<String, Object> data) {
+		mapper.deleteMainBanner(data.get("order"));
+		return mapper.setMainBanner(data);
 	}
 }
