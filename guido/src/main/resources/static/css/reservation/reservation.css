@@ -313,16 +313,35 @@ color: #5C5C5C;
 /* 결제 수단 item들 */
 .reservation--tou{
     padding: 20px 0;
+}
+
+
+.reservation--tou>div:nth-of-type(1){
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-
-.reservation--tou>div{
+.tou--item{
     display: flex;
     flex-direction: column;
 }
+
+/* 이용약관 아코디언 컨텐츠 */
+.tou--content {
+    display: none;
+    padding: 15px;
+    background-color: #efefef;
+    margin-top: 20px;
+    white-space: pre-wrap;
+    height: 200px;
+    overflow-y: auto;
+    font-size: 15px;
+  }
+  
+  .tou--content.open {
+    display: block;
+  }
 
 /* 연락처, 비상 연락망 div */
 .orderer--emergency{
@@ -853,7 +872,7 @@ textarea:focus {
         font-size: 14px;
     }
 
-    .reservation--tou>div{
+    .tou--item{
         font-size: 13px;
     }
 
@@ -863,6 +882,10 @@ textarea:focus {
     }
 
     .reservation--warning>div{
+        font-size: 14px;
+    }
+
+    .tou--content{
         font-size: 14px;
     }
 }

@@ -84,24 +84,11 @@ showTotalResevationCost();
 
 
   
-/* 모달창 띄우기 */
 
 // 모달 창 토글
-function toggleModal(type) {
+function toggleModal() {
   
-  let modal;
-
-  /* 개인정보 수집, 이용 동의 */
-  if(type=='ua')
-    modal = document.getElementById("useAgreeModal");
-
-  /* 결제 */
-  if(type=='pm')
-    modal = document.getElementById("paymentModal");
-  
-  /* 개인정보 3자 제공 동의 */
-  if(type=='pa')
-    modal = document.getElementById("provideAgreeModal");
+  let modal = document.getElementById("paymentModal");
   
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
 }
@@ -227,4 +214,13 @@ const touCheckBoxes = document.querySelectorAll("input[type='checkbox']");
 const formElements = [...touRadioBtn, ...touCheckBoxes];
 formElements.forEach(function(element) {
   element.addEventListener("change", checkFormStatus);
+});
+
+
+var details = document.querySelectorAll('.tou--detail');
+details.forEach(function(detail) {
+  detail.addEventListener('click', function() {
+    var content = this.parentElement.parentElement.nextElementSibling;
+    content.classList.toggle('open');
+  });
 });
