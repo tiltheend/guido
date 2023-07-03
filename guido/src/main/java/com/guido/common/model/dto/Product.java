@@ -51,7 +51,5 @@ public class Product {
 	private String productDate;		// 날짜
 	
 	private int wishOrNot;		// 상품목록 위시리스트
-
-	private int wishOrNot;		// 위시 여부
 	
 }
