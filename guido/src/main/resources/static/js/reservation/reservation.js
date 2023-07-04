@@ -133,6 +133,7 @@ if (lastYear !== newYear) {
 }
 
 
+const requestContent = document.getElementById("request").value;
 
   
   // 결제 요청
@@ -154,30 +155,61 @@ if (lastYear !== newYear) {
       buyer_tel: userTel,
     }, 
     
-    rsp => {
-      if (rsp.success) {   
-        // axios로 HTTP 요청
-        axios({
-          url: "/reservation/liquidate",
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          data: {
-            imp_uid: rsp.imp_uid,
-            merchant_uid: rsp.merchant_uid,
-            amount: 100,
-            productName: productName,
-            paymentMethod: 'C'            
-          }
+  //   rsp => {
+  //     if (rsp.success) {   
+        
+  //       // axios로 HTTP 요청
+  //       axios({
+  //         url: "/reservation/liquidate",
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         data: {
+  //           imp_uid: rsp.imp_uid,
+  //           merchant_uid: rsp.merchant_uid,
+  //           amount: 100,
+  //           productName: productName,
+  //           paymentMethod: 'C'            
+  //         }
 
-        }).then((data) => {
-          // 서버 결제 API 성공시 로직
-        })
-      } else {
-        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-        window.location.reload(); 
+  //       }).then((data) => {
+  //         // 서버 결제 API 성공시 로직
+  //       })
+  //     } else {
+  //       alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+  //       window.location.reload(); 
+  //     }
+
+  // }
+
+  function (rsp){   // callback
+    if(rsp.success){
+        // 결제 성공 시 로직
+
+      const data = {
+          imp_uid: rsp.imp_uid,
+          // merchant_uid: rsp.merchant_uid,
+          orderNumber: rsp.merchant_uid,
+          amount: 100,
+          productName: productName,
+          paymentMethod: 'C',
+          guestCount: Number(guestsQnt.innerText),
+          productNo: productNo,
+          userNo: userNo,
+          // productDateNo: ,
+          // optionNo: ,
+          requestContent: requestContent
       }
 
-  });
+      paymentComplete(data);
+        
+    }else{
+      // 결제 실패 시 로직
+      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+      window.location.reload(); 
+    }
+  }
+  
+  );
 }
 
 // 주문번호 랜덤 생성
@@ -193,6 +225,27 @@ function createRandomOrderNum(){
 	}
 
 	return orderNum;
+}
+
+// 결제 완료
+function paymentComplete(data){
+  fetch("/reservation/payment/complete", {
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : JSON.stringify(data)
+  })
+  .then(resp=>resp.text())
+  .then(result=>{
+
+    if(result==-1){
+      console.log("결제 실패");
+    }
+
+  })
+  .catch(err=>{
+    console.log(err);
+    alert(err);
+  })
 }
 
 

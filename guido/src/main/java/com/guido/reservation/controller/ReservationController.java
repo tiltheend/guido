@@ -1,10 +1,12 @@
 package com.guido.reservation.controller;
 
-import java.util.Map;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -21,9 +22,10 @@ import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.User;
-import com.guido.common.utility.Util;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.reservation.model.service.ReservationService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/reservation")
@@ -109,15 +111,20 @@ public class ReservationController {
 	}
 	
 	
-	@PostMapping("/liquidate")
-	@ResponseBody
-	public int liquidate(@RequestBody Map<String, Object> paramMap,
-			@SessionAttribute("loginUser") User loginUser) {
+	// 카드 결제 성공 후
+	@PostMapping("/payment/complete")
+	public int liquidate(HttpSession session, 
+			@RequestBody Reservation reservation,
+			@SessionAttribute("loginUser") User loginUser) throws IOException {
 		
-		System.out.println(paramMap);
-		
+		System.out.println(reservation);
+		// 1. 아임포트 API 키와 SECRET키로 토큰을 생성
+		String token = service.getToken();
+		System.out.println("토큰 : " + token);
+
 		return 0;
 	}
-	
-	
+
 }
+	
+
