@@ -101,6 +101,7 @@
     color: #fff;
     border-radius: 8px;
     margin-top: -0.2em;
+    font-size: 14px;
     /* display: flex;
     align-items: end; */
 
@@ -200,5 +201,12 @@ input[type="checkbox"]:checked + label{
     justify-content: start;
     color: #1c797d;
     font-weight: bold;
+}
+.normal-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    justify-content: start;
+    color: #5c5c5ca6;
 }
 

@@ -42,10 +42,10 @@ email.addEventListener("input",()=>{
         return;
     }
     // 정규 표현식
-    const regex = /^[A-Za-z\d\-\_]{4,}@[가-힣\w\-\_]+(\.\w+){1,3}$/;
+    const emailRegex = /^[A-Za-z\d\-\_]{4,}@[가-힣\w\-\_]+(\.\w+){1,3}$/;
     // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if(regex.test(email.value)){
+    if(emailRegex.test(email.value)){
         // 정규표현식 통과 -> 이메일 중복 검사
         fetch('/dupCheck/email?email='+email.value)
         .then(resp=>resp.text())
@@ -171,5 +171,66 @@ checkAuthBtn.addEventListener("click",()=>{
         alert("인증 시간이 만료되었습니다. 인증 번호를 다시 발급 받으세요.");
     }
 });
+
+// 비밀번호 검사
+// 영어 소문자,숫자,특수기호를 포함한 10~16자리 비밀번호
+const pwRegex = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-z0-9!@#$%^&*]{8,16}$/;
+const password = document.getElementById("password");
+const pwMessage = document.getElementById("pwMessage");
+
+password.addEventListener("input",()=>{
+    if(password.value.trim().length==0){
+        password.value="";
+        chk.password=false;
+        return;
+    }
+    
+    if(pwRegex.test(password.value)){
+        pwMessage.innerText="유효한 형식의 비밀번호입니다.";
+        pwMessage.classList.add("possible-message");
+        pwMessage.classList.remove("error-message");
+        pwMessage.classList.remove("normal-message");
+        password.style.border = "1px solid #1c797d";
+        chk.password = true;
+        
+    }else{
+        pwMessage.innerHTML =
+        "영어 대소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
+        pwMessage.classList.add("error-message");
+        pwMessage.classList.remove("possible-message");
+        pwMessage.classList.remove("normal-message");
+        password.style.border = "1px solid rgba(255, 0, 0, 0.77);"
+        password.focus();
+        chk.password = false;
+    }
+});
+
+// 비밀번호 확인
+const checkPassword = document.getElementById("checkPassword");
+const chkPwMessage = document.getElementById("chkPwMessage");
+checkPassword.addEventListener("input",()=>{
+    if(checkPassword.value.trim().length==0){
+        checkPassword.value="";
+        chk.pwCheck=false;
+        return;
+    }
+    if(password.value == checkPassword.value){
+        chkPwMessage.innerText = "비밀번호가 일치합니다.";
+        chkPwMessage.classList.add("possible-message");
+        chkPwMessage.classList.remove("error-message");
+        checkPassword.style.border = "1px solid rgba(255, 0, 0, 0.77);"
+        chk.pwCheck=true;
+    }else{
+        chkPwMessage.innerText = "비밀번호가 일치하지 않습니다.";
+        chkPwMessage.classList.add("error-message");
+        chkPwMessage.classList.remove("possible-message");
+        checkPassword.style.border = "1px solid #1c797d";
+        chk.pwCheck=false;
+
+    }
+});
+
+
+
 
 

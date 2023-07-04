@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tourist Sign Up</title>
-    <link rel="stylesheet" th:href="@{/css/signUp/signUpAsTourist.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/demo.css}"/>
     <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/intlTelInput.css}"/>
+    <link rel="stylesheet" th:href="@{/css/signUp/signUpAsTourist.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <th:block th:replace="~{common/header}"></th:block>
@@ -39,13 +39,13 @@
                 <div class="font4" id="authMessage"></div>
                 <!-- 비번 -->
                 <div class="inputGroup">
-                    <input type="text" id="password" name="userPassword" autocomplete="off" required>
+                    <input type="password" id="password" name="userPassword" autocomplete="off" required>
                     <label for="password">비밀번호</label>
                 </div>
-                <div class="font4" id="pwMessage"></div>
+                <div class="font4 normal-message" id="pwMessage">영어 대소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.</div>
                 <!-- 비번 확인 -->
                 <div class="inputGroup">
-                    <input type="text" id="checkPassword" autocomplete="off" required>
+                    <input type="password" id="checkPassword" autocomplete="off" required>
                     <label for="checkPassword">비밀번호 확인</label>
                 </div>
                 <div class="font4" id="chkPwMessage"></div>
