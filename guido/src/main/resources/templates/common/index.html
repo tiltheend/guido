@@ -51,56 +51,41 @@
                     <section id="demos">
                         <div class="row">
                             <div class="large-12 columns">
-                                <div class="loop owl-carousel owl-theme">
-    
+                                <div class="loop owl-carousel owl-theme"  th:each="file : ${eventBannerList}">
                                     <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
+                                        <!-- a태그 나중에 -->
+                                        <!-- <a th:href="@{/event/eventList}"> -->
+                                            <img class="detail--silde__item-img" th:src="${file.filePath}">
                                             <!-- <img class="detail--silde__item-img" th:src="@{/images/test2.PNG}"> -->
-                                        </a>
+                                        <!-- </a> -->
                                     </div>
 
+                                <div th:each="themeType : ${application.themeTypeList}">
+                                    <!-- <a th:href="@{#}"> -->
+                                    <a th:onclick="|loadProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
+                                    <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
+                                        <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
+                                        <button th:text="${themeType.THEME_NAME}">테마 이름</button>
+                                    </a>
+                                </div>
+
+                                    <!-- 
                                     <div class="item">
                                         <a th:href="@{/event/eventList}">
                                             <img class="detail--silde__item-img" th:src="@{#}">
                                         </a>
                                     </div>
-
                                     <div class="item">
                                         <a th:href="@{/event/eventList}">
                                             <img class="detail--silde__item-img" th:src="@{#}">
                                         </a>
                                     </div>
-
                                     <div class="item">
                                         <a th:href="@{/event/eventList}">
                                             <img class="detail--silde__item-img" th:src="@{#}">
                                         </a>
                                     </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
+                                    -->
                                 </div>
                             </div>
                         </div>

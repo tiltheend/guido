@@ -62,8 +62,8 @@ public class HomeController {
 		
 		
 		// 메인 슬라이드 이벤트 배너 조회
-//		List<Event> eventBannerList = service.selectEventBannerList();
-//		model.addAttribute("eventBannerList" ,eventBannerList);
+		List<Event> eventBannerList = service.selectEventBannerList();
+		model.addAttribute("eventBannerList" ,eventBannerList);
 	
 		
 		return "common/index";

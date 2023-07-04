@@ -96,7 +96,7 @@
 	</select>
 	
 	
-	<!-- ********** 인기 여행지 목록 조회 ********** -->
+	<!-- 인기 여행지 목록 조회 -->
 	<select id="selectPopularProductList" resultMap="product_rm">
 		SELECT *
 		FROM (
@@ -104,9 +104,15 @@
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
-		         (SELECT COUNT(*)
-		          FROM WISHLIST
-		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS WISH_COUNT
+		         <if test="userNo != 0">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
+            	  <if test="userNo == 0">
+				  NULL
+				  </if>
 		  FROM PRODUCT P
 		  WHERE P.PRODUCT_STATE = 'N'
 		  ORDER BY (SELECT COUNT(*) FROM WISHLIST WHERE PRODUCT_NO = P.PRODUCT_NO) DESC
@@ -343,8 +349,25 @@
 	</delete>
 	
 	
+	<!-- 메인 슬라이드 이벤트 배너 조회 -->
+	<select id="selectEventBannerList" resultType="map">
+		<![CDATA[  
+		SELECT NVL("EVENT".EVENT_NO, 0) AS EVENT_NO,
+        DUMMY_MAIN_BANNER_ORDER AS MAIN_BANNER_ORDER,
+		       NVL2(BG_COLOR, BG_COLOR, '#ffffff') AS BG_COLOR,
+		       FILE_PATH
+		FROM (
+		    SELECT LEVEL AS DUMMY_MAIN_BANNER_ORDER
+		    FROM DUAL
+		    CONNECT BY LEVEL <= 8
+		) DUMMY_SEQ
+		LEFT JOIN "EVENT" ON DUMMY_MAIN_BANNER_ORDER = MAIN_BANNER_ORDER
+		LEFT JOIN "FILE" ON "EVENT".EVENT_NO = "FILE".EVENT_NO AND FILE_ORDER = 0
+		ORDER BY MAIN_BANNER_ORDER
+		]]>
+	</select>
 	
-	<select id="selectEventBannerList"></select>
+	
 
 
 </mapper>
