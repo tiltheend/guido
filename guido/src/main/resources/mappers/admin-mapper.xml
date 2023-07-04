@@ -90,6 +90,7 @@
 		<choose>
 			<when test="pageName == 'eventList'">
 				"EVENT"
+				<if test="query != null">WHERE EVENT_NAME LIKE '%${query}%' OR EVENT_CONTENT LIKE '%${query}%'</if>
 			</when>
 			<when test="pageName == 'touristManagement'">
 				"USER" WHERE USER_TYPE='T'
@@ -105,6 +106,7 @@
 			</when>
 			<when test="pageName == 'qna'">
 				"QNA"
+				<if test="query != null">WHERE QNA_TITLE LIKE '%${query}%' OR QNA_CONTENT LIKE '%${query}%'</if>
 			</when>
 		</choose>
 	</select>
@@ -115,6 +117,7 @@
 			<when test="pageName == 'eventList'">
 				EVENT_NO, EVENT_NAME, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, TO_CHAR(EVENT_END_DT, 'YYYY-MM-DD') EVENT_END_DT, EVENT_STATE, BG_COLOR, NVL2(MAIN_BANNER_ORDER,MAIN_BANNER_ORDER,'0') MAIN_BANNER_ORDER
 				FROM EVENT
+				<if test="query != null">WHERE EVENT_NAME LIKE '%${query}%' OR EVENT_CONTENT LIKE '%${query}%'</if>
 				ORDER BY EVENT_NO DESC
 			</when>
 			<when test="pageName == 'touristManagement'">
@@ -147,6 +150,7 @@
 			<when test="pageName == 'qna'">
 				QNA_NO, QNA_TITLE, QNA_EMAIL, QNA_DATE, QNA_CHECK_FL
 				FROM QNA
+				<if test="query != null">WHERE QNA_TITLE LIKE '%${query}%' OR QNA_CONTENT LIKE '%${query}%'</if>
 				ORDER BY QNA_CHECK_FL, QNA_NO
 			</when>
 		</choose>
@@ -170,7 +174,9 @@
 		<selectKey order="BEFORE" resultType="_int" keyProperty="eventNo">
 			SELECT SEQ_EVENT_NO.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO "EVENT" VALUES(#{eventNo}, #{eventName}, #{eventContent}, #{eventEndDt}, SYSDATE, DEFAULT)
+		INSERT INTO "EVENT" VALUES(#{eventNo}, #{eventName}, #{eventContent}, #{eventEndDt}, SYSDATE, DEFAULT,
+			#{bgColor}, NULL
+		)
 	</insert>
 	
 	<insert id="insertFileList">
@@ -197,10 +203,6 @@
 		UPDATE QNA SET QNA_ANSWER = #{qnaAnswer}, QNA_CHECK_FL = 'Y' WHERE QNA_NO = #{qnaNo}
 	</update>
 	
-	<!--<update id="approveGuide">
-		UPDATE "USER" SET USER_STATE='N' WHERE USER_NO = ${userNo}
-	</update>-->
-	
 	<update id="approveGuide" parameterType="java.util.List">
 	  UPDATE "USER" SET USER_STATE='N' WHERE USER_STATE='Y' AND USER_NO IN
 	  <foreach item="userNo" collection="list" open="(" separator="," close=")">#{userNo}</foreach>
@@ -208,14 +210,17 @@
 	
 	<select id="selectMainEventList" resultType="map">
 		<![CDATA[  
-		SELECT NVL(EVENT_NO,0) EVENT_NO, DUMMY_MAIN_BANNER_ORDER AS MAIN_BANNER_ORDER, NVL2(BG_COLOR, BG_COLOR, '#ffffff') AS BG_COLOR
-		FROM(
-		        SELECT LEVEL AS DUMMY_MAIN_BANNER_ORDER
-					FROM DUAL
-					CONNECT BY LEVEL <= 8
+		SELECT NVL("EVENT".EVENT_NO, 0) AS EVENT_NO,
+        DUMMY_MAIN_BANNER_ORDER AS MAIN_BANNER_ORDER,
+		       NVL2(BG_COLOR, BG_COLOR, '#ffffff') AS BG_COLOR,
+		       FILE_PATH
+		FROM (
+		    SELECT LEVEL AS DUMMY_MAIN_BANNER_ORDER
+		    FROM DUAL
+		    CONNECT BY LEVEL <= 8
 		) DUMMY_SEQ
-		LEFT JOIN "EVENT" ON
-		DUMMY_MAIN_BANNER_ORDER = MAIN_BANNER_ORDER
+		LEFT JOIN "EVENT" ON DUMMY_MAIN_BANNER_ORDER = MAIN_BANNER_ORDER
+		LEFT JOIN "FILE" ON "EVENT".EVENT_NO = "FILE".EVENT_NO AND FILE_ORDER = 0
 		ORDER BY MAIN_BANNER_ORDER
 		]]>
 	</select>
@@ -227,6 +232,17 @@
 	
 	<update id="setMainBanner">
 		UPDATE "EVENT" SET MAIN_BANNER_ORDER = #{order} WHERE EVENT_NO = #{eventNo}
+	</update>
+	
+	
+	<update id="eventBlind" parameterType="java.util.List">
+	  UPDATE "EVENT" SET EVENT_STATE='B', MAIN_BANNER_ORDER=NULL WHERE EVENT_NO IN
+	  <foreach item="eventNo" collection="list" open="(" separator="," close=")">#{eventNo}</foreach>
+	</update>
+	
+	<update id="eventBlindCancel" parameterType="java.util.List">
+	  UPDATE "EVENT" SET EVENT_STATE='N' WHERE EVENT_NO IN
+	  <foreach item="eventNo" collection="list" open="(" separator="," close=")">#{eventNo}</foreach>
 	</update>
 	
 </mapper>

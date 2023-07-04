@@ -49,7 +49,7 @@
                 <div class="q-content" th:text="${qna.qnaContent}">내용</div>
                 <div class="q-img-container">
                     <th:block th:each="file : ${qna.fileList}">
-                        <a th:href="@{file.filePath}" data-lightbox="gallery"><img th:src="@{file.filePath}"></img></a>
+                        <a th:href="${file.filePath}" data-lightbox="gallery"><img th:src="${file.filePath}"></img></a>
                     </th:block>
                 </div>
                 <form th:action="@{/admin/writeAnswer}" method="POST">
