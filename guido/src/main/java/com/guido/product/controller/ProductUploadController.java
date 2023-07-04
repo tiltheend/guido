@@ -1,15 +1,18 @@
 package com.guido.product.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.model.dto.User;
 import com.guido.product.model.service.ProductDetailService;
@@ -33,6 +37,9 @@ public class ProductUploadController {
 	@Autowired // 여행상품 수정 시 상세조회 서비스 호출용 의존성 주입~!
 	private ProductDetailService productDetailService;
 	
+	@Value("${kakao.map.apikey2}")
+	private String apiKey2;
+	
 	@GetMapping("/upload")
 	public String productUpload(Model model
 //							 Product product
@@ -43,11 +50,11 @@ public class ProductUploadController {
 		
 		List<TourTheme> tourTheme = service.selectTourTheme();
 		
-	
+			model.addAttribute("apiKey2", apiKey2);
 			model.addAttribute("tourTheme", tourTheme);
 			System.out.println("tourTheme" + tourTheme);
 			
-			return "productUpload/productUpload";
+			return "productUpload/test";
 		
 	}	
 	
@@ -60,7 +67,8 @@ public class ProductUploadController {
 							 ,@RequestParam(value="images", required=true) List<MultipartFile> images
 							 , RedirectAttributes ra
 							 , @RequestParam(value="productAddPrice", required=false) List<String> additionalList
-							 ) throws IllegalStateException, IOException, Exception{
+							 , @RequestBody List<TourCourse> tourCourse
+							 ) throws IllegalStateException, IOException, Exception,SQLException{
 		
 			
 			
@@ -70,7 +78,7 @@ public class ProductUploadController {
 		
 		product.setProductAddNotes(String.join("^^^", additionalList));
 			
-		int productNo = service.productUpload(product,images);
+		int productNo = service.productUpload(product, images, tourCourse);
 	
 		System.out.println(product);
 //	        String[] arr = str.split(",");

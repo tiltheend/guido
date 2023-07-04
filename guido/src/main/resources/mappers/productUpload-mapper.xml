@@ -135,6 +135,21 @@
          #{fileOrder}, #{filePath}
       )
    </insert>
+   
+   <!--여행코스 리스트 삽입-->
+   <insert id="insertTourCourseList" parameterType="list">
+	   INSERT INTO TOUR_COURSE(COURSE_NO, PRODUCT_NO, COURSE_NAME, COURSE_ORDER, LATITUDE, LONGITUDE, BOSS_COURSE_FL)
+	   SELECT SEQ_TOURCOURSE_NO.NEXTVAL, A.*
+	   FROM(
+	   		<foreach collection="list" item="tourCourse" separator=" UNION ALL ">
+				SELECT #{tourCourse.productNo} PRODUCT_NO,
+				#{tourCourse.courseName} COURSE_NAME,
+				#{tourCourse.latitude} LATITUDE,
+				#{tourCourse.longitude} LONGITUDE,
+				'N'
+			   </foreach>
+	 		) A
+   </insert>
 	
 	
 </mapper>
