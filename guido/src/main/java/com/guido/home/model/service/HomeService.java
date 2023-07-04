@@ -3,6 +3,7 @@ package com.guido.home.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 
 public interface HomeService {
@@ -50,6 +51,11 @@ public interface HomeService {
 
 	// 관심상품 등록 여부 체크
 	List<Product> mainWishCheck(int userNo);
+
+
+
+	// 메인 슬라이드 이벤트 배너 조회
+	List<Event> selectEventBannerList();
 
 
 

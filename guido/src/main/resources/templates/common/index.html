@@ -33,9 +33,14 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <div class="wirte-btn" th:if="${session.loginUser.userNo}==*{userNo}">
-        <img th:src="@{/images/icons/writeBtn.png}" alt="">
-    </div>
+
+
+    <!-- 로그인한 가이드 글 작성 버튼 -->
+    <!-- <th:block th:if="${session.loginMember != null}"> -->
+        <div class="write-btn">
+            <img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기">
+        </div>
+    <!-- </th:block> -->
 
     <!-- ***** 메인 영역 슬라이드 ***** -->
 
@@ -134,13 +139,13 @@
 
 
     <!-- 상품 게시글 -->
-    <div class="post-more"><button type="button">more +</button></div>
+    <!-- <div class="post-more"><button type="button">more +</button></div> -->
     <article class="main-post">
 
         <div class="product-post">
             <ul id="productListContainer">  
 
-                <!-- ??? 테마 검색 ajax ??? -->
+                <!-- 테마 검색 ajax -->
                 <!-- <th:block th:if="${#lists.size(productList)} == 0">
                     <li>
                         <div>상품이 존재하지 않습니다.</div>
@@ -159,8 +164,15 @@
                             <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
                         <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
-                            <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                            <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <!-- 로그인 상태인 경우 -->
+                            <th:block th:if="${session.loginUser != null}">
+                                <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                                <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            </th:block>
+                            <!-- 로그인 상태가 아닌 경우 -->
+                            <th:block th:unless="${session.loginUser != null}">
+                                <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            </th:block>
                         </div>
                         <div class="sales-text">
                             <div> 
@@ -208,8 +220,15 @@
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
                     <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
-                        <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                        <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <!-- 로그인 상태인 경우 -->
+                        <th:block th:if="${session.loginUser != null}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
+                        <!-- 로그인 상태가 아닌 경우 -->
+                        <th:block th:unless="${session.loginUser != null}">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
                     </div>
                     <div class="sales-text">
                         <div>
@@ -254,8 +273,15 @@
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
                     <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
-                        <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                        <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <!-- 로그인 상태인 경우 -->
+                        <th:block th:if="${session.loginUser != null}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
+                        <!-- 로그인 상태가 아닌 경우 -->
+                        <th:block th:unless="${session.loginUser != null}">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
                     </div>
                     <div class="sales-text">
                         <div>
@@ -285,7 +311,7 @@
         <img th:src="@{/images/icons/recommendation.png}" alt="">
     </div>
     <div class="post-more"><button type="button">more +</button></div>
-    <!-- 인기 여행지 -->
+    <!-- 관심지역 기반 추천 상품 -->
     <article class="main-post">
     
         <div class="product-post">
@@ -301,8 +327,15 @@
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
                     <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
-                        <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                        <img th:if="${wish==0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <!-- 로그인 상태인 경우 -->
+                        <th:block th:if="${session.loginUser != null}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
+                        <!-- 로그인 상태가 아닌 경우 -->
+                        <th:block th:unless="${session.loginUser != null}">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
                     </div>
                     <div class="sales-text">
                         <div>
@@ -352,7 +385,6 @@
         const owl = $('.owl-carousel')
 
         $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
-
         $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
 
         });

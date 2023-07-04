@@ -80,6 +80,17 @@
 
 
 
+/* 로그인한 가이드 글작성 버튼 */
+.write-btn img{
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+
 
 /* ***** 메인 슬라이드 ***** */
 
@@ -599,8 +610,10 @@ hr{
 .divide-main{
   height: 80px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
+  align-content: center;
 }
 
 .divide-main p{
@@ -619,7 +632,7 @@ hr{
   display: flex;
   justify-content: flex-end;
   position: relative;
-  margin-top: 10px;
+  margin-top: -10px;
   margin-bottom: 10px;
 }
 .post-more button{

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.User;
 import com.guido.home.model.service.HomeService;
@@ -37,7 +38,11 @@ public class HomeController {
 //						, @RequestParam("productNo") int productNo
 						, @SessionAttribute(value="loginUser", required=false) User loginUser) {
 
-		int userNo= loginUser.getUserNo();
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
 		
 		// 상품 목록 조회
 		List<Product> productList = service.selectProductList(userNo);
@@ -55,6 +60,11 @@ public class HomeController {
 		List<Product> recommProductList = service.selectRecommProductList(userNo);
 		model.addAttribute("recommProductList", recommProductList);
 		
+		
+		// 메인 슬라이드 이벤트 배너 조회
+		List<Event> eventBannerList = service.selectEventBannerList();
+		model.addAttribute("eventBannerList" ,eventBannerList);
+	
 		
 		return "common/index";
 	}

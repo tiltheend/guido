@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 import com.guido.home.model.dao.HomeMapper;
 
@@ -110,6 +111,14 @@ public class HomeServiceImpl implements HomeService {
 	@Override
 	public List<Product> mainWishCheck(int userNo) {
 		return mapper.mainWishCheck(userNo);
+	}
+
+
+
+	// 메인 슬라이드 이벤트 배너 조회
+	@Override
+	public List<Event> selectEventBannerList() {
+		return mapper.selectEventBannerList();
 	}
 
 

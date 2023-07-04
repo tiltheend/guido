@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 
 @Mapper
@@ -60,6 +61,11 @@ public interface HomeMapper {
 
 	// 관심상품
 	List<Product> mainWishCheck(int userNo);
+
+
+
+	// 메인 슬라이드 이벤트 배너 조회
+	List<Event> selectEventBannerList();
 
 
 

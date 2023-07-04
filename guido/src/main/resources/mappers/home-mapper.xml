@@ -77,12 +77,15 @@
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
-		          <if test="userNo != null">
+		          <if test="userNo != 0">
 	              (SELECT COUNT(*) 
 	              FROM WISHLIST
 	              WHERE USER_NO = #{userNo}
 	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
             	  </if>
+            	  <if test="userNo == 0">
+				  NULL
+				  </if>
 		  FROM PRODUCT P
 		  WHERE P.PRODUCT_STATE = 'N'
 		  ORDER BY P.CREATE_DT DESC
@@ -95,19 +98,18 @@
 	
 	<!-- ********** 인기 여행지 목록 조회 ********** -->
 	<select id="selectPopularProductList" resultMap="product_rm">
-	    SELECT *
+		SELECT *
 		FROM (
 		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME,
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
-		          (SELECT COUNT(*) 
-					FROM "WISHLIST"
-					WHERE USER_NO = #{userNo}
-					AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+		         (SELECT COUNT(*)
+		          FROM WISHLIST
+		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS WISH_COUNT
 		  FROM PRODUCT P
 		  WHERE P.PRODUCT_STATE = 'N'
-		  ORDER BY P.CREATE_DT DESC
+		  ORDER BY (SELECT COUNT(*) FROM WISHLIST WHERE PRODUCT_NO = P.PRODUCT_NO) DESC
 		)
 	  <![CDATA[
 	    WHERE ROWNUM <= 8
@@ -123,10 +125,15 @@
 		           (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		            FROM REVIEW 
 		            WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
-		          (SELECT COUNT(*) 
-					FROM "WISHLIST"
-					WHERE USER_NO = #{userNo}
-					AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+		          <if test="userNo != null">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
+            	  <if test="userNo == null">
+				  NULL
+				  </if>
 		    FROM PRODUCT P
 		    LEFT JOIN GUIDE G ON P.USER_NO = G.USER_NO
 		    WHERE P.PRODUCT_STATE = 'N' AND G.SUPER_GUIDE_FL = 'Y'
@@ -146,10 +153,15 @@
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
-		          (SELECT COUNT(*) 
-					FROM "WISHLIST"
-					WHERE USER_NO = #{userNo}
-					AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+		          <if test="userNo != null">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
+            	  <if test="userNo == null">
+				  NULL
+				  </if>
 		  FROM PRODUCT P
 		  WHERE P.PRODUCT_STATE = 'N'
 		  ORDER BY P.CREATE_DT DESC
@@ -206,7 +218,7 @@
 		LEFT JOIN PRODUCT_DT D ON P.PRODUCT_NO = D.PRODUCT_NO 
 		WHERE P.PRODUCT_STATE = 'N'
 		
-		<choose>
+		<!--<choose>
 			<when test="location != ''"> 
 				AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%' OR P.PRODUCT_NAME LIKE '%${location}%')
 			</when>
@@ -229,7 +241,23 @@
 			<when test="tourist != ''"> 
 				AND '${tourist}' BETWEEN P.PRODUCT_MIN_TOURIST AND P.PRODUCT_MAX_TOURIST
 			</when>
-		</choose>
+		</choose>-->
+		<if test="location != ''"> 
+			AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%' OR P.PRODUCT_NAME LIKE '%${location}%')
+		</if>
+		<if test="firstday != ''"> 
+			<![CDATA[  
+			AND D.PRODUCT_DT >= TO_DATE('${firstday}', 'YYYY-MM-DD') 
+			]]>
+		</if>
+		<if test="lastday != ''"> 
+			<![CDATA[ 
+			AND D.PRODUCT_DT <= TO_DATE('${lastday}', 'YYYY-MM-DD')
+			]]> 
+		</if>
+		<if test="tourist != ''"> 
+			AND '${tourist}' BETWEEN P.PRODUCT_MIN_TOURIST AND P.PRODUCT_MAX_TOURIST
+		</if>
 		
 		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME
 	</select>
