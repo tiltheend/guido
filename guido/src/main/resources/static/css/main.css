@@ -80,6 +80,17 @@
 
 
 
+/* 로그인한 가이드 글작성 버튼 */
+.write-btn img{
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+
 
 /* ***** 메인 슬라이드 ***** */
 
@@ -445,7 +456,7 @@ hr{
 .main-post .product-post .add-wish-heart{
   width: 100%; 
 }
-.main-post .product-post .add-wish-heart svg{ 
+.main-post .product-post .add-wish-heart>img{ 
   width: 30px; height: 30px;
   cursor: pointer;
   border: none;
@@ -460,13 +471,13 @@ hr{
 }
 
 .heart-icon{
-  background-image: url('/images/icons/like.png'); 
+  background-image: url('/images/profile/heartNone.png'); 
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 .heart-icon.selected{
-  background-image: url('/images/icons/liked.png'); 
+  background-image: url('/images/profile/heartClick.png'); 
 }
   /* 좋아요 버튼 */
 /*   .like--container{
@@ -599,8 +610,10 @@ hr{
 .divide-main{
   height: 80px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
+  align-content: center;
 }
 
 .divide-main p{
@@ -619,7 +632,7 @@ hr{
   display: flex;
   justify-content: flex-end;
   position: relative;
-  margin-top: 10px;
+  margin-top: -10px;
   margin-bottom: 10px;
 }
 .post-more button{
