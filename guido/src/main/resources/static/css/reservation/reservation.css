@@ -478,6 +478,7 @@ input:focus {
     width: 25%;
     border-radius: 15px;
     position: relative;
+    min-width: 400px;
 }
 
 /* 모달 컨텐츠 */
@@ -543,6 +544,12 @@ input:focus {
     font-weight: 700;
     font-size: 18px;
     border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* 페이팔 버튼 */
+#paypal-buttons-container{
+    width: 100%;
     margin-top: 20px;
 }
 

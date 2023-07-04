@@ -44,6 +44,9 @@ public class ReservationController {
 	@Value("${portone.pg.mid}")
 	private String pgMid;
 	
+	@Value("${paypal.client.app}")
+	private String clientID;
+	
 
 	
 	@GetMapping("/reservationform/{productNo}")
@@ -88,7 +91,6 @@ public class ReservationController {
 		
 		String mainCourse = service.selectMainCourseName(productNo);
 		ProductOption option = null;
-		String merchantUid = Util.createReservationNo();
 		
 		if(optionNo!=-1)
 			option = service.selectProductOption(optionNo);
@@ -99,8 +101,8 @@ public class ReservationController {
 		model.addAttribute("mainCourse", mainCourse);
 		model.addAttribute("selectedTime", option);
 		model.addAttribute("impCode", impCode);
-		model.addAttribute("merchantUid", merchantUid);
 		model.addAttribute("pgMid", pgMid);
+		model.addAttribute("clientID", clientID);
 		
 		
 		return "reservation/reservationForm";
