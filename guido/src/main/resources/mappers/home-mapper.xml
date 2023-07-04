@@ -341,6 +341,10 @@
 		WHERE USER_NO = #{userNo}
 		AND PRODUCT_NO = #{productNo}
 	</delete>
+	
+	
+	
+	<select id="selectEventBannerList"></select>
 
 
 </mapper>
