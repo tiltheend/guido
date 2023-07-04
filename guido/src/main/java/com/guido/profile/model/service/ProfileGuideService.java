@@ -1,6 +1,10 @@
 package com.guido.profile.model.service;
 
+import java.util.List;
+
 import com.guido.common.model.dto.PR;
+import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
 public interface ProfileGuideService {
@@ -17,5 +21,19 @@ public interface ProfileGuideService {
 	 * @return pr
 	 */
 	PR selectPR(int userNo);
+
+
+	/** 가이드 상품 목록
+	 * @param userNo
+	 * @return
+	 */
+	List<Product> guideProductList(int userNo);
+
+
+	/** 가이드 리뷰 조회
+	 * @param userNo
+	 * @return
+	 */
+	List<Review> guideReivewList(int userNo);
 	
 }

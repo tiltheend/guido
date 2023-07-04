@@ -1,6 +1,8 @@
 package com.guido.profile.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +69,25 @@ public class ProfileTouristController {
 			model.addAttribute("guide", guide);
 			model.addAttribute("pr", pr);
 			
+			// 가이드 상품 목록
+			List<Product> guideProductList = GuideService.guideProductList(userNo);
+
+			model.addAttribute("guideProductList", guideProductList);
 			
+//			for(Product p : guideProductList) {
+//				System.out.println(p.getProductReviewList());
+//			}
+			
+			// 가이드 리뷰 조회
+			List<Review> guideReivewList = GuideService.guideReivewList(userNo);
+			
+			// 0.5 단위로 별점 바꾸기
+			for(Review r : guideReivewList) {
+				r.setReviewStarsDouble(r.getReviewStars()/20.0);
+			}
+			
+			model.addAttribute("guideReivewList", guideReivewList);
+
 			
 		} else if(userType == 0) { // 여행객 일 경우
 			path="profile/buyerProfile";
