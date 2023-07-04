@@ -20,6 +20,12 @@ main {
     border-radius: 20px;
 }
 
+.btn0 {
+    background-color: #F0F0F0;
+    width: 80px;
+    height: 36px;
+}
+
 .btn1 {
     background-color: #1C797D;
     color: #F0F0F0;
@@ -36,7 +42,6 @@ main {
 
 .btn3 {
     background-color: #F0F0F0;
-    ;
     color: black;
     width: 144px;
     height: 34px;
@@ -392,11 +397,18 @@ td {
 
 #modalContent {
     background-color: white;
-    margin: 10% auto;
+    margin: 20% auto;
     padding: 20px;
-    width: 80%;
-    max-width: 400px;
+    width: 500px;
     border-radius: 5px;
+}
+
+#modalContent>* {
+    margin: 10px;
+}
+
+.modal-btn-area {
+    
 }
 
 

@@ -36,15 +36,15 @@ public class AdminServiceImpl implements AdminService {
 	private AdminMapper mapper;
 
 	@Override
-	public Map<String, Object> selectList(String pageName, int cp) {
-		int listCount = mapper.getListCount(pageName);
+	public Map<String, Object> selectList(Map<String,Object> paramMap, int cp) {
+		int listCount = mapper.getListCount(paramMap);
 		Pagination pagination = new Pagination(listCount, cp);
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("list", mapper.selectList(pageName, rowBounds));
+		map.put("list", mapper.selectList(paramMap, rowBounds));
 		map.put("pagination", pagination);
 		
 		return map;
@@ -112,5 +112,17 @@ public class AdminServiceImpl implements AdminService {
 	public int setMainBanner(Map<String, Object> data) {
 		mapper.deleteMainBanner(data.get("order"));
 		return mapper.setMainBanner(data);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int eventBlind(List<Integer> eventNoList) {
+		return mapper.eventBlind(eventNoList);
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int eventBlindCancel(List<Integer> eventNoList) {
+		return mapper.eventBlindCancel(eventNoList);
 	}
 }

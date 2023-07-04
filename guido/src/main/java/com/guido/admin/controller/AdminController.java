@@ -1,6 +1,7 @@
 package com.guido.admin.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +37,21 @@ public class AdminController {
 
 	@GetMapping("/{pageName}")
 	public String listPage(@PathVariable("pageName") String pageName, Model model,
-			@RequestParam(value = "cp", defaultValue = "1") int cp) {
-		model.addAttribute("map", service.selectList(pageName, cp));
+			@RequestParam(value = "cp", defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+		System.out.println(paramMap);
+		paramMap.put("pageName", pageName);
+		
+		
+		List<String> pageNameList =
+				List.of("eventList","touristManagement","guideManagement","guideApprovalRequest","productManagement","","qna");
+		if(!pageNameList.contains(pageName))
+			return "redirect:/";
+		
+		Map<String,Object> data = new HashMap<>();
+		
+		
+		model.addAttribute("map", service.selectList(paramMap, cp));
 		model.addAttribute("pageName", pageName);
 
 		return "admin/" + pageName;
@@ -96,9 +110,7 @@ public class AdminController {
 	@ResponseBody
 	public ResponseEntity<String> setMainBanner(@RequestBody Map<String,Object> data,
 			HttpServletRequest request) {
-		System.out.println(data);
 		int result = service.setMainBanner(data);
-		
 		if(result > 0) {
 			ServletContext application = request.getServletContext();
 			application.setAttribute("mainEventList", service.selectMainEventList());
@@ -109,5 +121,28 @@ public class AdminController {
 		}
 	}
 	
+	@PostMapping("/eventBlind")
+	@ResponseBody
+	public ResponseEntity<String> eventBlind(@RequestBody List<Integer> eventNoList,
+			HttpServletRequest request) {
+		int result = service.eventBlind(eventNoList);
+		if(result == eventNoList.size()) {
+			ServletContext application = request.getServletContext();
+			application.setAttribute("mainEventList", service.selectMainEventList());
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("승인 실패");
+		}
+	}
 	
+	@PostMapping("/eventBlindCancel")
+	@ResponseBody
+	public ResponseEntity<String> eventBlindCancel(@RequestBody List<Integer> eventNoList) {
+		int result = service.eventBlindCancel(eventNoList);
+		if(result == eventNoList.size()) {
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("승인 실패");
+		}
+	}
 }
