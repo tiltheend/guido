@@ -313,16 +313,48 @@ color: #5C5C5C;
 /* 결제 수단 item들 */
 .reservation--tou{
     padding: 20px 0;
+}
+
+
+.reservation--tou>div:nth-of-type(1){
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-
-.reservation--tou>div{
+.tou--item{
     display: flex;
     flex-direction: column;
 }
+
+/* 이용약관 아코디언 컨텐츠 */
+.tou--content {
+    display: none;
+    padding: 15px;
+    background-color: #efefef;
+    margin-top: 20px;
+    white-space: pre-wrap;
+    height: 200px;
+    overflow-y: auto;
+    font-size: 15px;
+  }
+
+  /* .tou--content::-webkit-scrollbar {
+    width: 8px; 
+  }
+  
+  .tou--content::-webkit-scrollbar-track {
+    background-color: #f1f1f1; 
+  }
+  
+  .tou--content::-webkit-scrollbar-thumb {
+    background-color: #b6b6b6; 
+    border-radius: 5px;
+  }
+   */
+  .tou--content.open {
+    display: block;
+  }
 
 /* 연락처, 비상 연락망 div */
 .orderer--emergency{
@@ -443,31 +475,83 @@ input:focus {
     background-color: #fefefe;
     margin: 15% auto;
     border: 1px solid #888;
-    width: 50%;
+    width: 25%;
+    border-radius: 15px;
+    position: relative;
+    min-width: 400px;
 }
 
 /* 모달 컨텐츠 */
 .modal--content{
     white-space: pre-wrap;
+    padding: 30px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* 닫기 버튼 스타일 */
 .close {
-    color: #aaa;
-    width: 28px;
-    height: 28px;
-    font-size: 30px;
-    float: right;
-    font-weight: bold;
+    font-size: 40px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    right: 0;
+    font-weight: 100;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
-    text-decoration: none;
     cursor: pointer;
 }
 
+
+/* 모달 컨텐츠 타이틀 */
+.modal--content__text{
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* 모달 컨텐츠 결제 금액 */
+.modal--content__cost{
+    font-size: 25px;
+    font-weight: bold;
+    color: #0F4957;
+}
+
+/* 모달 구분선 */
+.modal--content__line{
+    width: 100%;
+    height: 2px;
+    background-color: #efefef;
+    margin: 20px 0;
+}
+
+.modal--content__text2{
+    font-size: 20px;
+    text-align: center;
+}
+
+/* 바로 결제 버튼 */
+#nowPay{
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    background-color: #0F4957;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* 페이팔 버튼 */
+#paypal-buttons-container{
+    width: 100%;
+    margin-top: 20px;
+}
 
 /* 요청사항 */
 textarea {
@@ -853,7 +937,7 @@ textarea:focus {
         font-size: 14px;
     }
 
-    .reservation--tou>div{
+    .tou--item{
         font-size: 13px;
     }
 
@@ -863,6 +947,10 @@ textarea:focus {
     }
 
     .reservation--warning>div{
+        font-size: 14px;
+    }
+
+    .tou--content{
         font-size: 14px;
     }
 }

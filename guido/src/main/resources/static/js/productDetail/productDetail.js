@@ -286,6 +286,7 @@ reserveBtn.addEventListener("click", e=>{
 
 
 
+    
     const guestHidden = document.getElementById("guestHidden");
     const dateHidden = document.getElementById("dateHidden");
 

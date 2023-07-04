@@ -16,9 +16,9 @@ public interface AdminMapper {
 
 	int insertFileList(List<File> uploadList);
 
-	int getListCount(String pageName);
+	int getListCount(Map<String, Object> paramMap);
 
-	List<Object> selectList(String pageName, RowBounds rowBounds);
+	List<Object> selectList(Map<String, Object> paramMap, RowBounds rowBounds);
 
 	QNA selectQNA(int qnaNo);
 
@@ -29,6 +29,10 @@ public interface AdminMapper {
 	List<Map<String,String>> selectMainEventList();
 
 	int deleteMainBanner(Object order);
+	
 	int setMainBanner(Map<String, Object> data);
 
+	int eventBlind(List<Integer> eventNoList);
+
+	int eventBlindCancel(List<Integer> eventNoList);
 }

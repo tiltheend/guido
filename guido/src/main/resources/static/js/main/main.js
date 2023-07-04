@@ -85,7 +85,62 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleHeart() {
     let heartIcon = event.target;
     // heartIcon.setAtrribute("src",'');
-    heartIcon.classList.toggle("selected");
+    // heartIcon.classList.toggle("selected");
+    
+    /* 관심상품 등록/제거 처리 */
+    if(document.querySelector(".heart-icon")!=null){
+        
+        let check;      // 관심상품 등록 여부
+        console.log(check);
+
+        let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
+        console.log(productNo);
+
+        /* 관심 상품 등록 O */
+        if (heartIcon.classList.contains("selected")) {
+            check = 1;
+        } else {
+            /* 관심 상품 등록X */
+            check = 0;
+        }
+        
+        let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
+
+        const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
+
+        console.log(selected);
+
+        fetch("/common/updateWishList",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(wishData)
+        })
+        .then(resp=>resp.text())
+        .then(result=>{
+            
+
+            if(result==1){
+                if (heartIcon.classList.contains("selected")) {
+                    heartIcon.classList.remove("selected");
+                    for(i of selected){
+                        i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
+                    }
+                } else {
+                    heartIcon.classList.add("selected");
+                    for(i of selected){
+                        i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
+                    }
+                }
+                console.log("위시 성공?");
+            } else {
+                console.log("관심상품 등록 실패");
+            }
+    
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
 }
 
 
@@ -156,38 +211,6 @@ function loadProductByTheme(themeCode) {
 
             const addWishHeart = document.createElement("div");
             addWishHeart.classList.add("add-wish-heart");
-
-
-            /* const heartLabel = document.createElement("label");
-            heartLabel.classList.add("like--container");
-        
-            const heartCheckbox = document.createElement("input");
-            heartCheckbox.setAttribute("type", "checkbox");
-            heartCheckbox.setAttribute("id", "wishHeart");
-            
-            // 여기에 실제 상태에 따른 checked 속성 추가
-            if(themeProduct.wishOrNot > 0){
-                heartCheckbox.checked;
-            }
-        
-            const heartSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            heartSvg.setAttribute("id", "Layer_1");
-            heartSvg.setAttribute("version", "1.0");
-            heartSvg.setAttribute("viewBox", "0 0 24 24");
-            heartSvg.setAttribute("xml:space", "preserve");
-            heartSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-            heartSvg.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
-        
-            const heartPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            heartPath.setAttribute("d", "M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z");
-        
-            heartSvg.appendChild(heartPath);
-            heartLabel.appendChild(heartCheckbox);
-            heartLabel.appendChild(heartSvg);
-            addWishHeart.appendChild(heartLabel);
-        
-            productRow.appendChild(addWishHeart); */
-
 
             const heartIcon = document.createElement("img");
             heartIcon.classList.add("heart-icon");
@@ -265,40 +288,7 @@ function loadProductByTheme(themeCode) {
 
 
 
-/* 관심상품 등록/제거 처리 */
-/* if(document.getElementById("wishHeart") != null){
-    
-    const wishHeart = document.getElementById("wishHeart");
-    let check;   
-    
-    if (wishHeart.checked) {
-        check = 1;
-    } else {
-        check = 0;
-    }
-    
-    const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
-    
-    wishHeart.addEventListener("click", ()=> {
-        
-        fetch("/common/updateWishList",{
-            method : "POST",
-            headers : {"Content-Type" : "application/json"},
-            body : JSON.stringify(wishData)
-        })
-        .then(resp=>resp.text())
-        .then(result=>{
-            console.log(result);
 
-            if(result==0){
-                console.log("관심상품 등록 실패");
-            }
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-    });
-} */
 
 
 

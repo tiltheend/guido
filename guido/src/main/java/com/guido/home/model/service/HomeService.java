@@ -3,6 +3,7 @@ package com.guido.home.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 
 public interface HomeService {
@@ -13,16 +14,16 @@ public interface HomeService {
 
 	
 	// 상품 목록 조회
-	List<Product> selectProductList();
+	List<Product> selectProductList(int userNo);
 
 	// 인기 여행지 목록 조회
-	List<Product> selectPopularProductList();
+	List<Product> selectPopularProductList(int userNo);
 
 	// 슈퍼가이드 상품 목록 조회
-	List<Product> selectSuperProductList();
+	List<Product> selectSuperProductList(int userNo);
 
 	// 추천 상품 목록 조회
-	List<Product> selectRecommProductList();
+	List<Product> selectRecommProductList(int userNo);
 
 	
 
@@ -42,14 +43,19 @@ public interface HomeService {
 
 
 	
+	// 관심상품 등록
+	int updateWish(Map<String, Integer> paramMap);
+	
 	// 관심상품 등록 여부 체크
 	int selectWishListCheck(Map<String, Object> map);
-	
-	// 관심상품 등록
-	int updateWishList(Map<String, Integer> paramMap);
+
+	// 관심상품 등록 여부 체크
+	List<Product> mainWishCheck(int userNo);
 
 
 
+	// 메인 슬라이드 이벤트 배너 조회
+	List<Event> selectEventBannerList();
 
 
 

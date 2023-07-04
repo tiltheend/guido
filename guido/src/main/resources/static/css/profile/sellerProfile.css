@@ -84,8 +84,13 @@
 .seller-profile-top .profile-seller-info .seller-info>h2{
     font-size: 1.625rem;
 }
+.seller-profile-top .profile-seller-info .seller-info>h2>span{
+    font-size: 1rem;
+}
+
+
 .seller-profile-top .profile-seller-info div:last-of-type>p:last-of-type{
-    font-size: 0.625rem;
+    /* font-size: 0.625rem; */
 }
 
 /* 유저 이메일 */
@@ -180,7 +185,10 @@
     background-color: #FFE69A;
     border-radius: 15px; margin: 10px;
 }
-.seller-profile-top .sales-list-box .sale-img>img{
+.seller-profile-top .sales-list-box .sale-img a{
+        display: block; width: 100%; height: 100%;
+}
+.seller-profile-top .sales-list-box .sale-img img{
     width: 100%; height: 100%;
     border-radius: 15px;
 }
@@ -242,6 +250,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    margin-bottom: 2px;
 }
 
 .seller-profile-top .sales-list-box .sale-content>p:last-of-type{ /* 언어 */
@@ -414,6 +423,7 @@
     margin: 10px;
     user-select: none;
     font-size: 0.875rem;
+    line-height: 22px;
 }
 .seller-profile-top .seller-reply>div:first-of-type{
     width: 100%;

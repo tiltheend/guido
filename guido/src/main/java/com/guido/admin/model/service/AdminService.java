@@ -12,7 +12,7 @@ import com.guido.common.model.dto.QNA;
 public interface AdminService {
 	int writeEvent(Event event, List<MultipartFile> files) throws IllegalStateException, IOException;
 
-	Map<String, Object> selectList(String pageName, int cp);
+	Map<String, Object> selectList(Map<String, Object> paramMap, int cp);
 
 	QNA selectQNA(int qnaNo);
 
@@ -23,4 +23,8 @@ public interface AdminService {
 	List<Map<String,String>> selectMainEventList();
 
 	int setMainBanner(Map<String, Object> data);
+
+	int eventBlind(List<Integer> eventNoList);
+
+	int eventBlindCancel(List<Integer> eventNoList);
 }

@@ -84,26 +84,14 @@ showTotalResevationCost();
 
 
   
-/* 모달창 띄우기 */
 
 // 모달 창 토글
-function toggleModal(type) {
+function toggleModal() {
   
-  let modal;
-
-  /* 개인정보 수집, 이용 동의 */
-  if(type=='ua')
-    modal = document.getElementById("useAgreeModal");
-
-  /* 결제 */
-  if(type=='pm')
-    modal = document.getElementById("paymentModal");
-  
-  /* 개인정보 3자 제공 동의 */
-  if(type=='pa')
-    modal = document.getElementById("provideAgreeModal");
+  let modal = document.getElementById("paymentModal");
   
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
+
 }
 
 
@@ -145,33 +133,116 @@ if (lastYear !== newYear) {
 }
 
 
-  // 결제(포트원) 가맹점 식별 코드 
-  
+
   
   // 결제 요청
+  var IMP = window.IMP;
+  IMP.init(impCode); 
+
+  //  카드결제
   function requestCardPay() {
   
-    IMP.init(impCode); 
-
-  
     IMP.request_pay({
-      pg: "kcp." + pgMid,     // 상점 ID
+      pg: "html5_inicis." + pgMid,     // 상점 ID
       pay_method: "card",
-      merchant_uid: merchantUid,   // 주문번호
+      merchant_uid: createRandomOrderNum(),   // 주문번호
       name: productName,    // 상품명
       // amount: Number(totalPaymentCost.innerText),
-      amount: 200,
+      amount: 100,
       buyer_email: userEmail,
-      buyer_name: loginUserName,
+      buyer_name: userName,
       buyer_tel: userTel,
-      m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 결제 완료 후 리디렉션 될 URL
-    }, function (rsp) { // callback
-      //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+    }, 
+    
+    rsp => {
+      if (rsp.success) {   
+        // axios로 HTTP 요청
+        axios({
+          url: "/reservation/liquidate",
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          data: {
+            imp_uid: rsp.imp_uid,
+            merchant_uid: rsp.merchant_uid,
+            amount: 100,
+            productName: productName,
+            paymentMethod: 'C'            
+          }
 
-      console.log(rsp);
+        }).then((data) => {
+          // 서버 결제 API 성공시 로직
+        })
+      } else {
+        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+        window.location.reload(); 
+      }
 
   });
 }
+
+// 주문번호 랜덤 생성
+function createRandomOrderNum(){
+  const date = new Date;
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const day = String(date.getDate()).padStart(2, "0");
+	
+	let orderNum = year + month + day + "-";
+	for(let i=0;i<6;i++) {
+		orderNum += Math.floor(Math.random() * 9);	
+	}
+
+	return orderNum;
+}
+
+
+
+
+// 결제 수단 선택에 따른 결제 진행 버튼 변동
+paypal.Buttons().render('#paypal-buttons-container');
+
+// 라디오 버튼 change 이벤트 설정
+document.querySelectorAll('input[name=payment]')
+    .forEach(function (el) {
+    el.addEventListener('change', function (event) {
+
+        // 결제 수단으로 페이팔 선택됐을 때 페이팔 버튼이 보이도록
+        if (event.target.value === 'paypal') {
+        document.body.querySelector('#nowPay')
+            .style.display = 'none';
+        document.body.querySelector('#paypal-buttons-container')
+            .style.display = 'block';
+        }
+
+        // 결제 수단으로 카드가 선택됐을 때 결제하기 버튼이 보이도록
+        if (event.target.value === 'card') {
+        document.body.querySelector('#nowPay')
+            .style.display = 'block';
+        document.body.querySelector('#paypal-buttons-container')
+            .style.display = 'none';
+        }
+    });
+});
+
+
+// 페이팔 결제
+// function requestPaypalPay(){
+  
+//   fetch('/paypal/submit')
+//     .then(function(response) {
+//         if (response.ok) {
+//             return response.text();
+//         }
+//         throw new Error('Network response was not ok.');
+//     })
+//     .then(function(data) {
+//         // 응답 처리
+//     })
+//     .catch(function(error) {
+//         // 에러 처리
+//     });
+// }
+
 
 /* 유의사항 전체 동의 */
 // 마지막 체크박스가 변경되었을 때 전체 동의 체크박스 상태 업데이트
@@ -228,3 +299,14 @@ const formElements = [...touRadioBtn, ...touCheckBoxes];
 formElements.forEach(function(element) {
   element.addEventListener("change", checkFormStatus);
 });
+
+
+const details = document.querySelectorAll('.tou--detail');
+details.forEach(function(detail) {
+  detail.addEventListener('click', function() {
+    const content = this.parentElement.parentElement.nextElementSibling;
+    content.classList.toggle('open');
+  });
+});
+
+

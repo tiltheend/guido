@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 
 @Mapper
@@ -16,16 +17,16 @@ public interface HomeMapper {
 	
 
 	// 상품 목록 조회
-	List<Product> selectProductList();
+	List<Product> selectProductList(int userNo);
 
 	// 인기 여행지 목록 조회
-	List<Product> selectPopularProductList();
+	List<Product> selectPopularProductList(int userNo);
 
 	// 슈퍼가이드 상품 목록 조회
-	List<Product> selectSuperProductList();
+	List<Product> selectSuperProductList(int userNo);
 
 	// 추천 상품 목록 조회
-	List<Product> selectRecommProductList();
+	List<Product> selectRecommProductList(int userNo);
 
 
 	
@@ -52,10 +53,19 @@ public interface HomeMapper {
 	int selectWishListCheck(Map<String, Object> map);
 	
 	// 관심상품 등록
-	int insertWishList(Map<String, Integer> paramMap);
+	int insertMainWish(Map<String, Integer> paramMap);
 
 	// 관심상품 해제
-	int deleteWishList(Map<String, Integer> paramMap);
+	int deleteMainWish(Map<String, Integer> paramMap);
+
+
+	// 관심상품
+	List<Product> mainWishCheck(int userNo);
+
+
+
+	// 메인 슬라이드 이벤트 배너 조회
+	List<Event> selectEventBannerList();
 
 
 

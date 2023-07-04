@@ -123,3 +123,35 @@ Coloris({
     inline: false,
     defaultColor: '#000000',
 });
+
+
+const form = document.getElementById('eventWriteForm');
+form.addEventListener('submit',e=>{
+    e.preventDefault();
+
+
+
+    // 유효성 검사
+
+    const eventEndDtInput = document.getElementById('eventEndDt');
+    const todayInput = document.getElementById('today');
+    const eventEndDt = new Date(eventEndDtInput.value);
+    const today = new Date(todayInput.value);
+
+    if (!eventEndDtInput.value) {
+        alert('이벤트 종료일을 입력해주세요.');
+        return false;
+    }
+
+    if (eventEndDt < today) {
+        alert('이벤트 종료일은 오늘 날짜 이후로 설정해야 합니다.');
+        return false;
+    }
+
+    if(inputImages[0].value==''){
+        alert('첫 번째 이미지(썸네일)은 반드시 필요합니다.');
+        return false;
+    }
+    
+    form.submit();
+})
