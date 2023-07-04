@@ -42,12 +42,12 @@ public class ReservationServiceImpl implements ReservationService{
 	@ToString
 	@Getter
 	private class Response{
-		private Reservation response;
+		private PaymentInfo response;
 	}
 	
 	@ToString
 	@Getter
-	private class Reservation{
+	private class PaymentInfo{
 		private int amount;
 	}
 
@@ -142,9 +142,9 @@ public class ReservationServiceImpl implements ReservationService{
 
 
 	@Override
-	public void paymentCancel(String access_token, String imp_uid, String amount, String reason) throws IOException {
+	public void paymentCancel(String access_token, String imp_uid, int amount, String reason) throws IOException {
 		
-System.out.println("결제 취소");
+		System.out.println("결제 취소");
 		
 		System.out.println(access_token);
 		
@@ -180,5 +180,19 @@ System.out.println("결제 취소");
  
 		br.close();
 		conn.disconnect();
+	}
+
+
+	// 예약 데이터 추가
+	@Override
+	public int insertReservation(Reservation reservation) {
+		return mapper.insertReservation(reservation);
+	}
+
+
+	// 예약 확인
+	@Override
+	public Reservation selectReservation(String orderNumber) {
+		return mapper.selectReservation(orderNumber);
 	}
 }

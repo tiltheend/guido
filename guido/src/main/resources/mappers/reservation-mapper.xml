@@ -15,6 +15,7 @@
 		<result property="optionNo" column="OPTION_NO"/>
 		<result property="requestContent" column="REQUEST_CONTENT"/>
 		<result property="orderNumber" column="ORDER_NUMBER"/>
+		<result property="totalPrice" column="TOTAL_PRICE"/>
 	</resultMap>
 	
 	
@@ -59,4 +60,19 @@
 		WHERE OPTION_NO = #{optionNo}
 	</select>
 	
+	
+	<insert id="insertReservation">
+		INSERT INTO "RESERVATION"
+		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
+		 'Y', #{paymentMethod}, #{guestCount}, 19, NULL, #{requestContent}, #{orderNumber}, #{totalPrice})
+<!--		INSERT INTO "RESERVATION"
+		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, #{createDate},
+		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice})-->
+	</insert>
+	
+	
+	<select id="selectReservation" resultMap="reservation_rm">
+		SELECT * FROM "RESERVATION"
+		WHERE ORDER_NUMBER = #{orderNumber}
+	</select>
 </mapper>

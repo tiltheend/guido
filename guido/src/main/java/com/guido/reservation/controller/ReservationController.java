@@ -25,8 +25,6 @@ import com.guido.common.model.dto.User;
 import com.guido.product.model.service.ProductDetailService;
 import com.guido.reservation.model.service.ReservationService;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("/reservation")
 @SessionAttributes("{loginUser}")
@@ -111,19 +109,77 @@ public class ReservationController {
 	}
 	
 	
+
 	// 카드 결제 성공 후
 	@PostMapping("/payment/complete")
-	public int liquidate(HttpSession session, 
-			@RequestBody Reservation reservation,
+	public ResponseEntity<String> liquidate(@RequestBody Reservation reservation,
 			@SessionAttribute("loginUser") User loginUser) throws IOException {
 		
 		System.out.println(reservation);
 		// 1. 아임포트 API 키와 SECRET키로 토큰을 생성
 		String token = service.getToken();
 		System.out.println("토큰 : " + token);
+		
+		// 결제 완료된 금액
+		int amount = service.paymentInfo(reservation.getImpUid(), token);
+		
+		System.out.println("amount : " + amount);
+	    
+	    
+		try {
+			
+			// 2. 실제 계산되어야 할 가격
+			int orderPriceCheck = -1;
+			
+			Product product = productService.selectProduct(reservation.getProductNo());
+			
+			if(product.getProductPackage()==1) {
+				orderPriceCheck = product.getProductPrice()*reservation.getGuestCount();
+			}else {
+				orderPriceCheck = product.getProductPrice();
+			}
+			
+			System.out.println("orderPriceCheck : " + orderPriceCheck);
+			
+			// 3. 결제 완료된 금액과 실제 계산되어야 할 금액이 다를경우 결제 취소
+			if(amount != orderPriceCheck + orderPriceCheck*0.1) {
+				service.paymentCancel(token, reservation.getImpUid(), amount, "결제 금액 오류");
+				return new ResponseEntity<String>("결제 금액 오류, 결제 취소", HttpStatus.BAD_REQUEST);
+			}
+			
+			
+			int result = service.insertReservation(reservation);
+			
+			System.out.println("result : " + result);
+			
+			if(result>0)
+				return new ResponseEntity<String>("성공", HttpStatus.OK);
 
-		return 0;
+			else
+				return new ResponseEntity<String>("주문 오류", HttpStatus.BAD_REQUEST);
+			
+			
+			
+		}catch(Exception e) {
+			
+			 // 4. 결제에러시 결제 취소
+			service.paymentCancel(token, reservation.getImpUid(), amount, "결제 에러");
+			 return new ResponseEntity<String>("결제 에러", HttpStatus.BAD_REQUEST);
+		}
+			
 	}
+	
+	
+	// 결제완료 후 예약 정보 확인
+	 @GetMapping("/reservation/order_result")
+	    public String getOrderResult(@RequestParam("order_id") String orderNumber, Model model) {
+		 
+		 Reservation reservation = service.selectReservation(orderNumber);
+		 
+		 model.addAttribute(reservation);
+		 
+	      return "reservation/reservationCheck";
+	   }
 
 }
 	

@@ -291,7 +291,7 @@ reserveBtn.addEventListener("click", e=>{
     const dateHidden = document.getElementById("dateHidden");
 
     guestHidden.value = inputGuestCount.innerText;
-    dateHidden.value = "2023-12-31";
+    dateHidden.value = "2023-07-14";
 
 });
 
@@ -465,6 +465,11 @@ if(product.productState=='B'){
     document.querySelector("body").style.overflow = 'hidden';
 }
 
-document.getElementById('editBtn').addEventListener('click', function () {
-    location.href = location.pathname + '/edit';
-});
+
+if(document.getElementById('editBtn')!=null){
+
+    document.getElementById('editBtn').addEventListener('click', function () {
+        location.href = location.pathname + '/edit';
+    });
+}
+

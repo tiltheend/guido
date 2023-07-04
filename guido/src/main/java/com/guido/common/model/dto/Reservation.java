@@ -24,6 +24,8 @@ public class Reservation {
 	
 	private String requestContent;
 	private String orderNumber;
+	private String impUid = "";
+	private int totalPrice;
 	
 	// --------------- 테이블 끝!
 	

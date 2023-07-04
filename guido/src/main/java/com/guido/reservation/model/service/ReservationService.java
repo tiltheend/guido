@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.guido.common.model.dto.ProductOption;
+import com.guido.common.model.dto.Reservation;
 
 public interface ReservationService {
 
@@ -55,6 +56,22 @@ public interface ReservationService {
 	 * @param reason
 	 * @throws IOException 
 	 */
-	public void paymentCancel(String access_token, String imp_uid, String amount, String reason) throws IOException;
+	public void paymentCancel(String access_token, String imp_uid, int amount, String reason) throws IOException;
+
+
+
+	/** 예약 데이터 추가
+	 * @param reservation
+	 * @return result
+	 */
+	int insertReservation(Reservation reservation);
+
+
+
+	/** 예약 확인
+	 * @param orderNumber
+	 * @return reservation
+	 */
+	Reservation selectReservation(String orderNumber);
 
 }
