@@ -91,6 +91,7 @@ function toggleModal() {
   let modal = document.getElementById("paymentModal");
   
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
+
 }
 
 
@@ -131,25 +132,20 @@ if (lastYear !== newYear) {
   reservationDateDiv.innerText = formattedDate + " ~ " + twoDaysLater;
 }
 
-function requestPay(){
 
-  const checkedMethod = document.querySelector('input[name="payment"]:checked');
 
-  if(checkedMethod.value=='card')
-    requestCardPay();
-}
-  
   
   // 결제 요청
   var IMP = window.IMP;
   IMP.init(impCode); 
 
+  //  카드결제
   function requestCardPay() {
   
     IMP.request_pay({
       pg: "html5_inicis." + pgMid,     // 상점 ID
       pay_method: "card",
-      merchant_uid: merchantUid,   // 주문번호
+      merchant_uid: createRandomOrderNum(),   // 주문번호
       name: productName,    // 상품명
       // amount: Number(totalPaymentCost.innerText),
       amount: 100,
@@ -172,6 +168,7 @@ function requestPay(){
             productName: productName,
             paymentMethod: 'C'            
           }
+
         }).then((data) => {
           // 서버 결제 API 성공시 로직
         })
@@ -182,6 +179,70 @@ function requestPay(){
 
   });
 }
+
+// 주문번호 랜덤 생성
+function createRandomOrderNum(){
+  const date = new Date;
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const day = String(date.getDate()).padStart(2, "0");
+	
+	let orderNum = year + month + day + "-";
+	for(let i=0;i<6;i++) {
+		orderNum += Math.floor(Math.random() * 9);	
+	}
+
+	return orderNum;
+}
+
+
+
+
+// 결제 수단 선택에 따른 결제 진행 버튼 변동
+paypal.Buttons().render('#paypal-buttons-container');
+
+// 라디오 버튼 change 이벤트 설정
+document.querySelectorAll('input[name=payment]')
+    .forEach(function (el) {
+    el.addEventListener('change', function (event) {
+
+        // 결제 수단으로 페이팔 선택됐을 때 페이팔 버튼이 보이도록
+        if (event.target.value === 'paypal') {
+        document.body.querySelector('#nowPay')
+            .style.display = 'none';
+        document.body.querySelector('#paypal-buttons-container')
+            .style.display = 'block';
+        }
+
+        // 결제 수단으로 카드가 선택됐을 때 결제하기 버튼이 보이도록
+        if (event.target.value === 'card') {
+        document.body.querySelector('#nowPay')
+            .style.display = 'block';
+        document.body.querySelector('#paypal-buttons-container')
+            .style.display = 'none';
+        }
+    });
+});
+
+
+// 페이팔 결제
+// function requestPaypalPay(){
+  
+//   fetch('/paypal/submit')
+//     .then(function(response) {
+//         if (response.ok) {
+//             return response.text();
+//         }
+//         throw new Error('Network response was not ok.');
+//     })
+//     .then(function(data) {
+//         // 응답 처리
+//     })
+//     .catch(function(error) {
+//         // 에러 처리
+//     });
+// }
+
 
 /* 유의사항 전체 동의 */
 // 마지막 체크박스가 변경되었을 때 전체 동의 체크박스 상태 업데이트
