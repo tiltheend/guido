@@ -179,8 +179,7 @@ FROM (SELECT *
 WHERE ROWNUM <= 4;
 
 
-
-
+SELECT * FROM "TOURIST";
 
 
  
