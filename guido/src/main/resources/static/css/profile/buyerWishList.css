@@ -241,8 +241,12 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    margin-top: 3px;
 }
-.buyer-profile-top .wish-list .sales-text img{
+.buyer-profile-top .wish-list .sales-text img:first-of-type{
+    width: 16px; margin-right: 4px;
+}
+.buyer-profile-top .wish-list .sales-text img:last-of-type{
     width: 12px; margin-right: 4px;
 }
 .buyer-profile-top .wish-list .sales-text>div{

@@ -105,3 +105,53 @@ slideArea.addEventListener('touchend', handleTouchEnd);
 
 /* 이벤트 시작 일을 오늘 날짜로 설정 */
 document.getElementById('today').value = new Date().toISOString().split('T')[0];
+
+
+
+Coloris({
+    // parent: '.demo',
+    theme: 'pill',     //default, large, polaroid, pill
+    themeMode: 'light',   //light , dark 모드
+    margin: 2,            //입력 필드와 색선택시 사이 여백
+    alpha: false,          //불투명도 조절
+    format: 'hex',        //포맷  hex rgb hsl auto mixed
+    formatToggle: true,   //포맷 토글
+    clearButton: true,
+    clearLabel: '초기화',
+    closeButton: true,
+    closeLabel: '닫기',
+    inline: false,
+    defaultColor: '#000000',
+});
+
+
+const form = document.getElementById('eventWriteForm');
+form.addEventListener('submit',e=>{
+    e.preventDefault();
+
+
+
+    // 유효성 검사
+
+    const eventEndDtInput = document.getElementById('eventEndDt');
+    const todayInput = document.getElementById('today');
+    const eventEndDt = new Date(eventEndDtInput.value);
+    const today = new Date(todayInput.value);
+
+    if (!eventEndDtInput.value) {
+        alert('이벤트 종료일을 입력해주세요.');
+        return false;
+    }
+
+    if (eventEndDt < today) {
+        alert('이벤트 종료일은 오늘 날짜 이후로 설정해야 합니다.');
+        return false;
+    }
+
+    if(inputImages[0].value==''){
+        alert('첫 번째 이미지(썸네일)은 반드시 필요합니다.');
+        return false;
+    }
+    
+    form.submit();
+})

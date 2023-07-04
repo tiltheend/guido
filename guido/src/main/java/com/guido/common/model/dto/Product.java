@@ -49,5 +49,11 @@ public class Product {
 	
 	private String courseName;		// 여행지 키워드
 	private String productDate;		// 날짜
-
+	
+	private int wishOrNot;		// 상품목록 위시리스트
+	
+	private List<ProductDate> ProductDateList; // 상품 일정 리스트
+	
+	private String thumbnail; // 썸네일 (파일 오더 1번)
+	
 }

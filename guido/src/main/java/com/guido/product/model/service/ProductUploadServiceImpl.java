@@ -1,6 +1,7 @@
 package com.guido.product.model.service;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,10 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.utility.Util;
 import com.guido.product.model.dao.ProductUploadMapper;
-import com.guido.product.model.exception.ImageDeleteException;
 
 @Service
 @PropertySource("classpath:/config.properties")
@@ -40,10 +41,10 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	}
 	
 	
-
+	//여행 상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productUpload(Product product, List<MultipartFile> images)  throws IllegalStateException, IOException {
+	public int productUpload(Product product, List<MultipartFile> images, List<TourCourse> tourCourse)  throws IllegalStateException, IOException, SQLException {
 
 		int result = mapper.productUpload(product);
 		
@@ -54,6 +55,9 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 		if(productNo > 0) {
 			
 			List<File> uploadList = new ArrayList<File>();
+			
+			//투어 코스 리스트 생성
+			List<TourCourse> uploadTourCourseList = new ArrayList<TourCourse>();
 			
 			for(int i=0 ; i<images.size(); i++) {
 				
@@ -76,6 +80,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				}
 			}
 			
+			
 			if( !uploadList.isEmpty()) {
 				
 				result = mapper.insertImageList(uploadList);
@@ -86,6 +91,28 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 					
 				}
 			}	
+			
+			
+			for(int j=0; j<tourCourse.size(); j++) {
+						
+						TourCourse tc = new TourCourse();
+						
+						tc.setProductNo(productNo);
+						tc.setCourseOrder(j);
+						uploadTourCourseList.add(tc);				
+					System.out.println(tourCourse);
+						
+			}
+			
+			if(!uploadTourCourseList.isEmpty()) {
+				
+				result = mapper.insertTourCourseList(uploadTourCourseList);
+				
+				if(result != uploadTourCourseList.size()) {
+					throw new SQLException();
+				}
+			}
+	
 		}
 		return productNo;
 	}
@@ -94,10 +121,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	//여행 상품 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productEdit(
-			Product product
-			,List<MultipartFile> images
-			,String deleteList) throws IllegalStateException, IOException {
+	public int productEdit(Product product, List<MultipartFile> images, String deleteList) throws IllegalStateException, IOException {
 		
 		int rowCount = mapper.productEdit(product);
 		
@@ -114,7 +138,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				rowCount = mapper.imageDelete(deleteMap);
 				
 				if(rowCount == 0) {
-					throw new ImageDeleteException();
+					throw new FileUploadException();
 				}
 			}
 			
@@ -150,13 +174,13 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				}
 			
 			}
-		
-		if(!uploadList.isEmpty()) {
-			for(int i=0 ; i<uploadList.size();i++) {
-				int index = uploadList.get(i).getFileOrder();
 				
-				String rename = Util.fileRename(images.get(i).getOriginalFilename());
-				images.get(i).transferTo(new java.io.File(filePath+rename));
+				if(!uploadList.isEmpty()) {
+					for(int i=0 ; i<uploadList.size();i++) {
+						int index = uploadList.get(i).getFileOrder();
+						
+						String rename = Util.fileRename(images.get(i).getOriginalFilename());
+						images.get(i).transferTo(new java.io.File(filePath+rename));
 			}	
 		}
 	}

@@ -86,16 +86,6 @@ function changeBackgroundColor(element) {
     element.style.backgroundColor = 'rgb(185, 215, 218)';
     element.style.borderColor = 'rgb(59, 119, 124)';
   }
-  const tourBoxCheck = () => {
-    let count = 0;
-    tourThemeItems.forEach((element) => {
-      if (count < 1 || count > 1) {
-        nextBtn.disabled = true;
-      } else {
-        nextBtn.disabled = false;
-      }
-    });
-  };
 }
 // 여행 테마 선택 체크박스
 
@@ -144,28 +134,6 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 //3페이지
 const tourThemes = document.querySelectorAll('.theme-img');
-// function tourThemesCheck() {
-//   nextBtn.disabled = true;
-//   tourThemes.forEach(function (tourTheme) {
-//     tourTheme.addEventListener('click', function () {
-//       // 배경색 초기화
-//       tourThemes.forEach(function (theme) {
-//         theme.style.backgroundColor = 'white';
-//         theme.style.borderColor = '#5555';
-//       });
-
-//       // 클릭한 span 요소의 배경색 변경
-//       this.style.backgroundColor = 'rgb(185, 215, 218)';
-//       this.style.borderColor = 'rgb(59, 119, 124)';
-
-//       // nextBtn 활성화
-//       nextBtn.disabled = false;
-//     });
-//   });
-//   // nextBtn.disabled = true;
-//   // nextBtn.disabled = false;
-// }
-// 초기값 설정
 
 // 4페이지
 let minPrice = document.getElementById('minPrice');
@@ -270,31 +238,6 @@ function plusMax() {
   maxTotal.innerText = '₩ ' + value * price.textContent * 0.9 + ' 원';
 }
 
-document
-  .querySelector('#priceRange')
-  .addEventListener('input', function (event) {
-    var gradient_value = 100 / event.target.attributes.max.value;
-    event.target.style.background =
-      'linear-gradient(to right, #1a1a1a 0%, #1a1a1a ' +
-      gradient_value * event.target.value +
-      '%, rgb(236, 236, 236) ' +
-      gradient_value * event.target.value +
-      '%, rgb(236, 236, 236) 100%)';
-  });
-
-// function plusMin() {
-//   var minResult = parseInt(document.getElementById('minResult').innerHTML);
-//   var maxResult = parseInt(document.getElementById('maxResult').innerHTML);
-
-//   if (minResult > maxResult) {
-//     var result = document.getElementById('minResult');
-//     var value = parseInt(result.innerHTML);
-//     value--;
-//     result.innerHTML = value;
-//   } else {
-//     document.getElementById('maxWarning').style.display = 'flex';
-//   }
-// }
 //6페이지
 const inputTitle = document.getElementById('inputTitle'); // 제목 input
 const titleCountContainer = document.getElementById('titleCountContainer'); // 제목 글자 수 카운트컨테이너
@@ -482,39 +425,6 @@ window.onclick = function (event) {
 };
 // 요금설정
 
-//숫자 이외 텍스트(문자포함) 막기
-
-// $('#feeInput').on('keydown', (e) => {
-//   let keyCode = e.keyCode || e.which;
-//   let allowedKeys = [8, 37, 39]; // 백스페이스(8), 왼쪽 화살표(37), 오른쪽 화살표(39)
-
-//   if (
-//     !(
-//       (keyCode >= 48 && keyCode <= 57) || // 0-9
-//       (keyCode >= 96 && keyCode <= 105) || // Numpad 0-9
-//       allowedKeys.includes(keyCode)
-//     )
-//   ) {
-//     e.preventDefault();
-//   }
-// });
-$('#inputDay').on('input', (e) => {
-  let v = e.currentTarget.value;
-  if (/[ㄱ-힣]+/.test(v)) {
-    e.currentTarget.value = v.replaceAll(/[ㄱ-힣]+/g, '');
-  } else {
-    e.currentTarget.value = v.replace(/[a-zA-Z]+|[^\w\s]|_/g, '');
-  }
-});
-$('#inputTime').on('input', (e) => {
-  let v = e.currentTarget.value;
-  if (/[ㄱ-힣]+/.test(v)) {
-    e.currentTarget.value = v.replaceAll(/[ㄱ-힣]+/g, '');
-  } else {
-    e.currentTarget.value = v.replace(/[a-zA-Z]+|[^\w\s]|_/g, '');
-  }
-});
-
 $('#feeInput').on('input', (e) => {
   let v = e.currentTarget.value;
   if (/[ㄱ-힣]+/.test(v)) {
@@ -599,14 +509,14 @@ const addImage = document.querySelectorAll('.add-image');
 const addImage2 = document.querySelectorAll('.add-image2');
 const addImage3 = document.querySelectorAll('.add-image3');
 
+//상품 수정 시 삭제된 이미지의 순서를 기록할 Set 객체 생성
+const deleteSet = new Set(); // 순서x, 중복x
+// -> x 버튼 클릭 시 순서를 한 번만 저장하는 용도
+
 for (let i = 0; i < inputImage.length; i++) {
   //파일이 선택되거나, 선택 후 취소 되었을 때
-  addImage2[i].style.display = 'none';
-  addImage[i].style.display = 'none';
-  addImage3[i].style.display = 'none';
   inputImage[i].addEventListener('change', (e) => {
     const file = e.target.files[0]; // 선택된 파일의 데이터
-
     if (file != undefined) {
       // 파일이 선택 되었을 때
       const reader = new FileReader(); // 파일을 읽는 객체
@@ -617,22 +527,24 @@ for (let i = 0; i < inputImage.length; i++) {
       reader.onload = (e) => {
         // 파일을 다 읽은 후 수행
         preview[i].setAttribute('src', e.target.result);
-        border[i].style.border = 'none';
-        deleteImage[i].style.display = 'block';
-        addImage[i].style.display = 'none';
-        addImage2[i].style.display = 'none';
-        addImage3[i].style.display = 'none';
+
+        deleteSet.delete(i);
+        // border[i].style.border = 'none';
+        // deleteImage[i].style.display = 'block';
+        // addImage[i].style.display = 'none';
+        // addImage2[i].style.display = 'none';
+        // addImage3[i].style.display = 'none';
       };
     } else {
       // 선택 후 취소 되었을 때
       // -> 선택된 파일 없음 -> 미리보기 삭제
 
       preview[i].removeAttribute('src');
-      border[i].style.border = '2px dashed #ccc';
-      deleteImage[i].style.display = 'none';
-      addImage[i].style.display = 'block';
-      addImage2[i].style.display = 'block';
-      addImage3[i].style.display = 'block';
+      // border[i].style.border = '2px dashed #ccc';
+      // deleteImage[i].style.display = 'none';
+      // addImage[i].style.display = 'block';
+      // addImage2[i].style.display = 'block';
+      // addImage3[i].style.display = 'block';
     }
 
     deleteImage[i].addEventListener('click', () => {
@@ -640,15 +552,18 @@ for (let i = 0; i < inputImage.length; i++) {
         preview[i].removeAttribute('src');
 
         inputImage[i].value = '';
-        border[i].style.border = '2px dashed #ccc';
-        deleteImage[i].style.display = 'none';
-        addImage[i].style.display = 'block';
-        addImage2[i].style.display = 'block';
-        addImage3[i].style.display = 'block';
+        // border[i].style.border = '2px dashed #ccc';
+
+        deleteSet.add(i);
+        // deleteImage[i].style.display = 'none';
+        // addImage[i].style.display = 'block';
+        // addImage2[i].style.display = 'block';
+        // addImage3[i].style.display = 'block';
       }
     });
   });
 }
+
 // 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가 생성
 const imgId4 = document.getElementById('imgId4');
 const imgId5 = document.getElementById('imgId5');
@@ -656,18 +571,12 @@ const imgId6 = document.getElementById('imgId6');
 const imgId7 = document.getElementById('imgId7');
 const imgId8 = document.getElementById('imgId8');
 
-// const tourThemeItems = document.querySelectorAll('[name="tourTheme"]');
-// const tourThemeSelectCheck = () => {
-//   let count = 0;
-//   // 기본 카테고리 확인
-//   tourThemeItems.forEach((tourThemeItem) => {
-//     if (tourThemeItem.checked) {
-//       count++;
-//     }
-//   });
-//   if (count < 1 || count > 5) {
-//     nextBtn.disabled = true;
-//   } else {
-//     nextBtn.disabled = false;
-//   }
-// };
+const productEditFrm = document.getElementById('productEditFrm');
+
+productEditFrm.addEventListener('click', (e) => {
+  // input type='hidden' 태그에
+  //deleteSet에 저장된 값을 "1,2,3" 형태로 변경해서 저장
+  document.querySelector("[name='deleteList']").value = Array.from(deleteSet);
+
+  // e.preventDefault();
+});

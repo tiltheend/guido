@@ -1,18 +1,22 @@
 
 /* ***** 헤더 검색 모달창 ***** */
+
+/* header 자체 */
 const mainSearchBox = document.querySelector('.main-search-box');
 const searchBoxClickBox = document.querySelector('.search-box-click-box');
 
+/* 클릭 전 버튼 */
 const whereButton = document.querySelector('.where-button');
 const whenButton = document.querySelector('.when-button');
 const guestButton = document.querySelector('.guest-button');
-/* const searchIcon = document.querySelector('.search-icon'); */
 
+/* 클릭 후 버튼 */
 const whereButtonClick = document.querySelector('.where-btn-click');
 const checkInButtonClick = document.querySelector('.in-btn-click');
 const checkOutButtonClick = document.querySelector('.out-btn-click');
 const guestButtonClick = document.querySelector('.guest-btn-click');
 
+/* 회색 바탕 부분 */
 const whereModal = document.querySelector('.where-modal-bg');
 const whenModal = document.querySelector('.when-modal-bg');
 const guestModal = document.querySelector('.guest-modal-bg');
@@ -47,7 +51,7 @@ guestButton.addEventListener('click', () => {
 
 
 
-/* *** 헤더 검색 추가 모달창 *** */
+/* *** 헤더 모달창 열기 *** */
 whereButtonClick.addEventListener('click', () => {
   whereModal.style.display = 'block';
   whenModal.style.display = 'none';
@@ -73,40 +77,7 @@ guestButtonClick.addEventListener('click', () => {
 
 
 
-/* *** 게스트 수 업다운 *** */
-const guestCountElement = document.querySelector('.main--right__guest-count');
-const guestInput = document.querySelector('input[name="tourist"]');
-
-// 감소 버튼 클릭 이벤트 처리
-document.querySelector('.main--right__guest-minus').addEventListener('click', () => {
-    let count = parseInt(guestCountElement.textContent);
-    if (count > 0) {
-        count--;
-        guestCountElement.textContent = count;
-        updateGuestText(count);
-        guestInput.value = count; // input 태그에 값 설정
-    }
-});
-
-// 증가 버튼 클릭 이벤트 처리
-document.querySelector('.main--right__guest-plus').addEventListener('click', () => {
-    let count = parseInt(guestCountElement.textContent);
-    count++;
-    guestCountElement.textContent = count;
-    updateGuestText(count);
-    guestInput.value = count; // input 태그에 값 설정
-});
-
-// 게스트 텍스트 업데이트 함수
-function updateGuestText(count) {
-    const guestText = document.querySelector('.guest-button-click input');
-    guestText.textContent = `게스트 ${count}명`;
-}
-
-
-
-
-/* *** 모달창 닫기 *** */
+/* *** 헤더 모달창 닫기 *** */
 document.addEventListener('DOMContentLoaded', function() {
 
   var modals = document.querySelectorAll('.modal');
@@ -123,42 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-/* ***** 메인 헤더 아이콘 모달창 ***** */
-const alarmIcon = document.querySelector(".alarm-icon");
-const mypageIcon = document.querySelector(".mypage-icon");
-
-const alarmModal = document.querySelector(".alarm-modal");
-const mypageModal = document.querySelector(".mypage-modal");
-
-const mypageModalClose = document.querySelector(".mypage-modal-close");
-const alarmModalClose = document.querySelector(".alarm-modal-close");
-
-alarmIcon.addEventListener("click", () => {
-  if (alarmModal.style.display === "block") {
-    alarmModal.style.display = "none";
-  } else {
-    alarmModal.style.display = "block";
-    mypageModal.style.display = "none";
-  }
-});
-
-mypageIcon.addEventListener("click", () => {
-  if (mypageModal.style.display === "block") {
-    mypageModal.style.display = "none";
-  } else {
-    mypageModal.style.display = "block";
-    alarmModal.style.display = "none";
-  }
-});
-
-alarmModalClose.addEventListener("click", () => {
-  alarmModal.style.display = "none";
-});
-
-mypageModalClose.addEventListener("click", () => {
-  mypageModal.style.display = "none";
-});
 
 
 
@@ -215,6 +150,8 @@ document.addEventListener('DOMContentLoaded', function() {
     clickDivs[3].classList.add('clicked');
   });
 });
+
+
 
 
 
@@ -286,10 +223,88 @@ whereModal.addEventListener("click", e => {
 
 
 
+/* ***** 캘린더 ***** */
+$(document).ready(function(){
+
+  $('.input-daterange').datepicker({
+      format: 'yyyy-mm-dd',
+      todayHighlight: true,
+      startDate: '0d'
+  });
+});
 
 
 
 
 
+/* ***** 게스트 수 업다운 ***** */
+const guestCountElement = document.querySelector('.main--right__guest-count');
+const guestInput = document.querySelector('input[name="tourist"]');
+
+// 감소 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-minus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    if (count > 0) {
+        count--;
+        guestCountElement.textContent = count;
+        updateGuestText(count);
+        guestInput.value = count; // input 태그에 값 설정
+    }
+});
+
+// 증가 버튼 클릭 이벤트 처리
+document.querySelector('.main--right__guest-plus').addEventListener('click', () => {
+    let count = parseInt(guestCountElement.textContent);
+    count++;
+    guestCountElement.textContent = count;
+    updateGuestText(count);
+    guestInput.value = count; // input 태그에 값 설정
+});
+
+// 게스트 텍스트 업데이트 함수
+function updateGuestText(count) {
+    const guestText = document.querySelector('.guest-button-click input');
+    guestText.textContent = `게스트 ${count}명`;
+}
+
+
+
+
+
+/* ***** 메인 헤더 아이콘 모달창 ***** */
+const alarmIcon = document.querySelector(".alarm-icon");
+const mypageIcon = document.querySelector(".mypage-icon");
+
+const alarmModal = document.querySelector(".alarm-modal");
+const mypageModal = document.querySelector(".mypage-modal");
+
+const mypageModalClose = document.querySelector(".mypage-modal-close");
+const alarmModalClose = document.querySelector(".alarm-modal-close");
+
+alarmIcon.addEventListener("click", () => {
+  if (alarmModal.style.display === "block") {
+    alarmModal.style.display = "none";
+  } else {
+    alarmModal.style.display = "block";
+    mypageModal.style.display = "none";
+  }
+});
+
+mypageIcon.addEventListener("click", () => {
+  if (mypageModal.style.display === "block") {
+    mypageModal.style.display = "none";
+  } else {
+    mypageModal.style.display = "block";
+    alarmModal.style.display = "none";
+  }
+});
+
+alarmModalClose.addEventListener("click", () => {
+  alarmModal.style.display = "none";
+});
+
+mypageModalClose.addEventListener("click", () => {
+  mypageModal.style.display = "none";
+});
 
 

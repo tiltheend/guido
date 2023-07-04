@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
@@ -84,6 +85,38 @@ public interface ProfileTouristService {
 	 * @return
 	 */
 	int reviewEdit(Review review);
+
+	/** 구매 내역 가져오기 (자세한)
+	 * @param userNo
+	 * @return
+	 */
+	List<Reservation> myReservation(int userNo);
+
+	/** 구매자 예약 목록 더보기 (3개씩)
+	 * @param map
+	 * @return
+	 */
+	List<Reservation> myReservationMore(Map<String, Integer> map);
+
+	/** 위시리스트 가져오기
+	 * @param userNo
+	 * @return
+	 */
+	List<Product> myWishList(int userNo);
+
+
+	/** 관심 상품 등록 여부 체크
+	 * @param map
+	 * @return wishOrNot
+	 */
+	int selectWishCheck(Map<String, Integer> map);
+
+
+	/** 관심 상품 등록 처리
+	 * @param map
+	 * @return
+	 */
+	int updateWish(Map<String, Integer> map);
 
 
 }

@@ -18,7 +18,9 @@ public class FilterConfig {
 	      
 	      resiRegistrationBean.setFilter(new LoginFilter());
 	      
-	      String[] url = {"/reservation/*"};	// 필터링 하고 싶은 경로
+	      String[] url = {"/reservation/*", 
+	    		  "/profile/touristReservation", "/profile/touristWishList", "/profile/guideReservationSchedule" , "/profile/guideReservation"
+	    		  };	// 필터링 하고 싶은 경로
 	      resiRegistrationBean.setUrlPatterns(Arrays.asList(url)); // url 패턴 여러 개 지정
 	      resiRegistrationBean.setName("loginFilter"); // 이름
 	      resiRegistrationBean.setOrder(1); // 여러 필터가 있을 때 순서

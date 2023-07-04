@@ -21,6 +21,7 @@ public class EmailServiceImpl implements EmailService{
 	@Autowired
 	private EmailMapper mapper;
 	
+	// 메일 보내기 위해
 	@Autowired
 	private JavaMailSender mailSender;
 	
@@ -78,35 +79,35 @@ public class EmailServiceImpl implements EmailService{
 		
 		// 임시 비번 요청한 유저 name
 		String user = mapper.selectUser(email);
-		System.out.println(user);
+		//System.out.println(user);
 		
 		try {
 			// 인증 메일
 			MimeMessage mail = mailSender.createMimeMessage();
 			// 제목
-			String subject = "[guido] 임시 비밀번호가 생성되었습니다."; 
+			String subject = "[guido] 임시 비밀번호 발급"; 
 			// 문자 인코딩
 			String charset = "UTF-8";
 			// 메일 내용
 			String mailContent = 
 					
-					
-					"<table style='border-spacing:10px;width:100%;border:2px solid #1c797d;border-radius:15px;box-shadow:2px 2px 2px #c5c5c5;padding:10px'>" + 
-						"<tr><td><img src='https://github.com/tiltheend/guido/blob/main/guido/src/main/resources/static/images/signUp/guido.png'></td></tr>" +
-				        "<tr><td >" + user + "님, 안녕하세요?</td></tr>" + 
-				        "<tr><td>요청하신 임시 비밀번호를 발급했습니다.</td></tr>" +
-				        "<tr><td></td></tr>" +
-				        "<tr><td>임시 비밀번호 : </td></tr>" +
-				        "<tr><td style='color:#1c797d;font-weight:bold;font-size:20px'>"+ tempPw +"</td></tr>" +
-				        "<tr><td></td></tr>" +
-				        "<tr><td>임시 비밀번호로 로그인 후, 개인 정보 보호를 위해 반드시 비밀번호를 변경해주세요!</td></tr>" +
-				        "<tr><td></td></tr>" +
-				        "<tr><td>감사합니다.</td></tr>" +
-				        "<tr><td></td></tr>" +
-				        "<tr><td style='border-bottom:#c5c5c5 1px solid'>가이두 드림</td></tr>" +
-				        "<tr><td></td></tr>" +
-				        "<tr><td><img src='https://github.com/tiltheend/guido/blob/main/guido/src/main/resources/static/images/signUp/guidoCompany.jpeg'></td></tr>" +
-
+					"<table style='border-spacing:10px;width:100%'>" + 
+						"<tr><td><img src='https://i.imgur.com/pQWCBfL.png'></td></tr>" +
+						"<tr><td style='padding-left:20px'></td></tr>" +
+				        "<tr><td style='padding-left:20px'>" + user + "님, 안녕하세요? Guido 입니다.</td></tr>" + 
+				        "<tr><td style='padding-left:20px'>요청하신 임시 비밀번호를 발급했습니다.</td></tr>" +
+				        "<tr><td style='padding-left:20px'></td></tr>" +
+				        "<tr><td style='padding-left:20px'>임시 비밀번호 : </td></tr>" +
+				        "<tr><td style='color:#1c797d;font-weight:bold;font-size:20px;padding-left:20px'>"+ tempPw +"</td></tr>" +
+				        "<tr><td style='padding-left:20px'></td></tr>" +
+				        "<tr><td style='padding-left:20px'>임시 비밀번호로 로그인 후, 개인 정보 보호를 위해 반드시 비밀번호를 변경해주세요!</td></tr>" +
+				        "<tr><td style='padding-left:20px'></td></tr>" +
+				        "<tr><td style='padding-left:20px'>감사합니다.</td></tr>" +
+				        "<tr><td style='padding-left:20px'>가이두 드림</td></tr>" +
+				        "<tr><td style='padding-left:20px'></td></tr>" +
+				        "<tr><td style='padding-left:20px'><img src='https://i.imgur.com/PcUN2ne.png'></td></tr>" +
+				        "<tr><td style='padding-left:20px'></td></tr>" +
+				        "<tr><td><img src='https://i.imgur.com/lpqS2eL.png'></td></tr>" +
 	   			    "</table>";
 					
 				// 송신자(보내는 사람) 지정
@@ -134,9 +135,73 @@ public class EmailServiceImpl implements EmailService{
 			
 			return result;
 	}
+
+	// 회원가입-인증 번호 보내기
+	@Transactional
+	@Override
+	public int authEmail(String email) {
+		
+		// 인증 번호 생성
+		String authKey = createAuthKey();
+		
+		// 인증 번호 발송
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+			String subject = "[guido] 이메일 인증 번호 발급";
+			String charset = "UTF-8";
+			String mailContent = 
+					"<table style='border-spacing:10px;width:100%'>" + 
+							"<tr><td><img src='https://i.imgur.com/pQWCBfL.png'></td></tr>" +
+							"<tr><td style='padding-left:140px'><img src='https://i.imgur.com/Wrrbdp7.png'></td></tr>" +
+							"<tr><td style='padding-left:20px'></td></tr>" +
+					        "<tr><td style='padding-left:20px'>안녕하세요!</td></tr>" + 
+					        "<tr><td style='padding-left:20px'>Guido를 이용해주셔서 진심으로 감사드립니다.</td></tr>" + 
+					        "<tr><td style='padding-left:20px'>아래 인증 번호 이용해 회원 가입 절차를 완료해주세요.</td></tr>" +
+					        "<tr><td style='padding-left:20px'></td></tr>" +
+					        "<tr><td style='padding-left:20px'>인증 번호 : </td></tr>" +
+					        "<tr><td style='color:#1c797d;font-weight:bold;font-size:20px;padding-left:20px'>"+ authKey +"</td></tr>" +
+					        "<tr><td style='padding-left:20px'></td></tr>" +
+//					        "<tr><td style='padding-left:20px'>해당 인증 번호의 유효 시간은 10분입니다.</td></tr>" +
+//					        "<tr><td style='padding-left:20px'>10분 내 인증하지 못하셨다면 '인증 번호 전송' 버튼을 다시 눌러주세요.</td></tr>" +
+//					        "<tr><td style='padding-left:20px'></td></tr>" +
+					        "<tr><td style='padding-left:20px'>감사합니다.</td></tr>" +
+					        "<tr><td style='padding-left:20px'>가이두 드림</td></tr>" +
+					        "<tr><td style='padding-left:20px'></td></tr>" +
+					        "<tr><td style='padding-left:20px'><img src='https://i.imgur.com/PcUN2ne.png'></td></tr>" +
+					        "<tr><td style='padding-left:20px'></td></tr>" +
+					        "<tr><td><img src='https://i.imgur.com/lpqS2eL.png'></td></tr>" +
+		   			    "</table>";
+			
+			mail.setFrom(new InternetAddress(fromEmail, fromUsername));
+			mail.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+			mail.setSubject(subject, charset);
+			mail.setText(mailContent, charset, "html");
+			mailSender.send(mail);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("authKey", authKey);
+		map.put("email", email);
+		
+		System.out.println(map);
+		
+		int result = mapper.updateAuthKey(map);
+		
+		if(result == 0) {
+			result = mapper.insertAuthKey(map);
+		}
+		
+		return result;
+	}
 	
 	
-	
+	@Override
+	public int checkAuthKey(Map<String, Object> authMap) {
+		return mapper.checkAuthKey(authMap);
+	}
 	
 	
 	

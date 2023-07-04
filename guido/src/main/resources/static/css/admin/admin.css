@@ -20,6 +20,12 @@ main {
     border-radius: 20px;
 }
 
+.btn0 {
+    background-color: #F0F0F0;
+    width: 80px;
+    height: 36px;
+}
+
 .btn1 {
     background-color: #1C797D;
     color: #F0F0F0;
@@ -36,7 +42,6 @@ main {
 
 .btn3 {
     background-color: #F0F0F0;
-    ;
     color: black;
     width: 144px;
     height: 34px;
@@ -281,6 +286,7 @@ td {
 .col-state{width:150px;}
 .col-approval{width:150px;}
 .col-confirmationNo{width:150px;}
+.col-main-banner{width:150px;}
 
 /* 페이지네이션 */
 
@@ -372,7 +378,7 @@ td {
 }
 
 
-#modalCalendar {
+#modal {
     display: none;
     /* 초기에는 모달을 숨김 */
     position: fixed;
@@ -389,13 +395,20 @@ td {
     /* 반투명한 배경색 */
 }
 
-#calendarArea {
+#modalContent {
     background-color: white;
-    margin: 10% auto;
+    margin: 20% auto;
     padding: 20px;
-    width: 80%;
-    max-width: 400px;
+    width: 500px;
     border-radius: 5px;
+}
+
+#modalContent>* {
+    margin: 10px;
+}
+
+.modal-btn-area {
+    
 }
 
 

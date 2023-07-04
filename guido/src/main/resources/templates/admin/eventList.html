@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
 
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/admin/admin.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <style>
         header {
             width: 100%;
@@ -32,8 +32,10 @@
             <div class="content-header">
                 <h1 class="content-title">이벤트 목록</h1>
                 <div class="btn-container">
-                    <a th:href="@{writeEvent}"><button type="buttion" id='writeEventBtn' class="btn btn1">글 작성</button></a>
-                    <button type="buttion" class="btn btn2">블라인드</button>
+                    <a th:href="@{writeEvent}"><button type="buttion" id='writeEventBtn' class="btn btn1">글
+                            작성</button></a>
+                    <button type="buttion" class="btn btn0" id="blindBtn">블라인드</button>
+                    <button type="buttion" class="btn btn2" id="blindCancelBtn">블라인드 해제</button>
                 </div>
             </div>
 
@@ -44,15 +46,27 @@
                 <!-- 카운트 -->
                 <div class="count-container">총 <span th:text="${map.pagination.listCount}">건 수</span>건</div>
                 <!-- 검색창 -->
-                <div class="search-container"><input type="text" name="query" id="search"><button id="searchBtn"><img th:src="@{/images/admin/searchBtn.svg}" alt="" id="searchImg"></button></div>
+                <form th:action="${pageName}" method="get">
+                    <div class="search-container">
+                        <input type="text" name="query" id="search">
+                        <button id="searchBtn"><img th:src="@{/images/admin/searchBtn.svg}" alt="" id="searchImg"></button>
+                    </div>
+                </form>
             </div>
 
             <!-- 테이블 -->
             <table id="table">
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
-                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">번호</th><th class="col-title">제목</th>
-                    <th class="col-date">작성일</th><th class="col-date">종료일</th><th class="col-blind">블라인드</th></tr>
+                    <tr>
+                        <th class="col-checkbox"><input type="checkbox" id="checkAll"></th>
+                        <th class="col-number">번호</th>
+                        <th class="col-title">제목</th>
+                        <th class="col-date">작성일</th>
+                        <th class="col-date">종료일</th>
+                        <th class="col-blind">블라인드</th>
+                        <th class="col-main-banner">메인 배너 설정</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
@@ -64,8 +78,14 @@
                             <td th:text="*{CREATE_DT}">작성일</td>
                             <td th:text="*{EVENT_END_DT}">종료일</td>
                             <td>
-                                <button type="buttion" th:if='*{EVENT_STATE=="N"}' class="btn btn3">블라인드</button>
-                                <button type="buttion" th:if='*{EVENT_STATE=="B"}' class="btn btn4">블라인드 해제</button>
+                                <button type="buttion" th:if='*{EVENT_STATE=="N"}' class="btn btn3 event-blind-btn">블라인드</button>
+                                <button type="buttion" th:if='*{EVENT_STATE=="B"}' class="btn btn4 event-blind-cancel-btn">블라인드 해제</button>
+                            </td>
+                            <td th:if='*{EVENT_STATE=="N"}'>
+                                <button type="buttion" th:unless='*{MAIN_BANNER_ORDER}'
+                                    class="btn btn3 set-main-banner">메인 배너 설정</button>
+                                <button type="buttion" th:if='*{MAIN_BANNER_ORDER}'
+                                    th:text="|*{MAIN_BANNER_ORDER}번째 메인 배너|" class="btn btn4 main-banner"></button>
                             </td>
                         </tr>
                     </th:block>
@@ -73,7 +93,28 @@
             </table>
 
             <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
+            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}" />
+        </div>
+        <div id="modal" class="modal">
+            <div id="modalContent">
+                <h1>메인 배너 설정</h1>
+                <hr>
+                <div>
+                    <span id="selectedEventNo">1</span>번 이벤트를
+                    <select name="modalSelect" id="modalSelect">
+                        <option value>선택</option>
+                        <option th:each="mainEvent : ${application.mainEventList}"
+                            th:value="${mainEvent.MAIN_BANNER_ORDER}"
+                            th:text="|${mainEvent.MAIN_BANNER_ORDER}번째 (${mainEvent.EVENT_NO != 0 ? mainEvent.EVENT_NO+'번 이벤트' : '비어있음'})|">
+                        </option>
+                    </select>
+                    메인 배너로 설정합니다.
+                </div>
+                <div class="modal-btn-area">
+                    <button class="btn btn1 modal-submit">확인</button>
+                    <button class="btn btn2 modal-cancel">취소</button>
+                </div>
+            </div>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>
@@ -81,4 +122,5 @@
         const list = /*[[${map.list}]]*/"리스트";
     </script> -->
 </body>
+
 </html>

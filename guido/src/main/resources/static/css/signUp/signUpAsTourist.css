@@ -1,14 +1,15 @@
 /* 전체 */
+*,*:focus{outline:none;}
 .container_total{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     padding: 400px 0;
     overflow: scroll;
-    margin-top: 80px;
+    margin-top: 120px;
 }
 /* 유효성 검사 색상 */
 .correct{color: green;}
@@ -25,39 +26,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 25px;
+    margin: 40px;
 }
 /* 입력 부분 */
+
+/* ----- uiverse ----- */
+.inputGroup {
+    /* font-family: 'Segoe UI', sans-serif; */
+    margin: 0.2em 0;
+    width: 420px;
+    height: 50px;
+    position: relative;
+}
+
+.inputGroup input {
+    font-size: 100%;
+    padding: 0.8em;
+    height: 50px;
+    outline: none;
+    border: 1px solid #c5c5c5;
+    background-color: transparent;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: -0.15rem;
+}
+
+.inputGroup label {
+    font-size: 0.875rem;
+    position: absolute;
+    left: 0;
+    padding: 1em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: #6d6c6c;
+}
+
+.inputGroup :is(input:focus, input:valid)~label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    border-radius: 40%;
+    background-color: #fff;
+    color: #1c797d;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+    border-color: #1c797d;
+}
+/* 이메일,인증번호 칸 작게 */
+.emailPart>.inputGroup, .authPart>.inputGroup{
+    width: 330px;
+    padding-right: 5px;
+} 
+/* 이름&성 칸 반반 */
+.last-name, .first-name{
+    display: flex;
+    flex-direction: column;
+    width: 207px;
+    position: relative;
+}
+.namePart .inputGroup{
+    width: 207px;
+}
+
+
+/* 원래 내가 작성 */
 .container_middle_input{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-/* 국제번호 입력 */
-
-/* 입력 중인 input 테두리 색 */
-.container_middle_input input:focus{
-    border-color: #1c797d;
-}
-/* .contain */
-.container_middle_input>input{
-    width: 420px;
-    height: 55px;
-    border: 1px solid #c5c5c5;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 5px;
-    color: #5c5c5c;
-}
-:not(#phone)
 /* 동의 체크 */
 .container_middle_check{
     width: 420px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: start; */
     margin: 10px 10px 30px 10px;
 }
 .box{
@@ -70,7 +116,14 @@
     display: none;
 }
 .container_middle_check>div{
-    margin: 5px 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.chk-all{
+    padding: 5px 0;
+}
+.chk0, .chk1, .chk2{
+    margin-left: 10px
 }
 .ment1,.ment2{
     color: #5c5c5c;
@@ -80,13 +133,15 @@
     cursor: pointer;
     color: black;
 }
+/* 동의 박스 체크됐을 때 */
 input[type="checkbox"]:checked + label{
-    background: url("../../images/signUp/check.png") 0 0 no-repeat;
+    background: url("/images/signUp/check.png") 0 0 no-repeat;
     background-size: cover;
     border: none;
 }
 .required{
     color:forestgreen; vertical-align: 3px;}
+
 /* 제출 버튼 */
 .container_bottom{
     height: 80px;
@@ -100,5 +155,52 @@ input[type="checkbox"]:checked + label{
     background-color: #1c797d;
     border-radius: 8px;
     color: #fff;
+}
+
+/* ----------------- */
+/* 이메일, 인증번호, 이름&성 입력부분 */
+.emailPart, .authPart, .namePart{
+    display: flex;
+    flex-direction: row;
+    width: 420px;
+    height: 55px;
+    justify-content: space-between;
+}
+/* 이메일, 인증번호 버튼 */
+.emailPart>button, .authPart>button{
+    width: 85px;
+    height: 50px;
+    background-color: #1c797d;
+    color: #fff;
+    border-radius: 8px;
+    /* display: flex;
+    align-items: end; */
+
+}
+
+/* 국제 번호 */
+
+/* 유효성 검사 메세지 */
+.error-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: 5px 15px 10px 15px;
+    color: rgba(255, 0, 0, 0.77);
+    justify-content: start;
+}
+.possible-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: 5px 15px 10px 15px;
+    justify-content: start;
+    color: rgba(34, 139, 34, 0.77);
+}
+.for-authTimer{
+    width: 420px;
+    padding-left: 15px;
+    margin: 5px 15px 10px 15px;
+    justify-content: start;
+    color: #1c797d;
+    font-weight: bold;
 }
 

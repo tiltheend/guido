@@ -80,6 +80,17 @@
 
 
 
+/* 로그인한 가이드 글작성 버튼 */
+.write-btn img{
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+
 
 /* ***** 메인 슬라이드 ***** */
 
@@ -112,7 +123,6 @@
   /* position: relative; */
   /* height: 40vh; */
   height: 360px;
-  border-radius: 15px;
 }
 
 
@@ -246,7 +256,7 @@ hr{
   transition-duration: 0.3s;
 }
 
-.prev{
+/* .prev{
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -258,7 +268,7 @@ hr{
   z-index: 100;
   margin-top: 135px;
   margin-left: 5px;
-  /* transition-duration: 0.2s; */
+  transition-duration: 0.2s;
   opacity: 0.6;
   cursor: pointer;
 }
@@ -274,10 +284,10 @@ hr{
   z-index: 100;
   margin-left: 265px;
   margin-top: 135px;
-  /* transition-duration: 0.2s; */
+  transition-duration: 0.2s;
   opacity: 0.6;
   cursor: pointer;
-}
+} */
 
 .container--inner__top__left img{
   min-width: 300px;
@@ -469,6 +479,44 @@ hr{
 .heart-icon.selected{
   background-image: url('/images/profile/heartClick.png'); 
 }
+  /* 좋아요 버튼 */
+/*   .like--container{
+    margin-top: 5vh;
+}
+
+  .like--container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .like--container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .like--container svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    transition: all 0.3s;
+    fill: #666;
+  }
+  
+  .like--container svg:hover {
+    transform: scale(1.1);
+  }
+  
+  .like--container input:checked ~ svg {
+    fill: #E3474F;
+  } */
+  /* 진 */
 
 
 /* 게시글 텍스트 */
@@ -562,8 +610,10 @@ hr{
 .divide-main{
   height: 80px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
+  align-content: center;
 }
 
 .divide-main p{
@@ -582,7 +632,7 @@ hr{
   display: flex;
   justify-content: flex-end;
   position: relative;
-  margin-top: 10px;
+  margin-top: -10px;
   margin-bottom: 10px;
 }
 .post-more button{

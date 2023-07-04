@@ -19,6 +19,8 @@
 		<result property="eventEndDt" column="EVENT_END_DT"/>
 		<result property="createDt" column="CREATE_DT"/>
 		<result property="state" column="EVENT_STATE"/>
+		<result property="bgColor" column="BG_COLOR"/>
+		<result property="mainBannerOrder" column="MAIN_BANNER_ORDER"/>
 		<collection property="fileList"
 					select="selectFileList"
 					column="EVENT_NO"
@@ -88,6 +90,7 @@
 		<choose>
 			<when test="pageName == 'eventList'">
 				"EVENT"
+				<if test="query != null">WHERE EVENT_NAME LIKE '%${query}%' OR EVENT_CONTENT LIKE '%${query}%'</if>
 			</when>
 			<when test="pageName == 'touristManagement'">
 				"USER" WHERE USER_TYPE='T'
@@ -103,6 +106,7 @@
 			</when>
 			<when test="pageName == 'qna'">
 				"QNA"
+				<if test="query != null">WHERE QNA_TITLE LIKE '%${query}%' OR QNA_CONTENT LIKE '%${query}%'</if>
 			</when>
 		</choose>
 	</select>
@@ -111,8 +115,9 @@
 		SELECT
 		<choose>
 			<when test="pageName == 'eventList'">
-				EVENT_NO, EVENT_NAME, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, TO_CHAR(EVENT_END_DT, 'YYYY-MM-DD') EVENT_END_DT, EVENT_STATE
+				EVENT_NO, EVENT_NAME, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, TO_CHAR(EVENT_END_DT, 'YYYY-MM-DD') EVENT_END_DT, EVENT_STATE, BG_COLOR, NVL2(MAIN_BANNER_ORDER,MAIN_BANNER_ORDER,'0') MAIN_BANNER_ORDER
 				FROM EVENT
+				<if test="query != null">WHERE EVENT_NAME LIKE '%${query}%' OR EVENT_CONTENT LIKE '%${query}%'</if>
 				ORDER BY EVENT_NO DESC
 			</when>
 			<when test="pageName == 'touristManagement'">
@@ -130,7 +135,8 @@
 				ORDER BY USER_NO DESC
 			</when>
 			<when test="pageName == 'guideApprovalRequest'">
-				USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, CONFIRMATION_NO FROM "USER"
+				USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, CONFIRMATION_NO
+				FROM "USER"
 				NATURAL JOIN "GUIDE"
 				WHERE USER_TYPE='G'
 				AND USER_STATE='Y'
@@ -144,10 +150,13 @@
 			<when test="pageName == 'qna'">
 				QNA_NO, QNA_TITLE, QNA_EMAIL, QNA_DATE, QNA_CHECK_FL
 				FROM QNA
+				<if test="query != null">WHERE QNA_TITLE LIKE '%${query}%' OR QNA_CONTENT LIKE '%${query}%'</if>
 				ORDER BY QNA_CHECK_FL, QNA_NO
 			</when>
 		</choose>
 	</select>
+	
+	
 	
 	<select id="selectEvent" resultMap="event_rm">
 		SELECT EVENT_NO, EVENT_NAME, EVENT_CONTENT, TO_CHAR(CREATE_DT,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') CREATE_DT
@@ -165,7 +174,9 @@
 		<selectKey order="BEFORE" resultType="_int" keyProperty="eventNo">
 			SELECT SEQ_EVENT_NO.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO "EVENT" VALUES(#{eventNo}, #{eventName}, #{eventContent}, #{eventEndDt}, SYSDATE, DEFAULT)
+		INSERT INTO "EVENT" VALUES(#{eventNo}, #{eventName}, #{eventContent}, #{eventEndDt}, SYSDATE, DEFAULT,
+			#{bgColor}, NULL
+		)
 	</insert>
 	
 	<insert id="insertFileList">
@@ -179,7 +190,7 @@
 	</insert>
 	
 	<select id="selectQNA" resultMap="qna_rm">
-		SELECT * FROM QNA WHERE QNA_NO=#{qna_no}
+		SELECT * FROM QNA WHERE QNA_NO=#{qnaNo}
 	</select>
 	
 	<select id="selectQnaFileList" resultMap="file_rm">
@@ -187,4 +198,51 @@
 		WHERE QNA_NO = #{qnaNo}
 		ORDER BY FILE_ORDER 
 	</select>
+	
+	<update id="writeAnswer">
+		UPDATE QNA SET QNA_ANSWER = #{qnaAnswer}, QNA_CHECK_FL = 'Y' WHERE QNA_NO = #{qnaNo}
+	</update>
+	
+	<update id="approveGuide" parameterType="java.util.List">
+	  UPDATE "USER" SET USER_STATE='N' WHERE USER_STATE='Y' AND USER_NO IN
+	  <foreach item="userNo" collection="list" open="(" separator="," close=")">#{userNo}</foreach>
+	</update>
+	
+	<select id="selectMainEventList" resultType="map">
+		<![CDATA[  
+		SELECT NVL("EVENT".EVENT_NO, 0) AS EVENT_NO,
+        DUMMY_MAIN_BANNER_ORDER AS MAIN_BANNER_ORDER,
+		       NVL2(BG_COLOR, BG_COLOR, '#ffffff') AS BG_COLOR,
+		       FILE_PATH
+		FROM (
+		    SELECT LEVEL AS DUMMY_MAIN_BANNER_ORDER
+		    FROM DUAL
+		    CONNECT BY LEVEL <= 8
+		) DUMMY_SEQ
+		LEFT JOIN "EVENT" ON DUMMY_MAIN_BANNER_ORDER = MAIN_BANNER_ORDER
+		LEFT JOIN "FILE" ON "EVENT".EVENT_NO = "FILE".EVENT_NO AND FILE_ORDER = 0
+		ORDER BY MAIN_BANNER_ORDER
+		]]>
+	</select>
+	
+	<update id="deleteMainBanner">
+		UPDATE "EVENT" SET MAIN_BANNER_ORDER = NULL WHERE MAIN_BANNER_ORDER = #{order}
+	</update>
+	
+	
+	<update id="setMainBanner">
+		UPDATE "EVENT" SET MAIN_BANNER_ORDER = #{order} WHERE EVENT_NO = #{eventNo}
+	</update>
+	
+	
+	<update id="eventBlind" parameterType="java.util.List">
+	  UPDATE "EVENT" SET EVENT_STATE='B', MAIN_BANNER_ORDER=NULL WHERE EVENT_NO IN
+	  <foreach item="eventNo" collection="list" open="(" separator="," close=")">#{eventNo}</foreach>
+	</update>
+	
+	<update id="eventBlindCancel" parameterType="java.util.List">
+	  UPDATE "EVENT" SET EVENT_STATE='N' WHERE EVENT_NO IN
+	  <foreach item="eventNo" collection="list" open="(" separator="," close=")">#{eventNo}</foreach>
+	</update>
+	
 </mapper>

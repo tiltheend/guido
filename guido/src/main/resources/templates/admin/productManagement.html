@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
 
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/admin/admin.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <style>
         header {
             width: 100%;
@@ -43,7 +43,12 @@
                 <!-- 카운트 -->
                 <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
                 <!-- 검색창 -->
-                <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
+                <form th:action="${pageName}" method="get">
+                    <div class="search-container">
+                        <input type="text" name="query" id="search">
+                        <button id="searchBtn"><img th:src="@{/images/admin/searchBtn.svg}" alt="" id="searchImg"></button>
+                    </div>
+                </form>
             </div>
 
             <!-- 테이블 -->

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guido</title>
 
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/admin/admin.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <style>
         header {
             width: 100%;
@@ -88,27 +88,7 @@
             <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
             <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
         </div>
-
-        
-        <div id="modalCalendar" class="modal">
-            <div id="calendarArea">
-                calendar area
-            </div>
-        </div>
     </main>
-    <script>
-        const calendar = document.querySelector('.calendar');
-        calendar.addEventListener('click',() => {
-            const modalCalendar = document.getElementById("modalCalendar");
-            modalCalendar.style.display = "block";
-
-            window.onclick = function (event) {
-                if (event.target == modalCalendar) {
-                    modalCalendar.style.display = "none"; // 모달 숨기기
-                }
-            }
-        });
-    </script>
     <script th:src="@{/js/admin/admin.js}"></script>
 </body>
 

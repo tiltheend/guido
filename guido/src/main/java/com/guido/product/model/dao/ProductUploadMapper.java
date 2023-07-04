@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 
 @Mapper
@@ -48,10 +49,16 @@ public interface ProductUploadMapper {
 	public int imageDelete(Map<String, Object> deleteMap);
 
 	
-	/**게시글 수정
+	/**상품 수정
 	 * @param product
 	 * @return rowCount
 	 */
 	public int productEdit(Product product);
+
+	/**투어 코스 리스트 삽입
+	 * @param uploadTourCourseList
+	 * @return
+	 */
+	public int insertTourCourseList(List<TourCourse> uploadTourCourseList);
 
 }
