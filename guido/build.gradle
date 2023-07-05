@@ -49,8 +49,6 @@ dependencies {
 	// 페이팔
 	// https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
 	implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.14.0'
-	
-	
 
 }
 

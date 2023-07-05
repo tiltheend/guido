@@ -493,9 +493,9 @@
                             <div class="detail--right__price-qty">
         
                                 <!-- 1인당 가격 : n박 시 eachCost !=0 -->
-                                <div th:if="${eachCost}!=0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(eachCost, 3, 'COMMA')}">1박 이상 인당 가격=상품가격/인원수</span> / person</div>
+                                <div th:if="${eachCost}!=0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(eachCost, 1, 'COMMA')}">1박 이상 인당 가격=상품가격/인원수</span> / person</div>
                                 <!-- 1인당 가격 : 1박 시 eachCost == 0원 -->
-                                <div th:if="${eachCost}==0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA')}">1박 시 인당 가격</span> / person</div>
+                                <div th:if="${eachCost}==0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}">1박 시 인당 가격</span> / person</div>
                                 
                                 <div>
                                     <div class="detail--right__price-minus priceBtn">&minus;</div>
