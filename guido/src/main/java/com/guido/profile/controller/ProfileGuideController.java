@@ -1,5 +1,7 @@
 package com.guido.profile.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,22 @@ public class ProfileGuideController {
 //		return "profile/sellerProfile";
 //	}
 	
+	// 비동기로 가이드 리뷰 목록 불러오기 (최신 3개)
+	@ResponseBody
+	@PostMapping(value="/guideReviewList", produces="application/json; charset=UTF-8")
+	public List<Review> guideReviewList(@RequestBody int userNo){
+
+		List<Review> guideReivewList = service.guideReivewList(userNo);
+		
+		// 0.5 단위로 별점 바꾸기
+		for(Review r : guideReivewList) {
+			r.setReviewStarsDouble(r.getReviewStars()/20.0);
+			System.out.println(r);
+		}
+		
+		return guideReivewList;
+	}
+	
 	// 리뷰 리플 달기
 	@ResponseBody
 	@PostMapping("/reviewReply")
@@ -48,8 +66,7 @@ public class ProfileGuideController {
 	
 	// 리뷰 리플 삭제
 	@ResponseBody
-	@PostMapping(value = "/reviewReplyDel", produces="application/json; charset=UTF-8")
-//	@PostMapping("/reviewReplyDel")
+	@PostMapping("/reviewReplyDel")
 	public int reviewReplyDel(@RequestBody int reviewNo){
 		int result = service.reviewReplyDel(reviewNo);
 		return result;

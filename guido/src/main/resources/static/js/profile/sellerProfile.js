@@ -5,8 +5,6 @@ if(profileEditIcon!=null){
     profileEditIcon.addEventListener('click', () => userProfileFile.click());
 }
 
-
-
 let reviewContentList; /* 리뷰 글자 수 */
 let reviewContentMore; /* 리뷰 글자 수 */
 
@@ -26,6 +24,8 @@ let reviewMoreModalClose; /* 더보기 닫기 */
 // let replyEditBtn; /* 리뷰 수정 버튼 */
 // let sellerReplyWirte; /* 리뷰 달기 박스 */
 
+let reviewMoreBtn; /* 리뷰 더보기 버튼 */
+
 /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
 function reviewMoreFn(){
     reviewContentList=document.querySelectorAll(".seller-profile-top .review-list li>pre");
@@ -43,8 +43,24 @@ function reviewMoreFn(){
 document.addEventListener("DOMContentLoaded",()=>{
 
     reviewMoreFn(); /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
+    reviewMoreBtnFn(); /* 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
 
 })
+
+/* 리뷰 더보기 js */
+
+// 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
+function reviewMoreBtnFn(){
+    reviewMoreBtn = document.querySelector(".review-list-more");
+
+    let reviewCountSpan = document.querySelector(".seller-review>h1>span").innerText;
+    
+    if(reviewCountSpan<=3){
+        reviewMoreBtn.style.display="none";
+    } else {
+        reviewMoreBtn.style.display="block";
+    }
+}
 
 /* 리뷰 답글 노출 */
 function reviewReplyFn (el) {
@@ -225,5 +241,49 @@ function moreReviewFn(el){
         e.preventDefault;
         reviewMoreModal.style.display="none";
     });
+
+};
+
+
+
+
+/* 비동기로 리뷰 목록 불러오기 (최신 3개) */
+function reviewListFn(e){
+
+    // fetch("/profile/guideReviewList",{
+    //     method : "POST",
+    //     headers : {"Content-Type" : "application/json"}, 
+    //     body : pageUserNo
+    // })
+    // .then(resp => resp.json())
+    // .then(guideReviewList => {
+
+    //     if(guideReviewList.length >0){
+
+    //         // 기존 리뷰 지우기
+    //         let reviewListElements = document.querySelectorAll('.seller-review .review-list');
+    
+    //         reviewListElements.forEach(function(reviewListElement) {
+    //         reviewListElement.parentNode.removeChild(reviewListElement);
+    //         });
+    
+    //         let reviewCount = newReviewList[0].reviewCount;
+    //         document.querySelector(".my-review>div>h1>span").innerText=reviewCount;
+            
+    //         for (let i = 0; i <newReviewList.length; i++) {
+    //             const review = newReviewList[i];
+    
+    //             if(review == null) break;
+
+                
+    //         }
+
+    //     }
+
+    // })
+    // .catch(err=>{
+    //     console.log(err);
+    //     reviewMoreBtn.style.display="none";
+    // });
 
 };

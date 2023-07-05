@@ -20,6 +20,9 @@ public interface ProfileGuideMapper {
 
 	// 가이드 상품 목록
 	List<Product> guideProductList(int userNo);
+	
+	// 가이드 리뷰 수 카운트
+	int reviewCount(int userNo);	
 
 	// 가이드 리뷰 조회
 	List<Review> guideReivewList(int userNo);
@@ -33,6 +36,9 @@ public interface ProfileGuideMapper {
 	// 리뷰 리플 삭제
 	int reviewReplyDel(int reviewNo);
 
+	
+
+	
 
 	
 }

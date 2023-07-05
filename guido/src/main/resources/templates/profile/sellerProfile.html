@@ -221,7 +221,7 @@
             </div>
 
             <div class="seller-review"> <!-- 리뷰 -->
-                <h1>Review (<span th:text="${#lists.size(guideReivewList)}">리뷰 갯수</span>)</h1>
+                <h1>Review (<span th:text="${reviewCount}">리뷰 갯수</span>)</h1>
                 <ul class="review-list">
                     <li th:each="review : ${guideReivewList}">
                         <ul>

@@ -215,7 +215,10 @@
 		AND REVIEW_DEL_FL = 'N'
 		AND REVIEW_REPLY_DEL_FL = 'N'
 		ORDER BY 1 DESC
+		FETCH FIRST 3 ROWS ONLY
 	</select>
+	
+
 	 
 	<!-- 리뷰 리플 달기 -->
 	<update id="reviewReply">
@@ -238,5 +241,11 @@
 		WHERE REVIEW_NO= #{reviewNo}
 	</update>
 	
+	<!-- 가이드 리뷰 수 카운트 -->
+	<select id="reviewCount" resultType="_int">
+		SELECT COUNT(*)  FROM "REVIEW" R
+		JOIN "PRODUCT" P USING(PRODUCT_NO)
+		WHERE P.USER_NO = #{userNo}
+	</select>
 	
 </mapper>

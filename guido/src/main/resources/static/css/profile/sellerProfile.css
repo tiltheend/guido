@@ -184,6 +184,7 @@
     /* width: 260px; height: 260px; */
     background-color: #FFE69A;
     border-radius: 15px; margin: 10px;
+    max-width: 40%;
 }
 .seller-profile-top .sales-list-box .sale-img a{
         display: block; width: 100%; height: 100%;
@@ -418,7 +419,7 @@
 }
 
 .seller-profile-top .seller-reply textarea{ /* 답글 textarea */
-    width: 100%; height: 80px;
+    width: 100%; height: 64px;
     resize: none; border: none;
     margin: 10px;
     user-select: none;
@@ -657,7 +658,7 @@
 
 
     
-@media screen and (max-width : 1024px) {
+@media screen and (max-width : 1100px) {
     /* 판매자 프로필 */
     .seller-profile-top{
         display: flex; justify-content: space-between;
@@ -745,7 +746,9 @@
         width: 260px;
         height: 260px;
     }
-
+    .seller-profile-top .seller-reply textarea{
+        height: 86px;
+    }
 }
 
 @media screen and (max-width : 767px) {

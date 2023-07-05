@@ -85,6 +85,10 @@ public class ProfileTouristController {
 			}
 			
 			model.addAttribute("guideReivewList", guideReivewList);
+			
+			// 가이드 리뷰 수 카운트
+			int reviewCount = GuideService.reviewCount(userNo);
+			model.addAttribute("reviewCount", reviewCount);
 
 			
 		} else if(userType == 0) { // 여행객 일 경우

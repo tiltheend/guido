@@ -42,6 +42,12 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 		return mapper.guideReivewList(userNo);
 	}
 	
+	// 가이드 리뷰 수 카운트
+	@Override
+	public int reviewCount(int userNo) {
+		return mapper.reviewCount(userNo);
+	}
+	
 	// 리뷰 리플 달기
 	@Override
 	public int reviewReply(Review review) {

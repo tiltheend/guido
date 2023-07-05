@@ -58,5 +58,12 @@ public interface ProfileGuideService {
 	int reviewReplyDel(int reviewNo);
 
 
+	/** 가이드 리뷰 수 카운트
+	 * @param userNo
+	 * @return
+	 */
+	int reviewCount(int userNo);
+
+
 
 }
