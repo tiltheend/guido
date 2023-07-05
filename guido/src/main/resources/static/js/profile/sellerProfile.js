@@ -452,22 +452,21 @@ function reviewListFn(){
                         // 답글 편집 버튼과 삭제 버튼을 담은 <div>를 생성합니다.
                     const replyEditDiv = document.createElement('div');
                     replyEditDiv.classList.add('reply-edit');
-                    replyEditDiv.setAttribute('th:if', '${session.loginUser?.userNo == user.userNo}');
+                    // replyEditDiv.setAttribute('th:if', '${session.loginUser?.userNo == user.userNo}');
     
                     // 편집 버튼을 담은 <button>을 생성합니다.
                     const editButton = document.createElement('button');
                     editButton.textContent = 'Edit';
                     editButton.setAttribute('type', 'button');
-                    editButton.addEventListener('click', function(event) {
-                        reviewReplyEditFn(event);
-                    });
+                    // editButton.setAttribute('onclick', 'reviewReplyEditFn(event)');                editButton.setAttribute('onclick', 'reviewReplyEditFn(event)');
+
     
                     // 삭제 버튼을 담은 <button>을 생성합니다.
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
                     deleteButton.setAttribute('type', 'button');
-                    deleteButton.addEventListener('click', function(event) {
-                        reviewReplyDelFn(event);
+                    deleteButton.addEventListener('click', e => {
+                        reviewReplyDelFn(e);
                     });
     
                     // 편집 버튼과 삭제 버튼을 담은 <div>에 요소를 추가합니다.
