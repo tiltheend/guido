@@ -27,6 +27,15 @@ public interface ReservationMapper {
 
 	// 예약 취소
 	int reservationCancel(Reservation reservation);
+
+	// 예약 가능한 상품인지 확인 - 1박의 경우
+	int checkAvailable(Reservation reservation);
+
+	// 예약 가능한 상품인지 확인 - 1박 이상의 경우
+	int checkAvailable2(Reservation reservation);
+
+	// 예약 가능 수량 업데이트
+	int updateAvailability(Reservation reservation);
 	
 
 }

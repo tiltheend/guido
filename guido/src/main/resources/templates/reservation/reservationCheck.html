@@ -123,7 +123,7 @@
         
             <div class="reservation--payment__method">
                 <div class="reservation--classification">결제 수단</div>
-                <div th:text="*{paymentMethod=='C'} ? '신용/체크 카드' : '페이팔' ">결제 수단</div>
+                <div th:text="*{paymentMethod=='C'} ? '신용/체크카드' : '페이팔' ">결제 수단</div>
             </div>
 
             <div class="reservation--divisionline"></div>
@@ -131,7 +131,7 @@
         </div>
 
         <div class="reservation--price">
-            <div class="reservation--classification">총 결제 금액</div>
+            <div class="reservation--classification" th:text="*{reservationState=='N'}?'취소 금액' : '총 결제 금액' "></div>
 
             <div>
                 <div class="reservation--text__price">

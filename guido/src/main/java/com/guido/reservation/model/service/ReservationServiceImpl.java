@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -184,8 +185,30 @@ public class ReservationServiceImpl implements ReservationService{
 
 	// 예약 데이터 추가
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public int insertReservation(Reservation reservation) {
-		return mapper.insertReservation(reservation);
+		
+		
+		// 예약 데이터 삽입 전 예약 가능한 상품인지 확인
+		int checkAvailable = mapper.checkAvailable(reservation);
+		
+		// 수량 O
+		if(checkAvailable>0) {
+			
+			// 예약 데이터 삽입
+			int result = mapper.insertReservation(reservation);
+			
+			// 예약 성공
+			if(result>0) {
+				return mapper.updateAvailability(reservation);
+			}
+			
+		}else 
+			// 예약 가능한 수량 초과(예약 불가능)
+			checkAvailable = -1;
+		
+		return checkAvailable;
+		
 	}
 
 

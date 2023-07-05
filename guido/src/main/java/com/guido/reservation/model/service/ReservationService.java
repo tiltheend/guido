@@ -3,6 +3,7 @@ package com.guido.reservation.model.service;
 import java.io.IOException;
 import java.util.Map;
 
+import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Reservation;
 

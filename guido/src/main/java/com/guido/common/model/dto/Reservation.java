@@ -33,7 +33,7 @@ public class Reservation {
 	private String cancelReason;  // 예약 취소 사유
 	
 	
-	
+	private int productPackage; 	// 1박 or n박
 	private String thumbnail; // 썸네일 (파일 오더 1번)
 	private String productName; // 상품명
 	private int reservationCount; // 예약 수

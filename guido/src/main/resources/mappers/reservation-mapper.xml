@@ -92,10 +92,52 @@
 	</select>
 	
 	
+	<!-- 예약 취소-->
 	<update id="reservationCancel">
 		UPDATE "RESERVATION"
 		SET RESERVATION_STATE = 'N',
 		CANCEL_REASON = #{cancelReason}
 		WHERE IMP_UID = #{impUid}
 	</update>
+	
+	
+	
+	<!-- 상품 구매 가능 여부 체크 -->
+	<select id="checkAvailable" resultType="_int">
+	  <choose>
+	    <when test="productPackage == 1">
+	      SELECT COUNT(*) FROM "PRODUCT_DT"
+	      LEFT JOIN "PRODUCT_OPTION" USING(PRODUCT_NO)
+	      WHERE PRODUCT_DT_AVAILABILITY = 'Y'
+	      AND OPTION_NO = #{optionNo}
+	      AND OPTION_REST >= #{guestCount}
+	    </when>
+	    <otherwise>
+	      SELECT COUNT(*) FROM "PRODUCT_DT"
+	      WHERE PRODUCT_DT_AVAILABILITY = 'Y'
+	      AND PRODUCT_DT_NO = #{productDateNo}
+	    </otherwise>
+	  </choose>
+	</select>
+	
+	
+	<!-- 예약 가능 수량 업데이트 -->
+	<update id="updateAvailability">
+	  <choose>
+		  <!-- 1박의 경우 예약 완료 시 구매 가능 옵션(시간대) 수량 업데이트-->
+	    <when test="productPackage == 1">
+	      UPDATE "PRODUCT_OPTION"
+	      SET OPTION_REST = OPTION_REST - #{guestCount}
+	      WHERE OPTION_NO = #{optionNo}
+	    </when>
+	    
+	    <!-- N박의 경우 예약 완료 시 구매 가능 일정(날짜) 업데이트-->
+	    <otherwise>
+	      UPDATE "PRODUCT_DT"
+	      SET PRODUCT_DT_AVAILABILITY = 'N'
+	      WHERE PRODUCT_DT_NO = #{productDateNo}
+	    </otherwise>
+	  </choose>
+	</update>
+	
 </mapper>

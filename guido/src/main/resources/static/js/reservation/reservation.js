@@ -169,8 +169,8 @@ const requestContent = document.getElementById("request").value;
             "guestCount": Number(guestsQnt.innerText),
             "productNo": productNo,
             "userNo": userNo,
-            // productDateNo: ,
-            // optionNo: ,
+            "productDateNo": 19,    // 캘린더에서 선택된 날짜
+            "optionNo": optionNo,
             "requestContent": requestContent
         }
 
@@ -342,3 +342,12 @@ details.forEach(function(detail) {
 });
 
 
+// textarea 글자수 제한
+function checkLength(el) {
+
+  const maxLength = 600; // 최대 글자수
+
+  if (el.value.length > maxLength) {
+    el.value = el.value.substring(0, maxLength);
+  }
+}

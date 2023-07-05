@@ -139,7 +139,6 @@ public class ReservationController {
 				orderPriceCheck = product.getProductPrice();
 			}
 			
-			System.out.println("orderPriceCheck : " + orderPriceCheck);
 			
 			// 3. 결제 완료된 금액과 실제 계산되어야 할 금액이 다를경우 결제 취소
 			if(amount != orderPriceCheck + orderPriceCheck*0.1) {
@@ -148,21 +147,28 @@ public class ReservationController {
 			}
 			
 			
+			reservation.setProductPackage(product.getProductPackage());
+			
+			
 			int result = service.insertReservation(reservation);
 			
-			System.out.println("result : " + result);
 			
 			if(result>0)
 				return new ResponseEntity<String>("성공", HttpStatus.OK);
 
-			else
+			else if(result==0)
 				return new ResponseEntity<String>("주문 오류", HttpStatus.BAD_REQUEST);
 			
+			else {
+				service.paymentCancel(token, reservation.getImpUid(), amount, "주문 가능한 수량 초과");
+				return new ResponseEntity<String>("주문 가능한 수량을 초과합니다", HttpStatus.BAD_REQUEST);
+			}
+				
 			
 			
 		}catch(Exception e) {
 			
-			 // 4. 결제에러시 결제 취소
+			 // 4. 결제에러 시 결제 취소
 			service.paymentCancel(token, reservation.getImpUid(), amount, "결제 에러");
 			 return new ResponseEntity<String>("결제 에러", HttpStatus.BAD_REQUEST);
 		}
@@ -175,13 +181,14 @@ public class ReservationController {
 	    public String getOrderResult(@RequestParam(value="order_id", required=false) String orderNumber, 
 	    		Model model, @SessionAttribute("loginUser") User loginUser) {
 		 
-		 if(orderNumber==null)
-			 return "redirect:/";
+		 Reservation reservation = null;
 		 
-		 Reservation reservation = service.selectReservation(orderNumber);
+		 if(orderNumber!=null)
+			 reservation = service.selectReservation(orderNumber);
 		 
 		 if(reservation==null)
 			 return "redirect:/";
+		 
 		 
 		 Product product = productService.selectProduct(reservation.getProductNo());
 		 
@@ -206,6 +213,8 @@ public class ReservationController {
 	   }
 
 	 
+	 
+	 // 주문 취소
 	 @PostMapping("/cancel")
 	 public String cancelReservation(Reservation reservation) throws IOException {
 

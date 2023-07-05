@@ -160,7 +160,7 @@
                         <div class="reservation--text">요청 사항</div>
 
                        <textarea name="request" id="request" 
-                       placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다."></textarea>
+                       placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다." oninput="checkLength(this)"></textarea>
                     </div>
 
 
@@ -350,6 +350,7 @@
         const maxTourist = /*[[${product.maxTourist}]]*/"최대 인원";
         const price = /*[[${product.productPrice}]]*/"상품 가격";
         const selectedTime = /*[[${selectedTime?.optionName}]]*/"옵션명";
+        const optionNo = /*[[${selectedTime?.optionNo}]]*/"옵션 번호";
         const impCode = /*[[${impCode}]]*/"포트원 가맹점 식별코드"
         const pgMid = /*[[${pgMid}]]*/"상점 ID"
         const productName = /*[[${product.productName}]]*/"상품명"
