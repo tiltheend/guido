@@ -160,7 +160,7 @@
                         <div class="reservation--text">요청 사항</div>
 
                        <textarea name="request" id="request" 
-                       placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다."></textarea>
+                       placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다." oninput="checkLength(this)"></textarea>
                     </div>
 
 
@@ -191,11 +191,6 @@
             <div class="reservation--bottom">
     
                     <div class="reservation--form__bottom"> 
-                        <!-- <input type="checkbox" id="reservationAgree">
-                        <label for="reservationAgree"></label>
-    
-                        <div class="reservation--text__bottom">주문 내용을 확인하였으며 약관에 동의합니다.</div> -->
-                    
 
                         <div class="reservation--tou">
                             <div>
@@ -288,7 +283,7 @@
                     <div class="close" onclick="toggleModal()">&times;</div>
                     <div class="modal--content">
                         <div class="modal--content__text">총 결제금액</div>
-                        <div class="modal--content__cost">72,900원</div>
+                        <div class="modal--content__cost"></div>
 
                         <div class="modal--content__line"></div>
                         <div class="modal--content__text2">개인 판매 상품으로 거래 관련 사항은 판매자에게 문의할 수 있습니다.</div>
@@ -346,6 +341,7 @@
         iti.setNumber(userTel);        // 전화번호를 입력 상자에 설정
 
         const userName = /*[[${session.loginUser?.userName}]]*/ "로그인 회원 이름";
+        const userNo = /*[[${session.loginUser?.userNo}]]*/ "로그인 회원 no";
         const userEmail = /*[[${session.loginUser?.userEmail}]]*/ "로그인 회원 이메일";
 
         const reservationDate = /*[[${reservationDate}]]*/"예약 일자";
@@ -353,10 +349,12 @@
         const minTourist = /*[[${product.minTourist}]]*/"최소 인원";
         const maxTourist = /*[[${product.maxTourist}]]*/"최대 인원";
         const price = /*[[${product.productPrice}]]*/"상품 가격";
-        const selectedTime = /*[[${option?.optionName}]]*/"옵션명";
+        const selectedTime = /*[[${selectedTime?.optionName}]]*/"옵션명";
+        const optionNo = /*[[${selectedTime?.optionNo}]]*/"옵션 번호";
         const impCode = /*[[${impCode}]]*/"포트원 가맹점 식별코드"
         const pgMid = /*[[${pgMid}]]*/"상점 ID"
         const productName = /*[[${product.productName}]]*/"상품명"
+        const productNo = /*[[${product.productNo}]]*/"상품번호"
         
         
     </script>

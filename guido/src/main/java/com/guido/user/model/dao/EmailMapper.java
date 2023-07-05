@@ -4,8 +4,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.guido.common.model.dto.User;
-
 @Mapper
 public interface EmailMapper {
 

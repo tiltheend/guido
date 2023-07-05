@@ -184,6 +184,7 @@
     /* width: 260px; height: 260px; */
     background-color: #FFE69A;
     border-radius: 15px; margin: 10px;
+    max-width: 40%;
 }
 .seller-profile-top .sales-list-box .sale-img a{
         display: block; width: 100%; height: 100%;
@@ -303,7 +304,7 @@
 .seller-profile-top .review-list li ul .seller-reply>div{
     display: flex; flex-direction: row;
 }
-.seller-profile-top .review-list li ul .seller-reply-wirte>div{
+.seller-profile-top .review-list li ul .seller-reply-write>div{
     display: flex; flex-direction: row;
 }
 /* 리뷰 남긴 사람 프로필 */
@@ -418,7 +419,7 @@
 }
 
 .seller-profile-top .seller-reply textarea{ /* 답글 textarea */
-    width: 100%; height: 80px;
+    width: 100%; height: 64px;
     resize: none; border: none;
     margin: 10px;
     user-select: none;
@@ -443,6 +444,7 @@
     border-radius: 20px; line-height: 32px;
     margin-top: 10px; margin-bottom: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* display: none; */
 }
 .seller-profile-top .seller-reply>div>button:hover{
     background-color: #5C5C5C; color: #F0F0F0;
@@ -452,18 +454,18 @@
 }
 
 /* ----- 판매자 후기 답글 달기 ----- */
-.seller-profile-top .seller-reply-wirte{
+.seller-profile-top .seller-reply-write{
     display: flex; flex-direction: column;
     height: 160px;
     display: none;
 }
-.seller-profile-top .seller-reply-wirte img{
+.seller-profile-top .seller-reply-write img{
     width: 32px; height: 24px; 
     margin-top: 10px;
     top: 0;
 }
 
-.seller-profile-top .seller-reply-wirte textarea{ /* 답글 textarea */
+.seller-profile-top .seller-reply-write textarea{ /* 답글 textarea */
     width: 100%;
     height: 80px;
     resize: none; border: none;
@@ -471,26 +473,26 @@
     margin-top: 10px;
 
 }
-.seller-profile-top .seller-reply-wirte>div:first-of-type{
+.seller-profile-top .seller-reply-write>div:first-of-type{
     width: 100%;
 }
 /* 답글 등록 버튼 */
-.seller-profile-top .review-list .seller-reply-wirte .reply-send{ 
+.seller-profile-top .review-list .seller-reply-write .reply-send{ 
     width: 120px; height: 34px; line-height: 34px;
     background-color: #0F4957; color: #fff;
 }
-.seller-profile-top .review-list .seller-reply-wirte .reply-send:hover{ 
+.seller-profile-top .review-list .seller-reply-write .reply-send:hover{ 
     width: 120px; height: 34px; line-height: 34px;
     background-color: #1C797D; color: #fff;
 }
 
 /* 댓글 수정 삭제 버튼 */
-.seller-profile-top .seller-reply-wirte>div:last-of-type{
+.seller-profile-top .seller-reply-write>div:last-of-type{
     display: flex; justify-content: end;
     margin-right: 8px;
 }
 
-.seller-profile-top .review-list .seller-reply-wirte button{ 
+.seller-profile-top .review-list .seller-reply-write button{ 
     width: 80px; height: 34px;
     background-color: #F0F0F0; color: #5C5C5C;
     font-weight: bold; font-size: 1rem;
@@ -498,7 +500,7 @@
     margin-top: 10px; margin-bottom: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.seller-profile-top .seller-reply-wirte>div>button:hover{
+.seller-profile-top .seller-reply-write>div>button:hover{
     background-color: #5C5C5C; color: #F0F0F0;
 }
 .seller-profile-top .seller-reply>div>button:first-of-type{
@@ -519,6 +521,7 @@
     display: flex;
     /* width: 100%; height: 50px; */
     position: relative;
+    width: 28px; height: 28px;
 }
 .seller-profile-top .review-list li .comment-view>img{ 
     width: 28px; height: 28px;
@@ -655,7 +658,7 @@
 
 
     
-@media screen and (max-width : 1024px) {
+@media screen and (max-width : 1100px) {
     /* 판매자 프로필 */
     .seller-profile-top{
         display: flex; justify-content: space-between;
@@ -665,7 +668,7 @@
         grid-template-columns: repeat(2,1fr);
     }
     .seller-profile-top .profile_right li{
-        margin-bottom: 40px; margin-right: 0;
+        margin-bottom: 20px; margin-right: 0;
     }
     /* 판매자 프로필 아래로 상품 리뷰 오게  */
     .seller-profile-top {
@@ -743,7 +746,9 @@
         width: 260px;
         height: 260px;
     }
-
+    .seller-profile-top .seller-reply textarea{
+        height: 86px;
+    }
 }
 
 @media screen and (max-width : 767px) {

@@ -89,8 +89,10 @@ showTotalResevationCost();
 function toggleModal() {
   
   let modal = document.getElementById("paymentModal");
+  const modalCost = document.querySelector(".modal--content__cost");
   
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
+  modalCost.innerText = totalPaymentCost.innerText;
 
 }
 
@@ -102,7 +104,7 @@ const orderDate = new Date(reservationDate);
 
 if(package==1){
 
-    reservationDateDiv.innerText = reservationDate + " (" + selectedTime + ")";
+    reservationDateDiv.innerText = reservationDate + " [" + selectedTime + "]";
   
 }else{
 
@@ -133,6 +135,7 @@ if (lastYear !== newYear) {
 }
 
 
+const requestContent = document.getElementById("request").value;
 
   
   // 결제 요청
@@ -147,38 +150,68 @@ if (lastYear !== newYear) {
       pay_method: "card",
       merchant_uid: createRandomOrderNum(),   // 주문번호
       name: productName,    // 상품명
-      // amount: Number(totalPaymentCost.innerText),
-      amount: 100,
+      amount: Number(totalPaymentCost.innerText),    // 금액
       buyer_email: userEmail,
       buyer_name: userName,
       buyer_tel: userTel,
     }, 
-    
-    rsp => {
-      if (rsp.success) {   
-        // axios로 HTTP 요청
-        axios({
-          url: "/reservation/liquidate",
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          data: {
-            imp_uid: rsp.imp_uid,
-            merchant_uid: rsp.merchant_uid,
-            amount: 100,
-            productName: productName,
-            paymentMethod: 'C'            
-          }
 
-        }).then((data) => {
-          // 서버 결제 API 성공시 로직
-        })
-      } else {
-        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-        window.location.reload(); 
-      }
+  function (rsp){   // callback
+    if(rsp.success){
+        // 결제 성공 시 로직 : 결제 승인
+
+        const data = {
+            "impUid": rsp.imp_uid,
+            "orderNumber": rsp.merchant_uid,
+            "totalPrice": Number(totalPaymentCost.innerText),
+            "productName": rsp.name,
+            "paymentMethod": 'C',
+            "guestCount": Number(guestsQnt.innerText),
+            "productNo": productNo,
+            "userNo": userNo,
+            "productDateNo": 19,    // 캘린더에서 선택된 날짜
+            "optionNo": optionNo,
+            "requestContent": requestContent
+        }
+
+
+        paymentComplete(data);
+
+        
+    }else{
+      // 결제 실패 시 로직
+      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+      window.location.reload(); 
+    }
 
   });
 }
+
+
+// 결제 완료
+function paymentComplete(data){
+  fetch("/reservation/payment/complete", {
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : JSON.stringify(data)
+  })
+  .then(resp=>resp.text())
+  .then(result=>{
+    
+    if(result!='성공')
+      alert(result);
+    else
+      location.replace("/reservation/order_result?order_id=" + data.orderNumber);
+
+  })
+  .catch(err=>{
+    console.log(err);
+    alert(err);
+  })
+}
+
+
+
 
 // 주문번호 랜덤 생성
 function createRandomOrderNum(){
@@ -194,7 +227,6 @@ function createRandomOrderNum(){
 
 	return orderNum;
 }
-
 
 
 
@@ -310,3 +342,12 @@ details.forEach(function(detail) {
 });
 
 
+// textarea 글자수 제한
+function checkLength(el) {
+
+  const maxLength = 600; // 최대 글자수
+
+  if (el.value.length > maxLength) {
+    el.value = el.value.substring(0, maxLength);
+  }
+}

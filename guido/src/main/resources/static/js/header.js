@@ -1,6 +1,25 @@
 
 /* ***** 헤더 검색 모달창 ***** */
 
+/* ***** 캘린더 ***** */
+$(document).ready(function(){
+
+  $('.input-daterange').datepicker({
+      format: 'yyyy-mm-dd',
+      todayHighlight: true,
+      startDate: '0d'
+  });
+});
+
+
+// 상위에 추가할 div 요소 생성
+var divElement = $('<div>').addClass('when-modal-bg modal');
+// datepicker의 상위 요소 선택
+var datepickerParent = $('.datepicker').parent();
+// 추가할 div 요소를 datepicker의 상위로 이동
+datepickerParent.before(divElement);
+
+
 /* header 자체 */
 const mainSearchBox = document.querySelector('.main-search-box');
 const searchBoxClickBox = document.querySelector('.search-box-click-box');
@@ -16,7 +35,7 @@ const checkInButtonClick = document.querySelector('.in-btn-click');
 const checkOutButtonClick = document.querySelector('.out-btn-click');
 const guestButtonClick = document.querySelector('.guest-btn-click');
 
-/* 회색 바탕 부분 */
+/* 회색 바탕 부분 & 모달창 (전부) */
 const whereModal = document.querySelector('.where-modal-bg');
 const whenModal = document.querySelector('.when-modal-bg');
 const guestModal = document.querySelector('.guest-modal-bg');
@@ -219,19 +238,6 @@ whereModal.addEventListener("click", e => {
   }
 });
 
-
-
-
-
-/* ***** 캘린더 ***** */
-$(document).ready(function(){
-
-  $('.input-daterange').datepicker({
-      format: 'yyyy-mm-dd',
-      todayHighlight: true,
-      startDate: '0d'
-  });
-});
 
 
 

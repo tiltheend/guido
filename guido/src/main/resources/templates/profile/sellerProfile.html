@@ -221,12 +221,11 @@
             </div>
 
             <div class="seller-review"> <!-- 리뷰 -->
-                <h1>Review (<span th:text="${#lists.size(guideReivewList)}">리뷰 갯수</span>)</h1>
+                <h1>Review (<span th:text="${reviewCount}">리뷰 갯수</span>)</h1>
                 <ul class="review-list">
-                    <!-- <th:block th:each="product : ${guideProductList}"> -->
                     <li th:each="review : ${guideReivewList}">
                         <ul>
-                            <li class="reply-content">
+                            <li class="reply-content" th:data-reviewno="${review.reviewNo}">
                                 <div>
                                     <div> <!-- 리뷰 남긴 사람 프로필 -->
                                         <div class="reviewer">
@@ -258,8 +257,8 @@
                                 </div>
                                 <pre th:text="${review.reviewMessage}">후기 내용</pre>
                                 <div class="more-and-reply">
-                                    <p>더보기 +</p>
-                                    <div class="comment-view" th:if="${session.loginUser?.userNo == user.userNo}">
+                                    <p onclick="moreReviewFn(this)">더보기 +</p>
+                                    <div class="comment-view" th:if="${session.loginUser?.userNo == user.userNo}" onclick="reviewReplyFn(this)">
                                         <img th:src="@{/images/profile/comment-view.png}" alt="comment-view">
                                         <img th:src="@{/images/profile/comment-view_hover.png}" alt="comment-view_hover">
                                     </div>
@@ -271,91 +270,40 @@
                                     <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200" th:text="${review.reviewReply}" readonly>답글 내용</textarea>
                                 </div>
                                 <div class="reply-edit" th:if="${session.loginUser?.userNo == user.userNo}">
-                                    <button>Edit</button>
-                                    <button>Delete</button>
+                                    <button onclick="reviewReplyEditFn(event)" type="button">Edit</button>
+                                    <button onclick="reviewReplyDelFn(event)" type="button">Delete</button>
                                 </div>
                             </li>
-                            <li class="seller-reply-wirte" th:unless="${review.reviewReply}"> <!-- 리뷰 작성 박스 -->
+                            <li class="seller-reply-write" th:unless="${review.reviewReply}"> <!-- 리뷰 작성 박스 -->
                                 <div>
                                     <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
                                     <textarea name="sellerReplyContent" id="sellerReplyContent"></textarea>
                                 </div>
                                 <div>
-                                    <button class="reply-send" th:if="${session.loginUser?.userNo == user.userNo}">register</button>
+                                    <button class="reply-send" th:if="${session.loginUser?.userNo == user.userNo}" onclick="reviewReplyAddFn(event)">register</button>
                                 </div>
-                            </li>
+                            </li> 
                         </ul>
                     </li>
-                    <!-- </th:block> -->
-
-                    <!-- <li>
-                        <ul>
-                            <li class="reply-content">
-                                <div>
-                                    <div>
-                                        <div class="reviewer">
-                                            <img src="">
-                                        </div>
-                                        <p class="reviewer-name">Anna</p>
-                                    </div>
-                                    <div class="sale-review-info">
-                                        <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
-                                        <div class="review-rating">
-                                            <div class="review-star">
-                                                <input type="radio" id="starpoint_1" class="star_radio">
-                                                <input type="radio" id="starpoint_2" class="star_radio">
-                                                <input type="radio" id="starpoint_3" class="star_radio">
-                                                <input type="radio" id="starpoint_4" class="star_radio">
-                                                <input type="radio" id="starpoint_5" class="star_radio">
-                                                <input type="radio" id="starpoint_6" class="star_radio">
-                                                <input type="radio" id="starpoint_7" class="star_radio">
-                                                <input type="radio" id="starpoint_8" class="star_radio">
-                                                <input type="radio" id="starpoint_9" class="star_radio" checked>
-                                                <input type="radio" id="starpoint_10" class="star_radio">
-                                                <span class="starpoint_bg"></span>
-                                            </div>
-                                            <span class="review-date">2023/05/25</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <pre>그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre>
-                                <div class="more-and-reply">
-                                    <p>더보기 +</p>
-                                    <div class="comment-view">
-                                        <img th:src="@{/images/profile/comment-view.png}" alt="comment-view">
-                                        <img th:src="@{/images/profile/comment-view_hover.png}" alt="comment-view_hover">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="seller-reply">
-                                <div>
-                                    <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
-                                    <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200">안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!</textarea>
-                                </div>
-                                <div class="reply-edit">
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </div>
-                            </li>
-                            <li class="seller-reply-wirte">
-                                <div>
-                                    <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
-                                    <textarea name="sellerReplyContent" id="sellerReplyContent"></textarea>
-                                </div>
-                                <div>
-                                    <button class="reply-send">register</button>
-                                </div>
-                            </li> -->
-                        </ul>
-                    </li>
-                    
                 </ul>
+
                 <button class="review-list-more">more reviews</button>
             </div>
 
         </div>
     </div>
 
+    <script th:inline="javascript">
+
+        const message = /*[[${message}]]*/  "전달 받은 message";
+        if(message != null) alert(message);
+
+        const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
+        // if(loginUserNo == null){loginUserNo = "";}
+        const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
+        // const reviewCount = /*[[${reviewCount}]]*/ "리뷰 갯수";
+    </script>       
+    
     <script th:src="@{/js/profile/sellerProfile.js}"></script>                   
 </body>
 </html>

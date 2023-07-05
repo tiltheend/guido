@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 // 리뷰 긴 것 더보기 상세 조회
 function moreReviewFn(el){
-        /* 더보기 버튼 누르면 상세 조회 */
+    /* 더보기 버튼 누르면 상세 조회 */
     // moreAndReply = document.querySelector(".more-and-reply>p");
     reviewMoreModal=document.querySelector(".buyer-profile-top .review-more-modal");
 
@@ -272,7 +272,7 @@ if(reviewMoreBtn !=null) {
                         starInput.classList.add("star_radio");
                         starInput.value = (j + 1) * 0.5;
                         if (review.reviewStarsDouble === (j + 1) * 0.5) {
-                            console.log(review.reviewStarsDouble);
+                            // console.log(review.reviewStarsDouble);
                             starInput.checked = true;
                         }
                         // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;
@@ -302,7 +302,7 @@ if(reviewMoreBtn !=null) {
                     moreAndReplyDiv.classList.add("more-and-reply");
                     const moreBtn = document.createElement("p");
                     moreBtn.textContent = "더보기 +";
-                    moreBtn.onclick = moreReviewFn.bind(this);
+                    // moreBtn.onclick = moreReviewFn.bind(this);
                     moreBtn.onclick = function() {
                         moreReviewFn(moreBtn);
                     };
@@ -550,7 +550,7 @@ function reviewListFn(e){
                     starInput.classList.add("star_radio");
                     starInput.value = (j + 1) * 0.5;
                     if (review.reviewStarsDouble === (j + 1) * 0.5) {
-                        console.log(review.reviewStarsDouble);
+                        // console.log(review.reviewStarsDouble);
                         starInput.checked = true;
                     }
                     // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;

@@ -35,5 +35,35 @@ public interface ProfileGuideService {
 	 * @return
 	 */
 	List<Review> guideReivewList(int userNo);
+
+
+	/** 리뷰 리플 달기
+	 * @param review
+	 * @return
+	 */
+	int reviewReply(Review review);
 	
+	
+	/** 리뷰 리플 수정
+	 * @param review
+	 * @return
+	 */
+	int reviewReplyEdit(Review review);
+
+
+	/** 리뷰 리플 삭제
+	 * @param replyNo
+	 * @return
+	 */
+	int reviewReplyDel(int reviewNo);
+
+
+	/** 가이드 리뷰 수 카운트
+	 * @param userNo
+	 * @return
+	 */
+	int reviewCount(int userNo);
+
+
+
 }
