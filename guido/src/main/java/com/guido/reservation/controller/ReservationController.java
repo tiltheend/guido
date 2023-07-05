@@ -171,12 +171,40 @@ public class ReservationController {
 	
 	
 	// 결제완료 후 예약 정보 확인
-	 @GetMapping("/reservation/order_result")
-	    public String getOrderResult(@RequestParam("order_id") String orderNumber, Model model) {
+	 @GetMapping("/order_result")
+	    public String getOrderResult(@RequestParam(value="order_id", required=false) String orderNumber, 
+	    		Model model, @SessionAttribute("loginUser") User loginUser) {
+		 
+		 System.out.println(orderNumber);
+
+		 if(orderNumber==null)
+			 return "redirect:/";
 		 
 		 Reservation reservation = service.selectReservation(orderNumber);
 		 
-		 model.addAttribute(reservation);
+		 System.out.println(reservation);
+
+		 if(reservation==null)
+			 return "redirect:/";
+		 
+		 Product product = productService.selectProduct(reservation.getProductNo());
+		 
+		 if(reservation.getUserNo()!=loginUser.getUserNo())
+			 return "redirect:/";
+		 
+		 int orderPrice = 0;
+		 
+		 if(product.getProductPackage()==1)
+			 orderPrice = reservation.getGuestCount()*product.getProductPrice();
+		 else
+			 orderPrice = product.getProductPrice();
+		 
+		 int extraFee = (int) (orderPrice * 0.1);
+		 
+		 model.addAttribute("reservation", reservation);
+		 model.addAttribute("product", product);
+		 model.addAttribute("orderPrice", orderPrice);
+		 model.addAttribute("extraFee", extraFee);
 		 
 	      return "reservation/reservationCheck";
 	   }

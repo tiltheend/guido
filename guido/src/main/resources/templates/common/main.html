@@ -20,7 +20,7 @@
       <!-- <th:block th:replace="~{common/header}"></th:block> -->
 
       <a th:href="@{/productDetail/product/15?guest=3}"><button>상품 상세 페이지</button></a> <br>
-      <!-- <a th:href="@{/productDetail/product/1}"><button>상품 상세 페이지</button></a> -->
+      <a th:href="@{/reservation/order_result?order_id=20230705-542802}"><button>예약 완료 페이지</button></a> <br>
     
       <a th:if="${session.loginUser}" th:href="@{/profile/{userNo}(userNo=${session.loginUser.userNo})}">
         <button>마이페이지</button>

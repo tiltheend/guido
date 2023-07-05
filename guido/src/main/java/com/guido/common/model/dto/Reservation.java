@@ -22,16 +22,19 @@ public class Reservation {
 	private int productDateNo;			// 선택한 상품 일정 번호
 	private int optionNo;		// 선택한 옵션 번호
 	
-	private String requestContent;
-	private String orderNumber;
-	private String impUid = "";
-	private int totalPrice;
+	private String requestContent;		// 요청사항
+	private String orderNumber;			// 주문 번호
+	private String impUid = "";			// 아임포트 고유번호
+	private int totalPrice;					// 총 가격
+	private String userName;			// 예약자명
+	private String userTel;			// 전화번호
+	private String productDate; 	 // 선택한 상품 일정 날짜
+	private String optionName;  // 선택한 옵션(시간대) - 1박의 경우
 	
-	// --------------- 테이블 끝!
+	
 	
 	private String thumbnail; // 썸네일 (파일 오더 1번)
 	private String productName; // 상품명
-	private String productDate; // 상품 날짜
 	private int reservationCount; // 예약 수
 	
 

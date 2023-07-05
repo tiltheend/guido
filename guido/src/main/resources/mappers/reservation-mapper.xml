@@ -16,6 +16,12 @@
 		<result property="requestContent" column="REQUEST_CONTENT"/>
 		<result property="orderNumber" column="ORDER_NUMBER"/>
 		<result property="totalPrice" column="TOTAL_PRICE"/>
+		<result property="impUid" column="IMP_UID"/>
+		
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="optionName" column="OPTION_NAME"/>
 	</resultMap>
 	
 	
@@ -61,18 +67,26 @@
 	</select>
 	
 	
+	<!-- 예약 -->
 	<insert id="insertReservation">
 		INSERT INTO "RESERVATION"
 		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
-		 'Y', #{paymentMethod}, #{guestCount}, 19, NULL, #{requestContent}, #{orderNumber}, #{totalPrice})
+		 'Y', #{paymentMethod}, #{guestCount}, 19, 21, #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid})
 <!--		INSERT INTO "RESERVATION"
 		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, #{createDate},
 		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice})-->
 	</insert>
 	
 	
+	<!-- 예약 조회 -->
 	<select id="selectReservation" resultMap="reservation_rm">
-		SELECT * FROM "RESERVATION"
+		SELECT R.USER_NO, RESERVATION_NO, R.PRODUCT_NO, R.CREATE_DT, RESERVATION_STATE, 
+		PAYMENT_METHOD, GUEST_COUNT, R.PRODUCT_DT_NO, OPTION_NO, REQUEST_CONTENT, ORDER_NUMBER, TOTAL_PRICE,
+		USER_NAME, USER_TEL,TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, OPTION_NAME, IMP_UID
+		FROM "RESERVATION" R
+		JOIN "USER" U ON(R.USER_NO=U.USER_NO)
+		JOIN "PRODUCT_DT" PD ON(R.PRODUCT_DT_NO= PD.PRODUCT_DT_NO) 
+		JOIN "PRODUCT_OPTION" USING(OPTION_NO) 
 		WHERE ORDER_NUMBER = #{orderNumber}
 	</select>
 </mapper>

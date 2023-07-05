@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/reservation/reservationDetail.css">
 
 </head>
-<body>
+<body th:object="${reservation}">
 
 
     <div class="reservation--container">
@@ -31,12 +31,11 @@
                 </div>
 
                 <div>
-                    <div>20230602-0002063</div>
-                    <div>2023-06-02 14:06:59</div>
-                    <div>John Doe</div>
-                    <!-- 취소 or 결제 완료 -->
-                    <div>결제 완료</div>
-                    <div>010-1234-5678</div>
+                    <div th:text="*{orderNumber}">예약 번호</div>
+                    <div th:text="*{createDate}">예약 일자</div>
+                    <div th:text="*{userName}">예약자명</div>
+                    <div th:text="*{reservationState}=='Y'? '예약 완료' : (*{reservationState}=='N' ? '예약 취소' : '구매 확정')"></div>
+                    <div th:text="*{userTel}">연락처</div>
                 </div>
             </div>
 
@@ -51,32 +50,51 @@
 
             <div class="reservation--text__product">
                 <div>예약 상품</div>
-                <div>(총 1개 / KRW 190,000)</div>
+                <div>(총 1개 / KRW [[*{totalPrice}]])</div>
             </div>
 
             <div class="reservation--detail__product">
 
-                <div class="reservation--img__detail">
-                    <img src="/images/productDetail/경복궁생과방.jpg">
-                </div>
+                <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
+                    <div class="reservation--img__detail">
+                        <img th:src="${product.imageList[0].filePath}">
+                    </div>
+                </a>
 
                 <div>
-                    <div class="reservation--title__detail">[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</div>
+
+                        
+                    <div class="reservation--title__detail" th:text="${product.productName}">상품명</div>
                     
-                    <div class="reservation--location__detail reservation--short">
-                        <img src="/images/productDetail/location_icon.svg">
-                        <div>Seoul - Changdeokgung Palace</div>
+                    <div>
+                        
+                        <div class="reservation--location__detail reservation--short">
+                            <img th:src="@{/images/productDetail/location_icon.svg}">
+                            <div>[[${product.regionName}]]
+                                    <th:block th:each="course : ${product.tourCourse}" th:if="${course.bossCourseFL=='Y'}">
+                                    - [[${course.courseName}]]
+                                </th:block>
+                            </div>
+                        </div>
+                        
+                        <div class="reservation--langauge__detail reservation--short">
+                            <img th:src="@{/images/productDetail/language_icon.svg}">
+                            <div>Guided language : [[${product.guideLanguage}]]</div>
+                        </div>
+                        
+                        <div th:if="${product.productPackage==1}" class="reservation--langauge__detail reservation--short">
+                            <img th:src="@{/images/productDetail/duration_icon.svg}">
+                            <div>Duration: [[${product.tourDuration}]] hr(s)</div>
+                        </div>
+                        
+                        <div class="reservation--cancel__detail reservation--short">
+                            <img th:src="@{/images/productDetail/receive_dollars_icon.svg}">
+                            <div>Free cancellation 4 day(s) prior to selected date</div>
+                        </div>
+                        
+
                     </div>
 
-                    <div class="reservation--langauge__detail reservation--short">
-                        <img src="/images/productDetail/language_icon.svg">
-                        <div>Guided language : 日本語/中文</div>
-                    </div>
-
-                    <div class="reservation--cancel__detail reservation--short">
-                        <img src="/images/productDetail/receive_dollars_icon.svg">
-                        <div>Free cancellation 4 day(s) prior to selected date</div>
-                    </div>
 
                 </div>
 
@@ -84,13 +102,13 @@
 
 
             <div class="reservation--date__product">
-                <div>3 nights in Myung-dong, Seoul</div>
-                <div>2023년 6월 7일 - 6월 9일</div>
+                <div>[[${product.regionName}]]에서 보내는 [[${product.productPackage}]]일</div>
+                <div id="reservationDate"></div>
             </div>
 
 
             <div class="reservation--bottom__product">
-                <div>3 guests</div>
+                <div>[[${reservation.guestCount}]] guests</div>
                 <div>
                     <div class="reservation--question__bottom">원하시는 정보가 없나요?</div>
                     <div class="reservation--inquire__bottom">
@@ -105,7 +123,7 @@
         
             <div class="reservation--payment__method">
                 <div class="reservation--classification">결제 수단</div>
-                <div>페이팔</div>
+                <div th:text="*{paymentMethod=='C'} ? '신용/체크 카드' : '페이팔' ">결제 수단</div>
             </div>
 
             <div class="reservation--divisionline"></div>
@@ -123,9 +141,9 @@
                 </div>
         
                 <div class="reservation--price__price">
-                    <div>KRW <strong>209,000</strong></div>
-                    <div>KRW 190,000</div>
-                    <div>KRW 19,000</div>
+                    <div>KRW <strong th:text="*{#numbers.formatInteger(totalPrice, 1, 'COMMA')}">총 결제 금액</strong></div>
+                    <div th:text="|KRW ${#numbers.formatInteger(orderPrice, 1, 'COMMA')}|"></div>
+                    <div th:text="|KRW ${#numbers.formatInteger(extraFee, 1, 'COMMA')}|"></div>
                 </div>
 
             </div>
@@ -140,7 +158,7 @@
             1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불 
             2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
             3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
-            4) 여행당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
+            4) 여행 당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
         </div>
 
 
@@ -152,10 +170,19 @@
 
         
         <!-- 예약 완료 시 바로 보여주는 페이지의 경우 -->
-        <a href="/productDetail/productDetail.html" style="width: 100%;"><button class="reservation--btn">view order list</button></a>
+        <a th:href="@{/profile/touristReservation}" style="width: 100%;"><button class="reservation--btn">view order list</button></a>
 
 
     </div>
+    <script th:inline="javascript">
+
+        const productDate = /*[[*{productDate}]]*/"선택한 상품 일정 날짜";
+        const selectedTime = /*[[*{optionName}]]*/"선택한 옵션(시간대)";
+        const package = /*[[${product.productPackage}]]*/"예약 상품 패키지";
+
+    </script>
+
+    <script th:src="@{/js/reservation/reservationDetails.js}"></script>
 
 
 </body>
