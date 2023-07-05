@@ -119,6 +119,8 @@ function reviewReplyAddFn(e){
 
         if(result>0){
             alert("답글이 등록 되었습니다.");
+            reviewListFn();
+            reviewMoreBtnFn();
 
         } else if (result=0){
             alert("답글 등록 실패");
@@ -158,6 +160,8 @@ function reviewReplyEditFn(e){
 
         if(result>0){
             alert("답글이 수정 되었습니다.");
+            reviewListFn();
+            reviewMoreBtnFn();
 
         } else if (result=0){
             alert("답글 수정 실패");
@@ -187,6 +191,8 @@ function reviewReplyDelFn(e){
     
             if(result>0){
                 alert("답글이 삭제 되었습니다.");
+                reviewListFn();
+                reviewMoreBtnFn();
     
             } else if (result=0){
                 alert("답글 삭제 실패");
@@ -453,7 +459,7 @@ function reviewListFn(){
                     editButton.textContent = 'Edit';
                     editButton.setAttribute('type', 'button');
                     editButton.addEventListener('click', function(event) {
-                    reviewReplyEditFn(event);
+                        reviewReplyEditFn(event);
                     });
     
                     // 삭제 버튼을 담은 <button>을 생성합니다.
@@ -461,7 +467,7 @@ function reviewListFn(){
                     deleteButton.textContent = 'Delete';
                     deleteButton.setAttribute('type', 'button');
                     deleteButton.addEventListener('click', function(event) {
-                    reviewReplyDelFn(event);
+                        reviewReplyDelFn(event);
                     });
     
                     // 편집 버튼과 삭제 버튼을 담은 <div>에 요소를 추가합니다.

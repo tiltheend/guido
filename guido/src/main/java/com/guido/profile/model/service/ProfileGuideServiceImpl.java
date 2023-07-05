@@ -49,6 +49,7 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	}
 	
 	// 리뷰 리플 달기
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int reviewReply(Review review) {
 		return mapper.reviewReply(review);
