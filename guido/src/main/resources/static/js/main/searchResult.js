@@ -161,10 +161,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// 검색페이지 테마 검색 상품 목록 조회 + 무한 스크롤(X)
-function loadSelectedProductByTheme(themeCode) {
+// 검색페이지 테마 검색 상품 목록 조회 
+function loadSelectedProductByTheme() {
 
-    fetch("/common/searchResult/" + themeCode)
+    const dataMap = {"location":location, "firstday":firstday, "lastday":lastday, "tourist":tourist, "themeCode":themeCode}
+    const query = new URLSearchParams(dataMap).toString();
+
+    fetch("/common/searchResult?" + query)
     .then(response => response.json())
     .then(themeProdList => {
         console.log(themeProdList);

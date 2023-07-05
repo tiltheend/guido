@@ -67,8 +67,8 @@ public class HomeController {
 	}
 	
 	
-	// 테마 검색 상품 목록 조회
-	@GetMapping(value = "/index/{themeCode}", produces = "application/json; charset=UTF-8")
+	// 테마검색 상품목록 조회
+	@GetMapping(value = "/home/{themeCode}", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
 	    return service.selectThemeProdList(themeCode);
@@ -111,6 +111,8 @@ public class HomeController {
 		model.addAttribute("term", term);
 		model.addAttribute("tourist", tourist);
 		
+		model.addAttribute("map", map);
+		
 		return "common/searchResult";
 	}
 	
@@ -123,16 +125,21 @@ public class HomeController {
 	}
 	
 	
+	// 검색페이지 내에서 테마검색 상품목록 조회
+	@GetMapping(value = "/searchResult", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Product> selectSearchThemeProdList(@RequestParam Map<String, Object> map) {
+		System.out.println(map);
+	    return service.selectSearchThemeProdList(map);
+	}
+	
+	
 	// 관심상품 등록
 	@PostMapping("/updateWishList")
 	@ResponseBody
 	public int updateWish(@RequestBody Map<String, Integer> paramMap) {
 		return service.updateWish(paramMap);
 	}
-	
-	
-	
-	
 	
 
 }

@@ -25,7 +25,7 @@ public interface HomeService {
 	List<Product> selectRecommProductList(int userNo);
 	
 
-	// 테마 검색 상품 목록 조회
+	// 테마검색 상품목록 조회
 	List<Product> selectThemeProdList(int themeCode);
 
 	
@@ -35,8 +35,8 @@ public interface HomeService {
 	// 위치 검색 시 드롭박스 리스트 조회
 	List<String> locationSearch(String location);
 
-	// 검색 페이지 테마 검색 상품 목록 조회 
-	List<Product> selectSearchThemeProdList(int themeCode);
+	// 검색 페이지 내에서 테마 검색 상품 목록 조회 
+	List<Product> selectSearchThemeProdList(Map<String, Object> map);
 
 	
 	// 관심상품 등록

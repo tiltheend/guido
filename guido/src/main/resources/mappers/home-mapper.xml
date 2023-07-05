@@ -200,7 +200,7 @@
 	
 	
 	
-	<!-- 테마 검색 상품 목록 조회 -->
+	<!-- 테마검색 상품목록 조회 -->
 	<select id="selectThemeProdList" resultMap="product_rm">
 		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, 
 		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
@@ -275,23 +275,28 @@
 	
 	<!-- 헤더 위치 검색 -->
 	<select id="locationSearch" resultType="String">
-		SELECT DISTINCT column_alias
-		FROM (
-		    SELECT 
-		        CASE
-		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN TRIM(C.COURSE_NAME)
-		            ELSE TRIM(P.REGION_NAME)
-		        END AS column_alias
-		    FROM PRODUCT P
-		    LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO
-		    WHERE P.PRODUCT_STATE = 'N'
-		    AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
-		)
+	    SELECT DISTINCT column_alias
+	    FROM (
+	        SELECT 
+	            CASE
+	                WHEN C.COURSE_NAME LIKE '%${location}%' THEN TRIM(C.COURSE_NAME)
+	                ELSE TRIM(P.REGION_NAME)
+	            END AS column_alias,
+	            CASE
+	                WHEN C.COURSE_NAME LIKE '%${location}%' THEN 1
+	                ELSE 2
+	            END AS priority
+	        FROM PRODUCT P
+	        LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO
+	        WHERE P.PRODUCT_STATE = 'N'
+	        AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
+	        ORDER BY priority ASC
+	    )
 	</select>
 	
 	
 	<!-- 검색 페이지 내에서 테마 검색 상품 목록 조회 -->
-	<select id="selectSearchThemeProdList" resultMap="product_rm">
+	<select id="selectSearchThemeProdList" resultType="map">
 		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_MIN_TOURIST, P.PRODUCT_MAX_TOURIST,
 		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		        FROM REVIEW 
