@@ -35,7 +35,6 @@ public class HomeController {
 	// 메인 페이지 이동 + 상품 목록 조회
 	@GetMapping("/home")
 	public String mainPage(Model model
-//						, @RequestParam("productNo") int productNo
 						, @SessionAttribute(value="loginUser", required=false) User loginUser) {
 
 		int userNo = 0;
@@ -60,12 +59,9 @@ public class HomeController {
 		List<Product> recommProductList = service.selectRecommProductList(userNo);
 		model.addAttribute("recommProductList", recommProductList);
 		
-		
 		// 메인 슬라이드 이벤트 배너 조회
 		List<Event> eventBannerList = service.selectEventBannerList();
 		model.addAttribute("eventBannerList" ,eventBannerList);
-	
-		System.out.println("eventBannerList : " + eventBannerList);
 		
 		return "common/index";
 	}
