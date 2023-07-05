@@ -65,6 +65,7 @@ public class HomeController {
 		List<Event> eventBannerList = service.selectEventBannerList();
 		model.addAttribute("eventBannerList" ,eventBannerList);
 	
+		System.out.println("eventBannerList : " + eventBannerList);
 		
 		return "common/index";
 	}

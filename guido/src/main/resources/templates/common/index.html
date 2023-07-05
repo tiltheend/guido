@@ -51,30 +51,25 @@
                     <section id="demos">
                         <div class="row">
                             <div class="large-12 columns">
-                                <div class="loop owl-carousel owl-theme"  th:each="file : ${eventBannerList}">
-                                    <div class="item">
-                                        <!-- a태그 나중에 -->
-                                        <!-- <a th:href="@{/event/eventList}"> -->
-                                            <img class="detail--silde__item-img" th:src="${file.filePath}">
-                                            <!-- <img class="detail--silde__item-img" th:src="@{/images/test2.PNG}"> -->
-                                        <!-- </a> -->
-                                    </div>
+                                <div class="loop owl-carousel owl-theme" >
+                                    <th:block th:each="banner : ${eventBannerList}">
+                                        <div class="item" th:each="file : ${banner.fileList}" th:style="'background-color: ' + ${banner.bgColor}">
+                                            <a th:href="@{/event/eventList}">
+                                                <img class="detail--silde__item-img" th:src="${file.filePath}">
+                                                <!-- <img class="detail--silde__item-img" th:src="@{/images/test2.PNG}"> -->
+                                            </a>
+                                        </div>
+                                    </th:block>
+                                    <!-- 게시글 슬라이드 (후)
+                                    <li class="product-row" th:each="product : ${productList}">
+                                        <div class="slider single-item" th:data-productno="${product.productNo}"> 
+                                            <div class="productImage" th:each="image : ${product.imageList}"> 
+                                                <img th:src="${image.filePath}">
+                                            </div>
+                                        </div> 
+                                    -->
 
-                                <div th:each="themeType : ${application.themeTypeList}">
-                                    <!-- <a th:href="@{#}"> -->
-                                    <a th:onclick="|loadProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
-                                    <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
-                                        <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
-                                        <button th:text="${themeType.THEME_NAME}">테마 이름</button>
-                                    </a>
-                                </div>
-
-                                    <!-- 
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
+                                    <!-- 메인 슬라이드 (전)
                                     <div class="item">
                                         <a th:href="@{/event/eventList}">
                                             <img class="detail--silde__item-img" th:src="@{#}">
