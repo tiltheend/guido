@@ -53,7 +53,7 @@
         <div class="detail--container">
             
             <section class="detail--top">
-                
+
                 <div>
                     <div class="detail--top__category">
                         <div th:text="*{regionName}">지역명</div>
@@ -653,6 +653,31 @@
                 </div> -->
                 
             </section>
+
+            <form action="#" method="POST">
+                <div id="faceImgModal" class="modal">
+                    <div class="modal-container">
+                        <div class="close" onclick="toggleModal()">&times;</div>
+                        <div class="modal--content">
+
+                            <div class="modal--title">본인 인증</div>
+                            
+                            <div class="modal--faceimg">
+                                <img th:src="@{/images/productDetail/faceImg.jpg}" class="upload">
+                                <input type="file" name="faceImg" class="myshop--popup__profile-edit real-upload" 
+                                accept="image/*" style="display: none;">
+                            </div>
+                            
+                            <div>예약을 진행하기 전 신원 인증을 위해 얼굴을 인식할 수 있는 촬영물이 필요합니다. 본 촬영물은 신분을 확인하는 용도로 판매자 측에 제공될 수 있습니다.</div>
+
+        
+                            <button id="faceImgUpload">Save</button>
+    
+                        </div>
+                    </div>
+                </div>
+            </form>
+
             
             <script th:inline="javascript">
                 jQuery(document).ready(function($) {
@@ -689,6 +714,7 @@
             const guestCount = /*[[${guestCount}]]*/"게스트수";
             const loginUserNo = /*[[${session.loginUser?.userNo}]]*/"로그인 회원 번호";
             const loginUserType = /*[[${session.loginUser?.userType}]]*/"로그인 회원 타입";
+            const faceImg = /*[[${session.loginUser?.faceImg}]]*/"로그인 회원 얼굴 인증사진";
             const product = /*[[${product}]]*/ "상품";
             
             </script>
