@@ -295,7 +295,7 @@ header .search-box-click-box button{
 }
 
 /* 캘린더 */
-.calendar-container{
+/* .calendar-container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -323,7 +323,7 @@ header .search-box-click-box button{
 }
 .calendarBtn {
   cursor: pointer;
-}
+} */
 
 /* ** Guest 모달창 ** */
 .guest-modal{
