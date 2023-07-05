@@ -26,10 +26,8 @@ let sellerReply; /* 답글 박스 */
 let replyEditBtn; /* 리뷰 수정 버튼 */
 let sellerReplyWirte; /* 리뷰 달기 박스 */
 
-document.addEventListener("DOMContentLoaded",()=>{
-
-    /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
-    // 리뷰 달기
+/* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
+function reviewMoreFn(){
     reviewContentList=document.querySelectorAll(".seller-profile-top .review-list li>pre");
     reviewContentMore=document.querySelectorAll(".seller-profile-top .review-list li>div:last-of-type>p");
 
@@ -40,7 +38,46 @@ document.addEventListener("DOMContentLoaded",()=>{
             }
         }
     }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    reviewMoreFn(); /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
+
+})
+
+/* 리뷰 답글 노출 */
+function reviewReplyFn (el) {
+
+    /* 버튼 누르면 판매자가 리뷰에 대한 답글 달기 */
+    // commentView = document.querySelectorAll(".comment-view");
+    // replyEditBtn = document.querySelectorAll(".reply-edit");
+    sellerReply = el.parentElement.parentElement.nextElementSibling;
+    sellerReplyWirte = el.parentElement.parentElement.nextElementSibling;
+
+    if(sellerReply != null) { // 답글이 있으면 수정 삭제 버튼 노출
+
+        if(sellerReply.lastElementChild.style.display!=='flex'){
+            sellerReply.lastElementChild.style.display="flex";
+        } else {    
+            sellerReply.lastElementChild.style.display="none";
+        }
+
+    } 
+    if(sellerReplyWirte != null) { // 답글이 없으면 댓글 달기 상자 노출
+        
+        if(sellerReplyWirte.style.display!=='flex'){
+            if(sellerReplyWirte!=null) sellerReplyWirte.style.display="flex";
+        } else {
+            sellerReplyWirte.style.display="none";
+        }
+    }
     
+}
+
+// 리뷰 긴 것 더보기 상세 조회
+function moreReviewFn(el){
+
     /* 더보기 버튼 누르면 상세 조회 */
     moreAndReply = document.querySelector(".more-and-reply>p");
     reviewMoreModal=document.querySelector(".seller-profile-top .review-more-modal");
@@ -52,70 +89,32 @@ document.addEventListener("DOMContentLoaded",()=>{
     reviewerDate = document.querySelector(".review-more-modal .review-date");
     reviewerRating = document.querySelector(".review-more-modal .review-rating");
 
-    if(moreAndReply != null){
-        moreAndReply.addEventListener("click",()=>{
-            // 리뷰 상세 조회 내용 넣기
-            reviewMoreModalTextArea.innerText = moreAndReply.parentElement.previousElementSibling.innerText;
-            
-            // 리뷰 상세 조회 상품 제목 넣기
-            reviewMoreModalP.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
-            
-            // 리뷰 이름 넣기
-            reviewerName.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.firstElementChild.lastElementChild.innerText;
-            
-            // 리뷰 사진 넣기
-            reviewerProfile.innerHTML = moreAndReply.parentElement.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
-            
-            // 리뷰 날짜 넣기
-            reviewerDate.innerText = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerText;
-            
-            // 리뷰 별점 넣기
-            reviewerRating.innerHTML = moreAndReply.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerHTML;
-            
-            // 모달 열기
-            reviewMoreModal.style.display="flex";
-            
-            // 모달 닫기
-            reviewMoreModalClose = document.querySelector(".seller-profile-top .review-more-modal .review-modal-close");
-            reviewMoreModalClose.addEventListener('click',()=>{
-                reviewMoreModal.style.display="none";
-            });
-        })
-    }
+    // 리뷰 상세 조회 내용 넣기
+    reviewMoreModalTextArea.innerText = el.parentElement.previousElementSibling.innerText;
+    
+    // 리뷰 상세 조회 상품 제목 넣기
+    reviewMoreModalP.innerText = el.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
+    
+    // 리뷰 이름 넣기
+    reviewerName.innerText = el.parentElement.previousElementSibling.previousElementSibling.firstElementChild.lastElementChild.innerText;
+    
+    // 리뷰 사진 넣기
+    reviewerProfile.innerHTML = el.parentElement.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
+    
+    // 리뷰 날짜 넣기
+    reviewerDate.innerText = el.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerText;
+    
+    // 리뷰 별점 넣기
+    reviewerRating.innerHTML = el.parentElement.previousElementSibling.previousElementSibling.lastElementChild.lastElementChild.innerHTML;
+    
+    // 모달 열기
+    reviewMoreModal.style.display="flex";
+    
+    // 모달 닫기
+    reviewMoreModalClose = document.querySelector(".seller-profile-top .review-more-modal .review-modal-close");
+    reviewMoreModalClose.addEventListener('click',e=>{
+        e.preventDefault;
+        reviewMoreModal.style.display="none";
+    });
 
-    /* 버튼 누르면 판매자가 리뷰에 대한 답글 달기 */
-    commentView = document.querySelectorAll(".comment-view");
-    sellerReply = document.querySelectorAll(".seller-reply");
-    replyEditBtn = document.querySelectorAll(".reply-edit");
-    sellerReplyWirte = document.querySelectorAll(".seller-reply-wirte");
-
-    // document.querySelectorAll(".seller-reply")[0].firstElementChild.lastElementChild.innerHTML;
-
-    if(commentView != null) {
-        if(sellerReply != null) { // 답글이 있으면 수정 삭제 버튼 노출
-            for(let i = 0; i < commentView.length; i++){
-                commentView[i].addEventListener("click",()=>{
-                    if(replyEditBtn[i].style.display!=='flex'){
-                        if(replyEditBtn!=null) replyEditBtn[i].style.display="flex";
-                    } else {    
-                        replyEditBtn[i].style.display="none";
-                    }
-                })
-            }
-            for(let i = 0; i < commentView.length; i++){
-                commentView[i].addEventListener("click",()=>{
-                    if(sellerReplyWirte[i].style.display!=='flex'){
-                        if(sellerReplyWirte!=null) sellerReplyWirte[i].style.display="flex";
-                    } else {
-                        sellerReplyWirte[i].style.display="none";
-                    }
-                })
-            }
-        } else { // 답글이 없으면 댓글 달기 상자 노출
-
-        }
-
-    }
-
-
-})
+};

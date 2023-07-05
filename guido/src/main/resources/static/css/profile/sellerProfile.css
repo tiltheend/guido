@@ -519,6 +519,7 @@
     display: flex;
     /* width: 100%; height: 50px; */
     position: relative;
+    width: 28px; height: 28px;
 }
 .seller-profile-top .review-list li .comment-view>img{ 
     width: 28px; height: 28px;
@@ -665,7 +666,7 @@
         grid-template-columns: repeat(2,1fr);
     }
     .seller-profile-top .profile_right li{
-        margin-bottom: 40px; margin-right: 0;
+        margin-bottom: 20px; margin-right: 0;
     }
     /* 판매자 프로필 아래로 상품 리뷰 오게  */
     .seller-profile-top {

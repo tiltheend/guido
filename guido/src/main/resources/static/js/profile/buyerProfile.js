@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 // 리뷰 긴 것 더보기 상세 조회
 function moreReviewFn(el){
-        /* 더보기 버튼 누르면 상세 조회 */
+    /* 더보기 버튼 누르면 상세 조회 */
     // moreAndReply = document.querySelector(".more-and-reply>p");
     reviewMoreModal=document.querySelector(".buyer-profile-top .review-more-modal");
 
