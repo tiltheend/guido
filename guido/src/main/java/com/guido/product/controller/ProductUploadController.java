@@ -1,7 +1,6 @@
 package com.guido.product.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -20,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.Product;
-import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.model.dto.User;
 import com.guido.product.model.service.ProductDetailService;
@@ -30,6 +27,7 @@ import com.guido.product.model.service.ProductUploadService;
 @SessionAttributes({"loginUser"})
 //@RequestMapping("/product")
 public class ProductUploadController {
+	
 
 	@Autowired
 	private ProductUploadService service;
@@ -66,28 +64,33 @@ public class ProductUploadController {
 							 ,@SessionAttribute("loginUser") User loginUser
 							 ,@RequestParam(value="images", required=true) List<MultipartFile> images
 							 , RedirectAttributes ra
-							 , @RequestParam(value="productAddPrice", required=false) List<String> additionalList
-							 , @RequestBody List<TourCourse> tourCourse
-							 ) throws IllegalStateException, IOException, Exception,SQLException{
-		
-			
-			
-//		*로그인한 유저 번호 -> product에 세팅	
-		product.setUserNo(loginUser.getUserNo());
-		
-		
-		product.setProductAddNotes(String.join("^^^", additionalList));
-			
-		int productNo = service.productUpload(product, images, tourCourse);
+							 , @RequestParam(value="productAddNotes", required=false) List<String> additionalList
+							 , @RequestParam(value="tourCourse2", required = true) String tourCourse2
+							 ) throws IllegalStateException, IOException, Exception{
 	
-		System.out.println(product);
+//			List<TourCourse> tourCourse = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
+		
+//			System.out.println(tourCourse + tourCourse2);
+			System.out.println(product);
+				
+	//		*로그인한 유저 번호 -> product에 세팅	
+			product.setUserNo(loginUser.getUserNo());
+			
+			
+			if(additionalList != null) {
+			   product.setProductAddNotes(String.join("^^^", additionalList));
+			}
+				
+			int productNo = service.productUpload(product, images, tourCourse2);
+		
+//		System.out.println(product);
 //	        String[] arr = str.split(",");
 //	        
 //	        for (String item : arr) {
 //	        	additionalList.add(item.trim());
 //	        }
 //		
-//        System.out.println(additionalList);
+        System.out.println(additionalList);
         
 		String message = null;
 		String path = "redirect:";

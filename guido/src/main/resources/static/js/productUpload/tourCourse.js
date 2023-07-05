@@ -89,7 +89,7 @@ function displayPlaces(places) {
         console.log(x, y);
         var checkboxElement = document.createElement('input');
         checkboxElement.setAttribute('type', 'radio');
-        checkboxElement.setAttribute('name', 'tourCourse');
+        // checkboxElement.setAttribute('name', 'tourCourse');
         checkboxElement.setAttribute('class', 'hidden');
         checkboxElement.setAttribute('id', 'tourCourse' + (numElements + 1));
         checkboxElement.setAttribute('value', title);
@@ -98,6 +98,15 @@ function displayPlaces(places) {
         labelElement.setAttribute('class', 'tourCourse-item');
         labelElement.setAttribute('for', 'tourCourse' + (numElements + 1));
         labelElement.innerText = title;
+
+        var deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-xmark');
+        deleteIcon.style.color = '#000000';
+
+        deleteIcon.addEventListener('click', function (e) {
+          e.stopPropagation();
+          deleteIcon.parentNode.remove();
+        });
 
         var createCourseDiv = document.querySelector('.create-course');
 
@@ -125,11 +134,11 @@ function displayPlaces(places) {
             };
             tourCourse.push(courseInfo);
 
-            // tourCourse 배열을 서버로 전송
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/upload', true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify(tourCourse));
+            // // tourCourse 배열을 서버로 전송
+            // var xhr = new XMLHttpRequest();
+            // xhr.open('POST', '/upload', true);
+            // xhr.setRequestHeader('Content-Type', 'application/json');
+            // xhr.send(JSON.stringify(tourCourse));
           } else {
             alert('10개 이상 등록할 수 없습니다.');
           }

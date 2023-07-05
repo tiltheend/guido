@@ -491,7 +491,7 @@ function addElement() {
     newElement.classList.add('added-element');
 
     var newInputElement = document.createElement('input');
-    newInputElement.setAttribute('name', 'productAddPrice');
+    newInputElement.setAttribute('name', 'productAddNotes');
     newInputElement.setAttribute('type', 'hidden');
 
     var deleteIcon = document.createElement('i');
@@ -931,3 +931,12 @@ function validateMinMaxInput2() {
   maxTouristName.value = maxVal2;
   minTouristName.value = 1;
 }
+
+const form = document.getElementById('productUploadFrm');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('tourCourse').value = JSON.stringify(tourCourse);
+  console.log(document.getElementById('tourCourse').value);
+  form.submit();
+});

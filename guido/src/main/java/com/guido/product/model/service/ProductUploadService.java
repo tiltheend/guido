@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.Product;
-import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 
 public interface ProductUploadService {
@@ -17,7 +16,16 @@ public interface ProductUploadService {
 	List<TourTheme> selectTourTheme();
 
 
-	int productUpload(Product product, List<MultipartFile> images, List<TourCourse> tourCourse)throws IllegalStateException, IOException ,SQLException;
+	/** 여행 상품 등록
+	 * @param product
+	 * @param images
+	 * @param tourCourse2
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	int productUpload(Product product, List<MultipartFile> images, String tourCourse2)throws IllegalStateException, IOException;
 
 
 	/** 여행 상품 수정 서비스

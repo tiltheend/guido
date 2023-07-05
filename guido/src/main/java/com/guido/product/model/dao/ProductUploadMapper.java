@@ -59,6 +59,6 @@ public interface ProductUploadMapper {
 	 * @param uploadTourCourseList
 	 * @return
 	 */
-	public int insertTourCourseList(List<TourCourse> uploadTourCourseList);
+	public int insertTourCourseList(List<TourCourse> tourCourseList);
 
 }

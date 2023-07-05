@@ -1,7 +1,6 @@
 package com.guido.product.model.service;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.TourCourse;
@@ -26,6 +27,7 @@ import com.guido.product.model.dao.ProductUploadMapper;
 @PropertySource("classpath:/config.properties")
 public class ProductUploadServiceImpl implements ProductUploadService{
 
+	
 	@Autowired
 	private ProductUploadMapper mapper;
 
@@ -44,7 +46,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	//여행 상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productUpload(Product product, List<MultipartFile> images, List<TourCourse> tourCourse)  throws IllegalStateException, IOException, SQLException {
+	public int productUpload(Product product, List<MultipartFile> images, String tourCourse2)  throws IllegalStateException, IOException {
 
 		int result = mapper.productUpload(product);
 		
@@ -55,9 +57,11 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 		if(productNo > 0) {
 			
 			List<File> uploadList = new ArrayList<File>();
+			List<TourCourse> tourCourseList = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
 			
-			//투어 코스 리스트 생성
-			List<TourCourse> uploadTourCourseList = new ArrayList<TourCourse>();
+			System.out.println(tourCourseList);
+			System.out.println(tourCourseList.get(0));
+			System.out.println(tourCourseList.size());
 			
 			for(int i=0 ; i<images.size(); i++) {
 				
@@ -79,8 +83,6 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 					uploadList.add(img);
 				}
 			}
-			
-			
 			if( !uploadList.isEmpty()) {
 				
 				result = mapper.insertImageList(uploadList);
@@ -88,31 +90,21 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				if(result != uploadList.size()) {
 					
 					throw new FileUploadException();
-					
 				}
 			}	
-			
-			
-			for(int j=0; j<tourCourse.size(); j++) {
-						
-						TourCourse tc = new TourCourse();
-						
-						tc.setProductNo(productNo);
-						tc.setCourseOrder(j);
-						uploadTourCourseList.add(tc);				
-					System.out.println(tourCourse);
-						
-			}
-			
-			if(!uploadTourCourseList.isEmpty()) {
+			for (int j = 0; j < tourCourseList.size(); j++) {
 				
-				result = mapper.insertTourCourseList(uploadTourCourseList);
+				TourCourse tc = new TourCourse();
 				
-				if(result != uploadTourCourseList.size()) {
-					throw new SQLException();
-				}
+				tc.setProductNo(productNo);
+				tc.setCourseName(tourCourseList.get(j).getCourseName());
+				tc.setCourseOrder(tourCourseList.get(j).getCourseOrder());
+				tc.setLatitude(tourCourseList.get(j).getLatitude());
+				tc.setLongitude(tourCourseList.get(j).getLongitude());
+			    tourCourseList.add(tc);
+			    
+				result = mapper.insertTourCourseList(tourCourseList);
 			}
-	
 		}
 		return productNo;
 	}
