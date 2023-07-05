@@ -217,5 +217,26 @@
 		ORDER BY 1 DESC
 	</select>
 	 
+	<!-- 리뷰 리플 달기 -->
+	<update id="reviewReply">
+		UPDATE REVIEW
+		SET REVIEW_REPLY= #{reviewMessage}
+		WHERE REVIEW_NO= #{reviewNo}
+	</update>
+	
+	<!-- 리뷰 리플 수정 -->
+	<update id="reviewReplyEdit">
+		UPDATE REVIEW
+		SET REVIEW_REPLY= #{reviewMessage}
+		WHERE REVIEW_NO= #{reviewNo}
+	</update>
+	
+	<!-- 리뷰 리플 삭제 -->
+	<update id="reviewReplyDel">
+		UPDATE REVIEW
+		SET REVIEW_REPLY= ''
+		WHERE REVIEW_NO= #{reviewNo}
+	</update>
+	
 	
 </mapper>

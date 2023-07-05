@@ -21,10 +21,10 @@ let reviewerDate; /* 리뷰 단 날짜 */
 let reviewerRating; /* 리뷰 단 날짜 */
 let reviewMoreModalClose; /* 더보기 닫기 */
 
-let commentView; /* 판매자 답글 버튼 */
-let sellerReply; /* 답글 박스 */
-let replyEditBtn; /* 리뷰 수정 버튼 */
-let sellerReplyWirte; /* 리뷰 달기 박스 */
+// let commentView; /* 판매자 답글 버튼 */
+// let sellerReply; /* 답글 박스 */
+// let replyEditBtn; /* 리뷰 수정 버튼 */
+// let sellerReplyWirte; /* 리뷰 달기 박스 */
 
 /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
 function reviewMoreFn(){
@@ -52,19 +52,21 @@ function reviewReplyFn (el) {
     /* 버튼 누르면 판매자가 리뷰에 대한 답글 달기 */
     // commentView = document.querySelectorAll(".comment-view");
     // replyEditBtn = document.querySelectorAll(".reply-edit");
-    sellerReply = el.parentElement.parentElement.nextElementSibling;
-    sellerReplyWirte = el.parentElement.parentElement.nextElementSibling;
+    let sellerReply = el.parentElement.parentElement.nextElementSibling.lastElementChild;
+    let sellerReplyWirte = el.parentElement.parentElement.nextElementSibling;
 
-    if(sellerReply != null) { // 답글이 있으면 수정 삭제 버튼 노출
+    if(sellerReply != null && sellerReply.className==='reply-edit') { // 답글이 있으면 수정 삭제 버튼 노출
 
-        if(sellerReply.lastElementChild.style.display!=='flex'){
-            sellerReply.lastElementChild.style.display="flex";
+        if(sellerReply.style.display!=='flex'){
+            sellerReply.style.display="flex";
+            sellerReply.previousElementSibling.lastElementChild.removeAttribute("readonly");
         } else {    
-            sellerReply.lastElementChild.style.display="none";
+            sellerReply.style.display="none";
+            sellerReply.previousElementSibling.lastElementChild.setAttribute("readonly",true);
         }
 
     } 
-    if(sellerReplyWirte != null) { // 답글이 없으면 댓글 달기 상자 노출
+    if(sellerReplyWirte != null && sellerReplyWirte.className==='seller-reply-wirte') { // 답글이 없으면 댓글 달기 상자 노출
         
         if(sellerReplyWirte.style.display!=='flex'){
             if(sellerReplyWirte!=null) sellerReplyWirte.style.display="flex";
@@ -73,6 +75,113 @@ function reviewReplyFn (el) {
         }
     }
     
+}
+/* 리뷰 답글 달기 */
+function reviewReplyAddFn(e){
+
+    let sellerReplyContent = e.target.parentElement.previousElementSibling.lastElementChild;
+    if(sellerReplyContent.value.trim().length == 0){
+        e.preventDefault();
+        alert("내용을 입력해주세요.");
+        sellerReplyContent.focus();
+        sellerReplyContent.value = ""; // 띄어쓰기, 개행문자 제거
+        return;
+    }
+
+    let reviewNo = e.target.parentElement.parentElement.previousElementSibling.getAttribute("data-reviewno");
+
+    fetch("/profile/reviewReply",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, 
+        body : JSON.stringify({
+            "reviewNo" : reviewNo,
+            "reviewMessage" : sellerReplyContent.value
+        })
+    })
+    .then(resp => resp.json())
+    .then(result => {
+
+        if(result>0){
+            alert("답글이 등록 되었습니다.");
+
+        } else if (result=0){
+            alert("답글 등록 실패");
+        }
+    })
+    .catch(err=>{
+        e.preventDefault();
+        console.log(err);
+    });
+
+}
+
+/* 리뷰 답글 수정 */
+function reviewReplyEditFn(e){
+
+    let sellerReplyContentEdit = e.target.parentElement.previousElementSibling.lastElementChild;
+    if(sellerReplyContentEdit.value.trim().length == 0){
+        e.preventDefault();
+        alert("내용을 입력해주세요.");
+        sellerReplyContentEdit.focus();
+        sellerReplyContentEdit.value = ""; // 띄어쓰기, 개행문자 제거
+        return;
+    }
+
+    let reviewNo = e.target.parentElement.parentElement.previousElementSibling.getAttribute("data-reviewno");
+
+    fetch("/profile/reviewReplyEdit",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, 
+        body : JSON.stringify({
+            "reviewNo" : reviewNo,
+            "reviewMessage" : sellerReplyContentEdit.value
+        })
+    })
+    .then(resp => resp.json())
+    .then(result => {
+
+        if(result>0){
+            alert("답글이 수정 되었습니다.");
+
+        } else if (result=0){
+            alert("답글 수정 실패");
+        }
+    })
+    .catch(err=>{
+        e.preventDefault();
+        console.log(err);
+    });
+
+}
+
+/* 리뷰 답글 삭제 */
+function reviewReplyDelFn(e){
+
+    let reviewNo = e.target.parentElement.parentElement.previousElementSibling.getAttribute("data-reviewno");
+
+    if(confirm("답글을 삭제 하시겠습니까?")){
+
+        fetch("/profile/reviewReplyDel",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"}, 
+            body: reviewNo
+        })
+        .then(resp => resp.text())
+        .then(result => {
+    
+            if(result>0){
+                alert("답글이 삭제 되었습니다.");
+    
+            } else if (result=0){
+                alert("답글 삭제 실패");
+            }
+        })
+        .catch(err=>{
+            e.preventDefault();
+            console.log(err);
+        });
+    }
+
 }
 
 // 리뷰 긴 것 더보기 상세 조회

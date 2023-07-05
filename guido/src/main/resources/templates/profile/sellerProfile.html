@@ -225,7 +225,7 @@
                 <ul class="review-list">
                     <li th:each="review : ${guideReivewList}">
                         <ul>
-                            <li class="reply-content" th:data-productno="${review.productNo}">
+                            <li class="reply-content" th:data-reviewno="${review.reviewNo}">
                                 <div>
                                     <div> <!-- 리뷰 남긴 사람 프로필 -->
                                         <div class="reviewer">
@@ -258,8 +258,7 @@
                                 <pre th:text="${review.reviewMessage}">후기 내용</pre>
                                 <div class="more-and-reply">
                                     <p onclick="moreReviewFn(this)">더보기 +</p>
-                                    <div class="comment-view" th:if="${session.loginUser?.userNo == user.userNo}"
-                                        onclick="reviewReplyFn(this)">
+                                    <div class="comment-view" th:if="${session.loginUser?.userNo == user.userNo}" onclick="reviewReplyFn(this)">
                                         <img th:src="@{/images/profile/comment-view.png}" alt="comment-view">
                                         <img th:src="@{/images/profile/comment-view_hover.png}" alt="comment-view_hover">
                                     </div>
@@ -271,8 +270,8 @@
                                     <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200" th:text="${review.reviewReply}" readonly>답글 내용</textarea>
                                 </div>
                                 <div class="reply-edit" th:if="${session.loginUser?.userNo == user.userNo}">
-                                    <button>Edit</button>
-                                    <button>Delete</button>
+                                    <button onclick="reviewReplyEditFn(event)" type="button">Edit</button>
+                                    <button onclick="reviewReplyDelFn(event)" type="button">Delete</button>
                                 </div>
                             </li>
                             <li class="seller-reply-wirte" th:unless="${review.reviewReply}"> <!-- 리뷰 작성 박스 -->
@@ -281,13 +280,13 @@
                                     <textarea name="sellerReplyContent" id="sellerReplyContent"></textarea>
                                 </div>
                                 <div>
-                                    <button class="reply-send" th:if="${session.loginUser?.userNo == user.userNo}">register</button>
+                                    <button class="reply-send" th:if="${session.loginUser?.userNo == user.userNo}" onclick="reviewReplyAddFn(event)">register</button>
                                 </div>
-                            </li>
+                            </li> 
                         </ul>
                     </li>
                 </ul>
-                
+
                 <button class="review-list-more">more reviews</button>
             </div>
 

@@ -1,8 +1,6 @@
 package com.guido.profile.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -302,16 +300,6 @@ public class ProfileTouristController {
 		}
 		
 		model.addAttribute("myWishList", myWishList);
-		
-//		int wishOrNot = -1;		// 관심 등록
-//
-//		Map<String, Integer> map = new HashMap<>();
-//		map.put("productNo", productNo);		
-//		map.put("userNo", loginUser.getUserNo());
-//		
-//		wishOrNot = service.selectWishCheck(map);
-//
-//		model.addAttribute("wishOrNot", wishOrNot);
 		
 		return "profile/buyerWishList";
 	}

@@ -23,4 +23,16 @@ public interface ProfileGuideMapper {
 
 	// 가이드 리뷰 조회
 	List<Review> guideReivewList(int userNo);
+
+	// 리뷰 리플 달기
+	int reviewReply(Review review);
+	
+	// 리뷰 리플 수정
+	int reviewReplyEdit(Review review);
+
+	// 리뷰 리플 삭제
+	int reviewReplyDel(int reviewNo);
+
+
+	
 }

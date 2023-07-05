@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
@@ -40,6 +41,27 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	public List<Review> guideReivewList(int userNo) {
 		return mapper.guideReivewList(userNo);
 	}
+	
+	// 리뷰 리플 달기
+	@Override
+	public int reviewReply(Review review) {
+		return mapper.reviewReply(review);
+	}
+
+	// 리뷰 리플 수정
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int reviewReplyEdit(Review review) {
+		return mapper.reviewReplyEdit(review);
+	}
+
+	// 리뷰 리플 삭제
+	@Override
+	public int reviewReplyDel(int reviewNo) {
+		return mapper.reviewReplyDel(reviewNo);
+	}
+
+
 
 	
 }

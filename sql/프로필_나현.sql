@@ -324,3 +324,24 @@ SELECT REVIEW_NO FROM "REVIEW" R
 JOIN "PRODUCT" P USING(PRODUCT_NO)
 WHERE P.USER_NO = 23
 ;
+
+UPDATE REVIEW
+SET REVIEW_REPLY='안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!! 안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!! 안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당'
+WHERE REVIEW_NO=14;
+
+-- 가이드 리뷰 달기
+-- 가이드 리뷰 답글 수정
+UPDATE REVIEW
+SET REVIEW_REPLY= '웅??'
+WHERE REVIEW_NO=14
+;
+
+-- 가이드 리뷰 답글 삭제
+UPDATE REVIEW
+SET REVIEW_REPLY= ''
+WHERE REVIEW_NO=14
+;
+
+
+COMMIT;
+
