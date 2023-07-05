@@ -274,7 +274,7 @@
                                     <button onclick="reviewReplyDelFn(event)" type="button">Delete</button>
                                 </div>
                             </li>
-                            <li class="seller-reply-wirte" th:unless="${review.reviewReply}"> <!-- 리뷰 작성 박스 -->
+                            <li class="seller-reply-write" th:unless="${review.reviewReply}"> <!-- 리뷰 작성 박스 -->
                                 <div>
                                     <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
                                     <textarea name="sellerReplyContent" id="sellerReplyContent"></textarea>
@@ -287,12 +287,23 @@
                     </li>
                 </ul>
 
-                <button class="review-list-more">more reviews</button>
+                <button class="review-list-more" onclick="reviewListFn()">more reviews</button>
             </div>
 
         </div>
     </div>
 
+    <script th:inline="javascript">
+
+        const message = /*[[${message}]]*/  "전달 받은 message";
+        if(message != null) alert(message);
+
+        const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
+        // if(loginUserNo == null){loginUserNo = "";}
+        const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
+        // const reviewCount = /*[[${reviewCount}]]*/ "리뷰 갯수";
+    </script>       
+    
     <script th:src="@{/js/profile/sellerProfile.js}"></script>                   
 </body>
 </html>
