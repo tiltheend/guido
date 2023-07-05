@@ -11,7 +11,6 @@ public interface HomeService {
 	// 테마 종류 조회
 	List<Map<String, Object>> selectThemeTypeList();
 
-
 	
 	// 상품 목록 조회
 	List<Product> selectProductList(int userNo);
@@ -24,12 +23,10 @@ public interface HomeService {
 
 	// 추천 상품 목록 조회
 	List<Product> selectRecommProductList(int userNo);
-
 	
 
 	// 테마 검색 상품 목록 조회
 	List<Product> selectThemeProdList(int themeCode);
-
 
 	
 	// 검색 페이지
@@ -41,26 +38,19 @@ public interface HomeService {
 	// 검색 페이지 테마 검색 상품 목록 조회 
 	List<Product> selectSearchThemeProdList(int themeCode);
 
-
 	
 	// 관심상품 등록
 	int updateWish(Map<String, Integer> paramMap);
 	
 	// 관심상품 등록 여부 체크
-	int selectWishListCheck(Map<String, Object> map);
+//	int selectWishListCheck(Map<String, Object> map);
 
 	// 관심상품 등록 여부 체크
-	List<Product> mainWishCheck(int userNo);
-
+//	List<Product> mainWishCheck(int userNo);
 
 
 	// 메인 슬라이드 이벤트 배너 조회
 	List<Event> selectEventBannerList();
-
-
-
-
-
 
 
 }

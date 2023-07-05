@@ -61,7 +61,7 @@ public class HomeController {
 		
 		// 메인 슬라이드 이벤트 배너 조회
 		List<Event> eventBannerList = service.selectEventBannerList();
-		model.addAttribute("eventBannerList" ,eventBannerList);
+		model.addAttribute("eventBannerList", eventBannerList);
 		
 		return "common/index";
 	}
@@ -75,25 +75,32 @@ public class HomeController {
 	}
 	
 	
-	
 	// 검색 페이지
 	@GetMapping("/index")
 	public String searchResult(Model model
+							, @SessionAttribute(value="loginUser", required=false) User loginUser
 							, @RequestParam(value="location", required=false) String location
 							, @RequestParam(value="firstday", required=false) String firstday
 							, @RequestParam(value="lastday", required=false) String lastday
 							, @RequestParam(value="tourist", required=false) String tourist
 							) {
 		
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
+		
 		Map<String, Object> map = new HashMap<>();
+		map.put("userNo", userNo);
 		map.put("location", location);
 		map.put("firstday", firstday);
 		map.put("lastday", lastday);
 		map.put("tourist", tourist);
-//		System.out.println(map);
+//		System.out.println("map : " + map);
 		
 		List<Product> searchResultList = service.selectSearchResult(map);
-//		System.out.println(searchResultList);
+//		System.out.println("searchResultList : " + searchResultList);
 		
 		String term = null;
 		if(firstday!=""&&lastday!=""&&firstday.equals(lastday)) term = "same";
@@ -114,7 +121,6 @@ public class HomeController {
 	public List<String> locationSearch(@RequestParam(value="location", required=false) String location){
 		return service.locationSearch(location);
 	}
-	
 	
 	
 	// 관심상품 등록

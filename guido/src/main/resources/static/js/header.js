@@ -1,23 +1,6 @@
 
 /* ***** 헤더 검색 모달창 ***** */
 
-/* ***** 캘린더 ***** */
-$(document).ready(function(){
-
-  $('.input-daterange').datepicker({
-      format: 'yyyy-mm-dd',
-      todayHighlight: true,
-      startDate: '0d'
-  });
-});
-
-
-// 상위에 추가할 div 요소 생성
-var divElement = $('<div>').addClass('when-modal-bg modal');
-// datepicker의 상위 요소 선택
-var datepickerParent = $('.datepicker').parent();
-// 추가할 div 요소를 datepicker의 상위로 이동
-datepickerParent.before(divElement);
 
 
 /* header 자체 */
@@ -237,6 +220,40 @@ whereModal.addEventListener("click", e => {
     /* document.querySelector(".where-modal").style.display = "none"; */
   }
 });
+
+
+
+/* ***** 캘린더 ***** */
+$(document).ready(function(){
+
+  $('.input-daterange').datepicker({
+      format: 'yyyy-mm-dd',
+      todayHighlight: true,
+      startDate: '0d'
+  });
+});
+
+
+// <div class="datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-bottom"> 요소를 선택합니다.
+var datePickerDiv = document.querySelector('.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom');
+
+// 새로운 <div class="when-modal-bg modal"> 요소를 생성합니다.
+var newDiv = document.createElement('div');
+newDiv.className = 'when-modal-bg modal';
+
+// wrapper 요소를 생성합니다.
+var wrapperDiv = document.createElement('div');
+
+// 기존의 <div class="datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-bottom"> 요소를 wrapper 요소 내부로 이동시킵니다.
+if (datePickerDiv) {
+  datePickerDiv.parentNode.insertBefore(wrapperDiv, datePickerDiv);
+  wrapperDiv.appendChild(datePickerDiv);
+}
+
+// wrapper 요소와 새로운 <div class="when-modal-bg modal"> 요소 사이에 <div class="datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-bottom"> 요소를 추가합니다.
+if (newDiv && wrapperDiv.parentNode) {
+  wrapperDiv.parentNode.insertBefore(newDiv, wrapperDiv);
+}
 
 
 
