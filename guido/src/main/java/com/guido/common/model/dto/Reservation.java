@@ -30,6 +30,7 @@ public class Reservation {
 	private String userTel;			// 전화번호
 	private String productDate; 	 // 선택한 상품 일정 날짜
 	private String optionName;  // 선택한 옵션(시간대) - 1박의 경우
+	private String cancelReason;  // 예약 취소 사유
 	
 	
 	

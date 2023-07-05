@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
@@ -195,4 +194,21 @@ public class ReservationServiceImpl implements ReservationService{
 	public Reservation selectReservation(String orderNumber) {
 		return mapper.selectReservation(orderNumber);
 	}
+	
+	
+	// 예약 취소
+	@Override
+	public void reservationCancel(Reservation reservation) throws IOException {
+	 
+	    if(!"".equals(reservation.getImpUid())) {
+	        String token = getToken();
+	        int amount = paymentInfo(reservation.getImpUid(), token);
+	        paymentCancel(token, reservation.getImpUid(), amount, reservation.getCancelReason());
+	    }
+	    
+	    mapper.reservationCancel(reservation);
+	    
+	}
+	
+
 }

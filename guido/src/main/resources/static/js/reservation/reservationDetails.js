@@ -35,7 +35,42 @@ if (lastYear !== newYear) {
 }
 
 
-function cancelPay(){
 
-  console.log(reservation);
+// 모달 창 토글
+function toggleModal() {
+  
+  let modal = document.getElementById("cancelModal");
+  
+  modal.style.display = (modal.style.display === "block") ? "none" : "block";
+  
 }
+
+
+// textarea 글자수 제한
+const textarea = document.querySelector('.cancel--textarea');
+const maxLength = 180; // 최대 글자수
+
+function checkLength() {
+
+  const lengthIndicator = document.getElementById('cancelReasonLength');
+
+  const currentLength = textarea.value.length;
+  lengthIndicator.textContent = currentLength;
+
+  if (currentLength > maxLength) {
+      lengthIndicator.style.color = 'red';
+  } else {
+      lengthIndicator.style.color = '';
+  }
+
+}
+
+
+document.getElementById("realCancelBtn").addEventListener("click", (e)=>{
+
+  if(textarea.value.length>maxLength){
+    alert("작성 가능한 글자수를 초과합니다.");    
+    e.preventDefault();
+  }
+
+})

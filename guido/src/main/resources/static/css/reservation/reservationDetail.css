@@ -396,7 +396,8 @@ body::-webkit-scrollbar-track {
 
 /* 예약 리스트 보기 버튼, 뒤로가기/취소하기 버튼들 */
 .reservation--btn,
-.reservation--btns a button{
+.reservation--btns a button,
+#cancelButton{
     width: 100%;
     background-color: #0F4957;
     height: 60px;
@@ -407,11 +408,146 @@ body::-webkit-scrollbar-track {
 }
 
 .reservation--btn:hover,
-.reservation--btns a button:hover{
+.reservation--btns a button:hover,
+#cancelButton:hover{
     background-color: #0f4957ef;
 }
 
 
+
+/* 취소 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+    padding: 20px;
+    background-color: #fefefe;
+    margin: 15% auto;
+    border: 1px solid #888;
+    width: 25%;
+    border-radius: 15px;
+    position: relative;
+    min-width: 400px;
+}
+
+
+/* 모달 컨텐츠 */
+.modal--content{
+    white-space: pre-wrap;
+    padding: 30px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal--content>div{
+    width: 100%;
+}
+
+.modal--content>div:nth-of-type(1){
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+/* 닫기 버튼 스타일 */
+.close {
+    font-size: 40px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    right: 0;
+    font-weight: 100;
+}
+
+.close:hover,
+.close:focus {
+    cursor: pointer;
+}
+
+/* 취소 모달 text */
+.cancel--text{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.cancel--length{
+    margin-right: 8px;
+}
+
+.modal-top{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 취소 사유 입력창 */
+.cancel--textarea{
+    width: 100%;
+    height: 6.25em;
+    border: none;
+    resize: none;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+
+.cancel--note{
+    color: #5C5C5C;
+    font-size: 15px;
+}
+
+/* 취소하기 더블체크 버튼 */
+#realCancelBtn{
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    background-color: #0F4957;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+
+/* textarea 스크롤 커스텀 */
+.custom-scrollbar {
+    /* 스크롤바 너비와 색상 등을 지정합니다. */
+    scrollbar-width: thin;
+    scrollbar-color: #888888 #f0f0f0;
+  }
+  
+  /* 스크롤바의 Track 스타일을 지정합니다. */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f0f0f0;
+  }
+  
+  /* 스크롤바의 Thumb 스타일을 지정합니다. */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #888888;
+    border-radius: 8px;
+  }
+  
+  /* 스크롤바 Thumb가 마우스 오버됐을 때의 스타일을 지정합니다. */
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
+  }
 
 
 @media screen and (max-width : 767px) {
@@ -477,7 +613,8 @@ body::-webkit-scrollbar-track {
 }
 
 .reservation--btn,
-.reservation--btns a button{
+.reservation--btns a button,
+#cancelButton{
     height: 50px;
 }
 

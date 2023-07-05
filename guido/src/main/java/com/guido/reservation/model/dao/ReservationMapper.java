@@ -24,6 +24,9 @@ public interface ReservationMapper {
 
 	// 예약 확인
 	Reservation selectReservation(String orderNumber);
+
+	// 예약 취소
+	int reservationCancel(Reservation reservation);
 	
 
 }

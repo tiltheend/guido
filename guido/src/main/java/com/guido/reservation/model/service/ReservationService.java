@@ -6,6 +6,10 @@ import java.util.Map;
 import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Reservation;
 
+/**
+ * @author user1
+ *
+ */
 public interface ReservationService {
 
 	
@@ -73,5 +77,12 @@ public interface ReservationService {
 	 * @return reservation
 	 */
 	Reservation selectReservation(String orderNumber);
+
+
+	/** 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	void reservationCancel(Reservation reservation) throws IOException;
 
 }

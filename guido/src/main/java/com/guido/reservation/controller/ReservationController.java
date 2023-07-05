@@ -175,15 +175,11 @@ public class ReservationController {
 	    public String getOrderResult(@RequestParam(value="order_id", required=false) String orderNumber, 
 	    		Model model, @SessionAttribute("loginUser") User loginUser) {
 		 
-		 System.out.println(orderNumber);
-
 		 if(orderNumber==null)
 			 return "redirect:/";
 		 
 		 Reservation reservation = service.selectReservation(orderNumber);
 		 
-		 System.out.println(reservation);
-
 		 if(reservation==null)
 			 return "redirect:/";
 		 
@@ -209,6 +205,14 @@ public class ReservationController {
 	      return "reservation/reservationCheck";
 	   }
 
+	 
+	 @PostMapping("/cancel")
+	 public String cancelReservation(Reservation reservation) throws IOException {
+
+		 service.reservationCancel(reservation);
+		 
+		 return "redirect:/reservation/order_result?order_id=" + reservation.getOrderNumber();
+	 }
 }
 	
 

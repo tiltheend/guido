@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.User;
 import com.guido.home.model.service.HomeService;
