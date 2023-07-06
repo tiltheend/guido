@@ -118,8 +118,9 @@ public class ProductUploadController {
 			
 			
 			Product product = productDetailService.selectProduct(productNo);
-			List<TourTheme> tourTheme = service.selectTourTheme();
 			
+			//투어 테마 호출
+			List<TourTheme> tourTheme = service.selectTourTheme();
 			List<String> addNotesList = null;
 			
 			if(product.getProductAddNotes()!=null) {
@@ -150,13 +151,15 @@ public class ProductUploadController {
 				,@RequestParam(value="deleteList", required=false) String deleteList
 				,@RequestParam(value="images", required=false) List<MultipartFile> images
 				,@RequestParam(value="productAddPrice", required=false) List<String> additionalList
+				,@RequestParam(value="tourCourse2", required = true) String tourCourse2
+				,@RequestParam(value="deleteTourCourseList", required=false) String tourCourseDeleteList 
 				,@PathVariable("productNo") int productNo
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
 	
 				product.setProductAddNotes(String.join("^^^", additionalList));
 				product.setProductNo(productNo);
 	
-				int rowCount = service.productEdit(product,images,deleteList);
+				int rowCount = service.productEdit(product,images,deleteList, tourCourse2, tourCourseDeleteList );
 				
 				String message = null;
 				String path = "redirect:";

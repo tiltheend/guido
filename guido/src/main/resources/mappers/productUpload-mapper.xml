@@ -151,6 +151,32 @@
 	    </foreach>
 	  ) tourCourse
 	</insert>
+	
+	<!-- 여행 코스 삭제(삭제할 코스가 있을 때 )-->
+	<delete id="tourCourseDelete">
+	  DELETE FROM TOUR_COURSE
+	  WHER PRODUCT_NO = #{productNo}
+	  AND TOUR_COURSE IN(${tourCourseDeleteList})
+	</delete>
 
+    <!-- 투어코스 삽입 -->
+    <insert id="tourCourseInsert">
+      INSERT INTO TOUR_COURSE
+      VALUES(
+      		SEQ_TOURCOURSE_NO.NEXTVAL, #{productNo}, #{courseName}, #{courseOrder},#{latitude}, #{longitude}, #{bossCourseFL}
+      )
+    </insert>
+    
+    <!-- 여행 코스 수정 -->
+    <update id="tourCourseUpdate">
+		UPDATE TOUR_COURSE SET
+		COURSE_NAME = #{courseName},
+		LATITUDE = #{latitude},
+		LONGITUDE = #{longitude}
+		WHERE PRODUCT_NO = #{productNo}
+		AND COURSE_ORDER = #{courseOrder}
+	</update>
+    
+    
 </mapper>
 

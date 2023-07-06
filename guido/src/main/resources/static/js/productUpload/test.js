@@ -38,6 +38,7 @@ const updatePage = () => {
     document.querySelector('.text5').innerHTML = '';
     typing5();
     disableNextButtonCheckNum();
+    disableNextButtonCheckNum2();
   }
   if (currentPage == 5) {
     document.querySelector('.text4').innerHTML = '';
@@ -442,6 +443,13 @@ function disableNextButtonCheckNum() {
     nextBtn.disabled = false;
   }
 }
+function disableNextButtonCheckNum2() {
+  if (maxInput2.value == '') {
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.disabled = false;
+  }
+}
 
 // Add an event listener to the checkbox
 checkbox.addEventListener('change', disableNextButton);
@@ -664,6 +672,10 @@ document.getElementById('feeInput').addEventListener('input', (e) => {
     '₩ ' + parseInt(value.replace(/[^0-9]/g, '') * 0.9).toLocaleString() + '원';
   checkFee.innerText =
     '₩ ' + parseInt(value.replace(/[^0-9]/g, '')).toLocaleString() + '원';
+});
+
+document.getElementById('feeInput').addEventListener('change', (e) => {
+  minTotal.backgroundColor = 'red';
 });
 
 function addCurrencySymbol(input) {

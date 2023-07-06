@@ -28,6 +28,7 @@
       <!-- 메인 로고 -->
       <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
       <span th:text="${session.loginUser.userName}" id="loginName" style="display: none;"></span>
+      <img th:src="${session.loginUser.profileImage}" id="loginImg" style="display: none;"></img>
     </header>
     <!-- 1페이지 -->
     <main id="page1" class="page current">
@@ -196,13 +197,13 @@
       <div class="map_wrap">
         <div
         id="map"
-        style="width: 100%; height: 100%; position: relative; overflow: hidden ;border : 7px solid black ;border-radius : 20px"></div>
+        style="width: 100%; height: 100%; position: relative; overflow: hidden ;border-radius : 20px"></div>
         <div id="menu_wrap" class="bg_white">
         <div class="option">
           <div>
             <form onclick="searchPlaces(); return false;">
              
-              <input type="text" value="이태원 맛집" id="keyword" size="15" />
+              <input type="text" value="부산" id="keyword" size="15" />
               <button type="submit">검색하기</button>
             </form>
           </div>

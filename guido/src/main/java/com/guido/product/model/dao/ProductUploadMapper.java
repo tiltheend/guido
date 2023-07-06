@@ -61,4 +61,24 @@ public interface ProductUploadMapper {
 	 */
 	public int insertTourCourseList(List<TourCourse> tourCourseList);
 
+	/* 투어 코스 삭제
+	 * @param deleteTourCourseListMap
+	 * @return
+	 */
+	public int tourCourseDelete(Map<String, Object> deleteTourCourseListMap);
+
+	/**투어 코스 수정
+	 * @param tc
+	 * @return
+	 */
+	public int tourCourseUpdate(TourCourse tc);
+
+	
+	/**투어 코스 삽입(추가된 코스 있을 때)
+	 * @param uploadTourCourse
+	 * @return
+	 */
+	public int tourCourseInsert(TourCourse tc);
+
+	
 }
