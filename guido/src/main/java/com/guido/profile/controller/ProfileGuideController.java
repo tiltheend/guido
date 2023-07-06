@@ -1,6 +1,5 @@
 package com.guido.profile.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
-import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.profile.model.service.ProfileGuideService;
@@ -55,9 +52,6 @@ public class ProfileGuideController {
 			
 		List<Product> guideProductMore = service.guideProductMore(request);
 		
-		for(Product p : guideProductMore) {
-			System.out.println(p);
-		}
 		return guideProductMore;
 	}
 

@@ -560,14 +560,14 @@ if(reviewMoreBtn !=null) {
 
     reviewMoreBtn.addEventListener("click", e => {
         let startReviewNum = reviewList.childElementCount;
-        console.log(startReviewNum);
+        // console.log(startReviewNum);
 
         fetch("/profile/guideReviewMore",{
             method : "POST",
             headers : {"Content-Type" : "application/json"}, 
             body : JSON.stringify({
                 "startReviewNum" : startReviewNum,
-                "pageUserNo" : pageUserNo
+                "userNo" : pageUserNo
             })
         })
         .then(resp => resp.json())
@@ -976,7 +976,7 @@ if(productMoreBtn !=null) {
             headers : {"Content-Type" : "application/json"}, 
             body : JSON.stringify({
                 "startReviewNum" : startReviewNum,
-                "pageUserNo" : pageUserNo
+                "userNo" : pageUserNo
             })
         })
         .then(resp => resp.json())
@@ -987,12 +987,13 @@ if(productMoreBtn !=null) {
             }
     
             if (moreProductList.length > 0) {
-                
+                console.log(1);
                 for (let i = 0; i < 3; i++) {
                     const product = moreProductList[i];
                     console.log(product);
+                    console.log(2);
                     if(product == null) break;
-    
+                    console.log(3);
                     const liElement = document.createElement("li");
 
                     const saleImgElement = document.createElement("div");
