@@ -102,6 +102,7 @@
     border-radius: 8px;
     margin-top: -0.2em;
     font-size: 14px;
+    font-weight: lighter;
     /* display: flex;
     align-items: end; */
 
@@ -123,7 +124,7 @@
     width: 420px;
     display: flex;
     flex-direction: column;
-    margin: 10px 10px 30px 10px;
+    margin: 10px 10px 20px 10px;
 }
 .box{
     display: inline-block;
@@ -139,10 +140,14 @@
     margin-bottom: 5px;
 }
 .chk-all{
-    padding: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    padding: 5px 5px;
 }
 .chk0, .chk1, .chk2{
-    margin-left: 10px
+    display: flex;
+    align-items: flex-start;
+    margin-left: 15px;
 }
 .ment1,.ment2{
     color: #5c5c5c;
@@ -160,6 +165,36 @@ input[type="checkbox"]:checked + label{
 }
 .required{
     color:forestgreen; vertical-align: 3px;}
+.downArrow{
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 0.75rem;
+    height: 0.75rem;
+    /* background-size: cover; */
+    background: rgba(255, 255, 255, 0.5) url("/images/signUp/downArrow.png") 0 0 /cover no-repeat;
+    border: none;
+}
+.upArrow{
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: rgba(255, 255, 255, 0.7) url("/images/signUp/upArrow.png") 0 0 /cover no-repeat;
+    background-size: cover;
+    border: none;
+}
+/* 약관 설명 */
+.terms-explain{
+    margin: 0 15px 20px 30px;
+    padding: 15px;
+    font-weight: lighter;
+    font-size: 0.7rem;
+    display: none;
+    border: #1c7a7d3d solid 1px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    transition-duration: 0.1s;
+}
 
 /* 제출 버튼 */
 .container_bottom{
@@ -171,19 +206,29 @@ input[type="checkbox"]:checked + label{
 .container_bottom_button{
     width: 420px;
     height: 50px;
-    background-color: #1c797d;
+    background-color: #c5c5c5;
     border-radius: 8px;
     color: #fff;
+    transition-duration: 0.1s;
 }
-
-
-/* 국제 번호 */
+.container_bottom_button:hover{
+    box-shadow: 3px 3px 2px #5c5c5c3c;
+    transition-duration: 0.2s;
+}
 
 /* 유효성 검사 메세지 */
 .error-message{
     width: 420px;
     padding-left: 15px;
     margin: -3px 0 10px 0px;
+    color: rgba(255, 0, 0, 0.77);
+    justify-content: start;
+}
+.name-error{
+    width: 420px;
+    height: auto;
+    padding-left: 15px;
+    margin: 10px 0 10px 0px;
     color: rgba(255, 0, 0, 0.77);
     justify-content: start;
 }

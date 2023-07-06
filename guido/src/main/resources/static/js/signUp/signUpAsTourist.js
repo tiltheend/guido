@@ -1,8 +1,15 @@
 // 전체 약관 동의
-function selectAll(selectAll)  {
-    console.log(document.getElementById("checkAll").checked);
-    const checkboxes 
-        = document.querySelectorAll('input[type="checkbox"]');
+const checkAll = document.getElementById("checkAll");
+// 모든 하위 동의 박스
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+// 이용 약관 동의
+const infoAgree1 = document.getElementById("infoAgree1");
+// 개인정보 수집 및 동의
+const infoAgree2 = document.getElementById("infoAgree2");
+// 마케팅 이메일 수신 동의
+const adverAgree = document.getElementById("adverAgree");
+
+function selectAll(selectAll) {
     console.log(checkboxes);
     checkboxes.forEach((checkbox) => {
         console.log(checkbox);
@@ -11,20 +18,57 @@ function selectAll(selectAll)  {
     })
 }
 
+// 약관 설명 펼치기
+const arrow1 = document.querySelector("#arrow1");
+const terms1 = document.getElementById("terms1");
+arrow1.addEventListener("click",()=>{
+    arrow1.classList.toggle("upArrow");
+    arrow1.classList.toggle("downArrow");
+    if(arrow1.classList.contains("downArrow")){
+        terms1.style.display = "none";
+    }else{
+        terms1.style.display = "block";
+    }
+});
+const arrow2 = document.querySelector("#arrow2");
+const terms2 = document.getElementById("terms2");
+arrow2.addEventListener("click",()=>{
+    arrow2.classList.toggle("upArrow");
+    arrow2.classList.toggle("downArrow");
+    if(arrow2.classList.contains("downArrow")){
+        terms2.style.display = "none";
+    }else{
+        terms2.style.display = "block";
+    }
+});
+// const arrow3 = document.querySelector("#arrow3");
+// const terms3 = document.getElementById("terms3");
+// arrow3.addEventListener("click",()=>{
+//     arrow3.classList.toggle("upArrow");
+//     arrow3.classList.toggle("downArrow");
+//     if(arrow3.classList.contains("downArrow")){
+//         terms3.style.display = "none";
+//     }else{
+//         terms3.style.display = "block";
+//     }
+// });
+
 // ------------ 유효성 검사 ------------
 
 // tourist(구매자)용 회원가입
 // 항목 작성했는지 체크 - 모두 작성해야 가입 진행
 const chk = {
     "email" : false,
-    "auth" : false,
+    "inputAuth" : false,
     "password" : false,
-    "pwCheck" : false,
-    "gender" : false,
-    "name" : false,
-    "contact" : false,
-    "emergencyCo" : false,
-    "passport" : false
+    "checkPassword" : false,
+    "lastName" : false,
+    "firstName" : false,
+    "phone" : false,
+    "passportNo" : false,
+    "primaryLanguage" : false,
+    "infoAgree1" : false,
+    "infoAgree2" : false
 };
 
 // 이메일 유효성 검사
@@ -36,7 +80,6 @@ email.addEventListener("input",()=>{
     if(email.value.trim().length == 0){
         email.value = "";
         emailMessage.innerText = "";
-        email.style.border = "1px solid #1c797d";
         emailMessage.classList.remove("error-message","possible-message")
         chk.email = false;
         return;
@@ -52,14 +95,12 @@ email.addEventListener("input",()=>{
         .then(count=>{
             if(count==0){
                 emailMessage.innerText="사용 가능한 이메일입니다.";
-                email.style.border = "1px solid #1c797d";
                 emailMessage.classList.add("possible-message");
                 emailMessage.classList.remove("error-message");
                 chk.email = true;
 
             }else{
                 emailMessage.innerText="이미 사용 중인 이메일입니다.";
-                email.style.border = "1px solid rgba(255, 0, 0, 0.77)"
                 emailMessage.classList.add("error-message");
                 emailMessage.classList.remove("possible-message");
                 chk.email = false;
@@ -68,7 +109,6 @@ email.addEventListener("input",()=>{
         .catch(err=>console.log(err));
     }else{
         emailMessage.innerText="올바른 이메일 형식으로 작성해주세요."
-        email.style.border = "1px solid rgba(255, 0, 0, 0.77)"
         emailMessage.classList.add("error-message");
         emailMessage.classList.remove("possible-message");
         chk.email=false;
@@ -91,7 +131,7 @@ sendAuthBtn.addEventListener("click",()=>{
     authMin = 9;
     authSec = 59;
 
-    chk.auth = false;
+    chk.inputAuth = false;
 
     if(chk.email){ // 사용 가능한 이메일
         // 인증번호 이메일로 보내기 ajax
@@ -121,7 +161,7 @@ sendAuthBtn.addEventListener("click",()=>{
             
             // 남은 시간 0분 0초
             if(authMin==0 && authSec==0){
-                chk.auth = false;
+                chk.inputAuth = false;
                 clearInterval(authTimer);
                 return;
             }
@@ -160,10 +200,10 @@ checkAuthBtn.addEventListener("click",()=>{
                 authMessage.innerText = "인증 완료 되었습니다.";
                 authMessage.classList.add("possible-message");
                 authMessage.classList.remove("for-authTimer");
-                chk.auth = true;
+                chk.inputAuth = true;
             }else{
                 alert("인증번호가 일치하지 않습니다.");
-                chk.auth = false;
+                chk.inputAuth = false;
             }
         })
         .catch(err=>console.log(err));
@@ -174,7 +214,8 @@ checkAuthBtn.addEventListener("click",()=>{
 
 // 비밀번호 검사
 // 영어 소문자,숫자,특수기호를 포함한 10~16자리 비밀번호
-const pwRegex = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-z0-9!@#$%^&*]{8,16}$/;
+const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,16}$/
+;
 const password = document.getElementById("password");
 const pwMessage = document.getElementById("pwMessage");
 
@@ -182,6 +223,11 @@ password.addEventListener("input",()=>{
     if(password.value.trim().length==0){
         password.value="";
         chk.password=false;
+        pwMessage.innerHTML =
+        "영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
+        pwMessage.classList.add("normal-message");
+        pwMessage.classList.remove("possible-message");
+        pwMessage.classList.remove("error-message");
         return;
     }
     
@@ -190,43 +236,266 @@ password.addEventListener("input",()=>{
         pwMessage.classList.add("possible-message");
         pwMessage.classList.remove("error-message");
         pwMessage.classList.remove("normal-message");
-        password.style.border = "1px solid #1c797d";
         chk.password = true;
         
     }else{
         pwMessage.innerHTML =
-        "영어 대소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
+        "영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
         pwMessage.classList.add("error-message");
         pwMessage.classList.remove("possible-message");
         pwMessage.classList.remove("normal-message");
-        password.style.border = "1px solid rgba(255, 0, 0, 0.77);"
         password.focus();
         chk.password = false;
     }
 });
 
-// 비밀번호 확인
+// 비밀번호 확인 검사
 const checkPassword = document.getElementById("checkPassword");
 const chkPwMessage = document.getElementById("chkPwMessage");
 checkPassword.addEventListener("input",()=>{
     if(checkPassword.value.trim().length==0){
         checkPassword.value="";
-        chk.pwCheck=false;
+        chkPwMessage.innerText=""; 
+        chk.checkPassword=false;
         return;
     }
     if(password.value == checkPassword.value){
         chkPwMessage.innerText = "비밀번호가 일치합니다.";
         chkPwMessage.classList.add("possible-message");
         chkPwMessage.classList.remove("error-message");
-        checkPassword.style.border = "1px solid rgba(255, 0, 0, 0.77);"
-        chk.pwCheck=true;
+        chk.checkPassword=true;
     }else{
         chkPwMessage.innerText = "비밀번호가 일치하지 않습니다.";
         chkPwMessage.classList.add("error-message");
         chkPwMessage.classList.remove("possible-message");
-        checkPassword.style.border = "1px solid #1c797d";
-        chk.pwCheck=false;
+        chk.checkPassword=false;
 
+    }
+});
+
+// 이름 검사
+const lastName = document.getElementById("lastName");
+const firstName = document.getElementById("firstName");
+const nameMessage1 = document.getElementById("nameMessage1");
+const nameMessage2 = document.getElementById("nameMessage2");
+// 여권상 이름 검사
+// 하나 이상의 영어 알파벳, 공백, 마침표, 작은따옴표, 대시가 포함된 문자열
+const nameRegex = /^[a-zA-Z\s.'-]+$/;
+
+lastName.addEventListener("input",()=>{
+    if(lastName.value.trim().length==0){
+        lastName.value="";
+        nameMessage1.innerText="";
+        chk.lastName = false;
+        return;
+    }
+    if(nameRegex.test(lastName.value)){
+        nameMessage1.innerText = "";
+        chk.lastName = true;
+    }else{ // 여권상 영문 아닐 때
+        nameMessage1.innerText = "여권상 영문명으로 작성해주세요.";
+        nameMessage1.classList.add("name-error");
+        nameMessage1.classList.remove("possible-message");
+        chk.lastName = false;
+    }
+});
+
+firstName.addEventListener("input",()=>{
+    if(firstName.value.trim().length==0){
+        firstName.value="";
+        nameMessage2.innerText="";
+        chk.firstName = false;
+        return;
+    }
+    if(!nameRegex.test(firstName.value)){
+        nameMessage2.innerText = "여권상 영문명으로 작성해주세요.";
+        nameMessage2.classList.add("name-error");
+        nameMessage2.classList.remove("possible-message");
+        chk.firstName = false;
+    }else{
+        nameMessage2.innerText = "";
+        chk.firstName = true;
+    }
+});
+
+// 국제 번호
+// 국가를 다시 한번 확인해주세요
+const phone = document.getElementById("phone");
+const phoneMessage = document.getElementById("phoneMessage");
+// 숫자, 특수문자만
+const phoneRegex = /^[0-9!@#$%^&*()+-]+$/;
+
+
+phone.addEventListener("input",()=>{
+    if(phone.value.trim().length==0){
+        phone.value = "";
+        phoneMessage.innerText = "";
+        chk.phone = false;
+        return;    
+    }
+    if(phoneRegex.test(phone.value)){
+        phoneMessage.innerText = "국가를 다시 한번 확인해주세요.";
+        phoneMessage.classList.add("possible-message");
+        phoneMessage.classList.remove("error-message");
+        chk.phone = true;
+    }else{
+        phoneMessage.innerText = "숫자, 특수문자만 입력할 수 있습니다."
+        phoneMessage.classList.remove("possible-message");
+        phoneMessage.classList.add("error-message");
+        chk.phone = false;
+
+    }
+});
+// 백) 전화번호의 첫부분에 붙은 0을 지우고??(할까말까)?? 그 앞에 국가별 전화코드를 붙이면 국제전화번호
+
+// 비상 연락처
+const emergencyCo = document.querySelector("#emergencyCo");
+const emergCoMessage = document.querySelector("#emergCoMessage");
+emergencyCo.addEventListener("focus",()=>{
+    emergCoMessage.innerText = "Twitter, Facebook, Instagram 등 SNS 주소도 가능합니다.";
+    emergCoMessage.classList.add("normal-message");
+});
+emergencyCo.addEventListener("focusout",()=>{
+    emergCoMessage.innerText = "";
+    emergCoMessage.classList.remove("normal-message");
+});
+
+
+// 여권번호
+const passportNo = document.getElementById("passportNo");
+const passportMessage = document.getElementById("passportMessage");
+passportNo.addEventListener("input",()=>{
+    if(passportNo.value.trim().length==0){
+        passportNo.value="";
+        passportMessage.innerText="";
+        chk.passportNo = false;
+        return;
+    }else{
+        chk.passportNo = true;
+    }
+});
+
+// 주 사용 언어
+// 영어로 작성해주세요.
+const primaryLanguage = document.getElementById("primaryLanguage");
+const pLanguageMessage = document.getElementById("pLanguageMessage");
+const engRegex = /^[A-Za-z]+$/; // 영어 검사
+
+primaryLanguage.addEventListener("input",()=>{
+    if(primaryLanguage.value.trim().length==0){
+        primaryLanguage.value="";
+        pLanguageMessage.innerText="";
+        chk.primaryLanguage = false;
+        return;
+    }
+    if(!engRegex.test(primaryLanguage.value)){
+        pLanguageMessage.innerText = "영어로 작성해주세요.";
+        pLanguageMessage.classList.add("error-message");
+        pLanguageMessage.classList.remove("possible-message");
+            chk.primaryLanguage = false;
+    }else{
+        pLanguageMessage.innerText="";
+        chk.primaryLanguage = true;
+    }
+});
+
+// input 다 채워지면(유효성 검사는 x) 회원가입 버튼 색상 변경
+// +체크 추가
+const signUpBtn = document.getElementById("signUpBtn");
+// input
+const validity = {email, inputAuth, password, checkPassword, lastName, firstName, phone, passportNo,primaryLanguage};
+for(let valid in validity)
+validity[valid].addEventListener('input',chagneSignupBtn);
+// 체크 동의
+infoAgree1.addEventListener('change',chagneSignupBtn);
+infoAgree2.addEventListener('change',chagneSignupBtn);
+
+function chagneSignupBtn(){
+    if (email.validity.valid&&
+        inputAuth.validity.valid&&
+        checkPassword.validity.valid&&
+        lastName.validity.valid&&
+        firstName.validity.valid&&
+        phone.validity.valid&&
+        passportNo.validity.valid&&
+        primaryLanguage.validity.valid&&
+        password.validity.valid&&
+        infoAgree1.checked&&
+        infoAgree2.checked){
+            signUpBtn.style.backgroundColor = "#1c797d";
+        }else{
+            signUpBtn.style.backgroundColor = "#c5c5c5";
+        }
+    }
+    
+    infoAgree1.addEventListener('change',()=>{
+        if(infoAgree1.checked){
+            chk.infoAgree1 = true;
+        }else{
+            chk.infoAgree1 = false;
+        }
+    })
+    infoAgree2.addEventListener('change',()=>{
+        if(infoAgree2.checked){
+            chk.infoAgree2 = true;
+        }else{
+            chk.infoAgree2 = false;
+        }
+    })
+    
+// 필수 입력 검사
+const signUpForm = document.getElementById("signUpForm");
+
+signUpForm.addEventListener("submit",e=>{
+    if (
+        !(
+        email.validity.valid &&
+        inputAuth.validity.valid &&
+        checkPassword.validity.valid &&
+        lastName.validity.valid &&
+        firstName.validity.valid &&
+        phone.validity.valid &&
+        passportNo.validity.valid &&
+        primaryLanguage.validity.valid &&
+        password.validity.valid &&
+        infoAgree1.checked &&
+        infoAgree2.checked
+        )
+    ) {
+        e.preventDefault(); // 제출을 막음
+        return;
+    }
+
+    for(let key in chk){
+        if(!chk[key]){
+            switch(key){
+                case "email":
+                    alert("이메일을 확인해주세요"); break;
+                case "inputAuth":
+                    alert("이메일 인증을 완료해주세요"); break;
+                case "password":
+                    alert("비밀번호를 확인해주세요"); break;
+                case "checkPassword":
+                    alert("비밀번호와 일치하는지 확인해주세요"); break;
+                case "lastName":
+                    alert("이름을 확인해주세요"); break;
+                case "firstName":
+                    alert("이름을 확인해주세요"); break;
+                case "phone":
+                    alert("연락처를 확인해주세요"); break;
+                case "passportNo":
+                    alert("여권번호를 확인해주세요"); break;
+                case "primaryLanguage":
+                    alert("주 사용 언어를 확인해주세요"); break;
+                case "infoAgree1":
+                    alert("이용약관에 동의해주세요"); break;
+                case "infoAgree2":
+                    alert("개인정보 수집 및 이용에 동의해주세요"); break;
+            }
+            document.getElementById(key).focus();
+            e.preventDefault();
+            return;
+        }
     }
 });
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tourist Sign Up</title>
     <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/demo.css}"/>
-    <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/intlTelInput.css}"/>
+    <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/signUpIntlTelInput.css}"/>
     <link rel="stylesheet" th:href="@{/css/signUp/signUpAsTourist.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -16,7 +16,7 @@
         <div class="container_top">
             <div class="container_top_title font0">회원 가입</div>
         </div>
-        <form th:action="@{/signUp/tourist}" method="post">
+        <form th:action="@{/signUp/tourist}" method="post" id="signUpForm" novalidate>
         <div class="container_middle">
             <div class="container_middle_input">
                 <!-- email -->
@@ -42,7 +42,7 @@
                     <input type="password" id="password" name="userPassword" autocomplete="off" required>
                     <label for="password">비밀번호</label>
                 </div>
-                <div class="font4 normal-message" id="pwMessage">영어 대소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.</div>
+                <div class="font4 normal-message" id="pwMessage">영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.</div>
                 <!-- 비번 확인 -->
                 <div class="inputGroup">
                     <input type="password" id="checkPassword" autocomplete="off" required>
@@ -51,25 +51,28 @@
                 <div class="font4" id="chkPwMessage"></div>
                 <!-- 이름(last/first) -->
                 <div class="namePart">
-                    <div class="first-name">
-                        <div class="inputGroup">
-                            <input type="text" id="firstName" name="userFirstName" autocomplete="off" required>
-                            <label for="firstName">이름</label>
-                        </div>
-                        <div class="font4" id="nameMessage"></div>
-                    </div>
                     <div class="last-name">
                         <div class="inputGroup">
                             <input type="text" id="lastName" name="userLastName" autocomplete="off" required>
                             <label for="lastName">성</label>
                         </div>
+                        <div class="font4" id="nameMessage1"></div>
+                    </div>
+                    <div class="first-name">
+                        <div class="inputGroup">
+                            <input type="text" id="firstName" name="userFirstName" autocomplete="off" required>
+                            <label for="firstName">이름</label>
+                        </div>
+                        <div class="font4" id="nameMessage2"></div>
                     </div>
                 </div>
                 <!-- 전번(국제)  -->
                 <div class="inputGroup">
                     <input id="phone" name="userTel" type="text" autocomplete="off" required/>
+                    <!-- 임시버튼 온클릭 -->
+                    <!-- <button type="button" id="submitBtn" onclick="submitForm()">btn</button> -->
                 </div>
-                <div class="font4" id="telMessage"></div>
+                <div class="font4" id="phoneMessage"></div>
                 <!-- 비상 연락처 (Text. 트위터/페북 주소, 인스타 아이디 등) -->
                 <div class="inputGroup">
                     <input type="text" id="emergencyCo" name="emergencyContact" autocomplete="off" required>
@@ -81,16 +84,13 @@
                     <input type="text" id="passportNo" name="passportNo" autocomplete="off" required>
                     <label for="passportNo">여권 번호</label>
                 </div>
-                <div class="font4" id="passportMessage"></div>
+                <!-- <div class="font4" id="passportMessage"></div> -->
                 <!-- 주 사용 언어 -->
                 <div class="inputGroup">
                     <input type="text" id="primaryLanguage" name="primaryLanguage" autocomplete="off" required>
                     <label for="primaryLanguage">주 사용 언어</label>
                 </div>
-                <div class="font4" id="passportMessage"></div>
-                
-                <!-- 전화번호 -->
-                <!-- <input type="text" name="contact" id="contact" class="contact font4" placeholder="전화번호"> -->
+                <div class="font4" id="pLanguageMessage"></div>
             </div>
 
             <!-- 약관 동의 체크박스 -->
@@ -99,17 +99,35 @@
                     <input type="checkbox" id="checkAll"><label for="checkAll" class="box" name="chk" onclick="selectAll(this)"></label><span class="font5 ment1">&nbsp&nbsp전체 약관 동의</span>
                 </div>
                 <div class="chk0">
-                    <input type="checkbox" name="chk" id="infoAgree1"><label for="infoAgree1" class="box"></label><span class="font5 ment1">&nbsp&nbsp이용약관 동의</span><span class="required font5">&nbsp[필수]</span>
+                    <input type="checkbox" name="chk" id="infoAgree1"><label for="infoAgree1" class="box"></label><span class="font5 ment1">&nbsp&nbsp이용약관 동의</span><span class="required font5">&nbsp[필수]</span><span class="downArrow" id="arrow1"></span>
+                </div>
+                <div class="terms-explain" id="terms1">메롱
+
+                    메롱
+
+                    메롱
                 </div>
                 <div class="chk1">
-                    <input type="checkbox" name="chk" id="infoAgree2"><label for="infoAgree2" class="box"></label><span class="font5 ment1">&nbsp&nbsp개인정보 수집 및 이용 동의</span><span class="font5 required">&nbsp[필수]</span>
+                    <input type="checkbox" name="chk" id="infoAgree2"><label for="infoAgree2" class="box"></label><span class="font5 ment1">&nbsp&nbsp개인정보 수집 및 이용 동의</span><span class="font5 required">&nbsp[필수]</span><span class="downArrow" id="arrow2"></span>
                 </div>
-                <div class="chk2">
-                    <input type="checkbox" name="chk" id="adverAgree"><label for="adverAgree" class="box" onclick="chk(this)"></label><span class="font5 ment2">&nbsp&nbsp마케팅 이메일 수신 동의 [선택]</span>
+                <div class="terms-explain" id="terms2">메롱
+    
+                    메롱
+    
+                    메롱
                 </div>
+                <!-- <div class="chk2">
+                    <input type="checkbox" name="chk" id="adverAgree"><label for="adverAgree" class="box"></label><span class="font5 ment2">&nbsp&nbsp마케팅 이메일 수신 동의 [선택]</span><span class="downArrow" id="arrow3"></span>
+                </div>
+                <div class="terms-explain" id="terms3">메롱
+    
+                    메롱
+    
+                    메롱
+                </div> -->
             </div>
             <div class="container_bottom">
-                <button class="font3 container_bottom_button">회원가입</button>
+                <button class="font3 container_bottom_button" id="signUpBtn" style="outline: none;">회원가입</button>
             </div>
         </form>
     </div>
@@ -118,10 +136,10 @@
     <script th:src="@{/js/signUp/signUpAsTourist.js}"></script>
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
     <script inline="javascript">
-        var submitBtn = document.querySelector("#submitBtn");
+        // var submitBtn = document.querySelector("#submitBtn");
         var input = document.querySelector("#phone");
 
-        window.intlTelInput(input, {
+        var iti = window.intlTelInput(input, {
             // allowDropdown: true,
             // autoInsertDialCode: true,
             // autoPlaceholder: "on",
@@ -146,14 +164,29 @@
             utilsScript: "build/js/utils.js"
         });
         
+        function submitForm() {
+            var selectedCountryData = iti.getSelectedCountryData();
+            var countryCode = selectedCountryData.iso2;
+            // 선택한 국가의 국가 코드
+            // document.getElementById("result").innerText = countryCode;
+            console.log("국가 코드:", countryCode);
+            
+            // 여기서부터는 제출 로직을 추가하면 됩니다.
+            // ...
+        }
+
+        // const countryName = "Korea"
+        // iti.setCountry(countryName);
+
         var title = document.querySelector(".iti__selected-flag");
         var code = document.querySelector(".iti__selected-dial-code");
 
-        submitBtn.addEventListener("click", ()=>{
-        console.log("전화번호 : " + input.value);
-        console.log("국가 : " + title.title);
-        console.log("국제전화 나라번호 : " + code.innerText);
-    })
+        // 이거 활용!!!!!!!!!!!!
+        // submitBtn.addEventListener("click", ()=>{
+        // console.log("전화번호 : " + input.value);
+        // console.log("국가 : " + title.title);
+        // console.log("국제전화 나라번호 : " + code.innerText);
+        // })
     </script>
 </body>
 </html>
