@@ -1,44 +1,67 @@
-// 전체 약관 동의
-const checkAll = document.getElementById("checkAll");
-// 모든 하위 동의 박스
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-// 이용 약관 동의
-const infoAgree1 = document.getElementById("infoAgree1");
-// 개인정보 수집 및 동의
-const infoAgree2 = document.getElementById("infoAgree2");
-// 마케팅 이메일 수신 동의
-const adverAgree = document.getElementById("adverAgree");
+// // 전체 약관 동의
 
-function selectAll(selectAll) {
-    console.log(checkboxes);
-    checkboxes.forEach((checkbox) => {
-        console.log(checkbox);
-        checkbox.checked = selectAll.checked
-        console.log(checkbox.checked);
-    })
-}
+const checkAllLabel = document.getElementById("checkAllLabel");
+const checkAll = document.getElementById("checkAll");
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#checkAll)');
+
+// 전체 동의 체크박스
+checkAllLabel.addEventListener('click', function() {
+    const isChecked = checkAll.checked;
+
+  // 하위 체크박스들의 상태를 전체 동의 체크박스와 동일하게 설정
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = !(isChecked);
+    });
+});
+
+// 하위 체크박스 클릭 이벤트 리스너 등록
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('click', function() {
+    // 하위 체크박스 중 하나라도 해제되었을 때 전체 동의 체크박스도 체크 해제
+        if (!this.checked) {
+            checkAll.checked = false;
+        }
+    });
+});
+
 
 // 약관 설명 펼치기
 const arrow1 = document.querySelector("#arrow1");
 const terms1 = document.getElementById("terms1");
+
+// 스크롤 위치 고정
+document.body.style.overflow = "hidden";
+const scrollPosition = document.documentElement.scrollTop;
+
 arrow1.addEventListener("click",()=>{
     arrow1.classList.toggle("upArrow");
     arrow1.classList.toggle("downArrow");
     if(arrow1.classList.contains("downArrow")){
         terms1.style.display = "none";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollPosition);
     }else{
         terms1.style.display = "block";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollPosition);
     }
 });
+
 const arrow2 = document.querySelector("#arrow2");
 const terms2 = document.getElementById("terms2");
+
 arrow2.addEventListener("click",()=>{
     arrow2.classList.toggle("upArrow");
     arrow2.classList.toggle("downArrow");
     if(arrow2.classList.contains("downArrow")){
         terms2.style.display = "none";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollPosition);
     }else{
         terms2.style.display = "block";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollPosition);
     }
 });
 // const arrow3 = document.querySelector("#arrow3");
@@ -52,6 +75,7 @@ arrow2.addEventListener("click",()=>{
 //         terms3.style.display = "block";
 //     }
 // });
+
 
 // ------------ 유효성 검사 ------------
 

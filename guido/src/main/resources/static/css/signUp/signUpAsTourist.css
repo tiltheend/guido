@@ -74,7 +74,7 @@
     color: #6d6c6c;
 }
 
-.inputGroup :is(input:focus, input:valid)~label {
+.inputGroup :is(input:focus, input:valid)~label, .google-email label {
     transform: translateY(-50%) scale(.9);
     margin: 0em;
     margin-left: 1.3em;
@@ -84,7 +84,7 @@
     color: #1c797d;
 }
 
-.inputGroup :is(input:focus, input:valid) {
+.inputGroup :is(input:focus, input:valid), .google-email {
     border-color: #1c797d;
 }
 
@@ -126,12 +126,6 @@
     flex-direction: column;
     margin: 10px 10px 20px 10px;
 }
-.box{
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border: 1px solid #c5c5c5;
-}
 [type="checkbox"]{
     display: none;
 }
@@ -155,10 +149,17 @@
 }
 .box:hover{
     cursor: pointer;
-    color: black;
 }
-/* 동의 박스 체크됐을 때 */
+/* 체크 해제 */
+.box{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #c5c5c5;
+}
+/* 체크 o */
 input[type="checkbox"]:checked + label{
+/* .box::before{ */
     background: url("/images/signUp/check.png") 0 0 no-repeat;
     background-size: cover;
     border: none;
@@ -185,15 +186,30 @@ input[type="checkbox"]:checked + label{
 }
 /* 약관 설명 */
 .terms-explain{
+    height: 200px;
     margin: 0 15px 20px 30px;
     padding: 15px;
     font-weight: lighter;
     font-size: 0.7rem;
     display: none;
-    border: #1c7a7d3d solid 1px;
+    border: #1c7a7d3d solid 2px;
     border-radius: 10px;
     white-space: pre-wrap;
-    transition-duration: 0.1s;
+    overflow-y:scroll;
+    
+}
+.terms-explain::-webkit-scrollbar-track{
+    background-color: transparent;
+    height: 90%;
+}
+.terms-explain::-webkit-scrollbar-thumb{
+    height: 20%;
+    background: #1c7a7d72;
+    border-radius: 15px;
+    margin: 5px;
+}
+.terms-explain::-webkit-scrollbar{
+    width: 5px;
 }
 
 /* 제출 버튼 */

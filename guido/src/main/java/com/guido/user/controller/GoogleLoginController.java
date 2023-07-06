@@ -26,7 +26,7 @@ import com.guido.user.model.dto.GoogleResponse;
 import com.guido.user.model.dto.GoogleUserInfo;
 import com.guido.user.model.service.GoogleLoginService;
 
-@SessionAttributes({"loginUser","googleUserInfo"})
+@SessionAttributes({"loginUser","googleEmail"})
 @Controller
 //@CrossOrigin("*")
 public class GoogleLoginController {
@@ -42,7 +42,7 @@ public class GoogleLoginController {
 	@Autowired
 	private GoogleLoginService service;
 	
-	
+//	
     @Value("${google.client.id}")
     private String googleClientId;
     @Value("${google.client.pw}")
@@ -108,18 +108,19 @@ public class GoogleLoginController {
         }else { // 가입된 회원 아니면 (이메일, 프로필 사진 가지고 회원가입 화면으로) 
         	path = "redirect:/user/signUp/chooseMemberType";
         	// 유저 타입 고르는 화면으로 구글 유저 정보 가져가서 -> 회원가입 페이지로 이동.
-        	ra.addFlashAttribute("message", "첫 방문을 환영합니다! Guido 사용을 위해 필수 정보 입력과 약관 동의 체크를 해주세요.");
-        	Map<String, Object> googleUserInfo = new HashMap<>();
-        	googleUserInfo.put("email", email);
-        	googleUserInfo.put("picture", picture);
-        	model.addAttribute("googleUserInfo", googleUserInfo);
+        	ra.addFlashAttribute("message", "첫 방문을 환영합니다! Guido 사용을 위해 먼저 회원가입을 진행주세요.");
+//        	Map<String, Object> googleUserInfo = new HashMap<>();
+//        	googleUserInfo.put("email", email);
+//        	googleUserInfo.put("picture", picture);
+        	System.out.println(email);
+        	model.addAttribute("googleEmail", email);
         }
         return path;
     }
 
     // 임시 chooseMemberType 맵핑
     @GetMapping("/signUp/chooseMemberType")
-    public String dd(RedirectAttributes ra) {
+    public String chooseMem(RedirectAttributes ra) {
     	return "signUp/chooseMemberType";
     }
     
