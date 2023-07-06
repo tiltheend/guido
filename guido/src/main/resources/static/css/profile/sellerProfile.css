@@ -324,10 +324,7 @@
     width: 60px; height: 60px; border-radius: 50%;
 }
 .seller-profile-top .review-list li .reviewer-name{
-    width: 60px; text-align: center;
-    /* font-size: 1rem; font-weight: bold;
-    margin-top: 4px; */
-    /* width: 90px; text-align: left; */
+    width: 90px; text-align: left;
     font-size: 1rem; font-weight: bold;
     margin-top: 4px;
     overflow: hidden;

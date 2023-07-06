@@ -19,6 +19,15 @@ document.addEventListener("DOMContentLoaded",()=>{
     let initCheck; // 초기 프로필 이미지 상태를 저장하는 변수
     // false == 기본 이미지, true == 이전 업로드 이미지
 
+    let GuideCheck = false; // 초기 프로필 이미지 상태를 저장하는 변수
+
+    console.log(userType);
+
+    if(userType == 'G' ){ // 가이드 인 경우 경고 메세지 출력용!!
+        GuideCheck = true;
+    }
+
+
     let deleteCheck = -1;
     // 프로필 이미지가 새로 업로드 되거나 삭제 되었음을 나타내는 변수
     // -1 == 초기값, 0 == 프로필 삭제(x버튼), 1 == 새 이미지 업로드
@@ -47,9 +56,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         // 2MB로 최대 크기 제한
         const maxSize = 1*1024*1024*2; // 파일 최대 크키 지정
-        console.log(e.target); // input
-        console.log(e.target.value); // 업로드된 파일의 경로
-        console.log(e.target.files); // 업로드된 파일의 정보가 담긴 배열
+        // console.log(e.target); // input
+        // console.log(e.target.value); // 업로드된 파일의 경로
+        // console.log(e.target.files); // 업로드된 파일의 정보가 담긴 배열
 
         const file = e.target.files[0]; // 업로드한 파일의 정보가 담긴 객체
 
@@ -104,29 +113,34 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         // #profileFrm이 제출 되었을 때
         document.querySelector(".profile-img-box").addEventListener("submit",e=>{
-        // initCheck
-        // 초기 프로필 이미지 상태를 저장하는 변수
-        // false == 기본 이미지, true == 이전 업로드 이미지
+            // initCheck
+            // 초기 프로필 이미지 상태를 저장하는 변수
+            // false == 기본 이미지, true == 이전 업로드 이미지
 
-        // deleteCheck
-        // 프로필 이미지가 새로 업로드 되거나 삭제 되었음을 나타내는 변수
-        // -1 == 초기값, 0 == 프로필 삭제(x버튼), 1 == 새 이미지 업로드
-        let flag = true;
+            // deleteCheck
+            // 프로필 이미지가 새로 업로드 되거나 삭제 되었음을 나타내는 변수
+            // -1 == 초기값, 0 == 프로필 삭제(x버튼), 1 == 새 이미지 업로드
+            let flag = true;
 
-        // 프로필 이미지가 없다 -> 있다.
-        if(!initCheck && deleteCheck==1) flag = false;
+            // 프로필 이미지가 없다 -> 있다.
+            if(!initCheck && deleteCheck==1) flag = false;
 
-        // 이전 프로필 이미지가 있다 -> 삭제
-        if(initCheck && deleteCheck==0) flag = false;
+            // 이전 프로필 이미지가 있다 -> 삭제
+            if(initCheck && deleteCheck==0) flag = false;
 
-        // 이전 프로필 이미지가 있다 -> 새 이미지
-        if(initCheck && deleteCheck == 1) flag = false;
+            // 이전 프로필 이미지가 있다 -> 새 이미지
+            if(initCheck && deleteCheck == 1) flag = false;
 
-        if(flag){ //
-        e.preventDefault(); // form 기본 이벤트 제거
-        alert("이미지 변경 후 클릭하세요.");
-        }
+            if(flag){ //
+            e.preventDefault(); // form 기본 이벤트 제거
+            alert("이미지 변경 후 클릭하세요.");
+            }
+
+            if(GuideCheck){ // 가이드만 경고 메세지 출력~~
+                alert("가이드의 프로필이 얼굴이 잘 나온 사진이 아닐 경우 이용에 제재를 받을 수 있습니다.");
+            }
         });
+
 
     }
 

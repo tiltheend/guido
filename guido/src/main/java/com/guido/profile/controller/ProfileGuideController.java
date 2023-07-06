@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,15 +15,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.profile.model.service.ProfileGuideService;
+import com.guido.profile.model.service.ProfileTouristService;
 
 @SessionAttributes("{loginUser}")
 @RequestMapping("/profile")
 @Controller
 public class ProfileGuideController {
+	
+	@Autowired
+	private ProfileTouristService Touristservice;
 	
 	@Autowired
 	private ProfileGuideService service;
@@ -92,13 +98,41 @@ public class ProfileGuideController {
 
 	// 가이드 예약 일정 확인 페이지로 이동
 	@GetMapping("/guideReservationSchedule")
-	public String guideReservationSchedule() {
+	public String guideReservationSchedule(
+			@SessionAttribute("loginUser") User loginUser,
+			Model model) {
+		
+		int userNo= loginUser.getUserNo();
+		
+		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
+		User user = Touristservice.userInfo(userNo);
+		model.addAttribute("user", user);
+		
+		// 가이드 자기 소개
+		User guide = service.selectGuideInfo(userNo);
+		
+		model.addAttribute("guide", guide);
+		
 		return "profile/sellerReservationSchedule";
 	}
 	
 	// 가이드 예약 내역 페이지로 이동
 	@GetMapping("/guideReservation")
-	public String guideReservation() {
+	public String guideReservation(
+			@SessionAttribute("loginUser") User loginUser,
+			Model model) {
+		
+		int userNo= loginUser.getUserNo();
+		
+		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
+		User user = Touristservice.userInfo(userNo);
+		model.addAttribute("user", user);
+		
+		// 가이드 자기 소개
+		User guide = service.selectGuideInfo(userNo);
+		
+		model.addAttribute("guide", guide);
+		
 		return "profile/sellerReservation";
 	}
 	

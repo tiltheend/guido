@@ -378,20 +378,22 @@ selectElement = document.querySelector(".review-write #reviewSaleList");
 let productNo;
 let productDtNo;
 // 상품 선택
-selectElement.addEventListener("change", function() {
-    // 선택된 option 요소
-    let selectedOption = this.options[this.selectedIndex];
+if(selectElement != null){
+    selectElement.addEventListener("change", function() {
+        // 선택된 option 요소
+        let selectedOption = this.options[this.selectedIndex];
+        
+        // 속성 값 가져오기
+        productNo = selectedOption.getAttribute("data-productno");
+        productDtNo = selectedOption.getAttribute("data-productdtno");
     
-    // 속성 값 가져오기
-    productNo = selectedOption.getAttribute("data-productno");
-    productDtNo = selectedOption.getAttribute("data-productdtno");
-
-    if(productNo){
-        if(productDtNo){
-            checkObj.selectElement = true;
+        if(productNo){
+            if(productDtNo){
+                checkObj.selectElement = true;
+            }
         }
-    }
-});
+    });
+}
 
 // 별점
 selectedStarScore = document.querySelectorAll(".review-write input[name='starScore']");
