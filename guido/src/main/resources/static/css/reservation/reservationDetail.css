@@ -551,6 +551,8 @@ body::-webkit-scrollbar-track {
   }
 
 
+
+
 @media screen and (max-width : 767px) {
     .reservation--detail__product{
         display: block;

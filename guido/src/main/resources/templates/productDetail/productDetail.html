@@ -48,6 +48,7 @@
         </div>
     </div>
     
+
     <form th:action="@{/reservation/reservationform/{productNo}(productNo=${product.productNo})}" method="GET"> 
     
         <div class="detail--container">
@@ -458,10 +459,6 @@
         
                     </section>
 
-        
-
-
-
                 
                 
                     
@@ -471,20 +468,43 @@
                         <!-- 예약 캘린더(날짜) -->
                         <div class="detail--right__calendar">
         
+                            <div class="calendar-header">
+                                <div class="calendar-arrow prev-month">&lt;</div>
+                    
+                                <div class="year-month"></div>
+                    
+                                <div class="calendar-arrow next-month">&gt;</div>
+                            </div>
+
+                            <div class="calendar-content">
+                                
+                                <table class="calendar-table">
+                                    <thead>
+                                        <th>Sun</th>
+                                        <th>Mon</th>
+                                        <th>Tue</th>
+                                        <th>Wed</th>
+                                        <th>Thu</th>
+                                        <th>Fri</th>
+                                        <th>Sat</th>
+                                    </thead>
+                        
+                                    <tbody>
+                        
+                                    </tbody>
+                        
+                        
+                                </table>
+
+                            </div>
+                    
                             
         
                         </div>
         
                         <!-- 예약 옵션(시간) : 당일 투어의 경우에만 뜸 -->
-                        <div class="detail--right__option" th:if="${#lists.size(product.optionList) > 0}">
-                            <span>Option</span>
-        
-                            <div class="detail--item__option">
-                                <th:block th:each="i : ${#numbers.sequence(0, #lists.size(product.optionList) - 1, 1)}">
-                                    <input type="radio" name="option" th:id="|option${i+1}|" th:value="${product.optionList[i].optionNo}" th:disabled="${product.optionList[i].optionRestCount==0}">
-                                    <label class="option--active" th:for="|option${i+1}|" th:utext="|${product.optionList[i].optionName} (${product.optionList[i].optionRestCount} left)|"></label>
-                                </th:block>
-                            </div>
+                        <div class="detail--right__option">
+
                         </div>
                         
                         <!-- 예약 가격 -->
@@ -730,6 +750,7 @@
 
     <script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
     <script th:src="@{/libraries/assets/js/app.js}"></script>
+    <script th:src="@{/js/productDetail/calendar.js}"></script>
     <script th:src="@{/js/productDetail/productDetail.js}"></script>
 
 

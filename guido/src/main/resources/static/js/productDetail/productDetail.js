@@ -268,7 +268,7 @@ reserveBtn.addEventListener("click", e=>{
 
 
         if(optionRestCount<inputGuestCount.innerText){
-            alert("현재 예약 가능한 인원 수를 초과");
+            alert("현재 예약 가능한 인원 수를 초과합니다");
             e.preventDefault();
             return;
         }
@@ -290,16 +290,20 @@ reserveBtn.addEventListener("click", e=>{
     }
 
 
-    /* 날짜 미선택 시 */
-
-
-
+    
     
     const guestHidden = document.getElementById("guestHidden");
     const dateHidden = document.getElementById("dateHidden");
-
+    
     guestHidden.value = inputGuestCount.innerText;
-    dateHidden.value = "2023-07-14";
+    
+    /* 날짜 미선택 시 */
+    if(dateHidden.value==""){
+        alert("날짜를 선택해주세요!");
+        e.preventDefault();
+    }
+
+
 
 
 });
@@ -559,4 +563,3 @@ if(document.getElementById('editBtn')!=null){
         location.href = location.pathname + '/edit';
     });
 }
-

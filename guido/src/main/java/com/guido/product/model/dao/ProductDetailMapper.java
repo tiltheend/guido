@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
@@ -50,5 +52,11 @@ public interface ProductDetailMapper {
 
 	// 얼굴 인증 사진 업데이트
 	int updateFaceImg(User loginUser);
+
+	// 캘린더 날짜 불러오기
+	List<ProductDate> selectCalendarDates(Map<String, Object> map);
+
+	// 날짜 선택 시 옵션 불러오기
+	List<ProductOption> getOptionInfo(Map<String, Object> map);
 	
 }

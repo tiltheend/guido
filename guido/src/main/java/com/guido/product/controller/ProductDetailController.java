@@ -25,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.product.model.service.ProductDetailService;
@@ -106,7 +108,7 @@ public class ProductDetailController {
 		model.addAttribute("addNotesList", addNotesList);
 		model.addAttribute("apiKey", apiKey);
 		model.addAttribute("recommendList", recommendList);
-	
+		
 		
 		return "productDetail/productDetail";
 	}
@@ -133,7 +135,34 @@ public class ProductDetailController {
 		
 		return "redirect:product/" + productNo; 
 			
+	}
+	
+	
+	// 캘린더 날짜 불러오기
+	@GetMapping("/calendarDates")
+	@ResponseBody
+	public List<ProductDate> selectProductDateList(@RequestParam("year") int year, 
+			@RequestParam("month") int month, @RequestParam("productNo") int productNo){
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("year", year);
+		map.put("month", month);
+		map.put("productNo", productNo);
+		
+		return service.selectCalendarDates(map);
+	}
+	
+	
+	// 날짜 선택 시 옵션 불러오기
+	@GetMapping("/getOptionInfo")
+	@ResponseBody
+	public List<ProductOption> selectOptionList(@RequestParam("productDate") String productDate, @RequestParam("productNo") int productNo){
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("productDate", productDate);
+		map.put("productNo", productNo);
+		
+		return service.getOptionInfo(map);
 	}
 	
 	

@@ -181,6 +181,10 @@
     height: 40vh;
 }
 
+/* 옵션 div */
+.detail--right__option{
+    display: none;
+}
 
 /* selectTime, price 텍스트 */
 .detail--right__option span,
@@ -1425,6 +1429,137 @@ a {
     font-weight: 600;
     margin-bottom: 5px;
 }
+
+
+
+/* 예약 캘린더 */
+
+  /* 달력 전체를 감싸는 요소 */
+  .detail--right__calendar{
+    width: 100%;
+    height: 400px;
+    padding: 10px;
+    min-width: 364px;
+}
+
+/* 달력 전체 블록 금지 */
+.detail--right__calendar *{
+    user-select: none;
+}
+
+/* 화살표, 년,월이 작성되는 영역 */
+.calendar-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 20px 20px 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+/*  화살표, 년,월에 대한 공통 설정*/
+.calendar-header > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 화살표 공통 설정 */
+.calendar-arrow{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.calendar-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.calendar-table{
+    border-collapse: collapse;
+}
+
+.calendar-table th{
+    text-align: center;
+}
+
+.calendar-table tbody{
+    margin-top: 30px;
+}
+
+/* 달력의 일을 나타내는 td */
+.calendar-table td{
+    width: 45px;
+    height: 43px;
+}
+
+/* 일을 나타내는 td 내부 전체를 차지하는 div */
+.calendar-table td > div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.calendar-table td > div.active:hover{
+    color: white;
+    background-color: #0F4957;
+    cursor: pointer;
+}
+
+.calendar-table td > div.inactive{
+    color : #C5C5C5;
+    /* text-decoration: line-through; */
+}
+
+.calendar-table td > div.inactive.pnday{
+    color: #e2e1e1;
+}
+
+.calendar-table thead::after {
+    content: "";
+    display: block;
+    height: 10px; /* 간격의 높이 조정 */
+  }
+
+  .calendar-table tbody::before {
+    content: "";
+    display: block;
+    height: 10px; /* 간격의 높이 조정 */
+  }
+
+
+
+.start-day-td{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+
+.start-day,
+.last-day{
+    background-color: #0F4957;
+    color : white !important;
+}
+
+.last-day-td{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.select-day-td{
+    background-color: #C5C5C5;
+}
+
+td.select-day-td div.inactive{
+    color: #000000;
+}
+
 
 
 /* 반응형 */

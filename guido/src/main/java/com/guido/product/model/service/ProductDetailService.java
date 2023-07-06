@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
@@ -83,6 +85,20 @@ public interface ProductDetailService {
 	 * @return result
 	 */
 	int updateFaceImg(User loginUser, MultipartFile faceImg) throws IllegalStateException, IOException;
+
+
+	/** 캘린더 날짜 불러오기
+	 * @param map
+	 * @return productDateList
+	 */
+	List<ProductDate> selectCalendarDates(Map<String, Object> map);
+
+
+	/** 날짜 선택 시 옵션 불러오기
+	 * @param map
+	 * @return optionInfo
+	 */
+	List<ProductOption> getOptionInfo(Map<String, Object> map);
 
 
 

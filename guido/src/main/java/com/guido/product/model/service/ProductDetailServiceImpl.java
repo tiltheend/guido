@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.common.utility.Util;
@@ -141,6 +143,20 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 		}
 		
 		return result;
+	}
+
+
+	// 캘린더 날짜 불러오기
+	@Override
+	public List<ProductDate> selectCalendarDates(Map<String, Object> map) {
+		return mapper.selectCalendarDates(map);
+	}
+
+
+	// 날짜 선택 시 옵션 불러오기
+	@Override
+	public List<ProductOption> getOptionInfo(Map<String, Object> map) {
+		return mapper.getOptionInfo(map);
 	}
 
 }
