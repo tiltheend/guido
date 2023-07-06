@@ -1,7 +1,4 @@
-
 /* ***** 헤더 검색 모달창 ***** */
-
-
 
 /* header 자체 */
 const mainSearchBox = document.querySelector('.main-search-box');
@@ -18,37 +15,48 @@ const checkInButtonClick = document.querySelector('.in-btn-click');
 const checkOutButtonClick = document.querySelector('.out-btn-click');
 const guestButtonClick = document.querySelector('.guest-btn-click');
 
-/* 회색 바탕 부분 & 모달창 (전부) */
-const whereModal = document.querySelector('.where-modal-bg');
-const whenModal = document.querySelector('.when-modal-bg');
-const guestModal = document.querySelector('.guest-modal-bg');
+/* 모달창 */
+const whereModal = document.querySelector('.where-modal');
+const whenModal = document.querySelector('.datepicker');
+const guestModal = document.querySelector('.guest-modal');
 
-const modalsBG = document.querySelectorAll('.modal');
+/* 모달창 배경 부분 */
+const modalsBG = document.querySelector('.modal-background');
 
 /* searchIcon.addEventListener('click', () => {
   mainSearchBox.style.display = 'none';
   searchBoxClickBox.style.display = 'block';
 }); */
 
+
+
+/* *** 헤더 열고 닫기 *** */
 whereButton.addEventListener('click', () => {
   mainSearchBox.style.display = 'none';
   searchBoxClickBox.style.display = 'block';
   whereModal.style.display = 'block';
   /* toggleModal(whereModal); */
+  modalsBG.style.display = 'block';
 });
 
 whenButton.addEventListener('click', () => {
+
+  // let startDateInput = document.querySelector(".form-control");
+  // startDateInput.click();
+
   mainSearchBox.style.display = 'none';
   searchBoxClickBox.style.display = 'block';
-  whenModal.style.display = 'block';
-  /* toggleModal(whenModal); */
+  // whenModal.style.display = 'block'; /* ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ */
+  // /* toggleModal(whenModal); */
+  // modalsBG.style.display = 'block';
 });
 
 guestButton.addEventListener('click', () => {
   mainSearchBox.style.display = 'none';
   searchBoxClickBox.style.display = 'block';
-  guestModal.style.display = 'block';
+  guestModal.style.display = 'flex';
   /* toggleModal(guestModal); */
+  modalsBG.style.display = 'block';
 });
 
 
@@ -56,54 +64,71 @@ guestButton.addEventListener('click', () => {
 /* *** 헤더 모달창 열기 *** */
 whereButtonClick.addEventListener('click', () => {
   whereModal.style.display = 'block';
-  whenModal.style.display = 'none';
+  // whenModal.style.display = 'none';
   guestModal.style.display = 'none';
 });
 
 checkInButtonClick.addEventListener('click', () => {
-  whenModal.style.display = 'block';
+  // whenModal.style.display = 'block';
   whereModal.style.display = 'none';
   guestModal.style.display = 'none';
 });
 checkOutButtonClick.addEventListener('click', () => {
-  whenModal.style.display = 'block';
+  // whenModal.style.display = 'block';
   whereModal.style.display = 'none';
   guestModal.style.display = 'none';
 });
 
 guestButtonClick.addEventListener('click', () => {
-  guestModal.style.display = 'block';
+  guestModal.style.display = 'flex';
   whereModal.style.display = 'none';
-  whenModal.style.display = 'none';
+  // whenModal.style.display = 'none';
+});
+
+
+/* 모달 회색 바탕 닫기 */
+// mainSearchBox.addEventListener('click', () => {
+//   modalsBG.style.display = 'block';
+// });
+
+modalsBG.addEventListener('click', () => {
+  mainSearchBox.style.display = 'flex';
+  searchBoxClickBox.style.display = 'none';
+  // whenModal.style.display = 'none';
+  whereModal.style.display = 'none';
+  guestModal.style.display = 'none';
+  modalsBG.style.display = 'none';
 });
 
 
 
 /* *** 헤더 모달창 닫기 *** */
-document.addEventListener('DOMContentLoaded', function() {
 
-  var modals = document.querySelectorAll('.modal');
+// document.addEventListener('DOMContentLoaded', function() {
 
-  modals.forEach(function(modal) {
-    modal.addEventListener('click', function(event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-        mainSearchBox.style.display = 'flex';
-        searchBoxClickBox.style.display = 'none';
-      }
-    });
-  });
-});
+//   var modals = document.querySelector('.modal-background');
 
-
+//   modals.forEach(function(modal) {
+//     modal.addEventListener('click', function(event) {
+//       if (event.target === modal) {
+//         modal.style.display = 'none';
+//         mainSearchBox.style.display = 'flex';
+//         searchBoxClickBox.style.display = 'none';
+//       }
+//     });
+//   });
+// });
 
 
 
 /* ***** 메인 검색 clicked css ***** */
 document.addEventListener('DOMContentLoaded', function() {
+
   var clickDivs = document.querySelectorAll('.click-div');
+
   clickDivs.forEach(function(clickDiv) {
     clickDiv.addEventListener('click', function() {
+
       // 모든 .click-div 요소의 클래스 제거
       clickDivs.forEach(function(div) {
         div.classList.remove('clicked');
@@ -123,37 +148,29 @@ document.addEventListener('DOMContentLoaded', function() {
   var clickDivs = document.querySelectorAll('.click-div');
 
   whereButton.addEventListener('click', function() {
-    // 모든 clickDivs 요소에서 .clicked 클래스 제거
     clickDivs.forEach(function(clickDiv) {
       clickDiv.classList.remove('clicked');
     });
 
-    // 첫 번째 clickDiv에 .clicked 클래스 추가
     clickDivs[0].classList.add('clicked');
   });
 
   whenButton.addEventListener('click', function() {
-    // 모든 clickDivs 요소에서 .clicked 클래스 제거
     clickDivs.forEach(function(clickDiv) {
       clickDiv.classList.remove('clicked');
     });
 
-    // 두 번째 clickDiv에 .clicked 클래스 추가
     clickDivs[1].classList.add('clicked');
   });
 
   guestButton.addEventListener('click', function() {
-    // 모든 clickDivs 요소에서 .clicked 클래스 제거
     clickDivs.forEach(function(clickDiv) {
       clickDiv.classList.remove('clicked');
     });
 
-    // 네 번째 clickDiv에 .clicked 클래스 추가
     clickDivs[3].classList.add('clicked');
   });
 });
-
-
 
 
 
@@ -232,31 +249,6 @@ $(document).ready(function(){
       startDate: '0d'
   });
 });
-
-
-// <div class="datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-bottom"> 요소를 선택합니다.
-var datePickerDiv = document.querySelector('.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom');
-
-// 새로운 <div class="when-modal-bg modal"> 요소를 생성합니다.
-var newDiv = document.createElement('div');
-newDiv.className = 'when-modal-bg modal';
-
-// wrapper 요소를 생성합니다.
-var wrapperDiv = document.createElement('div');
-
-// 기존의 <div class="datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-bottom"> 요소를 wrapper 요소 내부로 이동시킵니다.
-if (datePickerDiv) {
-  datePickerDiv.parentNode.insertBefore(wrapperDiv, datePickerDiv);
-  wrapperDiv.appendChild(datePickerDiv);
-}
-
-// wrapper 요소와 새로운 <div class="when-modal-bg modal"> 요소 사이에 <div class="datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-bottom"> 요소를 추가합니다.
-if (newDiv && wrapperDiv.parentNode) {
-  wrapperDiv.parentNode.insertBefore(newDiv, wrapperDiv);
-}
-
-
-
 
 
 
