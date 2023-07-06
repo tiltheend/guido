@@ -576,3 +576,21 @@ if(document.getElementById('editBtn')!=null){
         location.href = location.pathname + '/edit';
     });
 }
+
+
+
+/* 일정 소개 예약 가능한 일자 첫번째~마지막번째 세팅 */
+// 21 Jun 2023 - 24 Jun 2023
+
+let allDates = product.productDateList.map(item => item.productDate);
+
+let firstDate = allDates[0];
+let lastDate = allDates[allDates.length-1];
+
+firstDate = new Date(firstDate);
+lastDate = new Date(lastDate);
+
+firstDate = firstDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+lastDate = lastDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+
+document.querySelector(".detail--text__date-second").innerText = firstDate + " - " + lastDate;
