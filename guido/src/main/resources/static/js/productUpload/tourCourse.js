@@ -89,7 +89,7 @@ function displayPlaces(places) {
         console.log(x, y);
         var checkboxElement = document.createElement('input');
         checkboxElement.setAttribute('type', 'radio');
-        // checkboxElement.setAttribute('name', 'tourCourse');
+        checkboxElement.setAttribute('name', 'tourCourse');
         checkboxElement.setAttribute('class', 'hidden');
         checkboxElement.setAttribute('id', 'tourCourse' + (numElements + 1));
         checkboxElement.setAttribute('value', title);
@@ -99,14 +99,14 @@ function displayPlaces(places) {
         labelElement.setAttribute('for', 'tourCourse' + (numElements + 1));
         labelElement.innerText = title;
 
-        var deleteIcon = document.createElement('i');
-        deleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-xmark');
-        deleteIcon.style.color = '#000000';
+        // var deleteIcon = document.createElement('i');
+        // deleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-xmark');
+        // deleteIcon.style.color = '#000000';
 
-        deleteIcon.addEventListener('click', function (e) {
-          e.stopPropagation();
-          deleteIcon.parentNode.remove();
-        });
+        // deleteIcon.addEventListener('click', function (e) {
+        //   e.stopPropagation();
+        //   deleteIcon.parentNode.remove();
+        // });
 
         var createCourseDiv = document.querySelector('.create-course');
 
@@ -128,9 +128,10 @@ function displayPlaces(places) {
 
             var courseInfo = {
               courseName: title,
-              latitude: x,
-              longitude: y,
+              latitude: y,
+              longitude: x,
               courseOrder: numElements,
+              bossCourseFL: 'N',
             };
             tourCourse.push(courseInfo);
 

@@ -26,7 +26,6 @@ import com.guido.product.model.dao.ProductUploadMapper;
 @Service
 @PropertySource("classpath:/config.properties")
 public class ProductUploadServiceImpl implements ProductUploadService{
-
 	
 	@Autowired
 	private ProductUploadMapper mapper;
@@ -57,11 +56,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 		if(productNo > 0) {
 			
 			List<File> uploadList = new ArrayList<File>();
-			List<TourCourse> tourCourseList = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
 			
-			System.out.println(tourCourseList);
-			System.out.println(tourCourseList.get(0));
-			System.out.println(tourCourseList.size());
 			
 			for(int i=0 ; i<images.size(); i++) {
 				
@@ -83,6 +78,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 					uploadList.add(img);
 				}
 			}
+			
 			if( !uploadList.isEmpty()) {
 				
 				result = mapper.insertImageList(uploadList);
@@ -91,7 +87,15 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 					
 					throw new FileUploadException();
 				}
-			}	
+			}
+			
+			
+			List<TourCourse> tourCourseList = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
+			List<TourCourse> tempTourCourseList = new ArrayList<>();
+			System.out.println(tourCourseList);
+			System.out.println(tourCourseList.get(0));
+			System.out.println(tourCourseList.size());
+			
 			for (int j = 0; j < tourCourseList.size(); j++) {
 				
 				TourCourse tc = new TourCourse();
@@ -101,12 +105,19 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				tc.setCourseOrder(tourCourseList.get(j).getCourseOrder());
 				tc.setLatitude(tourCourseList.get(j).getLatitude());
 				tc.setLongitude(tourCourseList.get(j).getLongitude());
-			    tourCourseList.add(tc);
+				tc.setBossCourseFL(tourCourseList.get(j).getBossCourseFL());
+			    tempTourCourseList.add(tc);
 			    
-				result = mapper.insertTourCourseList(tourCourseList);
+				
+			}
+			
+			if(!tempTourCourseList.isEmpty()) {
+				
+				result = mapper.insertTourCourseList(tempTourCourseList);
 			}
 		}
 		return productNo;
+		
 	}
 
 
