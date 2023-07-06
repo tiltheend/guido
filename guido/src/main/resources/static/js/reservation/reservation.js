@@ -49,8 +49,11 @@ guestBtn.forEach((btn)=>{
 });    
 
 
+const cardAmount = document.getElementById("cardAmount");
+
 /* 총 금액 초기 세팅 & 변동 */
 function showTotalResevationCost(){
+
 
     let totalCost;
     let fee;
@@ -70,6 +73,10 @@ function showTotalResevationCost(){
 
     /* 총 결제 금액 계산 */
     payment = fee + totalCost;
+
+
+    // 카드 결제 시 필요한 amount hidden 태그 값에 저장
+    cardAmount.value = payment;
 
 
     totalReservationCost.innerText = "KRW " + totalCost.toLocaleString();
@@ -144,13 +151,14 @@ const requestContent = document.getElementById("request").value;
 
   //  카드결제
   function requestCardPay() {
+
   
     IMP.request_pay({
       pg: "html5_inicis." + pgMid,     // 상점 ID
       pay_method: "card",
       merchant_uid: createRandomOrderNum(),   // 주문번호
       name: productName,    // 상품명
-      amount: Number(totalPaymentCost.innerText),    // 금액
+      amount: cardAmount.value,    // 금액
       buyer_email: userEmail,
       buyer_name: userName,
       buyer_tel: userTel,
@@ -163,7 +171,7 @@ const requestContent = document.getElementById("request").value;
         const data = {
             "impUid": rsp.imp_uid,
             "orderNumber": rsp.merchant_uid,
-            "totalPrice": Number(totalPaymentCost.innerText),
+            "totalPrice": cardAmount.value,
             "productName": rsp.name,
             "paymentMethod": 'C',
             "guestCount": Number(guestsQnt.innerText),

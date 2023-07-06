@@ -330,7 +330,7 @@ let originalImage;     // 초기 프로필 이미지 파일의 경로 저장
 // 내상점 닫기 버튼 클릭 시
 document.querySelector(".close").addEventListener("click", ()=>{
 
-    upload.setAttribute("src", "/images/userProfile/basicUser2.svg");
+    upload.setAttribute("src", "/images/productDetail/faceImg2.jpg");
     realUpload.value="";
 });
     
@@ -339,7 +339,7 @@ document.querySelector(".close").addEventListener("click", ()=>{
         
         originalImage = upload.getAttribute("src");
         
-        if(originalImage == "/images/userProfile/basicUser2.svg"){
+        if(originalImage == "/images/productDetail/faceImg2.jpg"){
             initCheck = false;
         }else{
             initCheck = true;

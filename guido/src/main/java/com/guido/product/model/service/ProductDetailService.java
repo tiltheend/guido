@@ -1,7 +1,10 @@
 package com.guido.product.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
@@ -72,6 +75,14 @@ public interface ProductDetailService {
 	 * @return recommendList
 	 */
 	List<Product> selectRecommendList(int userNo);
+
+
+	/** 얼굴 인증 사진 업로드
+	 * @param loginUser
+	 * @param faceImg
+	 * @return result
+	 */
+	int updateFaceImg(User loginUser, MultipartFile faceImg) throws IllegalStateException, IOException;
 
 
 

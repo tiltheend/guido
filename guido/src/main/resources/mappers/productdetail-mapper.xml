@@ -263,6 +263,14 @@
 					WHERE ROWNUM <= 4
 		     	]]>
 	</select>
+	
+	
+	<!--  얼굴 인증 사진 업데이트 -->
+	<update id="updateFaceImg">
+		UPDATE TOURIST
+		SET FACE_IMG = #{faceImg}
+		WHERE USER_NO = #{userNo}
+	</update>
 		 
 
 	
