@@ -86,6 +86,34 @@ guestButtonClick.addEventListener('click', () => {
 });
 
 
+/* *********************************************************** */
+// whereModal.addEventListener('click', (event) => {
+//   const clickedElement = event.target;
+
+//   // whereModal 내부의 값을 클릭한 경우
+//   if (clickedElement.classList.contains('value')) {
+//     whereModal.style.display = 'none';
+//     checkInButtonClick.click(); // checkInButtonClick 버튼 클릭 시 이벤트 실행
+//   }
+// });
+
+// checkInButtonClick.addEventListener('click', () => {
+//   // 클릭 이벤트를 통해 모달창을 열 수 있는 input 태그를 찾습니다.
+//   const inputElement = document.querySelector('.form-control');
+//   inputElement.click();
+// });
+
+// 클릭 이벤트 핸들러 추가
+// whereModal.addEventListener("click", e => {
+//   if (e.target.tagName === "div") {
+//     const clickedItem = e.target.textContent; 
+//     document.querySelector(".where-modal").style.display = "none";
+//     location.value = clickedItem; 
+//   }
+// });
+/* *********************************************************** */
+
+
 /* 모달 회색 바탕 닫기 */
 // mainSearchBox.addEventListener('click', () => {
 //   modalsBG.style.display = 'block';
@@ -139,7 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
   var whereButton = document.querySelector('.where-button');
@@ -209,10 +236,10 @@ document.addEventListener("DOMContentLoaded", () =>{
 
             whereModal.appendChild(locationDiv);
 
-            // 클릭 이벤트 핸들러 추가
+            // whereModal 내 검색 값 클릭하면 모달창 닫히고 startday로 마우스 커서 옮겨감 
             locationDiv.addEventListener("click", () => {
               location.value = list; 
-              /* document.querySelector(".where-modal").style.display = "none"; */
+              document.querySelector(".where-modal").style.display = "none";
               document.querySelector('input[name="firstday"]').focus();
             });
           }
@@ -229,15 +256,6 @@ document.addEventListener("DOMContentLoaded", () =>{
   })
 });
 
-// 클릭 이벤트 핸들러 추가
-whereModal.addEventListener("click", e => {
-  if (e.target.tagName === "div") { // 클릭된 요소가 div인지 확인
-    const clickedItem = e.target.textContent; // 클릭된 항목의 텍스트 가져오기
-    location.value = clickedItem; // input 태그에 값을 설정
-    /* document.querySelector(".where-modal").style.display = "none"; */
-  }
-});
-
 
 
 /* ***** 캘린더 ***** */
@@ -249,6 +267,23 @@ $(document).ready(function(){
       startDate: '0d'
   });
 });
+
+
+
+/* ************************************** 0707 ************************************** */
+// startdayModal 내 검색 값 클릭하면 모달창 닫히고 lastday로 마우스 커서 옮겨감
+locationDiv.addEventListener("click", () => {
+  location.value = list; 
+  document.querySelector(".where-modal").style.display = "none";
+  document.querySelector('input[name="lastday"]').focus();
+});
+// lastdayModal 내 검색 값 클릭하면 모달창 닫히고 guests로 마우스 커서 옮겨감
+locationDiv.addEventListener("click", () => {
+  location.value = list; 
+  document.querySelector(".where-modal").style.display = "none";
+  document.querySelector('input[name="firstday"]').focus();
+});
+/* ************************************** 0707 ************************************** */
 
 
 
@@ -281,8 +316,6 @@ function updateGuestText(count) {
     const guestText = document.querySelector('.guest-button-click input');
     guestText.textContent = `게스트 ${count}명`;
 }
-
-
 
 
 
