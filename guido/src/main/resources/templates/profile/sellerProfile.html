@@ -132,7 +132,7 @@
                 
             <div class="sales-list"> <!-- 판매자 판매 상품 -->
                 <div> <!-- 제목 -->
-                    <h1>Sales List (<span th:text="${#lists.size(guideProductList)}">구매내역 갯수</span>)</h1>
+                    <h1>Sales List (<span th:text="${productCount}">구매내역 갯수</span>)</h1>
                     <!-- <img th:src="@{/images/profile/saleAdd.png}" alt="saleAdd"> -->
                     <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
@@ -164,7 +164,7 @@
                     </li>
                 </ul>
 
-                <button class="sales-list-more" onclick="productListFn(event)">more sales list</button>
+                <button class="sales-list-more">more sales list</button>
 
             </div> <!-- // 판매자 판매 상품 -->
 

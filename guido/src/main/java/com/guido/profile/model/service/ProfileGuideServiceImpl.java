@@ -36,6 +36,19 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	public List<Product> guideProductList(int userNo) {
 		return mapper.guideProductList(userNo);
 	}
+	
+	// 가이드 상품 목록 더보기 (3개씩)
+	@Override
+	public List<Product> guideProductMore(Map<String, Integer> request) {
+		return mapper.guideProductMore(request);
+	}
+
+	// 가이드 상품 수 카운트
+	@Override
+	public int productCount(int userNo) {
+		return mapper.productCount(userNo);
+	}
+
 
 	// 가이드 리뷰 조회
 	@Override
@@ -43,6 +56,7 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 		return mapper.guideReivewList(userNo);
 	}
 	
+
 	// 가이드 리뷰 수 카운트
 	@Override
 	public int reviewCount(int userNo) {

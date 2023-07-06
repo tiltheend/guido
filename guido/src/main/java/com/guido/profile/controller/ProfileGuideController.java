@@ -48,6 +48,19 @@ public class ProfileGuideController {
 		return guideProductList;
 	}
 	
+	// 가이드 상품 목록 더보기 (3개씩)
+	@ResponseBody
+	@PostMapping(value="/guideProductMore", produces="application/json; charset=UTF-8")
+	public List<Product> guideProductMore(@RequestBody Map<String, Integer> request){
+			
+		List<Product> guideProductMore = service.guideProductMore(request);
+		
+		for(Product p : guideProductMore) {
+			System.out.println(p);
+		}
+		return guideProductMore;
+	}
+
 	
 	// 비동기로 가이드 리뷰 목록 불러오기 (최신 3개)
 	@ResponseBody

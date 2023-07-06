@@ -70,9 +70,11 @@ public class ProfileTouristController {
 			
 			// 가이드 상품 목록
 			List<Product> guideProductList = GuideService.guideProductList(userNo);
-
 			model.addAttribute("guideProductList", guideProductList);
 			
+			// 가이드 상품 수 카운트
+			int productCount = GuideService.productCount(userNo);
+			model.addAttribute("productCount", productCount);
 			
 			// 가이드 리뷰 조회
 			List<Review> guideReivewList = GuideService.guideReivewList(userNo);
