@@ -117,7 +117,6 @@ function toggleHeart() {
         })
         .then(resp=>resp.text())
         .then(result=>{
-            
 
             if(result==1){
                 if (heartIcon.classList.contains("selected")) {

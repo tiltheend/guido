@@ -162,12 +162,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // 검색페이지 테마 검색 상품 목록 조회 
-function loadSelectedProductByTheme() {
+function loadSelectedProductByTheme(themeCode) {
 
-    const dataMap = {"location":location, "firstday":firstday, "lastday":lastday, "tourist":tourist, "themeCode":themeCode}
-    const query = new URLSearchParams(dataMap).toString();
+    const urlParams = new URLSearchParams(window.location.search);
 
-    fetch("/common/searchResult?" + query)
+    const location = urlParams.get('location') || '';
+    const firstday = urlParams.get('firstday') || '';
+    const lastday = urlParams.get('lastday') || '';
+    const tourist = urlParams.get('tourist') || '';
+
+    console.log(location);
+    console.log(firstday);
+    console.log(lastday);
+    console.log(tourist);
+    console.log(themeCode);
+
+    fetch("/common/searchResult", {
+        method : "POST", 
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify({
+            location : location,
+            firstday : firstday,
+            lastday : lastday,
+            tourist : tourist,
+            themeCode : themeCode
+        })
+    })
     .then(response => response.json())
     .then(themeProdList => {
         console.log(themeProdList);

@@ -126,11 +126,14 @@ public class HomeController {
 	
 	
 	// 검색페이지 내에서 테마검색 상품목록 조회
-	@GetMapping(value = "/searchResult", produces = "application/json; charset=UTF-8")
+	@PostMapping(value="/searchResult", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public List<Product> selectSearchThemeProdList(@RequestParam Map<String, Object> map) {
-		System.out.println(map);
+	public List<Product> selectSearchThemeProdList(@RequestBody Map<String, Object> map) {
 	    return service.selectSearchThemeProdList(map);
+//		System.out.println(map);
+//		List<Product> a = service.selectSearchThemeProdList(map);
+//		System.out.println(a);
+//	    return a;
 	}
 	
 	
