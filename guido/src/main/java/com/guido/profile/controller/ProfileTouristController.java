@@ -190,6 +190,8 @@ public class ProfileTouristController {
 		int reviewCount = service.reviewCount(userNo);
 		for(Review r : newReviewList) {
 			r.setReviewCount(reviewCount);
+			// 0.5 단위로 별점 바꾸기
+			r.setReviewStarsDouble(r.getReviewStars()/20.0);
 		}
 		
 		return newReviewList;

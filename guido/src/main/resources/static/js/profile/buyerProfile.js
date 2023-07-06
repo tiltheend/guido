@@ -173,8 +173,8 @@ function moreReviewFn(el){
     // 리뷰 상세 조회 내용 넣기
     reviewMoreModalTextArea.innerText = el.parentElement.previousElementSibling.innerText;
     
-    // 리뷰 상세 조회 상품 제목 넣기 el.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
-    reviewMoreModalP.innerText = 
+    // 리뷰 상세 조회 상품 제목 넣기 
+    reviewMoreModalP.innerText =el.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
     
     // 리뷰 이름 넣기
     reviewerName.innerText = el.parentElement.previousElementSibling.previousElementSibling.firstElementChild.lastElementChild.innerText;
@@ -272,8 +272,8 @@ if(reviewMoreBtn !=null) {
                         starInput.classList.add("star_radio");
                         starInput.value = (j + 1) * 0.5;
                         if (review.reviewStarsDouble === (j + 1) * 0.5) {
-                            // console.log(review.reviewStarsDouble);
                             starInput.checked = true;
+                            starInput.setAttribute("checked", "checked");
                         }
                         // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;
                         reviewStarDiv.appendChild(starInput);
@@ -552,8 +552,8 @@ function reviewListFn(e){
                     starInput.classList.add("star_radio");
                     starInput.value = (j + 1) * 0.5;
                     if (review.reviewStarsDouble === (j + 1) * 0.5) {
-                        // console.log(review.reviewStarsDouble);
                         starInput.checked = true;
+                        starInput.setAttribute("checked", "checked");
                     }
                     // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;
                     reviewStarDiv.appendChild(starInput);
@@ -782,9 +782,7 @@ function reviewEditSubmitFn(e){
                 alert("리뷰가 수정 되었습니다.");
 
                 reviewEditModal.style.display="none";
-
                 reviewListFn();
-
                 // location.href='/profile/'+loginUserNo;
 
             } else if (result=0){
@@ -801,5 +799,6 @@ function reviewEditSubmitFn(e){
         e.preventDefault();
         return;
     }
+    
 
 }
