@@ -2,8 +2,22 @@
 .map_wrap * {
   margin: 0;
   padding: 0;
-  font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
-  font-size: 12px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+#menu_wrap > div.option > div > form {
+  height: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: auto;
+  /* border: 2px solid black; */
+}
+#keyword {
+  border: none;
+  outline: none;
+  background: transparent;
 }
 .map_wrap a,
 .map_wrap a:hover,
@@ -21,7 +35,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 250px;
+  /* width: 250px; */
   margin: 10px 0 30px 10px;
   padding: 5px;
   overflow-y: auto;
@@ -54,7 +68,7 @@
 }
 #placesList .item {
   position: relative;
-  border-bottom: 1px solid #888;
+  /* border-bottom: 1px solid #888; */
   overflow: hidden;
   cursor: pointer;
   min-height: 65px;
@@ -71,6 +85,12 @@
 }
 #placesList .item .info {
   padding: 10px 0 10px 55px;
+  display: block;
+  flex-direction: column;
+  border-radius: 13px;
+
+  /* text-align: center; */
+  /* align-items: center; */
 }
 #placesList .info .gray {
   color: #8a8a8a;
@@ -149,4 +169,24 @@
   font-weight: bold;
   cursor: default;
   color: #777;
+}
+
+.marker-div {
+  /* border-radius: 20px; */
+  display: flex;
+}
+
+#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(16) {
+  border: 10px !important;
+  text-align: center;
+  border: 2px solid black;
+}
+/* #map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(16) :hover {
+  background-color: cadetblue;
+} */
+#menu_wrap > div.option > div > form > button {
+  border-radius: 15px;
+  color: white;
+  background-color: black;
+  width: 80px;
 }

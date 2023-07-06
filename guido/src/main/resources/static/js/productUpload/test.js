@@ -30,13 +30,9 @@ const updatePage = () => {
     typing2();
   }
   if (currentPage == 2) {
-    // document.querySelector('.text5').innerHTML = '';
-    // typing5();
-    // tourThemeSelectCheck();
-    // tourBoxCheck();
-    document.querySelector('.text3').innerHTML = '';
-    // tourThemesCheck();
-    typing3();
+    document.querySelector('.text6').innerHTML = '';
+    typing6();
+    init();
   }
   if (currentPage == 4) {
     document.querySelector('.text5').innerHTML = '';
@@ -175,7 +171,7 @@ tourTypes.forEach(function (tourType) {
 });
 inputDay.addEventListener('input', function () {
   if (this.value !== '') {
-    inputTimeHidden.value = '';
+    inputTime.value = '';
     inputDayHidden.value = inputDay.value;
     inputDay.addEventListener('input', function () {
       const value = inputDay.value;
@@ -315,7 +311,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var mainElement14 = document.getElementById('page15');
   if (mainElement14) {
-    mainElement14.style.width = '90%';
+    mainElement14.style.width = '70%';
   }
 });
 //3페이지
