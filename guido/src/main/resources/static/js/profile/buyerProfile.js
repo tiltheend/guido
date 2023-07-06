@@ -379,6 +379,7 @@ let productNo;
 let productDtNo;
 // 상품 선택
 if(selectElement != null){
+
     selectElement.addEventListener("change", function() {
         // 선택된 option 요소
         let selectedOption = this.options[this.selectedIndex];

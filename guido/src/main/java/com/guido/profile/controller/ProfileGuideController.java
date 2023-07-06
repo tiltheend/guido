@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.common.model.dto.PR;
+import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
@@ -35,6 +36,17 @@ public class ProfileGuideController {
 	
 	// 가이드 페이지로 이동
 	// 타입 검사 때문에 구매자 페이지 컨트롤러에 있음~~
+	
+	// 비동기로 가이드 판매 상품 목록 불러오기 (최신 3개)
+	@ResponseBody
+	@PostMapping(value="/guideProductList", produces="application/json; charset=UTF-8")
+	public List<Product> guideProductList(@RequestBody int userNo){
+
+		// 가이드 상품 목록
+		List<Product> guideProductList = service.guideProductList(userNo);
+
+		return guideProductList;
+	}
 	
 	
 	// 비동기로 가이드 리뷰 목록 불러오기 (최신 3개)

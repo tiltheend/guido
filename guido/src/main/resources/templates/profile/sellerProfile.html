@@ -143,7 +143,6 @@
                     <li th:each="product : ${guideProductList}">
                         <div class="sale-img">
                             <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${product.thumbnail}" alt="productImg"></a>
-                            <!-- <img src="" alt=""> -->
                         </div>
                         <div class="sale-content">
                             <h2 th:text="${product.productName}">상품 타이틀</h2>
@@ -156,29 +155,16 @@
                                 <th:block th:if="${package==1}"> a [[${product.tourDuration}]]-hours day trip in [[${product.regionName}]]</th:block>
                                 <th:block th:if="${package>1}">[[${product.productPackage}]] day trip in [[${product.regionName}]]</th:block>
                             </h3>
-                            <p th:if="${not #lists.isEmpty(product.ProductDateList)}">
-                                <th:block th:text="${product.ProductDateList.get(0).productDate}"></th:block>
-                                <th:block th:if="${#lists.size(product.ProductDateList)>1}" th:text="|~ ${product.ProductDateList.get(product.ProductDateList.size() - 1).productDate}|"></th:block>
+                            <p th:if="${not #lists.isEmpty(product.productDateList)}">
+                                <th:block th:text="${product.productDateList.get(0).productDate}"></th:block>
+                                <th:block th:if="${#lists.size(product.productDateList)>1}" th:text="|~ ${product.productDateList.get(product.productDateList.size() - 1).productDate}|"></th:block>
                             </p>
                             <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${product.guideLanguage}]]</p>
                         </div>
                     </li>
-                <!-- <li>
-                        <div class="sale-img">
-                            <img src="" alt="">
-                        </div>
-                        <div class="sale-content">
-                            <h2>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</h2>
-                            <p><img th:src="@{/images/profile/location.png}" alt="location">Seoul - Changdeokgung Palace</p>
-                            <h3>3 nights in Myung-dong, Seoul</h3>
-                            <p>21 Jun 2023 - 24 Jun 2023</p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: 日本語/中文</p>
-                        </div>
-                    </li> 
-                -->
                 </ul>
 
-                <button class="sales-list-more">more sales list</button>
+                <button class="sales-list-more" onclick="productListFn(event)">more sales list</button>
 
             </div> <!-- // 판매자 판매 상품 -->
 

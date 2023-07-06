@@ -169,7 +169,7 @@
 
 /* 상품 리스트 썸네일 */
 .seller-profile-top .sales-list-box{
-    margin-bottom: 40px;
+    margin-bottom: 120px;
 }
 .seller-profile-top .sales-list-box li{
     /* width: 100%;  */
@@ -178,6 +178,9 @@
     display: flex; 
     /* align-items: center; */
     margin-bottom: 12px;
+}
+.seller-profile-top .sales-list{
+    margin-bottom: 40px;
 }
 .seller-profile-top .sales-list-box .sale-img{ /* 상품 썸네일 */
     min-width: 260px; height: 260px;
@@ -276,7 +279,8 @@
     background-color: #0F4957; color: #fff;
     font-size: 1rem; text-align: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
+    transform: translateY(-80px);
 }
 .seller-profile-top .sales-list-more:hover{ /* 리뷰 더보기 버튼 */
     /* background-color: #fff; color: #0F4957; */

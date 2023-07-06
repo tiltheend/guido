@@ -18,6 +18,7 @@ let reviewMoreModalClose; /* 더보기 닫기 */
 // let sellerReplyWirte; /* 리뷰 달기 박스 */
 
 let reviewMoreBtn; /* 리뷰 더보기 버튼 */
+let productMoreBtn; /* 상품 더보기 버튼 */
 
 /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
 function reviewMoreFn(){
@@ -37,10 +38,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     reviewMoreFn(); /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
     reviewMoreBtnFn(); /* 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
+    // productwMoreBtnFn(); /* 상품 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
 
 })
-
-/* 리뷰 더보기 js */
 
 // 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
 function reviewMoreBtnFn(){
@@ -54,6 +54,20 @@ function reviewMoreBtnFn(){
         reviewMoreBtn.style.display="block";
     }
 }
+
+// 상품 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
+function productwMoreBtnFn(){
+    productMoreBtn = document.querySelector(".sales-list-more");
+
+    let productCountSpan = document.querySelector(".sales-list>div>h1>span").innerText;
+    
+    if(productCountSpan<=3){
+        productMoreBtn.style.display="none";
+    } else {
+        productMoreBtn.style.display="block";
+    }
+}
+
 
 /* 리뷰 답글 노출 */
 function reviewReplyFn (el) {
@@ -831,3 +845,119 @@ if(reviewMoreBtn !=null) {
     
     });
 }
+
+/* 비동기로 상품 목록 불러오기 (최신 3개) */
+function productListFn(e){
+
+    productMoreBtn = document.querySelector(".sales-list-more");
+
+    fetch("/profile/guideProductList",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, 
+        body : pageUserNo
+    })
+    .then(resp => resp.json())
+    .then(guideProductList => {
+
+        let productList = document.querySelector('.sales-list-box');
+        if(guideProductList.length >0){
+
+            // 기존 리뷰 지우기
+            let productListElements = document.querySelectorAll('.sales-list-box>li');
+    
+            productListElements.forEach(function(productListElement) {
+            productListElement.parentNode.removeChild(productListElement);
+            });
+    
+            // let reviewCount = newReviewList[0].reviewCount;
+            // document.querySelector(".my-review>div>h1>span").innerText=reviewCount;
+            
+            for (let i = 0; i <guideProductList.length; i++) {
+                const product = guideProductList[i];
+    
+                if(product == null) break;
+
+                const liElement = document.createElement("li");
+
+                const saleImgElement = document.createElement("div");
+                saleImgElement.classList.add("sale-img");
+
+                const aElement = document.createElement("a");
+                aElement.href = "/productDetail/product/" + product.productNo;
+                const imgElement = document.createElement("img");
+                imgElement.src = product.thumbnail;
+                imgElement.alt = "productImg";
+                aElement.appendChild(imgElement);
+                saleImgElement.appendChild(aElement);
+                liElement.appendChild(saleImgElement);
+
+                const saleContentElement = document.createElement("div");
+                saleContentElement.classList.add("sale-content");
+
+                const h2Element = document.createElement("h2");
+                h2Element.innerText = product.productName;
+                saleContentElement.appendChild(h2Element);
+
+                const pElement = document.createElement("p");
+                const locationImgElement = document.createElement("img");
+                locationImgElement.src = "/images/profile/location.png";
+                locationImgElement.alt = "location";
+                pElement.appendChild(locationImgElement);
+                pElement.appendChild(document.createTextNode(product.regionName));
+                saleContentElement.appendChild(pElement);
+
+                product.tourCourse.forEach(course => {
+                    if (course.bossCourseFL === 'Y') {
+                        const spanElement = document.createElement("span");
+                        spanElement.innerText = " - " + course.courseName;
+                        pElement.appendChild(spanElement);
+                    }
+                });
+
+                const h3Element = document.createElement("h3");
+                if (product.productPackage === 1) {
+                    h3Element.innerText = "a " + product.tourDuration + "-hours day trip in " + product.regionName;
+                } else if (product.productPackage > 1) {
+                    h3Element.innerText = product.productPackage + " day trip in " + product.regionName;
+                }
+                saleContentElement.appendChild(h3Element);
+
+                console.log(product);
+                console.log(product.productDateList);
+                if (product.productDateList.length > 0) {
+                    const pElement2 = document.createElement("p");
+                    const productDateBlock = document.createElement("block");
+                    productDateBlock.innerText = product.productDateList[0].productDate;
+                    pElement2.appendChild(productDateBlock);
+
+                    if (product.productDateList.length > 1) {
+                        const productDateBlock2 = document.createElement("block");
+                        productDateBlock2.innerText = " ~ " + product.productDateList[product.productDateList.length - 1].productDate;
+                        pElement2.appendChild(productDateBlock2);
+                    }
+
+                    saleContentElement.appendChild(pElement2);
+                }
+
+                const pElement3 = document.createElement("p");
+                const languageImgElement = document.createElement("img");
+                languageImgElement.src = "/images/profile/language.png";
+                languageImgElement.alt = "language";
+                pElement3.appendChild(languageImgElement);
+                pElement3.appendChild(document.createTextNode("Guided language: " + product.guideLanguage));
+                saleContentElement.appendChild(pElement3);
+
+                liElement.appendChild(saleContentElement);
+                productList.appendChild(liElement);
+
+            }
+
+        }
+
+    })
+    .catch(err=>{
+        console.log(err);
+        productMoreBtn.style.display="none";
+    });
+
+};

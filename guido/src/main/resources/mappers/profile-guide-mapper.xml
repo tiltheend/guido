@@ -30,7 +30,7 @@
 	 	<result property="thumbnail" column="THUMBNAIL" />
 	 	<result property="productDate" column="PRODUCT_DT" />
 	 		
-		<collection property="ProductDateList" select="selectProductDateList"
+		<collection property="productDateList" select="selectProductDateList"
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="ProductDate"/>
 			
 		<collection property="tourCourse" select="selectTourCourseList" 
@@ -168,6 +168,7 @@
 			WHERE USER_NO = #{userNo}	
 			AND PRODUCT_STATE = 'N'
 			ORDER BY CREATE_DT DESC
+			FETCH FIRST 3 ROWS ONLY
 	</select>
 	
 	<!-- 일정 조회 -->

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     let GuideCheck = false; // 초기 프로필 이미지 상태를 저장하는 변수
 
-    console.log(userType);
+    // console.log(userType);
 
     if(userType == 'G' ){ // 가이드 인 경우 경고 메세지 출력용!!
         GuideCheck = true;
