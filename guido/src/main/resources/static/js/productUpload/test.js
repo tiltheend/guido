@@ -252,11 +252,13 @@ for (let i = 0; i < clickElements.length; i++) {
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
         clickElements[j].style.fill = '#333';
+        s;
         clickElements[j].style.transform = 'none';
-
-        clickElements[j].style.fill = '#333';
-        clickElements[j].style.transform = 'none';
+      } else {
+        clickElements[j].style.fill = 'rgb(59, 119, 124)';
       }
+      city.innerText = textElements[i].innerHTML;
+      regionName.value = city.innerText;
     }
 
     // 선택한 요소에 효과 설정
@@ -265,6 +267,15 @@ for (let i = 0; i < clickElements.length; i++) {
     checkSpace.innerText = textElements[i].innerHTML;
   });
 }
+for (let i = 0; i < clickElements.length; i++) {
+  textElements[i].addEventListener('mouseover', () => {
+    clickElements[i].style.fill = 'rebeccapurple';
+  });
+  textElements[i].addEventListener('mouseout', () => {
+    clickElements[i].style.fill = '#333';
+  });
+}
+
 // function disableNextButton() {
 //   nextBtn.disabled = true;
 // }
@@ -717,6 +728,16 @@ feeInput.addEventListener('click', (e) => {
   } else {
     e.target.style.borderColor = 'lightgray';
   }
+});
+feeInput.addEventListener('keydown', (e) => {
+  maxTotal2.style.backgroundColor = '#408c8c';
+  maxTotal2.style.color = 'white';
+  maxTotal2.style.transitionDuration = '0.3s';
+});
+feeInput.addEventListener('keyup', (e) => {
+  maxTotal2.style.backgroundColor = 'white';
+  maxTotal2.style.color = 'black';
+  maxTotal2.style.transitionDuration = '0.3s';
 });
 
 // .replace(/[^0-9]/g, '');

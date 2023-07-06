@@ -243,6 +243,7 @@ button:disabled:hover {
 
 .OUTLINE:hover {
   fill: rebeccapurple !important;
+  transition-duration: 0.55s !important;
 }
 /* 카카오맵 여행 코스 */
 
@@ -1206,4 +1207,10 @@ label.tourCourse-item {
 
 .hidden {
   display: none;
+}
+.transition {
+  transition-duration: 0.35s !important;
+}
+#maxTotal2 {
+  border: 10px;
 }
