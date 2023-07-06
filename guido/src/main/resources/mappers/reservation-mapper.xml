@@ -70,6 +70,11 @@
 	
 	<!-- 예약 -->
 	<insert id="insertReservation">
+<!--		<selectKey id="findProductDate" resultType="int" keyProperty="productDate" order="BEFORE">
+			SELECT dept_code from department
+			WHERE user_id = #{user_id}
+		</selectKey> -->
+	
 		INSERT INTO "RESERVATION"
 		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
 		 'Y', #{paymentMethod}, #{guestCount}, 19, 21, #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
@@ -121,7 +126,7 @@
 	</select>
 	
 	
-	<!-- 예약 가능 수량 업데이트 -->
+	<!-- 예약 가능 수량 업데이트(구매 후) -->
 	<update id="updateAvailability">
 	  <choose>
 		  <!-- 1박의 경우 예약 완료 시 구매 가능 옵션(시간대) 수량 업데이트-->
@@ -135,6 +140,26 @@
 	    <otherwise>
 	      UPDATE "PRODUCT_DT"
 	      SET PRODUCT_DT_AVAILABILITY = 'N'
+	      WHERE PRODUCT_DT_NO = #{productDateNo}
+	    </otherwise>
+	  </choose>
+	</update>
+	
+	
+	<!-- 예약 가능 수량 업데이트(취소 후) -->
+	<update id="updateDateOrOption">
+	  <choose>
+		  <!-- 1박의 경우 취소 시 구매 가능 옵션(시간대) 수량 업데이트-->
+	    <when test="productPackage == 1">
+	      UPDATE "PRODUCT_OPTION"
+	      SET OPTION_REST = OPTION_REST + #{guestCount}
+	      WHERE OPTION_NO = #{optionNo}
+	    </when>
+	    
+	    <!-- N박의 경우 취소 완료 시 구매 가능 일정(날짜) 업데이트-->
+	    <otherwise>
+	      UPDATE "PRODUCT_DT"
+	      SET PRODUCT_DT_AVAILABILITY = 'Y'
 	      WHERE PRODUCT_DT_NO = #{productDateNo}
 	    </otherwise>
 	  </choose>

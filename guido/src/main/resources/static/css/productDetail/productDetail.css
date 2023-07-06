@@ -181,6 +181,10 @@
     height: 40vh;
 }
 
+/* 옵션 div */
+.detail--right__option{
+    display: none;
+}
 
 /* selectTime, price 텍스트 */
 .detail--right__option span,
@@ -1309,6 +1313,252 @@ a {
     cursor: pointer;
 }
 
+
+
+/* 얼굴 인증 사진 요구 모달창 */
+/* 취소 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* overflow: auto; */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+    padding: 20px;
+    background-color: #fefefe;
+    margin: 15% auto;
+    border: 1px solid #888;
+    width: 24%;
+    border-radius: 15px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    min-width: 400px;
+}
+
+
+/* 모달 컨텐츠 */
+.modal--content{
+    white-space: pre-wrap;
+    padding: 0px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 닫기 버튼 스타일 */
+.close {
+    font-size: 40px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    right: 0;
+    font-weight: 100;
+}
+
+.close:hover,
+.close:focus {
+    cursor: pointer;
+}
+
+
+/* 인증 사진 업로드 버튼 */
+#faceImgUpload{
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    background-color: #0F4957;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#faceImgUpload:hover{
+    background-color: #0f4957ef;
+    transition: 0.2s;
+}
+
+
+
+.modal--faceimg{ 
+    width: 250px;
+    height: 230px; 
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid #C5C5C5;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative; 
+    margin: 20px 0;
+}
+
+.modal--faceimg::before {
+    content: "";
+    display: block;
+    padding-top: calc(100% / (250 / 230)); /* 높이 대비 너비의 비율을 계산하여 적용 */
+}
+
+.modal--faceimg>img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal--faceimg>img:hover{
+    filter: brightness(0.5);
+}
+
+.modal--title{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+
+
+/* 예약 캘린더 */
+
+  /* 달력 전체를 감싸는 요소 */
+  .detail--right__calendar{
+    width: 100%;
+    height: 400px;
+    padding: 10px;
+    min-width: 364px;
+}
+
+/* 달력 전체 블록 금지 */
+.detail--right__calendar *{
+    user-select: none;
+}
+
+/* 화살표, 년,월이 작성되는 영역 */
+.calendar-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 20px 20px 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+/*  화살표, 년,월에 대한 공통 설정*/
+.calendar-header > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 화살표 공통 설정 */
+.calendar-arrow{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.calendar-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.calendar-table{
+    border-collapse: collapse;
+}
+
+.calendar-table th{
+    text-align: center;
+}
+
+.calendar-table tbody{
+    margin-top: 30px;
+}
+
+/* 달력의 일을 나타내는 td */
+.calendar-table td{
+    width: 45px;
+    height: 43px;
+}
+
+/* 일을 나타내는 td 내부 전체를 차지하는 div */
+.calendar-table td > div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.calendar-table td > div.active:hover{
+    color: white;
+    background-color: #0F4957;
+    cursor: pointer;
+}
+
+.calendar-table td > div.inactive{
+    color : #C5C5C5;
+    /* text-decoration: line-through; */
+}
+
+.calendar-table td > div.inactive.pnday{
+    color: #e2e1e1;
+}
+
+.calendar-table thead::after {
+    content: "";
+    display: block;
+    height: 10px; /* 간격의 높이 조정 */
+  }
+
+  .calendar-table tbody::before {
+    content: "";
+    display: block;
+    height: 10px; /* 간격의 높이 조정 */
+  }
+
+
+
+.start-day-td{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+
+.start-day,
+.last-day{
+    background-color: #0F4957;
+    color : white !important;
+}
+
+.last-day-td{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.select-day-td{
+    background-color: #C5C5C5;
+}
+
+td.select-day-td div.inactive{
+    color: #000000;
+}
 
 
 

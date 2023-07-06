@@ -1,6 +1,8 @@
 package com.guido.reservation.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,14 +66,14 @@ public class ReservationController {
 		
 		
 		// 예약 일자가 예약 가능 일자 범위 밖일 경우
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("productDate", date);
-//		map.put("productNo", productNo);
-//		
-//		int inRange = service.selectDateInRange(map);
-//		
-//		if(inRange==0)
-//			return "redirect:/productDetail/product/" + productNo;
+		Map<String, Object> map = new HashMap<>();
+		map.put("productDate", date);
+		map.put("productNo", productNo);
+		
+		int inRange = service.selectDateInRange(map);
+		
+		if(inRange==0)
+			return "redirect:/productDetail/product/" + productNo;
 		
 					
 		Product product = productService.selectProduct(productNo);

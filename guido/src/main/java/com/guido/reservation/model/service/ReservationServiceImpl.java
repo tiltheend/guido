@@ -229,7 +229,10 @@ public class ReservationServiceImpl implements ReservationService{
 	        paymentCancel(token, reservation.getImpUid(), amount, reservation.getCancelReason());
 	    }
 	    
-	    mapper.reservationCancel(reservation);
+	    int result = mapper.reservationCancel(reservation);
+	    
+	    if(result>0)
+	    	mapper.updateDateOrOption(reservation);
 	    
 	}
 	
