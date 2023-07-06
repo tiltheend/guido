@@ -293,7 +293,7 @@ function reviewListFn(){
                 
                 // 'reply-content' 클래스와 'reply-content' 속성을 추가합니다.
                 innerli1.classList.add('reply-content');
-                innerli1.setAttribute('th:data-reviewno', review.reviewNo);
+                innerli1.setAttribute('data-reviewno', review.reviewNo);
                 
                 // 리뷰 남긴 사람 프로필을 포함한 <div>를 생성합니다.
                 const innerliDiv = document.createElement('div');
@@ -346,10 +346,8 @@ function reviewListFn(){
                     starInput.classList.add("star_radio");
                     starInput.value = (j + 1) * 0.5;
                     if (review.reviewStarsDouble === (j + 1) * 0.5) {
-                        // console.log(review.reviewStarsDouble);
                         starInput.checked = true;
                     }
-                    // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;
                     reviewStar.appendChild(starInput);
                 }
                 
@@ -399,7 +397,6 @@ function reviewListFn(){
                     // "답글 보기"를 담은 <div>를 생성합니다.
                     const commentViewDiv = document.createElement('div');
                     commentViewDiv.classList.add('comment-view');
-                    // commentViewDiv.setAttribute('th:if', '${session.loginUser?.userNo == user.userNo}');
                     commentViewDiv.addEventListener('click', function() {
                         reviewReplyFn(this);
                     });
@@ -424,7 +421,6 @@ function reviewListFn(){
                 // 답글을 담은 <li> 요소를 생성합니다.
                 const replyLi = document.createElement('li');
                 replyLi.classList.add('seller-reply');
-                // replyLi.setAttribute('th:if', '${review.reviewReply}');
 
                 // 답글 아이콘 이미지를 담은 <img> 요소를 생성합니다.
                 const replyIconImg1 = document.createElement('img');
@@ -452,14 +448,15 @@ function reviewListFn(){
                         // 답글 편집 버튼과 삭제 버튼을 담은 <div>를 생성합니다.
                     const replyEditDiv = document.createElement('div');
                     replyEditDiv.classList.add('reply-edit');
-                    // replyEditDiv.setAttribute('th:if', '${session.loginUser?.userNo == user.userNo}');
     
                     // 편집 버튼을 담은 <button>을 생성합니다.
                     const editButton = document.createElement('button');
                     editButton.textContent = 'Edit';
                     editButton.setAttribute('type', 'button');
                     // editButton.setAttribute('onclick', 'reviewReplyEditFn(event)');                editButton.setAttribute('onclick', 'reviewReplyEditFn(event)');
-
+                    editButton.addEventListener('click', e => {
+                        reviewReplyEditFn(e);
+                    });
     
                     // 삭제 버튼을 담은 <button>을 생성합니다.
                     const deleteButton = document.createElement('button');
@@ -484,7 +481,6 @@ function reviewListFn(){
                     // 판매자 답글을 작성하는 <li>를 생성합니다.
                     sellerReplyWriteLi = document.createElement('li');
                     sellerReplyWriteLi.classList.add('seller-reply-write');
-                    // sellerReplyWriteLi.setAttribute('th:unless', '${review.reviewReply}');
     
                     // 판매자 답글 작성을 위한 <div>를 생성합니다.
                     const sellerReplyWriteDiv1 = document.createElement('div');
@@ -512,7 +508,6 @@ function reviewListFn(){
                         // 판매자 답글 작성을 위한 "register" 버튼을 생성합니다.
                         const replySendButton = document.createElement('button');
                         replySendButton.classList.add('reply-send');
-                        // replySendButton.setAttribute('th:if', '${session.loginUser?.userNo == user.userNo}');
                         replySendButton.textContent = 'register';
                         replySendButton.addEventListener('click', function(event) {
                             reviewReplyAddFn(event);

@@ -532,7 +532,6 @@ function reviewListFn(e){
                 profileDiv.appendChild(reviewerName);
                 firstDiv.appendChild(profileDiv);
     
-                console.log(review.reviewStarsDouble);
                 // 상품 정보 영역 (별점 + 날짜)
                 const saleReviewInfoDiv = document.createElement("div");
                 saleReviewInfoDiv.classList.add("sale-review-info");
