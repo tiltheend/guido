@@ -1,9 +1,11 @@
 package com.guido.profile.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
@@ -29,12 +31,24 @@ public interface ProfileGuideService {
 	 */
 	List<Product> guideProductList(int userNo);
 
+	/** 가이드 상품 목록 더보기 (3개씩)
+	 * @param request
+	 * @return
+	 */
+	List<Product> guideProductMore(Map<String, Integer> request);
 
 	/** 가이드 리뷰 조회
 	 * @param userNo
 	 * @return
 	 */
 	List<Review> guideReivewList(int userNo);
+
+
+	/** 가이드 리뷰 목록 더보기 (3개씩)
+	 * @param request
+	 * @return
+	 */
+	List<Review> guideReviewMore(Map<String, Integer> request);
 
 
 	/** 리뷰 리플 달기
@@ -63,6 +77,21 @@ public interface ProfileGuideService {
 	 * @return
 	 */
 	int reviewCount(int userNo);
+
+
+	/** 가이드 상품 수 카운트
+	 * @param userNo
+	 * @return
+	 */
+	int productCount(int userNo);
+
+
+	/** 가이드 예약 리스트 (구매자들 예약 확인용)
+	 * @param userNo
+	 * @return
+	 */
+	List<Reservation> GuideReservationList(int userNo);
+
 
 
 

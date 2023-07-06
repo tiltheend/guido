@@ -190,7 +190,7 @@
                                     <input type="radio" name="starScore" id="starpoint_E6" class="star_score" value="3.0">
                                     <input type="radio" name="starScore" id="starpoint_E7" class="star_score" value="3.5">
                                     <input type="radio" name="starScore" id="starpoint_E8" class="star_score" value="4.0">
-                                    <input type="radio" name="starScore" id="starpoint_E9" class="star_score" value="4.5" checked>
+                                    <input type="radio" name="starScore" id="starpoint_E9" class="star_score" value="4.5">
                                     <input type="radio" name="starScore" id="starpoint_E10" class="star_score" value="5.0">
                                     <span class="starpoint_bg"></span>
                                 </div>
@@ -349,9 +349,8 @@
         if(message != null) alert(message);
 
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
-        // if(loginUserNo == null){loginUserNo = "";}
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
-        // const reviewCount = /*[[${reviewCount}]]*/ "리뷰 갯수";
+        const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>       
     
     <script th:src="@{/js/profile/profileEdit.js}"></script>                   

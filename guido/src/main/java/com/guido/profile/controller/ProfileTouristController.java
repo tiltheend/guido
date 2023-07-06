@@ -58,6 +58,7 @@ public class ProfileTouristController {
 			path="profile/sellerProfile";
 			
 			model.addAttribute("user", user);
+			
 			System.out.println(user.getUserName()+" 가이드 프로필");
 			
 			// 가이드 자기 소개
@@ -69,12 +70,11 @@ public class ProfileTouristController {
 			
 			// 가이드 상품 목록
 			List<Product> guideProductList = GuideService.guideProductList(userNo);
-
 			model.addAttribute("guideProductList", guideProductList);
 			
-//			for(Product p : guideProductList) {
-//				System.out.println(p.getProductReviewList());
-//			}
+			// 가이드 상품 수 카운트
+			int productCount = GuideService.productCount(userNo);
+			model.addAttribute("productCount", productCount);
 			
 			// 가이드 리뷰 조회
 			List<Review> guideReivewList = GuideService.guideReivewList(userNo);
@@ -94,9 +94,8 @@ public class ProfileTouristController {
 		} else if(userType == 0) { // 여행객 일 경우
 			path="profile/buyerProfile";
 			
-			// System.out.println(user.getUserName()+" 여행객 프로필");
-			
 			model.addAttribute("user", user);
+			
 			
 			// 구매 내역 가져오기 (상품 번호, 썸네일)
 			List<Reservation> reservationList = service.reservationList(userNo);
@@ -191,6 +190,8 @@ public class ProfileTouristController {
 		int reviewCount = service.reviewCount(userNo);
 		for(Review r : newReviewList) {
 			r.setReviewCount(reviewCount);
+			// 0.5 단위로 별점 바꾸기
+			r.setReviewStarsDouble(r.getReviewStars()/20.0);
 		}
 		
 		return newReviewList;

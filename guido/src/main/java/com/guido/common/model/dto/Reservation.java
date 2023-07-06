@@ -38,5 +38,7 @@ public class Reservation {
 	private String productName; // 상품명
 	private int reservationCount; // 예약 수
 	
+	private String profileImage;		// 프로필 이미지 (예약한 사람! 구매자)
+	
 
 }

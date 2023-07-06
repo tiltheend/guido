@@ -132,7 +132,7 @@
                 
             <div class="sales-list"> <!-- 판매자 판매 상품 -->
                 <div> <!-- 제목 -->
-                    <h1>Sales List (<span th:text="${#lists.size(guideProductList)}">구매내역 갯수</span>)</h1>
+                    <h1>Sales List (<span th:text="${productCount}">구매내역 갯수</span>)</h1>
                     <!-- <img th:src="@{/images/profile/saleAdd.png}" alt="saleAdd"> -->
                     <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
@@ -143,7 +143,6 @@
                     <li th:each="product : ${guideProductList}">
                         <div class="sale-img">
                             <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${product.thumbnail}" alt="productImg"></a>
-                            <!-- <img src="" alt=""> -->
                         </div>
                         <div class="sale-content">
                             <h2 th:text="${product.productName}">상품 타이틀</h2>
@@ -156,26 +155,13 @@
                                 <th:block th:if="${package==1}"> a [[${product.tourDuration}]]-hours day trip in [[${product.regionName}]]</th:block>
                                 <th:block th:if="${package>1}">[[${product.productPackage}]] day trip in [[${product.regionName}]]</th:block>
                             </h3>
-                            <p th:if="${not #lists.isEmpty(product.ProductDateList)}">
-                                <th:block th:text="${product.ProductDateList.get(0).productDate}"></th:block>
-                                <th:block th:if="${#lists.size(product.ProductDateList)>1}" th:text="|~ ${product.ProductDateList.get(product.ProductDateList.size() - 1).productDate}|"></th:block>
+                            <p th:if="${not #lists.isEmpty(product.productDateList)}">
+                                <th:block th:text="${product.productDateList.get(0).productDate}"></th:block>
+                                <th:block th:if="${#lists.size(product.productDateList)>1}" th:text="|~ ${product.productDateList.get(product.productDateList.size() - 1).productDate}|"></th:block>
                             </p>
                             <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${product.guideLanguage}]]</p>
                         </div>
                     </li>
-                <!-- <li>
-                        <div class="sale-img">
-                            <img src="" alt="">
-                        </div>
-                        <div class="sale-content">
-                            <h2>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</h2>
-                            <p><img th:src="@{/images/profile/location.png}" alt="location">Seoul - Changdeokgung Palace</p>
-                            <h3>3 nights in Myung-dong, Seoul</h3>
-                            <p>21 Jun 2023 - 24 Jun 2023</p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: 日本語/中文</p>
-                        </div>
-                    </li> 
-                -->
                 </ul>
 
                 <button class="sales-list-more">more sales list</button>
@@ -204,7 +190,7 @@
                                     <input type="radio" id="starpoint_6" class="star_radio">
                                     <input type="radio" id="starpoint_7" class="star_radio">
                                     <input type="radio" id="starpoint_8" class="star_radio">
-                                    <input type="radio" id="starpoint_9" class="star_radio" checked>
+                                    <input type="radio" id="starpoint_9" class="star_radio">
                                     <input type="radio" id="starpoint_10" class="star_radio">
                                     <span class="starpoint_bg"></span>
                                 </div>
@@ -299,11 +285,11 @@
         if(message != null) alert(message);
 
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
-        // if(loginUserNo == null){loginUserNo = "";}
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
-        // const reviewCount = /*[[${reviewCount}]]*/ "리뷰 갯수";
+        const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>       
     
     <script th:src="@{/js/profile/sellerProfile.js}"></script>                   
+    <script th:src="@{/js/profile/profileEdit.js}"></script>                   
 </body>
 </html>

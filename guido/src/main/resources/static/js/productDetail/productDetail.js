@@ -268,7 +268,7 @@ reserveBtn.addEventListener("click", e=>{
 
 
         if(optionRestCount<inputGuestCount.innerText){
-            alert("현재 예약 가능한 인원 수를 초과");
+            alert("현재 예약 가능한 인원 수를 초과합니다");
             e.preventDefault();
             return;
         }
@@ -281,8 +281,6 @@ reserveBtn.addEventListener("click", e=>{
         return;
     }
 
-
-
     /* 얼굴 인증사진을 등록하지 않았을 경우 */
     if(faceImg==null){
         toggleModal();
@@ -290,17 +288,36 @@ reserveBtn.addEventListener("click", e=>{
     }
 
 
-    /* 날짜 미선택 시 */
-
-
-
+    
     
     const guestHidden = document.getElementById("guestHidden");
     const dateHidden = document.getElementById("dateHidden");
-
+    
     guestHidden.value = inputGuestCount.innerText;
-    dateHidden.value = "2023-07-14";
+    
+    /* 날짜 미선택 시 */
+    if(dateHidden.value==""){
+        alert("날짜를 선택해주세요!");
+        e.preventDefault();
+    }
 
+
+    /* 당일 투어의 경우 옵션 미선택 시 */
+    if(package==0){
+        const radios = document.querySelectorAll('input[type="radio"][name="option"]');
+        let checked = false;
+
+        radios.forEach(radio => {
+            if (radio.checked) {
+            checked = true;
+            }
+        });
+
+        if (!checked) {
+            alert("옵션을 선택해주세요.");
+            e.preventDefault();
+        }
+    }
 
 });
 
@@ -330,7 +347,7 @@ let originalImage;     // 초기 프로필 이미지 파일의 경로 저장
 // 내상점 닫기 버튼 클릭 시
 document.querySelector(".close").addEventListener("click", ()=>{
 
-    upload.setAttribute("src", "/images/userProfile/basicUser2.svg");
+    upload.setAttribute("src", "/images/productDetail/faceImg2.jpg");
     realUpload.value="";
 });
     
@@ -339,7 +356,7 @@ document.querySelector(".close").addEventListener("click", ()=>{
         
         originalImage = upload.getAttribute("src");
         
-        if(originalImage == "/images/userProfile/basicUser2.svg"){
+        if(originalImage == "/images/productDetail/faceImg2.jpg"){
             initCheck = false;
         }else{
             initCheck = true;
@@ -559,4 +576,3 @@ if(document.getElementById('editBtn')!=null){
         location.href = location.pathname + '/edit';
     });
 }
-

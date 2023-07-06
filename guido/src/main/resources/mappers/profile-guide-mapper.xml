@@ -30,7 +30,7 @@
 	 	<result property="thumbnail" column="THUMBNAIL" />
 	 	<result property="productDate" column="PRODUCT_DT" />
 	 		
-		<collection property="ProductDateList" select="selectProductDateList"
+		<collection property="productDateList" select="selectProductDateList"
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="ProductDate"/>
 			
 		<collection property="tourCourse" select="selectTourCourseList" 
@@ -127,6 +127,31 @@
 		<result property="bossCourseFL" column="BOSS_COURSE_FL"/>
 	</resultMap>
 	
+	<resultMap type="Reservation" id="reservation_rm">
+		<id property="reservationNo" column="RESERVATION_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="reservationState" column="RESERVATION_STATE"/>
+		<result property="paymentMethod" column="PAYMENT_METHOD"/>
+		<result property="guestCount" column="GUEST_COUNT"/>
+		<result property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="optionNo" column="OPTION_NO"/>
+		<result property="requestContent" column="REQUEST_CONTENT"/>
+		<result property="orderNumber" column="ORDER_NUMBER"/>
+		<result property="totalPrice" column="TOTAL_PRICE"/>
+		<result property="impUid" column="IMP_UID"/>
+		<result property="cancelReason" column="CANCEL_REASON"/>
+		
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="optionName" column="OPTION_NAME"/>
+
+		<result property="profileImage" column="PROFILE_IMG"/>
+	</resultMap>
+	
 	
 	 <!-- 특정 상품 작성자 정보 조회 -->
 	 <select id="selectGuideInfo" resultMap="guide_rm">
@@ -168,6 +193,25 @@
 			WHERE USER_NO = #{userNo}	
 			AND PRODUCT_STATE = 'N'
 			ORDER BY CREATE_DT DESC
+			FETCH FIRST 3 ROWS ONLY
+	</select>
+	
+	<!-- 가이드 상품 목록 더보기 (3개씩) -->
+	<select id="guideProductMore" resultMap="product_rm">
+		SELECT * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY PRODUCT_NO DESC) AS NUM,
+				PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, 
+						PRODUCT_PRICE, GUIDE_LANGUAGE, REGION_NAME, NVL(TOUR_DURATION, 0) TOUR_DURATION,
+					    (SELECT FILE_PATH FROM "FILE" F 
+					    WHERE F.PRODUCT_NO = PRODUCT.PRODUCT_NO
+					    AND F.FILE_ORDER = 1) AS THUMBNAIL
+				FROM PRODUCT
+				WHERE USER_NO = #{userNo}
+				AND PRODUCT_STATE = 'N'
+				ORDER BY CREATE_DT DESC
+			)
+			<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
+			ORDER BY NUM
 	</select>
 	
 	<!-- 일정 조회 -->
@@ -218,6 +262,25 @@
 		FETCH FIRST 3 ROWS ONLY
 	</select>
 	
+	<!-- 가이드 리뷰 목록 더보기 (3개씩) -->
+	<select id="guideReviewMore" resultMap="review_rm">
+		SELECT * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY REVIEW_NO DESC) AS NUM
+					,REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
+				  	, TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
+				   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
+				FROM "REVIEW" R
+				JOIN "USER" U ON(R.USER_NO = U.USER_NO)
+				JOIN "PRODUCT" P USING (PRODUCT_NO)
+				WHERE U.USER_STATE = 'N'
+				AND P.USER_NO = 23
+				AND REVIEW_DEL_FL = 'N'
+				AND REVIEW_REPLY_DEL_FL = 'N'
+				ORDER BY 1 DESC
+			)
+		<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
+			ORDER BY NUM
+	</select>
 
 	 
 	<!-- 리뷰 리플 달기 -->
@@ -247,5 +310,35 @@
 		JOIN "PRODUCT" P USING(PRODUCT_NO)
 		WHERE P.USER_NO = #{userNo}
 	</select>
+	
+	<!-- 가이드 상품 수 카운트 -->
+	<select id="productCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM PRODUCT
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_STATE = 'N'
+	</select>
+	
+	
+	<!-- 가이드 예약 리스트 (구매자들 예약 확인용) -->
+	<select id="GuideReservationList" resultMap="reservation_rm">
+		SELECT RESERVATION_NO, R.PRODUCT_NO,  P.PRODUCT_NAME, P.PRODUCT_PACKAGE, 
+				TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT,
+				R.USER_NO, U.PROFILE_IMG, U.USER_NAME,
+				RESERVATION_STATE, GUEST_COUNT, PO.OPTION_NAME,
+			   (SELECT FILE_PATH FROM "FILE" F 
+			    WHERE F.PRODUCT_NO = R.PRODUCT_NO
+			    AND F.FILE_ORDER = 1) AS THUMBNAIL
+		FROM RESERVATION R
+		RIGHT JOIN "USER" U ON (R.USER_NO = U.USER_NO)
+		RIGHT JOIN "PRODUCT" P ON (P.PRODUCT_NO = R.PRODUCT_NO)
+		RIGHT JOIN "PRODUCT_DT" USING (PRODUCT_DT_NO)
+		RIGHT JOIN "PRODUCT_OPTION" PO USING (OPTION_NO)
+		WHERE  P.USER_NO = #{userNo}
+		ORDER BY RESERVATION_NO DESC
+	</select>
+	
+	
+	
 	
 </mapper>

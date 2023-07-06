@@ -173,8 +173,8 @@ function moreReviewFn(el){
     // 리뷰 상세 조회 내용 넣기
     reviewMoreModalTextArea.innerText = el.parentElement.previousElementSibling.innerText;
     
-    // 리뷰 상세 조회 상품 제목 넣기 el.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
-    reviewMoreModalP.innerText = 
+    // 리뷰 상세 조회 상품 제목 넣기 
+    reviewMoreModalP.innerText =el.parentElement.previousElementSibling.previousElementSibling.lastElementChild.firstElementChild.innerText;
     
     // 리뷰 이름 넣기
     reviewerName.innerText = el.parentElement.previousElementSibling.previousElementSibling.firstElementChild.lastElementChild.innerText;
@@ -272,8 +272,8 @@ if(reviewMoreBtn !=null) {
                         starInput.classList.add("star_radio");
                         starInput.value = (j + 1) * 0.5;
                         if (review.reviewStarsDouble === (j + 1) * 0.5) {
-                            // console.log(review.reviewStarsDouble);
                             starInput.checked = true;
+                            starInput.setAttribute("checked", "checked");
                         }
                         // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;
                         reviewStarDiv.appendChild(starInput);
@@ -378,20 +378,23 @@ selectElement = document.querySelector(".review-write #reviewSaleList");
 let productNo;
 let productDtNo;
 // 상품 선택
-selectElement.addEventListener("change", function() {
-    // 선택된 option 요소
-    let selectedOption = this.options[this.selectedIndex];
-    
-    // 속성 값 가져오기
-    productNo = selectedOption.getAttribute("data-productno");
-    productDtNo = selectedOption.getAttribute("data-productdtno");
+if(selectElement != null){
 
-    if(productNo){
-        if(productDtNo){
-            checkObj.selectElement = true;
+    selectElement.addEventListener("change", function() {
+        // 선택된 option 요소
+        let selectedOption = this.options[this.selectedIndex];
+        
+        // 속성 값 가져오기
+        productNo = selectedOption.getAttribute("data-productno");
+        productDtNo = selectedOption.getAttribute("data-productdtno");
+    
+        if(productNo){
+            if(productDtNo){
+                checkObj.selectElement = true;
+            }
         }
-    }
-});
+    });
+}
 
 // 별점
 selectedStarScore = document.querySelectorAll(".review-write input[name='starScore']");
@@ -532,7 +535,6 @@ function reviewListFn(e){
                 profileDiv.appendChild(reviewerName);
                 firstDiv.appendChild(profileDiv);
     
-                console.log(review.reviewStarsDouble);
                 // 상품 정보 영역 (별점 + 날짜)
                 const saleReviewInfoDiv = document.createElement("div");
                 saleReviewInfoDiv.classList.add("sale-review-info");
@@ -550,8 +552,8 @@ function reviewListFn(e){
                     starInput.classList.add("star_radio");
                     starInput.value = (j + 1) * 0.5;
                     if (review.reviewStarsDouble === (j + 1) * 0.5) {
-                        // console.log(review.reviewStarsDouble);
                         starInput.checked = true;
+                        starInput.setAttribute("checked", "checked");
                     }
                     // starInput.checked = review.reviewStarsDouble === (j + 1) * 0.5;
                     reviewStarDiv.appendChild(starInput);
@@ -780,9 +782,7 @@ function reviewEditSubmitFn(e){
                 alert("리뷰가 수정 되었습니다.");
 
                 reviewEditModal.style.display="none";
-
                 reviewListFn();
-
                 // location.href='/profile/'+loginUserNo;
 
             } else if (result=0){
@@ -799,5 +799,6 @@ function reviewEditSubmitFn(e){
         e.preventDefault();
         return;
     }
+    
 
 }
