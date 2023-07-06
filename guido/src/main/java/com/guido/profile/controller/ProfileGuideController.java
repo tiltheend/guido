@@ -1,6 +1,8 @@
 package com.guido.profile.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.profile.model.service.ProfileGuideService;
@@ -25,10 +28,8 @@ public class ProfileGuideController {
 	private ProfileGuideService service;
 	
 	// 가이드 페이지로 이동
-//	@GetMapping("/mypage/G")
-//	public String mypageGuide() {
-//		return "profile/sellerProfile";
-//	}
+	// 타입 검사 때문에 구매자 페이지 컨트롤러에 있음~~
+	
 	
 	// 비동기로 가이드 리뷰 목록 불러오기 (최신 3개)
 	@ResponseBody
@@ -45,6 +46,22 @@ public class ProfileGuideController {
 		
 		return guideReivewList;
 	}
+	
+	// 가이드 리뷰 목록 더보기 (3개씩)
+	@ResponseBody
+	@PostMapping(value="/guideReviewMore", produces="application/json; charset=UTF-8")
+	public List<Review> guideReviewMore(@RequestBody Map<String, Integer> request){
+			
+		List<Review> guideReviewMore = service.guideReviewMore(request);
+		
+		// 0.5 단위로 별점 바꾸기
+		for(Review r : guideReviewMore) {
+			r.setReviewStarsDouble(r.getReviewStars()/20.0);
+		}
+		
+		return guideReviewMore;
+	}
+	
 	
 	// 리뷰 리플 달기
 	@ResponseBody

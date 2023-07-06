@@ -1,6 +1,7 @@
 package com.guido.profile.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,12 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 		return mapper.reviewCount(userNo);
 	}
 	
+	// 가이드 리뷰 목록 더보기 (3개씩)
+	@Override
+	public List<Review> guideReviewMore(Map<String, Integer> request) {
+		return mapper.guideReviewMore(request);
+	}
+
 	// 리뷰 리플 달기
 	@Transactional(rollbackFor = Exception.class)
 	@Override

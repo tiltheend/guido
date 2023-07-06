@@ -1,6 +1,7 @@
 package com.guido.profile.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,6 +28,9 @@ public interface ProfileGuideMapper {
 	// 가이드 리뷰 조회
 	List<Review> guideReivewList(int userNo);
 
+	// 가이드 리뷰 목록 더보기 (3개씩)
+	List<Review> guideReviewMore(Map<String, Integer> request);
+
 	// 리뷰 리플 달기
 	int reviewReply(Review review);
 	
@@ -35,6 +39,7 @@ public interface ProfileGuideMapper {
 
 	// 리뷰 리플 삭제
 	int reviewReplyDel(int reviewNo);
+
 
 	
 
