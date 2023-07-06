@@ -178,10 +178,15 @@ function createCalendar(year, month, availableDates, fewNights) {
 
                     
                     // 1박의 경우 옵션 불러오기
-                    if(fewNights==1){
+                    if(fewNights==1 && cell.classList.contains('start-day-td')){
                         document.querySelector(".detail--right__option").style.display = "block";
                         selectOptionList(reservationDate);
                     }
+                    
+                    if(!cell.classList.contains('start-day-td')){
+                        document.querySelector(".detail--right__option").style.display = "none";
+                    }
+
                 })
             
             }

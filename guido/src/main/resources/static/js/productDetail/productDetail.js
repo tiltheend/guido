@@ -281,8 +281,6 @@ reserveBtn.addEventListener("click", e=>{
         return;
     }
 
-
-
     /* 얼굴 인증사진을 등록하지 않았을 경우 */
     if(faceImg==null){
         toggleModal();
@@ -304,7 +302,22 @@ reserveBtn.addEventListener("click", e=>{
     }
 
 
+    /* 당일 투어의 경우 옵션 미선택 시 */
+    if(package==0){
+        const radios = document.querySelectorAll('input[type="radio"][name="option"]');
+        let checked = false;
 
+        radios.forEach(radio => {
+            if (radio.checked) {
+            checked = true;
+            }
+        });
+
+        if (!checked) {
+            alert("옵션을 선택해주세요.");
+            e.preventDefault();
+        }
+    }
 
 });
 
