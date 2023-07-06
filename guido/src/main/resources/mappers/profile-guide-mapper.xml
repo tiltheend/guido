@@ -127,6 +127,31 @@
 		<result property="bossCourseFL" column="BOSS_COURSE_FL"/>
 	</resultMap>
 	
+	<resultMap type="Reservation" id="reservation_rm">
+		<id property="reservationNo" column="RESERVATION_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="reservationState" column="RESERVATION_STATE"/>
+		<result property="paymentMethod" column="PAYMENT_METHOD"/>
+		<result property="guestCount" column="GUEST_COUNT"/>
+		<result property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="optionNo" column="OPTION_NO"/>
+		<result property="requestContent" column="REQUEST_CONTENT"/>
+		<result property="orderNumber" column="ORDER_NUMBER"/>
+		<result property="totalPrice" column="TOTAL_PRICE"/>
+		<result property="impUid" column="IMP_UID"/>
+		<result property="cancelReason" column="CANCEL_REASON"/>
+		
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="optionName" column="OPTION_NAME"/>
+
+		<result property="profileImage" column="PROFILE_IMG"/>
+	</resultMap>
+	
 	
 	 <!-- 특정 상품 작성자 정보 조회 -->
 	 <select id="selectGuideInfo" resultMap="guide_rm">
@@ -294,6 +319,24 @@
 		AND PRODUCT_STATE = 'N'
 	</select>
 	
+	
+	<!-- 가이드 예약 리스트 (구매자들 예약 확인용) -->
+	<select id="GuideReservationList" resultMap="reservation_rm">
+		SELECT RESERVATION_NO, R.PRODUCT_NO,  P.PRODUCT_NAME, P.PRODUCT_PACKAGE, 
+				TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT,
+				R.USER_NO, U.PROFILE_IMG, U.USER_NAME,
+				RESERVATION_STATE, GUEST_COUNT, PO.OPTION_NAME,
+			   (SELECT FILE_PATH FROM "FILE" F 
+			    WHERE F.PRODUCT_NO = R.PRODUCT_NO
+			    AND F.FILE_ORDER = 1) AS THUMBNAIL
+		FROM RESERVATION R
+		RIGHT JOIN "USER" U ON (R.USER_NO = U.USER_NO)
+		RIGHT JOIN "PRODUCT" P ON (P.PRODUCT_NO = R.PRODUCT_NO)
+		RIGHT JOIN "PRODUCT_DT" USING (PRODUCT_DT_NO)
+		RIGHT JOIN "PRODUCT_OPTION" PO USING (OPTION_NO)
+		WHERE  P.USER_NO = #{userNo}
+		ORDER BY RESERVATION_NO DESC
+	</select>
 	
 	
 	

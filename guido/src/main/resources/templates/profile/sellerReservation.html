@@ -15,9 +15,9 @@
 <body>
     <header>임시헤더</header>
 
-    <div class="seller-profile-top" th:object="${user}">
+    <div class="seller-profile-top">
 
-        <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
+        <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
 
             <div class="guide-banner"> <!-- 프로필 위 가이드 배너 -->
                 <img th:if="${guide.superGuideFl=='N'}" th:src="@{/images/profile/guideBanner.png}" alt="guideBanner"> <!-- 일반 가이드 -->
@@ -84,20 +84,39 @@
                 
             <div class="reservation-list"> <!-- 판매자 예약 내역 -->
                 <div> <!-- 제목 -->
-                    <h1>Reservation</h1>
+                    <h1>Reservation (<span th:text="${#lists.size(GuideReservationList)}">리뷰 갯수</span>)</h1>
                 </div>
 
                 <ul class="reservation-list-box">
-                    <li>
+                    <li th:each="reservation : ${GuideReservationList}">
                         <div class="sale-img">
-                            <!-- <img src="" alt=""> -->
+                            <img th:src="${reservation.thumbnail}" alt="thumbnail">
+                            <div class="guest-profile-img">
+                                <a th:href="@{/profile/{userNo}(userNo=${reservation.userNo})}">
+                                    <img th:unless="${reservation.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                    <img th:if="${reservation.profileImage}" th:src="${reservation.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->        
+                                </a>
+                                <!-- <h3 th:text="${reservation.userName}">Name</h3> -->
+                            </div>
+                        </div>
+                        <div class="sale-content">
+                            <h3 th:text="${reservation.productName}">상품명</h3>
+                            <h3>2023년 6월 7일 - 6월 9일</h3>
+                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${reservation.}]]</p>
+                            <div>
+                                <h2><span th:text="${reservation.guestCount}">guestCount</span> Guests</h2>
+                                <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting">
+                            </div>
+                        </div>
+                    </li>
+                    <!-- <li>
+                        <div class="sale-img">
                             <div class="guest-profile-img">
                                 <img src="">
                                 <h3>Name</h3>
                             </div>
                         </div>
                         <div class="sale-content">
-                            <!-- <h3>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</h3> -->
                             <h3>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea [Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea feeling the beauty of Korea</h3>
                             <h3>2023년 6월 7일 - 6월 9일</h3>
                             <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: Danish</p>
@@ -106,44 +125,7 @@
                                 <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting">
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="sale-img">
-                            <!-- <img src="" alt=""> -->
-                            <div class="guest-profile-img">
-                                <img src="">
-                                <h3>Name</h3>
-                            </div>
-                        </div>
-                        <div class="sale-content">
-                            <!-- <h3>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</h3> -->
-                            <h3>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea [Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea feeling the beauty of Korea</h3>
-                            <h3>2023년 6월 7일 - 6월 9일</h3>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: Danish</p>
-                            <div>
-                                <h2>3 Guests</h2>
-                                <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting">
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sale-img">
-                            <!-- <img src="" alt=""> -->
-                            <div class="guest-profile-img">
-                                <img src="">
-                                <h3>Name</h3>
-                            </div>
-                        </div>
-                        <div class="sale-content">
-                            <h3>상품 제목</h3>
-                            <h3>2023년 6월 7일 - 6월 9일</h3>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: Danish</p>
-                            <div>
-                                <h2>3 Guests</h2>
-                                <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting">
-                            </div>
-                        </div>
-                    </li>
+                    </li> -->
 
                 </ul>
 

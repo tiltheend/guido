@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.profile.model.dao.ProfileGuideMapper;
@@ -89,7 +90,13 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 		return mapper.reviewReplyDel(reviewNo);
 	}
 
+	// 가이드 예약 리스트 (구매자들 예약 확인용)
+	@Override
+	public List<Reservation> GuideReservationList(int userNo) {
+		return mapper.GuideReservationList(userNo);
+	}
 
+	
 
 	
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
@@ -45,6 +46,9 @@ public interface ProfileGuideMapper {
 
 	// 리뷰 리플 삭제
 	int reviewReplyDel(int reviewNo);
+	
+	// 가이드 예약 리스트 (구매자들 예약 확인용)
+	List<Reservation> GuideReservationList(int userNo);
 
 
 

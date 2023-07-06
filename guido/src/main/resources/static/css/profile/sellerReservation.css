@@ -168,7 +168,7 @@
     display: flex; flex-direction: column; justify-content: center;
     position: absolute; left: 12px; bottom: 12px; color: #fff;
 }
-.seller-profile-top .reservation-list-box .guest-profile-img>img{
+.seller-profile-top .reservation-list-box .guest-profile-img>a>img{
     width: 90px; height: 90px;
     border-radius: 50%;
     background-color: #B1D8DA;

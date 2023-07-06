@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.profile.model.service.ProfileGuideService;
@@ -148,8 +149,16 @@ public class ProfileGuideController {
 		
 		// 가이드 자기 소개
 		User guide = service.selectGuideInfo(userNo);
-		
 		model.addAttribute("guide", guide);
+		
+		// 가이드 예약 리스트 (구매자들 예약 확인용)
+		List<Reservation> GuideReservationList = service.GuideReservationList(userNo);
+		model.addAttribute("GuideReservationList", GuideReservationList);
+		
+		// 0.5 단위로 별점 바꾸기
+		for(Reservation r : GuideReservationList) {
+			System.out.println(r);
+		}
 		
 		return "profile/sellerReservation";
 	}

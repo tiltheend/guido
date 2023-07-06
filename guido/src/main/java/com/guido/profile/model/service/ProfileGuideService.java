@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
@@ -83,6 +84,13 @@ public interface ProfileGuideService {
 	 * @return
 	 */
 	int productCount(int userNo);
+
+
+	/** 가이드 예약 리스트 (구매자들 예약 확인용)
+	 * @param userNo
+	 * @return
+	 */
+	List<Reservation> GuideReservationList(int userNo);
 
 
 
