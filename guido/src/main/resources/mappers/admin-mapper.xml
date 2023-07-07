@@ -94,15 +94,24 @@
 			</when>
 			<when test="pageName == 'touristManagement'">
 				"USER" WHERE USER_TYPE='T'
+				<if test="state != '' and state != null and state != 'whole'">AND USER_STATE=#{state}</if>
+				<if test="query != null">AND USER_EMAIL LIKE '%${query}%'</if>
 			</when>
 			<when test="pageName == 'guideManagement'">
-				"USER" WHERE USER_TYPE='G'
+				"USER"
+				<if test='super == "Y"'>NATURAL JOIN "GUIDE"</if>
+				WHERE USER_TYPE='G' AND USER_STATE != 'Y'
+				<if test="state != '' and state != null and state != 'whole'">AND USER_STATE=#{state}</if>
+				<if test='super == "Y"'>AND SUPER_GUIDE_FL = 'Y'</if>
+				<if test="query != null">AND USER_EMAIL LIKE '%${query}%'</if>
 			</when>
 			<when test="pageName == 'guideApprovalRequest'">
 				"USER" WHERE USER_TYPE='G' AND USER_STATE='Y'
+				<if test="query != null">AND USER_EMAIL LIKE '%${query}%'</if>
 			</when>
 			<when test="pageName == 'productManagement'">
 				"PRODUCT"
+				<if test="query != null">WHERE PRODUCT_NAME LIKE '%${query}%' OR PRODUCT_CONTENT LIKE '%${query}%'</if>
 			</when>
 			<when test="pageName == 'qna'">
 				"QNA"
@@ -125,13 +134,18 @@
 				FROM "USER"
 				NATURAL JOIN "TOURIST"
 				WHERE USER_TYPE='T'
+				<if test="state != '' and state != null and state != 'whole'">AND USER_STATE=#{state}</if>
+				<if test="query != null">AND USER_EMAIL LIKE '%${query}%'</if>
 				ORDER BY USER_NO DESC
 			</when>
 			<when test="pageName == 'guideManagement'">
 				USER_NO, USER_EMAIL, TO_CHAR(CREATE_DT, 'YYYY-MM-DD') CREATE_DT, USER_STATE, SUPER_GUIDE_FL 
 				FROM "USER"
 				NATURAL JOIN "GUIDE"
-				WHERE USER_TYPE='G'
+				WHERE USER_TYPE='G' AND USER_STATE != 'Y'
+				<if test="state != '' and state != null and state != 'whole'">AND USER_STATE=#{state}</if>
+				<if test='super == "Y"'>AND SUPER_GUIDE_FL = 'Y'</if>
+				<if test="query != null">AND USER_EMAIL LIKE '%${query}%'</if>
 				ORDER BY USER_NO DESC
 			</when>
 			<when test="pageName == 'guideApprovalRequest'">
@@ -140,18 +154,23 @@
 				NATURAL JOIN "GUIDE"
 				WHERE USER_TYPE='G'
 				AND USER_STATE='Y'
+				<if test="query != null">AND USER_EMAIL LIKE '%${query}%'</if>
 				ORDER BY USER_NO ASC
 			</when>
 			<when test="pageName == 'productManagement'">
 				PRODUCT_NO, USER_EMAIL, PRODUCT_NAME, TO_CHAR(P.CREATE_DT, 'YYYY-MM-DD') CREATE_DT, PRODUCT_STATE FROM "PRODUCT" P
 				JOIN "USER" USING(USER_NO)
+				<if test="query != null">WHERE PRODUCT_NAME LIKE '%${query}%' OR PRODUCT_CONTENT LIKE '%${query}%'</if>
 				ORDER BY PRODUCT_NO DESC
 			</when>
 			<when test="pageName == 'qna'">
+				
 				QNA_NO, QNA_TITLE, QNA_EMAIL, QNA_DATE, QNA_CHECK_FL
 				FROM QNA
 				<if test="query != null">WHERE QNA_TITLE LIKE '%${query}%' OR QNA_CONTENT LIKE '%${query}%'</if>
-				ORDER BY QNA_CHECK_FL, QNA_NO
+				ORDER BY
+				  CASE WHEN QNA_CHECK_FL = 'Y' THEN QNA_NO END DESC,
+				  CASE WHEN QNA_CHECK_FL = 'N' THEN QNA_NO END ASC
 			</when>
 		</choose>
 	</select>
@@ -203,11 +222,6 @@
 		UPDATE QNA SET QNA_ANSWER = #{qnaAnswer}, QNA_CHECK_FL = 'Y' WHERE QNA_NO = #{qnaNo}
 	</update>
 	
-	<update id="approveGuide" parameterType="java.util.List">
-	  UPDATE "USER" SET USER_STATE='N' WHERE USER_STATE='Y' AND USER_NO IN
-	  <foreach item="userNo" collection="list" open="(" separator="," close=")">#{userNo}</foreach>
-	</update>
-	
 	<select id="selectMainEventList" resultType="map">
 		<![CDATA[  
 		SELECT NVL("EVENT".EVENT_NO, 0) AS EVENT_NO,
@@ -244,5 +258,28 @@
 	  UPDATE "EVENT" SET EVENT_STATE='N' WHERE EVENT_NO IN
 	  <foreach item="eventNo" collection="list" open="(" separator="," close=")">#{eventNo}</foreach>
 	</update>
+	
+	<update id="productBlind" parameterType="java.util.List">
+	  UPDATE "PRODUCT" SET PRODUCT_STATE='B' WHERE PRODUCT_NO IN
+	  <foreach item="productNo" collection="list" open="(" separator="," close=")">#{productNo}</foreach>
+	</update>
+	
+	<update id="productBlindCancel" parameterType="java.util.List">
+	  UPDATE "PRODUCT" SET PRODUCT_STATE='N' WHERE PRODUCT_NO IN
+	  <foreach item="productNo" collection="list" open="(" separator="," close=")">#{productNo}</foreach>
+	</update>
+	
+	<update id="setUserState" parameterType="java.util.Map">
+	  UPDATE "USER" SET USER_STATE=#{state} WHERE USER_NO IN
+	  <foreach item="userNo" collection="userNoList" open="(" separator="," close=")">#{userNo}</foreach>
+	</update>
+	
+	<select id="countUnapprovedGuide">
+		SELECT COUNT(*) FROM "USER" WHERE USER_STATE = 'Y'
+	</select>
+	
+	<select id="countUnprocessedQna">
+		SELECT COUNT(*) FROM QNA WHERE QNA_CHECK_FL = 'N'
+	</select>
 	
 </mapper>

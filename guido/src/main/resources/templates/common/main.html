@@ -7,7 +7,7 @@
     <title>guido</title>
   </head>
   <style>
-    main a button {
+    main a button, main>form>button {
       width: 200px;
       height: 30px;
       background-color: #0f4957;
@@ -47,6 +47,11 @@
       <br/>
 
       <a th:href="@{/admin/eventList}"><button>관리자 페이지</button></a>
+      <form th:action="@{/user/login}" method="POST" style="display:inline">
+        <input type="hidden" name="userEmail" value="manager00@gmail.com">
+        <input type="hidden" name="userPassword" value="pass00">
+        <button>관리자 로그인</button>
+      </form>
 
       <br/>
       <hr/>
