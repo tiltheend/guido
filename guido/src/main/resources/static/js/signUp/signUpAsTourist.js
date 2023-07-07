@@ -523,6 +523,56 @@ signUpForm.addEventListener("submit",e=>{
     }
 });
 
+// 회원가입 진행
+
+// 국제 번호 intlTel
+var input = document.querySelector("#phone");
+
+var iti = window.intlTelInput(input, {
+    separateDialCode: true,
+    utilsScript: "build/js/utils.js"
+});
+
+// 회원가입 버튼 누르면
+// function submitForm() {}
+signUpForm.addEventListener("click",()=>{
+    // 국제 나라 번호, 국가 코드 가져오기 (name속성 추가)
+    const selectedCountryData = iti.getSelectedCountryData();
+    const countryCode = selectedCountryData.iso2;
+    countryCode.setAttribute("name", "countryCode");
+    // 선택한 국가의 국가 코드
+    // document.getElementById("result").innerText = countryCode;
+    console.log("국가 코드:", countryCode);
+    
+    // const countryName = "Korea"
+    // iti.setCountry(countryName);
+
+    // 국가명
+    // var title = document.querySelector(".iti__selected-flag");
+    
+    // 국제 번호 앞자리
+    const countryNo = document.querySelector(".iti__selected-dial-code");
+    countryNo.setAttribute("name", "userTel");
+
+    // console.log("전화번호 : " + input.value);
+    // // console.log("국가 : " + title.title);
+    // console.log("국제전화 나라번호 : " + countryNo.innerText);
+
+    // name 값 
+    const data = {
+        "email": email, "password" : password, "lastName" : lastname, "firstName" : firstName, "countryCode" : countryCode, "phone" : phone, "countryNo" : countryNo, "emergencyCo" : emergencyCo, "passportNo" : passportNo,
+        "primaryLanguage" : primaryLanguage
+    }
+
+
+
+
+
+
+
+
+    });
+
 
 
 
