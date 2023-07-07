@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
 import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.User;
@@ -77,6 +78,7 @@ public class ReservationController {
 		
 					
 		Product product = productService.selectProduct(productNo);
+		ProductDate reservationDate = service.selectReservationDate(map);
 		
 		
 		// 당일 여행 상품이면서 옵션(시간대)를 선택하지 않았을 때
@@ -99,7 +101,7 @@ public class ReservationController {
 		
 		model.addAttribute("guestCount", guests);
 		model.addAttribute("product", product);
-		model.addAttribute("reservationDate", date);
+		model.addAttribute("reservationDate", reservationDate);
 		model.addAttribute("mainCourse", mainCourse);
 		model.addAttribute("selectedTime", option);
 		model.addAttribute("impCode", impCode);
@@ -114,23 +116,19 @@ public class ReservationController {
 
 	// 카드 결제 성공 후
 	@PostMapping("/payment/complete")
-	public ResponseEntity<String> liquidate(@RequestBody Reservation reservation,
+	public ResponseEntity<String> liquidate(@RequestBody Reservation reservation, @RequestParam("emergencyContact") String emergencyContact,
 			@SessionAttribute("loginUser") User loginUser) throws IOException {
 		
-		System.out.println(reservation);
-		// 1. 아임포트 API 키와 SECRET키로 토큰을 생성
+		// 아임포트 API 키와 SECRET키로 토큰을 생성
 		String token = service.getToken();
-		System.out.println("토큰 : " + token);
 		
 		// 결제 완료된 금액
 		int amount = service.paymentInfo(reservation.getImpUid(), token);
 		
-		System.out.println("amount : " + amount);
-	    
 	    
 		try {
 			
-			// 2. 실제 계산되어야 할 가격
+			// 실제 계산되어야 할 가격
 			int orderPriceCheck = -1;
 			
 			Product product = productService.selectProduct(reservation.getProductNo());
@@ -142,7 +140,7 @@ public class ReservationController {
 			}
 			
 			
-			// 3. 결제 완료된 금액과 실제 계산되어야 할 금액이 다를경우 결제 취소
+			// 결제 완료된 금액과 실제 계산되어야 할 금액이 다를경우 결제 취소
 			if(amount != orderPriceCheck + orderPriceCheck*0.1) {
 				service.paymentCancel(token, reservation.getImpUid(), amount, "결제 금액 오류");
 				return new ResponseEntity<String>("결제 금액 오류, 결제 취소", HttpStatus.BAD_REQUEST);
@@ -154,9 +152,11 @@ public class ReservationController {
 			
 			int result = service.insertReservation(reservation);
 			
-			
-			if(result>0)
+			if(result>0) {
+				loginUser.setEmergencyContact(emergencyContact);
+				service.updateEmergencyContact(loginUser);
 				return new ResponseEntity<String>("성공", HttpStatus.OK);
+			}
 
 			else if(result==0)
 				return new ResponseEntity<String>("주문 오류", HttpStatus.BAD_REQUEST);
@@ -211,7 +211,7 @@ public class ReservationController {
 		 model.addAttribute("orderPrice", orderPrice);
 		 model.addAttribute("extraFee", extraFee);
 		 
-	      return "reservation/reservationCheck";
+	     return "reservation/reservationCheck";
 	   }
 
 	 

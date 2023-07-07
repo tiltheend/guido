@@ -107,11 +107,11 @@ function toggleModal() {
 
 /* 예약하고자 하는 날짜 출력 */
 const reservationDateDiv = document.querySelector(".reservation--date__decription>div");
-const orderDate = new Date(reservationDate);
+const orderDate = new Date(reservationDate.productDate);
 
 if(package==1){
 
-    reservationDateDiv.innerText = reservationDate + " [" + selectedTime + "]";
+    reservationDateDiv.innerText = reservationDate.productDate + " [" + selectedTime + "]";
   
 }else{
 
@@ -141,7 +141,7 @@ if (lastYear !== newYear) {
   reservationDateDiv.innerText = formattedDate + " ~ " + twoDaysLater;
 }
 
-
+const emergencyContact = document.getElementById("emergencyContact").value;
 const requestContent = document.getElementById("request").value;
 
   
@@ -177,9 +177,10 @@ const requestContent = document.getElementById("request").value;
             "guestCount": Number(guestsQnt.innerText),
             "productNo": productNo,
             "userNo": userNo,
-            "productDateNo": 19,    // 캘린더에서 선택된 날짜
+            "productDateNo": reservationDate.productDateNo,    // 캘린더에서 선택된 날짜
             "optionNo": optionNo,
-            "requestContent": requestContent
+            "requestContent": requestContent,
+            "emergencyContact" : emergencyContact
         }
 
 
@@ -359,3 +360,5 @@ function checkLength(el) {
     el.value = el.value.substring(0, maxLength);
   }
 }
+
+console.log(reservationDate.productDateNo);

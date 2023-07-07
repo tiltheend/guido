@@ -4,8 +4,8 @@ let reservationDate;
 
 // 로딩되는 시점의 년, 월을 이용해서 달력 초기 생성
 let currentDate = new Date();
-let currentYear = currentDate.getFullYear();
-let currentMonth = currentDate.getMonth() + 1;
+// let currentYear = currentDate.getFullYear();
+// let currentMonth = currentDate.getMonth() + 1;
 
 const today = currentDate.toISOString().split("T")[0];
 
@@ -22,6 +22,12 @@ let availableDates = product.productDateList.map(item => item.productDate);
 
 // 오늘 날짜 이전의 날짜는 선택할 수 없도록 배열 필터링
 availableDates = availableDates.filter(date => date >= today);
+
+
+// 예약 가능한 전체 일정 중 첫번째 일정의 년, 월을 이용해서 달력 초기 생성
+let date = new Date(availableDates[0]);
+let currentYear = date.getFullYear();
+let currentMonth = date.getMonth() + 1;
 
 
 createCalendar(currentYear, currentMonth, availableDates, fewNights);
@@ -174,7 +180,6 @@ function createCalendar(year, month, availableDates, fewNights) {
                     reservationDate = y + "-" + m + "-" + d;
 
                     dateHidden.value = reservationDate;
-
 
                     
                     // 1박의 경우 옵션 불러오기

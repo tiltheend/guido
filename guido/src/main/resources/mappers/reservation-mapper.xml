@@ -42,6 +42,13 @@
 	</resultMap>
 	
 	
+	<!-- 예약 진행 시 일정(날짜) 정보 조회 -->
+	<select id="selectReservationDate" resultMap="product_date_rm">
+		SELECT PRODUCT_DT_NO, PRODUCT_NO,  TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT,  PRODUCT_DT_AVAILABILITY
+		FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT = #{productDate}
+	</select>
 	
 	
 	<!-- 예약 가능한 일정인지 확인 (1: 가능, 0: 불가능) -->
@@ -74,10 +81,9 @@
 			SELECT dept_code from department
 			WHERE user_id = #{user_id}
 		</selectKey> -->
-	
 		INSERT INTO "RESERVATION"
 		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
-		 'Y', #{paymentMethod}, #{guestCount}, 19, 21, #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
+		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
 <!--		INSERT INTO "RESERVATION"
 		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, #{createDate},
 		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice})-->
@@ -163,6 +169,14 @@
 	      WHERE PRODUCT_DT_NO = #{productDateNo}
 	    </otherwise>
 	  </choose>
+	</update>
+	
+	
+	<!-- 비상연락처 업데이트 -->
+	<update id="updateEmergencyContact">
+		UPDATE "TOURIST"
+		SET EMERGENCY_CONTACT = #{emergencyContact}
+		WHERE USER_NO = #{userNo}
 	</update>
 	
 </mapper>
