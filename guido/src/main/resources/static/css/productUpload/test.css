@@ -289,12 +289,12 @@ button:disabled:hover {
   transition-duration: 0.25s !important;
 } */
 
-#page3 > div.tour-theme img {
+div.tour-theme img {
   width: 40px;
   height: 40px;
   margin: 7px;
 }
-#page3 > div.tour-theme > span > span {
+div.tour-theme > span > span {
   margin-right: 7px;
 }
 .tour-theme > *:hover {

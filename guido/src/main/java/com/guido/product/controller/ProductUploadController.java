@@ -128,7 +128,7 @@ public class ProductUploadController {
 				addNotesList = Arrays.asList(product.getProductAddNotes().split("\\^\\^\\^"));
 				
 			}
-			
+			model.addAttribute("apiKey2", apiKey2);
 			model.addAttribute("product", product);
 			model.addAttribute("addNotesList", addNotesList);
 			model.addAttribute("tourTheme", tourTheme);
@@ -138,10 +138,10 @@ public class ProductUploadController {
 			
 			// 구분자로 문자열 나누기(addNotes)
 		
-			System.out.println(product);
+//			System.out.println(product.getTourCourse().get(0).getCourseOrder());
 
 			
-			return "productUpload/productEdit2";
+			return "productUpload/editTest";
 		}
 		
 		// 여행상품 수정

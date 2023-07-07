@@ -11,15 +11,11 @@
     <link rel="stylesheet" th:href="@{/css/productUpload/test.css}" />
     <link rel="stylesheet" th:href="@{/css/productUpload/main.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/style.css}">
-    <!-- <link rel="stylesheet" th:href="@{/css/productUpload/calender.css}"> -->
     <link rel="stylesheet" th:href="@{/css/productUpload/modal.css}">
-    <!-- <link rel="stylesheet" th:href="@{/css/productUpload/transition.css}"> -->
     <link rel="stylesheet" th:href="@{/css/productUpload/typing.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/tourCourse.css}">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
-    <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script> -->
    
     
   </head>
@@ -33,7 +29,6 @@
     <!-- 1페이지 -->
     <main id="page1" class="page current">
       <div class="greeting">
-        <!-- <h1 class="title typing">Jayden</h1> -->
         <div class="typing title">
           <h4 class="text"></h4>
         </div>
@@ -585,10 +580,12 @@
   <!-- <script src="../js/productUpload/calender.js"></script> -->
   <script th:src="@{/js/productUpload/typing3.js}"></script>
   <script th:src="@{/js/productUpload/tourCourse.js}"></script>
- <script>
-   const loginUserNo = /*[[${session.loginUser.userNo}]]*/"로그인 회원 번호";
-   console.log(loginUserNo);
- </script>
+  <script th:inline="javascript">
+  
+  
+  
+  
+  </script>
   <script
   src="https://kit.fontawesome.com/f7459b8054.js"
   crossorigin="anonymous"

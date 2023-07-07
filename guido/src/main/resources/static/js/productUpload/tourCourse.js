@@ -140,8 +140,10 @@ function displayPlaces(places) {
             labelElement.appendChild(deleteIcon);
             numElements++; // numElements 변수를 증가시킴
 
-            checkboxElement.addEventListener('change', (e) => {
-              if (e.target !== checkboxElement) {
+            checkboxElement.addEventListener('change', function () {
+              if (checkboxElement.checked) {
+                courseInfo.bossCourseFL = 'Y';
+              } else {
                 courseInfo.bossCourseFL = 'N';
               }
             });

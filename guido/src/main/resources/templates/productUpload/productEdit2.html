@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>여행 상품 수정</title>
-    <link rel="stylesheet" th:href="@{/css/productUpload/productEdit2.css}" />
+    <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
+    <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script>
+    <link rel="stylesheet" th:href="@{/css/productUpload/test.css}" />
     <link rel="stylesheet" th:href="@{/css/productUpload/main.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/style.css}">
-    <link rel="stylesheet" th:href="@{/css/productUpload/calender.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/modal.css}">
-    <link rel="stylesheet" th:href="@{/css/productUpload/transition.css}">
-    <link rel="stylesheet" th:href="@{/css/productUpload/typing.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/typing3.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/tourCourse.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    
@@ -22,45 +22,44 @@
       <!-- 메인 로고 -->
       <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
   </header>
-<main id="page15" class="page" style="height: 100%;">
-      <div class="greeting">
-        <div class="typing title">
-          <h4 class="text6"></h4>
-        </div>
-        <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span>
+  <main id="page15" class="page current" style="height: 100%;">
+    <div class="greeting">
+      <div class="typing title">
+        <h4 class="text6"></h4>
       </div>
-      <div class="course-container">
-      <div class="map_wrap">
-        <div
-        id="map"
-        style="width: 100%; height: 100%; position: relative; overflow: hidden ;border-radius : 20px"></div>
-        <div id="menu_wrap" class="bg_white">
-        <div class="option">
-          <div>
-            <form onclick="searchPlaces(); return false;">
-             
-              <input type="text" value="부산" id="keyword" size="15" />
-              <button type="submit">검색하기</button>
-            </form>
-          </div>
-        </div>
-        <hr />
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
+      <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span>
+    </div>
+    <div class="course-container">
+    <div class="map_wrap">
+      <div
+      id="map"
+      style="width: 100%; height: 100%; position: relative; overflow: hidden ;border-radius : 20px"></div>
+      <div id="menu_wrap" class="bg_white">
+      <div class="option">
+        <div>
+          <form onclick="searchPlaces(); return false;">
+           
+            <input type="text" value="부산" id="keyword" size="15" />
+            <button type="submit">검색하기</button>
+          </form>
         </div>
       </div>
-      <div class="tour-course">
-        <!-- <div id="location"></div> -->
-        <div class="create-course">
-          <!-- <label class="tourCourse-item" for="tourCourse">경복궁</label> -->
-        </div>
-      </div>  
-    <!-- <input type="hidden" name="tourCourse" id="tourCourse"> -->
-  <!-- <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
-  <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script> -->
+      <hr />
+      <ul id="placesList"></ul>
+      <div id="pagination"></div>
+      </div>
+    </div>
+    <div class="tour-course">
+      <!-- <div id="location"></div> -->
+      <div class="create-course">
+        <!-- <label class="tourCourse-item" for="tourCourse">경복궁</label> -->
+      </div>
+    </div>  
+  <!-- <input type="hidden" name="tourCourse" id="tourCourse"> -->
+<!-- <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
+<script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script> -->
 </div>
-    </main>
-
+  </main>
     
 
 
@@ -81,12 +80,13 @@
       </div>
       
       <div div class="tour-theme">
-        <label th:each="tourTheme : ${tourTheme}" class="theme-img">
-           <input type="radio" name="themeCode" class="hidden2" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
-          <img th:src="${tourTheme.themeImg}" alt="힐링 투어">
-          <span th:text="${tourTheme.themeName}" class="theme-img" for="">테마이름</span>
-        </label>
-      </div>
+        <th:block th:each="tourTheme : ${tourTheme}">
+          <input type="radio" name="themeCode" class="hidden" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
+            <label class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">
+              <img th:src="${tourTheme.themeImg}">
+            <th:block th:text="${tourTheme.themeName}" class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">테마이름</th:block>
+          </label>
+        </th:block>
 
 
     </main>
@@ -481,9 +481,9 @@
     </footer>
   </body>
 
-  <script th:src="@{/js/productUpload/productEdit2.js}"></script>
+  <script th:src="@{/js/productUpload/editTest.js}"></script>
   <!-- <script src="../js/productUpload/calender.js"></script> -->
-  <script th:src="@{/js/productUpload/typing2.js}"></script>
+  <script th:src="@{/js/productUpload/typing3.js}"></script>
   <script th:src="@{/js/productUpload/tourCourse.js}"></script>
  
   <script
