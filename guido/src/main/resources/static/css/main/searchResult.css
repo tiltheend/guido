@@ -78,7 +78,7 @@
     transition-duration: 0.3s;
   }
   
-  .prev{
+  /* .prev{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -90,7 +90,6 @@
     z-index: 100;
     margin-top: 135px;
     margin-left: 5px;
-    /* transition-duration: 0.2s; */
     opacity: 0.6;
     cursor: pointer;
   }
@@ -106,10 +105,9 @@
     z-index: 100;
     margin-left: 265px;
     margin-top: 135px;
-    /* transition-duration: 0.2s; */
     opacity: 0.6;
     cursor: pointer;
-  }
+  } */
   
   .container--inner__top__left img{
     min-width: 300px;

@@ -117,7 +117,6 @@ function toggleHeart() {
         })
         .then(resp=>resp.text())
         .then(result=>{
-            
 
             if(result==1){
                 if (heartIcon.classList.contains("selected")) {
@@ -164,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // 테마 검색 상품 목록 조회
 function loadProductByTheme(themeCode) {
 
-    fetch("/common/index/" + themeCode)
+    fetch("/common/home/" + themeCode)
     .then(response => response.json())
     .then(themeProdList => {
         console.log(themeProdList);
