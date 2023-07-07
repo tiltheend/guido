@@ -2,23 +2,32 @@
 var markers = [];
 var numElements = 0;
 var tourCourse = [];
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-  mapOption = {
+var map;
+var ps;
+var infowindow;
+
+function init() {
+  (mapContainer = document.getElementById('map')), // 지도를 표시할 div
+    (mapOption = {
+      center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+      level: 3, // 지도의 확대 레벨
+    });
+
+  // 지도를 생성합니다
+  map = new kakao.maps.Map(document.getElementById('map'), {
     center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
     level: 3, // 지도의 확대 레벨
-  };
+  });
 
-// 지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption);
+  // 장소 검색 객체를 생성합니다
+  ps = new kakao.maps.services.Places();
 
-// 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places();
+  // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+  infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-
-// 키워드로 장소를 검색합니다
-searchPlaces();
+  // 키워드로 장소를 검색합니다
+  // searchPlaces();
+}
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
@@ -99,6 +108,19 @@ function displayPlaces(places) {
         labelElement.setAttribute('for', 'tourCourse' + (numElements + 1));
         labelElement.innerText = title;
 
+        var deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-xmark');
+        deleteIcon.style.color = '#000000';
+
+        deleteIcon.addEventListener('click', function (e) {
+          e.stopPropagation();
+          deleteIcon.parentNode.remove();
+          var index = tourCourse.indexOf(courseInfo);
+          if (index !== -1) {
+            tourCourse.splice(index, 1);
+          }
+        });
+
         var createCourseDiv = document.querySelector('.create-course');
 
         // 같은 경로가 이미 등록되어 있는지 확인합니다.
@@ -115,21 +137,25 @@ function displayPlaces(places) {
           if (createCourseDiv.childElementCount < 20) {
             createCourseDiv.appendChild(checkboxElement);
             createCourseDiv.appendChild(labelElement);
+            labelElement.appendChild(deleteIcon);
             numElements++; // numElements 변수를 증가시킴
+
+            checkboxElement.addEventListener('change', function () {
+              if (checkboxElement.checked) {
+                courseInfo.bossCourseFL = 'Y';
+              } else {
+                courseInfo.bossCourseFL = 'N';
+              }
+            });
 
             var courseInfo = {
               courseName: title,
-              latitude: x,
-              longitude: y,
+              latitude: y,
+              longitude: x,
               courseOrder: numElements,
+              bossCourseFL: 'N',
             };
             tourCourse.push(courseInfo);
-
-            // tourCourse 배열을 서버로 전송
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/upload', true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify(tourCourse));
           } else {
             alert('10개 이상 등록할 수 없습니다.');
           }
@@ -138,9 +164,9 @@ function displayPlaces(places) {
         }
       });
 
-      kakao.maps.event.addListener(marker, 'mouseout', function () {
-        infowindow.close();
-      });
+      // kakao.maps.event.addListener(marker, 'mouseout', function () {
+      //   infowindow.close();
+      // });
 
       itemEl.onmouseover = function () {
         displayInfowindow(marker, x, y);
@@ -170,23 +196,17 @@ function getListItem(index, places) {
       (index + 1) +
       '"></span>' +
       '<div class="info">' +
-      '   <h5>' +
+      '<h5>' +
       places.place_name +
       '</h5>';
 
   if (places.road_address_name) {
-    itemStr +=
-      '    <span>' +
-      places.road_address_name +
-      '</span>' +
-      '   <span class="jibun gray">' +
-      places.address_name +
-      '</span>';
+    itemStr += '    <span>' + places.road_address_name + '</span>';
   } else {
     itemStr += '    <span>' + places.address_name + '</span>';
   }
 
-  itemStr += '  <span class="tel">' + places.phone + '</span>' + '</div>';
+  // itemStr += '  <span class="tel">' + places.phone + '</span>' + '</div>';
 
   el.innerHTML = itemStr;
   el.className = 'item';
@@ -258,7 +278,10 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-  var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+  var content =
+    '<div style="padding:5px;z-index:1; text-align : center">' +
+    title +
+    '</div>';
 
   infowindow.setContent(content);
   infowindow.open(map, marker);

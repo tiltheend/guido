@@ -46,6 +46,7 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	}
 
 	// 프로필 이미지 수정
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int updateProfile(MultipartFile profileImage, int userNo)  throws IllegalStateException, IOException {
 		
@@ -146,6 +147,7 @@ public class ProfileTouristServiceImpl implements ProfileTouristService{
 	}
 
 	// 리뷰 수정
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int reviewEdit(Review review) {
 		return mapper.reviewEdit(review);

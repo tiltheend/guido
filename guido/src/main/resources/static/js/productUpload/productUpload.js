@@ -492,7 +492,7 @@ function addElement() {
     newElement.classList.add('added-element');
 
     var newInputElement = document.createElement('input');
-    newInputElement.setAttribute('name', 'productAddPrice');
+    newInputElement.setAttribute('name', 'productAddNotes');
     newInputElement.setAttribute('type', 'hidden');
 
     var deleteIcon = document.createElement('i');

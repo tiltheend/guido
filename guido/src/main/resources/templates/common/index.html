@@ -247,7 +247,7 @@
                             <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                            <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')} + ' / total'"></p>
                         </div>
                     </div>
                 </li>
@@ -338,9 +338,8 @@
 
         });
 
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
-        if(loginUserNo == null) loginUserNo = "";
+        // if(loginUserNo == null) loginUserNo = "";
         
     </script>
 

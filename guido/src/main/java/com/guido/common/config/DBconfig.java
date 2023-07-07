@@ -50,34 +50,34 @@ public class DBconfig {
 	
 	////////////////////////////Mybatis 설정 추가 ////////////////////////////
 	
-	//SqlSessionFactory : SqlSession을 만드는 객체
+	// SqlSessionFactory : SqlSession을 만드는 객체
 	@Bean
 	public SqlSessionFactory sessionFactory(DataSource dataSource) throws Exception{
 		
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource);
 		
-		//매퍼 파일이 모여있는 경로 지정 			/src/main/resources/mappers
+		// 매퍼 파일이 모여있는 경로 지정 			/src/main/resources/mappers
 		sessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**.xml"));
 		
-		//별칭을 지정해야하는 DTO가 모여있는 패키지 지정
-		//-> 해당 패키지에 있는 모든 클래스가 클래스명으로 별칭이 지정됨
+		// 별칭을 지정해야하는 DTO가 모여있는 패키지 지정
+		// -> 해당 패키지에 있는 모든 클래스가 클래스명으로 별칭이 지정됨
 		sessionFactoryBean.setTypeAliasesPackage("com.guido.common.model.dto");
 		
-		//마이바티스 설정 파일 경로 지정
+		// 마이바티스 설정 파일 경로 지정
 		sessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
 		
-		//SqlSession 객체 반환
+		// SqlSession 객체 반환
 		return sessionFactoryBean.getObject();
 	}
 		
-	//SqlSessionTemplate : 기본 SQL 실행 + 트랜잭션 처리
+	// SqlSessionTemplate : 기본 SQL 실행 + 트랜잭션 처리
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sessionFactory) {
 		return new SqlSessionTemplate(sessionFactory);
 	}
 	
-	//DataSourceTransactionManager : 트랜잭션 매니저
+	// DataSourceTransactionManager : 트랜잭션 매니저
 	@Bean
 	public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);

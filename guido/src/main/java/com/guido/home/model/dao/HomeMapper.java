@@ -13,7 +13,6 @@ public interface HomeMapper {
 
 	// 테마 종류 조회
 	List<Map<String, Object>> selectThemeTypeList();
-
 	
 
 	// 상품 목록 조회
@@ -28,11 +27,9 @@ public interface HomeMapper {
 	// 추천 상품 목록 조회
 	List<Product> selectRecommProductList(int userNo);
 
-
 	
-	// 테마 검색 상품 목록 조회
+	// 테마검색 상품목록 조회
 	List<Product> selectThemeProdList(int themeCode);
-
 
 
 	// 검색 페이지
@@ -44,13 +41,9 @@ public interface HomeMapper {
 	// 위치 검색 시 드롭박스 리스트 조회
 	List<String> locationSearch(String location);
 
-	// 검색 페이지 테마 검색 상품 목록 조회  
-	List<Product> selectSearchThemeProdList(int themeCode);
-
-
+	// 검색 페이지 내에서 테마 검색 상품 목록 조회  
+	List<Product> selectSearchThemeProdList(Map<String, Object> map);
 	
-	// 관심상품 등록 여부 체크
-	int selectWishListCheck(Map<String, Object> map);
 	
 	// 관심상품 등록
 	int insertMainWish(Map<String, Integer> paramMap);
@@ -58,27 +51,17 @@ public interface HomeMapper {
 	// 관심상품 해제
 	int deleteMainWish(Map<String, Integer> paramMap);
 
+	// 관심상품 등록 여부 체크
+//	int selectWishListCheck(Map<String, Object> map);
 
 	// 관심상품
-	List<Product> mainWishCheck(int userNo);
-
+//	List<Product> mainWishCheck(int userNo);
 
 
 	// 메인 슬라이드 이벤트 배너 조회
 	List<Event> selectEventBannerList();
 
 
-
-
-
-
-
-
-
-
-
-	
-	
 
 
 }

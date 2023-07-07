@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>guido</title>
 
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="/css/reservation/reservationDetail.css">
 
 </head>
@@ -123,7 +124,7 @@
         
             <div class="reservation--payment__method">
                 <div class="reservation--classification">결제 수단</div>
-                <div th:text="*{paymentMethod=='C'} ? '신용/체크 카드' : '페이팔' ">결제 수단</div>
+                <div th:text="*{paymentMethod=='C'} ? '신용/체크카드' : '페이팔' ">결제 수단</div>
             </div>
 
             <div class="reservation--divisionline"></div>
@@ -131,7 +132,7 @@
         </div>
 
         <div class="reservation--price">
-            <div class="reservation--classification">총 결제 금액</div>
+            <div class="reservation--classification" th:text="*{reservationState=='N'}?'취소 금액' : '총 결제 금액' "></div>
 
             <div>
                 <div class="reservation--text__price">
@@ -163,15 +164,49 @@
 
 
         <!-- 예약 리스트에서 들어가는 예약 상세페이지의 경우 -->
-        <div class="reservation--btns">
+        <div class="reservation--btns" th:if="*{reservationState=='Y'}">
             <a href="javascript:window.history.back();"><button type="button" id="backButton">back</button></a>
-            <a href="#"><button id="cancelButton">cancel</button></a>
+            <button id="cancelButton" onclick="toggleModal()">cancel</button>
         </div>
 
         
         <!-- 예약 완료 시 바로 보여주는 페이지의 경우 -->
-        <a th:href="@{/profile/touristReservation}" style="width: 100%;"><button class="reservation--btn">view order list</button></a>
+        <a th:href="@{/profile/touristReservation}" style="width: 100%;" th:unless="*{reservationState=='Y'}"><button class="reservation--btn">view order list</button></a>
 
+
+        <!-- 취소 모달 창 -->
+        <form th:action="@{/reservation/cancel}" method="POST">
+            
+            <div id="cancelModal" class="modal">
+                <div class="modal-container">
+                    <div class="close" onclick="toggleModal()">&times;</div>
+                    <div class="modal--content">
+    
+                        <div>
+                            <div class="modal-top">
+                                <div class="cancel--text">정말 예약을 취소하시겠습니까?</div>
+                                <div class="cancel--length">(<span id="cancelReasonLength">0</span>/180)</div>
+                            </div>
+                            <textarea class="cancel--textarea custom-scrollbar" name="cancelReason" placeholder="정확한 취소 사유를 입력해주세요" oninput="checkLength()"></textarea>
+                        </div>
+
+                        <div class="cancel--note">&#8251; 취소 요청 확인 날짜는 공급자의 현지 시간을 따릅니다. 취소 요청 확인에는 영업일 기준 2-5일 정도 소요되며, 취소 규정에 따라 취소 수수료가 부과될 수 있습니다. 취소가 확정되면 14 영업일 이내에 환불받으실 수 있습니다.</div>
+                        
+                        <input type="hidden" name="impUid" th:value="*{impUid}">
+                        <input type="hidden" name="orderNumber" th:value="*{orderNumber}">
+                        <input type="hidden" name="guestCount" th:value="*{guestCount}">
+                        <input type="hidden" name="optionNo" th:value="*{optionNo}">
+                        <input type="hidden" name="productDateNo" th:value="*{productDateNo}">
+                        <input type="hidden" name="productPackage" th:value="${product.productPackage}">
+
+                        <button id="realCancelBtn">확인</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        
 
     </div>
     <script th:inline="javascript">
@@ -179,6 +214,7 @@
         const productDate = /*[[*{productDate}]]*/"선택한 상품 일정 날짜";
         const selectedTime = /*[[*{optionName}]]*/"선택한 옵션(시간대)";
         const package = /*[[${product.productPackage}]]*/"예약 상품 패키지";
+        const reservation = /*[[${reservation}]]*/"예약";
 
     </script>
 

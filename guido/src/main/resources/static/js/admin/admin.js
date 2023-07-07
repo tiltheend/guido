@@ -23,53 +23,10 @@ table.addEventListener('change', (event) => {
         }
     }
 });
-/*********************************************************************************/
-
-function approveGuide(userNoList) {
-    if(!confirm(userNoList+'번 가이드 승인처리 하시겠습니까?')){
-        return;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/admin/approveGuide');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if(xhr.status === 200) {
-            alert('승인 성공하였습니다.');
-        } else {
-            alert('승인 실패');
-        }
-        location.reload()
-    };
-    xhr.send(JSON.stringify(userNoList));
-}
-
-const rowBtns = document.querySelectorAll('.row-btn');
-if(rowBtns !== null)
-    rowBtns.forEach(btn => {
-        btn.addEventListener('click',() => {
-            const userNo = [btn.closest('tr').querySelector('.checkbox').value];
-            approveGuide(userNo);
-        });
-    });
-
-const approveBtn = document.querySelector('.approve-checked');
-if(approveBtn !== null)
-    approveBtn.addEventListener('click', () => {
-        const userNoList = [];
-        checkboxes.forEach(checkbox => {
-            if(checkbox.checked) {
-                userNoList.push(checkbox.value);
-            }
-        })
-        if(userNoList.length !== 0)
-            approveGuide(userNoList);
-        else
-            alert('선택된 체크박스가 없습니다.')
-    })
 
 /*********************************************************************************/
 function setMainBanner(eventNo, order) {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open('POST', '/admin/setMainBanner');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function() {
@@ -127,89 +84,162 @@ mainBanner.forEach(btn => {
     })
 })
 
-function eventBlind(eventNoList) {
-    if(!confirm(eventNoList+'번 이벤트를 블라인드처리 하시겠습니까?')){
+function blindAction(action, noList) {
+    let confirmMessage;
+    let url;
+
+    if (pageName === 'eventList') {
+        confirmMessage = '이벤트를 ';
+        url = 'event';
+    } else if (pageName === 'productManagement') {
+        confirmMessage = '상품을 ';
+        url = 'product';
+    }
+
+    confirmMessage += action=='Blind'?'블라인드':'블라인드 해제';
+
+    if (!confirm(noList + '번 ' + confirmMessage + ' 하시겠습니까?')) {
         return;
     }
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/admin/eventBlind');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if(xhr.status === 200) {
-            alert('성공하였습니다.');
-        } else {
-            alert('실패');
-        }
-        location.reload()
+
+    const endpoint = `/admin/${url}${action}`;
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(noList)
     };
-    xhr.send(JSON.stringify(eventNoList));
-}
 
-
-const eventBlindBtns = document.querySelectorAll('.event-blind-btn');
-if(eventBlindBtns !== null )
-    eventBlindBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const eventNo = [btn.closest('tr').querySelector('.checkbox').value];
-            eventBlind(eventNo);
-        })
-    })
-const blindBtn = document.querySelector('#blindBtn');
-if(blindBtn !== null)
-    blindBtn.addEventListener('click', () => {
-        const eventNoList = [];
-        checkboxes.forEach(checkbox => {
-            if(checkbox.checked) {
-                eventNoList.push(checkbox.value);
-            }
-        })
-        if(eventNoList.length !== 0)
-            eventBlind(eventNoList);
-        else
-            alert('선택된 체크박스가 없습니다.')
-    })
-
-function eventBlindCancel (eventNoList) {
-    if(!confirm(eventNoList+'번 이벤트를 블라인드해제 하시겠습니까?')){
-        return;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/admin/eventBlindCancel');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if(xhr.status === 200) {
-            alert('성공하였습니다.');
-        } else {
-            alert('실패');
-        }
-        location.reload()
-    };
-    xhr.send(JSON.stringify(eventNoList));
-}
-
-
-const eventBlindCancelBtns = document.querySelectorAll('.event-blind-cancel-btn');
-if(eventBlindCancelBtns !== null )
-    eventBlindCancelBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const eventNo = [btn.closest('tr').querySelector('.checkbox').value];
-            eventBlindCancel(eventNo);
-        })
-    })
-    const blindCancelBtn = document.querySelector('#blindCancelBtn');
-    if(blindCancelBtn !== null)
-    blindCancelBtn.addEventListener('click', () => {
-            const eventNoList = [];
-            checkboxes.forEach(checkbox => {
-                if(checkbox.checked) {
-                    eventNoList.push(checkbox.value);
-                }
-            })
-            if(eventNoList.length !== 0)
-                eventBlindCancel(eventNoList);
+    fetch(endpoint, options)
+        .then(response => {
+            if (response.ok)
+                alert('성공하였습니다.');
             else
-                alert('선택된 체크박스가 없습니다.')
+                alert('실패');
+            location.reload();
         })
+        .catch(error => {
+            console.error('오류 발생:', error);
+        });
+}
 
+function handleBlindButtonClick(event) {
+    const checkbox = event.target.closest('tr').querySelector('.checkbox');
+    const no = [checkbox.value];
+    blindAction('Blind', no);
+}
+
+function handleBlindCancelButtonClick(event) {
+    const checkbox = event.target.closest('tr').querySelector('.checkbox');
+    const no = [checkbox.value];
+    blindAction('BlindCancel', no);
+}
+
+function handleBatchBlindButtonClick() {
+    const checkedCheckboxes = Array.from(document.querySelectorAll('.checkbox:checked'));
+    const noList = checkedCheckboxes.map(checkbox => checkbox.value);
+
+    if (noList.length !== 0)
+        blindAction('Blind', noList);
+    else
+        alert('선택된 체크박스가 없습니다.');
+}
+
+function handleBatchBlindCancelButtonClick() {
+    const checkedCheckboxes = Array.from(document.querySelectorAll('.checkbox:checked'));
+    const noList = checkedCheckboxes.map(checkbox => checkbox.value);
+
+    if (noList.length !== 0) 
+        blindAction('BlindCancel', noList);
+    else 
+        alert('선택된 체크박스가 없습니다.');
+}
+
+const blindBtns = document.querySelectorAll('.blind-btn');
+if (blindBtns !== null) 
+    blindBtns.forEach(btn => {
+        btn.addEventListener('click', handleBlindButtonClick);
+    });
+
+const blindCancelBtns = document.querySelectorAll('.blind-cancel-btn');
+if (blindCancelBtns !== null) 
+    blindCancelBtns.forEach(btn => {
+        btn.addEventListener('click', handleBlindCancelButtonClick);
+    });
+
+const blindBtn = document.querySelector('#blindBtn');
+if (blindBtn !== null) 
+    blindBtn.addEventListener('click', handleBatchBlindButtonClick);
+
+const blindCancelBtn = document.querySelector('#blindCancelBtn');
+if (blindCancelBtn !== null) 
+    blindCancelBtn.addEventListener('click', handleBatchBlindCancelButtonClick);
 
 /*********************************************************************************/
+
+function setUserState(action,userNoList) {
+    const endpoint = '/admin/setUserState';
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userNoList : userNoList,
+            state : action === '탈퇴' ? 'D' : action === '블락' ? 'B' : 'N'
+        })
+    };
+    fetch(endpoint, options)
+        .then(response => {
+            if (response.ok)
+                alert('성공하였습니다.');
+            else
+                alert('실패');
+            location.reload();
+        })
+        .catch(error => {
+            console.error('오류 발생:', error);
+        });
+}
+
+function checkedBtnHandler(action) {
+    const userNoList = Array.from(document.querySelectorAll('.checkbox:checked')).map(checkbox => checkbox.value);
+    if(userNoList.length === 0) {
+        alert('선택된 체크박스가 없습니다.');
+        return;
+    }
+    if (!confirm(userNoList + '번 유저 ' + action + '처리 하시겠습니까?'))
+        return;
+    setUserState(action,userNoList);
+}
+
+secessionBtn = document.getElementById('secessionBtn');
+if(secessionBtn != null)
+    secessionBtn.addEventListener('click',() => {
+        checkedBtnHandler("탈퇴");
+    })
+blockBtn = document.getElementById('blockBtn');
+if(blockBtn != null)
+    blockBtn.addEventListener('click',() => {
+        checkedBtnHandler("블락");
+    })
+normalBtn = document.getElementById('normalBtn');
+if(normalBtn != null)
+    normalBtn.addEventListener('click',() => {
+        checkedBtnHandler("해제");
+    })
+approveBtn = document.getElementById('approveBtn');
+if(approveBtn != null)
+    approveBtn.addEventListener('click',() => {
+        checkedBtnHandler("승인");
+    })
+
+const approveBtns = document.querySelectorAll('.approve-btn');
+if(approveBtns != null)
+    approveBtns.forEach(btn => {
+        btn.addEventListener('click',() => {
+            const userNo = [btn.closest('tr').querySelector('.checkbox').value];
+            setUserState("승인",userNo);
+        });
+    });

@@ -21,7 +21,6 @@
 </head>
 <body th:object="${product}">
 
-
     <form th:action="@{/reservation/reserve}" method="POST">
 
 
@@ -125,6 +124,8 @@
                     <div class="reservation--payment__info">
                         <div class="reservation--text">결제 정보</div>
     
+
+                        <input type="hidden" id="cardAmount" value="">
     
                         <div class="payment__info--container">
                             <div>총 결제 금액</div>
@@ -149,7 +150,7 @@
                                 <p class="arrow_box">연락처는 내 정보 수정에서 변경  가능합니다.</p>
                             </div>
                             <div>비상 연락망</div>
-                            <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 guido@gmail.com"></div>
+                            <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 guido@gmail.com" id="emergencyContact"></div>
                         </div>
     
     
@@ -159,8 +160,8 @@
                     <div class="reservation--request">
                         <div class="reservation--text">요청 사항</div>
 
-                       <textarea name="request" id="request" 
-                       placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다." oninput="checkLength(this)"></textarea>
+                        <textarea name="requestContent" id="request" 
+                        placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다." oninput="checkLength(this)"></textarea>
                     </div>
 
 
@@ -344,7 +345,7 @@
         const userNo = /*[[${session.loginUser?.userNo}]]*/ "로그인 회원 no";
         const userEmail = /*[[${session.loginUser?.userEmail}]]*/ "로그인 회원 이메일";
 
-        const reservationDate = /*[[${reservationDate}]]*/"예약 일자";
+        const reservationDate = /*[[${reservationDate}]]*/"예약 일정(날짜)";
         const package = /*[[${product.productPackage}]]*/"당일 or n일";
         const minTourist = /*[[${product.minTourist}]]*/"최소 인원";
         const maxTourist = /*[[${product.maxTourist}]]*/"최대 인원";

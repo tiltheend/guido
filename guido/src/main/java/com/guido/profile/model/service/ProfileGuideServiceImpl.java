@@ -1,6 +1,7 @@
 package com.guido.profile.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.profile.model.dao.ProfileGuideMapper;
@@ -35,6 +37,19 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	public List<Product> guideProductList(int userNo) {
 		return mapper.guideProductList(userNo);
 	}
+	
+	// 가이드 상품 목록 더보기 (3개씩)
+	@Override
+	public List<Product> guideProductMore(Map<String, Integer> request) {
+		return mapper.guideProductMore(request);
+	}
+
+	// 가이드 상품 수 카운트
+	@Override
+	public int productCount(int userNo) {
+		return mapper.productCount(userNo);
+	}
+
 
 	// 가이드 리뷰 조회
 	@Override
@@ -42,12 +57,19 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 		return mapper.guideReivewList(userNo);
 	}
 	
+
 	// 가이드 리뷰 수 카운트
 	@Override
 	public int reviewCount(int userNo) {
 		return mapper.reviewCount(userNo);
 	}
 	
+	// 가이드 리뷰 목록 더보기 (3개씩)
+	@Override
+	public List<Review> guideReviewMore(Map<String, Integer> request) {
+		return mapper.guideReviewMore(request);
+	}
+
 	// 리뷰 리플 달기
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -68,7 +90,13 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 		return mapper.reviewReplyDel(reviewNo);
 	}
 
+	// 가이드 예약 리스트 (구매자들 예약 확인용)
+	@Override
+	public List<Reservation> GuideReservationList(int userNo) {
+		return mapper.GuideReservationList(userNo);
+	}
 
+	
 
 	
 }

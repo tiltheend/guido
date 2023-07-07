@@ -7,7 +7,13 @@
         <li class="menu-title">회원</li>
         <li id="touristManagement" class="menu-item"><a th:href="@{/admin/touristManagement}">구매자 관리</a></li>
         <li id="guideManagement" class="menu-item"><a th:href="@{/admin/guideManagement}">판매자 관리</a></li>
-        <li id="guideApprovalRequest" class="menu-item"><a th:href="@{/admin/guideApprovalRequest}">가이드 승인 요청 관리</a></li>
+        <li id="guideApprovalRequest" class="menu-item">
+            <a th:href="@{/admin/guideApprovalRequest}">
+                <div class="alarm-area">
+                    <span>가이드 승인 요청 관리</span><span th:if="${map.unapprovedGuideCount}" th:text="${map.unapprovedGuideCount}" class="alarm"/>
+                </div>
+            </a>
+        </li>
     </ul>
 
     <ul class="menu-group">
@@ -18,7 +24,7 @@
 
     <ul class="menu-group">
         <li class="menu-title">문의사항</li>
-        <li id="qna" class="menu-item"><a th:href="@{/admin/qna}">1:1 문의사항</a></li>
+        <li id="qna" class="menu-item"><a th:href="@{/admin/qna}"><div class="alarm-area"><span>1:1 문의사항</span><span th:if="${map.unprocessedQnaCount}" th:text="${map.unprocessedQnaCount}" class="alarm"/></div></a></li>
     </ul>
 </div>
 

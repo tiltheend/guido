@@ -5,215 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>guido</title>
 
-    <link rel="stylesheet" href="/css/reservation/reservationDetail.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="/css/reservation/reservationCheck.css">
 
 </head>
 <body th:object="${reservation}">
 
 
-    <div class="reservation--container">
+    <div class="ordercheck--container">
 
-        <div class="reservation--title">예약 내역</div>
-        
-        <div class="reservation--top__divisionline"></div>
-        
-        
-        <div class="reservation--info">
-            <div class="reservation--classification">예약 정보</div>
-
-            <div class="reservation--content__info">
-                <div>
-                    <div>예약 번호</div>
-                    <div>예약 일자</div>
-                    <div>주문자</div>
-                    <div>주문처리</div>
-                    <div>연락처</div>
-                </div>
-
-                <div>
-                    <div th:text="*{orderNumber}">예약 번호</div>
-                    <div th:text="*{createDate}">예약 일자</div>
-                    <div th:text="*{userName}">예약자명</div>
-                    <div th:text="*{reservationState}=='Y'? '예약 완료' : (*{reservationState}=='N' ? '예약 취소' : '구매 확정')"></div>
-                    <div th:text="*{userTel}">연락처</div>
-                </div>
-            </div>
-
-        </div>
-
-
-        
-        <div class="reservation--divisionline"></div>
-
-
-        <div class="reservation--product">
-
-            <div class="reservation--text__product">
-                <div>예약 상품</div>
-                <div>(총 1개 / KRW [[*{totalPrice}]])</div>
-            </div>
-
-            <div class="reservation--detail__product">
-
-                <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
-                    <div class="reservation--img__detail">
-                        <img th:src="${product.imageList[0].filePath}">
-                    </div>
-                </a>
-
-                <div>
-
-                        
-                    <div class="reservation--title__detail" th:text="${product.productName}">상품명</div>
-                    
-                    <div>
-                        
-                        <div class="reservation--location__detail reservation--short">
-                            <img th:src="@{/images/productDetail/location_icon.svg}">
-                            <div>[[${product.regionName}]]
-                                    <th:block th:each="course : ${product.tourCourse}" th:if="${course.bossCourseFL=='Y'}">
-                                    - [[${course.courseName}]]
-                                </th:block>
-                            </div>
-                        </div>
-                        
-                        <div class="reservation--langauge__detail reservation--short">
-                            <img th:src="@{/images/productDetail/language_icon.svg}">
-                            <div>Guided language : [[${product.guideLanguage}]]</div>
-                        </div>
-                        
-                        <div th:if="${product.productPackage==1}" class="reservation--langauge__detail reservation--short">
-                            <img th:src="@{/images/productDetail/duration_icon.svg}">
-                            <div>Duration: [[${product.tourDuration}]] hr(s)</div>
-                        </div>
-                        
-                        <div class="reservation--cancel__detail reservation--short">
-                            <img th:src="@{/images/productDetail/receive_dollars_icon.svg}">
-                            <div>Free cancellation 4 day(s) prior to selected date</div>
-                        </div>
-                        
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-            <div class="reservation--date__product">
-                <div>[[${product.regionName}]]에서 보내는 [[${product.productPackage}]]일</div>
-                <div id="reservationDate"></div>
-            </div>
-
-
-            <div class="reservation--bottom__product">
-                <div>[[${reservation.guestCount}]] guests</div>
-                <div>
-                    <div class="reservation--question__bottom">원하시는 정보가 없나요?</div>
-                    <div class="reservation--inquire__bottom">
-                        <img src="/images/reservation/inquire_icon.svg">
-                        <div>가이드에게 문의하기</div>
-                    </div>
-                </div>
-            </div>
-            
-
-            <div class="reservation--divisionline"></div>
-        
-            <div class="reservation--payment__method">
-                <div class="reservation--classification">결제 수단</div>
-                <div th:text="*{paymentMethod=='C'} ? '신용/체크카드' : '페이팔' ">결제 수단</div>
-            </div>
-
-            <div class="reservation--divisionline"></div>
-
-        </div>
-
-        <div class="reservation--price">
-            <div class="reservation--classification" th:text="*{reservationState=='N'}?'취소 금액' : '총 결제 금액' "></div>
+        <div class="ordercheck--container__top">
 
             <div>
-                <div class="reservation--text__price">
-                    <div>총 결제 금액</div>
-                    <div>총 주문 금액</div>
-                    <div>수수료</div>
-                </div>
-        
-                <div class="reservation--price__price">
-                    <div>KRW <strong th:text="*{#numbers.formatInteger(totalPrice, 1, 'COMMA')}">총 결제 금액</strong></div>
-                    <div th:text="|KRW ${#numbers.formatInteger(orderPrice, 1, 'COMMA')}|"></div>
-                    <div th:text="|KRW ${#numbers.formatInteger(extraFee, 1, 'COMMA')}|"></div>
-                </div>
-
+                <img class="ordercheck--img__top" th:src="@{/images/reservation/order_check.png}">
             </div>
 
-        </div>
-
-
-        <div class="reservation--cancel">여행 출발(개시) 전 취소 및 환불 규정 (*공정거래위원회 제정_소비자 피해보상 규정 기준)
-
-            여행계약 해제로 인한 피해 : 당사의 귀책사유로 당사가 계약해제하는 경우
-
-            1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불 
-            2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
-            3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
-            4) 여행 당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
-        </div>
-
-
-        <!-- 예약 리스트에서 들어가는 예약 상세페이지의 경우 -->
-        <div class="reservation--btns" th:if="*{reservationState=='Y'}">
-            <a href="javascript:window.history.back();"><button type="button" id="backButton">back</button></a>
-            <button id="cancelButton" onclick="toggleModal()">cancel</button>
-        </div>
-
-        
-        <!-- 예약 완료 시 바로 보여주는 페이지의 경우 -->
-        <a th:href="@{/profile/touristReservation}" style="width: 100%;" th:unless="*{reservationState=='Y'}"><button class="reservation--btn">view order list</button></a>
-
-
-        <!-- 취소 모달 창 -->
-        <form th:action="@{/reservation/cancel}" method="POST">
+            <div class="ordercheck--text__top">
+                <span>예약이 정상적으로 완료되었습니다.</span>
+                <span>감사합니다.</span>
+                <span>thank you. guido</span>
+            </div>
             
-            <div id="cancelModal" class="modal">
-                <div class="modal-container">
-                    <div class="close" onclick="toggleModal()">&times;</div>
-                    <div class="modal--content">
-    
-                        <div>
-                            <div class="modal-top">
-                                <div class="cancel--text">정말 예약을 취소하시겠습니까?</div>
-                                <div class="cancel--length">(<span id="cancelReasonLength">0</span>/180)</div>
-                            </div>
-                            <textarea class="cancel--textarea custom-scrollbar" name="cancelReason" placeholder="정확한 취소 사유를 입력해주세요" oninput="checkLength()"></textarea>
-                        </div>
+            <div class="ordercheck--divisionline"></div>
 
-                        <div class="cancel--note">&#8251; 취소 요청 확인 날짜는 공급자의 현지 시간을 따릅니다. 취소 요청 확인에는 영업일 기준 2-5일 정도 소요되며, 취소 규정에 따라 취소 수수료가 부과될 수 있습니다. 취소가 확정되면 14 영업일 이내에 환불받으실 수 있습니다.</div>
-                        
-                        <input type="hidden" name="impUid" th:value="*{impUid}">
-                        <input type="hidden" name="orderNumber" th:value="*{orderNumber}">
-
-                        <button id="realCancelBtn">확인</button>
-
-                    </div>
-                </div>
+            <div class="ordercheck--info__top">
+                <div>Order Number : </div>
+                <div th:text="*{orderNumber}"></div>
             </div>
 
-        </form>
-        
+            <div class="ordercheck--info__top">
+                <div>Total Cost : </div>
+                <div th:text="|&#8361; *{totalPrice}|"></div>
+            </div>
+
+        </div>
+
+
+        <div class="ordercheck--container__middle">
+
+            <div>
+
+                <div class="ordercheck--left__middle">
+
+                    <div class="ordercheck--img__middle">
+                        <img th:src="${product.imageList[0].filePath}">
+                    </div>
+
+                    <div class="ordercheck--content">
+                        <div th:text="${product.productName}" class="content-productname">상품명</div>
+                        <div id="reservationDate"></div>
+                        <div id="reservationDuration" th:if="${product.productPackage==1}">[[${product.tourDuration}]]hr(s) in [[${product.regionName}]]</div>
+                    
+                    </div>
+                    
+
+                </div>
+
+                <div th:text="|&#8361; *{totalPrice}|" class="ordercheck--right__middle"></div>
+
+            </div>
+
+        </div>
+
 
     </div>
+
     <script th:inline="javascript">
 
-        const productDate = /*[[*{productDate}]]*/"선택한 상품 일정 날짜";
-        const selectedTime = /*[[*{optionName}]]*/"선택한 옵션(시간대)";
-        const package = /*[[${product.productPackage}]]*/"예약 상품 패키지";
-        const reservation = /*[[${reservation}]]*/"예약";
-
+        const package = /*[[${product.productPackage}]]*/"당일 or 당일이상";
+        const createDate = /*[[*{createDate}]]*/"당일 or 당일이상";
+        const optionName = /*[[*{optionName}]]*/"당일 or 당일이상";
     </script>
 
-    <script th:src="@{/js/reservation/reservationDetails.js}"></script>
+    <script th:src="@{/js/reservation/reservationCheck.js}"></script>
 
 
 </body>

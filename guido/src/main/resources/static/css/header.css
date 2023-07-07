@@ -227,16 +227,25 @@ header .search-box-click-box button{
 } */
 
 /* 모달창 배경(회색) */
-.where-modal-bg, .when-modal-bg, .guest-modal-bg{
+/* .where-modal-bg, .when-modal-bg, .guest-modal-bg{
   position: absolute;
   top: 110px; left: 0;
   width: 100%; height: 2496px;
   display: none;
   background-color: #5C5C5C50;
   z-index: 250;
+} */
+.modal-background {
+  position: absolute;
+  top: 110px; left: 0;
+  width: 100%; 
+  height: 2496px;
+  display: none;
+  background-color: #5C5C5C50;
+  z-index: 250;
 }
 
-.where-modal, .when-modal, .guest-modal{
+.where-modal, /* .when-modal, */ .guest-modal{
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -253,7 +262,9 @@ header .search-box-click-box button{
   margin-top: 14px;
   position: fixed;
   left: 500px;
+  top: 110px;
   z-index: 300;
+  display: none;
 }
 
 .where-modal>div{
@@ -287,6 +298,7 @@ header .search-box-click-box button{
   margin-top: 24px;
   position: fixed;
   left: 500px;
+  top: 110px;
   z-index: 300;
 }
 
@@ -336,7 +348,9 @@ header .search-box-click-box button{
   align-items: center;
   position: fixed;
   right: 568px;
+  top: 110px;
   z-index: 300;
+  display: none;
 }
 
 .guest-modal div{

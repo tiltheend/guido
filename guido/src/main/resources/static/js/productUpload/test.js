@@ -30,18 +30,15 @@ const updatePage = () => {
     typing2();
   }
   if (currentPage == 2) {
-    // document.querySelector('.text5').innerHTML = '';
-    // typing5();
-    // tourThemeSelectCheck();
-    // tourBoxCheck();
-    document.querySelector('.text3').innerHTML = '';
-    // tourThemesCheck();
-    typing3();
+    document.querySelector('.text6').innerHTML = '';
+    typing6();
+    init();
   }
   if (currentPage == 4) {
     document.querySelector('.text5').innerHTML = '';
     typing5();
     disableNextButtonCheckNum();
+    disableNextButtonCheckNum2();
   }
   if (currentPage == 5) {
     document.querySelector('.text4').innerHTML = '';
@@ -175,7 +172,7 @@ tourTypes.forEach(function (tourType) {
 });
 inputDay.addEventListener('input', function () {
   if (this.value !== '') {
-    inputTimeHidden.value = '';
+    inputTime.value = '';
     inputDayHidden.value = inputDay.value;
     inputDay.addEventListener('input', function () {
       const value = inputDay.value;
@@ -255,11 +252,13 @@ for (let i = 0; i < clickElements.length; i++) {
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
         clickElements[j].style.fill = '#333';
+        s;
         clickElements[j].style.transform = 'none';
-
-        clickElements[j].style.fill = '#333';
-        clickElements[j].style.transform = 'none';
+      } else {
+        clickElements[j].style.fill = 'rgb(59, 119, 124)';
       }
+      city.innerText = textElements[i].innerHTML;
+      regionName.value = city.innerText;
     }
 
     // 선택한 요소에 효과 설정
@@ -268,6 +267,15 @@ for (let i = 0; i < clickElements.length; i++) {
     checkSpace.innerText = textElements[i].innerHTML;
   });
 }
+for (let i = 0; i < clickElements.length; i++) {
+  textElements[i].addEventListener('mouseover', () => {
+    clickElements[i].style.fill = 'rebeccapurple';
+  });
+  textElements[i].addEventListener('mouseout', () => {
+    clickElements[i].style.fill = '#333';
+  });
+}
+
 // function disableNextButton() {
 //   nextBtn.disabled = true;
 // }
@@ -315,7 +323,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var mainElement14 = document.getElementById('page15');
   if (mainElement14) {
-    mainElement14.style.width = '90%';
+    mainElement14.style.width = '70%';
   }
 });
 //3페이지
@@ -446,6 +454,13 @@ function disableNextButtonCheckNum() {
     nextBtn.disabled = false;
   }
 }
+function disableNextButtonCheckNum2() {
+  if (maxInput2.value == '') {
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.disabled = false;
+  }
+}
 
 // Add an event listener to the checkbox
 checkbox.addEventListener('change', disableNextButton);
@@ -491,7 +506,7 @@ function addElement() {
     newElement.classList.add('added-element');
 
     var newInputElement = document.createElement('input');
-    newInputElement.setAttribute('name', 'productAddPrice');
+    newInputElement.setAttribute('name', 'productAddNotes');
     newInputElement.setAttribute('type', 'hidden');
 
     var deleteIcon = document.createElement('i');
@@ -670,6 +685,10 @@ document.getElementById('feeInput').addEventListener('input', (e) => {
     '₩ ' + parseInt(value.replace(/[^0-9]/g, '')).toLocaleString() + '원';
 });
 
+document.getElementById('feeInput').addEventListener('change', (e) => {
+  minTotal.backgroundColor = 'red';
+});
+
 function addCurrencySymbol(input) {
   let value = input.value.replace(/[₩]/g, ''); // 기존의 ₩ 기호 제거
   let formattedValue = '₩' + value;
@@ -709,6 +728,16 @@ feeInput.addEventListener('click', (e) => {
   } else {
     e.target.style.borderColor = 'lightgray';
   }
+});
+feeInput.addEventListener('keydown', (e) => {
+  maxTotal2.style.backgroundColor = '#408c8c';
+  maxTotal2.style.color = 'white';
+  maxTotal2.style.transitionDuration = '0.3s';
+});
+feeInput.addEventListener('keyup', (e) => {
+  maxTotal2.style.backgroundColor = 'white';
+  maxTotal2.style.color = 'black';
+  maxTotal2.style.transitionDuration = '0.3s';
 });
 
 // .replace(/[^0-9]/g, '');
@@ -931,3 +960,12 @@ function validateMinMaxInput2() {
   maxTouristName.value = maxVal2;
   minTouristName.value = 1;
 }
+
+const form = document.getElementById('productUploadFrm');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('tourCourse').value = JSON.stringify(tourCourse);
+  console.log(document.getElementById('tourCourse').value);
+  form.submit();
+});

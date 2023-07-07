@@ -24,8 +24,6 @@ public interface AdminMapper {
 
 	int writeAnswer(QNA qna);
 
-	int approveGuide(List<Integer> userNoList);
-
 	List<Map<String,String>> selectMainEventList();
 
 	int deleteMainBanner(Object order);
@@ -35,4 +33,14 @@ public interface AdminMapper {
 	int eventBlind(List<Integer> eventNoList);
 
 	int eventBlindCancel(List<Integer> eventNoList);
+
+	int setUserState(Map<String, Object> map);
+
+	int productBlind(List<Integer> productNoList);
+
+	int productBlindCancel(List<Integer> productNoList);
+
+	int countUnapprovedGuide();
+
+	int countUnprocessedQna();
 }

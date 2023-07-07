@@ -15,4 +15,5 @@ public class ProductOption {
 	private int productNo;		// 상품 번호(당일 투어의 경우에만)
 	private String optionName;		// 옵션 명(시간 00:00)
 	private int optionRestCount; 	// 남은 개수
+	private int productDateNo; 	// 일정(날짜) 번호
 }

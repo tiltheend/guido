@@ -1,5 +1,6 @@
 package com.guido.product.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 import com.guido.product.model.service.ProductDetailService;
@@ -103,7 +108,7 @@ public class ProductDetailController {
 		model.addAttribute("addNotesList", addNotesList);
 		model.addAttribute("apiKey", apiKey);
 		model.addAttribute("recommendList", recommendList);
-	
+		
 		
 		return "productDetail/productDetail";
 	}
@@ -117,4 +122,55 @@ public class ProductDetailController {
 	}
 	
 	
+	// 얼굴 인증 사진 업로드
+	@PostMapping("/faceImageUpload")
+	public String faceImageUpload(@RequestParam("faceImg") MultipartFile faceImg,
+			int productNo, @SessionAttribute(value="loginUser", required=false) User loginUser,
+			RedirectAttributes ra ) throws IllegalStateException, IOException {
+		
+		int result = service.updateFaceImg(loginUser, faceImg);
+		
+		if(result<1) 
+			ra.addFlashAttribute("message", "이미지 업로드 실패");
+		
+		return "redirect:product/" + productNo; 
+			
+	}
+	
+	
+	// 캘린더 날짜 불러오기
+	@GetMapping("/calendarDates")
+	@ResponseBody
+	public List<ProductDate> selectProductDateList(@RequestParam("year") int year, 
+			@RequestParam("month") int month, @RequestParam("productNo") int productNo){
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("year", year);
+		map.put("month", month);
+		map.put("productNo", productNo);
+		
+		return service.selectCalendarDates(map);
+	}
+	
+	
+	// 날짜 선택 시 옵션 불러오기
+	@GetMapping("/getOptionInfo")
+	@ResponseBody
+	public List<ProductOption> selectOptionList(@RequestParam("productDate") String productDate, @RequestParam("productNo") int productNo){
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("productDate", productDate);
+		map.put("productNo", productNo);
+		
+		return service.getOptionInfo(map);
+	}
+	
+	
 }
+
+
+
+
+
+
+

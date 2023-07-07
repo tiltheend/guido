@@ -41,16 +41,17 @@ public class UserController {
 		return "signUp/chooseMemberType";
 	}
 	
-	// 가이드 회원가입
+	// 가이드 회원가입 페이지
 	@GetMapping("/signUp/guidePage")
 	public String guideSignupPage() {
 		return "signUp/signUpAsGuide";
 	}
-	// 관광객 회원가입
+	// 관광객 회원가입 페이지
 	@GetMapping("/signUp/touristPage")
-	public String touristSignupPage() {
+	public String touristSignupPge() {
 		return "signUp/signUpAsTourist";
 	}
+	
 	
 	//--------------------------------
 	
@@ -118,6 +119,13 @@ public class UserController {
 	public String logout(SessionStatus status, HttpSession session) {
 		status.setComplete();
 		return "redirect:/";
+	}
+	
+	// 투어리스트 회원가입 진행 -- 마저 작성하기
+	@PostMapping("/signUp/tourist")
+	@ResponseBody
+	public String touristSignUp(User user, String[] userName, String[] userTel) {
+		return null;
 	}
 	
 	

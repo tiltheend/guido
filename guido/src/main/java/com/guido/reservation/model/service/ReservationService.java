@@ -3,9 +3,10 @@ package com.guido.reservation.model.service;
 import java.io.IOException;
 import java.util.Map;
 
-import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
 import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Reservation;
+import com.guido.common.model.dto.User;
 
 /**
  * @author user1
@@ -85,5 +86,20 @@ public interface ReservationService {
 	 * @return result
 	 */
 	void reservationCancel(Reservation reservation) throws IOException;
+
+
+
+	/** 예약 날짜(일정) 정보 조회
+	 * @param map
+	 * @return reservationDate
+	 */
+	ProductDate selectReservationDate(Map<String, Object> map);
+
+
+
+	/** 비상 연락처 업데이트
+	 * @param loginUser
+	 */
+	void updateEmergencyContact(User loginUser);
 
 }

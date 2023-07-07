@@ -16,7 +16,6 @@
 .incorrect{color: red;}
 .signUp-message{
     display: none;
-    /* display: flex; */
     justify-content: start;
     width: 420px;
     padding: 10px;
@@ -29,14 +28,27 @@
     margin: 40px;
 }
 /* 입력 부분 */
+.container_middle_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ----- uiverse ----- */
-.inputGroup {
-    /* font-family: 'Segoe UI', sans-serif; */
-    margin: 0.2em 0;
+.inputGroup:not(.emailPart>.inputGroup):not(.authPart>.inputGroup):not(.namePart .inputGroup) {
+    margin: 0.7em 0;
+    width: 420px;
+    position: relative;
+}
+.emailPart, .authPart, .namePart{
+    margin: 0.6em 0;
     width: 420px;
     height: 50px;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .inputGroup input {
@@ -62,7 +74,7 @@
     color: #6d6c6c;
 }
 
-.inputGroup :is(input:focus, input:valid)~label {
+.inputGroup :is(input:focus, input:valid)~label, .google-email label {
     transform: translateY(-50%) scale(.9);
     margin: 0em;
     margin-left: 1.3em;
@@ -72,14 +84,29 @@
     color: #1c797d;
 }
 
-.inputGroup :is(input:focus, input:valid) {
+.inputGroup :is(input:focus, input:valid), .google-email {
     border-color: #1c797d;
 }
+
 /* 이메일,인증번호 칸 작게 */
 .emailPart>.inputGroup, .authPart>.inputGroup{
-    width: 330px;
+    width: 325px;
     padding-right: 5px;
 } 
+/* 이메일, 인증번호 버튼 */
+.emailPart>button, .authPart>button{
+    width: 90px;
+    height: 50px;
+    background-color: #1c797d;
+    color: #fff;
+    border-radius: 8px;
+    margin-top: -0.2em;
+    font-size: 14px;
+    font-weight: lighter;
+    /* display: flex;
+    align-items: end; */
+
+}
 /* 이름&성 칸 반반 */
 .last-name, .first-name{
     display: flex;
@@ -92,25 +119,12 @@
 }
 
 
-/* 원래 내가 작성 */
-.container_middle_input{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 /* 동의 체크 */
 .container_middle_check{
     width: 420px;
     display: flex;
     flex-direction: column;
-    margin: 10px 10px 30px 10px;
-}
-.box{
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border: 1px solid #c5c5c5;
+    margin: 10px 10px 20px 10px;
 }
 [type="checkbox"]{
     display: none;
@@ -120,10 +134,14 @@
     margin-bottom: 5px;
 }
 .chk-all{
-    padding: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    padding: 5px 5px;
 }
 .chk0, .chk1, .chk2{
-    margin-left: 10px
+    display: flex;
+    align-items: flex-start;
+    margin-left: 15px;
 }
 .ment1,.ment2{
     color: #5c5c5c;
@@ -131,16 +149,68 @@
 }
 .box:hover{
     cursor: pointer;
-    color: black;
 }
-/* 동의 박스 체크됐을 때 */
+/* 체크 해제 */
+.box{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #c5c5c5;
+}
+/* 체크 o */
 input[type="checkbox"]:checked + label{
+/* .box::before{ */
     background: url("/images/signUp/check.png") 0 0 no-repeat;
     background-size: cover;
     border: none;
 }
 .required{
     color:forestgreen; vertical-align: 3px;}
+.downArrow{
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 0.75rem;
+    height: 0.75rem;
+    /* background-size: cover; */
+    background: rgba(255, 255, 255, 0.5) url("/images/signUp/downArrow.png") 0 0 /cover no-repeat;
+    border: none;
+}
+.upArrow{
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: rgba(255, 255, 255, 0.7) url("/images/signUp/upArrow.png") 0 0 /cover no-repeat;
+    background-size: cover;
+    border: none;
+}
+/* 약관 설명 */
+.terms-explain{
+    height: 200px;
+    margin: 0 15px 20px 30px;
+    padding: 15px;
+    font-weight: lighter;
+    font-size: 0.7rem;
+    display: none;
+    border: #1c7a7d3d solid 2px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    overflow-y:scroll;
+    
+}
+.terms-explain::-webkit-scrollbar-track{
+    background-color: transparent;
+    height: 90%;
+}
+.terms-explain::-webkit-scrollbar-thumb{
+    height: 20%;
+    background: #1c7a7d72;
+    border-radius: 15px;
+    margin: 5px;
+}
+.terms-explain::-webkit-scrollbar{
+    width: 5px;
+}
 
 /* 제출 버튼 */
 .container_bottom{
@@ -152,55 +222,52 @@ input[type="checkbox"]:checked + label{
 .container_bottom_button{
     width: 420px;
     height: 50px;
-    background-color: #1c797d;
+    background-color: #c5c5c5;
     border-radius: 8px;
     color: #fff;
+    transition-duration: 0.1s;
 }
-
-/* ----------------- */
-/* 이메일, 인증번호, 이름&성 입력부분 */
-.emailPart, .authPart, .namePart{
-    display: flex;
-    flex-direction: row;
-    width: 420px;
-    height: 55px;
-    justify-content: space-between;
+.container_bottom_button:hover{
+    box-shadow: 3px 3px 2px #5c5c5c3c;
+    transition-duration: 0.2s;
 }
-/* 이메일, 인증번호 버튼 */
-.emailPart>button, .authPart>button{
-    width: 85px;
-    height: 50px;
-    background-color: #1c797d;
-    color: #fff;
-    border-radius: 8px;
-    /* display: flex;
-    align-items: end; */
-
-}
-
-/* 국제 번호 */
 
 /* 유효성 검사 메세지 */
 .error-message{
     width: 420px;
     padding-left: 15px;
-    margin: 5px 15px 10px 15px;
+    margin: -3px 0 10px 0px;
+    color: rgba(255, 0, 0, 0.77);
+    justify-content: start;
+}
+.name-error{
+    width: 420px;
+    height: auto;
+    padding-left: 15px;
+    margin: 10px 0 10px 0px;
     color: rgba(255, 0, 0, 0.77);
     justify-content: start;
 }
 .possible-message{
     width: 420px;
     padding-left: 15px;
-    margin: 5px 15px 10px 15px;
+    margin: -3px 0 10px 0px;
     justify-content: start;
     color: rgba(34, 139, 34, 0.77);
 }
 .for-authTimer{
     width: 420px;
     padding-left: 15px;
-    margin: 5px 15px 10px 15px;
+    margin: -3px 0 10px 0px;
     justify-content: start;
     color: #1c797d;
     font-weight: bold;
+}
+.normal-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    justify-content: start;
+    color: #5c5c5ca6;
 }
 
