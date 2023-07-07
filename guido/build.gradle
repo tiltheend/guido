@@ -49,6 +49,11 @@ dependencies {
 	// 페이팔
 	// https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
 	implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.14.0'
+<<<<<<< HEAD
+=======
+	
+	implementation 'com.google.code.gson:gson:2.8.7'
+>>>>>>> origin/feature/productUpload
 
 }
 

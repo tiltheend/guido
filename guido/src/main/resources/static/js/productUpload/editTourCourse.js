@@ -1,7 +1,7 @@
 // 마커를 담을 배열입니다
 var markers = [];
-var numElements = 0;
-var tourCourse = [];
+var numElements = tourCourse.length;
+// var tourCourse = [];
 var map;
 var ps;
 var infowindow;
@@ -100,7 +100,10 @@ function displayPlaces(places) {
         checkboxElement.setAttribute('type', 'radio');
         checkboxElement.setAttribute('name', 'tourCourse');
         checkboxElement.setAttribute('class', 'hidden');
-        checkboxElement.setAttribute('id', 'tourCourse' + (numElements + 1));
+        checkboxElement.setAttribute(
+          'id',
+          'tourCourse' + (Number(numElements) + 1)
+        );
         checkboxElement.setAttribute('value', title);
 
         var labelElement = document.createElement('label');

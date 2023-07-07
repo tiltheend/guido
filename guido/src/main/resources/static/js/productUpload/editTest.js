@@ -10,6 +10,7 @@ const btnContainer = document.getElementById('btnContainer');
 // const tourBox = document.getElementbyClassName('tour-box');
 var body = document.querySelector('body');
 // sbmtBtn.classList.add('.hidden');
+
 const updatePage = () => {
   nextBtn.disabled = false;
 
@@ -26,23 +27,32 @@ const updatePage = () => {
   if (currentPage == 0) {
   }
   if (currentPage == 1) {
-    document.querySelector('.text2').innerHTML = '';
-    typing2();
-  }
-  if (currentPage == 2) {
+    var mainElement8 = document.getElementById('page2');
+    if (mainElement8) {
+      mainElement8.style.width = '70%';
+    }
+    init();
     document.querySelector('.text6').innerHTML = '';
     typing6();
-    init();
+    // regionName.value = city.innerText;
+  }
+  if (currentPage == 2) {
+    var mainElement2 = document.getElementById('page3');
+    if (mainElement2) {
+      mainElement2.style.width = '750px';
+    }
+    document.querySelector('.text3').innerHTML = '';
+    typing3();
   }
   if (currentPage == 4) {
-    document.querySelector('.text5').innerHTML = '';
-    typing5();
+    // document.querySelector('.text5').innerHTML = '';
+    // typing5();
     disableNextButtonCheckNum();
     disableNextButtonCheckNum2();
   }
   if (currentPage == 5) {
-    document.querySelector('.text4').innerHTML = '';
-    typing4();
+    // document.querySelector('.text4').innerHTML = '';
+    // typing4();
     disableNextButtonFeeInput();
   }
   if (currentPage == 6) {
@@ -281,10 +291,10 @@ for (let i = 0; i < clickElements.length; i++) {
 // }
 //2페이지일 때 width 800px로 조정
 window.addEventListener('DOMContentLoaded', function () {
-  var mainElement = document.getElementById('page2');
-  if (mainElement) {
-    mainElement.style.width = '800px';
-  }
+  // var mainElement = document.getElementById('page2');
+  // if (mainElement) {
+  //   mainElement.style.width = '800px';
+  // }
   var mainElement2 = document.getElementById('page3');
   if (mainElement2) {
     mainElement2.style.width = '750px';
@@ -321,10 +331,10 @@ window.addEventListener('DOMContentLoaded', function () {
   if (mainElement10) {
     mainElement10.style.width = '850px';
   }
-  var mainElement14 = document.getElementById('page15');
-  if (mainElement14) {
-    mainElement14.style.width = '70%';
-  }
+  // var mainElement14 = document.getElementById('page15');
+  // if (mainElement14) {
+  //   mainElement14.style.width = '70%';
+  // }
 });
 //3페이지
 const tourThemes = document.querySelectorAll('.theme-img');
