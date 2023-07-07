@@ -93,16 +93,20 @@
                             <img th:src="${reservation.thumbnail}" alt="thumbnail">
                             <div class="guest-profile-img">
                                 <a th:href="@{/profile/{userNo}(userNo=${reservation.userNo})}">
-                                    <img th:unless="${reservation.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
-                                    <img th:if="${reservation.profileImage}" th:src="${reservation.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->        
+                                    <img th:unless="${reservation.faceImg}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                    <img th:if="${reservation.faceImg}" th:src="${reservation.faceImg}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->        
                                 </a>
-                                <!-- <h3 th:text="${reservation.userName}">Name</h3> -->
+                                <h3 th:text="${reservation.userName}">Name</h3>
                             </div>
                         </div>
                         <div class="sale-content">
                             <h3 th:text="${reservation.productName}">상품명</h3>
-                            <h3>2023년 6월 7일 - 6월 9일</h3>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${reservation.}]]</p>
+                            <h3 th:text="${reservation.productDate}">상품명</h3>
+                            <h3 th:with="package = ${reservation.productPackage}">
+                                <th:block th:if="${package==1}">a [[${reservation.tourDuration}]]-hours day trip [[${reservation.optionName}]]</th:block>
+                                <th:block th:if="${package>1}">[[${reservation.productPackage}]] day trip</th:block>
+                            </h3>
+                            <p><img th:src="@{/images/profile/language.png}" alt="language">Tourist language: [[${reservation.primaryLanguage}]]</p>
                             <div>
                                 <h2><span th:text="${reservation.guestCount}">guestCount</span> Guests</h2>
                                 <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting">

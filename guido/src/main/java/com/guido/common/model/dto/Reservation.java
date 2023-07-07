@@ -34,11 +34,15 @@ public class Reservation {
 	
 	
 	private int productPackage; 	// 1박 or n박
+	private int tourDuration;	// 1박 투어 시간
 	private String thumbnail; // 썸네일 (파일 오더 1번)
 	private String productName; // 상품명
 	private int reservationCount; // 예약 수
 	
-	private String profileImage;		// 프로필 이미지 (예약한 사람! 구매자)
+	// 투어리스트
+	private String primaryLanguage; // 주 사용 언어
+	private String faceImg; 		// 얼굴 인증 사진
 	
+
 
 }
