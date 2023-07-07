@@ -18,8 +18,6 @@ public interface AdminService {
 
 	int writeAnswer(QNA qna);
 
-	int approveGuide(List<Integer> userNoList);
-
 	List<Map<String,String>> selectMainEventList();
 
 	int setMainBanner(Map<String, Object> data);
@@ -27,4 +25,12 @@ public interface AdminService {
 	int eventBlind(List<Integer> eventNoList);
 
 	int eventBlindCancel(List<Integer> eventNoList);
+	
+	int productBlind(List<Integer> productNoList);
+	
+	int productBlindCancel(List<Integer> productNoList);
+
+	Map<String, Object> sideMenuCount();
+
+	int setUserState(Map<String, Object> map);
 }
