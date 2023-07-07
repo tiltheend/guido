@@ -181,7 +181,6 @@ function createCalendar(year, month, availableDates, fewNights) {
 
                     dateHidden.value = reservationDate;
 
-
                     
                     // 1박의 경우 옵션 불러오기
                     if(fewNights==1 && cell.classList.contains('start-day-td')){

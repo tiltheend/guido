@@ -18,8 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.guido.common.model.dto.ProductDate;
 import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Reservation;
+import com.guido.common.model.dto.User;
 import com.guido.reservation.model.dao.ReservationMapper;
 
 import lombok.Getter;
@@ -234,6 +236,20 @@ public class ReservationServiceImpl implements ReservationService{
 	    if(result>0)
 	    	mapper.updateDateOrOption(reservation);
 	    
+	}
+
+
+	// 예약 날짜(일정) 정보 조회
+	@Override
+	public ProductDate selectReservationDate(Map<String, Object> map) {
+		return mapper.selectReservationDate(map);
+	}
+
+
+	// 비상 연락처 업데이트
+	@Override
+	public void updateEmergencyContact(User loginUser) {
+		mapper.updateEmergencyContact(loginUser);
 	}
 	
 

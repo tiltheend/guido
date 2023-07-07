@@ -678,9 +678,9 @@ textarea:focus {
     left: -30px;
     top: -55px;
     width: 280px;
-    padding: 9px 8px;
+    padding: 8px 7px;
     margin-top: 10px;
-    border-radius: 8px;
+    border-radius: 18px;
     background: #333;
     color: #fff;
     font-size: 14px;
