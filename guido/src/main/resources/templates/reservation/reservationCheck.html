@@ -35,7 +35,7 @@
 
             <div class="ordercheck--info__top">
                 <div>Total Cost : </div>
-                <div th:text="|&#8361; *{totalPrice}|"></div>
+                <div th:text="|&#8361; *{#numbers.formatInteger(totalPrice, 1, 'COMMA')}|"></div>
             </div>
 
         </div>
@@ -55,13 +55,14 @@
                         <div th:text="${product.productName}" class="content-productname">상품명</div>
                         <div id="reservationDate"></div>
                         <div id="reservationDuration" th:if="${product.productPackage==1}">[[${product.tourDuration}]]hr(s) in [[${product.regionName}]]</div>
-                    
+                        <div id="guideLanguage" th:text="|guide language : ${product.guideLanguage}|"></div>
+                        <div id="guest"></div>
                     </div>
                     
 
                 </div>
 
-                <div th:text="|&#8361; *{totalPrice}|" class="ordercheck--right__middle"></div>
+                <div th:text="|&#8361; *{#numbers.formatInteger(totalPrice, 1, 'COMMA')}|" class="ordercheck--right__middle"></div>
 
             </div>
 
@@ -73,8 +74,9 @@
     <script th:inline="javascript">
 
         const package = /*[[${product.productPackage}]]*/"당일 or 당일이상";
-        const createDate = /*[[*{createDate}]]*/"당일 or 당일이상";
-        const optionName = /*[[*{optionName}]]*/"당일 or 당일이상";
+        const createDate = /*[[*{createDate}]]*/"예약 일자";
+        const optionName = /*[[*{optionName}]]*/"선택한 시간(옵션)";
+        const guestCount = /*[[*{guestCount}]]*/"예약 게스트 수";
     </script>
 
     <script th:src="@{/js/reservation/reservationCheck.js}"></script>
