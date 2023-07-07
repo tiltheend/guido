@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>여행 상품 등록</title>
+    <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
+    <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script>
+    
+    <link rel="stylesheet" th:href="@{/css/productUpload/editTest.css}" />
+    <link rel="stylesheet" th:href="@{/css/productUpload/main.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/style.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/typing.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/tourCourse.css}">
+    
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+   
+    
+  </head>
+  <body>
+    <header>
+      <!-- 메인 로고 -->
+      <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
+      <span th:text="${session.loginUser.userName}" id="loginName" style="display: none;"></span>
+      <img th:src="${session.loginUser.profileImage}" id="loginImg" style="display: none;"></img>
+    </header>
+    <main id="page1" class="page current" style="height: 100%;">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text1"></h4>
+        </div>
+        <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span>
+      </div>
+    </main>
+    <!-- 카카오맵 여행 코스 지정 -->
+    <main id="page2" class="page" style="height: 100%;">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text6"></h4>
+        </div>
+        <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span>
+      </div>
+      <div class="course-container">
+      <div class="map_wrap">
+        <div
+        id="map"
+        style="width: 100%; height: 100%; position: relative; overflow: hidden ;border-radius : 20px"></div>
+        <div id="menu_wrap" class="bg_white">
+        <div class="option">
+          <div>
+            <form onclick="searchPlaces(); return false;">
+             
+              <input type="text" value="부산" id="keyword" size="15" />
+              <button type="submit">검색하기</button>
+            </form>
+          </div>
+        </div>
+        <hr />
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+        </div>
+      </div>
+      <div class="tour-course">
+        <!-- <div id="location"></div> -->
+        <div class="create-course">
+          <th:block th:each="tourCourse : ${product.tourCourse}">
+            <input type="radio" name="tourCourse" class="hidden" th:id="'tourCourse'+ ${tourCourse.courseOrder}" th:value="${tourCourse.courseName}" >
+            <label class="tourCourse-item" th:for="'tourCourse'+ ${tourCourse.courseOrder}" th:text="${tourCourse.courseName}">
+              <i class="fa-sharp fa-solid fa-xmark" style="color: rgb(0, 0, 0);"></i>
+            </label>
+          </th:block>
+          
+        </div>
+      </div>  
+    <!-- <input type="hidden" name="tourCourse" id="tourCourse"> -->
+  <!-- <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
+  <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script> -->
+</div>
+    </main>
+    <!-- 3페이지 -->
+   <!-- form 시작 -->
+   <form th:action="@{upload}" method="post" enctype="multipart/form-data" id="productUploadFrm">  
+      <input type="hidden" id="onedayTour" name="productPackage" value="">
+      <input type="hidden" id="inputTimeHidden" name="tourDuration" value="">
+      <input type="hidden" id="inputDayHidden" name="productPackage" oninput="updateTourValue3()" value="">
+      <input type="hidden" name="regionName" id="regionName" value="">
+      <input typpe="hidden" name="tourCourse2" id="tourCourse" value="">
+    <main id="page3" class="page">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text3"></h4>
+        </div>
+        <span class="sub-title">여행의 주요 테마를 선택하여 여행객들에게 가이드님의 여행 컨셉에 대해 알려주세요.</span>
+      </div>
+      <div div class="tour-theme">
+      <th:block th:each="tourTheme : ${tourTheme}">
+        <input type="radio" name="themeCode" class="hidden" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
+          <label class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">
+            <img th:src="${tourTheme.themeImg}">
+          <th:block th:text="${tourTheme.themeName}" class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">테마이름</th:block>
+        </label>
+      </th:block>
+        
+      </div>
+    </main>
+    <!-- 최소 최대 인원 설정 -->
+    <main id="page4" class="page">
+      <div class="greeting">
+        <!-- <h1 class="title typing">Jayden</h1> -->
+        <div class="typing title">
+          <h4 class="text5"></h4>
+        </div>
+        <div class="inputPeopleNum"><span class="sub-title">언제든지 변경하실 수 있습니다.</span><span id="maxMinWarn">최소인원은 최대인원보다 많을 수 없습니다.</span></div>
+      </div>
+      <div class="set-fee">
+        <div class="set-people-container">
+          <span class="minTouristNum">최소인원</span>
+          <input type="text" class="minTouristNum minInput minMaxCheck" id="minInput">
+          <input type="hidden" name="minTourist" value="">
+          <span class="maxTouristNum">최대인원</span>
+          <input type="text" class="maxTouristNum maxInput minMaxCheck" id="maxInput">
+          <span class="maxTouristNum2">최대인원</span><input type="text" class="maxTouristNum2 maxInput2" id="maxInput2">
+          <input type="hidden" name="maxTourist" value="">
+        </div>
+      </div>
+    </main>
+    <!-- 가격 설정 페이지(페이지 수정해야함) -->
+    <main id="page13" class="page">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text4"></h4>
+        </div>
+        <span class="sub-title">언제든지 변경하실 수 있습니다.</span>
+      </div>
+      <div class="set-fee">
+       <div class="set-fee-container">
+        <input type="text" name="" id="feeInput" placeholder="₩35,000">
+        <input type="hidden" name="productPrice">
+        <span>가이드 최소,최대 수입 확인하기<i class="fa-thin fa-chevron-up"></i></span>
+      </div>
+      <ul class="accordion">
+        <span class="target" id="accordion"></span>
+        <li class="accordion__li">
+          <span class="target" id="accordion1"></span>
+          <a href="#accordion1" class="open-accordion" title="open">
+            <div>
+              <div>
+                <h5 class="accordion__title">
+                  예상 수입
+                </h5>
+              </div>
+            </div>
+          </a>
+          <a href="#accordion" class="close-accordion" title="close">
+            <div>
+              <div>
+                <span class="accordion__num"></span>
+                <h5 class="accordion__title">
+                  예상 수입
+                </h5>
+              </div>
+            </div>
+          </a>
+          <div class="accordion__content">
+            <div class="basic-info hrLine">
+              <span class="basic-info" id="incomeIcon">
+                <span class="addSubBtn" id="cashIcon">
+                  <img th:src="@{/images/productUpload/income.png}">
+                </span>
+                <span>예상수입</span>
+              </span>
+              <span class="income">예상수입</span>
+              <span class="income">수수료 10%</span>
+              <span class="income">예상 정산 금액</span>
+            </div>
+            <div class="basic-info min-fee-none">
+              <span class="basic-info" id="incomeIcon">
+                <span class="addSubBtn" id="cashIcon">
+                  <img th:src="@{/images/productUpload/income.png}" alt="" hidden>
+                </span>
+                <span>최소수입</span>
+              </span>
+                <span id="minPrice">0</span>
+                <span id="minFee">0</span>
+                <span id="minTotal">0</span>
+            </div>
+            <div class="basic-info min-fee-none">
+              <span class="basic-info" id="incomeIcon">
+                <span class="addSubBtn" id="cashIcon">
+                  <img src="@{/images/productUpload/income.png}" alt="" hidden>
+                </span>
+                <span>최대수입</span>
+              </span>
+                <span id="maxPrice">0</span>
+                <span id="maxFee">0</span>
+                <span id="maxTotal">0</span>
+            </div>
+              <div class="basic-info day-fee">
+                <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon">
+                  <img th:src="@{/images/productUpload/income.png}" alt="" hidden>
+                </span>
+                <span>최대수입</span>
+              </span>
+                  <span id="maxPrice2">0</span>
+                  <span id="maxFee2">0</span>
+                  <span id="maxTotal2">0</span>
+              </div>
+          </div>
+        </li>
+      </ul>
+      </div>
+    </main>
+    <!-- 5페이지(상품 이미지 등록) -->
+    <main id="page5" class="page">
+      <div class="greeting">
+        <h2 class="title">Jayden 가이드님 여행만의 매력을 돋보이게 하세요.</h2>
+        <span class="sub-title">여행지 이미지 5장 이상, 가이드님 여행만의 특색을 나타낼 수 있는 이미지를 추가하시면 됩니다.</span>
+      </div>
+      <div class="add-image-div">
+        <h3 class="title"></h3>
+        <button type="button" id="addImageBtn">
+          <img th:src="@{/images/productUpload/plus.png}" alt="">추가
+        </button>
+      </div>
+      <div class="img-box">
+        <div class="productImg thumbnail">
+          <label for="img0">
+            <img class="preview" src="" alt="">
+            <input type="file" name="images" class="input-image" id="img0" accept="image/*"/>
+            <span class="delete-image">&times;</span>
+            <div class="add-image add-image-thumbnail">
+              <img th:src="@{/images/productUpload/add-image.png}" alt="" class="img-inner-img">
+            </div>
+            <div class="add-image3 add-image-text">5장 이상의 사진을 선택하세요.</div>
+            <div class="add-image2 add-image-text2">기기에서 업로드</div>
+          </label> 
+        </div>
+        <!-- <div>여기로 사진을 끌어다 놓으세요.</div> -->
+      </div>
+      <!-- 이미지 박스 foreach -->
+      <div class="img-box">
+        <div th:each="index: ${#numbers.sequence(1, 4)}" class="productImg">
+          <label th:for="'img' + ${index}">
+            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
+            <span class="delete-image">&times;</span>
+            <div class="add-image">
+            <img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img">
+            </div>
+            <div class="add-image2"></div>
+            <div class="add-image3"></div>
+          </label>
+        </div>
+        <div th:each="index: ${#numbers.sequence(5, 9)}" class="productImg plus-image">
+          <label th:for="'img' + ${index}">
+            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
+            <span class="delete-image">&times;</span>
+            <div class="add-image"><img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img"></div>
+            <div class="add-image2"></div>
+            <div class="add-image3"></div>
+          </label>
+        </div>
+      </div>
+    </main>
+    <!-- 6페이지(상품 제목 정하기) -->
+    <main id="page6" class="page">
+      <div class="greeting">
+        <h2 class="title">이제 Jayden 가이드님 여행의 이름을 지어주세요</h2>
+        <span class="sub-title">여행지, 패키지 정보를 제목에 꼭 적으셔야 합니다.</span><br>
+        <span class="sub-title"> 입력하지 않으실 경우 추후 관리자에 의해 삭제될 수 있습니다</span>
+      </div>
+      <div id="titleContainer">
+        <div id="writeTitle">상품 이름</div>
+        <input type="text" name="productName" id="inputTitle" onkeydown="return event.key != 'Enter';">
+        <div id="titleCountContainer">
+          <div id="titleCharCount">0</div>
+            <div>/75</div>
+        </div>
+        <div id="titleWarning">
+          <div>!</div>
+          <span>75자까지 입력하실 수 있습니다.</span>
+        </div>
+      </div>
+    </main>
+    <!-- 7페이지(상품 상세 설명 작성) -->
+    <main id="page7" class="page">
+      <div class="greeting">
+        <h2 class="title">여행 일정과 가이드 상품 대한 설명을 작성해주세요</h2>
+        <span class="sub-title">여행지, 패키지 정보를 제목에 꼭 적으셔야 합니다.</span><br>
+      </div>
+      <div id="contentContainer">
+        <div id="writeTitle">여행 일정 및 상품 설명 작성</div>
+        <textarea name="productContent" id="inputContent" cols="30" rows="20" ></textarea>
+        <div id="contentCountContainer">
+          <div id="contentCharCount">0</div>
+            <div>/1000</div>
+          </div>
+          <div id="contentWarning"><div>!</div><span>1000자까지 입력하실 수 있습니다.</span>
+    </div>
+    </main>
+    <!-- 상품 일정 등록 -->
+    <main id="page11" class="page">
+      <div class="greeting">
+        <h1 class="title">이제 여행 일정과 가이드 상품에 대한 설명을 작성해주세요!</h1>
+        <span class="sub-title"></span>
+      </div>
+    </main>
+    <!-- 8페이지 구매 시 유의사항 작성 -->
+    <main id="page8" class="page">
+      <div class="greeting">
+        <h2 class="title">구매 시 유의 사항을 작성해주세요.</h2>
+        <span class="sub-title">가격에 미포함된 비용을 모두 작성해주세요. 작성하지 않는 비용이 발생할 시 패널티가 부과될 수 있습니다.</span>
+      </div>
+      <div class="write-add-price">
+        <input type="text" id="addPrice"><button id="addBtn">입력</button>
+      </div>
+      <span id="addWarning" hidden><i class="fa-sharp fa-solid fa-bomb"></i>이미 입력한 정보입니다.</span>
+          <div id="add-container">
+          </div>
+    </main>
+    <!-- 9페이지 취소 및 환불 규정 -->
+    <main id="page9" class="page">
+      <div class="greeting">
+        <h1 class="title">취소 및 환불 규정에 대해 숙지해주세요!</h1>
+        <span></span><span class="sub-title"></span>
+      </div>
+      <pre id="refundContent">
+
+        ['guido' 의 손해배상 의무]
+        1. guido가 'guido 약관상' 의 의무을위반하여 발생한 여행자와 guido 사이의 손해배상과 이로 인하여
+         여행자가 guido을 상대로 손해배상을 청구하는 등 법적 조치를 취한 경우 guido는본인의 비용으로 guido을
+        면책시켜야 함은 물론 그로 인하여 guido에 발생한 모든 손실, 비용(관련 변호사 비용 포함) 및 손해를 
+        전액 보상하여야 합니다.단, 여행자에게 신체 손상이 없는 경우 guido의 손해배상책임은 여행가의 100%를 
+        한도로 합니다.
+
+        2. guido는 고의 또는 과실로 위법하게 여행자에게 손해를 가한 경우 그로 인하여 여행자가 입은 손해를 배상
+        해야 합니다.
+        3. guido는 상대의 수화물을 수령, 인도, 보관할의무가 없으며, 수화물이 멸실, 훼손 또는 연착되어 여행자에게
+        발생한 손해를 배상할 책임이 없습니다.
+
+        ['guido' 의 손해배상 의무] guido는 guido가 'guido 약관상' 의의무을 위반하여 발생한 여행자와 guido 
+        사이의 손해배상과 이로 인하여 여행자가 guido을 상대로 손해배상을 청구하는 등 법적 조치를 취한 경우 
+        guido는 여행자와 guido에 대하여 어떠한 책임도 부담하지 않습니다.단, 'guido 약관상' 의 의무을 위반하지않고
+        발생한 여행자와 여행메이트 사이의 손해배상 등 법률 관계와 관련해서는 발생 상황을 면밀히 파악하여 guido와 
+        guido의 조율 하에 손해배상을진행합니다.
+        
+        [여행 출발(개시) 전 취소 및 환불 규정](*공정거래위원회 제정_소비자 피해보상 규정 기준)
+        
+        1. 여행계약 해제로 인한 피해 : 당사의 귀책사유로 당사가 계약해제하는 경우
+        
+        (당일여행인 경우)
+        1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불 
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
+        
+        (숙박여행인 경우)
+        1) 여행 개시 5일 전까지 취소 통보시 : 작품가 전액 환불
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
+        
+        2. 여행자의 귀책사유로 여행자가 계약해제하는 경우
+        
+        (당일여행인 경우)
+        1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가의 30% 배상
+        
+        (숙박여행인 경우)
+        1) 여행 개시 5일 전까지 취소 통보시 : 작품가 전액 환불
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가의 30% 배상
+         </pre>
+         <div id="refundCheck-div">
+          <input type="checkbox" id="refundCheck">
+          <span> 위의 취소 및 환불 규정을 모두 읽었으며, 
+          이와 관련된 사유로 취소, 환불 시 발생하는 손해의 책임은 판매자에게 있습니다.</span>
+        </div>
+    </main>
+    <main id="page10" class="page">
+      <div class="greeting">
+        <h1 class="title">가이드 상품 검토하기</h1>
+        <span class="sub-title">여행객에게 표시되는 정보는 다음과 같습니다. 모든 정보가 정확한지 확인하세요.</span>
+      </div>
+      <div class="confirm-container" onclick="openModal()">
+        <div class="confirm-image-container">
+          <img src="" alt="thumnail" id="checkImg">
+        </div>
+        <div class="confirm-text-container">
+          <div>
+            <span id="checkName"></span>
+            <span>신규★</span>
+          </div>
+          <div><span><i class="fa-solid fa-location-dot" style="color: #949494;"></i><span id="checkSpace"></span> > Changdeok Palace</span></div>
+          <div><span id="checkFee"></span><span> / 1 guest</span></div>
+        </div>
+      </div>
+      <!-- 모달창 -->
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <div id="modalChang"></i><span>미리보기 전체</span> </div>
+          <div class="item"><img th:src="${session.loginUser.profileImage}" id="checkModalImg"></div>
+          <div class="item modal-text"><span id="checkModalName"></span></div>
+          <div class="item"><img th:src="${session.loginUser.profileImage}"></div>
+          <div class="item modal-text item-sub"><span>5 ~ 20 people </span></div>
+          <div class="item modal-text item-sub" ><span>Price per person : USD 30</span></div>
+          <div class="item item-title modal-text">Travel theme</div>
+          <div class="item item-tour-theme modal-text item-sub"><img src="" ><span>Palace tour</span></div>
+          <div class="item item-title modal-text"><span>Additional Cost</span></div>
+          <div class="item modal-text item-sub"><span>Entrance fee to Changdeok Palace (USD 4)</span></div>
+          <div class="item item-title modal-text"><span>Location</span></div>
+          <div class="item modal-text item-sub"><span>Changdeok Palace</span><span>Soul N Tower</span><span>MyeongDong Street</span></div>
+          <div class="item item-title modal-text"><span>Detail</span></div>
+          <div class="item "></div>
+          <div class="item modal-text"><span id="checkModalContent"></span></div>
+          <!-- <div class="item">16</div>
+          <div class="item">17</div> -->
+        </div>
+      </div>
+    </main>
+    <div class="save"><button class="save-btn" id="submitBtn">제출하기</button></div>
+  </form>
+    <footer>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="progress-btn">
+        <button type="button" class="back-btn">이전</button>
+        <button type="button" class="next-btn">다음</button>
+      </div>
+    </footer>
+  </body>
+  <script th:src="@{/js/productUpload/editTest.js}"></script>
+  <script th:src="@{/js/productUpload/editTyping.js}"></script>
+  <script th:src="@{https://kit.fontawesome.com/f7459b8054.js}"
+  crossorigin="anonymous"
+></script>
+  <script th:inline="javascript">
+    const imageList = /*[[${product.imageList}]]*/ [];
+  
+    const previewList = document.querySelectorAll("img.preview");
+  
+    const addNotesList =  /*[[${addNotesList}]]*/ [];
+  
+    // const addNotesList = /*[[${addNotesList}]]*/ ;
+    // const addPriceList = productAddPrice.split("^^^");
+    // console.log(addPriceArray);
+    // console.log(productAddPrice);
+    // console.log(productAddPrice);
+    console.log(addNotesList);
+  
+    for(let img of imageList){
+        previewList[img.fileOrder].src = img.filePath;
+    }
+    // const tourCourseList = /*[[${product.tourCourse}]]*/ [];
+
+    const tourCourse = /*[[${product.tourCourse}]]*/ [];
+
+    // for(let tc of tourCourse){
+    //     previewList[img.fileOrder].src = img.filePath;
+    // }
+
+    console.log(tourCourseList);
+    // console.log(tourCourse.length);
+    let num = tourCourse.length;
+    console.log(num);
+  </script>
+  <script th:src="@{/js/productUpload/editTourCourse.js}"></script>
+
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b&libraries=services"></script> -->
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b"></script> -->
+</html>
+

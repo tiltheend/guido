@@ -153,10 +153,7 @@
                     </tr>
                 </tbody>
             </table>
-
-            
-            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
+            <th:block th:replace="~{/admin/pagination}"/>
         </div>
     </main>
 </body>

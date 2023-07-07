@@ -42,8 +42,6 @@ header .save .save-btn {
   width: 130px;
   border: 1px solid lightgray;
   border-radius: 20px;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 header .save .save-btn:hover {
@@ -55,7 +53,7 @@ main {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  /* overflow: auto; */
   padding-bottom: 150px;
 }
 
@@ -97,8 +95,6 @@ footer {
   font-weight: bold;
   box-shadow: 5px 5px 5px gray;
   cursor: pointer;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 .tour-box > *:hover {
@@ -145,7 +141,7 @@ footer {
   border-radius: 10px;
   cursor: pointer;
 }
-input[name='tourItems']:checked + label {
+input[name='themeCode']:checked + label {
   border: 2px solid rgb(59, 119, 124);
   background-color: rgb(185, 215, 218);
   color: white;
@@ -247,22 +243,36 @@ button:disabled:hover {
 
 .OUTLINE:hover {
   fill: rebeccapurple !important;
+  transition-duration: 0.55s !important;
 }
 /* 카카오맵 여행 코스 */
 
 .course-container {
-  display: block;
-  width: 60%;
+  display: flex;
   height: 100%;
 }
+.tour-course {
+  width: 50%;
+  height: 100%;
+}
+.create-course {
+  /* display: flex; */
+  flex-direction: column;
+}
+/* .added-element input[type='radio']:checked + span {
+  background-color: red;
+} */
 
+#tourCourse {
+  width: 100%;
+}
 /*  */
 /* 3페이지 */
 .tour-theme {
   display: flex;
   flex-wrap: wrap;
 }
-.tour-theme > * {
+/* .tour-theme > * {
   background-color: white;
   border: 4px solid #5555;
   border-radius: 15px;
@@ -276,10 +286,8 @@ button:disabled:hover {
   text-align: center;
   box-shadow: 5px 5px 5px gray;
   cursor: pointer;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
-}
+} */
 
 #page3 > div.tour-theme img {
   width: 40px;
@@ -492,7 +500,7 @@ button:disabled:hover {
   color: black;
   font-weight: bolder;
   cursor: pointer;
-  /* display: none; */
+  display: none;
 }
 .add-image {
   position: absolute;
@@ -592,8 +600,6 @@ button:disabled:hover {
   appearance: none; */
   border: 2px solid black;
   border-radius: 10px;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 
@@ -653,8 +659,6 @@ button:disabled {
   border: 2px solid black;
   border-radius: 8px;
   font-size: 1.2rem;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 
@@ -721,8 +725,6 @@ button:disabled {
   cursor: pointer;
   padding: 25px;
   padding-left: 15px;
-  transition-property: -ms-transform, -webkit-transform, transform,
-    background-color, border-color !important;
   transition-duration: 0.25s !important;
 }
 #add-container > *:hover {
@@ -925,7 +927,6 @@ button:disabled {
 .card-form:hover .card {
   transform: rotateY(180deg);
 }
-
 /* 요금 설정 */
 
 .set-fee-container > div {
@@ -933,6 +934,17 @@ button:disabled {
   height: 100px;
   /* display: block; */
   display: flex;
+}
+#feeInput:hover {
+  background-color: #a5c8c8;
+  transition-duration: 0.55s !important;
+}
+#feeInput:not(hover) {
+  background-color: #fff;
+  transition-duration: 0.55s !important;
+}
+.fee-container:hover {
+  border: rgb(47, 46, 46);
 }
 
 #feeInput,
@@ -966,7 +978,13 @@ ul {
   padding: 0;
   background: black;
 } */
-
+#page5 > div.set-fee > ul > li > a.open-accordion > div > div > h5 {
+  padding: 20px;
+}
+#page5 > div.set-fee > ul > li > a.close-accordion > div > div > h5 {
+  padding: 20px;
+  margin-left: -20px;
+}
 .target {
   display: block;
   /* top: 0;
@@ -1012,13 +1030,14 @@ ul {
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 20px;
 }
 .accordion__num {
   font-size: 1rem;
   margin-right: 1.3rem;
 }
 .accordion__title {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 .accordion__li i {
   font-size: 1.3rem;
@@ -1047,8 +1066,9 @@ ul {
   padding-top: 1rem;
 }
 .accordion__li:last-child :target ~ .accordion__content {
-  height: 15.4rem;
+  height: auto;
   padding-top: 1rem;
+  padding: 20px;
 }
 #page13 > div.set-fee > ul > li:nth-child(2) > a.open-accordion > div > div {
   justify-content: space-between;
@@ -1075,11 +1095,14 @@ ul {
   > span:nth-child(3) {
   width: 10%;
 }
-input[name='tourTheme']:checked + label {
-  border: 2px solid #2db400;
-  background-color: #2db400;
+/* .selected {
+  border: 2px solid #0f4957;
+  background-color: #408c8c;
   color: white;
   font-weight: bold;
+} */
+input[type='radio']:checked {
+  background-color: red;
 }
 
 #submitBtn {
@@ -1098,19 +1121,122 @@ input[name='tourTheme']:checked + label {
   color: white;
 }
 
-label[for='img9'],
-label[for='img8'],
-label[for='img7'],
-label[for='img6'],
-label[for='img5'] {
+.set-people-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 200px;
+}
+.minTouristNum,
+.maxTouristNum,
+.maxTouristNum2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+}
+.minInput,
+.maxInput,
+.maxInput2 {
+  outline: none;
+  width: 70px;
+  height: 70px;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  font-size: 1.5rem;
+
+  transition-duration: 0.25s !important;
+}
+.inputPeopleNum {
+  display: flex;
+  justify-content: space-between;
+}
+#maxMinWarn {
+  color: red;
   display: none;
 }
-input[name='tourTheme']:checked {
-  border: 2px solid #2db400;
-  background-color: #2db400;
+.maxTouristNum2 {
+  display: none;
+}
+.plus-image {
+  display: none;
+}
+
+.hrLine {
+  border-bottom: 1px dashed lightgray;
+}
+
+/* #categoryContainer {
+  display: flex;
+  padding: 3px;
+  flex-wrap: wrap;
+} */
+
+.tourCourse-item {
+  border: 4px solid #5555;
+  border-radius: 15px;
+  padding: 12px;
+  margin: 5px;
+  box-shadow: 5px 5px 5px gray;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  gap: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.theme-img {
+  border: 4px solid #5555;
+  border-radius: 20px;
+  padding: 6px;
+  margin: 5px;
+  box-shadow: 5px 5px 5px gray;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  gap: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type='radio']:checked + label.tourCourse-item {
+  border: 4px solid #0f4957;
+  background-color: #408c8c;
   color: white;
   font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 5px 5px 5px gray;
+  transition-duration: 0.55s !important;
 }
-.day-fee {
+input[type='radio']:checked + label.theme-img {
+  border: 4px solid #0f4957;
+  background-color: #408c8c;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 5px 5px 5px gray;
+  transition-duration: 0.55s !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+label.tourCourse-item {
+  width: fit-content;
+}
+
+.hidden {
   display: none;
+}
+.transition {
+  transition-duration: 0.35s !important;
+}
+#maxTotal2 {
+  border: 10px;
 }

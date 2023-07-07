@@ -78,8 +78,8 @@
                             <td th:text="*{CREATE_DT}">작성일</td>
                             <td th:text="*{EVENT_END_DT}">종료일</td>
                             <td>
-                                <button type="buttion" th:if='*{EVENT_STATE=="N"}' class="btn btn3 event-blind-btn">블라인드</button>
-                                <button type="buttion" th:if='*{EVENT_STATE=="B"}' class="btn btn4 event-blind-cancel-btn">블라인드 해제</button>
+                                <button type="buttion" th:if='*{EVENT_STATE=="N"}' class="btn btn3 blind-btn">블라인드</button>
+                                <button type="buttion" th:if='*{EVENT_STATE=="B"}' class="btn btn4 blind-cancel-btn">블라인드 해제</button>
                             </td>
                             <td th:if='*{EVENT_STATE=="N"}'>
                                 <button type="buttion" th:unless='*{MAIN_BANNER_ORDER}'
@@ -91,9 +91,7 @@
                     </th:block>
                 </tbody>
             </table>
-
-            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}" />
+            <th:block th:replace="~{/admin/pagination}"/>
         </div>
         <div id="modal" class="modal">
             <div id="modalContent">

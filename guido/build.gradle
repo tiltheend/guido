@@ -49,6 +49,21 @@ dependencies {
 	// 페이팔
 	// https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
 	implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.14.0'
+<<<<<<< HEAD
+=======
+	
+<<<<<<< HEAD
+	implementation 'com.google.code.gson:gson:2.8.7'
+>>>>>>> origin/feature/productUpload
+=======
+	// 웹소켓
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-websocket
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '3.1.0'
+	
+	// GSON (라이브러리)
+	// https://mvnrepository.com/artifact/com.google.code.gson/gson
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
+>>>>>>> origin/feature/mainPage
 
 }
 

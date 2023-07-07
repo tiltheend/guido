@@ -158,6 +158,7 @@
     background-color: #FFE69A;
     border-radius: 15px; margin: 10px;
     position: relative;
+    width: 40%;
 }
 .seller-profile-top .reservation-list-box .sale-img>img{ 
     width: 100%; height: 100%;

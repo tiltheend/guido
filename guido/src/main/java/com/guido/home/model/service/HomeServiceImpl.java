@@ -24,7 +24,6 @@ public class HomeServiceImpl implements HomeService {
 	}
 	
 	
-	
 	// 상품 목록 조회
 	@Override
 	public List<Product> selectProductList(int userNo) {
@@ -50,14 +49,12 @@ public class HomeServiceImpl implements HomeService {
 	}
 
 
-
-	// 테마 검색 상품 목록 조회
+	// 테마검색 상품목록 조회
 	@Override
 	public List<Product> selectThemeProdList(int themeCode) {
 		return mapper.selectThemeProdList(themeCode);
 	}
 
-	
 	
 	// 검색 페이지
 	@Override
@@ -71,14 +68,11 @@ public class HomeServiceImpl implements HomeService {
 		return mapper.locationSearch(location);
 	}
 
-	// 검색 페이지 테마 검색 상품 목록 조회 
+	// 검색 페이지 내에서 테마 검색 상품 목록 조회 
 	@Override
-	public List<Product> selectSearchThemeProdList(int themeCode) {
-		return mapper.selectSearchThemeProdList(themeCode);
+	public List<Product> selectSearchThemeProdList(Map<String, Object> map) {
+		return mapper.selectSearchThemeProdList(map);
 	}
-
-
-	
 
 	
 	// 관심상품 등록
@@ -102,16 +96,16 @@ public class HomeServiceImpl implements HomeService {
 
 	
 	// 관심상품 등록 여부 체크
-	@Override
-	public int selectWishListCheck(Map<String, Object> map) {
-		return mapper.selectWishListCheck(map);
-	}
+//	@Override
+//	public int selectWishListCheck(Map<String, Object> map) {
+//		return mapper.selectWishListCheck(map);
+//	}
 
 	// 관심상품 등록 여부 체크
-	@Override
-	public List<Product> mainWishCheck(int userNo) {
-		return mapper.mainWishCheck(userNo);
-	}
+//	@Override
+//	public List<Product> mainWishCheck(int userNo) {
+//		return mapper.mainWishCheck(userNo);
+//	}
 
 
 
@@ -121,11 +115,6 @@ public class HomeServiceImpl implements HomeService {
 		return mapper.selectEventBannerList();
 	}
 
-
-
-
-
-	
 
 
 }
