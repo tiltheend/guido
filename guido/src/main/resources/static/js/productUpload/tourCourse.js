@@ -140,13 +140,12 @@ function displayPlaces(places) {
             labelElement.appendChild(deleteIcon);
             numElements++; // numElements 변수를 증가시킴
 
-            checkboxElement.addEventListener('change', function () {
-              if (checkboxElement.checked) {
-                courseInfo.bossCourseFL = 'Y';
-              } else {
+            checkboxElement.addEventListener('change', (e) => {
+              if (e.target !== checkboxElement) {
                 courseInfo.bossCourseFL = 'N';
               }
             });
+
             var courseInfo = {
               courseName: title,
               latitude: y,
@@ -155,12 +154,6 @@ function displayPlaces(places) {
               bossCourseFL: 'N',
             };
             tourCourse.push(courseInfo);
-
-            // // tourCourse 배열을 서버로 전송
-            // var xhr = new XMLHttpRequest();
-            // xhr.open('POST', '/upload', true);
-            // xhr.setRequestHeader('Content-Type', 'application/json');
-            // xhr.send(JSON.stringify(tourCourse));
           } else {
             alert('10개 이상 등록할 수 없습니다.');
           }

@@ -272,7 +272,7 @@ button:disabled:hover {
   display: flex;
   flex-wrap: wrap;
 }
-.tour-theme > * {
+/* .tour-theme > * {
   background-color: white;
   border: 4px solid #5555;
   border-radius: 15px;
@@ -287,11 +287,7 @@ button:disabled:hover {
   box-shadow: 5px 5px 5px gray;
   cursor: pointer;
   transition-duration: 0.25s !important;
-}
-
-input[type='radio']:checked + .theme-img {
-  background-color: red;
-}
+} */
 
 #page3 > div.tour-theme img {
   width: 40px;
@@ -1190,6 +1186,24 @@ input[type='radio']:checked {
   text-align: center;
   display: inline-block;
   gap: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.theme-img {
+  border: 4px solid #5555;
+  border-radius: 20px;
+  padding: 6px;
+  margin: 5px;
+  box-shadow: 5px 5px 5px gray;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  gap: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 input[type='radio']:checked + label.tourCourse-item {
@@ -1200,6 +1214,18 @@ input[type='radio']:checked + label.tourCourse-item {
   font-size: 1rem;
   box-shadow: 5px 5px 5px gray;
   transition-duration: 0.55s !important;
+}
+input[type='radio']:checked + label.theme-img {
+  border: 4px solid #0f4957;
+  background-color: #408c8c;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 5px 5px 5px gray;
+  transition-duration: 0.55s !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 label.tourCourse-item {
   width: fit-content;

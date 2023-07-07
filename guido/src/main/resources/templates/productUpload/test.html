@@ -240,11 +240,14 @@
         <span class="sub-title">여행의 주요 테마를 선택하여 여행객들에게 가이드님의 여행 컨셉에 대해 알려주세요.</span>
       </div>
       <div div class="tour-theme">
-      <label th:each="tourTheme : ${tourTheme}" class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">
-        <input type="radio" name="themeCode" class="hidden2" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
-        <img th:src="${tourTheme.themeImg}">
-        <span th:text="${tourTheme.themeName}" class="theme-img" for="'tourTheme'+ ${tourTheme.themeCode}">테마이름</span>
-      </label>
+      <th:block th:each="tourTheme : ${tourTheme}">
+        <input type="radio" name="themeCode" class="hidden" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
+          <label class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">
+            <img th:src="${tourTheme.themeImg}">
+          <th:block th:text="${tourTheme.themeName}" class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">테마이름</th:block>
+        </label>
+      </th:block>
+        
       </div>
     </main>
     <!-- 최소 최대 인원 설정 -->
