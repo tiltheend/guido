@@ -11,13 +11,13 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <th:block th:replace="~{common/header}"></th:block>
+    <!-- <th:block th:replace="~{common/header}"></th:block> -->
     <div class="container_total">
         <div class="container_top">
             <div class="container_top_title font0">회원 가입</div>
         </div>
                         <!-- novalidate : required 있어도 브라우저 유효성 검사x -->
-        <form id="signUpForm" novalidate>
+        <form th:action="@{/user/signUp/tourist}" method="post" id="signUpForm" novalidate>
             <div class="container_middle">
                 <div class="container_middle_input">
                     <!-- email -->
@@ -61,13 +61,6 @@
                     <div class="font4" id="chkPwMessage"></div>
                     <!-- 이름(last/first) -->
                     <div class="namePart">
-                        <div class="last-name">
-                            <div class="inputGroup">
-                                <input type="text" id="lastName" name="userName" autocomplete="off" required>
-                                <label for="lastName">성</label>
-                            </div>
-                            <div class="font4" id="nameMessage1"></div>
-                        </div>
                         <div class="first-name">
                             <div class="inputGroup">
                                 <input type="text" id="firstName" name="userName" autocomplete="off" required>
@@ -75,12 +68,21 @@
                             </div>
                             <div class="font4" id="nameMessage2"></div>
                         </div>
+                        <div class="last-name">
+                            <div class="inputGroup">
+                                <input type="text" id="lastName" name="userName" autocomplete="off" required>
+                                <label for="lastName">성</label>
+                            </div>
+                            <div class="font4" id="nameMessage1"></div>
+                        </div>
                     </div>
                     <!-- 전번(국제)  -->
                     <div class="inputGroup">
+                        <input type="hidden" class="county-no" id="countryNo" name="userTel"/>
                         <input id="phone" name="userTel" type="text" autocomplete="off" required/>
+                        <input type="hidden" class="county-code" id="countryCode" name="countryCode"/>
                         <!-- 임시버튼 온클릭 -->
-                        <!-- <button type="button" id="submitBtn" onclick="submitForm()">btn</button> -->
+                        <!-- <button type="button" id="testBtn">btn</button> -->
                     </div>
                     <div class="font4" id="phoneMessage"></div>
                     <!-- 비상 연락처 (Text. 트위터/페북 주소, 인스타 아이디 등) -->
@@ -418,30 +420,106 @@
                 </div>
             </div>
             <div class="container_bottom">
-                <button class="font3 container_bottom_button" id="signUpBtn" style="outline: none;" type="button">회원가입</button>
+                <button class="font3 container_bottom_button" id="signUpBtn" style="outline: none;">회원가입</button>
             </div>
         </form>
     </div>
 </div>
-<th:block th:replace="~{common/footer}"></th:block>
+<!-- <th:block th:replace="~{common/footer}"></th:block> -->
     <script th:src="@{/js/signUp/signUpAsTourist.js}"></script>
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
     <script th:inline="javascript">
-        // 구글 이메일 input value로 set
-        const googleEmail = /*[[${session.googleEmail}]]*/ "구글 유저의 이메일";
+        // // 구글 이메일 input value로 set
+        // const googleEmail = /*[[${session.googleEmail}]]*/ "구글 유저의 이메일";
 
-        const authLable = document.querySelector('label[for="inputAuth"]');
-        const authPart = document.querySelector(".authPart");
+        // const authLable = document.querySelector('label[for="inputAuth"]');
+        // const authPart = document.querySelector(".authPart");
 
-        if(googleEmail){
-            email.validity.valid = true;
-        }
-        if(email.value==googleEmail){
-            chk.email=true;
-            chk.inputAuth=true;
-            sendAuthBtn.style.display="none";
-            authPart.style.display="none";
-        }
+        // if(googleEmail){
+        //     email.validity.valid = true;
+        // }
+        // if(email.value==googleEmail){
+        //     chk.email=true;
+        //     chk.inputAuth=true;
+        //     sendAuthBtn.style.display="none";
+        //     authPart.style.display="none";
+        // }
+
+        // 회원가입 진행
+
+        // 국제 번호 intlTel
+        var input = document.querySelector("#phone");
+
+        var iti = window.intlTelInput(input, {
+            separateDialCode: true,
+            utilsScript: "build/js/utils.js"
+        });
+
+        // intl test 버튼
+        // const testBtn = document.getElementById("testBtn");
+        // testBtn.addEventListener("click",()=>{
+        //     const selectedCountryData = iti.getSelectedCountryData();
+        //     const countryCodeString = selectedCountryData.iso2;
+        //     const countryCode = document.getElementById("countryCode");
+        //     countryCode.value = countryCodeString;
+            
+        // });
+
+        // 회원가입 버튼 누르면
+        signUpForm.addEventListener("submit",()=>{
+            // 국제 나라 번호, 국가 코드 가져오기 (name속성 추가)
+            // 국가 코드(문자열)
+            const selectedCountryData = iti.getSelectedCountryData();
+            const countryCodeString = selectedCountryData.iso2;
+            // 보이지 않는 input에 value 국가 코드 대입
+            const countryCode = document.getElementById("countryCode");
+            countryCode.value = countryCodeString;
+            
+            // 국제 번호 앞자리
+            const countryNoString = document.querySelector(".iti__selected-dial-code").innerText;
+            const countryNo = document.getElementById("countryNo");
+            countryNo.value = countryNoString;
+
+            // const countryName = "Korea"
+            // iti.setCountry(countryName);
+            // 국가명
+            // var title = document.querySelector(".iti__selected-flag");
+            // console.log("전화번호 : " + input.value);
+            // // console.log("국가 : " + title.title);
+            // console.log("국제전화 나라번호 : " + countryNo.innerText);
+
+            // 보낼 form 값 (form input 전달)
+            // const signUpFormData = new FormData(signUpForm);
+
+            // // 다른 객체 데이터 추가 (input말고)
+            // // const data = { "countryCode" : countryCode, "countryNo" : countryNo };
+            // // 보낼 값 추가
+            // // formData.append('data',JSON.stringify(data));
+
+            // fetch('/user/signUp/tourist',{
+            //     method : 'post',
+            //     headers : {
+            //         'Content-Type':'application/json',
+            //         'Accept' : 'application/json'
+            //     },
+            //     body : 'signUpFormData'
+            // })
+            // .then(resp=>resp.text())
+            // .then(result=>{
+            //     if(result==0){ // 실패 시
+            //         alert("회원가입 중 문제가 발생하였습니다. 다시 시도해주세요.");
+            //         window.location.href = window.location.href;
+            //     }
+            //     if(result>0){
+            //         alert("회원가입에 성공했습니다! 로그인 후 guido의 서비스를 이용해주세요.");
+            //         window.location.href = '/templates/login/login.html';
+            //     }
+            // })
+            // .catch(e=>console.log(e));
+
+
+
+    });
 
     
 

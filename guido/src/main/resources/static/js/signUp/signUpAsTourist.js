@@ -1,3 +1,21 @@
+// 유효성 검사용 chk
+
+// tourist(구매자)용 회원가입
+// 항목 작성했는지 체크 - 모두 작성해야 가입 진행
+const chk = {
+    "email" : false,
+    // 테스트 후 true -> false !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    "inputAuth" : true,
+    "password" : true,
+    "checkPassword" : false,
+    "lastName" : false,
+    "firstName" : false,
+    "phone" : false,
+    "passportNo" : false,
+    "primaryLanguage" : false,
+    "infoAgree1" : false,
+    "infoAgree2" : false
+};
 // // 전체 약관 동의
 
 const checkAllLabel = document.getElementById("checkAllLabel");
@@ -13,6 +31,7 @@ checkAllLabel.addEventListener('click', function() {
     checkboxes.forEach(function(checkbox) {
         checkbox.checked = !(isChecked);
     });
+    
 });
 
 // 하위 체크박스 클릭 이벤트 리스너 등록
@@ -24,6 +43,25 @@ checkboxes.forEach(function(checkbox) {
         }
     });
 });
+
+const infoAgree1 = document.getElementById("infoAgree1");
+const infoAgree2 = document.getElementById("infoAgree2");
+
+// 체크
+infoAgree1.addEventListener('change',()=>{
+    if(infoAgree1.checked){
+        chk.infoAgree1 = true;
+    }else{
+        chk.infoAgree1 = false;
+    }
+})
+infoAgree2.addEventListener('change',()=>{
+    if(infoAgree2.checked){
+        chk.infoAgree2 = true;
+    }else{
+        chk.infoAgree2 = false;
+    }
+})
 
 
 // 약관 설명 펼치기
@@ -79,25 +117,28 @@ arrow2.addEventListener("click",()=>{
 
 // ------------ 유효성 검사 ------------
 
-// tourist(구매자)용 회원가입
-// 항목 작성했는지 체크 - 모두 작성해야 가입 진행
-const chk = {
-    "email" : false,
-    "inputAuth" : false,
-    "password" : false,
-    "checkPassword" : false,
-    "lastName" : false,
-    "firstName" : false,
-    "phone" : false,
-    "passportNo" : false,
-    "primaryLanguage" : false,
-    "infoAgree1" : false,
-    "infoAgree2" : false
-};
+ // 구글 이메일 input value로 set
+const googleEmail = /*[[${session.googleEmail}]]*/ "구글 유저의 이메일";
 
-// 이메일 유효성 검사
+const authLable = document.querySelector('label[for="inputAuth"]');
+const authPart = document.querySelector(".authPart");
+const sendAuthBtn = document.getElementById("sendAuthBtn");
+
 const email = document.getElementById("email");
 const emailMessage = document.getElementById("emailMessage");
+
+if(googleEmail){
+    email.validity.valid = true;
+}
+if(email.value==googleEmail){
+    chk.email=true;
+    chk.inputAuth=true;
+    sendAuthBtn.style.display="none";
+    authPart.style.display="none";
+}
+
+
+// 이메일 유효성 검사
 
 // 이메일 입력중 검사
 email.addEventListener("input",()=>{
@@ -140,138 +181,139 @@ email.addEventListener("input",()=>{
 });
 
 // 이메일로 인증번호 보내기
+// ----------------------------------주석 풀기--------------------------------------------------
 
-// 인증 번호 발송
-const sendAuthBtn = document.getElementById("sendAuthBtn");
-// 인증 번호 입력 타이머
-const authMessage = document.getElementById("authMessage");
-let authTimer;
-let authMin;
-let authSec;
-// 인증 번호 발송 성공 이메일 저장
-let authenticEmail;
+// // 인증 번호 발송
 
-sendAuthBtn.addEventListener("click",()=>{
-    authMin = 9;
-    authSec = 59;
+// // 인증 번호 입력 타이머
+// const authMessage = document.getElementById("authMessage");
+// let authTimer;
+// let authMin;
+// let authSec;
+// // 인증 번호 발송 성공 이메일 저장
+// let authenticEmail;
 
-    chk.inputAuth = false;
+// sendAuthBtn.addEventListener("click",()=>{
+//     authMin = 9;
+//     authSec = 59;
 
-    if(chk.email){ // 사용 가능한 이메일
-        // 인증번호 이메일로 보내기 ajax
-        fetch("/sendEmail/authEmail?email="+email.value)
-        .then(resp=>resp.text())
-        .then(result=>{
-            if(result>0){ // 이메일 전송 됐으면
-                console.log("인증 번호 발송 성공");
-                authenticEmail = email.value;
-            }else{ // 이메일 전송 실패
-                console.log("인증 번호 발송 실패");
-            }
-        })
-        .catch(error=>{
-            console.log(error);
-            console.log("이메일 전송 에러 발생");
-        });
+//     chk.inputAuth = false;
 
-        alert("인증번호가 발송 되었습니다. 이메일을 확인해주세요.");
+//     if(chk.email){ // 사용 가능한 이메일
+//         // 인증번호 이메일로 보내기 ajax
+//         fetch("/sendEmail/authEmail?email="+email.value)
+//         .then(resp=>resp.text())
+//         .then(result=>{
+//             if(result>0){ // 이메일 전송 됐으면
+//                 console.log("인증 번호 발송 성공");
+//                 authenticEmail = email.value;
+//             }else{ // 이메일 전송 실패
+//                 console.log("인증 번호 발송 실패");
+//             }
+//         })
+//         .catch(error=>{
+//             console.log(error);
+//             console.log("이메일 전송 에러 발생");
+//         });
 
-        authMessage.innerText = "10:00";
-        authMessage.classList.add("for-authTimer");
-        // authMessage.classList.remove("possible-message");
+//         alert("인증번호가 발송 되었습니다. 이메일을 확인해주세요.");
 
-        authTimer = window.setInterval(()=>{
-            authMessage.innerText = (authMin<10 ? "0"+authMin : authMin) + ":" + (authSec<10 ? "0"+authSec : authSec);
+//         authMessage.innerText = "10:00";
+//         authMessage.classList.add("for-authTimer");
+//         // authMessage.classList.remove("possible-message");
+
+//         authTimer = window.setInterval(()=>{
+//             authMessage.innerText = (authMin<10 ? "0"+authMin : authMin) + ":" + (authSec<10 ? "0"+authSec : authSec);
             
-            // 남은 시간 0분 0초
-            if(authMin==0 && authSec==0){
-                chk.inputAuth = false;
-                clearInterval(authTimer);
-                return;
-            }
+//             // 남은 시간 0분 0초
+//             if(authMin==0 && authSec==0){
+//                 chk.inputAuth = false;
+//                 clearInterval(authTimer);
+//                 return;
+//             }
 
-            // 분 숫자 감소
-            if(authSec==0){
-                authSec = 60;
-                authMin--;
-            }
+//             // 분 숫자 감소
+//             if(authSec==0){
+//                 authSec = 60;
+//                 authMin--;
+//             }
 
-            authSec--;
+//             authSec--;
 
-        },1000)
+//         },1000)
         
-    }else{
-        alert("사용 가능한 이메일을 작성해주세요.");
-        email.focus();
-    }
-});
+//     }else{
+//         alert("사용 가능한 이메일을 작성해주세요.");
+//         email.focus();
+//     }
+// });
 
-// 인증 번호 확인
-const inputAuth = document.querySelector("#inputAuth");
-const checkAuthBtn = document.querySelector("#checkAuthBtn");
+// // 인증 번호 확인
+// const inputAuth = document.querySelector("#inputAuth");
+// const checkAuthBtn = document.querySelector("#checkAuthBtn");
 
-checkAuthBtn.addEventListener("click",()=>{
-    if(authMin>0 || authSec>0){ // 유효 시간 내
-        // 여러 값 보낼 때
-        const dataMap = {"inputAuth":inputAuth.value, "email":authenticEmail}
-        const query = new URLSearchParams(dataMap).toString();
-        fetch("/sendEmail/checkAuthKey?" + query)
-        .then(resp=>resp.text())
-        .then(result=>{
-            if(result>0){
-                // alert("인증 완료 되었습니다.");
-                clearInterval(authTimer);
-                authMessage.innerText = "인증 완료 되었습니다.";
-                authMessage.classList.add("possible-message");
-                authMessage.classList.remove("for-authTimer");
-                chk.inputAuth = true;
-            }else{
-                alert("인증번호가 일치하지 않습니다.");
-                chk.inputAuth = false;
-            }
-        })
-        .catch(err=>console.log(err));
-    }else{
-        alert("인증 시간이 만료되었습니다. 인증 번호를 다시 발급 받으세요.");
-    }
-});
+// checkAuthBtn.addEventListener("click",()=>{
+//     if(authMin>0 || authSec>0){ // 유효 시간 내
+//         // 여러 값 보낼 때
+//         const dataMap = {"inputAuth":inputAuth.value, "email":authenticEmail}
+//         const query = new URLSearchParams(dataMap).toString();
+//         fetch("/sendEmail/checkAuthKey?" + query)
+//         .then(resp=>resp.text())
+//         .then(result=>{
+//             if(result>0){
+//                 // alert("인증 완료 되었습니다.");
+//                 clearInterval(authTimer);
+//                 authMessage.innerText = "인증 완료 되었습니다.";
+//                 authMessage.classList.add("possible-message");
+//                 authMessage.classList.remove("for-authTimer");
+//                 chk.inputAuth = true;
+//             }else{
+//                 alert("인증번호가 일치하지 않습니다.");
+//                 chk.inputAuth = false;
+//             }
+//         })
+//         .catch(err=>console.log(err));
+//     }else{
+//         alert("인증 시간이 만료되었습니다. 인증 번호를 다시 발급 받으세요.");
+//     }
+// });
 
-// 비밀번호 검사
-// 영어 소문자,숫자,특수기호를 포함한 10~16자리 비밀번호
-const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,16}$/
-;
-const password = document.getElementById("password");
-const pwMessage = document.getElementById("pwMessage");
+// // 비밀번호 검사
+// // 영어 소문자,숫자,특수기호를 포함한 10~16자리 비밀번호
+// const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{10,16}$/
+// ;
+// const password = document.getElementById("password");
+// const pwMessage = document.getElementById("pwMessage");
 
-password.addEventListener("input",()=>{
-    if(password.value.trim().length==0){
-        password.value="";
-        chk.password=false;
-        pwMessage.innerHTML =
-        "영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
-        pwMessage.classList.add("normal-message");
-        pwMessage.classList.remove("possible-message");
-        pwMessage.classList.remove("error-message");
-        return;
-    }
+// password.addEventListener("input",()=>{
+//     if(password.value.trim().length==0){
+//         password.value="";
+//         chk.password=false;
+//         pwMessage.innerHTML =
+//         "영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
+//         pwMessage.classList.add("normal-message");
+//         pwMessage.classList.remove("possible-message");
+//         pwMessage.classList.remove("error-message");
+//         return;
+//     }
     
-    if(pwRegex.test(password.value)){
-        pwMessage.innerText="유효한 형식의 비밀번호입니다.";
-        pwMessage.classList.add("possible-message");
-        pwMessage.classList.remove("error-message");
-        pwMessage.classList.remove("normal-message");
-        chk.password = true;
+//     if(pwRegex.test(password.value)){
+//         pwMessage.innerText="유효한 형식의 비밀번호입니다.";
+//         pwMessage.classList.add("possible-message");
+//         pwMessage.classList.remove("error-message");
+//         pwMessage.classList.remove("normal-message");
+//         chk.password = true;
         
-    }else{
-        pwMessage.innerHTML =
-        "영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
-        pwMessage.classList.add("error-message");
-        pwMessage.classList.remove("possible-message");
-        pwMessage.classList.remove("normal-message");
-        password.focus();
-        chk.password = false;
-    }
-});
+//     }else{
+//         pwMessage.innerHTML =
+//         "영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 <br>비밀번호를 입력해주세요.";
+//         pwMessage.classList.add("error-message");
+//         pwMessage.classList.remove("possible-message");
+//         pwMessage.classList.remove("normal-message");
+//         password.focus();
+//         chk.password = false;
+//     }
+// });
 
 // 비밀번호 확인 검사
 const checkPassword = document.getElementById("checkPassword");
@@ -370,7 +412,6 @@ phone.addEventListener("input",()=>{
 
     }
 });
-// 백) 전화번호의 첫부분에 붙은 0을 지우고??(할까말까)?? 그 앞에 국가별 전화코드를 붙이면 국제전화번호
 
 // 비상 연락처
 const emergencyCo = document.querySelector("#emergencyCo");
@@ -450,29 +491,15 @@ function chagneSignupBtn(){
         }else{
             signUpBtn.style.backgroundColor = "#c5c5c5";
         }
-    }
+}
     
-    infoAgree1.addEventListener('change',()=>{
-        if(infoAgree1.checked){
-            chk.infoAgree1 = true;
-        }else{
-            chk.infoAgree1 = false;
-        }
-    })
-    infoAgree2.addEventListener('change',()=>{
-        if(infoAgree2.checked){
-            chk.infoAgree2 = true;
-        }else{
-            chk.infoAgree2 = false;
-        }
-    })
+    
     
 // 필수 입력 검사
 const signUpForm = document.getElementById("signUpForm");
 
 signUpForm.addEventListener("submit",e=>{
-    if (
-        !(
+    if (!(
         email.validity.valid &&
         inputAuth.validity.valid &&
         checkPassword.validity.valid &&
@@ -523,55 +550,7 @@ signUpForm.addEventListener("submit",e=>{
     }
 });
 
-// 회원가입 진행
 
-// 국제 번호 intlTel
-var input = document.querySelector("#phone");
-
-var iti = window.intlTelInput(input, {
-    separateDialCode: true,
-    utilsScript: "build/js/utils.js"
-});
-
-// 회원가입 버튼 누르면
-// function submitForm() {}
-signUpForm.addEventListener("click",()=>{
-    // 국제 나라 번호, 국가 코드 가져오기 (name속성 추가)
-    const selectedCountryData = iti.getSelectedCountryData();
-    const countryCode = selectedCountryData.iso2;
-    countryCode.setAttribute("name", "countryCode");
-    // 선택한 국가의 국가 코드
-    // document.getElementById("result").innerText = countryCode;
-    console.log("국가 코드:", countryCode);
-    
-    // const countryName = "Korea"
-    // iti.setCountry(countryName);
-
-    // 국가명
-    // var title = document.querySelector(".iti__selected-flag");
-    
-    // 국제 번호 앞자리
-    const countryNo = document.querySelector(".iti__selected-dial-code");
-    countryNo.setAttribute("name", "userTel");
-
-    // console.log("전화번호 : " + input.value);
-    // // console.log("국가 : " + title.title);
-    // console.log("국제전화 나라번호 : " + countryNo.innerText);
-
-    // name 값 
-    const data = {
-        "email": email, "password" : password, "lastName" : lastname, "firstName" : firstName, "countryCode" : countryCode, "phone" : phone, "countryNo" : countryNo, "emergencyCo" : emergencyCo, "passportNo" : passportNo,
-        "primaryLanguage" : primaryLanguage
-    }
-
-
-
-
-
-
-
-
-    });
 
 
 

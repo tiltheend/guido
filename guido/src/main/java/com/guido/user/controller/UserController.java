@@ -123,9 +123,40 @@ public class UserController {
 	
 	// 투어리스트 회원가입 진행 -- 마저 작성하기
 	@PostMapping("/signUp/tourist")
-	@ResponseBody
-	public String touristSignUp(User user, String[] userName, String[] userTel) {
-		return null;
+	public String touristSignUp(@RequestParam("userTel") String[] telValues,@RequestParam("userName") String[] nameValues, 
+			User inputUser, RedirectAttributes ra,
+			@RequestHeader(value="referer") String referer
+			) {
+		
+		// emergencyContact 비어있으면 null로 저장
+		if(inputUser.getEmergencyContact().equals("")) {
+			inputUser.setEmergencyContact(null); 
+		}
+		
+		// name 문자열 (이름, 성)
+		String name = String.join(" ", nameValues);
+		inputUser.setUserName(name);
+		
+		// tel 문자열 (국가번호, 번호)
+		String tel = String.join(" ", telValues);
+		inputUser.setUserTel(tel);
+		
+		
+		int result = service.touristSignUp(inputUser);
+		System.out.println(inputUser);
+		System.out.println(result);
+		
+		String path = "redirect:";
+		
+		if(result>0) {
+			ra.addFlashAttribute("message", "guido에 가입해주셔서 감사합니다. 서비스 이용을 위해 로그인을 해주세요.");
+			path += "/";
+		}else {
+			ra.addFlashAttribute("message", "회원가입 중 문제가 발생했습니다. 다시 시도해주세요.");
+			path += referer;
+		}
+			
+		return path;
 	}
 	
 	
