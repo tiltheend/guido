@@ -145,7 +145,8 @@
                             <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${product.thumbnail}" alt="productImg"></a>
                         </div>
                         <div class="sale-content">
-                            <h2 th:text="${product.productName}">상품 타이틀</h2>
+                            <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
+                            <h2 th:text="${product.productName}">상품 타이틀</h2></a>
                             <p><img th:src="@{/images/profile/location.png}" alt="location">[[${product.regionName}]]
                                 <th:block th:each="course : ${product.tourCourse}">
                                     <span th:if="${course.bossCourseFL=='Y'}">- [[${course.courseName}]]</span>
@@ -159,7 +160,17 @@
                                 <th:block th:text="${product.productDateList.get(0).productDate}"></th:block>
                                 <th:block th:if="${#lists.size(product.productDateList)>1}" th:text="|~ ${product.productDateList.get(product.productDateList.size() - 1).productDate}|"></th:block>
                             </p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${product.guideLanguage}]]</p>
+                            <p>
+                                <img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${product.guideLanguage}]]
+                            </p>
+                            <div th:with="pack = ${product.productPackage}">
+                                <span>
+                                    <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
+                                    <span th:text="${product.reviewStars}">평균 별점</span>
+                                </span>
+                                <h3 th:if="${pack==1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / person'"></h3>
+                                <h3 th:if="${pack>1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / total'"></h3>
+                            </div>
                         </div>
                     </li>
                 </ul>

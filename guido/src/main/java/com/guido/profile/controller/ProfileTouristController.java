@@ -59,7 +59,7 @@ public class ProfileTouristController {
 			
 			model.addAttribute("user", user);
 			
-			System.out.println(user.getUserName()+" 가이드 프로필");
+//			System.out.println(user.getUserName()+" 가이드 프로필");
 			
 			// 가이드 자기 소개
 			User guide = GuideService.selectGuideInfo(userNo);

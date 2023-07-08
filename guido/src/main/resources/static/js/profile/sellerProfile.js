@@ -950,7 +950,36 @@ function productListFn(e){
                 languageImgElement.alt = "language";
                 pElement3.appendChild(languageImgElement);
                 pElement3.appendChild(document.createTextNode("Guided language: " + product.guideLanguage));
+            
                 saleContentElement.appendChild(pElement3);
+
+                const containerDiv = document.createElement('div');
+
+                const starSpan = document.createElement('span');
+                const starImage = document.createElement('img');
+                starImage.src = '/images/profile/slideStar.png';
+                starImage.alt = 'slideStar';
+                starSpan.appendChild(starImage);
+
+                const reviewSpan = document.createElement('span');
+                const reviewStars = document.createTextNode(product.reviewStars);
+                reviewSpan.appendChild(reviewStars);
+
+                containerDiv.appendChild(starSpan);
+                containerDiv.appendChild(reviewSpan);
+
+                const priceH3 = document.createElement('h3');
+                if (reservation.productPackage=='1') {
+                const priceText = document.createTextNode(`₩ ${product.productPrice.toLocaleString()} / person`);
+                    priceH3.appendChild(priceText);
+                } else {
+                const priceText = document.createTextNode(`₩ ${product.productPrice.toLocaleString()} / total`);
+                    priceH3.appendChild(priceText);
+                }
+
+                containerDiv.appendChild(priceH3);
+
+                saleContentElement.appendChild(containerDiv);
 
                 liElement.appendChild(saleContentElement);
                 productList.appendChild(liElement);
@@ -1060,15 +1089,43 @@ if(productMoreBtn !=null) {
 
                         saleContentElement.appendChild(pElement2);
                     }
-
                     const pElement3 = document.createElement("p");
                     const languageImgElement = document.createElement("img");
                     languageImgElement.src = "/images/profile/language.png";
                     languageImgElement.alt = "language";
                     pElement3.appendChild(languageImgElement);
                     pElement3.appendChild(document.createTextNode("Guided language: " + product.guideLanguage));
+                
                     saleContentElement.appendChild(pElement3);
-
+    
+                    const containerDiv = document.createElement('div');
+    
+                    const starSpan = document.createElement('span');
+                    const starImage = document.createElement('img');
+                    starImage.src = '/images/profile/slideStar.png';
+                    starImage.alt = 'slideStar';
+                    starSpan.appendChild(starImage);
+    
+                    const reviewSpan = document.createElement('span');
+                    const reviewStars = document.createTextNode(product.reviewStars);
+                    reviewSpan.appendChild(reviewStars);
+    
+                    containerDiv.appendChild(starSpan);
+                    containerDiv.appendChild(reviewSpan);
+    
+                    const priceH3 = document.createElement('h3');
+                    if (reservation.productPackage=='1') {
+                    const priceText = document.createTextNode(`₩ ${product.productPrice.toLocaleString()} / person`);
+                        priceH3.appendChild(priceText);
+                    } else {
+                    const priceText = document.createTextNode(`₩ ${product.productPrice.toLocaleString()} / total`);
+                        priceH3.appendChild(priceText);
+                    }
+    
+                    containerDiv.appendChild(priceH3);
+    
+                    saleContentElement.appendChild(containerDiv);
+    
                     liElement.appendChild(saleContentElement);
                     productList.appendChild(liElement);
                 }
