@@ -99,7 +99,16 @@
 		JOIN "USER" U ON(R.USER_NO=U.USER_NO)
 		JOIN "PRODUCT_DT" PD ON(R.PRODUCT_DT_NO= PD.PRODUCT_DT_NO) 
 		JOIN "PRODUCT_OPTION" USING(OPTION_NO) 
-		WHERE ORDER_NUMBER = #{orderNumber}
+			<where>
+		        <if test="orderNumber != null">
+					 AND ORDER_NUMBER = #{orderNumber}
+		        </if>
+			</where>
+			<where>
+		        <if test="reservationNo != null">
+					AND RESERVATION_NO = #{reservationNo}
+		        </if>
+			</where>
 	</select>
 	
 	
