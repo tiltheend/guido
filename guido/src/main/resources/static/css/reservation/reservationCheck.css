@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: darkgray;
+    background-color: #f0f0f0;
 }
 
 /* 예약 체크 컨테이너 */
@@ -16,7 +16,8 @@ body{
     flex-direction: column;
     align-items: center;
     margin: auto;
-    padding: 2vh 0;
+    padding: 20px 0;
+    min-width: 707px;
 }
 
 /* 예약체크 감사인사 */
@@ -32,6 +33,11 @@ body{
     background-color: white;
     border-radius: 10px;
     margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ordercheck--container__middle>div{
+    width: 100%;
 }
 
 .ordercheck--container>div{
@@ -78,7 +84,7 @@ body{
     position: relative; 
     border-radius: 1px;
     border: 2px solid #F0F0F0;
-    margin-right: 20px;
+    margin-right: 30px;
 }
 
 .ordercheck--img__middle::before {
@@ -135,4 +141,65 @@ body{
     font-size: 17px;
     font-weight: 500;
     text-decoration: underline;
+}
+
+
+/* 예약내역 컨텐츠 위치 div */
+.content-location{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.content-location>img{
+    height: 20px;
+    margin-right: 10px;
+}
+
+.content-location>div{
+    color: #5c5c5c;
+}
+
+
+/* 예약내역 하단 div */
+.ordercheck--container__middle>div:nth-of-type(3){
+    display: flex;
+    justify-content: end;
+}
+
+.ordercheck--bottom__middle{
+    width: 40%;
+}
+
+.ordercheck--bottom__middle>div{
+    display: flex;
+    justify-content: space-between;
+    font-size: 17px;
+    color: #0F4957;
+    font-weight: 500;
+}
+
+/* 수수료 div */
+.ordercheck--extrafee__bottom{
+    margin-top: 15px;
+}
+
+/* 총 결제 금액 div */
+.ordercheck--total__bottom>div{
+    font-size: 21px;
+    font-weight: 700;
+}
+
+/* 예약목록 보기 버튼 */
+.orderlist-btn{
+    font-size: 25px;
+    text-decoration: underline;
+    margin-top: 20px;
+    background-color: transparent;
+    border: 0;
+    color: #0F4957;
+}
+
+.orderlist-btn:hover{
+    color: #145363af;
 }

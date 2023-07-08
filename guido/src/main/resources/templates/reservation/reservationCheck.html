@@ -47,29 +47,69 @@
 
                 <div class="ordercheck--left__middle">
 
-                    <div class="ordercheck--img__middle">
-                        <img th:src="${product.imageList[0].filePath}">
-                    </div>
-
+                    <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
+                        <div class="ordercheck--img__middle">
+                            <img th:src="${product.imageList[0].filePath}">
+                        </div>
+                    </a>
+                    
                     <div class="ordercheck--content">
-                        <div th:text="${product.productName}" class="content-productname">상품명</div>
+                        <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
+                            <div th:text="${product.productName}" class="content-productname">상품명</div>
+                        </a>
                         <div id="reservationDate"></div>
                         <div id="reservationDuration" th:if="${product.productPackage==1}">[[${product.tourDuration}]]hr(s) in [[${product.regionName}]]</div>
                         <div id="guideLanguage" th:text="|guide language : ${product.guideLanguage}|"></div>
+                        <!-- <div class="content-location">
+                            <img th:src="@{/images/productDetail/location_icon.svg}">
+                            <div th:text="|${product.regionName} - ${product.courseName}|"></div>
+                        </div> -->
                         <div id="guest"></div>
+
                     </div>
                     
-
+                    
                 </div>
+                
+                <!-- <div th:text="|&#8361; *{#numbers.formatInteger(totalPrice, 1, 'COMMA')}|" class="ordercheck--right__middle"></div> -->
+                
+            </div>
 
-                <div th:text="|&#8361; *{#numbers.formatInteger(totalPrice, 1, 'COMMA')}|" class="ordercheck--right__middle"></div>
 
+            
+            <div class="ordercheck--divisionline"></div>
+            
+            
+            <div>
+                <div class="ordercheck--bottom__middle">
+                    
+                    <div class="ordercheck--subtotal__bottom">
+                        <div>Subtotal</div>
+                        <div th:text="|&#8361; ${#numbers.formatInteger(orderPrice, 1, 'COMMA')}|">상품 금액</div>
+                    </div>
+                    
+                    <div class="ordercheck--extrafee__bottom">
+                        <div>Extra Fee</div>
+                        <div th:text="|&#8361; ${#numbers.formatInteger(extraFee, 1, 'COMMA')}|">수수료</div>
+                    </div>
+
+                    <div class="ordercheck--divisionline"></div>
+
+                    <div class="ordercheck--total__bottom">
+                        <div>Total</div>
+                        <div th:text="|&#8361; *{#numbers.formatInteger(totalPrice, 1, 'COMMA')}|"></div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
 
+
+        <a th:href="@{/profile/touristReservation}"><button class="orderlist-btn">view order list</button></a>
     </div>
+
+
 
     <script th:inline="javascript">
 

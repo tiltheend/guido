@@ -71,10 +71,7 @@
                         
                         <div class="reservation--location__detail reservation--short">
                             <img th:src="@{/images/productDetail/location_icon.svg}">
-                            <div>[[${product.regionName}]]
-                                    <th:block th:each="course : ${product.tourCourse}" th:if="${course.bossCourseFL=='Y'}">
-                                    - [[${course.courseName}]]
-                                </th:block>
+                            <div>[[${product.regionName}]] - [[${product.courseName}]]
                             </div>
                         </div>
                         
