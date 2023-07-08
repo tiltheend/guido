@@ -16,52 +16,8 @@ const chk = {
     "infoAgree1" : false,
     "infoAgree2" : false
 };
-// // 전체 약관 동의
 
-const checkAllLabel = document.getElementById("checkAllLabel");
-const checkAll = document.getElementById("checkAll");
 
-const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#checkAll)');
-
-// 전체 동의 체크박스
-checkAllLabel.addEventListener('click', function() {
-    const isChecked = checkAll.checked;
-
-  // 하위 체크박스들의 상태를 전체 동의 체크박스와 동일하게 설정
-    checkboxes.forEach(function(checkbox) {
-        checkbox.checked = !(isChecked);
-    });
-    
-});
-
-// 하위 체크박스 클릭 이벤트 리스너 등록
-checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('click', function() {
-    // 하위 체크박스 중 하나라도 해제되었을 때 전체 동의 체크박스도 체크 해제
-        if (!this.checked) {
-            checkAll.checked = false;
-        }
-    });
-});
-
-const infoAgree1 = document.getElementById("infoAgree1");
-const infoAgree2 = document.getElementById("infoAgree2");
-
-// 체크
-infoAgree1.addEventListener('change',()=>{
-    if(infoAgree1.checked){
-        chk.infoAgree1 = true;
-    }else{
-        chk.infoAgree1 = false;
-    }
-})
-infoAgree2.addEventListener('change',()=>{
-    if(infoAgree2.checked){
-        chk.infoAgree2 = true;
-    }else{
-        chk.infoAgree2 = false;
-    }
-})
 
 
 // 약관 설명 펼치기
@@ -118,7 +74,6 @@ arrow2.addEventListener("click",()=>{
 // ------------ 유효성 검사 ------------
 
  // 구글 이메일 input value로 set
-const googleEmail = /*[[${session.googleEmail}]]*/ "구글 유저의 이메일";
 
 const authLable = document.querySelector('label[for="inputAuth"]');
 const authPart = document.querySelector(".authPart");
@@ -461,8 +416,46 @@ primaryLanguage.addEventListener("input",()=>{
     }else{
         pLanguageMessage.innerText="";
         chk.primaryLanguage = true;
-    }
-});
+    }    
+});    
+
+// 약관 동의 체크
+
+const infoAgree1 = document.getElementById("infoAgree1");
+const infoAgree2 = document.getElementById("infoAgree2");
+
+// 전체 약관 동의
+
+const checkAllLabel = document.getElementById("checkAllLabel");
+const checkAll = document.getElementById("checkAll");
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#checkAll)');
+
+// 전체 동의 체크박스
+checkAllLabel.addEventListener('click', function() {
+    const isChecked = checkAll.checked;
+
+  // 하위 체크박스들의 상태를 전체 동의 체크박스와 동일하게 설정  
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = !(isChecked);
+        if(infoAgree1.checked) chk.infoAgree1 = true;
+        else chk.infoAgree1 = false;
+        if(infoAgree2.checked) chk.infoAgree2 = true;
+        else chk.infoAgree2 = false;
+    });    
+    
+});    
+
+// 하위 체크박스 클릭 이벤트 리스너 등록
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('click', function() {
+    // 하위 체크박스 중 하나라도 해제되었을 때 전체 동의 체크박스도 체크 해제    
+        if (!this.checked) {
+            checkAll.checked = false;
+        }    
+    });    
+});    
+
 
 // input 다 채워지면(유효성 검사는 x) 회원가입 버튼 색상 변경
 // +체크 추가
@@ -471,22 +464,25 @@ const signUpBtn = document.getElementById("signUpBtn");
 const validity = {email, inputAuth, password, checkPassword, lastName, firstName, phone, passportNo,primaryLanguage};
 for(let valid in validity)
 validity[valid].addEventListener('input',chagneSignupBtn);
-// 체크 동의
+
+// 제출 버튼 유효화
 infoAgree1.addEventListener('change',chagneSignupBtn);
 infoAgree2.addEventListener('change',chagneSignupBtn);
+checkAll.addEventListener('change', chagneSignupBtn);
 
 function chagneSignupBtn(){
     if (email.validity.valid&&
-        inputAuth.validity.valid&&
         checkPassword.validity.valid&&
         lastName.validity.valid&&
         firstName.validity.valid&&
         phone.validity.valid&&
         passportNo.validity.valid&&
         primaryLanguage.validity.valid&&
-        password.validity.valid&&
+        password.validity.valid
+        &&
         infoAgree1.checked&&
-        infoAgree2.checked){
+        infoAgree2.checked
+        ){
             signUpBtn.style.backgroundColor = "#1c797d";
         }else{
             signUpBtn.style.backgroundColor = "#c5c5c5";
@@ -501,7 +497,6 @@ const signUpForm = document.getElementById("signUpForm");
 signUpForm.addEventListener("submit",e=>{
     if (!(
         email.validity.valid &&
-        inputAuth.validity.valid &&
         checkPassword.validity.valid &&
         lastName.validity.valid &&
         firstName.validity.valid &&
@@ -513,6 +508,7 @@ signUpForm.addEventListener("submit",e=>{
         infoAgree2.checked
         )
     ) {
+        alert("뭔가 막힘!");
         e.preventDefault(); // 제출을 막음
         return;
     }

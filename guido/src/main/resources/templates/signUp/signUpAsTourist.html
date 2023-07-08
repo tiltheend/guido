@@ -426,24 +426,12 @@
     </div>
 </div>
 <!-- <th:block th:replace="~{common/footer}"></th:block> -->
+    <script th:inline="javascript">
+        const googleEmail = /*[[${session.googleEmail}]]*/ "구글 유저의 이메일";
+    </script>
     <script th:src="@{/js/signUp/signUpAsTourist.js}"></script>
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
     <script th:inline="javascript">
-        // // 구글 이메일 input value로 set
-        // const googleEmail = /*[[${session.googleEmail}]]*/ "구글 유저의 이메일";
-
-        // const authLable = document.querySelector('label[for="inputAuth"]');
-        // const authPart = document.querySelector(".authPart");
-
-        // if(googleEmail){
-        //     email.validity.valid = true;
-        // }
-        // if(email.value==googleEmail){
-        //     chk.email=true;
-        //     chk.inputAuth=true;
-        //     sendAuthBtn.style.display="none";
-        //     authPart.style.display="none";
-        // }
 
         // 회원가입 진행
 
@@ -487,37 +475,6 @@
             // console.log("전화번호 : " + input.value);
             // // console.log("국가 : " + title.title);
             // console.log("국제전화 나라번호 : " + countryNo.innerText);
-
-            // 보낼 form 값 (form input 전달)
-            // const signUpFormData = new FormData(signUpForm);
-
-            // // 다른 객체 데이터 추가 (input말고)
-            // // const data = { "countryCode" : countryCode, "countryNo" : countryNo };
-            // // 보낼 값 추가
-            // // formData.append('data',JSON.stringify(data));
-
-            // fetch('/user/signUp/tourist',{
-            //     method : 'post',
-            //     headers : {
-            //         'Content-Type':'application/json',
-            //         'Accept' : 'application/json'
-            //     },
-            //     body : 'signUpFormData'
-            // })
-            // .then(resp=>resp.text())
-            // .then(result=>{
-            //     if(result==0){ // 실패 시
-            //         alert("회원가입 중 문제가 발생하였습니다. 다시 시도해주세요.");
-            //         window.location.href = window.location.href;
-            //     }
-            //     if(result>0){
-            //         alert("회원가입에 성공했습니다! 로그인 후 guido의 서비스를 이용해주세요.");
-            //         window.location.href = '/templates/login/login.html';
-            //     }
-            // })
-            // .catch(e=>console.log(e));
-
-
 
     });
 
