@@ -332,6 +332,14 @@
 		AND PRODUCT_STATE = 'N'
 	</select>
 	
+	<!-- 예약 개수 세기 -->
+	<select id="reservarionCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM RESERVATION
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE PRODUCT.USER_NO= #{userNo}
+	</select>
+	
 	
 	<!-- 가이드 예약 리스트 (구매자들 예약 확인용) -->
 	<select id="GuideReservationList" resultMap="reservation_rm">
@@ -351,9 +359,33 @@
 		RIGHT JOIN "PRODUCT_OPTION" PO USING (OPTION_NO)
 		WHERE  P.USER_NO = #{userNo}
 		ORDER BY RESERVATION_NO DESC
+		FETCH FIRST 3 ROWS ONLY
 	</select>
 	
-	
+	<!-- 가이드 예약 리스트 (3개씩 더보기) -->	
+	<select id="guideMoreReservationList" resultMap="reservation_rm">
+		SELECT * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY RESERVATION_NO DESC) AS NUM
+				,RESERVATION_NO, R.PRODUCT_NO,  P.PRODUCT_NAME, P.PRODUCT_PACKAGE, 
+						TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, P.TOUR_DURATION, 
+						R.USER_NO, U.USER_NAME, R.TOTAL_PRICE,
+						RESERVATION_STATE, GUEST_COUNT, PO.OPTION_NAME,
+						T.PRIMARY_LANGUAGE , T.FACE_IMG,
+					   (SELECT FILE_PATH FROM "FILE" F 
+					    WHERE F.PRODUCT_NO = R.PRODUCT_NO
+					    AND F.FILE_ORDER = 1) AS THUMBNAIL
+				FROM RESERVATION R
+				RIGHT JOIN "USER" U ON (R.USER_NO = U.USER_NO)
+				RIGHT JOIN "TOURIST" T ON (R.USER_NO = T.USER_NO)
+				RIGHT JOIN "PRODUCT" P ON (P.PRODUCT_NO = R.PRODUCT_NO)
+				RIGHT JOIN "PRODUCT_DT" USING (PRODUCT_DT_NO)
+				RIGHT JOIN "PRODUCT_OPTION" PO USING (OPTION_NO)
+				WHERE  P.USER_NO = #{userNo}
+				ORDER BY RESERVATION_NO DESC
+			)
+		<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
+			ORDER BY NUM
+	</select>
 	
 	
 </mapper>

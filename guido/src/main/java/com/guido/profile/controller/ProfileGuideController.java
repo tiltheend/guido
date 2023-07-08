@@ -160,7 +160,32 @@ public class ProfileGuideController {
 			System.out.println(r);
 		}
 		
+		// 예약 개수 세기
+		int reservarionCount = service.reservarionCount(userNo);
+		model.addAttribute("reservarionCount", reservarionCount);
+		
 		return "profile/sellerReservation";
+	}
+	
+	// 가이드 예약 리스트 (비동기 조회)
+	@ResponseBody
+	@PostMapping(value="/guideReservationList", produces="application/json; charset=UTF-8")
+	public List<Reservation> guideReservationList(@RequestBody int userNo){
+
+		List<Reservation> guideReservationList = service.GuideReservationList(userNo);
+		// int reservationCount = service.reservationCount(userNo);
+		
+		return guideReservationList;
+	}
+	
+	// 가이드 예약 리스트 (3개씩 더보기)
+	@ResponseBody
+	@PostMapping(value="/guideMoreReservationList", produces="application/json; charset=UTF-8")
+	public List<Reservation> guideMoreReservationList(@RequestBody int userNo){
+		
+		List<Reservation> guideMoreReservationList = service.guideMoreReservationList(userNo);
+		
+		return guideMoreReservationList;
 	}
 	
 

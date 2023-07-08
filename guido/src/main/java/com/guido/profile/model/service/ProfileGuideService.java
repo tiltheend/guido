@@ -85,12 +85,26 @@ public interface ProfileGuideService {
 	 */
 	int productCount(int userNo);
 
+	/** 예약 개수 세기
+	 * @param userNo
+	 * @return
+	 */
+	int reservarionCount(int userNo);
 
 	/** 가이드 예약 리스트 (구매자들 예약 확인용)
 	 * @param userNo
 	 * @return
 	 */
 	List<Reservation> GuideReservationList(int userNo);
+
+
+	/** 가이드 예약 리스트 (3개씩 더보기)
+	 * @param userNo
+	 * @return
+	 */
+	List<Reservation> guideMoreReservationList(int userNo);
+
+
 
 
 

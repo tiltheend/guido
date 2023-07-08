@@ -90,10 +90,23 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 		return mapper.reviewReplyDel(reviewNo);
 	}
 
+	// 예약 개수 세기
+	@Override
+	public int reservarionCount(int userNo) {
+		return mapper.reservarionCount(userNo);
+	}
+
+
 	// 가이드 예약 리스트 (구매자들 예약 확인용)
 	@Override
 	public List<Reservation> GuideReservationList(int userNo) {
 		return mapper.GuideReservationList(userNo);
+	}
+	
+	// 가이드 예약 리스트 (3개씩 더보기)
+	@Override
+	public List<Reservation> guideMoreReservationList(int userNo) {
+		return mapper.guideMoreReservationList(userNo);
 	}
 
 	

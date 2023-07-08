@@ -172,6 +172,11 @@
     display: flex; flex-direction: column; justify-content: center;
     position: absolute; left: 12px; bottom: 12px; color: #fff;
 }
+.seller-profile-top .reservation-list-box .guest-profile-img h3{
+    /* background-color: #0F4957;  */
+    padding: 4px; border-radius: 10px;
+    width: 100%;
+}
 .seller-profile-top .reservation-list-box .guest-profile-img>a>img{
     width: 90px; height: 90px;
     border-radius: 50%;
@@ -185,6 +190,7 @@
     display: flex; flex-direction: column; 
     margin: 20px;
     /* overflow: auto; height: 260px; */
+    width: 60%;
 }
 .seller-profile-top .reservation-list-box .sale-content>h3:nth-of-type(1){ /* 상품 제목 */
     font-size: 1.375rem; font-weight: normal;
@@ -233,17 +239,29 @@
     text-decoration: underline; 
     /* width: 100%; text-align: left; */
 }
-
-.seller-profile-top .reservation-list-box .sale-content>div>img{
-    width: 32px; height: 32px;
+.seller-profile-top .reservation-list-box .sale-content>div>p{
+    margin-right: 36px;
+}
+.seller-profile-top .reservation-list-box .sale-content>div>p>img{
+    width: 28px; height: 28px;
     position: absolute; bottom: 20px; right: 20px;
     cursor: pointer;
 }
+.seller-profile-top .reservation-list-box .sale-content>h3{width: 100%;}
 
-
-
+.seller-profile-top .reservation-list-more{ /* 구매자 더보기 버튼 */
+    width: 100%; height: 62px;
+    background-color: #0F4957; color: #fff;
+    font-size: 1rem; text-align: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 40px;
+}
+.seller-profile-top .reservation-list-more:hover{ /* 리뷰 더보기 버튼 */
+    /* background-color: #fff; color: #0F4957; */
+    background-color: #1C797D;
+}
     
-@media screen and (max-width : 1024px) {
+@media screen and (max-width : 1200px) {
     /* 판매자 프로필 */
     .seller-profile-top{
         display: flex; justify-content: space-between;
@@ -331,7 +349,7 @@
 
     /* 상품 리스트 */
     .seller-profile-top .reservation-list-box .sale-img {
-        width: 260px;
+        min-width: 260px;
         height: 260px;
     }
 
@@ -431,6 +449,7 @@
     }
     .seller-profile-top .reservation-list-box .sale-content>div>h2{
         font-size: 1.2rem;
+        width: 100%;
     }
     /* .seller-profile-top .reservation-list-box .sale-content>p {
         font-size: 0.875rem;
@@ -439,7 +458,42 @@
         bottom: -110px; left: 0;
         font-size: 0;
     }
-    .seller-profile-top .reservation-list-box .guest-profile-img>img{
-        width: 0; height: 0;
+    .seller-profile-top .reservation-list-box .guest-profile-img>a{
+        /* width: 0; height: 0; */
+        position: relative;
+    }
+    .seller-profile-top .reservation-list-box .guest-profile-img{
+    }
+    .seller-profile-top .reservation-list-box .sale-content>div{
+        display: flex; flex-direction: column;
+    }
+    .seller-profile-top .reservation-list-box .sale-content>div>p {
+        margin-right: 40px;
+        position: absolute;
+        top: 190px;
+        left: 110px;
+        width: 22%; height: 90px;
+        
+    }
+
+}
+
+@media screen and (max-width : 620px) {
+    .seller-profile-top .reservation-list-box .guest-profile-img>a>img{
+        width: 60px; height: 60px;
+    }
+    .seller-profile-top .reservation-list-box .sale-content>div>p {
+        top: 170px;
+        left: 22px;
+        width: 39%;
+        height: 110px;
+    }
+    .seller-profile-top .reservation-list-box .sale-content>div>p>span {
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 }

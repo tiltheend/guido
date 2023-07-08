@@ -84,7 +84,8 @@
                 
             <div class="reservation-list"> <!-- 판매자 예약 내역 -->
                 <div> <!-- 제목 -->
-                    <h1>Reservation (<span th:text="${#lists.size(GuideReservationList)}">리뷰 갯수</span>)</h1>
+                    <!-- <h1>Reservation (<span>0</span>)</h1> -->
+                    <h1>Reservation (<span th:text="${reservarionCount}">리뷰 갯수</span>)</h1>
                 </div>
 
                 <ul class="reservation-list-box">
@@ -96,25 +97,26 @@
                                     <img th:unless="${reservation.faceImg}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                     <img th:if="${reservation.faceImg}" th:src="${reservation.faceImg}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->        
                                 </a>
-                                <h3 th:text="${reservation.userName}">Name</h3>
                             </div>
                         </div>
                         <div class="sale-content">
                             <h3 th:text="${reservation.productName}">상품명</h3>
-                            <h3 th:text="${reservation.productDate}">상품명</h3>
-                            <h3 th:with="package = ${reservation.productPackage}">
-                                <th:block th:if="${package==1}">a [[${reservation.tourDuration}]]-hours day trip [[${reservation.optionName}]]</th:block>
-                                <th:block th:if="${package>1}">[[${reservation.productPackage}]] day trip</th:block>
+                            <h3 th:with="package = ${reservation.productPackage}"> 
+                                <th:block th:if="${package==1}">[[${reservation.productDate}]]
+                                    <th:block th:if="${reservation.optionName}">[ [[${reservation.optionName}]] ]</th:block> 
+                                </th:block>
+                                <th:block th:if="${package>1}">[[${reservation.productDate}]]</th:block>
                             </h3>
+                            <h3>KRW <span th:text="${#numbers.formatInteger(reservation.totalPrice, 1, 'COMMA')}+ ' / total'">000,000</span></h3>
                             <p><img th:src="@{/images/profile/language.png}" alt="language">Tourist language: [[${reservation.primaryLanguage}]]</p>
                             <div>
                                 <h2><span th:text="${reservation.guestCount}">guestCount</span> Guests</h2>
-                                <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting">
+                                <p><span>[[${reservation.userName}]]</span> <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting"></p>
                             </div>
                         </div>
                     </li>
                 </ul>
-
+                <button class="reservation-list-more">more reservation list</button>
             </div> <!-- // 판매자 예약 내역 -->
 
         </div>
