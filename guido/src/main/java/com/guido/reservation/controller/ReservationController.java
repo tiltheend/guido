@@ -191,9 +191,12 @@ public class ReservationController {
 		map.put("orderNumber", orderNumber);
 		map.put("reservationNo", reservationNo);
 		
+		System.out.println(map);
 		
 		 if(reservationNo!=null)
 			 reservation = service.selectReservation(map);
+		 
+		 System.out.println(reservation);
 		 
 		 if(reservation==null)
 			 return "redirect:/";
