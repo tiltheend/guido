@@ -7,7 +7,7 @@
     <title>guido</title>
   </head>
   <style>
-    main a button {
+    main a button, main>form>button {
       width: 200px;
       height: 30px;
       background-color: #0f4957;
@@ -20,7 +20,7 @@
       <!-- <th:block th:replace="~{common/header}"></th:block> -->
 
       <a th:href="@{/productDetail/product/15?guest=3}"><button>상품 상세 페이지</button></a> <br>
-      <!-- <a th:href="@{/productDetail/product/1}"><button>상품 상세 페이지</button></a> -->
+      <a th:href="@{/reservation/order_result?order_id=20230705-542802}"><button>예약 완료 페이지</button></a> <br>
     
       <a th:if="${session.loginUser}" th:href="@{/profile/{userNo}(userNo=${session.loginUser.userNo})}">
         <button>마이페이지</button>
@@ -47,6 +47,11 @@
       <br/>
 
       <a th:href="@{/admin/eventList}"><button>관리자 페이지</button></a>
+      <form th:action="@{/user/login}" method="POST" style="display:inline">
+        <input type="hidden" name="userEmail" value="manager00@gmail.com">
+        <input type="hidden" name="userPassword" value="pass00">
+        <button>관리자 로그인</button>
+      </form>
 
       <br/>
       <hr/>

@@ -32,7 +32,7 @@
             <div class="content-header">
                 <h1 class="content-title">가이드 승인 요청 관리</h1>
                 <div class="btn-container">
-                    <button class="btn btn5 approve-checked">승인하기</button>
+                    <button class="btn btn5" id="approveBtn">승인하기</button>
                 </div>
             </div>
 
@@ -42,7 +42,12 @@
                 <!-- 카운트 -->
                 <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
                 <!-- 검색창 -->
-                <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
+                <form th:action="${pageName}" method="get">
+                    <div class="search-container">
+                        <input type="text" name="query" id="search">
+                        <button id="searchBtn"><img th:src="@{/images/admin/searchBtn.svg}" alt="" id="searchImg"></button>
+                    </div>
+                </form>
             </div>
 
             <!-- 테이블 -->
@@ -63,14 +68,13 @@
                             <td th:text="*{CREATE_DT}">가입일</td>
                             <td th:text="*{CONFIRMATION_NO}"></td>
                             <td>
-                                <button class="btn btn6 row-btn"><!-- 승인버튼 --></button>
+                                <button class="btn btn6 approve-btn"><!-- 승인버튼 --></button>
                             </td>
                         </tr>
                     </th:block>
                 </tbody>
             </table>
-            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
+            <th:block th:replace="~{/admin/pagination}"/>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>

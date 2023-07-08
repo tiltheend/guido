@@ -85,7 +85,10 @@
     font-size: 1.625rem;
 }
 .seller-profile-top .profile-seller-info div:last-of-type>p:last-of-type{
-    font-size: 0.625rem;
+    /* font-size: 0.625rem; */
+}
+.seller-profile-top .profile-seller-info .seller-info>h2>span {
+    font-size: 1rem;
 }
 
 /* 유저 이메일 */
@@ -155,6 +158,7 @@
     background-color: #FFE69A;
     border-radius: 15px; margin: 10px;
     position: relative;
+    width: 40%;
 }
 .seller-profile-top .reservation-list-box .sale-img>img{ 
     width: 100%; height: 100%;
@@ -165,7 +169,7 @@
     display: flex; flex-direction: column; justify-content: center;
     position: absolute; left: 12px; bottom: 12px; color: #fff;
 }
-.seller-profile-top .reservation-list-box .guest-profile-img>img{
+.seller-profile-top .reservation-list-box .guest-profile-img>a>img{
     width: 90px; height: 90px;
     border-radius: 50%;
     background-color: #B1D8DA;

@@ -1,6 +1,8 @@
 package com.guido.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +38,22 @@ public class AdminController {
 
 	@GetMapping("/{pageName}")
 	public String listPage(@PathVariable("pageName") String pageName, Model model,
-			@RequestParam(value = "cp", defaultValue = "1") int cp) {
-		model.addAttribute("map", service.selectList(pageName, cp));
+			@RequestParam(value = "cp", defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+		System.out.println(paramMap);
+		paramMap.put("pageName", pageName);
+		
+		
+		List<String> pageNameList =
+				List.of("eventList","touristManagement","guideManagement","guideApprovalRequest",
+						"productManagement","","qna","settlementManagement");
+		if(!pageNameList.contains(pageName))
+			return "redirect:/";
+		
+		Map<String,Object> data = new HashMap<>();
+		
+		
+		model.addAttribute("map", service.selectList(paramMap, cp));
 		model.addAttribute("pageName", pageName);
 
 		return "admin/" + pageName;
@@ -45,6 +61,7 @@ public class AdminController {
 
 	@GetMapping("/writeEvent")
 	public String writeEvent(Model model) {
+		model.addAttribute("map", service.sideMenuCount());
 		return "admin/writeEvent";
 	}
 
@@ -70,6 +87,8 @@ public class AdminController {
 	@GetMapping("/writeAnswer/{qnaNo}")
 	public String writeAnswer(@PathVariable("qnaNo") int qnaNo, Model model) {
 		model.addAttribute("qna", service.selectQNA(qnaNo));
+		
+		model.addAttribute("map", service.sideMenuCount());
 
 		return "admin/writeAnswer";
 	}
@@ -81,33 +100,76 @@ public class AdminController {
 		return "redirect:/admin/qna";
 	}
 	
-	@PostMapping("/approveGuide")
-	@ResponseBody
-	public ResponseEntity<String> approveGuide(@RequestBody List<Integer> userNoList) {
-		int result = service.approveGuide(userNoList);
-		if(result == userNoList.size()) {
-			return ResponseEntity.ok("");
-		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("승인 실패");
-		}
-	}
-	
 	@PostMapping("/setMainBanner")
 	@ResponseBody
 	public ResponseEntity<String> setMainBanner(@RequestBody Map<String,Object> data,
 			HttpServletRequest request) {
-		System.out.println(data);
 		int result = service.setMainBanner(data);
-		
 		if(result > 0) {
 			ServletContext application = request.getServletContext();
 			application.setAttribute("mainEventList", service.selectMainEventList());
 			
 			return ResponseEntity.ok("");
 		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("승인 실패");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
 		}
 	}
 	
+	@PostMapping("/eventBlind")
+	@ResponseBody
+	public ResponseEntity<String> eventBlind(@RequestBody List<Integer> eventNoList,
+			HttpServletRequest request) {
+		int result = service.eventBlind(eventNoList);
+		if(result == eventNoList.size()) {
+			ServletContext application = request.getServletContext();
+			application.setAttribute("mainEventList", service.selectMainEventList());
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
+		}
+	}
 	
+	@PostMapping("/eventBlindCancel")
+	@ResponseBody
+	public ResponseEntity<String> eventBlindCancel(@RequestBody List<Integer> eventNoList) {
+		int result = service.eventBlindCancel(eventNoList);
+		if(result == eventNoList.size()) {
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
+		}
+	}
+	@PostMapping("/productBlind")
+	@ResponseBody
+	public ResponseEntity<String> productBlind(@RequestBody List<Integer> productNoList) {
+		int result = service.productBlind(productNoList);
+		if(result == productNoList.size()) {
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
+		}
+	}
+	
+	@PostMapping("/productBlindCancel")
+	@ResponseBody
+	public ResponseEntity<String> productBlindCancel(@RequestBody List<Integer> productNoList) {
+		int result = service.productBlindCancel(productNoList);
+		if(result == productNoList.size()) {
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
+		}
+	}
+	
+	@PostMapping("/setUserState")
+	@ResponseBody
+	public ResponseEntity<String> setUserState(@RequestBody Map<String,Object> map){
+		System.out.println(map);
+		int result = service.setUserState(map);
+		if(result == ((List)map.get("userNoList")).size()) {
+			return ResponseEntity.ok("");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
+		}
+	}
 }

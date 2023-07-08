@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSessionException;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.utility.Util;
 import com.guido.product.model.dao.ProductUploadMapper;
@@ -23,7 +27,7 @@ import com.guido.product.model.dao.ProductUploadMapper;
 @Service
 @PropertySource("classpath:/config.properties")
 public class ProductUploadServiceImpl implements ProductUploadService{
-
+	
 	@Autowired
 	private ProductUploadMapper mapper;
 
@@ -42,7 +46,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	//여행 상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productUpload(Product product, List<MultipartFile> images)  throws IllegalStateException, IOException {
+	public int productUpload(Product product, List<MultipartFile> images, String tourCourse2)  throws IllegalStateException, IOException {
 
 		int result = mapper.productUpload(product);
 		
@@ -53,6 +57,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 		if(productNo > 0) {
 			
 			List<File> uploadList = new ArrayList<File>();
+			
 			
 			for(int i=0 ; i<images.size(); i++) {
 				
@@ -82,18 +87,50 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				if(result != uploadList.size()) {
 					
 					throw new FileUploadException();
-					
 				}
-			}	
+			}
+			
+			
+			List<TourCourse> tourCourseList = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
+			List<TourCourse> tempTourCourseList = new ArrayList<>();
+			System.out.println(tourCourseList);
+			System.out.println(tourCourseList.get(0));
+			System.out.println(tourCourseList.size());
+			
+			for (int j = 0; j < tourCourseList.size(); j++) {
+				
+				TourCourse tc = new TourCourse();
+				
+				tc.setProductNo(productNo);
+				tc.setCourseName(tourCourseList.get(j).getCourseName());
+				tc.setCourseOrder(tourCourseList.get(j).getCourseOrder());
+				tc.setLatitude(tourCourseList.get(j).getLatitude());
+				tc.setLongitude(tourCourseList.get(j).getLongitude());
+				tc.setBossCourseFL(tourCourseList.get(j).getBossCourseFL());
+			    tempTourCourseList.add(tc);
+			    
+				
+			}
+			
+			if(!tempTourCourseList.isEmpty()) {
+				
+				result = mapper.insertTourCourseList(tempTourCourseList);
+			}
 		}
 		return productNo;
+		
 	}
 
 
 	//여행 상품 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productEdit(Product product, List<MultipartFile> images, String deleteList) throws IllegalStateException, IOException {
+	public int productEdit(
+						Product product
+					  , List<MultipartFile> images
+					  , String deleteList
+					  , String tourCourse2
+					  , String tourCourseDeleteList) throws IllegalStateException, IOException {
 		
 		int rowCount = mapper.productEdit(product);
 		
@@ -155,11 +192,62 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 						images.get(i).transferTo(new java.io.File(filePath+rename));
 			}	
 		}
+				
+				
+				//투어 코스 변경사항 있을 시 수정 사항 반영하기(삭제 or 추가)
+				if(!tourCourseDeleteList.equals("")) { // 삭제할 투어 코스가 있을 때
+					
+					Map<String, Object> deleteTourCourseListMap = new HashMap<>();
+					deleteTourCourseListMap.put("productNo", product.getProductNo());
+					deleteTourCourseListMap.put("tourCourseDeleteList", tourCourseDeleteList);
+					
+					rowCount = mapper.tourCourseDelete(deleteTourCourseListMap);
+					
+					if(rowCount == 0) {
+						throw new SqlSessionException();
+					}
+				}
+				
+				// JS에서 JSON 형태로 받아온 tourCourseList(객체 배열) => Java List로 변형
+				List<TourCourse> tourCourseList = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
+				
+				List<TourCourse> uploadTourCourse = new ArrayList<>();
+				
+				for (int j = 0; j < tourCourseList.size(); j++) {
+					
+					TourCourse tc = new TourCourse();
+					
+					tc.setCourseName(tourCourseList.get(j).getCourseName());
+					tc.setCourseOrder(tourCourseList.get(j).getCourseOrder());
+					tc.setLatitude(tourCourseList.get(j).getLatitude());
+					tc.setLongitude(tourCourseList.get(j).getLongitude());
+					tc.setBossCourseFL(tourCourseList.get(j).getBossCourseFL());
+					uploadTourCourse.add(tc);
+				    
+					rowCount = mapper.tourCourseUpdate(tc);
+					
+					if(rowCount == 0) {
+						// 수정 실패 == DB에 이미지가 없었다 
+						// -> 이미지를 삽입
+						rowCount = mapper.tourCourseInsert(tc);
+					}
+				
+				}
+				
+				if(!uploadTourCourse.isEmpty()) {
+					for(int i=0 ; i<uploadTourCourse.size();i++) {
+						
+						int index = uploadTourCourse.get(i).getCourseOrder();
+						
+			}	
+		}
+				
 	}
 		
 		return rowCount;
 	}
-	
+
+
 	
 	
 	

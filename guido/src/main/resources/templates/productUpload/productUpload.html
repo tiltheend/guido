@@ -40,34 +40,25 @@
         <span class="tour-type" onclick="updateTourValue()">당일투어</span>
         <!-- 히든 속성으로 당일투어 클릭하면 value='1'로 설정하고 데이터 전송 -->
         <input type="hidden" id="onedayTour" name="productPackage" value="">
-
-
         <span class="tour-type" id="tourBox" onclick="updateTourValue2()">1박 이상 패키지</span>
       </div>
       <div id="tourTime">
         <div>몇 시간 코스인가요?</div><br>
-
         <div class="input-container2" id="inputContainer2">
           <input type="text" id="inputTime" name="tourDuration" >시간
         </div>
-
         <div class="input-container" id="inputWarning">
           <span class="error-message">숫자만 입력해주세요!</span>
         </div>
-
       </div>
-
       <div id="tourDay">
         <div>몇 일 코스인가요?</div><br>
-
         <div class="input-container">
           <input type="text" id="inputDay" name="productPackage" oninput="updateTourValue3()">일 
         </div>
-
         <div class="input-container" id="inputWarning">
           <span class="error-message">숫자만 입력해주세요!</span>
         </div>
-
       </div>
     </main>
     <!-- 2페이지 -->

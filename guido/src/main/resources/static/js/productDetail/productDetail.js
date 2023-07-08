@@ -268,7 +268,7 @@ reserveBtn.addEventListener("click", e=>{
 
 
         if(optionRestCount<inputGuestCount.innerText){
-            alert("현재 예약 가능한 인원 수를 초과");
+            alert("현재 예약 가능한 인원 수를 초과합니다");
             e.preventDefault();
             return;
         }
@@ -281,19 +281,124 @@ reserveBtn.addEventListener("click", e=>{
         return;
     }
 
+    /* 얼굴 인증사진을 등록하지 않았을 경우 */
+    if(faceImg==null){
+        toggleModal();
+        e.preventDefault();
+    }
 
-    /* 날짜 미선택 시 */
 
-
-
+    
+    
     const guestHidden = document.getElementById("guestHidden");
     const dateHidden = document.getElementById("dateHidden");
-
+    
     guestHidden.value = inputGuestCount.innerText;
-    dateHidden.value = "2023-12-31";
+    
+    /* 날짜 미선택 시 */
+    if(dateHidden.value==""){
+        alert("날짜를 선택해주세요!");
+        e.preventDefault();
+    }
+
+
+    /* 당일 투어의 경우 옵션 미선택 시 */
+    if(package==0){
+        const radios = document.querySelectorAll('input[type="radio"][name="option"]');
+        let checked = false;
+
+        radios.forEach(radio => {
+            if (radio.checked) {
+            checked = true;
+            }
+        });
+
+        if (!checked) {
+            alert("옵션을 선택해주세요.");
+            e.preventDefault();
+        }
+    }
 
 });
 
+
+
+// 모달 창 토글
+function toggleModal() {
+
+    let modal = document.getElementById("faceImgModal");
+    
+    modal.style.display = (modal.style.display === "block") ? "none" : "block";
+    
+}
+
+
+
+/* 인증 사진 모달 저장 버튼 클릭 시 */
+const faceImgUploadBtn = document.getElementById("faceImgUpload");      // 저장 버튼
+const realUpload = document.querySelector(".real-upload");  // input 태그
+const upload = document.querySelector(".upload");   // img 태그
+
+let initCheck;  // 초기 프로필 이미지 상태 저장
+let deleteCheck = -1;  // 프로필 이미지 새로 업로드 or 삭제되었음을 나타냄
+let originalImage;     // 초기 프로필 이미지 파일의 경로 저장
+
+
+// 내상점 닫기 버튼 클릭 시
+document.querySelector(".close").addEventListener("click", ()=>{
+
+    upload.setAttribute("src", "/images/productDetail/faceImg2.jpg");
+    realUpload.value="";
+});
+    
+
+    if(realUpload!=null){
+        
+        originalImage = upload.getAttribute("src");
+        
+        if(originalImage == "/images/productDetail/faceImg2.jpg"){
+            initCheck = false;
+        }else{
+            initCheck = true;
+        }
+
+    }
+    
+    upload.addEventListener("click", ()=> realUpload.click());
+    
+    realUpload.addEventListener("change", e=>{
+        
+        const maxSize = 1* 1024 * 1024 * 2;
+        const file = e.target.files[0];     // 업로드한 파일의 정보
+
+        if(file==undefined){
+            deleteCheck = -1;   // 취소==파일없음
+            upload.setAttribute("src", originalImage);
+            return;
+        }
+
+        if(file.size>maxSize){
+            alert("2MB 이하의 이미지를 선택해주세요");
+
+            realUpload.value="";
+            deleteCheck = -1;   //취소==파일없음
+
+            upload.setAttribute("src", originalImage);
+            return;
+        }
+
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+
+        reader.onload = e =>{
+            const url = e.target.result;
+            upload.setAttribute("src", url);
+            deleteCheck = 1;
+        }
+        
+    });
 
 
 /* 여행 코스 지도 */
@@ -464,6 +569,28 @@ if(product.productState=='B'){
     document.querySelector("body").style.overflow = 'hidden';
 }
 
-document.getElementById('editBtn').addEventListener('click', function () {
-    location.href = location.pathname + '/edit';
-});
+
+if(document.getElementById('editBtn')!=null){
+
+    document.getElementById('editBtn').addEventListener('click', function () {
+        location.href = location.pathname + '/edit';
+    });
+}
+
+
+
+/* 일정 소개 예약 가능한 일자 첫번째~마지막번째 세팅 */
+// 21 Jun 2023 - 24 Jun 2023
+
+let allDates = product.productDateList.map(item => item.productDate);
+
+let firstDate = allDates[0];
+let lastDate = allDates[allDates.length-1];
+
+firstDate = new Date(firstDate);
+lastDate = new Date(lastDate);
+
+firstDate = firstDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+lastDate = lastDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+
+document.querySelector(".detail--text__date-second").innerText = firstDate + " - " + lastDate;

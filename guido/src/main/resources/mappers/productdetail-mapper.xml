@@ -35,6 +35,9 @@
 		<collection property="optionList" select="selectOptionList"
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="ProductOption"/>
 		
+		<collection property="productDateList" select="selectProductDateList"
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="ProductDate"/>
+		
 	</resultMap>
 	
 	
@@ -109,6 +112,15 @@
 		<result property="productNo" column="PRODUCT_NO" />
 	 	<result property="optionName" column="OPTION_NAME" />
 	 	<result property="optionRestCount" column="OPTION_REST" />
+	 	<result property="productDateNo" column="PRODUCT_DT_NO" />
+	</resultMap>
+	
+	
+	<resultMap  type="ProductDate" id="product_date_rm">
+		<id property="productDateNo" column="PRODUCT_DT_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="productDate" column="PRODUCT_DT" />
+	 	<result property="availability" column="PRODUCT_DT_AVAILABILITY" />
 	</resultMap>
 	
 	
@@ -199,8 +211,18 @@
 	 <!-- 특정 상품(1박 패키지) 옵션 조회 -->
 	 <select id="selectOptionList" resultMap="option_rm">
 		 SELECT * FROM "PRODUCT_OPTION"
-		 WHERE PRODUCT_NO = #{productNO}
+		 WHERE PRODUCT_NO = #{productNo}
 		ORDER BY OPTION_NAME
+	 </select>
+	 
+	 
+	 <!-- 특정 상품 예약 가능 날짜(일정) 조회 -->
+	 <select id="selectProductDateList" resultMap="product_date_rm">
+		 SELECT PRODUCT_DT_NO, PRODUCT_NO, TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, 
+		 PRODUCT_DT_AVAILABILITY 
+		 FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT_AVAILABILITY = 'Y'
 	 </select>
 	 
 	 
@@ -263,7 +285,37 @@
 					WHERE ROWNUM <= 4
 		     	]]>
 	</select>
+	
+	
+	<!--  얼굴 인증 사진 업데이트 -->
+	<update id="updateFaceImg">
+		UPDATE TOURIST
+		SET FACE_IMG = #{faceImg}
+		WHERE USER_NO = #{userNo}
+	</update>
 		 
-
+	
+	<!-- 캘린더 날짜 불러오기 -->
+	<select id="selectCalendarDates" resultMap="product_date_rm">
+		SELECT PRODUCT_DT_NO, PRODUCT_NO, TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, PRODUCT_DT_AVAILABILITY  
+ 		FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT_AVAILABILITY = 'Y'
+		AND EXTRACT(YEAR FROM PRODUCT_DT) = #{year}
+		AND EXTRACT (MONTH FROM PRODUCT_DT) = #{month}
+	</select>
+	
+	
+	
+	<!-- 날짜 선택 시 옵션 불러오기 -->
+	<select id="getOptionInfo" resultMap="option_rm">
+		SELECT OPTION_NO, OPTION_NAME, OPTION_REST, PO.PRODUCT_NO, PRODUCT_DT_NO 
+		FROM "PRODUCT_OPTION" PO
+		LEFT JOIN "PRODUCT_DT" PD USING(PRODUCT_DT_NO)
+		WHERE PO.PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT = #{productDate}
+		ORDER BY OPTION_NAME
+	</select>
+		 
 	
 </mapper>

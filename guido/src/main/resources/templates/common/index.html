@@ -33,69 +33,30 @@
 
     <th:block th:replace="~{common/header}"></th:block>
 
-    <div class="wirte-btn">
-        <img th:src="@{/images/icons/writeBtn.png}" alt="">
-    </div>
+    <!-- 로그인한 가이드 글 작성 버튼 -->
+    <!-- <th:block th:if="${session.loginMember != null}"> -->
+        <div class="write-btn">
+            <img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기">
+        </div>
+    <!-- </th:block> -->
 
     <!-- ***** 메인 영역 슬라이드 ***** -->
-
     <div class="main--container">
         <section class="main--top">
             <div class="main--top__slide">
                 <div class="main--silde__container">
                     <section id="demos">
+
                         <div class="row">
                             <div class="large-12 columns">
-                                <div class="loop owl-carousel owl-theme">
-    
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                            <!-- <img class="detail--silde__item-img" th:src="@{/images/test2.PNG}"> -->
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a th:href="@{/event/eventList}">
-                                            <img class="detail--silde__item-img" th:src="@{#}">
-                                        </a>
-                                    </div>
+                                <div class="loop owl-carousel owl-theme" >
+                                    <th:block th:each="banner : ${eventBannerList}">
+                                        <div class="item" th:each="file : ${banner.fileList}" th:style="'background-color: ' + ${banner.bgColor}">
+                                            <a th:href="@{/event/eventDetail}">
+                                                <img class="detail--silde__item-img" th:src="${file.filePath}">
+                                            </a>
+                                        </div>
+                                    </th:block>
                                 </div>
                             </div>
                         </div>
@@ -103,19 +64,15 @@
                         <div class="owl-carousel__prev">
                             <img th:src="@{/images/productDetail/arrow_left.svg}">
                         </div>
-                        
                         <div class="owl-carousel__next">
                             <img th:src="@{/images/productDetail/arrow_right.svg}">
                         </div>
+
                     </section>
                 </div>
             </div>
         </section>
     </div>
-
-
-
-
 
     <!-- ***** 카테고리 아이콘 ***** -->
     <div class="categori-icon-box-container">
@@ -131,15 +88,15 @@
         </div>
     </div>
 
-
-
+    <!-- ***** 게시글 영역 ***** -->
     <!-- 상품 게시글 -->
+    <!-- <div class="post-more"><button type="button">more +</button></div> -->
     <article class="main-post">
 
         <div class="product-post">
             <ul id="productListContainer">  
 
-                <!-- ??? 테마 검색 ajax ??? -->
+                <!-- 테마 검색 ajax -->
                 <!-- <th:block th:if="${#lists.size(productList)} == 0">
                     <li>
                         <div>상품이 존재하지 않습니다.</div>
@@ -148,7 +105,7 @@
 
                 <!-- <th:block th:unless="${#lists.size(productList)} == 0"> -->
                     <li class="product-row" th:each="product : ${productList}">
-                        <div class="slider single-item"> 
+                        <div class="slider single-item" th:data-productno="${product.productNo}"> 
                             <div class="productImage" th:each="image : ${product.imageList}"> 
                                 <img th:src="${image.filePath}">
                             </div>
@@ -157,12 +114,16 @@
                             <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                             <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
-                        <div class="add-wish-heart">
-                            <!-- <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}"> -->
-                            <!-- <label class="like--container" th:if="${session.loginUser}">
-                                <input type="checkbox" id="wishHeart" th:checked="${wishOrNot}>0">
-                                <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path></svg>
-                            </label> -->
+                        <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                            <!-- 로그인 상태인 경우 -->
+                            <th:block th:if="${session.loginUser != null}">
+                                <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                                <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            </th:block>
+                            <!-- 로그인 상태가 아닌 경우 -->
+                            <th:block th:unless="${session.loginUser != null}">
+                                <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            </th:block>
                         </div>
                         <div class="sales-text">
                             <div> 
@@ -200,7 +161,7 @@
         <div class="product-post">
             <ul>
                 <li th:each="product : ${popularProductList}">
-                    <div class="slider single-item">
+                    <div class="slider single-item" th:data-productno="${product.productNo}">
                         <div th:each="image : ${product.imageList}">
                             <img th:src="${image.filePath}">
                         </div>
@@ -209,8 +170,16 @@
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                    <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                        <!-- 로그인 상태인 경우 -->
+                        <th:block th:if="${session.loginUser != null}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
+                        <!-- 로그인 상태가 아닌 경우 -->
+                        <th:block th:unless="${session.loginUser != null}">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
                     </div>
                     <div class="sales-text">
                         <div>
@@ -245,7 +214,7 @@
         <div class="product-post"> 
             <ul>
                 <li th:each="product : ${superProductList}">
-                    <div class="slider single-item">
+                    <div class="slider single-item" th:data-productno="${product.productNo}">
                         <div th:each="image : ${product.imageList}">
                             <img th:src="${image.filePath}">
                         </div>
@@ -254,8 +223,16 @@
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                    <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                        <!-- 로그인 상태인 경우 -->
+                        <th:block th:if="${session.loginUser != null}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
+                        <!-- 로그인 상태가 아닌 경우 -->
+                        <th:block th:unless="${session.loginUser != null}">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
                     </div>
                     <div class="sales-text">
                         <div>
@@ -270,7 +247,7 @@
                             <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                            <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')} + ' / total'"></p>
                         </div>
                     </div>
                 </li>
@@ -285,13 +262,13 @@
         <img th:src="@{/images/icons/recommendation.png}" alt="">
     </div>
     <div class="post-more"><button type="button">more +</button></div>
-    <!-- 인기 여행지 -->
+    <!-- 관심지역 기반 추천 상품 -->
     <article class="main-post">
     
         <div class="product-post">
             <ul>
                 <li th:each="product : ${recommProductList}">
-                    <div class="slider single-item">
+                    <div class="slider single-item" th:data-productno="${product.productNo}">
                         <div th:each="image : ${product.imageList}">
                             <img th:src="${image.filePath}">
                         </div>
@@ -300,8 +277,16 @@
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                         <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                     </div>
-                    <div class="add-wish-heart">
-                        <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                    <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                        <!-- 로그인 상태인 경우 -->
+                        <th:block th:if="${session.loginUser != null}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
+                        <!-- 로그인 상태가 아닌 경우 -->
+                        <th:block th:unless="${session.loginUser != null}">
+                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        </th:block>
                     </div>
                     <div class="sales-text">
                         <div>
@@ -323,8 +308,6 @@
             </ul>
         </div>
     </article>
-
-
 
     <th:block th:replace="~{common/footer}"></th:block>
 
@@ -351,13 +334,12 @@
         const owl = $('.owl-carousel')
 
         $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
-
         $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
 
         });
 
-        let loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인한 회원 번호";
-        if(loginMemberNo == null) loginMemberNo = "";
+        const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
+        // if(loginUserNo == null) loginUserNo = "";
         
     </script>
 

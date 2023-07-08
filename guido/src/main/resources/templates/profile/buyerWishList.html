@@ -124,12 +124,13 @@
     <script th:src="@{/js/profile/buyerWishList.js}"></script>
     <script th:src="@{/js/profile/profileEdit.js}"></script>
     
-    <!-- javascript 영역에서 타임리프를 적용/해석 함 -->
     <script th:inline="javascript">
         const message = /*[[${message}]]*/  "전달 받은 message";
         if(message != null) alert(message);
 
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
+        const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
+        const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>  
 </body>
 </html>

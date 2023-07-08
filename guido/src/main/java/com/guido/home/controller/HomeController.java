@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.User;
 import com.guido.home.model.service.HomeService;
 
 
-/*@SessionAttributes({"loginUser"})*/
+@SessionAttributes({"loginUser"})
 @RequestMapping("/common")
 @Controller
 public class HomeController {
@@ -34,70 +35,72 @@ public class HomeController {
 	// 메인 페이지 이동 + 상품 목록 조회
 	@GetMapping("/home")
 	public String mainPage(Model model
-//						, @RequestParam("productNo") int productNo
 						, @SessionAttribute(value="loginUser", required=false) User loginUser) {
 
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
+		
 		// 상품 목록 조회
-		List<Product> productList = service.selectProductList();
-		model.addAttribute("productList", productList); // + 위시
+		List<Product> productList = service.selectProductList(userNo);
+		model.addAttribute("productList", productList); 
 		
 		// 인기 여행지 목록 조회
-		List<Product> popularProductList = service.selectPopularProductList();
+		List<Product> popularProductList = service.selectPopularProductList(userNo);
 		model.addAttribute("popularProductList", popularProductList);
 		
 		// 슈퍼가이드 상품 목록 조회
-		List<Product> superProductList = service.selectSuperProductList();
+		List<Product> superProductList = service.selectSuperProductList(userNo);
 		model.addAttribute("superProductList", superProductList);
 		
 		// 추천 상품 목록 조회
-		List<Product> recommProductList = service.selectRecommProductList();
+		List<Product> recommProductList = service.selectRecommProductList(userNo);
 		model.addAttribute("recommProductList", recommProductList);
 		
-		
-		// 관심상품 등록 여부 체크
-//		int wishOrNot = -1;
-//		
-//		if(loginUser != null) {
-//			
-//			Map<String, Object> map = new HashMap<>();
-//			map.put("productNo", productNo);
-//			map.put("userNo", loginUser.getUserNo());
-//			
-//			wishOrNot = service.selectWishListCheck(map);
-//		}
-//		model.addAttribute("wishOrNot", wishOrNot);		
+		// 메인 슬라이드 이벤트 배너 조회
+		List<Event> eventBannerList = service.selectEventBannerList();
+		model.addAttribute("eventBannerList", eventBannerList);
 		
 		return "common/index";
 	}
 	
 	
-	// 테마 검색 상품 목록 조회
-	@GetMapping(value = "/index/{themeCode}", produces = "application/json; charset=UTF-8")
+	// 테마검색 상품목록 조회
+	@GetMapping(value = "/home/{themeCode}", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
 	    return service.selectThemeProdList(themeCode);
 	}
 	
 	
-	
 	// 검색 페이지
 	@GetMapping("/index")
 	public String searchResult(Model model
+							, @SessionAttribute(value="loginUser", required=false) User loginUser
 							, @RequestParam(value="location", required=false) String location
 							, @RequestParam(value="firstday", required=false) String firstday
 							, @RequestParam(value="lastday", required=false) String lastday
 							, @RequestParam(value="tourist", required=false) String tourist
 							) {
 		
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
+		
 		Map<String, Object> map = new HashMap<>();
+		map.put("userNo", userNo);
 		map.put("location", location);
 		map.put("firstday", firstday);
 		map.put("lastday", lastday);
 		map.put("tourist", tourist);
-//		System.out.println(map);
+//		System.out.println("map : " + map);
 		
 		List<Product> searchResultList = service.selectSearchResult(map);
-//		System.out.println(searchResultList);
+//		System.out.println("searchResultList : " + searchResultList);
 		
 		String term = null;
 		if(firstday!=""&&lastday!=""&&firstday.equals(lastday)) term = "same";
@@ -107,6 +110,8 @@ public class HomeController {
 		model.addAttribute("location", location);
 		model.addAttribute("term", term);
 		model.addAttribute("tourist", tourist);
+		
+		model.addAttribute("map", map);
 		
 		return "common/searchResult";
 	}
@@ -120,31 +125,24 @@ public class HomeController {
 	}
 	
 	
-	// 검색 페이지 테마 검색 상품 목록 조회
-//	@GetMapping(value = "/searchResult/{themeCode}", produces = "application/json; charset=UTF-8")
-//	@ResponseBody
-//	public List<Product> selectSearchThemeProdList(@PathVariable("themeCode") int themeCode) {
-//	    return service.selectSearchThemeProdList(themeCode);
-//	}
-	
+	// 검색페이지 내에서 테마검색 상품목록 조회
+	@PostMapping(value="/searchResult", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Product> selectSearchThemeProdList(@RequestBody Map<String, Object> map) {
+	    return service.selectSearchThemeProdList(map);
+//		System.out.println(map);
+//		List<Product> a = service.selectSearchThemeProdList(map);
+//		System.out.println(a);
+//	    return a;
+	}
 	
 	
 	// 관심상품 등록
 	@PostMapping("/updateWishList")
 	@ResponseBody
 	public int updateWish(@RequestBody Map<String, Integer> paramMap) {
-		return service.updateWishList(paramMap);
+		return service.updateWish(paramMap);
 	}
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
 	
 
 }

@@ -32,28 +32,33 @@
             <div class="content-header">
                 <h1 class="content-title">판매자 관리</h1>
                 <div class="btn-container">
-                    <button class="btn btn1">탈퇴</button>
-                    <button class="btn btn2">블락</button>
-                    <button class="btn btn1">해제</button>
+                    <button class="btn btn1" id="secessionBtn">탈퇴</button>
+                    <button class="btn btn2" id="blockBtn">블락</button>
+                    <button class="btn btn1" id="normalBtn">해제</button>
                 </div>
             </div>
 
             <hr>
 
 
-            <div class="content-search-container">
-                <!-- 라디오버튼 -->
-                <div class="radio-area">
-                    <span>회원 상태</span>
-                    <input type="radio" name="state" id="whole" checked><label for="whole">전체</label>
-                    <input type="radio" name="state" id="normal"><label for="normal">정상</label>
-                    <input type="radio" name="state" id="secession"><label for="secession">탈퇴</label>
-                    <input type="radio" name="state" id="block"><label for="block">블락</label>
-                    <input type="radio" name="state" id="super"><label for="super">슈퍼가이드</label>
+            <!-- 검색창 -->
+            <form th:action="${pageName}" method="get">
+                <div class="content-search-container">
+                    <!-- 라디오버튼 -->
+                    <div class="radio-area">
+                        <span>회원 상태</span>
+                        <input type="radio" name="state" id="whole" value="whole" th:checked="${param.state?.toString()=='whole' or param.state == null}"><label for="whole">전체</label>
+                        <input type="radio" name="state" id="normal" value="N" th:checked="${param.state?.toString()=='N'}"><label for="normal">정상</label>
+                        <input type="radio" name="state" id="secession" value="D" th:checked="${param.state?.toString()=='D'}"><label for="secession">탈퇴</label>
+                        <input type="radio" name="state" id="block" value="B" th:checked="${param.state?.toString()=='B'}"><label for="block">블락</label>
+                        <input type="checkbox" name="super" id="super" value="Y" th:checked="${param.super?.toString()=='Y'}"><label for="super">슈퍼가이드</label>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" name="query" id="search">
+                        <button id="searchBtn"><img th:src="@{/images/admin/searchBtn.svg}" alt="" id="searchImg"></button>
+                    </div>
                 </div>
-                <!-- 검색창 -->
-                <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
-            </div>
+            </form>
             <!-- 카운트 -->
             <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
 
@@ -84,31 +89,9 @@
                     </th:block>
                 </tbody>
             </table>
-            
-            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <th:block th:unless="${#lists.size(list) == 0}" th:replace="~{/admin/pagination}"/>
-        </div>
-
-        
-        <div id="modalCalendar" class="modal">
-            <div id="calendarArea">
-                calendar area
-            </div>
+            <th:block th:replace="~{/admin/pagination}"/>
         </div>
     </main>
-    <script>
-        const calendar = document.querySelector('.calendar');
-        calendar.addEventListener('click',() => {
-            const modalCalendar = document.getElementById("modalCalendar");
-            modalCalendar.style.display = "block";
-
-            window.onclick = function (event) {
-                if (event.target == modalCalendar) {
-                    modalCalendar.style.display = "none"; // 모달 숨기기
-                }
-            }
-        });
-    </script>
     <script th:src="@{/js/admin/admin.js}"></script>
 </body>
 

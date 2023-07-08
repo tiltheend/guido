@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
+import com.guido.profile.model.service.ProfileGuideService;
 import com.guido.profile.model.service.ProfileTouristService;
 
 
@@ -34,6 +36,9 @@ public class ProfileTouristController {
 	
 	@Autowired
 	private ProfileTouristService service;
+	
+	@Autowired
+	private ProfileGuideService GuideService;
 	
 	// 프로필 조회
 	@GetMapping("/{userNo:[0-9]+}")
@@ -53,15 +58,44 @@ public class ProfileTouristController {
 			path="profile/sellerProfile";
 			
 			model.addAttribute("user", user);
+			
 			System.out.println(user.getUserName()+" 가이드 프로필");
 			
+			// 가이드 자기 소개
+			User guide = GuideService.selectGuideInfo(userNo);
+			PR pr = GuideService.selectPR(userNo);
+			
+			model.addAttribute("guide", guide);
+			model.addAttribute("pr", pr);
+			
+			// 가이드 상품 목록
+			List<Product> guideProductList = GuideService.guideProductList(userNo);
+			model.addAttribute("guideProductList", guideProductList);
+			
+			// 가이드 상품 수 카운트
+			int productCount = GuideService.productCount(userNo);
+			model.addAttribute("productCount", productCount);
+			
+			// 가이드 리뷰 조회
+			List<Review> guideReivewList = GuideService.guideReivewList(userNo);
+			
+			// 0.5 단위로 별점 바꾸기
+			for(Review r : guideReivewList) {
+				r.setReviewStarsDouble(r.getReviewStars()/20.0);
+			}
+			
+			model.addAttribute("guideReivewList", guideReivewList);
+			
+			// 가이드 리뷰 수 카운트
+			int reviewCount = GuideService.reviewCount(userNo);
+			model.addAttribute("reviewCount", reviewCount);
+
 			
 		} else if(userType == 0) { // 여행객 일 경우
 			path="profile/buyerProfile";
 			
-			System.out.println(user.getUserName()+" 여행객 프로필");
-			
 			model.addAttribute("user", user);
+			
 			
 			// 구매 내역 가져오기 (상품 번호, 썸네일)
 			List<Reservation> reservationList = service.reservationList(userNo);
@@ -156,6 +190,8 @@ public class ProfileTouristController {
 		int reviewCount = service.reviewCount(userNo);
 		for(Review r : newReviewList) {
 			r.setReviewCount(reviewCount);
+			// 0.5 단위로 별점 바꾸기
+			r.setReviewStarsDouble(r.getReviewStars()/20.0);
 		}
 		
 		return newReviewList;
@@ -269,18 +305,6 @@ public class ProfileTouristController {
 		}
 		
 		model.addAttribute("myWishList", myWishList);
-		
-//		int wishOrNot = -1;		// 관심 등록
-//
-//		Map<String, Integer> map = new HashMap<>();
-//		map.put("productNo", productNo);
-//		
-//		map.put("userNo", loginUser.getUserNo());
-//		
-//		wishOrNot = service.selectWishCheck(map);
-//
-//
-//		model.addAttribute("wishOrNot", wishOrNot);
 		
 		return "profile/buyerWishList";
 	}

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.Product;
 
 @Mapper
@@ -12,26 +13,23 @@ public interface HomeMapper {
 
 	// 테마 종류 조회
 	List<Map<String, Object>> selectThemeTypeList();
-
 	
 
 	// 상품 목록 조회
-	List<Product> selectProductList();
+	List<Product> selectProductList(int userNo);
 
 	// 인기 여행지 목록 조회
-	List<Product> selectPopularProductList();
+	List<Product> selectPopularProductList(int userNo);
 
 	// 슈퍼가이드 상품 목록 조회
-	List<Product> selectSuperProductList();
+	List<Product> selectSuperProductList(int userNo);
 
 	// 추천 상품 목록 조회
-	List<Product> selectRecommProductList();
-
+	List<Product> selectRecommProductList(int userNo);
 
 	
-	// 테마 검색 상품 목록 조회
+	// 테마검색 상품목록 조회
 	List<Product> selectThemeProdList(int themeCode);
-
 
 
 	// 검색 페이지
@@ -43,32 +41,27 @@ public interface HomeMapper {
 	// 위치 검색 시 드롭박스 리스트 조회
 	List<String> locationSearch(String location);
 
-	// 검색 페이지 테마 검색 상품 목록 조회  
-	List<Product> selectSearchThemeProdList(int themeCode);
-
-
+	// 검색 페이지 내에서 테마 검색 상품 목록 조회  
+	List<Product> selectSearchThemeProdList(Map<String, Object> map);
 	
-	// 관심상품 등록 여부 체크
-	int selectWishListCheck(Map<String, Object> map);
 	
 	// 관심상품 등록
-	int insertWishList(Map<String, Integer> paramMap);
+	int insertMainWish(Map<String, Integer> paramMap);
 
 	// 관심상품 해제
-	int deleteWishList(Map<String, Integer> paramMap);
+	int deleteMainWish(Map<String, Integer> paramMap);
+
+	// 관심상품 등록 여부 체크
+//	int selectWishListCheck(Map<String, Object> map);
+
+	// 관심상품
+//	List<Product> mainWishCheck(int userNo);
 
 
+	// 메인 슬라이드 이벤트 배너 조회
+	List<Event> selectEventBannerList();
 
 
-
-
-
-
-
-
-
-	
-	
 
 
 }

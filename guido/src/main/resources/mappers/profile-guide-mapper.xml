@@ -2,7 +2,350 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.guido.profile.model.dao.ProfileGuideMapper">
 	
+	<resultMap id="product_rm" type="Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productPackage" column="PRODUCT_PACKAGE"/>
+		<result property="productContent" column="PRODUCT_CONTENT"/>
+		<result property="tourDuration" column="TOUR_DURATION"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="productAddNotes" column="PRODUCT_ADD_PRICE"/>
+		<result property="maxTourist" column="PRODUCT_MAX_TOURIST"/>
+		<result property="minTourist" column="PRODUCT_MIN_TOURIST"/>
+		
+		<result property="userNo" column="USER_NO"/>
+		<result property="themeCode" column="THEME_CODE"/>
+		<result property="productState" column="PRODUCT_STATE"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="guideLanguage" column="GUIDE_LANGUAGE"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+
+		<result property="regionName" column="REGION_NAME"/>
+		<result property="themeName" column="THEME_NAME"/>
+		<result property="productRating" column="PRODUCT_RATING"/>
+		<result property="reviewCount" column="REVIEW_COUNT"/>
+		<result property="reviewPercentage" column="REVIEW_PERCENTAGE"/>
+		
+		
+	 	<result property="thumbnail" column="THUMBNAIL" />
+	 	<result property="productDate" column="PRODUCT_DT" />
+	 		
+		<collection property="productDateList" select="selectProductDateList"
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="ProductDate"/>
+			
+		<collection property="tourCourse" select="selectTourCourseList" 
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="TourCourse"/>	
+			
+	</resultMap>
 	
+	<!-- 
+		<collection property="ProductReviewList" select="selectProductReviewList"
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="Review"/>
+	-->
+	
+	<resultMap type="Review" id="review_rm">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="reviewMessage" column="REVIEW_MESSAGE"/>
+		<result property="reviewStars" column="REVIEW_STARS"/>
+		<result property="reviewDeleteFL" column="REVIEW_DEL_FL"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productDtNo" column="PRODUCT_DT_NO"/>
+		<result property="reviewReply" column="REVIEW_REPLY"/>
+	</resultMap>
+	
+	
+	<resultMap type="User" id="guide_rm" >
+		<id property="userNo" column="USER_NO"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="languageSkill" column="LANGUAGE_SKILL"/>
+		<result property="superGuideFl" column="SUPER_GUIDE_FL"/>
+		<result property="countryCode" column="COUNTRY_CODE"/>
+		
+		<result property="reviewCount" column="REVIEW_COUNT"/>
+		<result property="starAverage" column="STARS_AVERAGE"/>
+		<result property="careerDate" column="CAREER_DT"/>
+	</resultMap>
+	
+	
+	<resultMap type="PR" id="pr_rm">
+	  <id property="userNo" column="USER_NO" />
+	  <result property="birthYear" column="BIRTH_YEAR" />
+	  <result property="job" column="JOB" />
+	  <result property="pets" column="PETS" />
+	  <result property="hobby" column="HOBBY" />
+	  <result property="subLang" column="SUB_LANG" />
+	  <result property="abroadExperience" column="ABROAD_EXPERIENCE" />
+	  <result property="mbti" column="MBTI" />
+	  <result property="strength" column="STRENGTH" />
+	  <result property="favoriteSong" column="FAVORITE_SONG" />
+	  <result property="tmi" column="TMI" />
+	  <result property="major" column="MAJOR" />
+	  <result property="dopamine" column="DOPAMINE" />
+	  <result property="uselessTalent" column="USELESS_TALENT" />
+	  <result property="capList" column="CAP_LIST" />
+	</resultMap>
+	
+	
+	<resultMap  type="File" id="file_rm">
+		<id property="fileNo" column="FILE_NO" />
+	 	<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="fileOrder" column="FILE_ORDER" />
+	 	<result property="filePath" column="FILE_PATH" />
+	</resultMap>
+	
+	
+	<resultMap  type="ProductOption" id="option_rm">
+		<id property="optionNo" column="OPTION_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="optionName" column="OPTION_NAME" />
+	 	<result property="optionRestCount" column="OPTION_REST" />
+	</resultMap>
+	
+		
+	<resultMap  type="ProductDate" id="productDate_rm">
+		<id property="productDateNo" column="PRODUCT_DT_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="productDate" column="PRODUCT_DT" />
+	 	<result property="availability" column="PRODUCT_DT_AVAILABILITY" />
+	</resultMap>
+	
+	<resultMap type="TourCourse" id="tourcourse_rm">
+		<id property="courseNo" column="COURSE_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="courseName" column="COURSE_NAME"/>
+		<result property="courseOrder" column="COURSE_ORDER"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="longitude" column="LONGITUDE"/>
+		<result property="bossCourseFL" column="BOSS_COURSE_FL"/>
+	</resultMap>
+	
+	<resultMap type="Reservation" id="reservation_rm">
+		<id property="reservationNo" column="RESERVATION_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="reservationState" column="RESERVATION_STATE"/>
+		<result property="paymentMethod" column="PAYMENT_METHOD"/>
+		<result property="guestCount" column="GUEST_COUNT"/>
+		<result property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="optionNo" column="OPTION_NO"/>
+		<result property="requestContent" column="REQUEST_CONTENT"/>
+		<result property="orderNumber" column="ORDER_NUMBER"/>
+		<result property="totalPrice" column="TOTAL_PRICE"/>
+		<result property="impUid" column="IMP_UID"/>
+		<result property="cancelReason" column="CANCEL_REASON"/>
+		
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="productPackage" column="PRODUCT_PACKAGE"/>
+		<result property="tourDuration" column="TOUR_DURATION"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="optionName" column="OPTION_NAME"/>
+		
+		<result property="guideLanguage" column="GUIDE_LANGUAGE"/>
+
+		<result property="primaryLanguage" column="PRIMARY_LANGUAGE"/>
+		<result property="faceImg" column="FACE_IMG"/>
+	</resultMap>
+	
+	
+	 <!-- 특정 상품 작성자 정보 조회 -->
+	 <select id="selectGuideInfo" resultMap="guide_rm">
+		 SELECT USER_NAME, PROFILE_IMG, CREATE_DT, LANGUAGE_SKILL, SUPER_GUIDE_FL,
+		 		(SELECT COUNT(*) FROM "REVIEW" R
+				JOIN "PRODUCT" P USING(PRODUCT_NO)
+				WHERE P.USER_NO = #{userNo}) REVIEW_COUNT, 
+				(SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
+				FROM "REVIEW" R JOIN "PRODUCT" P USING(PRODUCT_NO)
+				WHERE P.USER_NO = #{userNo}) STARS_AVERAGE,
+				
+				<![CDATA[
+			    CASE
+			        WHEN SYSDATE - CREATE_DT < 30 THEN FLOOR(SYSDATE - CREATE_DT) || ',일'
+			        WHEN SYSDATE - CREATE_DT < 365 THEN FLOOR((SYSDATE - CREATE_DT) / 30) || ',개월'
+			        ELSE FLOOR((SYSDATE - CREATE_DT) / 365) || ',년'
+			    END CAREER_DT
+		     	]]>
+		     	
+			FROM "USER"
+			JOIN "GUIDE" USING(USER_NO)
+			WHERE USER_NO = #{userNo}
+	 </select>
 	 
+	 <!-- 자기소개 조회 -->
+	 <select id="selectPR" resultMap="pr_rm">
+		SELECT * FROM "PR"
+		WHERE USER_NO = #{userNo}		 
+	 </select>
+	 
+	 <!-- 가이드 상품 목록 -->
+	<select id="guideProductList" resultMap="product_rm">
+			SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, 
+					PRODUCT_PRICE, GUIDE_LANGUAGE, REGION_NAME, NVL(TOUR_DURATION, 0) TOUR_DURATION,
+				    (SELECT FILE_PATH FROM "FILE" F 
+				    WHERE F.PRODUCT_NO = PRODUCT.PRODUCT_NO
+				    AND F.FILE_ORDER = 1) AS THUMBNAIL
+			FROM PRODUCT
+			WHERE USER_NO = #{userNo}	
+			AND PRODUCT_STATE = 'N'
+			ORDER BY CREATE_DT DESC
+			FETCH FIRST 3 ROWS ONLY
+	</select>
+	
+	<!-- 가이드 상품 목록 더보기 (3개씩) -->
+	<select id="guideProductMore" resultMap="product_rm">
+		SELECT * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY PRODUCT_NO DESC) AS NUM,
+				PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, 
+						PRODUCT_PRICE, GUIDE_LANGUAGE, REGION_NAME, NVL(TOUR_DURATION, 0) TOUR_DURATION,
+					    (SELECT FILE_PATH FROM "FILE" F 
+					    WHERE F.PRODUCT_NO = PRODUCT.PRODUCT_NO
+					    AND F.FILE_ORDER = 1) AS THUMBNAIL
+				FROM PRODUCT
+				WHERE USER_NO = #{userNo}
+				AND PRODUCT_STATE = 'N'
+				ORDER BY CREATE_DT DESC
+			)
+			<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
+			ORDER BY NUM
+	</select>
+	
+	<!-- 일정 조회 -->
+	<select id="selectProductDateList" resultMap="productDate_rm">
+		SELECT PRODUCT_DT_NO, TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT
+		FROM PRODUCT_DT
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT_AVAILABILITY = 'Y'
+		ORDER BY PRODUCT_DT
+	</select>
+	
+	<!-- 여행 코스 리스트 조회 -->
+	<select id="selectTourCourseList" resultMap="tourcourse_rm">
+		SELECT COURSE_NO, PRODUCT_NO, COURSE_NAME, COURSE_ORDER, BOSS_COURSE_FL
+		FROM TOUR_COURSE
+		WHERE PRODUCT_NO = #{productNo}
+		ORDER BY COURSE_ORDER
+	</select>
+	
+	<!-- 리뷰 리스트 조회 
+	<select id="selectProductReviewList" resultMap="review_rm">
+		SELECT REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS REVIEW_STARS_DOUBLE
+			  	, TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
+			   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
+		FROM "REVIEW" R
+		JOIN "USER" U ON(R.USER_NO = U.USER_NO)
+		JOIN "PRODUCT" USING (PRODUCT_NO)
+		WHERE U.USER_STATE = 'N'
+		AND PRODUCT_NO = #{productNo}
+		AND REVIEW_DEL_FL = 'N'
+		AND REVIEW_REPLY_DEL_FL = 'N'
+		ORDER BY 1 DESC
+	</select> -->
+	
+	<!-- 가이드 리뷰 조회 -->
+	<select id="guideReivewList" resultMap="review_rm">
+		SELECT REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
+			  	, TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
+			   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
+		FROM "REVIEW" R
+		JOIN "USER" U ON(R.USER_NO = U.USER_NO)
+		JOIN "PRODUCT" P USING (PRODUCT_NO)
+		WHERE U.USER_STATE = 'N'
+		AND P.USER_NO = #{userNo}
+		AND REVIEW_DEL_FL = 'N'
+		AND REVIEW_REPLY_DEL_FL = 'N'
+		ORDER BY 1 DESC
+		FETCH FIRST 3 ROWS ONLY
+	</select>
+	
+	<!-- 가이드 리뷰 목록 더보기 (3개씩) -->
+	<select id="guideReviewMore" resultMap="review_rm">
+		SELECT * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY REVIEW_NO DESC) AS NUM
+					,REVIEW_NO, REVIEW_MESSAGE, REVIEW_STARS*20 REVIEW_STARS
+				  	, TO_CHAR(R.CREATE_DT, 'YYYY/MM/DD') CREATE_DT, PROFILE_IMG, USER_NAME
+				   , PRODUCT_NAME, REVIEW_REPLY, PRODUCT_NO
+				FROM "REVIEW" R
+				JOIN "USER" U ON(R.USER_NO = U.USER_NO)
+				JOIN "PRODUCT" P USING (PRODUCT_NO)
+				WHERE U.USER_STATE = 'N'
+				AND P.USER_NO = 23
+				AND REVIEW_DEL_FL = 'N'
+				AND REVIEW_REPLY_DEL_FL = 'N'
+				ORDER BY 1 DESC
+			)
+		<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
+			ORDER BY NUM
+	</select>
+
+	 
+	<!-- 리뷰 리플 달기 -->
+	<update id="reviewReply">
+		UPDATE REVIEW
+		SET REVIEW_REPLY= #{reviewMessage}
+		WHERE REVIEW_NO= #{reviewNo}
+	</update>
+	
+	<!-- 리뷰 리플 수정 -->
+	<update id="reviewReplyEdit">
+		UPDATE REVIEW
+		SET REVIEW_REPLY= #{reviewMessage}
+		WHERE REVIEW_NO= #{reviewNo}
+	</update>
+	
+	<!-- 리뷰 리플 삭제 -->
+	<update id="reviewReplyDel">
+		UPDATE REVIEW
+		SET REVIEW_REPLY= ''
+		WHERE REVIEW_NO= #{reviewNo}
+	</update>
+	
+	<!-- 가이드 리뷰 수 카운트 -->
+	<select id="reviewCount" resultType="_int">
+		SELECT COUNT(*)  FROM "REVIEW" R
+		JOIN "PRODUCT" P USING(PRODUCT_NO)
+		WHERE P.USER_NO = #{userNo}
+	</select>
+	
+	<!-- 가이드 상품 수 카운트 -->
+	<select id="productCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM PRODUCT
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_STATE = 'N'
+	</select>
+	
+	
+	<!-- 가이드 예약 리스트 (구매자들 예약 확인용) -->
+	<select id="GuideReservationList" resultMap="reservation_rm">
+		SELECT RESERVATION_NO, R.PRODUCT_NO,  P.PRODUCT_NAME, P.PRODUCT_PACKAGE, 
+				TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, P.TOUR_DURATION, 
+				R.USER_NO, U.USER_NAME,
+				RESERVATION_STATE, GUEST_COUNT, PO.OPTION_NAME,
+				T.PRIMARY_LANGUAGE , T.FACE_IMG,
+			   (SELECT FILE_PATH FROM "FILE" F 
+			    WHERE F.PRODUCT_NO = R.PRODUCT_NO
+			    AND F.FILE_ORDER = 1) AS THUMBNAIL
+		FROM RESERVATION R
+		RIGHT JOIN "USER" U ON (R.USER_NO = U.USER_NO)
+		RIGHT JOIN "TOURIST" T ON (R.USER_NO = T.USER_NO)
+		RIGHT JOIN "PRODUCT" P ON (P.PRODUCT_NO = R.PRODUCT_NO)
+		RIGHT JOIN "PRODUCT_DT" USING (PRODUCT_DT_NO)
+		RIGHT JOIN "PRODUCT_OPTION" PO USING (OPTION_NO)
+		WHERE  P.USER_NO = #{userNo}
+		ORDER BY RESERVATION_NO DESC
+	</select>
+	
+	
+	
 	
 </mapper>

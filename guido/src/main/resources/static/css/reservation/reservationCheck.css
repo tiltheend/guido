@@ -1,0 +1,138 @@
+
+@media screen and (max-width : 767px) {
+    html{
+        font-size: 12px;
+    }
+}
+
+body{
+    background-color: darkgray;
+}
+
+/* 예약 체크 컨테이너 */
+.ordercheck--container{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 2vh 0;
+}
+
+/* 예약체크 감사인사 */
+.ordercheck--text__top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 예약체크 상단 */
+.ordercheck--container__top, .ordercheck--container__middle{
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.ordercheck--container>div{
+    width: 100%;
+}
+
+.ordercheck--text__top span{
+    font-size: 21px;
+}
+
+/* 예약체크 결제정보 */
+.ordercheck--info__top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+/* 구분선 */
+.ordercheck--divisionline{
+    height: 1px;
+    background-color: #F0F0F0;
+    margin: 30px 0;
+}
+
+/* 예약체크 이미지 */
+.ordercheck--img__top{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ordercheck--container__top>div:nth-of-type(1){
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 예약 내역 썸네일 */
+.ordercheck--img__middle{
+    width: 190px;
+    height: 130px;
+    overflow: hidden;
+    position: relative; 
+    border-radius: 1px;
+    border: 2px solid #F0F0F0;
+    margin-right: 20px;
+}
+
+.ordercheck--img__middle::before {
+    content: "";
+    display: block;
+    padding-top: calc(100% / (100 / 50)); 
+}
+
+
+.ordercheck--img__middle>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 예약내역 컨텐츠 div */
+.ordercheck--container__middle>div{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 예약내역 컨텐츠 왼쪽 div */
+.ordercheck--left__middle{
+    display: flex;
+}
+
+/* 상품명 */
+.content-productname{
+    color: #0F4957;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* 예약된 일정(날짜) div */
+#reservationDate{
+    margin-top: 20px;
+}
+
+#reservationDate, #reservationDuration, #guideLanguage{
+    margin-bottom: 5px;
+    color: #5c5c5c;
+}
+
+/* 예약내역 컨텐츠 오른쪽 div 총 가격 */
+.ordercheck--right__middle{
+    color: #0F4957;
+}
+
+#guest{
+    margin-top: 20px;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: underline;
+}

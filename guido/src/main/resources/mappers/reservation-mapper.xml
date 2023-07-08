@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.guido.reservation.model.dao.ReservationMapper">
 	
+	
+	<resultMap type="Reservation" id="reservation_rm">
+		<id property="reservationNo" column="RESERVATION_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="reservationState" column="RESERVATION_STATE"/>
+		<result property="paymentMethod" column="PAYMENT_METHOD"/>
+		<result property="guestCount" column="GUEST_COUNT"/>
+		<result property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="optionNo" column="OPTION_NO"/>
+		<result property="requestContent" column="REQUEST_CONTENT"/>
+		<result property="orderNumber" column="ORDER_NUMBER"/>
+		<result property="totalPrice" column="TOTAL_PRICE"/>
+		<result property="impUid" column="IMP_UID"/>
+		<result property="cancelReason" column="CANCEL_REASON"/>
+		
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="optionName" column="OPTION_NAME"/>
+	</resultMap>
+	
+	
 	<resultMap type="ProductDate" id="product_date_rm">
 		<id property="productDateNo" column="PRODUCT_DT_NO"/>
 		<result property="productNo" column="PRODUCT_NO"/>
@@ -18,6 +42,13 @@
 	</resultMap>
 	
 	
+	<!-- 예약 진행 시 일정(날짜) 정보 조회 -->
+	<select id="selectReservationDate" resultMap="product_date_rm">
+		SELECT PRODUCT_DT_NO, PRODUCT_NO,  TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT,  PRODUCT_DT_AVAILABILITY
+		FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT = #{productDate}
+	</select>
 	
 	
 	<!-- 예약 가능한 일정인지 확인 (1: 가능, 0: 불가능) -->
@@ -42,5 +73,110 @@
 		SELECT * FROM PRODUCT_OPTION
 		WHERE OPTION_NO = #{optionNo}
 	</select>
+	
+	
+	<!-- 예약 -->
+	<insert id="insertReservation">
+<!--		<selectKey id="findProductDate" resultType="int" keyProperty="productDate" order="BEFORE">
+			SELECT dept_code from department
+			WHERE user_id = #{user_id}
+		</selectKey> -->
+		INSERT INTO "RESERVATION"
+		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
+		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
+<!--		INSERT INTO "RESERVATION"
+		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, #{createDate},
+		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice})-->
+	</insert>
+	
+	
+	<!-- 예약 조회 -->
+	<select id="selectReservation" resultMap="reservation_rm">
+		SELECT R.USER_NO, RESERVATION_NO, R.PRODUCT_NO, R.CREATE_DT, RESERVATION_STATE, 
+		PAYMENT_METHOD, GUEST_COUNT, R.PRODUCT_DT_NO, OPTION_NO, REQUEST_CONTENT, ORDER_NUMBER, TOTAL_PRICE,
+		USER_NAME, USER_TEL,TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, OPTION_NAME, IMP_UID, CANCEL_REASON
+		FROM "RESERVATION" R
+		JOIN "USER" U ON(R.USER_NO=U.USER_NO)
+		JOIN "PRODUCT_DT" PD ON(R.PRODUCT_DT_NO= PD.PRODUCT_DT_NO) 
+		JOIN "PRODUCT_OPTION" USING(OPTION_NO) 
+		WHERE ORDER_NUMBER = #{orderNumber}
+	</select>
+	
+	
+	<!-- 예약 취소-->
+	<update id="reservationCancel">
+		UPDATE "RESERVATION"
+		SET RESERVATION_STATE = 'N',
+		CANCEL_REASON = #{cancelReason}
+		WHERE IMP_UID = #{impUid}
+	</update>
+	
+	
+	
+	<!-- 상품 구매 가능 여부 체크 -->
+	<select id="checkAvailable" resultType="_int">
+	  <choose>
+	    <when test="productPackage == 1">
+	      SELECT COUNT(*) FROM "PRODUCT_DT"
+	      LEFT JOIN "PRODUCT_OPTION" USING(PRODUCT_NO)
+	      WHERE PRODUCT_DT_AVAILABILITY = 'Y'
+	      AND OPTION_NO = #{optionNo}
+	      AND OPTION_REST >= #{guestCount}
+	    </when>
+	    <otherwise>
+	      SELECT COUNT(*) FROM "PRODUCT_DT"
+	      WHERE PRODUCT_DT_AVAILABILITY = 'Y'
+	      AND PRODUCT_DT_NO = #{productDateNo}
+	    </otherwise>
+	  </choose>
+	</select>
+	
+	
+	<!-- 예약 가능 수량 업데이트(구매 후) -->
+	<update id="updateAvailability">
+	  <choose>
+		  <!-- 1박의 경우 예약 완료 시 구매 가능 옵션(시간대) 수량 업데이트-->
+	    <when test="productPackage == 1">
+	      UPDATE "PRODUCT_OPTION"
+	      SET OPTION_REST = OPTION_REST - #{guestCount}
+	      WHERE OPTION_NO = #{optionNo}
+	    </when>
+	    
+	    <!-- N박의 경우 예약 완료 시 구매 가능 일정(날짜) 업데이트-->
+	    <otherwise>
+	      UPDATE "PRODUCT_DT"
+	      SET PRODUCT_DT_AVAILABILITY = 'N'
+	      WHERE PRODUCT_DT_NO = #{productDateNo}
+	    </otherwise>
+	  </choose>
+	</update>
+	
+	
+	<!-- 예약 가능 수량 업데이트(취소 후) -->
+	<update id="updateDateOrOption">
+	  <choose>
+		  <!-- 1박의 경우 취소 시 구매 가능 옵션(시간대) 수량 업데이트-->
+	    <when test="productPackage == 1">
+	      UPDATE "PRODUCT_OPTION"
+	      SET OPTION_REST = OPTION_REST + #{guestCount}
+	      WHERE OPTION_NO = #{optionNo}
+	    </when>
+	    
+	    <!-- N박의 경우 취소 완료 시 구매 가능 일정(날짜) 업데이트-->
+	    <otherwise>
+	      UPDATE "PRODUCT_DT"
+	      SET PRODUCT_DT_AVAILABILITY = 'Y'
+	      WHERE PRODUCT_DT_NO = #{productDateNo}
+	    </otherwise>
+	  </choose>
+	</update>
+	
+	
+	<!-- 비상연락처 업데이트 -->
+	<update id="updateEmergencyContact">
+		UPDATE "TOURIST"
+		SET EMERGENCY_CONTACT = #{emergencyContact}
+		WHERE USER_NO = #{userNo}
+	</update>
 	
 </mapper>

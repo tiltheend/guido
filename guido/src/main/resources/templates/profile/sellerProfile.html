@@ -20,8 +20,8 @@
         <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
 
             <div class="guide-banner"> <!-- 프로필 위 가이드 배너 -->
-                <img th:src="@{/images/profile/guideBanner.png}" alt="guideBanner" id="displayNone"> <!-- 일반 가이드 -->
-                <img th:src="@{/images/profile/superGuideBanner.png}" alt="superGuideBanner"> <!-- 슈퍼 가이드 -->
+                <img th:if="${guide.superGuideFl=='N'}" th:src="@{/images/profile/guideBanner.png}" alt="guideBanner"> <!-- 일반 가이드 -->
+                <img th:if="${guide.superGuideFl=='Y'}" th:src="@{/images/profile/superGuideBanner.png}" alt="superGuideBanner"> <!-- 슈퍼 가이드 -->
             </div>
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
@@ -48,17 +48,16 @@
 
                 <div class="profile-seller-info"> <!-- 판매자 정보 (후기/평점/경력) -->
                     <div class="seller-info">
-                        <h2>36</h2>
+                        <h2 th:text="${guide.reviewCount}">0</h2>
                         <p>후기</p>
                     </div>
                     <div class="seller-info">
-                        <h2>4.8</h2>
+                        <h2 th:text="${guide.starAverage}">0.0</h2>
                         <p>평점</p>
                     </div>
                     <div class="seller-info">
-                        <h2>10</h2>
+                        <h2 th:utext="|${#strings.setSplit(guide.careerDate, ',')[0]}<span>(${#strings.setSplit(guide.careerDate, ',')[1]})</span>|">0</h2>
                         <p>경력</p>
-                        <p>(개월)</p>
                     </div>
                 </div>
 
@@ -83,89 +82,84 @@
         
         <div class="profile_right"> <!-- 프로필 오른쪽 박스 -->
 
-            <div class="seller-about"> <!-- 판매자 소개 -->
+            <div class="seller-about" th:if="${#lists.size(pr) > 0}"> <!-- 판매자 소개 -->
                 <h1>About Me !</h1>
                 <ul class="about-me">
-                    <li>
-                        <pre><img th:src="@{/images/profile/aboutMe_1.png}" alt="aboutMe">I have traveled to : Valencia, Spain</pre>
+                    <li th:if="${pr.abroadExperience}">
+                        <pre><img th:src="@{/images/profile/abroadExperience.png}">I have traveled to : [[${pr.abroadExperience}]] </pre>
                     </li>
-                    <li>
-                        <pre><img th:src="@{/images/profile/aboutMe_2.png}" alt="aboutMe">Speaks English, French</pre>
+                    <li th:if="${pr.subLang}">
+                        <pre><img th:src="@{/images/profile/subLang.png}">Speaks [[${pr.subLang}]]</pre>
                     </li>
-                    <li>
-                        <pre><img th:src="@{/images/profile/aboutMe_3.png}" alt="aboutMe">Favorite song : Les copains d'abord - Georges Brassens</pre>
+                    <li th:if="${pr.favoriteSong}">
+                        <pre><img th:src="@{/images/profile/favoriteSong.png}">Favorite song :  [[${pr.favoriteSong}]]</pre>
                     </li>
-                    <li>
-                        <pre><img th:src="@{/images/profile/aboutMe_4.png}" alt="aboutMe">I'm obsessed with: Cutting fruits vegetables in my recipes</pre>
-                        <!-- <pre><img th:src="@{/images/profile/aboutMe_4.png}" alt="aboutMe">I'm obsessed with: Cutting fruits vegetables in my recipesI'm obsessed with: Cutting fruits vegetables in my recipes</pre> -->
+                    <li th:if="${pr.dopamine}">
+                        <pre><img th:src="@{/images/profile/dopamine.png}">My dopamine: [[${pr.dopamine}]]</pre>
                     </li>
-                    <li>
-                        <pre><img th:src="@{/images/profile/aboutMe_5.png}" alt="aboutMe">Born in the 80s</pre>
+                    <li th:if="${pr.birthYear}">
+                        <pre><img th:src="@{/images/profile/birthDay.png}">Born in the [[${pr.birthYear}]]</pre>
                     </li>
-                    <li>
-                        <pre><img th:src="@{/images/profile/aboutMe_6.png}" alt="aboutMe">My work: Interior architect</pre>
+                    <li th:if="${pr.job}">
+                        <pre><img th:src="@{/images/profile/job.png}">My work: [[${pr.job}]]</pre>
+                    </li>
+                    <li th:if="${pr.pets}">
+                        <pre><img th:src="@{/images/profile/pets.png}">Live with [[${pr.pets}]]</pre>
+                    </li>
+                    <li th:if="${pr.hobby}">
+                        <pre><img th:src="@{/images/profile/hobby.png}">My hobby: [[${pr.hobby}]]</pre>
+                    </li>
+                    <li th:if="${pr.mbti}">
+                        <pre><img th:src="@{/images/profile/MBTI.png}">MBTI is: [[${pr.mbti}]]</pre>
+                    </li>
+                    <li th:if="${pr.strength}">
+                        <pre><img th:src="@{/images/profile/strength.png}">[[${pr.strength}]]</pre>
+                    </li>
+                    <li th:if="${pr.tmi}">
+                        <pre><img th:src="@{/images/profile/TMI.png}">TMI is [[${pr.tmi}]]</pre>
+                    </li>
+                    <li th:if="${pr.major}">
+                        <pre><img th:src="@{/images/profile/major.png}">I majored in [[${pr.major}]]</pre>
+                    </li>
+                    <li th:if="${pr.uselessTalent}"> 
+                        <pre><img th:src="@{/images/profile/uselessTalent.png}">Useless talent: [[${pr.uselessTalent}]]</pre>
+                    </li>
+                    <li th:if="${pr.capList}">
+                        <pre><img th:src="@{/images/profile/capList.png}">[[${pr.capList}]] as guide</pre>
                     </li>
                 </ul>
             </div>
                 
             <div class="sales-list"> <!-- 판매자 판매 상품 -->
                 <div> <!-- 제목 -->
-                    <h1>Sales List (15)</h1>
+                    <h1>Sales List (<span th:text="${productCount}">구매내역 갯수</span>)</h1>
                     <!-- <img th:src="@{/images/profile/saleAdd.png}" alt="saleAdd"> -->
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
                     </svg>
                 </div>
 
                 <ul class="sales-list-box">
-                    <li>
+                    <li th:each="product : ${guideProductList}">
                         <div class="sale-img">
-                            <!-- <img src="" alt=""> -->
+                            <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${product.thumbnail}" alt="productImg"></a>
                         </div>
                         <div class="sale-content">
-                            <h2>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</h2>
-                            <!-- <h2>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea [Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea [Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</h2> -->
-                            <p><img th:src="@{/images/profile/location.png}" alt="location">Seoul - Changdeokgung Palace</p>
-                            <!-- <p><img th:src="@{/images/profile/location.png}" alt="location">Seoul - Changdeokgung Palace Seoul - Changdeokgung Palace Seoul - Changdeokgung Palace Seoul - Changdeokgung Palace Seoul - Changdeokgung Palace</p> -->
-                            <h3>3 nights in Myung-dong, Seoul</h3>
-                            <p>21 Jun 2023 - 24 Jun 2023</p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: 日本語/中文</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sale-img">
-                            <!-- <img src="" alt=""> -->
-                        </div>
-                        <div class="sale-content">
-                            <h2>상품 타이틀</h2>
-                            <p><img th:src="@{/images/profile/location.png}" alt="location">위치</p>
-                            <h3>위치/일정</h3>
-                            <p>날짜</p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: 가이드 언어</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sale-img">
-                            <!-- <img src="" alt=""> -->
-                        </div>
-                        <div class="sale-content">
-                            <h2>상품 타이틀</h2>
-                            <p><img th:src="@{/images/profile/location.png}" alt="location">위치</p>
-                            <h3>위치/일정</h3>
-                            <p>날짜</p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: 가이드 언어</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sale-img">
-                            <!-- <img src="" alt=""> -->
-                        </div>
-                        <div class="sale-content">
-                            <h2>상품 타이틀</h2>
-                            <p><img th:src="@{/images/profile/location.png}" alt="location">위치</p>
-                            <h3>위치/일정</h3>
-                            <p>날짜</p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: 가이드 언어</p>
+                            <h2 th:text="${product.productName}">상품 타이틀</h2>
+                            <p><img th:src="@{/images/profile/location.png}" alt="location">[[${product.regionName}]]
+                                <th:block th:each="course : ${product.tourCourse}">
+                                    <span th:if="${course.bossCourseFL=='Y'}">- [[${course.courseName}]]</span>
+                                </th:block> 
+                            </p>
+                            <h3 th:with="package = ${product.productPackage}"> <!-- 위치/일정 -->
+                                <th:block th:if="${package==1}"> a [[${product.tourDuration}]]-hours day trip in [[${product.regionName}]]</th:block>
+                                <th:block th:if="${package>1}">[[${product.productPackage}]] day trip in [[${product.regionName}]]</th:block>
+                            </h3>
+                            <p th:if="${not #lists.isEmpty(product.productDateList)}">
+                                <th:block th:text="${product.productDateList.get(0).productDate}"></th:block>
+                                <th:block th:if="${#lists.size(product.productDateList)>1}" th:text="|~ ${product.productDateList.get(product.productDateList.size() - 1).productDate}|"></th:block>
+                            </p>
+                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${product.guideLanguage}]]</p>
                         </div>
                     </li>
                 </ul>
@@ -196,7 +190,7 @@
                                     <input type="radio" id="starpoint_6" class="star_radio">
                                     <input type="radio" id="starpoint_7" class="star_radio">
                                     <input type="radio" id="starpoint_8" class="star_radio">
-                                    <input type="radio" id="starpoint_9" class="star_radio" checked>
+                                    <input type="radio" id="starpoint_9" class="star_radio">
                                     <input type="radio" id="starpoint_10" class="star_radio">
                                     <span class="starpoint_bg"></span>
                                 </div>
@@ -213,138 +207,89 @@
             </div>
 
             <div class="seller-review"> <!-- 리뷰 -->
-                <h1>Review (36)</h1>
+                <h1>Review (<span th:text="${reviewCount}">리뷰 갯수</span>)</h1>
                 <ul class="review-list">
-                    <li>
+                    <li th:each="review : ${guideReivewList}">
                         <ul>
-                            <li class="reply-content">
+                            <li class="reply-content" th:data-reviewno="${review.reviewNo}">
                                 <div>
                                     <div> <!-- 리뷰 남긴 사람 프로필 -->
                                         <div class="reviewer">
-                                            <img th:src="@{/images/profile/aboutMe_1.png}">
+                                            <!-- <img src=""> -->
+                                            <img th:unless="${review.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                            <img th:if="${review.profileImage}" th:src="${review.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                         </div>
-                                        <p class="reviewer-name">Anna</p>
+                                        <p class="reviewer-name" th:text="${review.userName}">리뷰 쓴 사람</p>
                                     </div>
                                     <div class="sale-review-info">
-                                        <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
+                                        <p th:text="${review.productName}">상품 제목</p>
                                         <div class="review-rating">
                                             <div class="review-star">
-                                                <input type="radio" id="starpoint_1" class="star_radio" value="0.5">
-                                                <input type="radio" id="starpoint_2" class="star_radio" value="1.0">
-                                                <input type="radio" id="starpoint_3" class="star_radio" value="1.5">
-                                                <input type="radio" id="starpoint_4" class="star_radio" value="2.0">
-                                                <input type="radio" id="starpoint_5" class="star_radio" value="2.5">
-                                                <input type="radio" id="starpoint_6" class="star_radio" value="3.0">
-                                                <input type="radio" id="starpoint_7" class="star_radio" value="3.5">
-                                                <input type="radio" id="starpoint_8" class="star_radio" value="4.0">
-                                                <input type="radio" id="starpoint_9" class="star_radio" value="4.5" checked>
-                                                <input type="radio" id="starpoint_10" class="star_radio" value="5.0">
+                                                <input type="radio" id="starpoint_1" class="star_radio" value="0.5" th:checked="${review.reviewStarsDouble == 0.5}">
+                                                <input type="radio" id="starpoint_2" class="star_radio" value="1.0" th:checked="${review.reviewStarsDouble == 1.0}">
+                                                <input type="radio" id="starpoint_3" class="star_radio" value="1.5" th:checked="${review.reviewStarsDouble == 1.5}">
+                                                <input type="radio" id="starpoint_4" class="star_radio" value="2.0" th:checked="${review.reviewStarsDouble == 2.0}">
+                                                <input type="radio" id="starpoint_5" class="star_radio" value="2.5" th:checked="${review.reviewStarsDouble == 2.5}">
+                                                <input type="radio" id="starpoint_6" class="star_radio" value="3.0" th:checked="${review.reviewStarsDouble == 3.0}">
+                                                <input type="radio" id="starpoint_7" class="star_radio" value="3.5" th:checked="${review.reviewStarsDouble == 3.5}">
+                                                <input type="radio" id="starpoint_8" class="star_radio" value="4.0" th:checked="${review.reviewStarsDouble == 4.0}">
+                                                <input type="radio" id="starpoint_9" class="star_radio" value="4.5" th:checked="${review.reviewStarsDouble == 4.5}">
+                                                <input type="radio" id="starpoint_10" class="star_radio" value="5.0" th:checked="${review.reviewStarsDouble == 5.0}">
                                                 <span class="starpoint_bg"></span>
                                             </div>
-                                            <span class="review-date">2023/05/25</span>
+                                            <span class="review-date" th:text="${review.createDate}">2023/05/25</span>
                                         </div>
                                     </div>
                                 </div>
-                                <pre>그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다!그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!! 그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다!</pre>
-                                <!-- <pre>그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre> -->
+                                <pre th:text="${review.reviewMessage}">후기 내용</pre>
                                 <div class="more-and-reply">
-                                    <p>더보기 +</p>
-                                    <div class="comment-view">
+                                    <p onclick="moreReviewFn(this)">더보기 +</p>
+                                    <div class="comment-view" th:if="${session.loginUser?.userNo == user.userNo}" onclick="reviewReplyFn(this)">
                                         <img th:src="@{/images/profile/comment-view.png}" alt="comment-view">
                                         <img th:src="@{/images/profile/comment-view_hover.png}" alt="comment-view_hover">
                                     </div>
                                 </div>
                             </li>
-                            <li class="seller-reply">
+                            <li class="seller-reply" th:if="${review.reviewReply}">
                                 <div> <!-- 답글 200 글자 제한 -->
                                     <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
-                                    <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200">안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!</textarea>
+                                    <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200" th:text="${review.reviewReply}" readonly>답글 내용</textarea>
                                 </div>
-                                <div class="reply-edit">
-                                    <button>Edit</button>
-                                    <button>Delete</button>
+                                <div class="reply-edit" th:if="${session.loginUser?.userNo == user.userNo}">
+                                    <button onclick="reviewReplyEditFn(event)" type="button">Edit</button>
+                                    <button onclick="reviewReplyDelFn(event)" type="button">Delete</button>
                                 </div>
                             </li>
-                            <li class="seller-reply-wirte"> <!-- 리뷰 작성 박스 -->
+                            <li class="seller-reply-write" th:unless="${review.reviewReply}"> <!-- 리뷰 작성 박스 -->
                                 <div>
                                     <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
                                     <textarea name="sellerReplyContent" id="sellerReplyContent"></textarea>
                                 </div>
                                 <div>
-                                    <button class="reply-send">register</button>
+                                    <button class="reply-send" th:if="${session.loginUser?.userNo == user.userNo}" onclick="reviewReplyAddFn(event)">register</button>
                                 </div>
-                            </li>
+                            </li> 
                         </ul>
                     </li>
-
-                    <li>
-                        <ul>
-                            <li class="reply-content">
-                                <div>
-                                    <div> <!-- 리뷰 남긴 사람 프로필 -->
-                                        <div class="reviewer">
-                                            <img src="">
-                                        </div>
-                                        <p class="reviewer-name">Anna</p>
-                                    </div>
-                                    <div class="sale-review-info">
-                                        <p>[Moonlight trip to Changdeokgung Palace] The night tour of Changdeokgung Palace, feeling the beauty of Korea</p>
-                                        <div class="review-rating">
-                                            <div class="review-star">
-                                                <input type="radio" id="starpoint_1" class="star_radio">
-                                                <input type="radio" id="starpoint_2" class="star_radio">
-                                                <input type="radio" id="starpoint_3" class="star_radio">
-                                                <input type="radio" id="starpoint_4" class="star_radio">
-                                                <input type="radio" id="starpoint_5" class="star_radio">
-                                                <input type="radio" id="starpoint_6" class="star_radio">
-                                                <input type="radio" id="starpoint_7" class="star_radio">
-                                                <input type="radio" id="starpoint_8" class="star_radio">
-                                                <input type="radio" id="starpoint_9" class="star_radio" checked>
-                                                <input type="radio" id="starpoint_10" class="star_radio">
-                                                <span class="starpoint_bg"></span>
-                                            </div>
-                                            <span class="review-date">2023/05/25</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <pre>그녀는 훌륭한 가이드였고, 항상 도움을 주고 질문에 답할 준비가 되어 있었습니다. 서울은 아름다운 도시입니다! 백퍼센트 추천!!</pre>
-                                <div class="more-and-reply">
-                                    <p>더보기 +</p>
-                                    <div class="comment-view">
-                                        <img th:src="@{/images/profile/comment-view.png}" alt="comment-view">
-                                        <img th:src="@{/images/profile/comment-view_hover.png}" alt="comment-view_hover">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="seller-reply">
-                                <div> <!-- 답글 200 글자 제한 -->
-                                    <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
-                                    <textarea name="sellerReplyContent" id="sellerReplyContent" maxlength="200">안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!안녕하세요~ 좋은 후기 감사합니당!!</textarea>
-                                </div>
-                                <div class="reply-edit">
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </div>
-                            </li>
-                            <li class="seller-reply-wirte"> <!-- 리뷰 작성 박스 -->
-                                <div>
-                                    <img th:src="@{/images/profile/replyIcon.png}" alt="replyIcon">
-                                    <textarea name="sellerReplyContent" id="sellerReplyContent"></textarea>
-                                </div>
-                                <div>
-                                    <button class="reply-send">register</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
                 </ul>
+
                 <button class="review-list-more">more reviews</button>
             </div>
 
         </div>
     </div>
 
+    <script th:inline="javascript">
+
+        const message = /*[[${message}]]*/  "전달 받은 message";
+        if(message != null) alert(message);
+
+        const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
+        const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
+        const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
+    </script>       
+    
     <script th:src="@{/js/profile/sellerProfile.js}"></script>                   
+    <script th:src="@{/js/profile/profileEdit.js}"></script>                   
 </body>
 </html>

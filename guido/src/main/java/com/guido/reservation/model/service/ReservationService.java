@@ -1,9 +1,17 @@
 package com.guido.reservation.model.service;
 
+import java.io.IOException;
 import java.util.Map;
 
+import com.guido.common.model.dto.ProductDate;
 import com.guido.common.model.dto.ProductOption;
+import com.guido.common.model.dto.Reservation;
+import com.guido.common.model.dto.User;
 
+/**
+ * @author user1
+ *
+ */
 public interface ReservationService {
 
 	
@@ -28,5 +36,70 @@ public interface ReservationService {
 	 * @return option
 	 */
 	ProductOption selectProductOption(int optionNo);
+	
+	
+	/** 아임포트 API 키와 SECRET키로 토큰 생성
+	 * @return
+	 * @throws IOException
+	 */
+	String getToken() throws IOException;
+	
+	
+	
+	/** 결제 정보
+	 * @param imp_uid
+	 * @param access_token
+	 * @return
+	 * @throws IOException 
+	 */
+	int paymentInfo(String imp_uid, String access_token) throws IOException;
+	
+	
+	/** 결제 취소
+	 * @param access_token
+	 * @param imp_uid
+	 * @param amount
+	 * @param reason
+	 * @throws IOException 
+	 */
+	public void paymentCancel(String access_token, String imp_uid, int amount, String reason) throws IOException;
+
+
+
+	/** 예약 데이터 추가
+	 * @param reservation
+	 * @return result
+	 */
+	int insertReservation(Reservation reservation);
+
+
+
+	/** 예약 확인
+	 * @param orderNumber
+	 * @return reservation
+	 */
+	Reservation selectReservation(String orderNumber);
+
+
+	/** 예약 취소
+	 * @param reservation
+	 * @return result
+	 */
+	void reservationCancel(Reservation reservation) throws IOException;
+
+
+
+	/** 예약 날짜(일정) 정보 조회
+	 * @param map
+	 * @return reservationDate
+	 */
+	ProductDate selectReservationDate(Map<String, Object> map);
+
+
+
+	/** 비상 연락처 업데이트
+	 * @param loginUser
+	 */
+	void updateEmergencyContact(User loginUser);
 
 }

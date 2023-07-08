@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>여행 상품 등록</title>
+    <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
+    <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script>
+    
+    <link rel="stylesheet" th:href="@{/css/productUpload/test.css}" />
+    <link rel="stylesheet" th:href="@{/css/productUpload/main.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/style.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/typing.css}">
+    <link rel="stylesheet" th:href="@{/css/productUpload/tourCourse.css}">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+    
+  </head>
+  <body>
+    <header>
+      <!-- 메인 로고 -->
+      <div class="logo"><a href="/"><img th:src="@{/images/productUpload/guido_test.png}" alt="메인 로고"></a></div>
+      <span th:text="${session.loginUser.userName}" id="loginName" style="display: none;"></span>
+      <img th:src="${session.loginUser.profileImage}" id="loginImg" style="display: none;"></img>
+    </header>
+    <!-- 1페이지 -->
+    <main id="page1" class="page current">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text"></h4>
+        </div>
+        <span class="sub-title">판매 등록하실 가이드 상품을 선택해주세요!</span>
+      </div>
+      <div class="tour-box">
+        <span class="tour-type" onclick="updateTourValue()">당일투어</span>
+        <!-- 히든 속성으로 당일투어 클릭하면 value='1'로 설정하고 데이터 전송 -->
+        <span class="tour-type" id="tourBox" onclick="updateTourValue2()">1박 이상 패키지</span>
+      </div>
+      <div id="tourTime">
+        <div>몇 시간 코스인가요?</div><br>
+        <div class="input-container2" id="inputContainer2">
+          <input type="text" id="inputTime" >시간
+        </div>
+        <div class="input-container" id="inputWarning">
+          <span class="error-message">숫자만 입력해주세요!</span>
+        </div>
+      </div>
+      <div id="tourDay">
+        <div>몇 일 코스인가요?</div><br>
+        <div class="input-container">
+          <input type="text" id="inputDay" oninput="updateTourValue3()">일 
+        </div>
+        <div class="input-container" id="inputWarning">
+          <span class="error-message">숫자만 입력해주세요!</span>
+        </div>
+      </div>
+    </main>
+    <!-- 2페이지 : 지역 선택하기-->
+    <main id="page2" class="page">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text2"></h4>
+        </div>
+        <span class="sub-title">선택한 지역 : </span><span id="space"></span>
+      </div>
+      <div class="korea-map">
+        <svg id="mySvg"
+          style="background: none; overflow: visible"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+              id="CD11"
+              class="OUTLINE"
+              d=" M 178 231 l -4 2 -4 3 -1 0 0 1 -3 1 -4 -5 -4 0 -6 1 -4 3 -2 -1 -1 -1 -3 2 -3 -3 -1 -3 -2 -3 0 0 -1 -2 -3 2 -3 1 -2 -4 0 -8 -3 -1 0 0 0 0 0 0 -2 -1 -3 -2 2 -4 3 -3 0 -1 0 0 0 0 0 -1 1 0 4 2 7 1 2 -2 0 1 2 0 1 -4 2 -8 7 -1 4 2 0 -3 1 -1 2 -4 3 -4 2 0 3 2 7 2 2 8 1 4 1 1 0 0 0 2 0 2 0 1 0 0 -1 6 3 0 8 -1 0 5 -4 3 -1 5 z "
+            /> 
+            <path
+              id="CD26"
+              class="OUTLINE"
+              d=" M 496 702 l 0 4 -1 0 -2 -5 -1 6 -1 -2 0 0 -1 0 -1 1 -1 2 0 1 -1 -1 -1 -6 -1 -6 -2 3 -2 -3 0 2 0 0 0 0 0 0 0 0 -1 0 1 0 -4 1 -2 -5 -1 5 -1 2 0 0 -2 0 -7 -2 0 -2 2 -2 -1 -3 -5 -4 -2 -2 4 -1 9 0 0 -5 1 -6 5 -1 6 -2 7 -1 4 -6 1 -4 2 0 3 1 1 -3 6 -3 4 -1 1 -5 3 -6 7 0 3 -2 0 -3 0 0 2 -3 1 3 0 0 1 0 2 0 4 -1 4 4 1 3 0 1 -1 1 5 1 -7 4 -1 6 -1 4 -1 0 0 0 0 -1 -1 2 -1 1 2 2 -1 4 -2 4 -3 6 -3 4 0 1 0 0 -5 0 -4 0 -2 -1 -1 4 -1 4 1 -1 0 4 -7 0 -2 -4 -1 1 -3 4 z "
+            />
+            <path
+              id="CD27"
+              class="OUTLINE"
+              d=" M 441 530 l 3 1 3 7 0 4 2 9 1 7 -4 4 -2 -1 0 4 -1 2 -3 6 -2 7 0 8 -4 2 -4 2 -3 1 -3 -5 -6 0 -5 3 -1 6 -3 7 -2 3 -5 0 -7 3 -7 1 0 -8 -4 -4 -1 -3 5 -2 6 0 0 -5 -5 -4 -1 -5 3 -5 3 -2 8 -1 0 -5 -8 -4 -6 0 0 -5 2 -5 3 -4 3 -3 5 -1 2 7 3 3 1 0 2 -4 3 -7 0 -7 2 2 1 1 3 -2 6 -4 3 -3 5 -1 z "
+            />
+            <path
+              id="CD28"
+              class="OUTLINE"
+              d=" M 91 229 l 1 -2 0 1 0 0 1 0 1 0 0 -1 1 0 -1 -1 0 0 0 0 2 0 -4 -5 0 -5 1 -3 0 0 1 0 -1 0 0 -1 0 0 1 -1 0 -1 4 -1 4 -1 -5 -1 -3 -1 -1 -1 -2 1 1 -3 5 -3 3 -4 4 1 3 3 5 4 4 3 5 2 -2 4 -1 3 -1 5 -2 2 2 5 2 3 -1 7 -1 2 -2 3 -1 -3 -1 6 -7 2 -1 6 -6 1 -1 0 -3 -5 -2 -4 -1 -5 5 -2 -4 -2 0 -3 -2 2 z M 82 219 l 3 1 0 0 1 2 2 3 -2 2 -4 1 -8 5 -9 7 -4 -2 -3 -3 -1 0 -2 1 -2 -4 4 -5 4 -2 7 -1 7 -3 1 -4 z M 64 156 l 3 2 4 4 7 4 0 4 2 3 -1 2 -2 4 2 3 -1 4 0 3 2 0 0 2 -1 1 1 1 -1 1 1 2 1 2 1 1 -1 0 -5 4 -8 1 -8 0 -5 -4 0 -4 4 -3 0 -5 -2 -4 1 0 0 -1 -5 -3 -1 -8 0 -7 4 -4 0 0 1 0 z "
+            />
+
+            <path
+              id="CD29"
+              class="OUTLINE"
+              d=" M 113 687 l 2 3 6 3 7 -3 4 -2 2 0 1 0 0 0 0 0 1 0 0 0 1 -1 4 0 4 3 2 3 -1 1 1 1 3 4 6 3 1 4 -1 7 -4 4 -3 4 -7 1 -7 0 -6 2 -1 1 -1 0 -1 1 -4 1 -8 -1 0 -4 -4 -5 -4 -1 -7 0 -4 -7 -1 -1 3 -3 2 -6 2 -4 2 0 1 1 4 -4 1 -4 0 0 0 0 z "
+            />
+            <path
+              id="CD30"
+              class="OUTLINE"
+              d=" M 223 432 l 1 6 4 1 0 0 3 0 4 -4 1 0 0 2 -1 2 3 2 2 6 5 1 0 5 -2 6 -2 3 -2 7 -1 8 1 7 -5 3 -2 4 -7 -1 -3 -4 -2 -1 1 -2 -1 -2 1 -1 0 0 -3 -2 -2 6 -1 6 -3 4 -1 1 -1 -4 -3 -4 -1 1 -1 0 -2 -3 -1 -7 -5 -4 1 -2 1 -3 2 -8 1 -7 0 -6 9 -3 2 -3 2 -3 2 -5 z "
+            />
+            <path
+              id="CD31"
+              class="OUTLINE"
+              d=" M 550 641 l 2 6 -1 7 -1 8 -3 3 0 0 -1 0 0 1 0 0 -2 1 -5 -1 1 -1 0 -1 -1 -3 -4 -4 -4 1 -2 0 -1 0 0 0 -1 -3 -1 -7 -4 -1 -6 -2 -4 -5 -2 -3 -4 -3 -5 -3 -1 -3 -3 1 -1 0 0 0 -2 0 -3 -2 -4 -4 5 -5 0 -8 3 -4 1 0 1 1 4 -3 3 0 -2 -3 0 -2 1 -1 0 -1 2 -4 4 -2 4 -1 9 -1 5 0 4 3 3 3 4 7 6 -1 3 -2 4 -2 7 2 1 0 7 3 2 8 0 7 -1 8 -2 4 2 -1 -2 5 -1 4 -1 -1 0 1 -2 1 -2 -6 -3 -6 -3 -1 2 2 -2 1 2 1 1 3 -3 1 2 0 0 0 1 1 0 4 z "
+            />
+            <path
+              id="CD36"
+              class="OUTLINE"
+              d=" M 184 410 l -2 -2 0 -5 1 -9 -1 -4 -1 1 0 0 -1 0 -1 -4 3 -4 3 0 5 2 5 3 6 3 2 0 0 0 0 0 0 0 2 1 2 2 -2 4 -1 4 2 4 0 3 0 3 2 1 3 3 6 2 3 4 3 2 0 8 -6 2 -2 5 -2 3 -2 3 -9 3 -6 -1 -6 -4 -1 -3 -3 -9 0 -7 2 -7 1 -4 0 0 0 0 -1 1 z "
+            />
+            <path
+              id="CD41"
+              class="OUTLINE"
+              d=" M 81 192 l 1 -2 -1 -1 -1 -7 -1 -3 1 -3 1 -4 -2 -3 0 -5 4 2 4 2 4 1 3 -1 4 -2 4 0 3 5 -1 -4 -1 -12 -1 -1 0 -1 0 0 0 0 0 0 0 0 3 -2 -1 -5 0 0 1 -3 0 -5 -1 1 -1 -4 3 -6 7 -2 7 -2 3 -2 5 -2 1 -4 1 -1 1 -1 3 -3 1 -6 1 -7 4 -4 3 -2 3 2 1 0 3 -5 1 -3 0 0 1 -2 2 -3 3 -7 8 2 3 -5 1 0 1 0 3 0 0 0 1 0 0 0 0 0 1 0 0 0 1 0 3 1 3 -1 1 0 1 3 4 9 1 5 6 1 4 -2 3 -3 4 0 -1 1 -1 5 0 6 4 2 3 3 2 -1 5 -3 5 0 6 2 1 5 1 8 2 6 6 2 6 1 2 5 6 3 4 3 1 3 -1 1 1 2 0 1 -1 4 -4 3 -5 4 -4 6 0 5 -1 2 1 2 1 6 -3 3 -1 4 7 1 -1 7 0 8 8 0 5 1 4 3 5 3 3 4 4 0 4 0 1 -1 3 2 7 3 4 3 1 2 -5 2 -4 2 1 1 -1 0 -3 4 2 5 2 3 0 6 -1 3 -1 5 -4 7 0 8 -1 7 0 6 -1 4 -1 6 -4 6 -2 5 -4 3 -8 0 0 7 -3 4 -1 1 -1 -1 -1 1 0 -1 0 3 -5 3 0 2 0 0 -2 1 -4 -2 -2 0 -3 1 -2 -1 -3 0 -2 5 -3 4 -5 3 -4 3 1 1 1 1 -5 4 -4 2 -4 2 -4 1 1 3 0 1 0 0 0 0 -2 3 -4 -4 -6 -3 -3 -3 -5 -3 -5 -2 -8 2 -1 3 -1 0 -2 0 -4 1 -7 1 -8 2 -6 2 -3 4 0 -4 -8 1 -8 -1 0 -7 3 -8 -9 -1 2 -7 -6 -3 -1 -5 -10 -11 0 -5 0 -4 -2 1 -1 -1 -1 1 -1 0 0 0 0 0 0 0 1 -4 2 -3 -3 0 -1 -4 -3 -5 -2 0 -2 1 -2 -1 2 3 -7 1 0 -7 0 -7 3 -2 -1 -1 1 0 6 -4 2 0 -3 1 -4 4 -2 3 2 1 4 3 3 3 -1 1 2 1 3 3 0 1 0 4 2 -1 3 -1 -2 -2 0 0 0 -1 1 -1 -1 -2 0 0 0 0 -1 -2 5 -3 6 1 5 0 0 0 1 2 -1 1 1 1 0 1 1 -4 1 0 -1 6 3 -6 1 -4 2 -1 -1 -1 3 0 4 3 1 1 1 -2 1 0 0 0 2 1 -1 -2 -7 -3 -7 -2 -4 -1 0 0 -1 0 -2 -2 -8 -5 -1 -4 9 -7 7 -2 -5 -2 0 -1 1 -1 0 -1 1 -2 1 -7 -2 -3 -2 -5 2 -2 1 -5 1 -3 3 2 2 1 0 0 0 0 0 0 3 1 0 8 2 4 3 -1 3 -2 1 2 0 0 2 3 1 3 3 3 3 -2 1 1 2 1 4 -3 6 -1 4 0 4 5 3 -1 0 -1 1 0 4 -3 4 -2 3 -8 1 -5 4 -3 0 -5 -8 1 -3 0 1 -6 0 0 0 -1 0 -2 0 -2 0 0 -1 -1 -1 -4 -2 -8 -7 -2 -3 -2 -2 0 -3 4 -2 4 -1 1 0 3 -4 -2 -7 1 -2 8 -1 4 -2 0 0 -1 -2 2 -7 -1 -4 -2 -1 0 0 1 0 0 0 0 0 1 -3 3 -5 -2 -4 -3 -5 -4 -3 -3 -4 -1 -3 4 -5 3 -7 -1 -2 -5 z M 120 292 l -5 1 -3 4 -5 4 -2 2 9 10 5 0 -1 -7 -1 -2 0 -1 3 -2 5 -4 -3 -2 1 -1 1 -1 -1 -2 1 -4 z "
+            />
+            <path
+              id="CD42"
+              class="OUTLINE"
+              d=" M 409 61 l 2 3 0 0 0 3 3 4 3 5 -2 4 2 -1 2 4 1 6 2 4 2 4 4 5 1 0 -1 0 2 3 4 6 5 5 1 3 4 5 0 0 1 0 0 3 4 6 4 4 3 5 2 4 3 3 3 5 0 -1 0 0 0 0 0 1 3 4 4 4 5 5 3 4 3 2 4 5 3 4 4 6 0 5 2 5 -1 0 1 0 4 4 4 3 0 0 0 0 0 0 0 0 0 1 0 -1 1 4 0 4 0 -1 1 4 2 7 4 4 4 4 2 4 1 1 -1 -1 0 0 0 2 2 4 4 3 4 3 2 7 1 4 0 -1 1 2 3 3 2 3 1 0 1 1 2 1 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 1 1 2 5 0 6 1 8 2 5 -1 0 0 0 0 0 0 0 -1 -1 -1 1 -1 -1 -1 1 -5 4 -5 2 -3 4 -3 4 0 3 0 3 0 1 1 0 -5 0 -6 -3 -5 -4 -3 -2 -7 -1 -3 5 -3 0 -4 -2 0 1 -1 -1 -5 0 -4 0 0 0 -3 -2 -4 1 -4 6 -7 1 -6 -5 -4 -2 -2 0 -3 4 -1 7 -6 -1 -4 -1 -5 -3 -5 -3 -2 -2 -2 1 -1 0 0 -1 -1 0 0 0 -2 1 -3 -1 -6 -2 -4 -4 -2 -2 -2 2 -5 1 -5 0 -4 -7 -2 -3 -1 1 0 0 -2 -1 -1 1 -2 -1 -1 1 -1 -1 0 1 -1 0 1 0 -4 2 -6 -1 -1 -3 5 -4 4 -5 -10 -2 -3 -2 0 0 -2 0 -3 -2 -5 -1 -3 5 -3 -1 -2 -1 -1 0 -1 -1 -2 4 -2 2 -4 2 -1 0 -1 0 -3 1 -2 -5 -2 -4 0 -1 0 0 -4 -3 -7 1 -5 4 0 1 1 5 0 4 -2 3 -4 2 -1 -1 -3 0 -2 1 -1 -1 -1 1 -4 1 -7 0 -4 -5 -2 -7 1 -6 1 -4 0 -6 1 -7 0 -8 4 -7 1 -5 1 -3 0 -6 -2 -3 -2 -5 3 -4 1 0 -1 -1 4 -2 5 -2 -1 -2 -4 -3 -7 -3 -3 -2 -1 1 -4 0 -4 0 -3 -4 -5 -3 -4 -3 -5 -1 -8 0 0 -8 1 -7 -7 -1 1 -4 3 -3 -1 -5 -1 -3 1 -2 0 -5 4 -6 5 -4 4 -3 1 -4 0 -1 -1 -2 1 -1 -1 -3 -4 -3 -6 -3 -2 -5 -6 -1 -6 -2 -2 -6 -1 -8 -1 -5 -6 -2 -5 0 -5 3 -2 1 -3 -3 -4 -2 0 -6 1 -5 1 -1 -4 0 -3 3 -4 2 -6 -1 -1 -5 -4 -9 -1 -3 -1 0 -3 1 -3 -1 0 -3 0 -3 -1 0 -1 -3 3 -1 -1 -1 2 -2 2 -2 0 0 0 0 1 4 6 -2 2 -2 -1 0 0 0 0 0 2 -1 4 -2 7 1 4 4 1 0 0 -1 0 0 -1 -1 0 0 1 0 0 0 0 0 0 -1 0 1 1 0 0 1 8 1 3 -6 6 0 8 3 3 1 4 2 4 -2 4 -2 6 -3 5 1 0 0 0 0 0 0 0 0 0 0 1 1 7 1 0 2 0 0 2 -2 1 2 6 0 3 0 3 -2 5 4 5 3 7 0 5 -5 0 0 4 1 8 3 2 3 1 1 1 -1 2 1 2 -3 5 0 6 -2 3 -5 6 -1 7 -1 2 -6 5 -3 6 -1 1 -5 2 -6 5 0 0 -5 0 1 0 -2 -3 0 3 -1 4 -8 1 -8 -1 -6 4 -2 6 3 1 4 2 8 3 5 2 4 2 6 2 6 3 4 3 5 3 7 1 3 z "
+            />
+            <path
+              id="CD43"
+              class="OUTLINE"
+              d=" M 321 275 l 4 3 0 0 0 1 2 4 2 5 3 -1 1 0 1 0 4 -2 2 -2 2 -4 1 1 1 0 2 1 3 1 3 -5 5 1 3 2 2 0 0 0 3 2 10 2 -4 5 -5 4 1 3 6 1 4 -2 -1 0 1 0 0 -1 1 1 1 -1 2 1 1 -1 1 1 1 0 1 -1 2 3 4 7 5 0 5 -1 2 -2 2 2 4 4 6 2 3 1 2 -1 0 0 1 0 0 1 1 0 2 -1 2 2 5 3 -4 1 -2 2 -3 -1 0 1 -5 3 -3 5 -4 3 -4 4 -4 2 -4 4 -2 5 -3 7 2 8 -2 6 -5 1 -7 1 -7 -3 -4 -3 -4 -4 -4 -2 0 0 -3 4 -2 6 -6 0 -5 -2 -1 -1 -3 2 -4 4 -1 2 -3 -3 -3 1 -1 5 -1 8 3 4 1 2 -5 0 -3 -3 -1 0 -4 2 -3 -2 -2 -1 -3 6 -6 2 -3 1 -1 1 0 0 0 1 4 1 4 3 1 5 -1 4 -1 2 1 1 -2 -1 -4 -5 -2 -4 0 -1 -4 4 0 4 0 0 -1 1 -6 2 1 5 7 3 2 5 4 3 0 5 -3 3 0 2 0 1 0 0 0 0 0 0 0 1 0 0 0 1 -1 4 0 2 2 2 -2 3 -1 3 3 3 -1 2 1 0 0 3 -3 4 -3 5 1 6 6 0 2 -3 2 3 4 3 2 2 1 0 1 1 2 0 3 -3 6 1 2 5 2 6 1 2 -4 -1 -7 0 0 8 -1 6 -3 4 0 1 0 2 -1 3 -3 6 -5 2 -4 3 -4 2 -9 -1 -8 2 -6 -2 -5 -2 -2 -3 -3 3 -2 -1 -5 -3 -1 -7 -4 -9 0 -6 0 -7 -2 -6 -6 -2 -8 0 -1 -7 1 -8 2 -7 2 -3 2 -6 0 -5 -5 -1 -2 -6 -3 -2 1 -2 0 -2 -1 0 -4 4 -3 0 0 0 -4 -1 -1 -6 0 -8 -3 -2 -3 -4 -6 -2 -3 -3 -2 -1 0 -3 0 -3 -2 -4 1 -4 2 -4 -2 -2 -1 -2 3 -4 5 -5 5 -4 7 1 -1 -5 -1 -5 -5 -4 -5 -2 -2 -5 -3 -5 -3 -3 2 -3 0 0 0 0 0 -1 -1 -3 4 -1 4 -2 4 -2 5 -4 -1 -1 -1 -1 4 -3 5 -3 3 -4 2 -5 3 0 2 1 3 -1 2 0 4 2 2 -1 0 0 0 -2 5 -3 0 -3 0 1 1 -1 1 1 1 -1 3 -4 0 -7 8 0 4 -3 2 -5 4 -6 2 7 4 5 7 0 4 -1 1 -1 1 1 2 -1 3 0 1 1 4 -2 2 -3 0 -4 -1 -5 0 -1 5 -4 z "
+            />
+            <path
+              id="CD44"
+              class="OUTLINE"
+              d=" M 53 418 l 1 8 2 5 2 2 0 4 -1 2 3 2 1 2 0 0 -1 5 -6 -1 -5 -2 0 -3 1 0 -3 -2 -1 -6 -2 2 1 -5 1 -3 -1 0 0 0 -1 0 0 -3 0 -8 -2 -3 0 0 0 0 0 -2 3 -3 6 1 0 3 -1 0 0 1 0 0 z M 30 354 l 1 1 2 -3 4 -3 2 -6 0 -8 2 -4 1 1 0 0 0 0 0 0 -1 2 1 1 0 0 1 0 -2 3 0 4 2 4 1 3 -2 2 1 0 -1 2 -2 4 3 3 -1 0 1 0 -1 1 -3 3 6 -1 2 -5 4 3 0 0 0 -1 -1 -3 1 -1 3 -5 6 -3 0 -5 0 -4 0 0 -1 0 -1 1 -2 0 -2 -1 0 0 -2 -2 -4 -3 5 -1 2 -1 -1 0 -1 -2 -6 -2 3 -3 0 -1 3 1 2 -1 6 0 2 1 3 1 2 -4 8 -7 3 3 5 2 3 1 0 1 0 0 6 3 3 2 10 1 6 2 7 -1 2 5 2 7 2 4 1 3 11 3 4 -2 3 -4 6 -2 8 -2 7 -1 4 -1 2 0 1 0 1 -3 8 -2 5 2 5 3 3 3 6 3 4 4 3 3 3 5 2 5 5 2 5 4 1 5 1 5 -7 -1 -5 4 -5 5 -3 4 -1 1 0 0 0 0 0 0 0 0 -2 0 -6 -3 -5 -3 -5 -2 -3 0 -3 4 1 4 1 0 0 0 1 -1 1 4 -1 9 0 5 4 3 2 3 1 -1 0 0 0 0 -1 4 -2 7 0 7 3 9 1 3 6 4 6 1 0 6 -1 7 -2 8 -1 3 -1 2 5 4 1 7 2 3 1 0 1 -1 3 4 1 4 1 -1 3 -4 1 -6 2 -6 3 2 0 0 -1 1 1 2 -1 2 2 1 3 4 7 1 2 -4 5 -3 8 0 6 2 2 6 0 7 0 6 4 9 1 7 -1 4 1 0 0 2 -2 1 1 3 -1 2 -1 0 -3 -4 -8 -2 -2 8 -5 2 -7 -1 -3 -5 -1 -3 0 0 -4 2 -5 -3 -3 -6 -1 -7 -1 -5 -3 -2 -6 2 -5 1 -1 0 -1 0 -3 3 -7 1 -8 2 -2 2 -6 0 -3 -1 -3 -3 -3 -8 -4 -2 -3 -2 -1 1 -2 0 -4 -2 -4 1 -2 2 -7 3 -2 7 0 5 -6 3 -7 4 -8 4 -2 2 -1 0 0 1 -7 -2 -4 1 1 -3 -3 -6 -3 -4 -1 -3 3 -2 -4 -2 -2 -2 0 0 -1 -2 -6 -3 -4 -2 -3 -1 -4 1 0 0 1 2 -2 -1 0 -3 1 -1 0 0 3 -1 3 -9 0 -7 1 -3 0 0 0 -1 1 -1 -1 -3 -5 -6 2 -5 6 -3 5 0 -4 -1 -4 -2 -4 -3 -5 -3 1 -5 1 -2 0 0 2 -1 2 -2 -3 1 -1 0 0 -1 0 0 0 0 1 -1 -2 -3 -1 -6 -1 -9 -2 -6 -1 -6 -7 -4 0 -1 -7 -2 -5 1 -3 3 -4 2 -1 -6 -2 -9 -3 -3 0 -1 0 0 0 0 0 0 0 -2 1 -3 1 -4 -1 0 0 -1 -1 2 -4 3 -5 4 -3 2 -5 0 1 -6 7 0 -1 -6 -4 -4 -2 0 -1 0 -1 0 -1 4 -2 4 -2 1 1 -3 1 -3 0 0 0 0 -1 -2 -1 -4 2 -1 0 -1 0 0 -1 0 1 -1 0 0 1 0 1 -4 2 -7 2 4 2 4 2 3 -1 -5 -1 -4 -1 -1 2 -3 0 -7 3 -4 0 1 0 -1 0 1 2 -1 4 -1 -2 3 -2 2 z "
+            />
+            <path
+              id="CD45"
+              class="OUTLINE"
+              d=" M 134 519 l 0 -5 2 -7 7 -3 2 -2 4 -1 4 2 2 0 1 -1 3 2 4 2 3 8 3 3 3 1 6 0 2 -2 8 -2 7 -1 3 -3 1 0 1 0 5 -1 6 -2 3 2 1 5 1 7 3 6 5 3 4 -2 0 0 1 3 3 5 7 1 5 -2 2 -8 8 2 3 4 1 0 1 -2 -1 -3 2 -1 0 -2 -1 0 1 -4 5 3 2 1 3 -3 2 3 5 2 6 2 8 -2 9 1 2 4 0 1 0 0 2 4 3 7 -4 7 -3 2 -3 5 -4 3 -3 2 -6 2 -5 2 -3 6 -3 4 -5 3 -2 8 0 5 -3 3 -2 7 -1 8 -2 4 -1 3 -2 8 6 6 2 8 0 5 4 3 -1 5 -3 3 -3 5 -2 3 0 1 0 0 0 0 1 4 -2 3 -4 4 -3 -3 -4 -2 -5 -4 -4 -2 -6 -1 -4 1 -2 4 -4 5 -4 1 -3 -2 -1 0 -3 2 -8 0 -4 -1 -5 -3 -2 2 -2 1 -4 -3 -3 1 -4 3 -5 2 -8 -3 -1 -4 0 -8 -4 -3 0 -2 3 -3 -1 -4 -1 -3 -1 -4 -3 1 -2 -1 -1 4 -1 2 -2 2 -1 0 -1 5 -7 -1 -4 -3 -2 -5 -5 -3 -1 -1 -2 1 -1 -4 -6 2 -5 1 -4 4 0 7 -3 3 0 1 0 2 -3 3 -3 3 -5 3 -4 1 1 2 -4 0 -6 0 -1 1 1 0 -2 2 -7 -1 -2 -5 -1 -4 -2 0 -1 1 -1 -4 -1 -8 -2 -3 -6 -2 4 -9 1 -3 4 -5 4 -3 1 0 0 0 0 0 0 0 2 -1 0 1 1 -1 0 1 1 0 0 1 1 -2 0 1 1 0 -1 0 0 -1 4 -1 3 2 1 1 0 -1 0 -1 2 -4 2 -3 0 0 0 0 0 0 2 0 2 0 4 4 2 5 -1 -5 -2 -5 -8 -2 -9 0 -6 0 -3 1 0 0 -3 -3 -4 -3 -1 -1 1 -2 -1 0 1 -1 -1 -2 1 0 3 -2 6 -5 1 -1 1 0 1 -2 3 -2 -1 -3 -4 -4 -3 -6 -4 -11 -2 0 -3 -1 0 -2 5 -2 6 -11 3 -8 -1 -2 -1 -7 5 1 0 -1 3 0 9 0 7 -2 7 -2 4 2 3 -2 0 -4 8 -4 7 -4 z M 70 573 l 1 6 2 3 3 6 6 7 2 0 3 -3 3 -5 2 -8 1 -4 4 0 7 -1 -1 -8 -1 -4 -3 -5 -7 -1 -2 -6 -1 -6 -5 0 -6 1 -4 12 -2 4 -1 5 z "
+            />
+            <path
+              id="CD46"
+              class="OUTLINE"
+              d=" M 118 837 l 1 -4 -1 -7 -2 -4 1 0 0 -1 -1 -3 1 -3 0 -1 0 0 -1 3 -2 8 0 9 -2 8 -3 2 0 0 2 3 -3 4 -3 2 -7 4 -4 0 0 0 0 1 -4 4 -2 6 -2 5 -2 4 -7 2 -3 3 -3 0 0 -1 0 0 0 0 0 0 0 -2 1 -2 0 -1 1 -1 -1 -1 0 -1 0 0 -3 -3 -4 1 0 1 -1 -1 1 -1 0 -1 0 0 -1 -2 1 0 -1 -1 0 0 1 -1 -1 0 3 -3 1 -7 -6 -2 0 -2 2 1 -1 -4 0 -4 0 0 0 0 0 0 -1 -4 -1 -4 0 1 0 -1 -2 1 0 -3 -2 -2 1 -1 -2 -1 -2 -1 -2 3 -3 0 -3 -4 -9 -3 -2 -3 -1 -1 -1 1 -1 -4 -2 -6 -3 -5 0 -1 1 -1 -1 -1 1 -2 2 -5 3 -8 5 1 3 5 2 3 2 2 3 -3 2 -3 0 -1 -2 -4 3 -4 6 -1 3 -1 -6 -1 -7 0 1 -7 5 -4 0 -5 -2 -4 -1 1 2 -5 -1 -6 0 -6 -2 -4 -1 -3 -1 5 0 8 -4 3 -2 0 -3 -3 -2 -5 -1 -2 3 -2 6 -1 0 -3 -2 0 4 -3 4 -3 1 -2 -5 -3 -4 -2 -1 -1 1 0 0 0 1 -2 -4 -1 -2 5 -2 1 0 -1 -1 -1 -1 -1 -2 3 -2 6 -2 0 -1 -2 -1 2 -2 -7 -3 -1 0 1 0 0 0 1 -1 -1 -1 -2 0 0 -1 0 0 0 -2 -1 -3 -1 1 -1 0 0 0 -1 -1 -2 0 -2 5 -1 6 1 4 1 0 0 0 0 2 0 0 -1 -2 -3 1 -3 0 -1 1 1 3 -2 4 1 2 1 3 -3 3 -1 -1 5 -1 4 0 3 2 0 1 -1 0 3 3 4 1 -1 1 -2 0 -1 2 2 1 6 0 4 2 -1 1 1 1 -1 0 0 0 -2 2 -3 2 -6 0 -4 -5 -3 -3 -4 -1 0 -1 -2 -3 -4 -1 -5 2 -4 -4 2 -3 1 1 -2 0 -2 -1 0 1 1 0 1 -2 0 -3 -4 1 -5 1 2 2 -1 0 -1 0 -1 1 0 -2 0 2 -4 -1 0 0 -2 4 -1 4 -2 -1 -3 1 -1 0 -1 0 -1 0 0 0 0 0 0 0 0 1 -2 3 -6 4 1 2 3 0 -3 -4 -4 -1 -4 2 -6 3 -1 6 2 2 3 1 8 1 4 1 -1 2 0 1 4 2 5 7 1 2 -2 -1 0 1 -1 6 0 4 0 -1 -2 4 -1 5 -3 3 -3 3 -3 0 -2 0 -1 3 -3 0 -7 4 -4 5 -1 6 -2 1 4 2 -1 1 1 5 3 2 5 4 3 7 1 1 -5 1 0 2 -2 1 -2 1 -4 2 1 3 -1 1 4 1 3 1 4 -3 3 0 2 4 3 0 8 1 4 8 3 5 -2 4 -3 3 -1 4 3 2 -1 2 -2 5 3 4 1 8 0 3 -2 1 0 3 2 4 -1 4 -5 2 -4 4 -1 6 1 4 2 5 4 4 2 3 3 3 8 2 3 1 4 0 8 4 6 5 3 4 6 0 4 4 4 3 4 4 3 3 5 1 2 0 3 -3 6 -5 3 -1 -2 -3 5 -3 3 0 2 -3 -2 -2 3 -1 1 -4 0 -5 -3 -1 -5 -3 8 5 3 0 1 -2 5 1 3 1 0 0 0 0 0 0 -1 0 0 3 3 9 0 3 -2 0 -1 -1 -1 5 0 3 2 0 0 3 -2 2 7 -2 6 -2 9 1 2 -1 1 -5 2 -3 1 0 0 -3 -3 -4 -2 -1 1 -2 3 0 4 -3 -1 0 5 2 9 0 3 -3 -2 -5 -1 -1 3 -2 -2 -2 -4 0 -2 0 0 0 -3 3 -3 -2 -1 -1 -1 -1 1 1 -4 3 -2 1 -6 -3 -3 -1 0 1 0 0 -1 0 1 0 0 1 -1 0 1 0 -2 -4 -4 -4 -1 0 0 2 -5 -2 -2 0 0 0 -1 0 0 0 -1 -1 -3 0 -4 1 0 -1 0 -4 3 -1 6 -6 1 -1 -3 -1 1 0 -1 -1 1 -4 4 -7 -1 -4 -1 4 2 4 3 0 0 1 0 1 0 1 0 1 1 1 -1 -3 3 -3 3 1 1 -1 0 0 1 1 3 -2 2 0 6 2 3 1 0 0 0 3 3 4 4 1 1 0 0 3 2 2 1 0 1 2 1 -3 0 1 2 1 0 0 0 1 1 1 -1 1 4 -1 7 -6 0 -7 1 -2 3 1 2 4 1 0 0 0 0 -1 1 1 1 -1 1 -2 4 -4 2 0 -1 -2 1 1 3 0 0 -2 1 -3 -1 -1 1 -1 1 0 0 -3 2 -1 5 -3 -1 0 0 0 0 0 -1 0 0 1 1 -1 -2 -3 -3 -2 -3 1 0 -1 -3 -6 -3 -3 -3 -1 1 -1 1 0 -1 -1 1 -3 -1 -3 0 0 1 1 0 -2 0 -2 -1 -1 1 -2 -1 0 1 -1 -1 0 0 0 0 -2 -3 0 -4 0 0 1 -1 1 -1 0 0 2 -2 1 -4 2 2 2 -4 1 -2 -1 -1 1 -1 3 -3 6 -3 2 -6 2 -4 3 -1 2 5 0 4 0 0 1 1 4 0 2 -5 2 -7 -3 -6 -3 1 -3 2 -4 0 -3 -4 -4 3 -2 4 -3 5 -6 1 -4 -2 0 0 0 0 0 -1 -3 4 -3 4 -2 0 1 1 -4 2 -3 4 -1 0 -1 0 -2 2 -8 0 -4 -1 4 2 4 3 -1 1 1 0 0 0 -2 4 3 3 -1 2 0 -1 -1 0 -3 4 -1 7 0 6 -5 2 -2 4 -2 -1 -6 0 -1 4 -4 -2 -3 -2 -1 1 -2 0 -1 -1 -1 1 -2 -4 0 -4 -1 0 z M 61 823 l 3 -2 2 -2 -4 -2 -2 -3 -2 1 0 -2 -1 0 0 0 -1 -3 -2 -3 0 0 -1 0 -1 2 -3 0 -1 -4 1 2 1 0 1 -3 -1 -3 2 0 -1 -2 -2 -1 -4 4 -3 0 1 4 2 5 3 6 5 3 4 2 z M 49 798 l 1 0 2 0 3 4 3 -2 2 -1 0 4 -3 4 0 0 4 3 4 2 0 0 0 0 0 0 4 1 3 1 0 0 0 1 0 0 0 0 1 0 0 -2 -4 -4 -3 -4 4 3 7 2 5 3 5 1 2 1 1 -1 -8 -2 -4 -4 1 -2 1 -2 -1 0 1 0 -3 1 -6 -2 2 -1 -3 -1 -2 -3 -4 -2 2 -3 -1 -1 0 0 0 0 0 0 0 0 -1 0 -2 1 -2 -2 -1 1 -2 0 0 0 0 0 0 0 0 -1 0 0 0 0 -2 0 -4 2 -1 2 0 1 0 0 0 0 z M 122 727 l 4 -1 1 -1 1 0 1 -1 6 -2 7 0 7 -1 3 -4 4 -4 1 -7 -1 -4 -6 -3 -3 -4 -1 -1 1 -1 -2 -3 -4 -3 -4 0 -1 1 0 0 -1 0 0 0 0 0 -1 0 -2 0 -4 2 -7 3 -6 -3 -2 -3 -4 1 0 0 0 0 -1 4 -4 4 -2 -1 -1 0 -2 4 -2 6 -3 3 1 1 4 7 7 0 4 1 4 5 0 4 z M 95 876 l -1 0 -1 -7 0 -5 6 -2 6 2 3 6 1 4 0 0 0 0 2 4 2 6 -4 -1 1 0 -3 0 -7 -1 z M 191 843 l 1 0 0 1 0 0 1 3 -2 6 -2 3 -10 1 -7 -4 0 -6 3 -3 0 0 0 0 0 1 4 2 5 -3 0 0 0 0 1 0 0 0 1 0 2 0 1 0 1 0 z M 27 823 l 5 2 4 3 -1 1 0 0 0 0 0 0 4 2 3 2 0 0 2 2 3 6 1 4 -1 -1 -2 3 0 6 -4 5 -2 2 -1 -2 -2 2 -1 -1 0 0 0 1 0 1 -3 1 -5 2 1 1 -3 1 -3 1 -5 1 -7 1 -5 0 1 -1 -1 0 1 -1 1 -2 -5 -2 -2 -8 3 -4 1 1 1 0 0 0 -1 -3 5 -4 4 -1 0 -1 4 -3 4 -3 0 -1 -1 0 2 -3 z M 281 794 l 2 1 5 3 0 2 -1 0 -1 -1 -1 1 0 -1 0 3 2 5 1 0 1 0 0 4 0 7 1 5 -6 0 -3 -1 -1 0 0 -1 0 0 0 0 -3 -3 0 -7 4 -3 1 -5 -1 -6 -1 -1 0 0 0 0 0 0 0 0 0 -1 z "
+            />
+            <path
+              id="CD47"
+              class="OUTLINE"
+              d=" M 560 528 l 7 2 5 -4 3 -4 3 -4 1 -1 0 0 3 -4 3 2 2 6 -1 8 -2 3 -1 0 0 0 -1 4 0 4 0 0 -1 0 0 -1 0 1 0 0 -2 2 -2 3 0 2 1 0 0 0 1 4 0 4 -1 -1 -1 1 0 0 1 4 -1 3 0 0 0 0 0 0 0 1 -1 3 0 3 0 0 0 1 -1 -1 -1 4 -1 8 -2 7 -1 6 -2 4 -2 4 -7 -3 -1 0 -7 -2 -4 2 -3 2 -6 1 -4 -7 -3 -3 -4 -3 -5 0 -9 1 -4 1 -4 2 -2 4 0 1 -1 1 0 2 2 3 -3 0 -4 3 -1 -1 -1 0 -3 4 -7 0 -5 -4 -3 0 -3 1 -4 3 -4 5 -5 1 -6 3 -8 0 -7 -2 -8 -1 -7 2 -6 -3 -3 -3 -3 -3 -1 -7 0 -5 1 -6 5 -3 6 0 3 5 3 -1 4 -2 4 -2 0 -8 2 -7 3 -6 1 -2 0 -4 2 1 4 -4 -1 -7 -2 -9 0 -4 -3 -7 -3 -1 -9 0 -5 1 -3 3 -7 4 -2 2 -1 -1 -2 -2 0 7 -3 7 -2 4 -1 0 -3 -3 -2 -7 -5 1 -3 3 -3 4 -2 5 0 5 6 0 8 4 0 5 -8 1 -3 2 -3 5 1 5 5 4 0 5 -6 0 -5 2 1 3 4 4 0 8 -5 -3 -3 -3 -7 -1 -8 1 -3 2 -2 0 -3 -2 -5 -3 2 -3 0 0 1 0 2 -4 -1 -7 -2 -4 -3 -3 -5 -4 -2 -4 -1 -4 -1 0 -1 0 -5 -2 -8 0 -7 -2 -5 -3 -1 0 -3 1 -1 -4 -4 -3 -4 -5 4 -7 -3 -7 -2 -4 0 0 0 -1 -2 -4 4 -2 4 -3 5 -2 3 -6 1 -3 0 -2 0 -1 3 -4 1 -6 0 -8 7 0 4 1 -1 -2 -2 -6 -2 -5 -6 -1 -3 3 -2 0 -1 -1 -1 0 -2 -2 -4 -3 -2 -3 -2 3 -6 0 -1 -6 3 -5 3 -4 0 -3 -1 0 1 -2 -3 -3 1 -3 2 -3 -2 -2 0 -2 1 -4 0 -1 0 0 0 -1 0 0 0 0 0 0 0 -1 0 -2 3 -3 0 -5 -4 -3 -2 -5 -7 -3 -1 -5 6 -2 1 -1 0 0 0 -4 4 -4 0 1 2 4 4 5 2 1 -1 -1 1 -2 1 -4 -1 -5 -4 -3 -4 -1 0 -1 0 0 1 -1 3 -1 6 -2 3 -6 2 1 3 2 4 -2 1 0 3 3 5 0 -1 -2 -3 -4 1 -8 1 -5 3 -1 3 3 1 -2 4 -4 3 -2 1 1 5 2 6 0 2 -6 3 -4 0 0 4 2 4 4 4 3 7 3 7 -1 5 -1 2 -6 -2 -8 3 -7 2 -5 4 -4 4 -2 4 -4 4 -3 3 -5 5 -3 0 -1 3 1 2 -2 4 -1 5 3 4 1 6 1 1 -7 3 -4 2 0 4 2 6 5 7 -1 4 -6 4 -1 3 2 4 0 5 0 1 1 1 -1 3 2 3 0 3 -5 7 1 3 2 5 4 6 3 5 0 -1 0 0 -1 0 -3 0 -3 3 -4 3 -4 5 -2 5 -4 1 -1 1 1 1 -1 1 1 0 0 0 0 0 0 1 0 0 -1 1 2 1 4 2 5 6 7 -1 3 0 1 0 1 -1 2 1 3 0 4 0 1 0 1 -1 1 1 1 0 0 0 1 1 5 0 6 1 5 -1 -1 0 4 4 7 2 3 -1 0 1 1 1 4 3 7 0 9 0 6 -2 5 -1 -2 -1 1 -3 5 -2 6 0 7 4 8 1 5 0 2 0 0 1 2 -1 2 0 1 0 0 0 0 0 0 -1 3 0 7 -2 8 -3 6 -2 3 -1 6 -1 7 0 7 1 8 -1 4 0 -1 1 4 2 3 1 5 1 5 6 3 0 0 0 3 -4 4 -4 3 -1 0 -2 4 6 2 z M 797 205 l 2 1 1 0 -1 3 0 6 1 2 -3 2 -3 3 -6 0 -4 -2 -3 -5 1 -5 6 -2 4 -2 0 0 2 0 z "
+            />
+            <path
+              id="CD48"
+              class="OUTLINE"
+              d=" M 307 751 l 4 2 0 5 -1 4 0 0 -1 0 -1 4 1 4 1 0 -1 1 3 3 3 4 3 0 -1 -1 0 0 4 -2 7 -1 4 1 0 0 1 1 0 5 0 7 -1 4 -1 4 1 2 0 0 0 0 0 0 1 0 -1 1 0 0 0 0 -1 1 -2 -1 -1 1 -2 -3 -4 1 -6 -3 -2 -8 -6 2 -2 6 -6 -1 -2 -6 1 -4 -1 1 -1 -4 -2 -3 -2 -4 0 -7 2 -3 0 -1 0 0 0 -2 0 0 0 -1 0 -1 3 -1 2 -5 z M 441 731 l 3 1 1 2 -2 3 0 1 0 0 0 1 -1 0 0 4 3 3 1 5 0 4 0 0 -1 2 -2 3 -1 3 2 0 -1 1 2 -1 3 -2 3 -1 -1 1 -2 5 -1 4 -2 -1 -1 1 -1 1 3 2 0 7 -2 -3 -1 0 0 0 0 0 -1 1 -3 -1 -2 3 -3 4 -1 3 4 4 3 0 -1 1 -1 1 0 -1 -1 0 -1 0 -1 0 -4 2 -6 1 -1 -3 0 0 -1 0 -1 0 2 -5 -1 -3 -2 1 -2 0 -1 -3 5 -3 0 -6 0 -4 0 1 -1 -2 -2 1 0 1 0 0 -3 2 -4 2 -1 3 0 0 -1 0 -2 -4 -3 -3 -1 -4 0 -4 1 -1 0 0 3 -3 4 -4 1 0 0 0 0 0 3 3 4 1 0 -1 4 1 4 0 -1 -2 1 -1 -1 0 0 0 0 0 -3 -4 2 -5 5 -1 3 -5 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 -1 -1 1 0 1 1 0 -4 z M 429 693 l -4 1 -3 2 -2 4 1 3 0 0 0 1 2 3 0 3 0 0 0 1 -1 -1 -1 0 -1 1 4 2 3 6 2 2 -2 1 3 2 -2 1 0 0 0 0 -3 1 -4 1 1 -2 1 -1 -4 -1 3 -3 -4 -1 -3 -4 -3 1 -1 2 0 0 -1 0 0 0 -1 0 -1 -1 -2 -1 -1 2 0 0 -1 0 -3 -1 0 5 -3 2 -3 2 -7 4 0 4 2 -3 5 -2 4 -2 0 -1 0 -1 1 -1 1 1 1 0 0 0 1 -1 2 1 0 0 -1 4 1 4 0 0 0 0 1 -1 0 1 0 0 0 1 2 1 -4 3 -2 2 -1 0 0 0 -1 0 0 0 0 0 0 0 0 0 -4 -1 -1 2 4 2 -2 3 -1 5 -1 7 1 6 1 -2 0 0 1 0 1 -1 0 0 0 0 -1 -1 1 0 0 0 0 -2 -1 -1 4 2 1 5 -1 -2 -1 4 -2 4 -4 2 -6 0 0 -4 5 -1 -5 -3 -1 -3 -1 2 0 -1 -1 2 -2 -1 -1 -1 -2 1 -2 -1 -1 1 -1 -1 -1 0 1 0 -1 -3 4 -1 4 -1 0 -1 -3 -5 -1 -4 -1 1 0 -1 -1 0 0 0 -1 2 -2 3 0 3 0 0 0 0 0 0 0 0 0 0 -4 2 -2 -1 0 0 0 -1 -1 -1 1 -1 0 -1 0 0 0 0 0 0 0 -1 0 0 0 0 0 0 -4 0 -6 0 -2 7 -6 1 -4 2 0 1 -3 -4 -3 -2 3 -1 -2 0 -2 0 0 -1 -1 0 1 0 -1 1 0 0 -4 -1 -5 -4 -1 -3 0 1 2 -2 1 -2 -1 -2 0 -4 1 -2 0 0 0 0 -2 -2 0 -5 1 -4 2 -3 -3 2 -2 5 -1 4 0 0 0 0 0 0 0 0 -2 0 0 0 1 -3 -2 0 1 0 -3 1 2 2 2 4 0 3 -1 0 0 1 -1 1 1 0 0 0 0 -1 -1 0 -1 -1 -2 2 -3 -2 0 0 -1 0 0 0 0 1 0 0 -3 1 -1 -2 0 0 0 -2 -4 -3 1 3 -1 2 1 0 0 0 -1 1 1 0 0 1 0 0 0 0 0 0 0 0 0 1 -2 1 -4 5 -5 0 -2 -2 0 0 0 0 -1 1 -5 2 -4 1 0 0 -1 -1 -2 -5 3 -6 0 -3 -1 -2 -3 -5 -4 -3 -3 -4 -4 -4 0 -4 -4 -6 -5 -3 -4 -6 0 -8 -1 -4 -2 -3 -3 -8 4 -4 2 -3 -1 -4 0 0 0 0 0 -1 2 -3 3 -5 3 -3 1 -5 -4 -3 0 -5 -2 -8 -6 -6 2 -8 1 -3 2 -4 1 -8 2 -7 3 -3 0 -5 2 -8 5 -3 3 -4 3 -6 5 -2 6 -2 3 -2 4 -3 3 -5 3 -2 4 5 4 3 1 4 3 -1 1 0 5 3 7 2 8 0 5 2 1 0 1 0 1 4 2 4 5 4 3 3 2 4 1 7 -2 4 -1 0 0 0 -2 3 5 3 3 2 2 0 3 -2 8 -1 7 1 3 3 5 3 7 -1 7 -3 5 0 2 -3 3 -7 0 5 1 7 3 3 3 3 6 3 7 -2 8 1 7 2 8 0 6 -3 5 -1 4 -5 4 -3 3 -1 3 0 5 4 7 0 0 8 -5 5 4 4 3 2 2 0 0 0 1 0 3 -1 1 3 5 3 4 3 2 3 4 5 6 2 4 1 1 7 -2 3 0 0 0 3 -3 2 -7 0 -3 6 -1 5 -4 1 -6 3 -1 3 -3 -1 -2 0 -1 4 -4 6 -7 1 -6 2 -5 1 -1 6 0 5 -9 0 -4 1 2 2 5 4 1 3 -2 2 -3 2 -4 1 2 -2 0 -1 -4 -1 -2 6 -3 -2 -1 -3 -3 1 -2 -1 -2 0 -1 1 0 -3 -2 -6 -2 3 -1 1 0 -1 -1 -1 0 -1 -1 1 -3 -3 -3 2 1 0 -1 0 1 1 -1 0 -2 -5 -2 -6 4 -6 z "
+            />
+            <path
+              id="CD50"
+              class="OUTLINE"
+              d=" M 115 920 l 5 2 3 2 5 3 6 2 3 5 -1 4 0 0 1 0 0 0 1 1 2 1 -2 1 3 0 -1 7 -2 1 -3 7 -4 4 -3 5 -3 5 -5 4 -5 0 -3 1 0 0 0 0 0 0 -1 1 -2 1 0 1 -3 1 -8 2 -4 0 0 0 -2 0 -3 2 -6 3 -7 0 -8 1 -7 1 -7 -1 -8 0 -7 0 -6 1 -3 5 -6 -1 -3 -4 -4 -3 -5 -2 -2 -4 -2 -8 2 -7 3 -4 1 0 1 0 3 -3 4 -3 3 -5 3 -4 4 -2 6 -4 4 -2 5 -1 6 -1 7 -3 4 -2 4 -1 5 -1 -1 1 4 -1 7 -1 6 -2 3 -3 1 1 0 0 1 0 0 1 0 0 1 0 2 -1 2 0 1 0 0 0 1 0 6 -1 z "
+            />
+          </g>
+          <g>
+            <text id="LCD11" class="TEXT" x="156" y="214">서울특별시</text>
+            <text id="LCD26" class="TEXT" x="503" y="695">부산광역시</text>
+            <text id="LCD27" class="TEXT" x="418" y="567">대구광역시</text>
+            <text id="LCD28" class="TEXT" x="87" y="177">인천광역시</text>
+            <text id="LCD29" class="TEXT" x="127" y="707">광주광역시</text>
+            <text id="LCD30" class="TEXT" x="221" y="463">대전광역시</text>
+            <text id="LCD31" class="TEXT" x="531" y="622">울산광역시</text>
+            <text id="LCD36" class="TEXT" x="199" y="418">세종특별자치시</text>
+            <text id="LCD41" class="TEXT" x="216" y="245">경기도</text>
+            <text id="LCD42" class="TEXT" x="370" y="179">강원도</text>
+            <text id="LCD43" class="TEXT" x="294" y="381">충청북도</text>
+            <text id="LCD44" class="TEXT" x="105" y="449">충청남도</text>
+            <text id="LCD45" class="TEXT" x="179" y="592">전라북도</text>
+            <text id="LCD46" class="TEXT" x="138" y="764">전라남도</text>
+            <text id="LCD47" class="TEXT" x="447" y="460">경상북도</text>
+            <text id="LCD48" class="TEXT" x="367" y="672">경상남도</text>
+            <text id="LCD50" class="TEXT" x="76" y="950">제주특별자치도</text>
+          </g>
+        </svg>
+      </div>
+    </main>
+    <!-- 카카오맵 여행 코스 지정 -->
+    <main id="page15" class="page" style="height: 100%;">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text6"></h4>
+        </div>
+        <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span>
+      </div>
+      <div class="course-container">
+      <div class="map_wrap">
+        <div
+        id="map"
+        style="width: 100%; height: 100%; position: relative; overflow: hidden ;border-radius : 20px"></div>
+        <div id="menu_wrap" class="bg_white">
+        <div class="option">
+          <div>
+            <form onclick="searchPlaces(); return false;">
+             
+              <input type="text" value="부산" id="keyword" size="15" />
+              <button type="submit">검색하기</button>
+            </form>
+          </div>
+        </div>
+        <hr />
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+        </div>
+      </div>
+      <div class="tour-course">
+        <!-- <div id="location"></div> -->
+        <div class="create-course">
+          <!-- <label class="tourCourse-item" for="tourCourse">경복궁</label> -->
+        </div>
+      </div>  
+    <!-- <input type="hidden" name="tourCourse" id="tourCourse"> -->
+  <!-- <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2} + '&libraries=services'"></script>
+  <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script> -->
+</div>
+    </main>
+    <!-- 3페이지 -->
+   <!-- form 시작 -->
+   <form th:action="@{upload}" method="post" enctype="multipart/form-data" id="productUploadFrm">  
+      <input type="hidden" id="onedayTour" name="productPackage" value="">
+      <input type="hidden" id="inputTimeHidden" name="tourDuration" value="">
+      <input type="hidden" id="inputDayHidden" name="productPackage" oninput="updateTourValue3()" value="">
+      <input type="hidden" name="regionName" id="regionName" value="">
+      <input typpe="hidden" name="tourCourse2" id="tourCourse" value="">
+    <main id="page3" class="page">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text3"></h4>
+        </div>
+        <span class="sub-title">여행의 주요 테마를 선택하여 여행객들에게 가이드님의 여행 컨셉에 대해 알려주세요.</span>
+      </div>
+      <div div class="tour-theme">
+      <th:block th:each="tourTheme : ${tourTheme}">
+        <input type="radio" name="themeCode" class="hidden" th:id="'tourTheme'+ ${tourTheme.themeCode}" th:value="${tourTheme.themeCode}">
+          <label class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">
+            <img th:src="${tourTheme.themeImg}">
+          <th:block th:text="${tourTheme.themeName}" class="theme-img" th:for="'tourTheme'+ ${tourTheme.themeCode}">테마이름</th:block>
+        </label>
+      </th:block>
+        
+      </div>
+    </main>
+    <!-- 최소 최대 인원 설정 -->
+    <main id="page4" class="page">
+      <div class="greeting">
+        <!-- <h1 class="title typing">Jayden</h1> -->
+        <div class="typing title">
+          <h4 class="text5"></h4>
+        </div>
+        <div class="inputPeopleNum"><span class="sub-title">언제든지 변경하실 수 있습니다.</span><span id="maxMinWarn">최소인원은 최대인원보다 많을 수 없습니다.</span></div>
+      </div>
+      <div class="set-fee">
+        <div class="set-people-container">
+          <span class="minTouristNum">최소인원</span>
+          <input type="text" class="minTouristNum minInput minMaxCheck" id="minInput">
+          <input type="hidden" name="minTourist" value="">
+          <span class="maxTouristNum">최대인원</span>
+          <input type="text" class="maxTouristNum maxInput minMaxCheck" id="maxInput">
+          <span class="maxTouristNum2">최대인원</span><input type="text" class="maxTouristNum2 maxInput2" id="maxInput2">
+          <input type="hidden" name="maxTourist" value="">
+        </div>
+      </div>
+    </main>
+    <!-- 가격 설정 페이지(페이지 수정해야함) -->
+    <main id="page13" class="page">
+      <div class="greeting">
+        <div class="typing title">
+          <h4 class="text4"></h4>
+        </div>
+        <span class="sub-title">언제든지 변경하실 수 있습니다.</span>
+      </div>
+      <div class="set-fee">
+       <div class="set-fee-container">
+        <input type="text" name="" id="feeInput" placeholder="₩35,000">
+        <input type="hidden" name="productPrice">
+        <span>가이드 최소,최대 수입 확인하기<i class="fa-thin fa-chevron-up"></i></span>
+      </div>
+      <ul class="accordion">
+        <span class="target" id="accordion"></span>
+        <li class="accordion__li">
+          <span class="target" id="accordion1"></span>
+          <a href="#accordion1" class="open-accordion" title="open">
+            <div>
+              <div>
+                <h5 class="accordion__title">
+                  예상 수입
+                </h5>
+              </div>
+            </div>
+          </a>
+          <a href="#accordion" class="close-accordion" title="close">
+            <div>
+              <div>
+                <span class="accordion__num"></span>
+                <h5 class="accordion__title">
+                  예상 수입
+                </h5>
+              </div>
+            </div>
+          </a>
+          <div class="accordion__content">
+            <div class="basic-info hrLine">
+              <span class="basic-info" id="incomeIcon">
+                <span class="addSubBtn" id="cashIcon">
+                  <img th:src="@{/images/productUpload/income.png}">
+                </span>
+                <span>예상수입</span>
+              </span>
+              <span class="income">예상수입</span>
+              <span class="income">수수료 10%</span>
+              <span class="income">예상 정산 금액</span>
+            </div>
+            <div class="basic-info min-fee-none">
+              <span class="basic-info" id="incomeIcon">
+                <span class="addSubBtn" id="cashIcon">
+                  <img th:src="@{/images/productUpload/income.png}" alt="" hidden>
+                </span>
+                <span>최소수입</span>
+              </span>
+                <span id="minPrice">0</span>
+                <span id="minFee">0</span>
+                <span id="minTotal">0</span>
+            </div>
+            <div class="basic-info min-fee-none">
+              <span class="basic-info" id="incomeIcon">
+                <span class="addSubBtn" id="cashIcon">
+                  <img src="@{/images/productUpload/income.png}" alt="" hidden>
+                </span>
+                <span>최대수입</span>
+              </span>
+                <span id="maxPrice">0</span>
+                <span id="maxFee">0</span>
+                <span id="maxTotal">0</span>
+            </div>
+              <div class="basic-info day-fee">
+                <span class="basic-info" id="incomeIcon"><span class="addSubBtn" id="cashIcon">
+                  <img th:src="@{/images/productUpload/income.png}" alt="" hidden>
+                </span>
+                <span>최대수입</span>
+              </span>
+                  <span id="maxPrice2">0</span>
+                  <span id="maxFee2">0</span>
+                  <span id="maxTotal2">0</span>
+              </div>
+          </div>
+        </li>
+      </ul>
+      </div>
+    </main>
+    <!-- 5페이지(상품 이미지 등록) -->
+    <main id="page5" class="page">
+      <div class="greeting">
+        <h2 class="title">Jayden 가이드님 여행만의 매력을 돋보이게 하세요.</h2>
+        <span class="sub-title">여행지 이미지 5장 이상, 가이드님 여행만의 특색을 나타낼 수 있는 이미지를 추가하시면 됩니다.</span>
+      </div>
+      <div class="add-image-div">
+        <h3 class="title"></h3>
+        <button type="button" id="addImageBtn">
+          <img th:src="@{/images/productUpload/plus.png}" alt="">추가
+        </button>
+      </div>
+      <div class="img-box">
+        <div class="productImg thumbnail">
+          <label for="img0">
+            <img class="preview" src="" alt="">
+            <input type="file" name="images" class="input-image" id="img0" accept="image/*"/>
+            <span class="delete-image">&times;</span>
+            <div class="add-image add-image-thumbnail">
+              <img th:src="@{/images/productUpload/add-image.png}" alt="" class="img-inner-img">
+            </div>
+            <div class="add-image3 add-image-text">5장 이상의 사진을 선택하세요.</div>
+            <div class="add-image2 add-image-text2">기기에서 업로드</div>
+          </label> 
+        </div>
+        <!-- <div>여기로 사진을 끌어다 놓으세요.</div> -->
+      </div>
+      <!-- 이미지 박스 foreach -->
+      <div class="img-box">
+        <div th:each="index: ${#numbers.sequence(1, 4)}" class="productImg">
+          <label th:for="'img' + ${index}">
+            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
+            <span class="delete-image">&times;</span>
+            <div class="add-image">
+            <img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img">
+            </div>
+            <div class="add-image2"></div>
+            <div class="add-image3"></div>
+          </label>
+        </div>
+        <div th:each="index: ${#numbers.sequence(5, 9)}" class="productImg plus-image">
+          <label th:for="'img' + ${index}">
+            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
+            <span class="delete-image">&times;</span>
+            <div class="add-image"><img th:src="@{/images/productUpload/plus.png}" alt="" class="img-inner-img"></div>
+            <div class="add-image2"></div>
+            <div class="add-image3"></div>
+          </label>
+        </div>
+      </div>
+    </main>
+    <!-- 6페이지(상품 제목 정하기) -->
+    <main id="page6" class="page">
+      <div class="greeting">
+        <h2 class="title">이제 Jayden 가이드님 여행의 이름을 지어주세요</h2>
+        <span class="sub-title">여행지, 패키지 정보를 제목에 꼭 적으셔야 합니다.</span><br>
+        <span class="sub-title"> 입력하지 않으실 경우 추후 관리자에 의해 삭제될 수 있습니다</span>
+      </div>
+      <div id="titleContainer">
+        <div id="writeTitle">상품 이름</div>
+        <input type="text" name="productName" id="inputTitle" onkeydown="return event.key != 'Enter';">
+        <div id="titleCountContainer">
+          <div id="titleCharCount">0</div>
+            <div>/75</div>
+        </div>
+        <div id="titleWarning">
+          <div>!</div>
+          <span>75자까지 입력하실 수 있습니다.</span>
+        </div>
+      </div>
+    </main>
+    <!-- 7페이지(상품 상세 설명 작성) -->
+    <main id="page7" class="page">
+      <div class="greeting">
+        <h2 class="title">여행 일정과 가이드 상품 대한 설명을 작성해주세요</h2>
+        <span class="sub-title">여행지, 패키지 정보를 제목에 꼭 적으셔야 합니다.</span><br>
+      </div>
+      <div id="contentContainer">
+        <div id="writeTitle">여행 일정 및 상품 설명 작성</div>
+        <textarea name="productContent" id="inputContent" cols="30" rows="20" ></textarea>
+        <div id="contentCountContainer">
+          <div id="contentCharCount">0</div>
+            <div>/1000</div>
+          </div>
+          <div id="contentWarning"><div>!</div><span>1000자까지 입력하실 수 있습니다.</span>
+    </div>
+    </main>
+    <!-- 상품 일정 등록 -->
+    <main id="page11" class="page">
+      <div class="greeting">
+        <h1 class="title">이제 여행 일정과 가이드 상품에 대한 설명을 작성해주세요!</h1>
+        <span class="sub-title"></span>
+      </div>
+    </main>
+    <!-- 8페이지 구매 시 유의사항 작성 -->
+    <main id="page8" class="page">
+      <div class="greeting">
+        <h2 class="title">구매 시 유의 사항을 작성해주세요.</h2>
+        <span class="sub-title">가격에 미포함된 비용을 모두 작성해주세요. 작성하지 않는 비용이 발생할 시 패널티가 부과될 수 있습니다.</span>
+      </div>
+      <div class="write-add-price">
+        <input type="text" id="addPrice"><button id="addBtn">입력</button>
+      </div>
+      <span id="addWarning" hidden><i class="fa-sharp fa-solid fa-bomb"></i>이미 입력한 정보입니다.</span>
+          <div id="add-container">
+          </div>
+    </main>
+    <!-- 9페이지 취소 및 환불 규정 -->
+    <main id="page9" class="page">
+      <div class="greeting">
+        <h1 class="title">취소 및 환불 규정에 대해 숙지해주세요!</h1>
+        <span></span><span class="sub-title"></span>
+      </div>
+      <pre id="refundContent">
+
+        ['guido' 의 손해배상 의무]
+        1. guido가 'guido 약관상' 의 의무을위반하여 발생한 여행자와 guido 사이의 손해배상과 이로 인하여
+         여행자가 guido을 상대로 손해배상을 청구하는 등 법적 조치를 취한 경우 guido는본인의 비용으로 guido을
+        면책시켜야 함은 물론 그로 인하여 guido에 발생한 모든 손실, 비용(관련 변호사 비용 포함) 및 손해를 
+        전액 보상하여야 합니다.단, 여행자에게 신체 손상이 없는 경우 guido의 손해배상책임은 여행가의 100%를 
+        한도로 합니다.
+
+        2. guido는 고의 또는 과실로 위법하게 여행자에게 손해를 가한 경우 그로 인하여 여행자가 입은 손해를 배상
+        해야 합니다.
+        3. guido는 상대의 수화물을 수령, 인도, 보관할의무가 없으며, 수화물이 멸실, 훼손 또는 연착되어 여행자에게
+        발생한 손해를 배상할 책임이 없습니다.
+
+        ['guido' 의 손해배상 의무] guido는 guido가 'guido 약관상' 의의무을 위반하여 발생한 여행자와 guido 
+        사이의 손해배상과 이로 인하여 여행자가 guido을 상대로 손해배상을 청구하는 등 법적 조치를 취한 경우 
+        guido는 여행자와 guido에 대하여 어떠한 책임도 부담하지 않습니다.단, 'guido 약관상' 의 의무을 위반하지않고
+        발생한 여행자와 여행메이트 사이의 손해배상 등 법률 관계와 관련해서는 발생 상황을 면밀히 파악하여 guido와 
+        guido의 조율 하에 손해배상을진행합니다.
+        
+        [여행 출발(개시) 전 취소 및 환불 규정](*공정거래위원회 제정_소비자 피해보상 규정 기준)
+        
+        1. 여행계약 해제로 인한 피해 : 당사의 귀책사유로 당사가 계약해제하는 경우
+        
+        (당일여행인 경우)
+        1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불 
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
+        
+        (숙박여행인 경우)
+        1) 여행 개시 5일 전까지 취소 통보시 : 작품가 전액 환불
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
+        
+        2. 여행자의 귀책사유로 여행자가 계약해제하는 경우
+        
+        (당일여행인 경우)
+        1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가의 30% 배상
+        
+        (숙박여행인 경우)
+        1) 여행 개시 5일 전까지 취소 통보시 : 작품가 전액 환불
+        2) 여행 개시 2일 전까지 취소 통보시 : 작품가의 10% 배상
+        3) 여행 개시 1일 전까지 취소 통보시 : 작품가의 20% 배상
+        4) 여행당일 통보 및 통보가 없는 경우 : 작품가의 30% 배상
+         </pre>
+         <div id="refundCheck-div">
+          <input type="checkbox" id="refundCheck">
+          <span> 위의 취소 및 환불 규정을 모두 읽었으며, 
+          이와 관련된 사유로 취소, 환불 시 발생하는 손해의 책임은 판매자에게 있습니다.</span>
+        </div>
+    </main>
+    <main id="page10" class="page">
+      <div class="greeting">
+        <h1 class="title">가이드 상품 검토하기</h1>
+        <span class="sub-title">여행객에게 표시되는 정보는 다음과 같습니다. 모든 정보가 정확한지 확인하세요.</span>
+      </div>
+      <div class="confirm-container" onclick="openModal()">
+        <div class="confirm-image-container">
+          <img src="" alt="thumnail" id="checkImg">
+        </div>
+        <div class="confirm-text-container">
+          <div>
+            <span id="checkName"></span>
+            <span>신규★</span>
+          </div>
+          <div><span><i class="fa-solid fa-location-dot" style="color: #949494;"></i><span id="checkSpace"></span> > Changdeok Palace</span></div>
+          <div><span id="checkFee"></span><span> / 1 guest</span></div>
+        </div>
+      </div>
+      <!-- 모달창 -->
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <div id="modalChang"></i><span>미리보기 전체</span> </div>
+          <div class="item"><img th:src="${session.loginUser.profileImage}" id="checkModalImg"></div>
+          <div class="item modal-text"><span id="checkModalName"></span></div>
+          <div class="item"><img th:src="${session.loginUser.profileImage}"></div>
+          <div class="item modal-text item-sub"><span>5 ~ 20 people </span></div>
+          <div class="item modal-text item-sub" ><span>Price per person : USD 30</span></div>
+          <div class="item item-title modal-text">Travel theme</div>
+          <div class="item item-tour-theme modal-text item-sub"><img src="" ><span>Palace tour</span></div>
+          <div class="item item-title modal-text"><span>Additional Cost</span></div>
+          <div class="item modal-text item-sub"><span>Entrance fee to Changdeok Palace (USD 4)</span></div>
+          <div class="item item-title modal-text"><span>Location</span></div>
+          <div class="item modal-text item-sub"><span>Changdeok Palace</span><span>Soul N Tower</span><span>MyeongDong Street</span></div>
+          <div class="item item-title modal-text"><span>Detail</span></div>
+          <div class="item "></div>
+          <div class="item modal-text"><span id="checkModalContent"></span></div>
+          <!-- <div class="item">16</div>
+          <div class="item">17</div> -->
+        </div>
+      </div>
+    </main>
+    <div class="save"><button class="save-btn" id="submitBtn">제출하기</button></div>
+  </form>
+    <footer>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="progress-btn">
+        <button type="button" class="back-btn">이전</button>
+        <button type="button" class="next-btn">다음</button>
+      </div>
+    </footer>
+  </body>
+  <script th:src="@{/js/productUpload/test.js}"></script>
+  <!-- <script src="../js/productUpload/calender.js"></script> -->
+  <script th:src="@{/js/productUpload/typing3.js}"></script>
+  <script th:src="@{/js/productUpload/tourCourse.js}"></script>
+  <script th:inline="javascript">
+  
+  
+  
+  
+  </script>
+  <script
+  src="https://kit.fontawesome.com/f7459b8054.js"
+  crossorigin="anonymous"
+></script>
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b&libraries=services"></script> -->
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7af279a7235c210dd3e8c7e27ac9299b"></script> -->
+</html>
+

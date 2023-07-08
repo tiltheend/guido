@@ -11,10 +11,15 @@
     <link rel="stylesheet" th:href="@{/css/reservation/reservation.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+    <!-- paypal -->
+    <script th:src="'https://www.paypal.com/sdk/js?client-id=' + ${clientID} + '&disable-funding=card'"></script>
+
 </head>
 <body th:object="${product}">
-
 
     <form th:action="@{/reservation/reserve}" method="POST">
 
@@ -119,6 +124,8 @@
                     <div class="reservation--payment__info">
                         <div class="reservation--text">결제 정보</div>
     
+
+                        <input type="hidden" id="cardAmount" value="">
     
                         <div class="payment__info--container">
                             <div>총 결제 금액</div>
@@ -143,7 +150,7 @@
                                 <p class="arrow_box">연락처는 내 정보 수정에서 변경  가능합니다.</p>
                             </div>
                             <div>비상 연락망</div>
-                            <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 guido@gmail.com"></div>
+                            <div><input type="text" class="orderer--emergency" placeholder="ex. 카카오톡 guido@gmail.com" id="emergencyContact"></div>
                         </div>
     
     
@@ -153,8 +160,8 @@
                     <div class="reservation--request">
                         <div class="reservation--text">요청 사항</div>
 
-                       <textarea name="request" id="request" 
-                       placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다."></textarea>
+                        <textarea name="requestContent" id="request" 
+                        placeholder="필요한 요청사항을 작성해주세요. 상품에 포함되지 않은 개인적인 요청은 제공되지 않을 수 있습니다." oninput="checkLength(this)"></textarea>
                     </div>
 
 
@@ -185,42 +192,76 @@
             <div class="reservation--bottom">
     
                     <div class="reservation--form__bottom"> 
-                        <!-- <input type="checkbox" id="reservationAgree">
-                        <label for="reservationAgree"></label>
-    
-                        <div class="reservation--text__bottom">주문 내용을 확인하였으며 약관에 동의합니다.</div> -->
-                    
 
                         <div class="reservation--tou">
                             <div>
-                                <span>개인정보 수집ㆍ이용에 동의합니다 (필수)</span>
-                                <span class="tou--detail" onclick="toggleModal('pa')">자세히 보기</span>
+                                <div class="tou--item">
+                                    <div>개인정보 수집ㆍ이용에 동의합니다 (필수)</div>
+                                    <div class="tou--detail">자세히 보기</div>
+                                </div>
+                                <label class="tou--checkbox__container">
+                                    <input type="checkbox">
+                                    <div class="tou--checkmark"></div>
+                                </label>
                             </div>
-                            <label class="tou--checkbox__container">
-                                <input type="checkbox">
-                                <div class="tou--checkmark"></div>
-                            </label>
+
+                            <div class="tou--content">회사는 원활한 서비스 이용을 위하여 다음과 같이 개인정보를 수집하여 이용합니다.
+
+<strong>수집·이용 목적</strong>
+1. 여행, 관광(숙박, 액티비티 등), 교통(항공, 해운, 철도, 렌터카 등) 예약서비스 제공 및 지원
+2. 예약 상품 배송
+3. 대금결제 및 정산
+
+<strong>수집항목</strong>
+1. 예약자 및 여행자의 이름(영문), 국적, 이메일 주소, 전화번호, 여권번호, 투어 일자 정보
+2. 신용카드번호
+3. 유효기간, 계약자와의 관계
+
+<strong>보유·이용 기간</strong>
+서비스 제공 종료 후 3개월까지(단, 관련 법령에 의해 개인정보를 보유하여야 하는 경우를 제외하고, 이미 발생한 민원 처리 등 수집·이용 목적 범위 내에서 회원 탈퇴 이후에도 개인정보를 이용하여야 할 필요가 있는 경우에는 그 목적 달성 후 파기) 귀하는 동의를 거부할 수 있으며, 동의 거부 시 서비스 이용이 제한될 수 있습니다.</div>
                         </div>
+
                         <div class="reservation--divisionline"></div>
 
                         <div class="reservation--tou">
                             <div>
-                                <span>개인정보의 제3자 제공에 동의합니다 (필수)</span>
-                                <span class="tou--detail" onclick="toggleModal('ua')">자세히 보기</span>
+                                <div class="tou--item">
+                                    <div>개인정보의 제3자 제공에 동의합니다 (필수)</div>
+                                    <div class="tou--detail">자세히 보기</div>
+                                </div>
+                                <label class="tou--checkbox__container">
+                                    <input type="checkbox">
+                                    <div class="tou--checkmark"></div>
+                                </label>
                             </div>
-                            <label class="tou--checkbox__container">
-                                <input type="checkbox">
-                                <div class="tou--checkmark"></div>
-                            </label>
+
+                            <div class="tou--content">회사는 원활한 서비스 이용을 위하여 다음과 같이 귀하의 개인정보를 다음과 같이 제공합니다.
+
+<strong>제공받는 자</strong>
+여행, 관광(숙박, 액티비티 등), 교통(항공, 해운, 철도, 렌터카 등) 예약 서비스 및 공급업체
+
+<strong>개인정보 제공항목</strong>
+예약자 및 여행자 이름(영문), 국적, 전화번호, 이메일
+
+<strong>개인정보 제공 목적</strong>
+서비스 예약 및 예약 관리
+국외이전 여부
+업체별 상이함
+
+<strong>보유 및 이용기간</strong>
+예약 확정 후 3개월까지 귀하는 동의를 거부할 수 있으며, 동의 거부 시 서비스 이용이 제한될 수 있습니다.</div>
                         </div>
+
                         <div class="reservation--divisionline"></div>
 
                         <div class="reservation--tou">
-                            <div><strong>구매 조건을 모두 확인하였으며, 거래 진행에 동의합니다.</strong></div>
-                            <label class="tou--checkbox__container">
-                                <input type="checkbox" id="touAllCheck">
-                                <div class="tou--checkmark"></div>
-                            </label>
+                            <div>
+                                <div  class="tou--item"><strong>구매 조건을 모두 확인하였으며, 거래 진행에 동의합니다.</strong></div>
+                                <label class="tou--checkbox__container">
+                                    <input type="checkbox" id="touAllCheck">
+                                    <div class="tou--checkmark"></div>
+                                </label>
+                            </div>
                         </div>
                         
                         <div class="reservation--warning">
@@ -232,7 +273,7 @@
 
     
                     <button class="reservation--btn__bottom" type="button" disabled
-                        onclick="toggleModal('pm')"></button>
+                        onclick="toggleModal()"></button>
     
             </div>
 
@@ -240,65 +281,23 @@
             <!-- 결제 모달 창 -->
             <div id="paymentModal" class="modal">
                 <div class="modal-container">
-                <div class="close" onclick="toggleModal('pm')">&times;</div>
-                <h5>결제 모달 창</h5>
-                </div>
-            </div>
-
-            <div id="provideAgreeModal" class="modal">
-                <div class="modal-container">
-                    <div>
-                        <div class="close" onclick="toggleModal('pa')">&times;</div>
-                        <h5>개인정보 수집ㆍ이용 동의</h5>
-                    </div>
-
+                    <div class="close" onclick="toggleModal()">&times;</div>
                     <div class="modal--content">
-회사는 원활한 서비스 이용을 위하여 다음과 같이 개인정보를 수집하여 이용합니다.</p>
+                        <div class="modal--content__text">총 결제금액</div>
+                        <div class="modal--content__cost"></div>
 
-수집·이용 목적
-1. 여행, 관광(숙박, 액티비티 등), 교통(항공, 해운, 철도, 렌터카 등) 예약서비스 제공 및 지원
-2. 예약 상품 배송
-3. 대금결제 및 정산
-
-수집항목
-1. 예약자 및 여행자의 이름(영문), 국적, 이메일 주소, 전화번호, 여권번호, 투어 일자 정보
-2. 신용카드번호
-3. 유효기간, 계약자와의 관계
-
-보유·이용 기간
-서비스 제공 종료 후 3개월까지 (단, 관련 법령에 의해 개인정보를 보유하여야 하는 경우를 제외하고, 
-이미 발생한 민원 처리 등 수집·이용 목적 범위 내에서 회원 탈퇴 이후에도 개인정보를 이용하여야 할 필요가 있는 
-경우에는 그 목적 달성 후 파기) 귀하는 동의를 거부할 수 있으며, 동의 거부 시 서비스 이용이 제한될 수 있습니다.
+                        <div class="modal--content__line"></div>
+                        <div class="modal--content__text2">개인 판매 상품으로 거래 관련 사항은 판매자에게 문의할 수 있습니다.</div>
+                        
+                        <!-- 신용/체크 카드 선택 시 보이는 버튼 -->
+                        <button id="nowPay" type="button" onclick="requestCardPay()">바로 결제하기</button>
+                        
+                        <!-- 페이팔 선택 시 보이는 버튼 -->
+                        <div id="paypal-buttons-container"></div>
                     </div>
                 </div>
             </div>
 
-            <div id="useAgreeModal" class="modal">
-                <div class="modal-container">
-                    <div>
-                        <div class="close" onclick="toggleModal('ua')">&times;</div>
-                        <h5>개인정보 제3자 제공 동의</h5>
-                    </div>
-
-                    <div class="modal--content">
-회사는 원활한 서비스 이용을 위하여 다음과 같이 귀하의 개인정보를 다음과 같이 제공합니다.
-
-제공받는 자
-여행, 관광(숙박, 액티비티 등), 교통(항공, 해운, 철도, 렌터카 등) 예약 서비스 및 공급업체
-
-개인정보 제공항목
-예약자 및 여행자 이름(영문), 국적, 전화번호, 이메일
-
-개인정보 제공 목적
-서비스 예약 및 예약 관리
-국외이전 여부
-업체별 상이함
-보유 및 이용기간
-예약 확정 후 3개월까지
-귀하는 동의를 거부할 수 있으며, 동의 거부 시 서비스 이용이 제한될 수 있습니다.
-                    </div>
-                </div>
-            </div>
 
 
     
@@ -306,7 +305,6 @@
         
     </form>
 
-    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
     
     <script th:inline="javascript">
@@ -344,18 +342,20 @@
         iti.setNumber(userTel);        // 전화번호를 입력 상자에 설정
 
         const userName = /*[[${session.loginUser?.userName}]]*/ "로그인 회원 이름";
-        const userEmail = /*[[${session.loginUser?.userEmail}]]*/ "로그인 회원 이름";
+        const userNo = /*[[${session.loginUser?.userNo}]]*/ "로그인 회원 no";
+        const userEmail = /*[[${session.loginUser?.userEmail}]]*/ "로그인 회원 이메일";
 
-        const reservationDate = /*[[${reservationDate}]]*/"예약 일자";
+        const reservationDate = /*[[${reservationDate}]]*/"예약 일정(날짜)";
         const package = /*[[${product.productPackage}]]*/"당일 or n일";
         const minTourist = /*[[${product.minTourist}]]*/"최소 인원";
         const maxTourist = /*[[${product.maxTourist}]]*/"최대 인원";
         const price = /*[[${product.productPrice}]]*/"상품 가격";
-        const selectedTime = /*[[${option?.optionName}]]*/"옵션명";
+        const selectedTime = /*[[${selectedTime?.optionName}]]*/"옵션명";
+        const optionNo = /*[[${selectedTime?.optionNo}]]*/"옵션 번호";
         const impCode = /*[[${impCode}]]*/"포트원 가맹점 식별코드"
-        const merchantUid = /*[[${merchantUid}]]*/"주문 번호"
         const pgMid = /*[[${pgMid}]]*/"상점 ID"
-        const productName = /*[[${product.productName}]]*/"상점 ID"
+        const productName = /*[[${product.productName}]]*/"상품명"
+        const productNo = /*[[${product.productNo}]]*/"상품번호"
         
         
     </script>

@@ -38,8 +38,6 @@
         </div>
     </div>
 
-
-
     <!-- 상품 게시글 -->
     <article class="main-post">
 
@@ -55,7 +53,7 @@
 
                 <!-- <th:block th:unless="${#lists.size(productList)} == 0"> -->
                     <li class="product-row" th:each="product : ${searchResultList}">
-                        <div class="slider single-item"> 
+                        <div class="slider single-item" th:data-productno="${product.productNo}"> 
                             <div class="productImage" th:each="image : ${product.imageList}"> 
                                 <img th:src="${image.filePath}">
                             </div>
@@ -64,8 +62,16 @@
                             <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
                             <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
                         </div>
-                        <div class="add-wish-heart">
-                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                        <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
+                            <!-- 로그인 상태인 경우 -->
+                            <th:block th:if="${session.loginUser != null}">
+                                <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                                <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            </th:block>
+                            <!-- 로그인 상태가 아닌 경우 -->
+                            <th:block th:unless="${session.loginUser != null}">
+                                <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            </th:block>
                         </div>
                         <div class="sales-text">
                             <div> 
@@ -89,12 +95,11 @@
             </ul>
         </div>
     </article>
-        
 
     <th:block th:replace="~{common/footer}"></th:block>
 
-
     <script th:inline="javascript">
+
         jQuery(document).ready(function($) {
         $('.loop').owlCarousel({
             center: true,
@@ -116,10 +121,14 @@
         const owl = $('.owl-carousel')
 
         $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
-
         $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
 
         });
+
+
+        const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
+        // if(loginUserNo == null) loginUserNo = "";
+
     </script>
     
     <!-- 게시글 슬라이드 -->

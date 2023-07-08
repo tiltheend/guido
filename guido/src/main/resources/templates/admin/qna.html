@@ -31,20 +31,18 @@
         <div class="content-container">
             <div class="content-header">
                 <h1 class="content-title">1:1 문의사항</h1>
-                <div class="btn-container">
-                    <a href="./writeEvent.html"><button id='writeEventBtn' class="btn btn1">글 작성</button></a>
-                    <button class="btn btn2">블라인드</button>
-                </div>
             </div>
-
             <hr>
-
-
             <div class="content-count-and-search">
                 <!-- 카운트 -->
                 <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
                 <!-- 검색창 -->
-                <div class="search-container"><input type="text" name="" id="search"><button id="searchBtn"><img src="../images/admin/searchBtn.svg" alt="" id="searchImg"></button></div>
+                <form th:action="@{qna}" method="get">
+                    <div class="search-container">
+                        <input type="text" name="query" id="search">
+                        <button id="searchBtn"><img th:src="@{/images/admin/searchBtn.svg}" alt="" id="searchImg"></button>
+                    </div>
+                </form>
             </div>
 
             <!-- 테이블 -->
@@ -75,10 +73,7 @@
                     </th:block>
                 </tbody>
             </table>
-            
-            <!-- 게시글이 있을 때만 페이지네이션 보이기 -->
-            <!-- <th:block th:unless="${#lists.size(map.list) == 0}" th:replace="~{/admin/pagination}"/> -->
-            <th:block th:unless="${map.pagination.listCount == 0}" th:replace="~{/admin/pagination}"/>
+            <th:block th:replace="~{/admin/pagination}"/>
         </div>
     </main>
     <script th:src="@{/js/admin/admin.js}"></script>

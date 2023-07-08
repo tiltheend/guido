@@ -90,7 +90,7 @@
   width: 6vmax;
   border-radius: 50%;
 }
-.item:nth-child(4) {
+#modal > div > div:nth-child(4) {
   grid-column: 16 / 17;
   grid-row: 2 / 5;
 

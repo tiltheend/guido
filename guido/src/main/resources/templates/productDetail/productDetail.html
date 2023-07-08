@@ -48,12 +48,13 @@
         </div>
     </div>
     
+
     <form th:action="@{/reservation/reservationform/{productNo}(productNo=${product.productNo})}" method="GET"> 
     
         <div class="detail--container">
             
             <section class="detail--top">
-                
+
                 <div>
                     <div class="detail--top__category">
                         <div th:text="*{regionName}">지역명</div>
@@ -365,9 +366,7 @@
                             </div>
         
                             <!-- 총 진행 날짜(범위) -->
-                            <div class="detail--text__date-second">
-                                21 Jun 2023 - 24 Jun 2023
-                            </div>
+                            <div class="detail--text__date-second"></div>
                             
                             <div class="detail--calendar__date">
                                 <img th:src="@{http://via.placeholder.com/600x330}">
@@ -458,10 +457,6 @@
         
                     </section>
 
-        
-
-
-
                 
                 
                     
@@ -471,40 +466,43 @@
                         <!-- 예약 캘린더(날짜) -->
                         <div class="detail--right__calendar">
         
-                            <!-- <table class="scriptCalendar">
-                                <thead>
-                                    <tr>
-                                    <td class="calendarBtn" id="btnPrevCalendar">&#60;</td>
-                                    <td colspan="5">
-                                        <span id="calYear">YYYY</span>년 <span id="calMonth">M</span>월
-                                    </td>
-                                    <td class="calendarBtn" id="nextNextCalendar">&#62;</td>
-                                    </tr>
-                                    <tr>
-                                    <td>Sun</td>
-                                    <td>Mon</td>
-                                    <td>Tue</td>
-                                    <td>Wed</td>
-                                    <td>Thu</td>
-                                    <td>Fri</td>
-                                    <td>Sat</td>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                                </table> -->
+                            <div class="calendar-header">
+                                <div class="calendar-arrow prev-month">&lt;</div>
+                    
+                                <div class="year-month"></div>
+                    
+                                <div class="calendar-arrow next-month">&gt;</div>
+                            </div>
+
+                            <div class="calendar-content">
+                                
+                                <table class="calendar-table">
+                                    <thead>
+                                        <th>Sun</th>
+                                        <th>Mon</th>
+                                        <th>Tue</th>
+                                        <th>Wed</th>
+                                        <th>Thu</th>
+                                        <th>Fri</th>
+                                        <th>Sat</th>
+                                    </thead>
+                        
+                                    <tbody>
+                        
+                                    </tbody>
+                        
+                        
+                                </table>
+
+                            </div>
+                    
+                            
         
                         </div>
         
                         <!-- 예약 옵션(시간) : 당일 투어의 경우에만 뜸 -->
-                        <div class="detail--right__option" th:if="${#lists.size(product.optionList) > 0}">
-                            <span>Option</span>
-        
-                            <div class="detail--item__option">
-                                <th:block th:each="i : ${#numbers.sequence(0, #lists.size(product.optionList) - 1, 1)}">
-                                    <input type="radio" name="option" th:id="|option${i+1}|" th:value="${product.optionList[i].optionNo}" th:disabled="${product.optionList[i].optionRestCount==0}">
-                                    <label class="option--active" th:for="|option${i+1}|" th:utext="|${product.optionList[i].optionName} (${product.optionList[i].optionRestCount} left)|"></label>
-                                </th:block>
-                            </div>
+                        <div class="detail--right__option">
+
                         </div>
                         
                         <!-- 예약 가격 -->
@@ -513,9 +511,9 @@
                             <div class="detail--right__price-qty">
         
                                 <!-- 1인당 가격 : n박 시 eachCost !=0 -->
-                                <div th:if="${eachCost}!=0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(eachCost, 3, 'COMMA')}">1박 이상 인당 가격=상품가격/인원수</span> / person</div>
+                                <div th:if="${eachCost}!=0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(eachCost, 1, 'COMMA')}">1박 이상 인당 가격=상품가격/인원수</span> / person</div>
                                 <!-- 1인당 가격 : 1박 시 eachCost == 0원 -->
-                                <div th:if="${eachCost}==0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(product.productPrice, 3, 'COMMA')}">1박 시 인당 가격</span> / person</div>
+                                <div th:if="${eachCost}==0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}">1박 시 인당 가격</span> / person</div>
                                 
                                 <div>
                                     <div class="detail--right__price-minus priceBtn">&minus;</div>
@@ -674,54 +672,83 @@
                 
             </section>
             
-            <script th:inline="javascript">
-                jQuery(document).ready(function($) {
-                    $('.loop').owlCarousel({
-                        center: true,
-                    items: 3,
-                    loop: true,
-                    nav: false,
-                    autoplay: true,
-                    autoplayTimeout: 4000,
-                    autoplayHoverPause: true,
-                    mouseDrag: false,
-                    margin: 10,
-                    responsive: {
-                        0:{
-                            items: 1
-                        },
-                        600: {
-                            items: 2
-                        }
-                    }
-                });
-                
-                const owl = $('.owl-carousel');
-                
-                $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
-                
-                $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
-                
-            });
-            
-            
-            const package = /*[[${eachCost}]]*/"패키지종류(1박or1박이상)";
-            const guestCount = /*[[${guestCount}]]*/"게스트수";
-            const loginUserNo = /*[[${session.loginUser?.userNo}]]*/"로그인 회원 번호";
-            const loginUserType = /*[[${session.loginUser?.userType}]]*/"로그인 회원 타입";
-            const product = /*[[${product}]]*/ "상품";
-            
-            </script>
+        </div>
+    </form>
+    
 
-    </div>
+    <form th:action="@{/productDetail/faceImageUpload}" method="POST" enctype="multipart/form-data">
+        <div id="faceImgModal" class="modal">
+            <div class="modal-container">
+                <div class="close" onclick="toggleModal()">&times;</div>
+                <div class="modal--content">
 
-</form>
+                    <div class="modal--title">본인 인증</div>
+                    
+                    <div class="modal--faceimg">
+                        <img th:src="@{/images/productDetail/faceImg2.jpg}" class="upload">
+                        <input type="file" name="faceImg" class="real-upload" 
+                        accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div>예약을 진행하기 전 신원 인증을 위해 얼굴을 인식할 수 있는 촬영물이 필요합니다. 본 촬영물은 신분을 확인하는 용도로 판매자 측에 제공될 수 있습니다.</div>
+
+
+                    <input type="hidden" th:value="${product.productNo}" name="productNo">
+                    <button id="faceImgUpload">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <script th:inline="javascript">
+        jQuery(document).ready(function($) {
+            $('.loop').owlCarousel({
+                center: true,
+            items: 3,
+            loop: true,
+            nav: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            mouseDrag: false,
+            margin: 10,
+            responsive: {
+                0:{
+                    items: 1
+                },
+                600: {
+                    items: 2
+                }
+            }
+        });
+        
+        const owl = $('.owl-carousel');
+        
+        $('.owl-carousel__next').click(() => owl.trigger('next.owl.carousel'))
+        
+        $('.owl-carousel__prev').click(() => owl.trigger('prev.owl.carousel'))
+        
+    });
+    
+    
+    const package = /*[[${eachCost}]]*/"패키지종류(1박or1박이상)";
+    const guestCount = /*[[${guestCount}]]*/"게스트수";
+    const loginUserNo = /*[[${session.loginUser?.userNo}]]*/"로그인 회원 번호";
+    const loginUserType = /*[[${session.loginUser?.userType}]]*/"로그인 회원 타입";
+    const faceImg = /*[[${session.loginUser?.faceImg}]]*/"로그인 회원 얼굴 인증사진";
+    const product = /*[[${product}]]*/ "상품";
+    
+    </script>
 
     <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey} + '&libraries=services'"></script>
     <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey}"></script>
 
     <script th:src="@{/libraries/assets/vendors/highlight.js}"></script>
     <script th:src="@{/libraries/assets/js/app.js}"></script>
+    <script th:src="@{/js/productDetail/calendar.js}"></script>
     <script th:src="@{/js/productDetail/productDetail.js}"></script>
 
 

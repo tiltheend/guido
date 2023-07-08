@@ -49,8 +49,11 @@ guestBtn.forEach((btn)=>{
 });    
 
 
+const cardAmount = document.getElementById("cardAmount");
+
 /* 총 금액 초기 세팅 & 변동 */
 function showTotalResevationCost(){
+
 
     let totalCost;
     let fee;
@@ -72,6 +75,10 @@ function showTotalResevationCost(){
     payment = fee + totalCost;
 
 
+    // 카드 결제 시 필요한 amount hidden 태그 값에 저장
+    cardAmount.value = payment;
+
+
     totalReservationCost.innerText = "KRW " + totalCost.toLocaleString();
     commission.innerText = "KRW " + fee.toLocaleString();
     totalPaymentCost.innerText = payment.toLocaleString();
@@ -84,37 +91,27 @@ showTotalResevationCost();
 
 
   
-/* 모달창 띄우기 */
 
 // 모달 창 토글
-function toggleModal(type) {
+function toggleModal() {
   
-  let modal;
-
-  /* 개인정보 수집, 이용 동의 */
-  if(type=='ua')
-    modal = document.getElementById("useAgreeModal");
-
-  /* 결제 */
-  if(type=='pm')
-    modal = document.getElementById("paymentModal");
-  
-  /* 개인정보 3자 제공 동의 */
-  if(type=='pa')
-    modal = document.getElementById("provideAgreeModal");
+  let modal = document.getElementById("paymentModal");
+  const modalCost = document.querySelector(".modal--content__cost");
   
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
+  modalCost.innerText = totalPaymentCost.innerText;
+
 }
 
 
 
 /* 예약하고자 하는 날짜 출력 */
 const reservationDateDiv = document.querySelector(".reservation--date__decription>div");
-const orderDate = new Date(reservationDate);
+const orderDate = new Date(reservationDate.productDate);
 
 if(package==1){
 
-    reservationDateDiv.innerText = reservationDate + " (" + selectedTime + ")";
+    reservationDateDiv.innerText = reservationDate.productDate + " [" + selectedTime + "]";
   
 }else{
 
@@ -144,34 +141,149 @@ if (lastYear !== newYear) {
   reservationDateDiv.innerText = formattedDate + " ~ " + twoDaysLater;
 }
 
+const emergencyContact = document.getElementById("emergencyContact").value;
+const requestContent = document.getElementById("request").value;
 
-  // 결제(포트원) 가맹점 식별 코드 
-  
   
   // 결제 요청
+  var IMP = window.IMP;
+  IMP.init(impCode); 
+
+  //  카드결제
   function requestCardPay() {
-  
-    IMP.init(impCode); 
 
   
     IMP.request_pay({
-      pg: "kcp." + pgMid,     // 상점 ID
+      pg: "html5_inicis." + pgMid,     // 상점 ID
       pay_method: "card",
-      merchant_uid: merchantUid,   // 주문번호
+      merchant_uid: createRandomOrderNum(),   // 주문번호
       name: productName,    // 상품명
-      // amount: Number(totalPaymentCost.innerText),
-      amount: 200,
+      amount: cardAmount.value,    // 금액
       buyer_email: userEmail,
-      buyer_name: loginUserName,
+      buyer_name: userName,
       buyer_tel: userTel,
-      m_redirect_url : '{결제 완료 후 리디렉션 될 URL}' // 결제 완료 후 리디렉션 될 URL
-    }, function (rsp) { // callback
-      //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+    }, 
 
-      console.log(rsp);
+  function (rsp){   // callback
+    if(rsp.success){
+        // 결제 성공 시 로직 : 결제 승인
+
+        const data = {
+            "impUid": rsp.imp_uid,
+            "orderNumber": rsp.merchant_uid,
+            "totalPrice": cardAmount.value,
+            "productName": rsp.name,
+            "paymentMethod": 'C',
+            "guestCount": Number(guestsQnt.innerText),
+            "productNo": productNo,
+            "userNo": userNo,
+            "productDateNo": reservationDate.productDateNo,    // 캘린더에서 선택된 날짜
+            "optionNo": optionNo,
+            "requestContent": requestContent,
+            "emergencyContact" : emergencyContact
+        }
+
+
+        paymentComplete(data);
+
+        
+    }else{
+      // 결제 실패 시 로직
+      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+      window.location.reload(); 
+    }
 
   });
 }
+
+
+// 결제 완료
+function paymentComplete(data){
+  fetch("/reservation/payment/complete", {
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : JSON.stringify(data)
+  })
+  .then(resp=>resp.text())
+  .then(result=>{
+    
+    if(result!='성공')
+      alert(result);
+    else
+      location.replace("/reservation/order_result?order_id=" + data.orderNumber);
+
+  })
+  .catch(err=>{
+    console.log(err);
+    alert(err);
+  })
+}
+
+
+
+
+// 주문번호 랜덤 생성
+function createRandomOrderNum(){
+  const date = new Date;
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const day = String(date.getDate()).padStart(2, "0");
+	
+	let orderNum = year + month + day + "-";
+	for(let i=0;i<6;i++) {
+		orderNum += Math.floor(Math.random() * 9);	
+	}
+
+	return orderNum;
+}
+
+
+
+// 결제 수단 선택에 따른 결제 진행 버튼 변동
+paypal.Buttons().render('#paypal-buttons-container');
+
+// 라디오 버튼 change 이벤트 설정
+document.querySelectorAll('input[name=payment]')
+    .forEach(function (el) {
+    el.addEventListener('change', function (event) {
+
+        // 결제 수단으로 페이팔 선택됐을 때 페이팔 버튼이 보이도록
+        if (event.target.value === 'paypal') {
+        document.body.querySelector('#nowPay')
+            .style.display = 'none';
+        document.body.querySelector('#paypal-buttons-container')
+            .style.display = 'block';
+        }
+
+        // 결제 수단으로 카드가 선택됐을 때 결제하기 버튼이 보이도록
+        if (event.target.value === 'card') {
+        document.body.querySelector('#nowPay')
+            .style.display = 'block';
+        document.body.querySelector('#paypal-buttons-container')
+            .style.display = 'none';
+        }
+    });
+});
+
+
+// 페이팔 결제
+// function requestPaypalPay(){
+  
+//   fetch('/paypal/submit')
+//     .then(function(response) {
+//         if (response.ok) {
+//             return response.text();
+//         }
+//         throw new Error('Network response was not ok.');
+//     })
+//     .then(function(data) {
+//         // 응답 처리
+//     })
+//     .catch(function(error) {
+//         // 에러 처리
+//     });
+// }
+
 
 /* 유의사항 전체 동의 */
 // 마지막 체크박스가 변경되었을 때 전체 동의 체크박스 상태 업데이트
@@ -228,3 +340,25 @@ const formElements = [...touRadioBtn, ...touCheckBoxes];
 formElements.forEach(function(element) {
   element.addEventListener("change", checkFormStatus);
 });
+
+
+const details = document.querySelectorAll('.tou--detail');
+details.forEach(function(detail) {
+  detail.addEventListener('click', function() {
+    const content = this.parentElement.parentElement.nextElementSibling;
+    content.classList.toggle('open');
+  });
+});
+
+
+// textarea 글자수 제한
+function checkLength(el) {
+
+  const maxLength = 600; // 최대 글자수
+
+  if (el.value.length > maxLength) {
+    el.value = el.value.substring(0, maxLength);
+  }
+}
+
+console.log(reservationDate.productDateNo);

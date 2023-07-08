@@ -16,19 +16,31 @@ public interface AdminMapper {
 
 	int insertFileList(List<File> uploadList);
 
-	int getListCount(String pageName);
+	int getListCount(Map<String, Object> paramMap);
 
-	List<Object> selectList(String pageName, RowBounds rowBounds);
+	List<Object> selectList(Map<String, Object> paramMap, RowBounds rowBounds);
 
 	QNA selectQNA(int qnaNo);
 
 	int writeAnswer(QNA qna);
 
-	int approveGuide(List<Integer> userNoList);
-
 	List<Map<String,String>> selectMainEventList();
 
 	int deleteMainBanner(Object order);
+	
 	int setMainBanner(Map<String, Object> data);
 
+	int eventBlind(List<Integer> eventNoList);
+
+	int eventBlindCancel(List<Integer> eventNoList);
+
+	int setUserState(Map<String, Object> map);
+
+	int productBlind(List<Integer> productNoList);
+
+	int productBlindCancel(List<Integer> productNoList);
+
+	int countUnapprovedGuide();
+
+	int countUnprocessedQna();
 }

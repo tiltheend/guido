@@ -1,24 +1,40 @@
 package com.guido.product.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
+import com.guido.common.utility.Util;
 import com.guido.product.model.dao.ProductDetailMapper;
 
 @Service
+@PropertySource("classpath:/config.properties")	
 public class ProductDetailServiceImpl implements ProductDetailService{
 	
 	@Autowired
 	private ProductDetailMapper mapper;
 
+	
+	@Value("${my.faceimg.webpath}")
+	private String webPath;
+	
+	@Value("${my.faceimg.location}")
+	private String filePath;
+	
 	
 	// 상품 상세 조회
 	@Override
@@ -90,6 +106,57 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 	@Override
 	public List<Product> selectRecommendList(int userNo) {
 		return mapper.selectRecommendList(userNo);
+	}
+
+
+	// 얼굴 인증 사진 업로드
+	@Override
+	public int updateFaceImg(User loginUser, MultipartFile faceImg) throws IllegalStateException, IOException {
+		
+		
+		String rename = null;		// 변경 이름 저장 변수
+		
+		if(faceImg.getSize()>0) {		// 업로드 된 이미지가 있을 경우
+			
+			rename = Util.fileRename(faceImg.getOriginalFilename());
+			
+			loginUser.setFaceImg(webPath + rename);
+			
+		}else {	
+			loginUser.setFaceImg(null);
+		}
+		
+		
+		int result = mapper.updateFaceImg(loginUser);
+		
+		
+		if(result>0) {	// 성공
+			
+			// 새 이미지가 업로드 된 경우
+			if(rename != null) {
+				faceImg.transferTo(new File(filePath + rename));
+			}
+			
+		}else {	// 실패
+			// 이전 이미지로 프로필 다시 세팅
+			loginUser.setFaceImg(null);
+		}
+		
+		return result;
+	}
+
+
+	// 캘린더 날짜 불러오기
+	@Override
+	public List<ProductDate> selectCalendarDates(Map<String, Object> map) {
+		return mapper.selectCalendarDates(map);
+	}
+
+
+	// 날짜 선택 시 옵션 불러오기
+	@Override
+	public List<ProductOption> getOptionInfo(Map<String, Object> map) {
+		return mapper.getOptionInfo(map);
 	}
 
 }
