@@ -104,8 +104,9 @@
                                 </div>
                             </div>
                             <div th:with="pack = ${product.productPackage}">
-                                <p th:if="${pack==1}">₩ [[${product.productPrice}]] / person</p>
-                                <p th:if="${pack>1}">₩ [[${product.productPrice}]] / total</p>
+                                <p th:if="${pack==1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / person'"></p>
+                                <p th:if="${pack>1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / total'"></p>
+                                <!-- th:text="'₩'+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / total'" -->
                                 <div>
                                     <img th:src="@{/images/profile/location.png}" alt="location">
                                     <span th:text="${product.regionName}">지역명</span>

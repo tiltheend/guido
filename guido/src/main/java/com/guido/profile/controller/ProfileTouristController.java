@@ -267,20 +267,22 @@ public class ProfileTouristController {
 		map.put("userNo",loginUser.getUserNo());
 		
 		List<Reservation> moreReservationMore = service.myReservationMore(map);
-		
+		for(Reservation r : moreReservationMore) {
+			System.out.println(r);
+		}
 		return moreReservationMore;
 	}
 	
 	// 비동기로 예약 목록 불러오기 (최신 3개)
-//	@ResponseBody
-//	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
-//	public List<Reservation> newReservationList(@RequestBody int userNo){
-//
-//		List<Reservation> newReservationList = service.myReservation(userNo);
-//		int reservationCount = service.reservationCount(userNo);
-//		
-//		return newReservationList;
-//	}
+	@ResponseBody
+	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
+	public List<Reservation> newReservationList(@RequestBody int userNo){
+
+		List<Reservation> newReservationList = service.myReservation(userNo);
+		// int reservationCount = service.reservationCount(userNo);
+		
+		return newReservationList;
+	}
 	
 	// 투어리스트 위시 리스트로 이동
 	@GetMapping("/touristWishList")
