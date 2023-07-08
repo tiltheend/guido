@@ -25,6 +25,7 @@
 		<result property="productRating" column="PRODUCT_RATING"/>
 		<result property="reviewCount" column="REVIEW_COUNT"/>
 		<result property="reviewPercentage" column="REVIEW_PERCENTAGE"/>
+		<result property="courseName" column="MAIN_COURSE"/>
 		
 		<collection property="tourCourse" select="selectTourCourseList" 
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="TourCourse"/>	
@@ -146,7 +147,10 @@
 			(SELECT AVG(REVIEW_STARS)*20
 				FROM "REVIEW" 
 				JOIN "PRODUCT" USING(PRODUCT_NO)
-				WHERE PRODUCT_NO = #{productNo}) REVIEW_PERCENTAGE
+				WHERE PRODUCT_NO = #{productNo}) REVIEW_PERCENTAGE,
+			(SELECT COURSE_NAME FROM TOUR_COURSE 
+				WHERE PRODUCT_NO = #{productNo}
+				AND BOSS_COURSE_FL = 'Y') MAIN_COURSE
 		FROM "PRODUCT"
 		JOIN "THEME" USING(THEME_CODE)
 		WHERE PRODUCT_NO = #{productNo}
