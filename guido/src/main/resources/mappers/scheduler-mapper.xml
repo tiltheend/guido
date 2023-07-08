@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guido.common.scheduler.ProductSchedulerMapper">
+	
+	<resultMap id="product_rm" type="Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		
+		<collection property="productDateList" select="selectProductDateList"
+			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="ProductDate"/>
+		
+	</resultMap>
+	
+	
+	<resultMap  type="ProductDate" id="product_date_rm">
+		<id property="productDateNo" column="PRODUCT_DT_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="productDate" column="PRODUCT_DT" />
+	 	<result property="availability" column="PRODUCT_DT_AVAILABILITY" />
+	</resultMap>
+	
+	
+	 
+	 <!-- 모든 상품 조회 (스케줄러) -->
+	 <select id="selectProductList" resultMap="product_rm">
+		 SELECT * FROM "PRODUCT"
+	 </select>
+	 
+	 	 <!-- 특정 상품 일정 조회 -->
+	 <select id="selectProductDateList" resultMap="product_date_rm">
+		 SELECT PRODUCT_DT_NO, PRODUCT_NO, TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, 
+		 PRODUCT_DT_AVAILABILITY 
+		 FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		ORDER BY PRODUCT_DT
+	 </select>
+	 
+	 
+	 <!-- 스케줄러 - 마지막 일정이 현재 날짜보다 이른 경우 상태 변경 -->
+	 <update id="updateProductAvailability">
+		 UPDATE "PRODUCT"
+		 SET PRODUCT_STATE = 'E'
+		 WHERE PRODUCT_NO = #{productNo}
+	 </update>
+	 
+	
+</mapper>
