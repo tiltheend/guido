@@ -12,10 +12,22 @@ if(package==1){
 }else{
     outputDate = formattedDate + " - ";
 
-    date.setDate(date.getDate() + 3); 
+    date.setDate(date.getDate() + (package-1)); 
     formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
     outputDate = outputDate + formattedDate;
 }
 
 reservationDate.innerText = outputDate;
+
+
+const guest = document.getElementById("guest");
+let outputGuest;
+
+if(guest==1){
+    outputGuest = guestCount + " guest"
+}else{
+    outputGuest = guestCount + " guests"
+}
+
+guest.innerText = outputGuest;
