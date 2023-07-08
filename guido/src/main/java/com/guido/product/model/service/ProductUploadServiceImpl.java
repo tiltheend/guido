@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSessionException;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -129,8 +128,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 						Product product
 					  , List<MultipartFile> images
 					  , String deleteList
-					  , String tourCourse2
-					  , String tourCourseDeleteList) throws IllegalStateException, IOException {
+					  , String tourCourse2) throws IllegalStateException, IOException {
 		
 		int rowCount = mapper.productEdit(product);
 		
@@ -194,55 +192,9 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 		}
 				
 				
-				//투어 코스 변경사항 있을 시 수정 사항 반영하기(삭제 or 추가)
-				if(!tourCourseDeleteList.equals("")) { // 삭제할 투어 코스가 있을 때
-					
-					Map<String, Object> deleteTourCourseListMap = new HashMap<>();
-					deleteTourCourseListMap.put("productNo", product.getProductNo());
-					deleteTourCourseListMap.put("tourCourseDeleteList", tourCourseDeleteList);
-					
-					rowCount = mapper.tourCourseDelete(deleteTourCourseListMap);
-					
-					if(rowCount == 0) {
-						throw new SqlSessionException();
-					}
-				}
 				
-				// JS에서 JSON 형태로 받아온 tourCourseList(객체 배열) => Java List로 변형
-				List<TourCourse> tourCourseList = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
-				
-				List<TourCourse> uploadTourCourse = new ArrayList<>();
-				
-				for (int j = 0; j < tourCourseList.size(); j++) {
-					
-					TourCourse tc = new TourCourse();
-					
-					tc.setCourseName(tourCourseList.get(j).getCourseName());
-					tc.setCourseOrder(tourCourseList.get(j).getCourseOrder());
-					tc.setLatitude(tourCourseList.get(j).getLatitude());
-					tc.setLongitude(tourCourseList.get(j).getLongitude());
-					tc.setBossCourseFL(tourCourseList.get(j).getBossCourseFL());
-					uploadTourCourse.add(tc);
-				    
-					rowCount = mapper.tourCourseUpdate(tc);
-					
-					if(rowCount == 0) {
-						// 수정 실패 == DB에 이미지가 없었다 
-						// -> 이미지를 삽입
-						rowCount = mapper.tourCourseInsert(tc);
-					}
-				
-				}
-				
-				if(!uploadTourCourse.isEmpty()) {
-					for(int i=0 ; i<uploadTourCourse.size();i++) {
-						
-						int index = uploadTourCourse.get(i).getCourseOrder();
-						
-			}	
 		}
-				
-	}
+		
 		
 		return rowCount;
 	}

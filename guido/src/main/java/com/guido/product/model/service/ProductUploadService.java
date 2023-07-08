@@ -33,12 +33,11 @@ public interface ProductUploadService {
 	 * @param images
 	 * @param deleteList
 	 * @param tourCourse2 
-	 * @param tourCourseDeleteList 
 	 * @return
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
-	int productEdit(Product product, List<MultipartFile> images, String deleteList, String tourCourse2, String tourCourseDeleteList)throws IllegalStateException, IOException;
+	int productEdit(Product product, List<MultipartFile> images, String deleteList, String tourCourse2)throws IllegalStateException, IOException;
 
 
 }
