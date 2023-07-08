@@ -52,6 +52,7 @@
                                 <div class="loop owl-carousel owl-theme" >
                                     <th:block th:each="banner : ${eventBannerList}">
                                         <div class="item" th:each="file : ${banner.fileList}" th:style="'background-color: ' + ${banner.bgColor}">
+                                            <!-- <td th:utext='|<a href="@{/event/eventDetail}/*{EVENT_NO}">*{EVENT_NAME}</a>|'>글제목</td> -->
                                             <a th:href="@{/event/eventDetail}">
                                                 <img class="detail--silde__item-img" th:src="${file.filePath}">
                                             </a>
@@ -107,6 +108,7 @@
                     <li class="product-row" th:each="product : ${productList}">
                         <div class="slider single-item" th:data-productno="${product.productNo}"> 
                             <div class="productImage" th:each="image : ${product.imageList}"> 
+                                <!-- <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${product.thumbnail}" alt="productImg"></a> -->
                                 <img th:src="${image.filePath}">
                             </div>
                         </div>

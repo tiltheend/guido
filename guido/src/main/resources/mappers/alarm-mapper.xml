@@ -4,4 +4,18 @@
 	
 	
 	
+	<!-- 알림 받는 회원 번호 -->
+	<select id="selectUserNo" resultType="int">
+		SELECT USER_NO
+		FROM PRODUCT
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<!-- 알림 삽입 -->
+	<select id="insertAlarm">
+		INSERT INTO NOTIFICATION
+		(NOTIFICATION_NO, RECEIVER_NO, SENDER_NO, NOTIFICATION_CONTENT, CREATE_DT, NOTIFICATION_URL, NOTIFICATION_TYPE)
+		VALUES(SEQ_NOTIFICATION_NO.NEXTVAL, #{receiverNo}, #{senderNo}, #{notificationContent}, SYSDATE, #{notificationURL}, #{notificationType});
+	</select>
+	
 </mapper>

@@ -457,6 +457,8 @@ function reviewAddFn(e){
                 reviewListFn();
                 reviewMoreBtnFn();
                 // location.href='/profile/'+loginUserNo;
+                
+                sendReview(productNo);
 
             } else if (result=0){
                 alert("리뷰 작성 실패");

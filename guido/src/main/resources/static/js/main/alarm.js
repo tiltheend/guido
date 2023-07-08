@@ -1,5 +1,3 @@
-// ----------------------------------------------------------------------------------------------------------------
-
 // sockjs를 이용한 WebSocket 구현
 
 // 로그인이 되어 있을 경우에만
@@ -8,4 +6,58 @@ let alarmSock;
 
 if(loginUserNo != ""){
 	alarmSock = new SockJS("/alarm");
+}
+
+/* 
+	회원 유형 
+	가이드 : G
+	여행객 : T
+*/
+
+// 리뷰 등록 알람
+function sendReview(productNo){
+
+	// [가이드]
+	// 리뷰 등록 : (상품 이름) 상품에 리뷰가 작성되었습니다.
+	// -> 마이페이지 해당 상품에 리뷰로 이동
+
+	// [여행객]
+	// 리뷰 등록 : (판매자 이름)님이 댓글을 작성하였습니다.
+
+	// 매개 변수 JS객체에 저장
+	let obj = {};
+
+	// 객체에 일치하는 key가 없다면 자동으로 추가
+	obj.senderNo = loginUserNo; // 보낸 회원 번호
+	// obj.userName = userName; // 보낸 회원 이름
+	obj.productNo = productNo; // 상품 번호
+	// obj.productName = productName; // 상품 이름
+	// 회원 타입?
+	obj.notificationType = "R";
+
+	console.log(obj);
+
+	alarmSock.send(JSON.stringify(obj));
+}
+
+
+// 관심상품 등록 알람
+function sendWish(productNo){
+
+	// [가이드]
+	// 관심상품 등록 : (상품 이름) 상품이 총 #건 관심상품으로 등록되었습니다.
+	// -> 해당 상품 상세 페이지로 이동
+
+	let obj = {};
+
+	obj.senderNo = loginUserNo;
+	// obj.userName = userName;
+	obj.productNo = productNo;
+	// obj.productName = productName;
+	// 관심상품 등록 개수
+	obj.notificationType = "L";
+
+	console.log(obj);
+
+	alarmSock.send(JSON.stringify(obj));
 }

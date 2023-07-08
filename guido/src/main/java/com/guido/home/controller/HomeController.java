@@ -32,6 +32,7 @@ public class HomeController {
 	private HomeService service;
 	
 	
+	
 	// 메인 페이지 이동 + 상품 목록 조회
 	@GetMapping("/home")
 	public String mainPage(Model model
@@ -73,6 +74,26 @@ public class HomeController {
 	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
 	    return service.selectThemeProdList(themeCode);
 	}
+	
+
+
+	// 이벤트 상세 페이지 이동 + 조회
+//	@GetMapping("/home/eventDetail/{eventNo}")
+//	public String eventPage(@PathVariable("eventNo") int eventNo,
+//			Model model) {
+//		
+//		model.addAttribute("event", service.selectEvent(eventNo));
+//		
+//		return "event/eventDetail";
+//	}
+	
+	// 상품 상세 페이지 이동
+//	@GetMapping("/home/productDetail/{productNo}")
+//	public String productPage(@PathVariable("productNo") int productNo,
+//			Model model) {
+//		
+//		return "productDetail/productDetail";
+//	}
 	
 	
 	// 검색 페이지
