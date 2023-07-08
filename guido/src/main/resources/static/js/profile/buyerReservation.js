@@ -35,10 +35,13 @@ if(reservationMoreBtn !=null) {
                 const reservationNumberSpan1 = document.createElement("span");
                 const reservationNumberSpan2 = document.createElement("span");
                 reservationNumberSpan1.textContent = "예약 번호";
+                const reservationNumberA = document.createElement("a");
+                reservationNumberA.href = `/reservation/reservation_info?reservation_no=${reservation.reservationNo}`;
                 reservationNumberSpan2.textContent = `${reservation.orderNumber}`;
 
                 reservationNumberDiv.appendChild(reservationNumberSpan1);
-                reservationNumberDiv.appendChild(reservationNumberSpan2);
+                reservationNumberDiv.appendChild(reservationNumberA);
+                reservationNumberA.appendChild(reservationNumberSpan2);
 
                 li.appendChild(reservationNumberDiv);
 
@@ -199,11 +202,14 @@ function reservationListFn(){
                 const reservationNumberSpan1 = document.createElement("span");
                 const reservationNumberSpan2 = document.createElement("span");
                 reservationNumberSpan1.textContent = "예약 번호";
+                const reservationNumberA = document.createElement("a");
+                reservationNumberA.href = `/reservation/reservation_info?reservation_no=${reservation.reservationNo}`;
                 reservationNumberSpan2.textContent = `${reservation.orderNumber}`;
 
                 reservationNumberDiv.appendChild(reservationNumberSpan1);
-                reservationNumberDiv.appendChild(reservationNumberSpan2);
-
+                reservationNumberDiv.appendChild(reservationNumberA);
+                reservationNumberA.appendChild(reservationNumberSpan2);
+                
                 li.appendChild(reservationNumberDiv);
 
                 // 주문 처리

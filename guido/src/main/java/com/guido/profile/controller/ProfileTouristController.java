@@ -267,9 +267,6 @@ public class ProfileTouristController {
 		map.put("userNo",loginUser.getUserNo());
 		
 		List<Reservation> moreReservationMore = service.myReservationMore(map);
-		for(Reservation r : moreReservationMore) {
-			System.out.println(r);
-		}
 		return moreReservationMore;
 	}
 	

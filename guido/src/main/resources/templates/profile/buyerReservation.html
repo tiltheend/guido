@@ -79,7 +79,10 @@
 
                     <li th:each="reservation : ${reservationList}">
                         <div>
-                            <span>예약 번호</span><span th:text="${reservation.orderNumber}">12345678-12345678</span>
+                            <span>예약 번호</span>
+                            <a th:href="@{/reservation/reservation_info(reservation_no=${reservation.reservationNo})}">
+                                <span th:text="${reservation.orderNumber}">12345678-12345678</span>
+                            </a>
                         </div>
                         <div th:with="state = ${reservation.reservationState}">
                             <span>주문 처리</span>
