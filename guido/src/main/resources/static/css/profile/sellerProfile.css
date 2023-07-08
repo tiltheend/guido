@@ -134,6 +134,8 @@
 .seller-profile-top .profile_right{
     margin-left: 80px; 
     /* margin-right: 80px; */
+    width: 60%;
+    max-width: 1200px;
 }
 .seller-profile-top .profile_right .about-me{
     width: 100%;  height: auto;
@@ -188,7 +190,8 @@
     /* width: 260px; height: 260px; */
     background-color: #FFE69A;
     border-radius: 15px; margin: 10px;
-    max-width: 40%;
+    /* max-width: 40%; */
+    max-width: 380px;
 }
 .seller-profile-top .sales-list-box .sale-img a{
         display: block; width: 100%; height: 100%;
@@ -279,7 +282,7 @@
 }
 .seller-profile-top .sales-list-box .sale-content>div>h3:last-child{
     text-align: right;
-    margin-right: 20px;
+    margin-right: 10px;
     font-size: 1.2rem;
 }
 
@@ -691,6 +694,9 @@
     .seller-profile-top{
         display: flex; justify-content: space-between;
     }
+    .seller-profile-top .profile_right{
+        width: 100%;
+    }
     /* 프로필 오른쪽 박스 - 판매자 소개 */
     .seller-profile-top .profile_right .about-me{
         grid-template-columns: repeat(2,1fr);
@@ -782,6 +788,9 @@
 @media screen and (max-width : 767px) {
     .seller-profile-top {
         margin: 61px;
+    }
+    .seller-profile-top .profile_right{
+        width: 100%;
     }
     /* 프로필 오른쪽 박스 - 판매자 소개 */
     .seller-profile-top .profile_right .about-me{
