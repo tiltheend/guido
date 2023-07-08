@@ -29,6 +29,7 @@ const updatePage = () => {
   if (currentPage == 1) {
     document.querySelector('.text2').innerHTML = '';
     typing2();
+    updateNextBtnCity();
   }
   if (currentPage == 2) {
     document.querySelector('.text6').innerHTML = '';

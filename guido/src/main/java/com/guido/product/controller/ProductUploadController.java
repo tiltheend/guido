@@ -41,16 +41,24 @@ public class ProductUploadController {
 	@GetMapping("/upload")
 	public String productUpload(Model model
 //							 Product product
-//							 ,@SessionAttribute("loginMember") User loginMember
+							 ,@SessionAttribute("loginUser") User loginUser
 //							 ,@RequestParam(value="images", required=true) List<MultipartFile> productImages
-//							 , RedirectAttributes ra
+							 , RedirectAttributes ra
 							 ) throws IllegalStateException, IOException, Exception{
 		
 		List<TourTheme> tourTheme = service.selectTourTheme();
-		
+//		System.out.println(loginUser.getUserType());
+//		System.out.println(loginUser.getUserType().getClass().getSimpleName());
 			model.addAttribute("apiKey2", apiKey2);
 			model.addAttribute("tourTheme", tourTheme);
 			System.out.println("tourTheme" + tourTheme);
+//			System.out.println(loginUser.getLanguageSkill());
+			
+			if(loginUser.getProfileImage() == null ) {
+				return "redirect:/";
+			}else if(loginUser.getUserType().equals("T")){
+				return "redirect:/";
+			}
 			
 			return "productUpload/test";
 		
@@ -71,10 +79,13 @@ public class ProductUploadController {
 //			List<TourCourse> tourCourse = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
 			
 //			System.out.println(tourCourse + tourCourse2);
-			System.out.println(product);
+			
+
+		
 				
 	//		*로그인한 유저 번호 -> product에 세팅	
 			product.setUserNo(loginUser.getUserNo());
+			product.setGuideLanguage(loginUser.getLanguageSkill());
 			
 			
 			if(additionalList != null) {
@@ -96,8 +107,10 @@ public class ProductUploadController {
 		String path = "redirect:";
 		
 		if(productNo > 0) {
+			System.out.println(product);
 			message = "상품이 등록 되었습니다.";
 			path += "/productDetail/" + "product/" + productNo;
+			
 		}else {
 			message = "상품 등록 실패,";
 			path += "/upload";
