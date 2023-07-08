@@ -4,8 +4,8 @@ let reservationDate;
 
 // 로딩되는 시점의 년, 월을 이용해서 달력 초기 생성
 let currentDate = new Date();
-// let currentYear = currentDate.getFullYear();
-// let currentMonth = currentDate.getMonth() + 1;
+// let nowYear = currentDate.getFullYear();
+// let nowMonth = currentDate.getMonth() + 1;
 
 const today = currentDate.toISOString().split("T")[0];
 

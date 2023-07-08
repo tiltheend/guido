@@ -108,10 +108,13 @@ function toggleModal() {
 /* 예약하고자 하는 날짜 출력 */
 const reservationDateDiv = document.querySelector(".reservation--date__decription>div");
 const orderDate = new Date(reservationDate.productDate);
+const dayOfWeek = orderDate.getDay();
+const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const weekday = weekdays[dayOfWeek];
 
 if(package==1){
 
-    reservationDateDiv.innerText = reservationDate.productDate + " [" + selectedTime + "]";
+    reservationDateDiv.innerText = reservationDate.productDate + " (" + weekday + ")   " + selectedTime;
   
 }else{
 
