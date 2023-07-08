@@ -6,7 +6,7 @@ public interface UserService {
 
 	User login(User inputUser);
 
-	// 회원가입(투어리스트)
-	int touristSignUp(User inputUser);
+	// 회원가입
+	int signUp(User inputUser);
 
 }

@@ -121,16 +121,18 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	// 투어리스트 회원가입 진행 -- 마저 작성하기
-	@PostMapping("/signUp/tourist")
-	public String touristSignUp(@RequestParam("userTel") String[] telValues,@RequestParam("userName") String[] nameValues, 
+	// 회원가입 진행
+	@PostMapping("/signUp")
+	public String signUp(@RequestParam("userTel") String[] telValues,@RequestParam("userName") String[] nameValues, 
 			User inputUser, RedirectAttributes ra,
 			@RequestHeader(value="referer") String referer
 			) {
 		
 		// emergencyContact 비어있으면 null로 저장
-		if(inputUser.getEmergencyContact().equals("")) {
-			inputUser.setEmergencyContact(null); 
+		if(inputUser.getEmergencyContact()!=null) { // 가이드는 값이 없음 
+			if(inputUser.getEmergencyContact().equals("")) {
+				inputUser.setEmergencyContact(null); 
+			}
 		}
 		
 		// name 문자열 (이름, 성)
@@ -141,10 +143,8 @@ public class UserController {
 		String tel = String.join(" ", telValues);
 		inputUser.setUserTel(tel);
 		
-		
-		int result = service.touristSignUp(inputUser);
+		int result = service.signUp(inputUser);
 		System.out.println(inputUser);
-		System.out.println(result);
 		
 		String path = "redirect:";
 		

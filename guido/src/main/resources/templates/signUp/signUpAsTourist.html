@@ -17,7 +17,7 @@
             <div class="container_top_title font0">회원 가입</div>
         </div>
                         <!-- novalidate : required 있어도 브라우저 유효성 검사x -->
-        <form th:action="@{/user/signUp/tourist}" method="post" id="signUpForm" novalidate>
+        <form th:action="@{/user/signUp}" method="post" id="signUpForm" novalidate>
             <div class="container_middle">
                 <div class="container_middle_input">
                     <!-- email -->
@@ -61,19 +61,19 @@
                     <div class="font4" id="chkPwMessage"></div>
                     <!-- 이름(last/first) -->
                     <div class="namePart">
-                        <div class="first-name">
-                            <div class="inputGroup">
-                                <input type="text" id="firstName" name="userName" autocomplete="off" required>
-                                <label for="firstName">이름</label>
-                            </div>
-                            <div class="font4" id="nameMessage2"></div>
-                        </div>
                         <div class="last-name">
                             <div class="inputGroup">
                                 <input type="text" id="lastName" name="userName" autocomplete="off" required>
                                 <label for="lastName">성</label>
                             </div>
                             <div class="font4" id="nameMessage1"></div>
+                        </div>
+                        <div class="first-name">
+                            <div class="inputGroup">
+                                <input type="text" id="firstName" name="userName" autocomplete="off" required>
+                                <label for="firstName">이름</label>
+                            </div>
+                            <div class="font4" id="nameMessage2"></div>
                         </div>
                     </div>
                     <!-- 전번(국제)  -->
@@ -104,6 +104,7 @@
                     </div>
                     <div class="font4" id="pLanguageMessage"></div>
                 </div>
+                <input type="hidden" value="T" name="userType">
                 <!-- 약관 동의 체크박스 -->
                 <div class="container_middle_check">
                     <div class="chk-all">

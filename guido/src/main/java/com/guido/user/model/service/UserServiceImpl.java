@@ -40,21 +40,22 @@ public class UserServiceImpl implements UserService {
 		return loginUser;
 	}
 
-	// TOURIST 회원가입
+	// 회원가입
 	@Transactional(rollbackFor = { Exception.class })
 	@Override
-	public int touristSignUp(User inputUser) {
+	public int signUp(User inputUser) {
 		
 		// BCrypt
 		String encPw = bcrypt.encode(inputUser.getUserPassword());
 		inputUser.setUserPassword(encPw);
 		
-		int result = mapper.touristSignUp(inputUser);
+		int result = mapper.signUp(inputUser);
 		
 		if(result>0) { // 성공하면
 			int inputUserNo = mapper.signUpUserNo(inputUser); // userNo 가져와서 (select)
 			inputUser.setUserNo(inputUserNo); // userNo set 하고 
-			result = mapper.insertTourist(inputUser); // TOURIST 테이블 insert
+			if(inputUser.getUserType().equals("T")) result = mapper.insertTourist(inputUser); // TOURIST 테이블 insert
+			if(inputUser.getUserType().equals("G")) result = mapper.insertGuide(inputUser); // GUIDE 테이블 insert
 		}else { // 실패하면 실패 
 			result = 0;
 		}

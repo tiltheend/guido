@@ -1,3 +1,5 @@
+*,*:focus,*:hover{outline:none;text-decoration: none;}
+
 .container_total{
     display: flex;
     flex-direction: column;
@@ -76,4 +78,8 @@
     color: #231f20;
     transition-duration: 0.3s;
 
+}
+
+a:hover{
+    text-decoration: none !important;
 }

@@ -56,7 +56,7 @@
 	</select>
 	
 	<!-- 투어리스트 회원가입 -->	
-	<insert id="touristSignUp" parameterType="User" useGeneratedKeys="true">
+	<insert id="signUp" parameterType="User" useGeneratedKeys="true">
 		
 		<selectKey order="BEFORE" resultType="_int" keyProperty="userNo">
 			SELECT SEQ_USER_NO.NEXTVAL FROM DUAL
@@ -64,7 +64,7 @@
 		
 		<!-- USER -->
 		INSERT INTO "USER"
-		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, 'T', 'N')
+		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, #{userType}, 'N')
 		
 		<!-- TOURIST -->
 		<!--INSERT INTO "TOURIST"
@@ -78,6 +78,11 @@
 	<insert id="insertTourist" parameterType="User">
 		INSERT INTO "TOURIST"
 		VALUES (#{userNo}, #{passportNo},#{primaryLanguage},#{emergencyContact}, NULL, #{countryCode})
+	</insert>
+	
+	<insert id="insertGuide" parameterType="User">
+		INSERT INTO "GUIDE"
+		VALUES (#{userNo}, #{languageSkill},#{activityArea},#{confirmationNo},DEFAULT)
 	</insert>
 	
 
