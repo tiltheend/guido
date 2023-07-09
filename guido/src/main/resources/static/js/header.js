@@ -272,17 +272,17 @@ $(document).ready(function(){
 
 /* ************************************** 0707 ************************************** */
 // startdayModal 내 검색 값 클릭하면 모달창 닫히고 lastday로 마우스 커서 옮겨감
-locationDiv.addEventListener("click", () => {
-  location.value = list; 
-  document.querySelector(".where-modal").style.display = "none";
-  document.querySelector('input[name="lastday"]').focus();
-});
+//locationDiv.addEventListener("click", () => {
+//  location.value = list; 
+//  document.querySelector(".where-modal").style.display = "none";
+//  document.querySelector('input[name="lastday"]').focus();
+//});
 // lastdayModal 내 검색 값 클릭하면 모달창 닫히고 guests로 마우스 커서 옮겨감
-locationDiv.addEventListener("click", () => {
-  location.value = list; 
-  document.querySelector(".where-modal").style.display = "none";
-  document.querySelector('input[name="firstday"]').focus();
-});
+//locationDiv.addEventListener("click", () => {
+//  location.value = list; 
+//  document.querySelector(".where-modal").style.display = "none";
+//  document.querySelector('input[name="firstday"]').focus();
+//});
 /* ************************************** 0707 ************************************** */
 
 

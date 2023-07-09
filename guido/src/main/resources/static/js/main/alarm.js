@@ -2,11 +2,12 @@
 
 // 로그인이 되어 있을 경우에만
 // /alarmSock 이라는 요청 주소로 통신할 수 있는  WebSocket 객체 생성
-let alarmSock;
+//let alarmSock;
 
-if(loginUserNo != ""){
-	alarmSock = new SockJS("/alarm");
-}
+//if(loginUser != ""){
+//	alarmSock = new SockJS("/alarm");
+//}
+let alarmSock = new SockJS("/alarm");
 
 /* 
 	회원 유형 
@@ -61,3 +62,15 @@ function sendWish(productNo){
 
 	alarmSock.send(JSON.stringify(obj));
 }
+
+
+
+
+alarmSock.onmessage = function(e) {
+
+	// e : 이벤트 객체, e.data : 전달 받은 메시지(JSON)
+
+	const obj = JSON.parse(e.data);
+	console.log(`보낸 사람 : ${obj.senderName} / ${obj.noticeContent}`);
+}
+

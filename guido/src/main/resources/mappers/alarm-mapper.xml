@@ -12,10 +12,10 @@
 	</select>
 	
 	<!-- 알림 삽입 -->
-	<select id="insertAlarm">
+	<insert id="insertAlarm">
 		INSERT INTO NOTIFICATION
 		(NOTIFICATION_NO, RECEIVER_NO, SENDER_NO, NOTIFICATION_CONTENT, CREATE_DT, NOTIFICATION_URL, NOTIFICATION_TYPE)
-		VALUES(SEQ_NOTIFICATION_NO.NEXTVAL, #{receiverNo}, #{senderNo}, #{notificationContent}, SYSDATE, #{notificationURL}, #{notificationType});
-	</select>
+		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{receiverNo}, #{senderNo}, #{notificationContent}, SYSDATE, #{notificationURL}, #{notificationType})
+	</insert>
 	
 </mapper>

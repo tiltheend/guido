@@ -23,7 +23,7 @@ import com.guido.home.model.service.AlarmService;
 
 import jakarta.servlet.http.HttpSession;
 
-//@SessionAttributes({"loginUser"})
+@SessionAttributes({"loginUser"})
 @Component
 public class AlarmWebsocketHandler extends TextWebSocketHandler{
 	
@@ -65,7 +65,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         
         Notification notice = objectMapper.readValue(message.getPayload(), Notification.class);
         // Message 객체 확인
-        System.out.println(notice); 
+        System.out.println("객체 확인 : " + notice); 
         
         // DB 삽입 서비스 호출
         
@@ -81,7 +81,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         	
         	userNo = service.selectUserNo(notice.getProductNo());
         	
-        	noticeContent = "";
+        	noticeContent = notice.getSenderNo() + "님이 " + notice.getProductNo() + "를 관심상품으로 등록하였습니다.";
         	
         	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
         	notice.setNotificationContent(noticeContent);
@@ -95,12 +95,14 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         
         	userNo = service.selectUserNo(notice.getProductNo());
         	
-        	noticeContent = "";
+        	noticeContent = notice.getSenderNo() + "님이 " + notice.getProductNo() + "를 관심상품으로 등록하였습니다.";
         	
         	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
         	notice.setNotificationContent(noticeContent);
         	notice.setSenderNo(notice.getSenderNo()); // 
         	notice.setProductNo(notice.getProductNo());
+        	
+        	System.out.println("관심상품 : " + notice);
         	
         	break;
         }
@@ -111,12 +113,20 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         if(result > 0) {
         	
         	for(WebSocketSession s : sessions) {
+        		
+        		HttpSession temp = (HttpSession)s.getAttributes().get("session");
        		
         		User user = (User)s.getAttributes().get("loginUser");
+        		int loginUserNo = ((User)temp.getAttribute("loginUser")).getUserNo();
+        		
+        		
+        		// 로그인된 회원 정보 중 회원 번호 얻어오기
+                // int loginMemberNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
+                // logger.debug("loginMemberNo : " + loginMemberNo);
         		
         		if(user != null) {
         			if(user.getUserNo() == userNo) {
-       				s.sendMessage(new TextMessage(new Gson().toJson(notice)));
+        				s.sendMessage(new TextMessage(new Gson().toJson(notice)));
 						break;
         			}
         		}
