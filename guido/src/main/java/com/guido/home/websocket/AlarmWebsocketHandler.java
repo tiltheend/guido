@@ -73,7 +73,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         // 알람 받는 사람 번호 
         int userNo = 0;
         String noticeContent = null;
-        
+
         
         switch(notice.getNotificationType()) {
         
@@ -116,20 +116,14 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         		
         		HttpSession temp = (HttpSession)s.getAttributes().get("session");
        		
-        		User user = (User)s.getAttributes().get("loginUser");
         		int loginUserNo = ((User)temp.getAttribute("loginUser")).getUserNo();
         		
+    			if(loginUserNo == userNo) {
+    				System.out.println("받는 사람 "+ userNo);
+    				s.sendMessage(new TextMessage(new Gson().toJson(notice)));
+					break;
+    			}
         		
-        		// 로그인된 회원 정보 중 회원 번호 얻어오기
-                // int loginMemberNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
-                // logger.debug("loginMemberNo : " + loginMemberNo);
-        		
-        		if(user != null) {
-        			if(user.getUserNo() == userNo) {
-        				s.sendMessage(new TextMessage(new Gson().toJson(notice)));
-						break;
-        			}
-        		}
         	}
         }
     }

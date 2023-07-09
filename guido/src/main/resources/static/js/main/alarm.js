@@ -71,6 +71,6 @@ alarmSock.onmessage = function(e) {
 	// e : 이벤트 객체, e.data : 전달 받은 메시지(JSON)
 
 	const obj = JSON.parse(e.data);
-	console.log(`보낸 사람 : ${obj.senderName} / ${obj.noticeContent}`);
+	console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
 }
 
