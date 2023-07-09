@@ -192,21 +192,24 @@
     /* overflow: auto; height: 260px; */
     width: 60%;
 }
-.seller-profile-top .reservation-list-box .sale-content>h3:nth-of-type(1){ /* 상품 제목 */
+.seller-profile-top .reservation-list-box .sale-content>a{
+    width: 100%;
+}
+.seller-profile-top .reservation-list-box .sale-content>a>h3:nth-of-type(1){ /* 상품 제목 */
     font-size: 1.375rem; font-weight: normal;
     width: 100%; text-align: left;
-    height: 60px;
+    height: 30px;
     line-height: 30px;
     overflow: hidden;
     white-space: normal;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     cursor: pointer;
 }
 
-.seller-profile-top .reservation-list-box .sale-content>h3:nth-of-type(2){ /* 날짜 */
+.seller-profile-top .reservation-list-box .sale-content>h3:first-of-type{ /* 날짜 */
     font-size: 1.2rem; color: #0F4957;
     display: flex; align-items: center;
     width: 100%; text-align: left;
@@ -247,7 +250,13 @@
     position: absolute; bottom: 20px; right: 20px;
     cursor: pointer;
 }
-.seller-profile-top .reservation-list-box .sale-content>h3{width: 100%;}
+.seller-profile-top .reservation-list-box .sale-content>h3{
+    width: 100%;
+    text-align: end;
+}
+.seller-profile-top .reservation-list div.pay-state{
+    display: flex; justify-content: end;
+}
 
 .seller-profile-top .reservation-list-more{ /* 구매자 더보기 버튼 */
     width: 100%; height: 62px;

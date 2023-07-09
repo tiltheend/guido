@@ -320,10 +320,14 @@ function reviewListFn(){
                 profileImage.classList.add('img-content');
 
                                 
+                const userProfileLink = document.createElement('a');
+                userProfileLink.href = `/profile/${review.userNo}`;
+                
                 // 리뷰어 이름을 담은 <p> 요소를 생성합니다.
                 const reviewerName = document.createElement('p');
                 reviewerName.classList.add('reviewer-name');
                 reviewerName.textContent = review.userName;
+
 
                 innerli1.appendChild(innerliDiv);
 
@@ -331,7 +335,8 @@ function reviewListFn(){
                 innerliDiv.appendChild(reviewerDiv1);
                 reviewerDiv1.appendChild(reviewerDiv2);
                 reviewerDiv2.appendChild(profileImage);
-                reviewerDiv1.appendChild(reviewerName);
+                reviewerDiv1.appendChild(userProfileLink);
+                userProfileLink.appendChild(reviewerName);
     
                 // 리뷰 정보(제목+별점)
                 const reviewerDiv3 = document.createElement('div');
@@ -613,11 +618,14 @@ if(reviewMoreBtn !=null) {
                     profileImage.setAttribute('alt', 'profileImage');
                     profileImage.classList.add('img-content');
 
-                                    
+                    const userProfileLink = document.createElement('a');
+                    userProfileLink.href = `/profile/${review.userNo}`;
+                    
                     // 리뷰어 이름을 담은 <p> 요소를 생성합니다.
                     const reviewerName = document.createElement('p');
                     reviewerName.classList.add('reviewer-name');
                     reviewerName.textContent = review.userName;
+
 
                     innerli1.appendChild(innerliDiv);
 
@@ -625,7 +633,8 @@ if(reviewMoreBtn !=null) {
                     innerliDiv.appendChild(reviewerDiv1);
                     reviewerDiv1.appendChild(reviewerDiv2);
                     reviewerDiv2.appendChild(profileImage);
-                    reviewerDiv1.appendChild(reviewerName);
+                    reviewerDiv1.appendChild(userProfileLink);
+                    userProfileLink.appendChild(reviewerName);
         
                     // 리뷰 정보(제목+별점)
                     const reviewerDiv3 = document.createElement('div');
@@ -713,7 +722,7 @@ if(reviewMoreBtn !=null) {
 
                         // "답글 보기" 아이콘 호버 이미지를 담은 <img> 요소를 생성합니다.
                         const commentViewHoverImg = document.createElement('img');
-                        commentViewHoverImg.src = '/images/profile/comment-view_hover.png';
+                        commentViewHoverImg.src = '/images/review/comment-view_hover.png';
                         commentViewHoverImg.setAttribute('alt', 'comment-view_hover');
 
                         // 답글 버튼

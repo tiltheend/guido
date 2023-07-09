@@ -100,7 +100,9 @@
                             </div>
                         </div>
                         <div class="sale-content">
-                            <h3 th:text="${reservation.productName}">상품명</h3>
+                            <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}">
+                                <h3 th:text="${reservation.productName}">상품명</h3>
+                            </a>
                             <h3 th:with="package = ${reservation.productPackage}"> 
                                 <th:block th:if="${package==1}">[[${reservation.productDate}]]
                                     <th:block th:if="${reservation.optionName}">[ [[${reservation.optionName}]] ]</th:block> 
@@ -108,6 +110,14 @@
                                 <th:block th:if="${package>1}">[[${reservation.productDate}]]</th:block>
                             </h3>
                             <h3>KRW <span th:text="${#numbers.formatInteger(reservation.totalPrice, 1, 'COMMA')}+ ' / total'">000,000</span></h3>
+                            <div th:with="state = ${reservation.reservationState}" class="pay-state">
+                                <span>주문 처리 : 
+                                    <th:block th:if="${state=='Y'}">예약 완료</th:block>
+                                    <th:block th:if="${state=='N'}">예약 취소</th:block>
+                                    <th:block th:if="${state=='D'}">구매확정 완료</th:block>
+                                    <th:block> ( [[${reservation.createDate}]] ) </th:block>
+                                </span>
+                            </div>
                             <p><img th:src="@{/images/profile/language.png}" alt="language">Tourist language: [[${reservation.primaryLanguage}]]</p>
                             <div>
                                 <h2><span th:text="${reservation.guestCount}">guestCount</span> Guests</h2>

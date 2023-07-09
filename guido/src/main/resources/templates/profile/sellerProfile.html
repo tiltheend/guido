@@ -230,7 +230,9 @@
                                             <img th:unless="${review.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                             <img th:if="${review.profileImage}" th:src="${review.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                         </div>
-                                        <p class="reviewer-name" th:text="${review.userName}">리뷰 쓴 사람</p>
+                                        <a th:href="@{/profile/{userNo}(userNo=${review.userNo})}">
+                                            <p class="reviewer-name" th:text="${review.userName}">리뷰 쓴 사람</p>
+                                        </a>
                                     </div>
                                     <div class="sale-review-info">
                                         <p th:text="${review.productName}">상품 제목</p>

@@ -1,4 +1,4 @@
-/* 구매 더보기 js */
+/* 예약 더보기 js */
 const reservationMoreBtn = document.querySelector(".reservation-list-more");
 const myReviewList = document.querySelector(".reservation-list-box");
 
@@ -58,9 +58,13 @@ if(reservationMoreBtn !=null) {
                 const saleContentDiv = document.createElement('div');
                 saleContentDiv.classList.add('sale-content');
 
+                const productLink = document.createElement('a');
+                productLink.href = `/productDetail/product/${reservation.productNo}`;
+
                 const productNameH3 = document.createElement('h3');
                 productNameH3.textContent = reservation.productName;
-                saleContentDiv.appendChild(productNameH3);
+                productLink.appendChild(productNameH3);
+                saleContentDiv.appendChild(productLink);
 
                 const dateH2 = document.createElement('h3');
                 if(reservation.productPackage=='1'){
@@ -121,6 +125,28 @@ if(reservationMoreBtn !=null) {
                 totalPriceH3.appendChild(totalPriceSpan);
                 saleContentDiv.appendChild(totalPriceH3);
 
+                // 구매 관련
+                let payStateDiv = document.createElement('div');
+                payStateDiv.classList.add('pay-state');
+
+                let span = document.createElement('span');
+                span.textContent = '주문 처리 : ';
+
+                const state = reservation.reservationState;
+                // const stateSpan = document.createElement("span");
+                if (state === 'Y') {
+                    span.textContent += "예약 완료";
+                } else if (state === 'N') {
+                    span.textContent += "예약 취소";
+                } else if (state === 'D') {
+                    span.textContent += "구매확정 완료";
+                }
+                span.textContent += ` ( ${reservation.createDate } ) `;
+
+                payStateDiv.appendChild(span);
+
+                saleContentDiv.appendChild(payStateDiv);
+
                 const languageP = document.createElement('p');
                 const languageImg = document.createElement('img');
                 languageImg.src = '/images/profile/language.png';
@@ -164,7 +190,7 @@ if(reservationMoreBtn !=null) {
     });
 }
 
-/* 비동기로 구매 목록 불러오기 (최신 3개) */
+/* 비동기로 예약 목록 불러오기 (최신 3개) */
 function reservationListFn(){
 
     fetch("/profile/guideReservationList",{
@@ -222,9 +248,14 @@ function reservationListFn(){
                 const saleContentDiv = document.createElement('div');
                 saleContentDiv.classList.add('sale-content');
 
+                const productLink = document.createElement('a');
+                productLink.href = `/productDetail/product/${reservation.productNo}`;
+
                 const productNameH3 = document.createElement('h3');
                 productNameH3.textContent = reservation.productName;
-                saleContentDiv.appendChild(productNameH3);
+                productLink.appendChild(productNameH3);
+                saleContentDiv.appendChild(productLink);
+
 
                 const dateH2 = document.createElement('h3');
                 if(reservation.productPackage=='1'){
@@ -285,6 +316,28 @@ function reservationListFn(){
                 totalPriceH3.appendChild(totalPriceSpan);
                 saleContentDiv.appendChild(totalPriceH3);
 
+                // 구매 관련
+                let payStateDiv = document.createElement('div');
+                payStateDiv.classList.add('pay-state');
+
+                let span = document.createElement('span');
+                span.textContent = '주문 처리 : ';
+
+                const state = reservation.reservationState;
+                // const stateSpan = document.createElement("span");
+                if (state === 'Y') {
+                    span.textContent += "예약 완료";
+                } else if (state === 'N') {
+                    span.textContent += "예약 취소";
+                } else if (state === 'D') {
+                    span.textContent += "구매확정 완료";
+                }
+                span.textContent += ` ( ${reservation.createDate } ) `;
+
+                payStateDiv.appendChild(span);
+
+                saleContentDiv.appendChild(payStateDiv);
+
                 const languageP = document.createElement('p');
                 const languageImg = document.createElement('img');
                 languageImg.src = '/images/profile/language.png';
@@ -330,7 +383,7 @@ function reservationListFn(){
 };
 
 
-//  구매 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
+//  예약 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
 function reservationMoreBtnFn(){
     let reservationCountSpan = document.querySelector(".reservation-list>div>h1>span").innerText;
     
