@@ -65,6 +65,22 @@
 		<result property="starAverage" column="STARS_AVERAGE"/>
 		<result property="careerDate" column="CAREER_DT"/>
 	</resultMap>
+	
+		<resultMap  type="ProductOption" id="option_rm">
+		<id property="optionNo" column="OPTION_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="optionName" column="OPTION_NAME" />
+	 	<result property="optionRestCount" column="OPTION_REST" />
+	 	<result property="productDateNo" column="PRODUCT_DT_NO" />
+	</resultMap>
+	
+	
+	<resultMap  type="ProductDate" id="product_date_rm">
+		<id property="productDateNo" column="PRODUCT_DT_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="productDate" column="PRODUCT_DT" />
+	 	<result property="availability" column="PRODUCT_DT_AVAILABILITY" />
+	</resultMap>
 	 
 	 <select id="selectTourTheme" resultMap="tourtheme_rm">
 		 SELECT * FROM THEME T

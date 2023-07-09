@@ -9,6 +9,7 @@
     <script type="text/javascript" th:src="'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${apiKey2}"></script>
     
     <link rel="stylesheet" th:href="@{/css/productUpload/test.css}" />
+    <link rel="stylesheet" th:href="@{/css/productUpload/calender.css}" />
     <link rel="stylesheet" th:href="@{/css/productUpload/main.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/style.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/modal.css}">
@@ -452,6 +453,40 @@
       <div class="greeting">
         <h1 class="title">이제 여행 일정과 가이드 상품에 대한 설명을 작성해주세요!</h1>
         <span class="sub-title"></span>
+        
+      </div>
+      <div style="display: flex;">
+      <div class="calendar-div">
+        <input type="hidden" name="productDate" id="productDate" value="">
+        <table class="Calendar">
+          <thead>
+            <tr>
+              <td onClick="prevCalendar();" style="cursor: pointer">&#60;</td>
+              <td colspan="5">
+                <span id="calYear"></span>년 <span id="calMonth"></span>월
+              </td>
+              <td onClick="nextCalendar();" style="cursor: pointer">&#62;</td>
+            </tr>
+            <tr>
+              <td>일</td>
+              <td>월</td>
+              <td>화</td>
+              <td>수</td>
+              <td>목</td>
+              <td>금</td>
+              <td>토</td>
+            </tr>
+          </thead>
+  
+          <tbody></tbody>
+        </table>
+        
+      </div>
+      <div id="createDate">
+          
+      </div>
+    </div>
+
       </div>
     </main>
     <!-- 8페이지 구매 시 유의사항 작성 -->
@@ -583,7 +618,7 @@
     </footer>
   </body>
   <script th:src="@{/js/productUpload/test.js}"></script>
-  <!-- <script src="../js/productUpload/calender.js"></script> -->
+  <script th:src="@{/js/productUpload/calender.js}"></script>
   <script th:src="@{/js/productUpload/typing3.js}"></script>
   <script th:src="@{/js/productUpload/tourCourse.js}"></script>
   <script th:inline="javascript">

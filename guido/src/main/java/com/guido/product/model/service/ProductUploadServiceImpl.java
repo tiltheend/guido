@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
 import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.utility.Util;
@@ -45,7 +46,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	//여행 상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productUpload(Product product, List<MultipartFile> images, String tourCourse2)  throws IllegalStateException, IOException {
+	public int productUpload(Product product, List<MultipartFile> images, String tourCourse2, String productDate)  throws IllegalStateException, IOException {
 
 		int result = mapper.productUpload(product);
 		
@@ -115,6 +116,14 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				
 				result = mapper.insertTourCourseList(tempTourCourseList);
 			}
+			
+			List<ProductDate> productDateList = new Gson().fromJson(productDate, new TypeToken<List<ProductDate>>() {}.getType());
+			List<ProductDate> tempProductDateList = new ArrayList<>();
+			System.out.println(productDateList);
+			System.out.println(productDateList.size());
+			System.out.println(productDateList.get(0));
+			
+			
 		}
 		return productNo;
 		

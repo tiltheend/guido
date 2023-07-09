@@ -74,6 +74,7 @@ public class ProductUploadController {
 							 , RedirectAttributes ra
 							 , @RequestParam(value="productAddNotes", required=false) List<String> additionalList
 							 , @RequestParam(value="tourCourse2", required = true) String tourCourse2
+							 , @RequestParam(value="productDate", required = true) String productDate
 							 ) throws IllegalStateException, IOException, Exception{
 	
 //			List<TourCourse> tourCourse = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
@@ -92,7 +93,7 @@ public class ProductUploadController {
 			   product.setProductAddNotes(String.join("^^^", additionalList));
 			}
 				
-			int productNo = service.productUpload(product, images, tourCourse2);
+			int productNo = service.productUpload(product, images, tourCourse2,productDate);
 		
 //		System.out.println(product);
 //	        String[] arr = str.split(",");
@@ -127,7 +128,6 @@ public class ProductUploadController {
 		public String productEdit(
 				@PathVariable("productNo") int productNo
 				,Model model) {
-			
 			
 			
 			Product product = productDetailService.selectProduct(productNo);

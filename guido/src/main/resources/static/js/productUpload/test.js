@@ -24,55 +24,55 @@ const updatePage = () => {
 
   prevBtn.style.display = 'block';
 
-  if (currentPage == 0) {
-  }
-  if (currentPage == 1) {
-    document.querySelector('.text2').innerHTML = '';
-    typing2();
-    updateNextBtnCity();
-  }
-  if (currentPage == 2) {
-    document.querySelector('.text6').innerHTML = '';
-    typing6();
-    init();
-    // checkTourCourse();
-  }
-  if (currentPage == 3) {
-    updateNextBtnState();
-    document.querySelector('.text3').innerHTML = '';
-    typing3();
-  }
-  if (currentPage == 4) {
-    document.querySelector('.text5').innerHTML = '';
-    typing5();
-    disableNextButtonCheckNum();
-    disableNextButtonCheckNum2();
-  }
-  if (currentPage == 5) {
-    document.querySelector('.text4').innerHTML = '';
-    typing4();
-    disableNextButtonFeeInput();
-  }
-  if (currentPage == 6) {
-    document.querySelector('.text7').innerHTML = '';
-    typing7();
-    checkImage();
-  }
-  if (currentPage == 7) {
-    document.querySelector('.text8').innerHTML = '';
-    typing8();
-    titleCharCheck();
-    inputTitle.focus();
-  }
-  if (currentPage == 8) {
-    document.querySelector('.text9').innerHTML = '';
-    typing9();
-    contentCharCheck();
-    inputContent.focus();
-  }
-  if (currentPage == 11) {
-    disableNextButton();
-  }
+  // if (currentPage == 0) {
+  // }
+  // if (currentPage == 1) {
+  //   document.querySelector('.text2').innerHTML = '';
+  //   typing2();
+  //   updateNextBtnCity();
+  // }
+  // if (currentPage == 2) {
+  //   document.querySelector('.text6').innerHTML = '';
+  //   typing6();
+  //   init();
+  //   // checkTourCourse();
+  // }
+  // if (currentPage == 3) {
+  //   updateNextBtnState();
+  //   document.querySelector('.text3').innerHTML = '';
+  //   typing3();
+  // }
+  // if (currentPage == 4) {
+  //   document.querySelector('.text5').innerHTML = '';
+  //   typing5();
+  //   disableNextButtonCheckNum();
+  //   disableNextButtonCheckNum2();
+  // }
+  // if (currentPage == 5) {
+  //   document.querySelector('.text4').innerHTML = '';
+  //   typing4();
+  //   disableNextButtonFeeInput();
+  // }
+  // if (currentPage == 6) {
+  //   document.querySelector('.text7').innerHTML = '';
+  //   typing7();
+  //   checkImage();
+  // }
+  // if (currentPage == 7) {
+  //   document.querySelector('.text8').innerHTML = '';
+  //   typing8();
+  //   titleCharCheck();
+  //   inputTitle.focus();
+  // }
+  // if (currentPage == 8) {
+  //   document.querySelector('.text9').innerHTML = '';
+  //   typing9();
+  //   contentCharCheck();
+  //   inputContent.focus();
+  // }
+  // if (currentPage == 11) {
+  //   disableNextButton();
+  // }
 };
 
 prevBtn.addEventListener('click', () => {
@@ -1000,6 +1000,8 @@ const form = document.getElementById('productUploadFrm');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   document.getElementById('tourCourse').value = JSON.stringify(tourCourse);
+  document.getElementById('productDate').value = JSON.stringify(productDate);
   console.log(document.getElementById('tourCourse').value);
-  form.submit();
+  console.log(document.getElementById('productDate').value);
+  // form.submit();
 });
