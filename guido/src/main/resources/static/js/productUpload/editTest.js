@@ -32,8 +32,8 @@ const updatePage = () => {
       mainElement8.style.width = '70%';
     }
     init();
-    document.querySelector('.text6').innerHTML = '';
-    typing6();
+    // document.querySelector('.text6').innerHTML = '';
+    // typing6();
     // regionName.value = city.innerText;
   }
   if (currentPage == 2) {
@@ -41,8 +41,8 @@ const updatePage = () => {
     if (mainElement2) {
       mainElement2.style.width = '750px';
     }
-    document.querySelector('.text3').innerHTML = '';
-    typing3();
+    // document.querySelector('.text3').innerHTML = '';
+    // typing3();
   }
   if (currentPage == 4) {
     // document.querySelector('.text5').innerHTML = '';
@@ -180,54 +180,54 @@ tourTypes.forEach(function (tourType) {
 
   nextBtn.disabled = true;
 });
-inputDay.addEventListener('input', function () {
-  if (this.value !== '') {
-    inputTime.value = '';
-    inputDayHidden.value = inputDay.value;
-    inputDay.addEventListener('input', function () {
-      const value = inputDay.value;
+// inputDay.addEventListener('input', function () {
+//   if (this.value !== '') {
+//     inputTime.value = '';
+//     inputDayHidden.value = inputDay.value;
+//     inputDay.addEventListener('input', function () {
+//       const value = inputDay.value;
 
-      if (!value || isNaN(value)) {
-        inputDay.style.borderColor = 'red';
-        inputDay.style.backgroundColor = 'rgb(255,232,232)';
-        inputWarning.style.display = 'flex';
-        nextBtn.disabled = true;
-      } else {
-        inputDay.style.backgroundColor = '';
-        inputWarning.style.display = 'none';
-        inputDay.style.borderColor = 'white';
-        inputDay.style.backgroundColor = 'white';
-      }
-    });
-    nextBtn.disabled = false;
-  } else {
-    nextBtn.disabled = true;
-  }
-});
-inputTime.addEventListener('input', function () {
-  if (this.value !== '') {
-    inputDay.value = '';
-    inputTimeHidden.value = inputTime.value;
-    inputTime.addEventListener('input', function () {
-      const value = inputTime.value;
+//       if (!value || isNaN(value)) {
+//         inputDay.style.borderColor = 'red';
+//         inputDay.style.backgroundColor = 'rgb(255,232,232)';
+//         inputWarning.style.display = 'flex';
+//         nextBtn.disabled = true;
+//       } else {
+//         inputDay.style.backgroundColor = '';
+//         inputWarning.style.display = 'none';
+//         inputDay.style.borderColor = 'white';
+//         inputDay.style.backgroundColor = 'white';
+//       }
+//     });
+//     nextBtn.disabled = false;
+//   } else {
+//     nextBtn.disabled = true;
+//   }
+// });
+// inputTime.addEventListener('input', function () {
+//   if (this.value !== '') {
+//     inputDay.value = '';
+//     inputTimeHidden.value = inputTime.value;
+//     inputTime.addEventListener('input', function () {
+//       const value = inputTime.value;
 
-      if (!value || isNaN(value)) {
-        inputTime.style.borderColor = 'red';
-        inputTime.style.backgroundColor = 'rgb(255,232,232)';
-        inputWarning.style.display = 'flex';
-        nextBtn.disabled = true;
-      } else {
-        inputTime.style.backgroundColor = '';
-        inputWarning.style.display = 'none';
-        inputTime.style.borderColor = 'white';
-        inputTime.style.backgroundColor = 'white';
-      }
-    });
-    nextBtn.disabled = false;
-  } else {
-    nextBtn.disabled = true;
-  }
-});
+//       if (!value || isNaN(value)) {
+//         inputTime.style.borderColor = 'red';
+//         inputTime.style.backgroundColor = 'rgb(255,232,232)';
+//         inputWarning.style.display = 'flex';
+//         nextBtn.disabled = true;
+//       } else {
+//         inputTime.style.backgroundColor = '';
+//         inputWarning.style.display = 'none';
+//         inputTime.style.borderColor = 'white';
+//         inputTime.style.backgroundColor = 'white';
+//       }
+//     });
+//     nextBtn.disabled = false;
+//   } else {
+//     nextBtn.disabled = true;
+//   }
+// });
 
 // 여행 테마 선택 체크박스
 
@@ -907,69 +907,69 @@ function validateMinMaxInput() {
   maxTouristName.value = maxVal;
   minTouristName.value = minVal;
 }
-inputDay.addEventListener('input', () => {
-  if (inputDay.value > 0) {
-    minTouristNum[0].style.display = 'none';
-    minTouristNum[1].style.display = 'none';
-    minInput.style.display = 'none';
-    maxTouristNum[0].style.display = 'none';
-    maxTouristNum[1].style.display = 'none';
-    maxInput.style.display = 'none';
-    maxTouristNum2[0].style.display = 'block';
-    maxTouristNum2[1].style.display = 'block';
-    minFeeNone[0].style.display = 'none';
-    minFeeNone[1].style.display = 'none';
-    dayFee.style.display = 'flex';
-  } else {
-    minTouristNum[0].style.display = 'block';
-    minTouristNum[1].style.display = 'block';
-    minFeeNone[0].style.display = 'flex';
-    minFeeNone[1].style.display = 'flex';
-    dayFee.style.display = 'none';
-  }
-  maxTouristName.value = '';
-  minTouristName.value = '';
-});
+// inputDay.addEventListener('input', () => {
+//   if (inputDay.value > 0) {
+//     minTouristNum[0].style.display = 'none';
+//     minTouristNum[1].style.display = 'none';
+//     minInput.style.display = 'none';
+//     maxTouristNum[0].style.display = 'none';
+//     maxTouristNum[1].style.display = 'none';
+//     maxInput.style.display = 'none';
+//     maxTouristNum2[0].style.display = 'block';
+//     maxTouristNum2[1].style.display = 'block';
+//     minFeeNone[0].style.display = 'none';
+//     minFeeNone[1].style.display = 'none';
+//     dayFee.style.display = 'flex';
+//   } else {
+//     minTouristNum[0].style.display = 'block';
+//     minTouristNum[1].style.display = 'block';
+//     minFeeNone[0].style.display = 'flex';
+//     minFeeNone[1].style.display = 'flex';
+//     dayFee.style.display = 'none';
+//   }
+//   maxTouristName.value = '';
+//   minTouristName.value = '';
+// });
 
-inputTime.addEventListener('input', () => {
-  if (inputTime.value > 0) {
-    minTouristNum[0].style.display = 'block';
-    minTouristNum[1].style.display = 'block';
-    minInput.style.display = 'block';
-    maxTouristNum[0].style.display = 'block';
-    maxTouristNum[1].style.display = 'block';
-    maxInput.style.display = 'block';
-    maxTouristNum2[0].style.display = 'none';
-    maxTouristNum2[1].style.display = 'none';
-    minFeeNone[0].style.display = 'flex';
-    minFeeNone[1].style.display = 'flex';
-    dayFee.style.display = 'none';
-  } else {
-    minTouristNum[0].style.display = 'none';
-    minTouristNum[1].style.display = 'none';
-    minFeeNone[0].style.display = 'none';
-    minFeeNone[1].style.display = 'none';
-    dayFee.style.display = 'flex';
-  }
-  maxTouristName.value = '';
-});
+// inputTime.addEventListener('input', () => {
+//   if (inputTime.value > 0) {
+//     minTouristNum[0].style.display = 'block';
+//     minTouristNum[1].style.display = 'block';
+//     minInput.style.display = 'block';
+//     maxTouristNum[0].style.display = 'block';
+//     maxTouristNum[1].style.display = 'block';
+//     maxInput.style.display = 'block';
+//     maxTouristNum2[0].style.display = 'none';
+//     maxTouristNum2[1].style.display = 'none';
+//     minFeeNone[0].style.display = 'flex';
+//     minFeeNone[1].style.display = 'flex';
+//     dayFee.style.display = 'none';
+//   } else {
+//     minTouristNum[0].style.display = 'none';
+//     minTouristNum[1].style.display = 'none';
+//     minFeeNone[0].style.display = 'none';
+//     minFeeNone[1].style.display = 'none';
+//     dayFee.style.display = 'flex';
+//   }
+//   maxTouristName.value = '';
+// });
 
-minInput.addEventListener('input', validateMinMaxInput);
-maxInput.addEventListener('input', validateMinMaxInput);
-maxInput2.addEventListener('input', validateMinMaxInput2);
-function validateMinMaxInput2() {
-  const maxVal2 = Number(maxInput2.value);
+// minInput.addEventListener('input', validateMinMaxInput);
+// maxInput.addEventListener('input', validateMinMaxInput);
+// maxInput2.addEventListener('input', validateMinMaxInput2);
+// function validateMinMaxInput2() {
+//   const maxVal2 = Number(maxInput2.value);
 
-  if (maxVal2 > 0) {
-    nextBtn.disabled = false;
-    maxInput2.style.backgroundColor = '#b1d8da';
-  } else {
-    nextBtn.disabled = true;
-    maxInput2.style.backgroundColor = 'rgb(252, 171, 171)';
-  }
-  maxTouristName.value = maxVal2;
-  minTouristName.value = 1;
-}
+//   if (maxVal2 > 0) {
+//     nextBtn.disabled = false;
+//     maxInput2.style.backgroundColor = '#b1d8da';
+//   } else {
+//     nextBtn.disabled = true;
+//     maxInput2.style.backgroundColor = 'rgb(252, 171, 171)';
+//   }
+//   maxTouristName.value = maxVal2;
+//   minTouristName.value = 1;
+// }
 
 const form = document.getElementById('productUploadFrm');
 
