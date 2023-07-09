@@ -190,9 +190,6 @@ public class ProfileTouristController {
 		
 		List<Review> reviewOption = service.addReviewList(userNo);
 		
-		for(Review r : reviewOption) {			
-			System.out.println(r);
-		}
 		return reviewOption;
 	}
 	

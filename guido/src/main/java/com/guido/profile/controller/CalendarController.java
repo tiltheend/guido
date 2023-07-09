@@ -40,11 +40,6 @@ public class CalendarController {
 	    for (Schedule s : sellerScheduleList) {
 	        Map<String, Object> schedule = new HashMap<>();
 
-	        System.out.println(s.getProductName());
-	        System.out.println(s.getProductPackage());
-	        System.out.println(s.getProductDateStart());
-	        System.out.println(s.getProductDateEnd());
-
 	        schedule.put("title", s.getProductName());
 	        schedule.put("start", s.getProductDateStart());
 	        // 종료일이 1 빼고 출력 되는 이슈가 있어서 종료일이 원래 종료일보다 하루 빠르게 출력 시켜놓음 (mapper)

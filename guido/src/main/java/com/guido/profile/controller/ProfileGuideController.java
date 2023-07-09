@@ -155,11 +155,6 @@ public class ProfileGuideController {
 		List<Reservation> GuideReservationList = service.GuideReservationList(userNo);
 		model.addAttribute("GuideReservationList", GuideReservationList);
 		
-		// 0.5 단위로 별점 바꾸기
-		for(Reservation r : GuideReservationList) {
-			System.out.println(r);
-		}
-		
 		// 예약 개수 세기
 		int reservarionCount = service.reservarionCount(userNo);
 		model.addAttribute("reservarionCount", reservarionCount);
