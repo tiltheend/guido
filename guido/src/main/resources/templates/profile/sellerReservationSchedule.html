@@ -103,6 +103,24 @@
     </div>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let calendarElement = document.getElementById('calendar');
+        adjustCalendarSize(); // 초기 로드 시 캘린더 크기 조절
+
+        function adjustCalendarSize() {
+            if (window.innerWidth <= 1100) {
+                calendarElement.style.width = '80vw';
+                calendarElement.style.height = '65vh';
+            } else {
+                calendarElement.style.width = '1000px';
+                calendarElement.style.height = '650px';
+            }
+        }
+
+        window.addEventListener('resize', adjustCalendarSize);
+    });
+
+
         // 캘린더 사이즈 조절
         let calendarElement = document.getElementById('calendar');
 

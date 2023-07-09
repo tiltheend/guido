@@ -13,18 +13,20 @@ document.addEventListener('DOMContentLoaded', function () {
             for (let i of data) {
                 let startDate = i.start.slice(0, 10); // 날짜 부분만 추출
                 let endDate = i.end.slice(0, 10); // 날짜 부분만 추출
-                
+
                 events.push({
                 title: i.title,
                 start: startDate,
                 end: endDate,
-                color: "#6937a1"
+                color: i.color,
+                textColor : i.textColor
                 });
             }
         }
 
         console.log(events);
         let calendar = new FullCalendar.Calendar(calendarEl, {
+            defaultDate: new Date(),
             // initialDate: '2023-07-09',
             // initialView: 'timeGridWeek',
             headerToolbar: {
@@ -32,8 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 center: 'title',
                 right: 'dayGridMonth'
             },
-            editable: false,
-            droppable: false,
+            selectable: true,
+            selectMirror: true,
+    
+            navLinks: true, // can click day/week names to navigate views
+            // editable: true, // 드래그
+
+            dayMaxEvents: true,
 
             events: events
         });
