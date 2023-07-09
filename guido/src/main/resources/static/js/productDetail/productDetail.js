@@ -419,16 +419,12 @@ function showTourcourseMap(latitude, longitude, number){
 
     let geocoder = new kakao.maps.services.Geocoder();
 
-    console.log("위도 경도 : " + latitude + ", " + longitude);
-
     let coord = new kakao.maps.LatLng(latitude, longitude);
-
-    console.log("coord : " + coord);
 
     
     let callback = function(result, status) {
             if (status === kakao.maps.services.Status.OK) {
-                
+
                 createMap(result[0].address.address_name, coord);
 
             }else if(status === kakao.maps.services.Status.ZERO_RESULT){
@@ -444,7 +440,6 @@ function showTourcourseMap(latitude, longitude, number){
 
     function createMap(addressName, coordinates){
         
-        console.log("coordnates : " + coordinates.getLat() + ", " + coordinates.getLng());
         
         const mapContainer = document.getElementById('tourcourseMap' + number), // 지도의 중심좌표
             mapOption = { 

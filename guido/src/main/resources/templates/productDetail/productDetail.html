@@ -422,7 +422,7 @@
         
                                         <div>
                                             <div class="detail--item__review-profile">
-                                                <img th:src="${review.profileImage}">
+                                                <img th:src="${review.profileImage}?${review.profileImage}:@{/images/userProfile/basicUser2.svg}">
                                             </div>
                                         </div>
                                         

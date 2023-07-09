@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guido</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/reservation/reservationList.css}">
+
+</head>
+<body th:object="${reservation}">
+
+
+    <div class="reservation--container">
+
+
+        <div class="reservation--text">예약 내역</div>
+
+        <div class="product--container">
+
+            <div class="product--info">
+    
+                    <div>
+                        <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
+                            <div class="reservation--img__info">
+                                <img th:src="${product.imageList[0].filePath}">
+                            </div>
+                        </a>
+                    </div>
+                    
+                    
+                    <div class="product--right__info">
+                        
+                        <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
+                            <div class="reservation--title__info" th:text="${product.productName}">상품명</div>
+                        </a>
+                        
+                        <div class="reservation--short">
+                            <div>[[${product.regionName}]] - [[${product.courseName}]]</div>
+                            <div>Guided language : [[${product.guideLanguage}]]</div>
+                            <div th:if="${product.productPackage==1}">Duration: [[${product.tourDuration}]] hr(s)</div>
+                        </div>
+                        
+                        <div id="reservatonDate">
+                            <!-- 투어 날짜 -->대충 투어 날짜다
+                        </div>
+                    
+                    </div>
+            </div>
+
+
+            <div class="divisionline"></div>
+
+
+            <div class="price--info">
+                <div>Total</div>
+                <div th:text="|&#8361; *{#numbers.formatInteger(totalPrice, 1, 'COMMA')}|"></div>
+            </div>
+
+        </div>
+        
+
+
+
+        <div class="reservation--info">
+
+            <div class="reservation--content__info">
+
+                <div>
+                    <div>예약 번호</div>
+                    <div th:text="*{orderNumber}"></div>
+                </div>
+
+                <div>
+                    <div>예약 일자</div>
+                    <div th:text="*{createDate}"></div>
+                </div>
+
+                
+                <div>
+                    <div>주문 처리</div>
+                    <div th:text="*{reservationState}=='Y'? '예약 완료' : (*{reservationState}=='N' ? '예약 취소' : '구매 확정')"></div>
+                </div>
+                
+                <div>
+                    <div>주문 금액</div>
+                    <div th:text="|*{#numbers.formatInteger(totalPrice, 1, 'COMMA')}|"></div>
+                </div>
+
+                
+            </div>
+            
+
+            <div th:if="*{reservationState=='N'}" class="request--content">
+                <div class="request--text">
+                    <img th:src="@{/images/reservation/tou_alert.png}">
+                    <div>취소사유</div>
+                </div>
+                <div th:text="*{cancelReason}"></div>
+            </div>
+
+
+            <div class="divisionline"></div>
+            
+            
+            <div class="reservation--user__info">
+
+                <!-- <a th:href="@{/profile/{userNo}(userNo=*{userNo})}">
+                    <div class="user--faceimg">
+                        <img th:src="*{faceImg}">
+                    </div>
+                </a> -->
+
+
+                <div class="orderer--info">
+                    
+                    <div>
+                        <div>예약자</div>
+                        <div class="tourist--faceimg">
+                            <div th:text="*{userName}"></div>
+
+
+                            <img th:src="@{/images/reservation/tourist_faceimg2.png}" id="faceImgIcon" onclick="toggleModal()">
+                            
+                            <div id="hoverFaceImg">
+                                <div class="image-wrapper">
+                                    <img th:src="*{faceImg}" id="faceImg">
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div>연락처</div>
+                        <div th:text="*{userTel}"></div>
+                    </div>
+                    
+                    <div th:if="*{emergencyContact}">
+                        <div>비상 연락처</div>
+                        <div th:text="*{emergencyContact}"></div>
+                    </div>
+
+                    <div>
+                        <div>주 사용 언어</div>
+                        <div th:text="*{primaryLanguage}"></div>
+                    </div>
+
+                    <div>
+                        <div>게스트 수</div>
+                        <div th:text="|*{guestCount}명|"></div>
+                    </div>
+
+
+                    <div th:if="*{requestContent}" class="request--content">
+                        <div class="request--text">
+                            <img th:src="@{/images/reservation/tou_alert.png}">
+                            <div>요청사항</div>
+                        </div>
+                        <div th:text="*{requestContent}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <a href="#" style="width: 100%;"><button class="orderlist-btn">view reservation list</button></a>
+
+
+
+        <div id="faceImgModal" class="modal">
+            <div class="modal-container">
+                <div class="modal--content">
+
+                    <div class="modal--faceimg">
+                        <img th:src="*{faceImg}">
+                    </div>
+
+                    <button id="closeBtn" onclick="toggleModal()">close</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script th:inline="javascript">
+        const productDate = /*[[*{productDate}]]*/"선택한 일자";
+        const optionName = /*[[*{optionName}]]*/"선택한 시간대";
+        const package = /*[[${product.productPackage}]]*/"선택한 시간대";
+    </script>
+
+    <script th:src="@{/js/reservation/reservationList.js}"></script>
+
+
+</body>
+</html>
