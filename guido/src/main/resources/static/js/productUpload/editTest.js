@@ -474,6 +474,7 @@ function disableNextButtonCheckNum2() {
 
 // Add an event listener to the checkbox
 checkbox.addEventListener('change', disableNextButton);
+// const deleteIcon2 = document.querySelectorAll('.delete-icon');
 
 window.addEventListener('resize', function () {
   if (window.innerHeight <= 800) {
@@ -527,6 +528,10 @@ function addElement() {
       e.stopPropagation();
       deleteIcon.parentNode.remove();
     });
+
+    // for(let i=0; i<deleteIcon.length; i++) {
+
+    // }
 
     newElement.innerHTML = value;
     newElement.appendChild(deleteIcon);

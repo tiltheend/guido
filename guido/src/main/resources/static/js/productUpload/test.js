@@ -35,6 +35,7 @@ const updatePage = () => {
     document.querySelector('.text6').innerHTML = '';
     typing6();
     init();
+    // checkTourCourse();
   }
   if (currentPage == 3) {
     updateNextBtnState();
@@ -55,6 +56,7 @@ const updatePage = () => {
   if (currentPage == 6) {
     document.querySelector('.text7').innerHTML = '';
     typing7();
+    checkImage();
   }
   if (currentPage == 7) {
     document.querySelector('.text8').innerHTML = '';
@@ -814,23 +816,49 @@ for (let i = 0; i < inputImage.length; i++) {
 const changeEvent = new Event('change');
 inputImage[4].dispatchEvent(changeEvent);
 inputImage[5].dispatchEvent(changeEvent);
+const plusImage = document.querySelectorAll('.plus-image');
+for (let i = 0; i < 5; i++) {
+  inputImage[i].addEventListener('change', () => {
+    let allImagesSelected = true;
+    for (let j = 0; j < 5; j++) {
+      if (preview[j].getAttribute('src') === '') {
+        allImagesSelected = false;
+        break;
+      }
+    }
 
-inputImage[4].addEventListener('change', () => {
-  if (
-    preview[0].getAttribute('src') !== '' &&
-    preview[1].getAttribute('src') !== '' &&
-    preview[2].getAttribute('src') !== '' &&
-    preview[3].getAttribute('src') !== '' &&
-    preview[4].getAttribute('src') !== ''
-  ) {
-    document.querySelector(
-      '#page5 > div:nth-child(4) > div:nth-child(5)'
-    ).style.display = 'flex';
-  } else {
+    if (allImagesSelected) {
+      for (let i = 0; i < plusImage.length; i++) {
+        plusImage[i].style.display = 'inline-block';
+      }
+      nextBtn.disabled = false;
+    } else {
+      nextBtn.disabled = true;
+    }
+  });
+}
+
+const checkImage = () => {
+  for (let i = 0; i < 5; i++) {
+    if (preview[i].getAttribute('src') == '') {
+      nextBtn.disabled = true;
+    }
+  }
+};
+const checkTourCourse = () => {
+  if (tourCourse.length == 0) {
     nextBtn.disabled = true;
   }
-});
-
+};
+// document
+//   .getElementsByClassName('create-course')[0]
+//   .addEventListener('change', () => {
+//     if (tourCourse.length == 0) {
+//       nextBtn.disabled = true;
+//     } else {
+//       nextBtn.disabled = false;
+//     }
+//   });
 // 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가
 const imgId1 = document.getElementById('imgId1');
 const imgId2 = document.getElementById('imgId2');

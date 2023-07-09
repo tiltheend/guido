@@ -1186,7 +1186,7 @@ input[type='radio']:checked {
   text-align: center;
   display: inline-block;
   gap: 3px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
 }
