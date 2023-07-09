@@ -181,6 +181,21 @@ public class ProfileTouristController {
 		
 	}
 	
+	// 비동기로 리뷰 작성 옵션 불러오기
+	@ResponseBody
+	@PostMapping(value="/reviewOption", produces="application/json; charset=UTF-8")
+	public List<Review> reviewOption(@SessionAttribute("loginUser") User loginUser){
+
+		int userNo= loginUser.getUserNo();
+		
+		List<Review> reviewOption = service.addReviewList(userNo);
+		
+		for(Review r : reviewOption) {			
+			System.out.println(r);
+		}
+		return reviewOption;
+	}
+	
 	// 비동기로 리뷰 목록 불러오기 (최신 3개)
 	@ResponseBody
 	@PostMapping(value="/newReviewList", produces="application/json; charset=UTF-8")

@@ -155,8 +155,6 @@
 	 </select>
 	 
 	 
-	 
-	 
 	 <!-- 리뷰 수 카운트 -->
 	 <select id="reviewCount" resultType="_int">
 		 SELECT COUNT(*)

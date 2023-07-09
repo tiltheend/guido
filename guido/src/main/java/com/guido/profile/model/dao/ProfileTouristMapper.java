@@ -28,6 +28,7 @@ public interface ProfileTouristMapper {
 	// 구매 수 카운트
 	int reservationCount(int userNo);
 
+
 	// 내가 쓴 리뷰 내역 가져오기
 	List<Review> reviewList(int userNo);
 
@@ -67,6 +68,7 @@ public interface ProfileTouristMapper {
 
 	// 관심 상품 해제
 	int deleteProductWish(Map<String, Integer> map);
+
 
 	
 
