@@ -27,6 +27,7 @@ public class Schedule {
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+9")
     private LocalDateTime productDateEnd;
     
+    private int reservationNo;			// 예약 번호
 
     // ProductDate
     private String productName;			// 상품명

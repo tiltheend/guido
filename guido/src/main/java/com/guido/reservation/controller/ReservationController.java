@@ -301,7 +301,7 @@ public class ReservationController {
 		 if(reservation.getGuideNo()!=loginUser.getUserNo())
 			 return "redirect:/";
 		 
-		 Product product = productService.selectProduct(reservation.getGuideNo());
+		 Product product = productService.selectProduct(reservation.getProductNo());
 		 
 		 model.addAttribute("product", product);
 		 model.addAttribute("reservation", reservation);

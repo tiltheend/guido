@@ -17,6 +17,9 @@
 		
 		<result property="optionNo" column="OPTION_NO"/>
 		<result property="optionName" column="OPTION_NAME"/>
+		
+		<result property="reservationNo" column="RESERVATION_NO"/>
+		
 
 	</resultMap>
 	

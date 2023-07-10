@@ -177,7 +177,7 @@
     padding: 4px; border-radius: 10px;
     width: 100%;
 }
-.seller-profile-top .reservation-list-box .guest-profile-img>a>img{
+.seller-profile-top .reservation-list-box .guest-profile-img>img{
     width: 90px; height: 90px;
     border-radius: 50%;
     background-color: #B1D8DA;
@@ -195,7 +195,7 @@
 .seller-profile-top .reservation-list-box .sale-content>a{
     width: 100%;
 }
-.seller-profile-top .reservation-list-box .sale-content>a>h3:nth-of-type(1){ /* 상품 제목 */
+.seller-profile-top .reservation-list-box .sale-content>h3:nth-of-type(1){ /* 상품 제목 */
     font-size: 1.375rem; font-weight: normal;
     width: 100%; text-align: left;
     height: 30px;
@@ -209,7 +209,7 @@
     cursor: pointer;
 }
 
-.seller-profile-top .reservation-list-box .sale-content>h3:first-of-type{ /* 날짜 */
+.seller-profile-top .reservation-list-box .sale-content>h3:nth-of-type(2){ /* 날짜 */
     font-size: 1.2rem; color: #0F4957;
     display: flex; align-items: center;
     width: 100%; text-align: left;
@@ -488,7 +488,7 @@
 }
 
 @media screen and (max-width : 620px) {
-    .seller-profile-top .reservation-list-box .guest-profile-img>a>img{
+    .seller-profile-top .reservation-list-box .guest-profile-img>img{
         width: 60px; height: 60px;
     }
     .seller-profile-top .reservation-list-box .sale-content>div>p {
@@ -504,5 +504,8 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+    }
+    .pay-state span{
+        font-size: 0.875rem;
     }
 }

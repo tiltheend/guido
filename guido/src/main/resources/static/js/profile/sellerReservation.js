@@ -29,6 +29,10 @@ if(reservationMoreBtn !=null) {
                 if(reservation == null) break;
 
                 const li = document.createElement('li');
+                li.setAttribute('data-reservationno',reservation.reservationNo);
+                li.addEventListener('click', function() {
+                    gotoGuideRFn(this);
+                });
 
                 const saleImgDiv = document.createElement('div');
                 saleImgDiv.classList.add('sale-img');
@@ -41,16 +45,16 @@ if(reservationMoreBtn !=null) {
                 const guestProfileImgDiv = document.createElement('div');
                 guestProfileImgDiv.classList.add('guest-profile-img');
 
-                const userProfileLink = document.createElement('a');
-                userProfileLink.href = `/profile/${reservation.userNo}`;
+                // const userProfileLink = document.createElement('a');
+                // userProfileLink.href = `/profile/${reservation.userNo}`;
 
                 const profileImage = document.createElement('img');
                 profileImage.src = reservation.faceImg ? reservation.faceImg : '/images/userProfile/basicUser.png';
                 profileImage.alt = 'profileImage';
                 profileImage.classList.add('img-content');
 
-                userProfileLink.appendChild(profileImage);
-                guestProfileImgDiv.appendChild(userProfileLink);
+                // userProfileLink.appendChild(profileImage);
+                guestProfileImgDiv.appendChild(profileImage);
 
                 saleImgDiv.appendChild(guestProfileImgDiv);
                 li.appendChild(saleImgDiv);
@@ -58,8 +62,8 @@ if(reservationMoreBtn !=null) {
                 const saleContentDiv = document.createElement('div');
                 saleContentDiv.classList.add('sale-content');
 
-                const productLink = document.createElement('a');
-                productLink.href = `/productDetail/product/${reservation.productNo}`;
+                // const productLink = document.createElement('a');
+                // productLink.href = `/productDetail/product/${reservation.productNo}`;
 
                 const productNameH3 = document.createElement('h3');
                 productNameH3.textContent = reservation.productName;
@@ -219,6 +223,10 @@ function reservationListFn(){
                 if(reservation == null) break;
 
                 const li = document.createElement('li');
+                li.setAttribute('data-reservationno',reservation.reservationNo);
+                li.addEventListener('click', function() {
+                    gotoGuideRFn(this);
+                });
 
                 const saleImgDiv = document.createElement('div');
                 saleImgDiv.classList.add('sale-img');
@@ -231,16 +239,16 @@ function reservationListFn(){
                 const guestProfileImgDiv = document.createElement('div');
                 guestProfileImgDiv.classList.add('guest-profile-img');
 
-                const userProfileLink = document.createElement('a');
-                userProfileLink.href = `/profile/${reservation.userNo}`;
+                // const userProfileLink = document.createElement('a');
+                // userProfileLink.href = `/profile/${reservation.userNo}`;
 
                 const profileImage = document.createElement('img');
                 profileImage.src = reservation.faceImg ? reservation.faceImg : '/images/userProfile/basicUser.png';
                 profileImage.alt = 'profileImage';
                 profileImage.classList.add('img-content');
 
-                userProfileLink.appendChild(profileImage);
-                guestProfileImgDiv.appendChild(userProfileLink);
+                // userProfileLink.appendChild(profileImage);
+                guestProfileImgDiv.appendChild(profileImage);
 
                 saleImgDiv.appendChild(guestProfileImgDiv);
                 li.appendChild(saleImgDiv);
@@ -248,13 +256,13 @@ function reservationListFn(){
                 const saleContentDiv = document.createElement('div');
                 saleContentDiv.classList.add('sale-content');
 
-                const productLink = document.createElement('a');
-                productLink.href = `/productDetail/product/${reservation.productNo}`;
+                // const productLink = document.createElement('a');
+                // productLink.href = `/productDetail/product/${reservation.productNo}`;
 
                 const productNameH3 = document.createElement('h3');
                 productNameH3.textContent = reservation.productName;
-                productLink.appendChild(productNameH3);
-                saleContentDiv.appendChild(productLink);
+                // productLink.appendChild(productNameH3);
+                saleContentDiv.appendChild(productNameH3);
 
 
                 const dateH2 = document.createElement('h3');
@@ -403,4 +411,10 @@ function addTime(time, duration) {
     endTime.setMinutes(Number(minute));
     endTime.setMinutes(endTime.getMinutes() + duration * 60);
     return `${endTime.getHours()}:${endTime.getMinutes().toString().padStart(2, '0')}`;
+}
+
+// 가이드 예약 페이지 보기
+function gotoGuideRFn(el){
+    let reservationNo = el.getAttribute('data-reservationno');
+    location.href="/reservation/reservation_list?reservation_no="+reservationNo;
 }
