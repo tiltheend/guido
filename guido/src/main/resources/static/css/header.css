@@ -235,6 +235,12 @@ header .search-box-click-box button{
   background-color: #5C5C5C50;
   z-index: 250;
 } */
+input[name="firstday"], input[name="lastday"], input[name="tourist"] {
+  pointer-events: none;
+}
+
+
+
 .modal-background {
   position: absolute;
   top: 110px; left: 0;
@@ -391,6 +397,7 @@ header .search-box-click-box button{
   height: 226px;
   background-color: #fff;
   border: 1px solid #C5C5C5;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   position: fixed;
   top: 70px;
@@ -428,10 +435,11 @@ header .search-box-click-box button{
 
 /* 알람 */
 .alarm-modal{
-  width: 320px;
+  width: 340px;
   /* height: 360px; */
   background-color: #fff;
   border: 1px solid #C5C5C5;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   position: fixed;
   top: 70px;
@@ -443,7 +451,7 @@ header .search-box-click-box button{
 .alarm-modal>div{
   margin: 20px;
   margin-top: 30px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .alarm-modal>div>div{
   margin-top: 12px;
@@ -451,9 +459,9 @@ header .search-box-click-box button{
   text-align: center;
 }
 .alarm-modal img{
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
+  width: 15px;
+  /* height: 20px; */
+  margin-right: 3px;
 }
 
 .alarm-modal-close{

@@ -89,6 +89,43 @@ window.addEventListener('DOMContentLoaded', function() {
         console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
 
         // 알림 내용을 요소에 설정
-        alarmModalContent.textContent = obj.notificationContent;
+        //alarmModalContent.textContent = obj.notificationContent;
+		const contentWithImage = `<img src="/images/icons/alarm_wish.svg" alt=""> ${obj.notificationContent}`;
+        alarmModalContent.innerHTML = contentWithImage;
+
     };
 });
+
+
+
+function alarmFn(){
+
+	alarmModalBox = document.querySelector(".alarm-modal");
+	alarmModalBox.innerHTML = "";
+
+	fetch("/alarm/send")
+	.then(resp => resp.json())
+	.then(alarmList => {
+
+		if(alarmList.length > 0){
+			for(let alarm of alarmList){
+				// 각 알림에 대한 처리 수행
+				const notificationContent = alarm.notificationContent;
+				const senderNo = alarm.senderNo;
+
+				// 예시: 알림 내용과 보낸 사람 정보를 표시
+				const alarmContent = document.createElement("div");
+				alarmContent.textContent = `알림 내용: ${notificationContent}, 보낸 사람: ${senderNo}`;
+
+				alarmModalBox.appendChild(alarmContent);
+			}
+		}
+
+		else{
+			alarmModalBox.innerHTML = ""
+		}
+	})
+	.catch(err => {
+		console.log(err);
+	})
+}
