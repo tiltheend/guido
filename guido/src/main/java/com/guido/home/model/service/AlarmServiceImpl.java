@@ -1,5 +1,7 @@
 package com.guido.home.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,12 @@ public class AlarmServiceImpl implements AlarmService{
 	@Override
 	public int insertAlarm(Notification notice) {
 		return mapper.insertAlarm(notice);
+	}
+
+	// 최근 알람 10개 조회
+	@Override
+	public List<Notification> selectAlarmList(int userNo) {
+		return mapper.selectAlarmList(userNo);
 	}
 
 }
