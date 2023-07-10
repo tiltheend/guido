@@ -583,11 +583,11 @@ border-radius: 50% !important;
 background-color: #eee;
 }
 
-.active {
+/* .active {
 border-radius: 50% !important;
 background-image: linear-gradient(#90CAF9, #64B5F6) !important;
 color: #fff !important;
-}
+} */
 
 .range-start, .range-end {
 border-radius: 50% !important;
