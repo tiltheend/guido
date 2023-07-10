@@ -1,6 +1,5 @@
 package com.guido.home.websocket;
 
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
