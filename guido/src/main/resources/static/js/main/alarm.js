@@ -84,6 +84,9 @@ window.addEventListener('DOMContentLoaded', function() {
     const alarmModalContent = document.querySelector('.alarm-modal-content');
 
     alarmSock.onmessage = function(e) {
+
+		alarmModalContent.innerHTML = "";
+
         const obj = JSON.parse(e.data);
         console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
 
@@ -91,8 +94,9 @@ window.addEventListener('DOMContentLoaded', function() {
         //alarmModalContent.textContent = obj.notificationContent;
 		const contentWithImage = `<img src="/images/icons/alarm_wish.svg" alt=""> ${obj.notificationContent}`;
         alarmModalContent.innerHTML = contentWithImage;
-
     };
+
+	alarmFn(); // 함수 확인
 });
 
 
@@ -100,7 +104,7 @@ window.addEventListener('DOMContentLoaded', function() {
 function alarmFn(){
 
 	alarmModalBox = document.querySelector(".alarm-modal");
-	alarmModalBox.innerHTML = "";
+	// alarmModalBox.innerHTML = "";
 
 	fetch("/alarm/send")
 	.then(resp => resp.json())
@@ -108,6 +112,7 @@ function alarmFn(){
 
 		if(alarmList.length > 0){
 			for(let alarm of alarmList){
+
 				// 각 알림에 대한 처리 수행
 				const notificationContent = alarm.notificationContent;
 				const senderNo = alarm.senderNo;
@@ -121,7 +126,7 @@ function alarmFn(){
 		}
 
 		else{
-			alarmModalBox.innerHTML = ""
+			alarmModalBox.innerHTML = "<div><p> 받은 알림이 없습니다.</p></div>"
 		}
 	})
 	.catch(err => {

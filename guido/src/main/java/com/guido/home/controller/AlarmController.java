@@ -28,7 +28,7 @@ public class AlarmController {
 	public List<Notification> alarmList(@SessionAttribute("loginUser") User loginUser){
 		List<Notification> alarmList = service.selectAlarmList(loginUser.getUserNo());
 		
-		System.out.println(alarmList);
+		// System.out.println("알림리스트 : " + alarmList);
 		return alarmList;
 	}
 }
