@@ -121,10 +121,10 @@ function toggleHeart() {
                     for(i of selected){
                         i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
                     }
+                    sendWish(productNo, productName);
                 }
                 // console.log("관심상품 등록 성공");
 
-                sendWish(productNo, productName);
 
             } else {
                 // console.log("관심상품 등록 실패");
