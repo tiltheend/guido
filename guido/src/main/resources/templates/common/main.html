@@ -14,10 +14,13 @@
       color: #fff;
       margin: 10px;
     }
+    main {
+      margin-top: 100px;
+    }
   </style>
   <body>
     <main th:object="${session.loginUser}">
-      <!-- <th:block th:replace="~{common/header}"></th:block> -->
+      <th:block th:replace="~{common/header}"></th:block>
 
       <a th:href="@{/productDetail/product/15?guest=3}"><button>상품 상세 페이지</button></a> <br>
       <a th:href="@{/reservation/order_result?order_id=20230705-542802}"><button>예약 결제 완료 페이지</button></a> <br>

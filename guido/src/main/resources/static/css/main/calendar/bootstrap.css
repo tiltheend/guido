@@ -33,7 +33,7 @@
     background-color: #fff;
   } */
   
-  [tabindex="-1"]:focus:not(:focus-visible) {
+  /* [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important;
   }
   
@@ -47,13 +47,13 @@
     margin-top: 0;
     margin-bottom: 0.5rem;
   }
-  
+   */
  /*  p {
     margin-top: 0;
     margin-bottom: 1rem;
   } */
   
-  abbr[title],
+  /* abbr[title],
   abbr[data-original-title] {
     text-decoration: underline;
     -webkit-text-decoration: underline dotted;
@@ -121,7 +121,7 @@
   sup {
     top: -.5em;
   }
-  
+   */
  /*  a {
     color: #007bff;
     text-decoration: none;
@@ -261,7 +261,7 @@
     -webkit-appearance: listbox;
   } */
   
-  textarea {
+  /* textarea {
     overflow: auto;
     resize: vertical;
   }
@@ -354,7 +354,7 @@
   
   h6, .h6 {
     font-size: 1rem;
-  }
+  } */
   
   .lead {
     font-size: 1.25rem;
