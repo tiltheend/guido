@@ -22,7 +22,8 @@
     </style>
 </head>
 <body>
-    <header>임시헤더</header>
+    <!-- <header>임시헤더</header> -->
+    <th:block th:replace="~{common/header}"></th:block>
     <div class="buyer-profile-top">
         <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
 
@@ -355,7 +356,7 @@
     <script th:src="@{/js/profile/profileEdit.js}"></script>                   
     <script th:src="@{/js/profile/buyerProfile.js}"></script>   
 
-    <th:block th:replace="~{common/header}"></th:block>
+    
 
 </body>
 </html>

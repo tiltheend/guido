@@ -418,3 +418,4 @@ function gotoGuideRFn(el){
     let reservationNo = el.getAttribute('data-reservationno');
     location.href="/reservation/reservation_list?reservation_no="+reservationNo;
 }
+

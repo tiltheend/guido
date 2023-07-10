@@ -1150,3 +1150,30 @@ if(productMoreBtn !=null) {
     
     });
 }
+
+/* 자기 소개 수정 요소 */
+let prBtn = document.querySelector('.pr-btn');
+prBtn.addEventListener("click",()=>{
+    let prEditBox = document.querySelector(".seller-profile-top .pr-edit");
+    prEditBox.style.display = "grid";
+})
+
+/* 자기 소개 수정 */
+function prEditFn(el){
+    fetch("/profile/guideReservationList",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, 
+        body : pageUserNo
+    })
+    .then(resp => resp.json())
+    .then(result => {
+        if(result>0){
+            alert("자기 소개가 수정 되었습니다.");
+        } else {
+            alert("수정에 실패하였습니다.");
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+}
