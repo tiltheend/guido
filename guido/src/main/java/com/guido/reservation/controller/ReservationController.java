@@ -197,13 +197,13 @@ public class ReservationController {
 		 
 		 
 		 if(reservation==null)
-			 return "redirect:/";
+			 return "error/404";
 		 
 		 
 		 Product product = productService.selectProduct(reservation.getProductNo());
 		 
 		 if(reservation.getUserNo()!=loginUser.getUserNo())
-			 return "redirect:/";
+			 return "error/404";
 		 
 		 int orderPrice = 0;
 		 
@@ -242,13 +242,13 @@ public class ReservationController {
 			 reservation = service.selectReservation(map);
 		 
 		 if(reservation==null)
-			 return "redirect:/";
+			 return "error/404";
 		 
 		 
 		 Product product = productService.selectProduct(reservation.getProductNo());
 		 
 		 if(reservation.getUserNo()!=loginUser.getUserNo())
-			 return "redirect:/";
+			 return "error/404";
 		 
 		 int orderPrice = 0;
 		 
@@ -299,7 +299,7 @@ public class ReservationController {
 		 
 		 
 		 if(reservation.getGuideNo()!=loginUser.getUserNo())
-			 return "redirect:/";
+			 return "error/404";
 		 
 		 Product product = productService.selectProduct(reservation.getProductNo());
 		 

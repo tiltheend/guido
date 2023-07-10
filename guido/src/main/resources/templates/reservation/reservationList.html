@@ -117,9 +117,11 @@
                     
                     <div>
                         <div>예약자</div>
-                        <div class="tourist--faceimg">
-                            <div th:text="*{userName}"></div>
 
+                        <div class="tourist--faceimg">
+                            <a th:href="@{'/profile/' + *{userNo}}">
+                                <div th:text="*{userName}"></div>
+                            </a>
 
                             <img th:src="@{/images/reservation/tourist_faceimg2.png}" id="faceImgIcon" onclick="toggleModal()">
                             

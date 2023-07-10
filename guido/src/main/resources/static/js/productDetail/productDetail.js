@@ -337,15 +337,16 @@ if(document.getElementById("wishHeart")!=null){
 
 
 
+let faceModal = document.getElementById("faceImgModal");
 
 // 모달 창 토글
 function toggleModal() {
-
-    let modal = document.getElementById("faceImgModal");
-    
-    modal.style.display = (modal.style.display === "block") ? "none" : "block";
-    
+    faceModal.style.display = (faceModal.style.display === "block") ? "none" : "block";
 }
+
+faceModal.addEventListener('click', ()=>{
+    toggleModal();
+});
 
 
 
@@ -618,3 +619,80 @@ firstDate = firstDate.toLocaleDateString('en-US', { day: 'numeric', month: 'shor
 lastDate = lastDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
 
 document.querySelector(".detail--text__date-second").innerText = firstDate + " - " + lastDate;
+
+
+
+/* 슬라이드 사진 클릭 시 크게 보기 팝업 */
+const slideImages = document.getElementsByClassName("detail--silde__item-img");
+
+Array.from(slideImages).forEach(function(slide){
+    slide.addEventListener("click", ()=>{
+
+        const modal = document.querySelector(".modal2");
+        const modal_img = document.querySelector(".modal_content2");
+        const span = document.querySelector(".close2");
+
+        modalDisplay("block");
+        modal_img.src = slide.getAttribute("src");
+
+        span.addEventListener('click', ()=>{
+        modalDisplay("none");
+        });
+
+        modal.addEventListener('click', ()=>{
+        modalDisplay("none");
+        });
+
+        function modalDisplay(text){
+        modal.style.display = text;
+        }
+    })
+});
+
+
+/* 총 일정 확인 캘린더 */
+const fullCalendar = document.querySelector(".detail--calendar__date");
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    let events = allProductDateList.map(function(item) {
+
+        return {
+            start : item.productDate,
+            end : calculateLastDate(item.productDate),
+            overlap: false,
+            display: 'background'
+        }
+    });
+
+
+    let calendar = new FullCalendar.Calendar(fullCalendar, {
+        initialView: 'dayGridMonth',
+        initialDate: allProductDateList[0].productDate,
+        headerToolbar:{
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        },
+        events : events
+    });
+    calendar.render();
+
+});
+
+
+/* 마지막 날짜 계산 */
+function calculateLastDate(productDate){
+
+    const package = product.productPackage;
+    let lastDate = new Date(productDate);
+
+    lastDate.setDate(lastDate.getDate() + package);
+    const year = lastDate.getFullYear();
+    const month = String(lastDate.getMonth() + 1).padStart(2, "0");
+    const day = String(lastDate.getDate()).padStart(2, "0");
+    lastDate = `${year}-${month}-${day}`;
+    
+    return lastDate;
+}
+
