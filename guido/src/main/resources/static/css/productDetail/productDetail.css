@@ -1436,7 +1436,6 @@ a {
 
 
 /* 예약 캘린더 */
-
   /* 달력 전체를 감싸는 요소 */
   .detail--right__calendar{
     width: 100%;
@@ -1564,6 +1563,57 @@ td.select-day-td div.inactive{
 }
 
 
+/* 총 일정 확인 캘린더 */
+.detail--calendar__date{
+    margin: 50px 0 30px 0;
+    width: 600px;
+    height: 500px;
+}
+
+h2#fc-dom-1{
+    font-size: 20px;
+    color: #0F4957;
+}
+
+.fc .fc-button-primary{
+    background-color: white;
+    border-color: white;
+    color: #0F4957;
+    font-size: 1.4rem;
+    padding: 0;
+}
+
+.fc .fc-toolbar.fc-header-toolbar{
+    margin-bottom: 1em;
+}
+
+
+/* 다음(next) 버튼 클릭 시 스타일 제거 */
+.fc .fc-button-primary:hover{
+    background-color: white;
+    border-color: white;
+    color: #0F4957;
+}
+
+.fc .fc-button-primary:active{
+    background-color: white;
+    border-color: white;
+    color: #0F4957;
+}
+
+.fc .fc-bg-event{
+    /* background-color: #8fdf82; */
+    /* background-color: #B1D8DA; */
+    /* background-color: #FFFCAD; */
+}
+
+:root{
+    --fc-button-active-bg-color:#ffffff;
+    --fc-button-active-border-color:#ffffff;
+}
+.fc .fc-button:focus{box-shadow:0 0 0 .2rem #ffffff; outline:0}
+.fc .fc-button-primary:focus{box-shadow:0 0 0 .2rem #ffffff}
+.fc-button-active:focus,.fc .fc-button-primary:not(:disabled):active:focus{box-shadow:0 0 0 .2rem #ffffff}
 
 /* 상품 이미지 모달 */
 .modal2 {

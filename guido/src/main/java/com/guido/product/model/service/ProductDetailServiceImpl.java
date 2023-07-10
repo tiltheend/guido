@@ -177,4 +177,11 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 		schedulerMapper.updateProductAvailability(productNo);
 	}
 
+
+	// 상품 전체 일정 조회
+	@Override
+	public List<ProductDate> selectAllProductDateList(int productNo) {
+		return mapper.selectAllProductDateList(productNo);
+	}
+
 }

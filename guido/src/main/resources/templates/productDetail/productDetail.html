@@ -24,6 +24,8 @@
     <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
+    <script th:src='@{https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js}'></script>
+
 </head>
 <body th:object="${product}">
 
@@ -370,8 +372,8 @@
                             <!-- 총 진행 날짜(범위) -->
                             <div class="detail--text__date-second"></div>
                             
+                            <!-- 캘린더 -->
                             <div class="detail--calendar__date">
-                                <img th:src="@{http://via.placeholder.com/600x330}">
                             </div>
                             
                         </div>
@@ -755,6 +757,7 @@
     const loginUserType = /*[[${session.loginUser?.userType}]]*/"로그인 회원 타입";
     const faceImg = /*[[${session.loginUser?.faceImg}]]*/"로그인 회원 얼굴 인증사진";
     const product = /*[[${product}]]*/ "상품";
+    const allProductDateList = /*[[${allProductDateList}]]*/ "상품 전체 일정";
     
     </script>
 

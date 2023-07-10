@@ -337,15 +337,16 @@ if(document.getElementById("wishHeart")!=null){
 
 
 
+let faceModal = document.getElementById("faceImgModal");
 
 // 모달 창 토글
 function toggleModal() {
-
-    let modal = document.getElementById("faceImgModal");
-    
-    modal.style.display = (modal.style.display === "block") ? "none" : "block";
-    
+    faceModal.style.display = (faceModal.style.display === "block") ? "none" : "block";
 }
+
+faceModal.addEventListener('click', ()=>{
+    toggleModal();
+});
 
 
 
@@ -647,3 +648,51 @@ Array.from(slideImages).forEach(function(slide){
         }
     })
 });
+
+
+/* 총 일정 확인 캘린더 */
+const fullCalendar = document.querySelector(".detail--calendar__date");
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    let events = allProductDateList.map(function(item) {
+
+        return {
+            start : item.productDate,
+            end : calculateLastDate(item.productDate),
+            overlap: false,
+            display: 'background'
+        }
+    });
+
+
+    let calendar = new FullCalendar.Calendar(fullCalendar, {
+        initialView: 'dayGridMonth',
+        initialDate: allProductDateList[0].productDate,
+        headerToolbar:{
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        },
+        events : events
+    });
+    calendar.render();
+
+});
+
+
+/* 마지막 날짜 계산 */
+function calculateLastDate(productDate){
+
+    const package = product.productPackage;
+    let lastDate = new Date(productDate);
+
+    lastDate.setDate(lastDate.getDate() + package);
+    const year = lastDate.getFullYear();
+    const month = String(lastDate.getMonth() + 1).padStart(2, "0");
+    const day = String(lastDate.getDate()).padStart(2, "0");
+    lastDate = `${year}-${month}-${day}`;
+    
+    return lastDate;
+}
+

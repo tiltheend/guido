@@ -93,6 +93,7 @@ showTotalResevationCost();
   
 
 // 모달 창 토글
+
 function toggleModal() {
   
   let modal = document.getElementById("paymentModal");
@@ -100,9 +101,11 @@ function toggleModal() {
   
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
   modalCost.innerText = totalPaymentCost.innerText;
-
 }
 
+// modal.addEventListener('click', ()=>{
+//   toggleModal();
+//   });
 
 
 /* 예약하고자 하는 날짜 출력 */

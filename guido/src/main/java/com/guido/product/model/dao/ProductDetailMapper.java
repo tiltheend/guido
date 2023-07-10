@@ -59,5 +59,8 @@ public interface ProductDetailMapper {
 	// 날짜 선택 시 옵션 불러오기
 	List<ProductOption> getOptionInfo(Map<String, Object> map);
 
+	// 상품 전체 일정 조회
+	List<ProductDate> selectAllProductDateList(int productNo);
+
 	
 }
