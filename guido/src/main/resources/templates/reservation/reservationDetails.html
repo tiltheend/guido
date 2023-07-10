@@ -51,7 +51,7 @@
 
             <div class="reservation--text__product">
                 <div>예약 상품</div>
-                <div>(총 1개 / KRW [[*{totalPrice}]])</div>
+                <div th:text="|(총 1개 / KRW *{#numbers.formatInteger(totalPrice, 1, 'COMMA')})|">(총 1개 / KRW 가격)</div>
             </div>
 
             <div class="reservation--detail__product">
@@ -71,10 +71,7 @@
                         
                         <div class="reservation--location__detail reservation--short">
                             <img th:src="@{/images/productDetail/location_icon.svg}">
-                            <div>[[${product.regionName}]]
-                                    <th:block th:each="course : ${product.tourCourse}" th:if="${course.bossCourseFL=='Y'}">
-                                    - [[${course.courseName}]]
-                                </th:block>
+                            <div>[[${product.regionName}]] - [[${product.courseName}]]
                             </div>
                         </div>
                         
@@ -154,12 +151,18 @@
 
         <div class="reservation--cancel">여행 출발(개시) 전 취소 및 환불 규정 (*공정거래위원회 제정_소비자 피해보상 규정 기준)
 
-            여행계약 해제로 인한 피해 : 당사의 귀책사유로 당사가 계약해제하는 경우
+           <strong>당사의 귀책사유로 당사가 계약해제하는 경우</strong>
 
-            1) 여행 개시 3일 전까지 취소 통보시 : 작품가 전액 환불 
-            2) 여행 개시 2일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 10% 배상
-            3) 여행 개시 1일 전까지 취소 통보시 : 작품가 전액 환불 및 작품가의 20% 배상
-            4) 여행 당일 통보 및 통보가 없는 경우 : 작품가 전액 환불 및 작품가의 30% 배상
+            1) 여행 개시 3일 전까지 취소 통보시 : 상품가 전액 환불 
+            2) 여행 개시 2일 전까지 취소 통보시 : 상품가 전액 환불 및 상품가의 10% 배상
+            3) 여행 개시 1일 전까지 취소 통보시 : 상품가 전액 환불 및 상품가의 20% 배상
+            4) 여행 당일 통보 및 통보가 없는 경우 : 상품가 전액 환불 및 상품가의 30% 배상
+
+
+            <strong>소비자의 귀책사유로 소비자가 계약해제하는 경우</strong>
+            
+            1) 선택한 날짜로부터 13일 이전까지 취소 수수료 0% 발생
+            2) 선택한 날짜로부터 0일 ~ 12일 이전 취소 수수료 100% 발생
         </div>
 
 

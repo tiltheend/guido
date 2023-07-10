@@ -178,15 +178,68 @@ public class ReservationController {
 	}
 	
 	
+	// 예약 상품 확인
+	@GetMapping("/reservation_info")
+	public String getReservationInfo(@RequestParam(value="reservation_no", required=false) String reservationNo,
+			Model model, @SessionAttribute("loginUser") User loginUser) {
+		
+		Reservation reservation = null;
+		String orderNumber = null;
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("orderNumber", orderNumber);
+		map.put("reservationNo", reservationNo);
+		
+		
+		 if(reservationNo!=null)
+			 reservation = service.selectReservation(map);
+		 
+		 
+		 if(reservation==null)
+			 return "redirect:/";
+		 
+		 
+		 Product product = productService.selectProduct(reservation.getProductNo());
+		 
+		 if(reservation.getUserNo()!=loginUser.getUserNo())
+			 return "redirect:/";
+		 
+		 int orderPrice = 0;
+		 
+		 if(product.getProductPackage()==1)
+			 orderPrice = reservation.getGuestCount()*product.getProductPrice();
+		 else
+			 orderPrice = product.getProductPrice();
+		 
+		 int extraFee = (int) (orderPrice * 0.1);
+		 
+		 model.addAttribute("reservation", reservation);
+		 model.addAttribute("product", product);
+		 model.addAttribute("orderPrice", orderPrice);
+		 model.addAttribute("extraFee", extraFee);
+		 
+	     return "reservation/reservationDetails";
+	     
+	}
+	
+	
 	// 결제완료 후 예약 정보 확인
 	 @GetMapping("/order_result")
 	    public String getOrderResult(@RequestParam(value="order_id", required=false) String orderNumber, 
 	    		Model model, @SessionAttribute("loginUser") User loginUser) {
 		 
-		 Reservation reservation = null;
+		 	Reservation reservation = null;
+			String reservationNo = null;
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("orderNumber", orderNumber);
+			map.put("reservationNo", reservationNo);
+			
 		 
 		 if(orderNumber!=null)
-			 reservation = service.selectReservation(orderNumber);
+			 reservation = service.selectReservation(map);
 		 
 		 if(reservation==null)
 			 return "redirect:/";
@@ -213,7 +266,7 @@ public class ReservationController {
 		 
 	     return "reservation/reservationCheck";
 	   }
-
+	 
 	 
 	 
 	 // 주문 취소
@@ -224,6 +277,39 @@ public class ReservationController {
 		 
 		 return "redirect:/reservation/order_result?order_id=" + reservation.getOrderNumber();
 	 }
+	 
+	 
+	 // 가이드에게 보여지는 예약 확인창
+	 @GetMapping("/reservation_list")
+	 public String getReservationList(@RequestParam(value="reservation_no", required=false) String reservationNo,
+				Model model, @SessionAttribute("loginUser") User loginUser) {
+		 
+		 
+			Reservation reservation = null;
+			String orderNumber = null;
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("orderNumber", orderNumber);
+			map.put("reservationNo", reservationNo);
+			
+		 
+		 if(reservationNo!=null)
+			 reservation = service.selectReservation(map);		
+		 
+		 
+		 if(reservation.getGuideNo()!=loginUser.getUserNo())
+			 return "redirect:/";
+		 
+		 Product product = productService.selectProduct(reservation.getGuideNo());
+		 
+		 model.addAttribute("product", product);
+		 model.addAttribute("reservation", reservation);
+		 
+		 return "reservation/reservationList";
+		 
+	 }
+	 
 }
 	
 

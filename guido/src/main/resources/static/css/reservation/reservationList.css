@@ -1,0 +1,426 @@
+
+
+@media screen and (max-width : 767px) {
+    html{
+        font-size: 12px;
+    }
+}
+
+
+/* 예약 내역 text */
+.reservation--text{
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 컨테이너 */
+.reservation--container{
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vh 0;
+    min-width: 440px;
+    margin: auto;
+}
+
+
+.reservation--container>div{
+    width: 100%;
+}
+
+
+/* 주문자 정보 div */
+.reservation--info{
+    display: flex;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 상품 정보 + 가격 정보 컨테이너 */
+.product--container{
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+/* 상품 정보 div */
+.product--info{
+    display: flex;
+}
+
+
+
+/* 상품 이미지 */
+.reservation--img__info{
+    width: 300px;
+    height: 230px;
+    overflow: hidden;
+    position: relative; 
+    border-radius: 5px;
+    border: 2px solid #F0F0F0;
+}
+
+
+.reservation--img__info::before {
+    content: "";
+    display: block;
+    padding-top: calc(100% / (300 / 230)); 
+}
+
+
+.reservation--img__info>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+/* 아이콘 text */
+.reservation--short>div{
+    color: #5c5c5c;
+    margin: 10px 0;
+}
+
+
+/* 상품명 */
+.reservation--title__info{
+    color: #0F4957;
+    font-size: 1.2rem;
+}
+
+
+/* 상품 정보 오른쪽 div */
+.product--right__info{
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+
+/* 가격 정보 */
+.price--info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.price--info div{
+    color: #0F4957;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+/* 여행객 인증사진 */
+.user--faceimg{
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    position: relative; 
+    border-radius: 5px;
+    border: 2px solid #F0F0F0;
+}
+
+
+.user--faceimg::before {
+    content: "";
+    display: block;
+    padding-top: calc(100% / (80 / 80)); 
+}
+
+
+.user--faceimg>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 예약 정보 + 주문자 정보 div */
+.reservation--info{
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+/* 주문자 정보 div */
+.reservation--user__info{
+    display: flex;
+    width: 100%;
+}
+
+
+
+/* 주문 정보 */
+.orderer--info{
+    width: 100%;
+}
+
+.orderer--info>div:not(:last-of-type){
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 8px 0;
+}
+
+
+
+/* 예약 정보 */
+.reservation--content__info>div{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 8px 0;
+    justify-content: space-between;
+}
+
+.reservation--content__info>div>div:nth-of-type(1){
+    margin-right: 60px;
+}
+
+
+/* 요청사항 div*/
+.request--content{
+    margin-top: 25px;
+    background-color: #e5f8f9;
+    padding: 15px;
+}
+
+/* 요청사항 text */
+.request--text{
+    display: flex;
+    align-items: center;
+    color: #92b7b9;
+    font-size: 1.07rem;
+    margin-bottom: 5px;
+}
+
+
+.request--text>img{
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 5px;
+}
+
+/* 예약자가 작성한 요청사항 */
+.request--content>div:nth-of-type(2){
+    padding: 10px;
+}
+
+
+/* 구분선 */
+.divisionline{
+    height: 1px;
+    background-color: #F0F0F0;
+    margin: 20px 0;
+}
+
+
+/* 예약한 날짜(일정) */
+#reservatonDate{
+    color: #0F4957;
+}
+
+
+/* 예약목록 보기 버튼 */
+.orderlist-btn{
+    width: 100%;
+    background-color: #0F4957;
+    height: 60px;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 25px 0;
+    border-radius: 10px;
+}
+
+.orderlist-btn:hover{
+    background-color: #0f4957ef;
+}
+
+
+
+/* 예약자 인증 사진 */
+.tourist--faceimg{
+    display: flex;
+}
+
+
+#faceImgIcon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+#hoverFaceImg {
+    position: relative;
+}
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: -20px;
+    transform: translate(-50%, -100%);
+    border-radius: 5px;
+}
+
+#faceImg {
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#faceImgIcon:hover + #hoverFaceImg #faceImg {
+    opacity: 1;
+}
+
+#faceImgIcon:hover + #hoverFaceImg .image-wrapper {
+    border: 2px solid #0F4957;
+    transition: 0.3s ease;
+}
+
+
+
+/* 인증 사진 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+    padding: 15px;
+    background-color: #fefefe;
+    margin: 15% auto;
+    border: 1px solid #888;
+    width: 25%;
+    border-radius: 15px;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 400px;
+}
+
+
+/* 모달 컨텐츠 */
+.modal--content>div{
+    width: 100%;
+}
+
+
+#closeBtn{
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    background-color: #0F4957;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
+/* 모달 얼굴 사진 크롭 */
+.modal--faceimg{
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative; 
+    border-radius: 5px;
+}
+
+.modal--faceimg::before {
+    content: "";
+    display: block;
+    padding-top: calc(100% / (300 / 500)); 
+}
+
+
+.modal--faceimg>img{  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+@media screen and (max-width : 1120px) {
+
+    .product--info{
+        display: block;
+    }
+
+    .product--right__info{
+        margin-left: 0;
+        margin-top: 20px;
+        height: 180px;
+    }
+
+    .reservation--img__info{
+        width: 100%;
+        height: 250px;
+    }
+    
+    
+    .reservation--img__info::before {
+        content: "";
+        display: block;
+        padding-top: calc(100% / (300 / 280)); 
+    }
+    
+
+}
+
+
+@media screen and (max-width : 767px) {
+
+    .product--right__info{
+        height: 160px;
+    }
+
+    .orderlist-btn{
+        margin-top: 10px;
+        height: 45px;
+    }
+
+    .request--content{
+        padding: 10px;
+    }
+
+    .request--content>div:nth-of-type(2){
+        padding: 5px;
+    }
+
+}

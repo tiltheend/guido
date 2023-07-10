@@ -46,9 +46,17 @@ public interface ProfileGuideMapper {
 
 	// 리뷰 리플 삭제
 	int reviewReplyDel(int reviewNo);
+
+	// 예약 개수 세기
+	int reservarionCount(int userNo);
 	
 	// 가이드 예약 리스트 (구매자들 예약 확인용)
 	List<Reservation> GuideReservationList(int userNo);
+
+	// 가이드 예약 리스트 (3개씩 더보기)
+	List<Reservation> guideMoreReservationList(int userNo);
+
+	
 
 
 

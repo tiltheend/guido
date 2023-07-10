@@ -116,5 +116,17 @@ public class HomeServiceImpl implements HomeService {
 	}
 
 
+	// 이벤트 상세 페이지 이동 + 조회
+	@Override
+	public Event selectEvent(int eventNo) {
+		// 이벤트 번호로 이벤트 셀렉트
+		Event event = mapper.selectEvent(eventNo);
+		// 0번 인덱스는 썸네일이므로 삭제.
+		if (!event.getFileList().isEmpty())
+			event.getFileList().remove(0);
+		return event;
+	}
+
+
 
 }

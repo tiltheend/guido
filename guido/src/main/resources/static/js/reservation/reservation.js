@@ -108,37 +108,42 @@ function toggleModal() {
 /* 예약하고자 하는 날짜 출력 */
 const reservationDateDiv = document.querySelector(".reservation--date__decription>div");
 const orderDate = new Date(reservationDate.productDate);
+const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+let dayOfWeek = orderDate.getDay();
+let weekday = weekdays[dayOfWeek];
+let firstFormattedDate = orderDate.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric' });
 
 if(package==1){
 
-    reservationDateDiv.innerText = reservationDate.productDate + " [" + selectedTime + "]";
+    reservationDateDiv.innerText = firstFormattedDate + " (" + weekday + ")   " + selectedTime;
   
 }else{
 
-  // 투어 마지막 날 계산
-  const newYear = orderDate.getFullYear();
-  const newMonth = ('0' + (orderDate.getMonth() + 1)).slice(-2);
-  const newDay = ('0' + orderDate.getDate()).slice(-2);
-  
-  const formattedDate = newYear + '년 ' + newMonth + '월 ' + newDay + '일';
-  
-  
-  orderDate.setDate(orderDate.getDate() + package-1);
-  
-  const lastYear = orderDate.getFullYear();
-  const lastMonth = String(orderDate.getMonth() + 1).padStart(package-1, "0");
-  const lastDay = String(orderDate.getDate()).padStart(package-1, "0");
-  
+/* N일 투어의 경우 마지막날 계산 필요 */
 
-let twoDaysLater;
-
-if (lastYear !== newYear) {
-  twoDaysLater = `${lastYear}년 ${lastMonth}월 ${lastDay}일`;
-} else {
-  twoDaysLater = `${lastMonth}월 ${lastDay}일`;
-}
+const firstYear = orderDate.getFullYear();
   
-  reservationDateDiv.innerText = formattedDate + " ~ " + twoDaysLater;
+let nDaysLater = new Date(reservationDate.productDate);
+nDaysLater.setDate(nDaysLater.getDate() + (package-1));
+
+const lastYear = nDaysLater.getFullYear();
+
+/* 6 july, 2023 (Sun) 형식으로 변경 */
+if (lastYear !== firstYear)
+  firstFormattedDate = orderDate.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+else
+  firstFormattedDate = orderDate.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short'});
+
+
+  /* 마지막 날 요일 구하기 */
+ dayOfWeek = nDaysLater.getDay();
+ weekday = weekdays[dayOfWeek];
+
+
+  nDaysLater = nDaysLater.toLocaleDateString('en-US', { day: 'numeric', month: 'short',  weekday: 'short', year: 'numeric' });
+
+  reservationDateDiv.innerText = firstFormattedDate + " - " + nDaysLater;
 }
 
 const emergencyContact = document.getElementById("emergencyContact").value;

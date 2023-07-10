@@ -121,6 +121,7 @@
                             <div class="detail--text__title font1">
                                 [[*{productName}]]
                                 <span class="detail--ongoing__title font4" th:if="*{productState}=='N'">ongoing</span>
+                                <span class="detail--finished__title font4" th:if="*{productState}=='E'">finished</span>
                             </div>
         
         
@@ -421,7 +422,7 @@
         
                                         <div>
                                             <div class="detail--item__review-profile">
-                                                <img th:src="${review.profileImage}">
+                                                <img th:src="${review.profileImage}?${review.profileImage}:@{/images/userProfile/basicUser2.svg}">
                                             </div>
                                         </div>
                                         
@@ -462,80 +463,85 @@
                     
                     <!-- 예약 사이드바 -->
                     <section class="detail--right__sidebar">
-        
-                        <!-- 예약 캘린더(날짜) -->
-                        <div class="detail--right__calendar">
-        
-                            <div class="calendar-header">
-                                <div class="calendar-arrow prev-month">&lt;</div>
-                    
-                                <div class="year-month"></div>
-                    
-                                <div class="calendar-arrow next-month">&gt;</div>
-                            </div>
 
-                            <div class="calendar-content">
-                                
-                                <table class="calendar-table">
-                                    <thead>
-                                        <th>Sun</th>
-                                        <th>Mon</th>
-                                        <th>Tue</th>
-                                        <th>Wed</th>
-                                        <th>Thu</th>
-                                        <th>Fri</th>
-                                        <th>Sat</th>
-                                    </thead>
-                        
-                                    <tbody>
-                        
-                                    </tbody>
-                        
-                        
-                                </table>
+                        <th:block th:unless="*{productState=='E'}">
 
-                            </div>
-                    
+                            <!-- 예약 캘린더(날짜) -->
+                            <div class="detail--right__calendar">
+            
+                                <div class="calendar-header">
+                                    <div class="calendar-arrow prev-month">&lt;</div>
+                        
+                                    <div class="year-month"></div>
+                        
+                                    <div class="calendar-arrow next-month">&gt;</div>
+                                </div>
+    
+                                <div class="calendar-content">
+                                    
+                                    <table class="calendar-table">
+                                        <thead>
+                                            <th>Sun</th>
+                                            <th>Mon</th>
+                                            <th>Tue</th>
+                                            <th>Wed</th>
+                                            <th>Thu</th>
+                                            <th>Fri</th>
+                                            <th>Sat</th>
+                                        </thead>
                             
-        
-                        </div>
-        
-                        <!-- 예약 옵션(시간) : 당일 투어의 경우에만 뜸 -->
-                        <div class="detail--right__option">
-
-                        </div>
+                                        <tbody>
+                            
+                                        </tbody>
+                            
+                            
+                                    </table>
+    
+                                </div>
                         
-                        <!-- 예약 가격 -->
-                        <div class="detail--right__price">
-                            <span>Guest</span>
-                            <div class="detail--right__price-qty">
-        
-                                <!-- 1인당 가격 : n박 시 eachCost !=0 -->
-                                <div th:if="${eachCost}!=0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(eachCost, 1, 'COMMA')}">1박 이상 인당 가격=상품가격/인원수</span> / person</div>
-                                <!-- 1인당 가격 : 1박 시 eachCost == 0원 -->
-                                <div th:if="${eachCost}==0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}">1박 시 인당 가격</span> / person</div>
                                 
-                                <div>
-                                    <div class="detail--right__price-minus priceBtn">&minus;</div>
-                                    <div class="detail--right__price-count" th:text="${guestCount}">게스트 수</div>
-                                    <div class="detail--right__price-plus priceBtn">&plus;</div>
+            
+                            </div>
+            
+                            <!-- 예약 옵션(시간) : 당일 투어의 경우에만 뜸 -->
+                            <div class="detail--right__option">
+    
+                            </div>
+                            
+                            <!-- 예약 가격 -->
+                            <div class="detail--right__price">
+                                <span>Guest</span>
+                                <div class="detail--right__price-qty">
+            
+                                    <!-- 1인당 가격 : n박 시 eachCost !=0 -->
+                                    <div th:if="${eachCost}!=0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(eachCost, 1, 'COMMA')}">1박 이상 인당 가격=상품가격/인원수</span> / person</div>
+                                    <!-- 1인당 가격 : 1박 시 eachCost == 0원 -->
+                                    <div th:if="${eachCost}==0"> KRW <span id="eachCost" th:text="${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}">1박 시 인당 가격</span> / person</div>
+                                    
+                                    <div>
+                                        <div class="detail--right__price-minus priceBtn">&minus;</div>
+                                        <div class="detail--right__price-count" th:text="${guestCount}">게스트 수</div>
+                                        <div class="detail--right__price-plus priceBtn">&plus;</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-        
-        
-                        <div class="detail--right__price-total">
-                            <span>Total</span>
-                            <div> &#8361; 
-                                <span id="totalCost"></span></div>
-        
-                        </div>
-                        <!-- 예약 버튼 -->
+            
+            
+                            <div class="detail--right__price-total">
+                                <span>Total</span>
+                                <div> &#8361; 
+                                    <span id="totalCost"></span></div>
+            
+                            </div>
+                            <!-- 예약 버튼 -->
+    
+                            <input type="hidden" value="" id="guestHidden" name="guests">
+                            <input type="hidden" value="" id="dateHidden" name="date">
+    
+                            <button class="detail--right__button" id="reserveBtn">Reserve</button>
 
-                        <input type="hidden" value="" id="guestHidden" name="guests">
-                        <input type="hidden" value="" id="dateHidden" name="date">
-
-                        <button class="detail--right__button" id="reserveBtn">Reserve</button>
+                        </th:block>
+        
 
                     
 

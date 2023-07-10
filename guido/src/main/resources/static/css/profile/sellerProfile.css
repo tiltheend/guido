@@ -134,6 +134,8 @@
 .seller-profile-top .profile_right{
     margin-left: 80px; 
     /* margin-right: 80px; */
+    width: 60%;
+    max-width: 1200px;
 }
 .seller-profile-top .profile_right .about-me{
     width: 100%;  height: auto;
@@ -157,6 +159,7 @@
 /* ----- 판매자 상품 리스트 ----- */
 .seller-profile-top .sales-list div{ /* 제목 + 상품 등록 아이콘 */
     display: flex; justify-content: space-between; align-items: center;
+    width: 100%;
 }
 .seller-profile-top .sales-list img{ /* 이미지로 넣으면 */
     width: 28px; height: 28px;
@@ -187,7 +190,8 @@
     /* width: 260px; height: 260px; */
     background-color: #FFE69A;
     border-radius: 15px; margin: 10px;
-    max-width: 40%;
+    /* max-width: 40%; */
+    max-width: 380px;
 }
 .seller-profile-top .sales-list-box .sale-img a{
         display: block; width: 100%; height: 100%;
@@ -196,14 +200,34 @@
     width: 100%; height: 100%;
     border-radius: 15px;
 }
+.seller-profile-top .sales-list-box li>div:last-child>span{ /* 별점 */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.seller-profile-top .sales-list-box li>div:last-child span>img{
+    width: 16px; height: 15px;
+    margin-right: 2px; 
+    align-items: center;
+    transform: translateY(1px);
+}
+.seller-profile-top .sales-list-box li>div:last-child span>span{
+    color: #0F4957;
+    /* font-weight: bold; */
+}
 
 /* 상품 리스트 내용*/
 .seller-profile-top .sales-list-box .sale-content{
     display: flex; flex-direction: column; 
     margin: 20px;
+    width: 100%;
     /* overflow: auto; height: 260px; */
 }
-.seller-profile-top .sales-list-box .sale-content>h2{ /* 상품 제목 */
+.seller-profile-top .sales-list-box .sale-content>a{
+    display: block; width: 100%;
+} 
+.seller-profile-top .sales-list-box .sale-content h2{ /* 상품 제목 */
     font-size: 1.375rem; font-weight: normal;
     margin-bottom: 16px;
     width: 100%; text-align: left;
@@ -220,7 +244,7 @@
 .seller-profile-top .sales-list-box .sale-content>p:first-of-type{ /* 로케이션 */
     font-size: 1rem; color: #5C5C5C;
     display: flex; align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     width: 100%; text-align: left;
     overflow: hidden;
     white-space: normal;
@@ -236,7 +260,7 @@
 .seller-profile-top .sales-list-box .sale-content>p{ /* 날짜 */
     font-size: 1rem; color: #5C5C5C;
     display: flex; align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     width: 100%; text-align: left;
     overflow: hidden;
     white-space: normal;
@@ -256,6 +280,11 @@
     -webkit-box-orient: vertical;
     margin-bottom: 2px;
 }
+.seller-profile-top .sales-list-box .sale-content>div>h3:last-child{
+    text-align: right;
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
 
 .seller-profile-top .sales-list-box .sale-content>p:last-of-type{ /* 언어 */
     font-size: 1rem; color: #5C5C5C;
@@ -268,6 +297,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    margin-bottom: 10px;
 }
 .seller-profile-top .sales-list-box .sale-content>p:last-of-type>img{
     width: 15px; height: 15px;
@@ -664,6 +694,9 @@
     .seller-profile-top{
         display: flex; justify-content: space-between;
     }
+    .seller-profile-top .profile_right{
+        width: 100%;
+    }
     /* 프로필 오른쪽 박스 - 판매자 소개 */
     .seller-profile-top .profile_right .about-me{
         grid-template-columns: repeat(2,1fr);
@@ -756,6 +789,9 @@
     .seller-profile-top {
         margin: 61px;
     }
+    .seller-profile-top .profile_right{
+        width: 100%;
+    }
     /* 프로필 오른쪽 박스 - 판매자 소개 */
     .seller-profile-top .profile_right .about-me{
         grid-template-columns: repeat(1,1fr);
@@ -768,7 +804,7 @@
     }
     /* 판매자 프로필 아래로 상품 리뷰 오게  */
 
-    .seller-profile-top .sales-list-more {
+    /* .seller-profile-top .sales-list-more {
         width: 80vw;
     }
     .seller-profile-top .review-list-more {
@@ -793,7 +829,7 @@
     .seller-profile-top .profile-box {
         margin: 0;
         margin-top: 80px;
-    }
+    } */
     .seller-profile-top .profile-left {
         position: relative;
     }
@@ -844,6 +880,9 @@
     }
     .seller-profile-top .sales-list-box .sale-content>p {
         font-size: 0.875rem;
+    }
+    .seller-profile-top .sales-list-box .sale-content>div>h3:last-child{
+        font-size: 1rem;
     }
     
 }

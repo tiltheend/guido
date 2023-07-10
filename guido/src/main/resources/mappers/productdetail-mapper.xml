@@ -25,6 +25,7 @@
 		<result property="productRating" column="PRODUCT_RATING"/>
 		<result property="reviewCount" column="REVIEW_COUNT"/>
 		<result property="reviewPercentage" column="REVIEW_PERCENTAGE"/>
+		<result property="courseName" column="MAIN_COURSE"/>
 		
 		<collection property="tourCourse" select="selectTourCourseList" 
 			column="PRODUCT_NO" javaType="java.util.ArrayList" ofType="TourCourse"/>	
@@ -132,6 +133,20 @@
 	</select>
 	 
 	 
+	 <!-- 모든 상품 조회 (스케줄러) -->
+	 <select id="selectProductList" resultMap="product_rm">
+		 SELECT * FROM "PRODUCT"
+	 </select>
+	 
+	 
+	 <!-- 스케줄러 - 마지막 일정이 현재 날짜보다 이른 경우 상태 변경 -->
+	 <update id="updateProductAvailability">
+		 UPDATE "PRODUCT"
+		 SET PRODUCT_STATE = 'E'
+		 WHERE PRODUCT_NO = #{productNo}"
+	 </update>
+	 
+	 
 	 <!--특정 상품 조회 -->
 	 <select id="selectProduct" resultMap="product_rm">
 		 SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE,
@@ -146,7 +161,10 @@
 			(SELECT AVG(REVIEW_STARS)*20
 				FROM "REVIEW" 
 				JOIN "PRODUCT" USING(PRODUCT_NO)
-				WHERE PRODUCT_NO = #{productNo}) REVIEW_PERCENTAGE
+				WHERE PRODUCT_NO = #{productNo}) REVIEW_PERCENTAGE,
+			(SELECT COURSE_NAME FROM TOUR_COURSE 
+				WHERE PRODUCT_NO = #{productNo}
+				AND BOSS_COURSE_FL = 'Y') MAIN_COURSE
 		FROM "PRODUCT"
 		JOIN "THEME" USING(THEME_CODE)
 		WHERE PRODUCT_NO = #{productNo}
@@ -223,6 +241,7 @@
 		 FROM "PRODUCT_DT"
 		WHERE PRODUCT_NO = #{productNo}
 		AND PRODUCT_DT_AVAILABILITY = 'Y'
+		ORDER BY PRODUCT_DT
 	 </select>
 	 
 	 

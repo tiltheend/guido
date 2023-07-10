@@ -21,19 +21,35 @@
 	 	<result property="filePath" column="FILE_PATH" />
 	</resultMap>
 	
-	<resultMap  type="Reservation" id="reservation_rm">
-		<id property="reservationNo" column="RESERVATION_NO" />
-	 	<result property="productNo" column="PRODUCT_NO" />
-	 	<result property="userNo" column="USER_NO" />
-	 	<result property="createDate" column="CREATE_DT" />
-	 	<result property="reservationState" column="RESERVATION_STATE" />
-	 	<result property="paymentMethod" column="PAYMENT_METHOD" />
-	 	<result property="guestCount" column="GUEST_COUNT" />
-	 	<result property="productDateNo" column="PRODUCT_DT_NO" />
-	 	
-	 	<result property="thumbnail" column="FILE_PATH" />
-	 	<result property="productName" column="PRODUCT_NAME" />
-	 	<result property="productDate" column="PRODUCT_DT" />
+	<resultMap type="Reservation" id="reservation_rm">
+		<id property="reservationNo" column="RESERVATION_NO"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="reservationState" column="RESERVATION_STATE"/>
+		<result property="paymentMethod" column="PAYMENT_METHOD"/>
+		<result property="guestCount" column="GUEST_COUNT"/>
+		<result property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="optionNo" column="OPTION_NO"/>
+		<result property="requestContent" column="REQUEST_CONTENT"/>
+		<result property="orderNumber" column="ORDER_NUMBER"/>
+		<result property="totalPrice" column="TOTAL_PRICE"/>
+		<result property="impUid" column="IMP_UID"/>
+		<result property="cancelReason" column="CANCEL_REASON"/>
+		
+		<result property="userName" column="USER_NAME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="productDate" column="PRODUCT_DT"/>
+		<result property="productPackage" column="PRODUCT_PACKAGE"/>
+		<result property="tourDuration" column="TOUR_DURATION"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="optionName" column="OPTION_NAME"/>
+		
+		<result property="guideLanguage" column="GUIDE_LANGUAGE"/>
+
+		<result property="primaryLanguage" column="PRIMARY_LANGUAGE"/>
+		<result property="faceImg" column="FACE_IMG"/>
+		<result property="thumbnail" column="THUMBNAIL" />
 	</resultMap>
 	
 	<resultMap type="Review" id="review_rm">
@@ -108,7 +124,7 @@
 	
 	<!-- 구매 내역 가져오기 (상품 번호, 썸네일) -->
 	<select id="reservationList" resultMap="reservation_rm">
-		SELECT PRODUCT_NO, FILE_PATH
+		SELECT PRODUCT_NO, FILE_PATH THUMBNAIL
 		FROM "FILE"
 		JOIN RESERVATION USING (PRODUCT_NO)
 		WHERE USER_NO = #{userNo}
@@ -137,6 +153,7 @@
 		ORDER BY 1 DESC
 		FETCH FIRST 3 ROWS ONLY
 	 </select>
+	 
 	 
 	 <!-- 리뷰 수 카운트 -->
 	 <select id="reviewCount" resultType="_int">
@@ -202,14 +219,17 @@
 	<!-- 구매 내역 가져오기 (자세한) -->
 	<select id="myReservation" resultMap="reservation_rm">
 		SELECT R.RESERVATION_NO, R.PRODUCT_NO, R.USER_NO, R.RESERVATION_STATE,
-		  R.PRODUCT_DT_NO, 
-		  F.FILE_PATH, TO_CHAR(PD.PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, P.PRODUCT_NAME
+		  R.PRODUCT_DT_NO, R.ORDER_NUMBER, R.TOTAL_PRICE, PO.OPTION_NAME, P.PRODUCT_PACKAGE, P.TOUR_DURATION,
+		  F.FILE_PATH THUMBNAIL, TO_CHAR(PD.PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, P.PRODUCT_NAME
 		FROM RESERVATION R
-		  LEFT JOIN (SELECT PRODUCT_NO, FILE_PATH, FILE_ORDER,
-		    ROW_NUMBER() OVER (PARTITION BY PRODUCT_NO ORDER BY FILE_ORDER) AS RN
-		    FROM "FILE") F ON F.PRODUCT_NO = R.PRODUCT_NO AND F.RN = 1
-		  JOIN PRODUCT_DT PD ON PD.PRODUCT_DT_NO = R.PRODUCT_DT_NO
-		  JOIN PRODUCT P ON P.PRODUCT_NO = R.PRODUCT_NO
+  		    JOIN PRODUCT_DT PD ON PD.PRODUCT_DT_NO = R.PRODUCT_DT_NO
+		    JOIN PRODUCT P ON P.PRODUCT_NO = R.PRODUCT_NO
+		    LEFT JOIN PRODUCT_OPTION PO ON PO.OPTION_NO = R.OPTION_NO
+		    LEFT JOIN (
+		      SELECT PRODUCT_NO, FILE_PATH, FILE_ORDER,
+		        ROW_NUMBER() OVER (PARTITION BY PRODUCT_NO ORDER BY FILE_ORDER) AS RN
+		      FROM "FILE"
+		    ) F ON F.PRODUCT_NO = R.PRODUCT_NO AND F.RN = 1
 		WHERE R.USER_NO = #{userNo}
 		ORDER BY PD.PRODUCT_DT DESC
 		FETCH FIRST 3 ROWS ONLY
@@ -220,13 +240,13 @@
 		SELECT * FROM (
 		  SELECT
 		    ROW_NUMBER() OVER (ORDER BY PD.PRODUCT_DT DESC) AS NUM,
-		    R.RESERVATION_NO, R.PRODUCT_NO, R.USER_NO,
-		    R.RESERVATION_STATE, R.PRODUCT_DT_NO,
-		    F.FILE_PATH, PD.PRODUCT_DT, P.PRODUCT_NAME
-		  FROM
-		    RESERVATION R
+		      R.RESERVATION_NO, R.PRODUCT_NO, R.USER_NO, R.RESERVATION_STATE,
+			  R.PRODUCT_DT_NO, R.ORDER_NUMBER, R.TOTAL_PRICE, PO.OPTION_NAME, P.PRODUCT_PACKAGE, P.TOUR_DURATION,
+			  F.FILE_PATH THUMBNAIL, TO_CHAR(PD.PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT, P.PRODUCT_NAME
+		  FROM RESERVATION R
 		    JOIN PRODUCT_DT PD ON PD.PRODUCT_DT_NO = R.PRODUCT_DT_NO
 		    JOIN PRODUCT P ON P.PRODUCT_NO = R.PRODUCT_NO
+		    LEFT JOIN PRODUCT_OPTION PO ON PO.OPTION_NO = R.OPTION_NO
 		    LEFT JOIN (
 		      SELECT PRODUCT_NO, FILE_PATH, FILE_ORDER,
 		        ROW_NUMBER() OVER (PARTITION BY PRODUCT_NO ORDER BY FILE_ORDER) AS RN

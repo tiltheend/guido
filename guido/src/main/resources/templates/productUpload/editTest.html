@@ -65,12 +65,16 @@
       <div class="tour-course">
         <!-- <div id="location"></div> -->
         <div class="create-course">
-          <th:block th:each="tourCourse : ${product.tourCourse}">
-            <input type="radio" name="tourCourse" class="hidden" th:id="'tourCourse'+ ${tourCourse.courseOrder}" th:value="${tourCourse.courseName}" >
-            <label class="tourCourse-item" th:for="'tourCourse'+ ${tourCourse.courseOrder}" th:text="${tourCourse.courseName}">
-              <i class="fa-sharp fa-solid fa-xmark" style="color: rgb(0, 0, 0);"></i>
+          <span th:each="tourCourse : ${product.tourCourse}">
+            <input type="radio" name="tourCourse" class="hidden" th:id="'tourCourse'+ ${tourCourse.courseOrder}" th:value="${tourCourse.courseName}">
+            <label class="tourCourse-item" th:for="'tourCourse'+ ${tourCourse.courseOrder}">
+              <span th:text="${tourCourse.courseName}"></span>
+              <i class="fa-sharp fa-solid fa-xmark delete-icon" style="color: rgb(0, 0, 0);"></i>
             </label>
-          </th:block>
+          </span>
+          
+          
+          
           
         </div>
       </div>  
@@ -86,7 +90,7 @@
       <input type="hidden" id="inputTimeHidden" name="tourDuration" value="">
       <input type="hidden" id="inputDayHidden" name="productPackage" oninput="updateTourValue3()" value="">
       <input type="hidden" name="regionName" id="regionName" value="">
-      <input typpe="hidden" name="tourCourse2" id="tourCourse" value="">
+      <input type="hidden" name="tourCourse2" id="tourCourse" value="">
     <main id="page3" class="page">
       <div class="greeting">
         <div class="typing title">
@@ -437,7 +441,7 @@
     </footer>
   </body>
   <script th:src="@{/js/productUpload/editTest.js}"></script>
-  <script th:src="@{/js/productUpload/editTyping.js}"></script>
+  <!-- <script th:src="@{/js/productUpload/editTyping.js}"></script> -->
   <script th:src="@{https://kit.fontawesome.com/f7459b8054.js}"
   crossorigin="anonymous"
 ></script>
@@ -466,7 +470,8 @@
     //     previewList[img.fileOrder].src = img.filePath;
     // }
 
-    console.log(tourCourseList);
+    // console.log(tourCourseList);
+    console.log(tourCourse);
     // console.log(tourCourse.length);
     let num = tourCourse.length;
     console.log(num);

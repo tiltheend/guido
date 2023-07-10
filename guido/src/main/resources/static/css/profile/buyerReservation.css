@@ -153,6 +153,9 @@
     /* align-items: center; */
     margin-bottom: 12px;
 }
+.buyer-profile-top .reservation-list-box>li>div>a{
+    margin: 20px;
+}
 .buyer-profile-top .reservation-list-box .reservation-img{ /* 구매자 썸네일 */
     max-width: 260px;
     min-width: 260px; 
@@ -215,7 +218,7 @@
     -webkit-box-orient: vertical;
     margin-bottom: 40px;
     margin-right: 8px;
-    line-height: 17px;
+    line-height: 22px;
 }
 .buyer-profile-top .reservation-content span{
     font-size: 1.375rem;

@@ -59,7 +59,7 @@ public class ProfileTouristController {
 			
 			model.addAttribute("user", user);
 			
-			System.out.println(user.getUserName()+" 가이드 프로필");
+//			System.out.println(user.getUserName()+" 가이드 프로필");
 			
 			// 가이드 자기 소개
 			User guide = GuideService.selectGuideInfo(userNo);
@@ -181,6 +181,18 @@ public class ProfileTouristController {
 		
 	}
 	
+	// 비동기로 리뷰 작성 옵션 불러오기
+	@ResponseBody
+	@PostMapping(value="/reviewOption", produces="application/json; charset=UTF-8")
+	public List<Review> reviewOption(@SessionAttribute("loginUser") User loginUser){
+
+		int userNo= loginUser.getUserNo();
+		
+		List<Review> reviewOption = service.addReviewList(userNo);
+		
+		return reviewOption;
+	}
+	
 	// 비동기로 리뷰 목록 불러오기 (최신 3개)
 	@ResponseBody
 	@PostMapping(value="/newReviewList", produces="application/json; charset=UTF-8")
@@ -267,20 +279,19 @@ public class ProfileTouristController {
 		map.put("userNo",loginUser.getUserNo());
 		
 		List<Reservation> moreReservationMore = service.myReservationMore(map);
-		
 		return moreReservationMore;
 	}
 	
 	// 비동기로 예약 목록 불러오기 (최신 3개)
-//	@ResponseBody
-//	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
-//	public List<Reservation> newReservationList(@RequestBody int userNo){
-//
-//		List<Reservation> newReservationList = service.myReservation(userNo);
-//		int reservationCount = service.reservationCount(userNo);
-//		
-//		return newReservationList;
-//	}
+	@ResponseBody
+	@PostMapping(value="/newReservationList", produces="application/json; charset=UTF-8")
+	public List<Reservation> newReservationList(@RequestBody int userNo){
+
+		List<Reservation> newReservationList = service.myReservation(userNo);
+		// int reservationCount = service.reservationCount(userNo);
+		
+		return newReservationList;
+	}
 	
 	// 투어리스트 위시 리스트로 이동
 	@GetMapping("/touristWishList")

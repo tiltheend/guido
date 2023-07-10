@@ -91,10 +91,10 @@ function toggleHeart() {
     if(document.querySelector(".heart-icon")!=null){
         
         let check;      // 관심상품 등록 여부
-        console.log(check);
+        // console.log(check);
 
         let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
-        console.log(productNo);
+        // console.log(productNo);
 
         /* 관심 상품 등록 O */
         if (heartIcon.classList.contains("selected")) {
@@ -108,7 +108,7 @@ function toggleHeart() {
 
         const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
 
-        console.log(selected);
+        // console.log(selected);
 
         fetch("/common/updateWishList",{
             method : "POST",
@@ -130,9 +130,12 @@ function toggleHeart() {
                         i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
                     }
                 }
-                console.log("위시 성공?");
+                // console.log("관심상품 등록 성공");
+
+                sendWish(productNo);
+
             } else {
-                console.log("관심상품 등록 실패");
+                // console.log("관심상품 등록 실패");
             }
     
         })

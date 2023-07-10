@@ -79,9 +79,11 @@
 
                     <li th:each="reservation : ${reservationList}">
                         <div>
-                            <span>예약 번호</span><span>12345678-12345678</span>
+                            <span>예약 번호</span>
+                            <a th:href="@{/reservation/reservation_info(reservation_no=${reservation.reservationNo})}">
+                                <span th:text="${reservation.orderNumber}">12345678-12345678</span>
+                            </a>
                         </div>
-                        <!-- (Y: 예약 완료, N: 예약 취소, D: 구매확정 완료) -->
                         <div th:with="state = ${reservation.reservationState}">
                             <span>주문 처리</span>
                             <span th:if="${state=='Y'}">예약 완료</span>
@@ -93,15 +95,20 @@
                                 <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
                             </div>
                             <div class="reservation-content">
-                                <h2 th:text="${reservation.productDate}">0000년 0월 0일 - 0월 0일</h2>
+                                <h2 th:with="package = ${reservation.productPackage}"> 
+                                    <th:block th:if="${package==1}">[[${reservation.productDate}]]
+                                        <th:block th:if="${reservation.optionName}">[ [[${reservation.optionName}]] ]</th:block> 
+                                    </th:block>
+                                    <th:block th:if="${package>1}">[[${reservation.productDate}]]</th:block>
+                                </h2>
                                 <h2 th:text="${reservation.productName}">상품 제목</h2>
-                                <span>KRW</span><span>000,000</span>
+                                <span>KRW</span><span th:text="${#numbers.formatInteger(reservation.totalPrice, 1, 'COMMA')}+ ' / total'">000,000</span>
                             </div>
                         </div>
                     </li>
                 </ul>
 
-                <button class="reservation-list-more">more sales list</button>
+                <button class="reservation-list-more">more reservation list</button>
 
             </div> <!-- // 판매자 판매 상품 -->
 

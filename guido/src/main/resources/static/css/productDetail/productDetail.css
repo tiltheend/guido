@@ -367,9 +367,7 @@ box-shadow:  5px 5px 8px #e2e2e2,
     width: 25%;
 }
 
-/* 상품 진행중 표시 */
-.detail--ongoing__title{
-    background-color: #D3305B;
+.detail--text__title>span{
     color: #ffffff;
     padding: 0 6px;
     display: inline-block;
@@ -384,11 +382,16 @@ box-shadow:  5px 5px 8px #e2e2e2,
     margin-top: 1px;
 }
 
-/* 상품명 + 상품 진행중 표시 div */
-.detail--text__title{
-    /* line-height: 150%; */
+/* 상품 진행중 표시 */
+.detail--ongoing__title{
+    background-color: #D3305B;
+
 }
 
+.detail--finished__title{
+    background-color: #231F20;
+    line-height: 28px !important;
+}
 
 /* 상품 평균 별점 div */
 .detail--div__rating{

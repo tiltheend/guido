@@ -78,6 +78,11 @@
                                         <div>Guided language: [[*{guideLanguage}]]</div>
                                     </div>
         
+                                    <div th:if="${product.productPackage==1}">
+                                        <img th:src="@{/images/productDetail/duration_icon.svg}">
+                                        <div>Duration: [[*{tourDuration}]] hr(s)</div>
+                                    </div>
+
                                     <div>
                                         <img th:src="@{/images/productDetail/receive_dollars_icon.svg}">
                                         
