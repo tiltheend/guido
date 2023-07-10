@@ -74,14 +74,15 @@ public class ProductUploadController {
 							 , RedirectAttributes ra
 							 , @RequestParam(value="productAddNotes", required=false) List<String> additionalList
 							 , @RequestParam(value="tourCourse2", required = true) String tourCourse2
-							 , @RequestParam(value="productDate", required = true) String productDate
+							 , @RequestParam(value="productOption", required = true) String productOption
 							 ) throws IllegalStateException, IOException, Exception{
 	
 //			List<TourCourse> tourCourse = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
 			
 //			System.out.println(tourCourse + tourCourse2);
 			
-
+			System.out.println(productOption);
+	
 		
 				
 	//		*로그인한 유저 번호 -> product에 세팅	
@@ -93,7 +94,7 @@ public class ProductUploadController {
 			   product.setProductAddNotes(String.join("^^^", additionalList));
 			}
 				
-			int productNo = service.productUpload(product, images, tourCourse2,productDate);
+			int productNo = service.productUpload(product, images, tourCourse2, productOption);
 		
 //		System.out.println(product);
 //	        String[] arr = str.split(",");
@@ -103,6 +104,8 @@ public class ProductUploadController {
 //	        }
 //		
         System.out.println(additionalList);
+        System.out.println(productOption);
+        
         
 		String message = null;
 		String path = "redirect:";

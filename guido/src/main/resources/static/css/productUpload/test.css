@@ -1190,6 +1190,21 @@ input[type='radio']:checked {
   align-items: center;
   justify-content: center;
 }
+.optionName-item {
+  border: 4px solid #5555;
+  border-radius: 15px;
+  padding: 12px;
+  margin: 5px;
+  box-shadow: 5px 5px 5px gray;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  gap: 3px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
 .theme-img {
   border: 4px solid #5555;
   border-radius: 20px;
@@ -1229,6 +1244,15 @@ input[type='radio']:checked + label.theme-img {
 }
 label.tourCourse-item {
   width: fit-content;
+}
+input[type='checkbox']:checked + label.optionName-item {
+  border: 4px solid #0f4957;
+  background-color: #408c8c;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 5px 5px 5px gray;
+  transition-duration: 0.55s !important;
 }
 
 .hidden {

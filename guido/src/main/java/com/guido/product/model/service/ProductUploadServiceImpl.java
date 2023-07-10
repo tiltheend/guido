@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 import com.guido.common.utility.Util;
@@ -46,7 +47,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 	//여행 상품 등록
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int productUpload(Product product, List<MultipartFile> images, String tourCourse2, String productDate)  throws IllegalStateException, IOException {
+	public int productUpload(Product product, List<MultipartFile> images, String tourCourse2, String productOption)  throws IllegalStateException, IOException {
 
 		int result = mapper.productUpload(product);
 		
@@ -93,9 +94,8 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 			
 			List<TourCourse> tourCourseList = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
 			List<TourCourse> tempTourCourseList = new ArrayList<>();
-			System.out.println(tourCourseList);
-			System.out.println(tourCourseList.get(0));
-			System.out.println(tourCourseList.size());
+//			System.out.println(tourCourseList);
+
 			
 			for (int j = 0; j < tourCourseList.size(); j++) {
 				
@@ -117,11 +117,63 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				result = mapper.insertTourCourseList(tempTourCourseList);
 			}
 			
-			List<ProductDate> productDateList = new Gson().fromJson(productDate, new TypeToken<List<ProductDate>>() {}.getType());
+			List<ProductOption> productOptionList = new Gson().fromJson(productOption, new TypeToken<List<ProductOption>>() {}.getType());
+			List<ProductDate> productDateList = new Gson().fromJson(productOption, new TypeToken<List<ProductDate>>() {}.getType());
+			List<ProductOption> tempProductOptionList = new ArrayList<>();
 			List<ProductDate> tempProductDateList = new ArrayList<>();
-			System.out.println(productDateList);
-			System.out.println(productDateList.size());
-			System.out.println(productDateList.get(0));
+			
+			
+			String optionNameString = productOptionList.get(0).getOptionName();
+
+			
+			String[] optionNameArr = optionNameString.split(",");
+
+			// 각 요소에서 공백을 제거합니다.
+			for (int i = 0; i < optionNameArr.length; i++) {
+				optionNameArr[i] = optionNameArr[i].trim();
+			}
+
+			// 결과를 출력합니다.
+			for (String time : optionNameArr) {
+			    System.out.println(time);
+			}
+			
+			
+			for(int i=0; i<productDateList.size(); i++) {
+				ProductDate pd = new ProductDate();
+				
+				pd.setProductNo(productNo);
+				pd.setProductDate(productDateList.get(i).getProductDate());
+				pd.setAvailability(productDateList.get(i).getAvailability());
+				tempProductDateList.add(pd);
+				
+				
+				result = mapper.insertProductDate(pd);
+				System.out.println(pd.getProductDateNo());
+				
+				
+				for(int j=0; j<productOptionList.size(); j++) {
+					
+					ProductOption po = new ProductOption();
+					
+					po.setProductNo(productNo);
+					po.setOptionRestCount(productOptionList.get(j).getOptionRestCount());
+					po.setOptionName(optionNameArr[j]);
+					po.setProductDateNo(pd.getProductDateNo());
+					tempProductOptionList.add(po);
+					
+					
+					if(result > 0) {
+						
+						result = mapper.insertProductOptionList(po);
+					}
+					
+				}
+				
+				
+			}
+		
+			
 			
 			
 		}

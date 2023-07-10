@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Product;
+import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.TourCourse;
 import com.guido.common.model.dto.TourTheme;
 
@@ -60,6 +62,25 @@ public interface ProductUploadMapper {
 	 * @return
 	 */
 	public int insertTourCourseList(List<TourCourse> tourCourseList);
+
+	
+	/** product Date insert
+	 * @param pd
+	 * @return
+	 */
+	public int insertProductDate(ProductDate pd);
+
+
+	/** 여행 날짜 insert
+	 * @param tempProductOptionList
+	 * @return
+	 */
+	public int insertProductDateList(List<ProductOption> tempProductOptionList);
+
+	public int insertProductOptionList(ProductOption po);
+
+	
+
 
 
 	
