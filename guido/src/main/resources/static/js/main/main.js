@@ -96,6 +96,10 @@ function toggleHeart() {
         let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
         // console.log(productNo);
 
+        let productName = heartIcon.parentElement.parentElement.querySelector('.product-name').getAttribute("data-productname");
+        // console.log(productName);
+        
+
         /* 관심 상품 등록 O */
         if (heartIcon.classList.contains("selected")) {
             check = 1;
@@ -132,7 +136,7 @@ function toggleHeart() {
                 }
                 // console.log("관심상품 등록 성공");
 
-                sendWish(productNo);
+                sendWish(productNo, productName);
 
             } else {
                 // console.log("관심상품 등록 실패");

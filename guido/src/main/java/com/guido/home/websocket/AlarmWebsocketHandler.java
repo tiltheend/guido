@@ -64,7 +64,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         
         Notification notice = objectMapper.readValue(message.getPayload(), Notification.class);
         // Message 객체 확인
-        System.out.println("객체 확인 : " + notice); 
+        // System.out.println("객체 확인 : " + notice); 
         
         // DB 삽입 서비스 호출
         
@@ -94,7 +94,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         
         	userNo = service.selectUserNo(notice.getProductNo());
         	
-        	noticeContent = notice.getSenderNo() + "님이 " + notice.getProductNo() + "를 관심상품으로 등록하였습니다.";
+        	noticeContent = "'" + notice.getProductName() + "'" + " 상품이 총 #건 관심상품으로 등록되었습니다.";
         	
         	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
         	notice.setNotificationContent(noticeContent);
@@ -118,7 +118,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         		int loginUserNo = ((User)temp.getAttribute("loginUser")).getUserNo();
         		
     			if(loginUserNo == userNo) {
-    				System.out.println("받는 사람 "+ userNo);
+    				// System.out.println("받는 사람 "+ userNo);
     				s.sendMessage(new TextMessage(new Gson().toJson(notice)));
 					break;
     			}
