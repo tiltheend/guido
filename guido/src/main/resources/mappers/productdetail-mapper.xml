@@ -133,6 +133,20 @@
 	</select>
 	 
 	 
+	 <!-- 모든 상품 조회 (스케줄러) -->
+	 <select id="selectProductList" resultMap="product_rm">
+		 SELECT * FROM "PRODUCT"
+	 </select>
+	 
+	 
+	 <!-- 스케줄러 - 마지막 일정이 현재 날짜보다 이른 경우 상태 변경 -->
+	 <update id="updateProductAvailability">
+		 UPDATE "PRODUCT"
+		 SET PRODUCT_STATE = 'E'
+		 WHERE PRODUCT_NO = #{productNo}"
+	 </update>
+	 
+	 
 	 <!--특정 상품 조회 -->
 	 <select id="selectProduct" resultMap="product_rm">
 		 SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PACKAGE, PRODUCT_CONTENT, PRODUCT_PRICE,
@@ -227,6 +241,7 @@
 		 FROM "PRODUCT_DT"
 		WHERE PRODUCT_NO = #{productNo}
 		AND PRODUCT_DT_AVAILABILITY = 'Y'
+		ORDER BY PRODUCT_DT
 	 </select>
 	 
 	 

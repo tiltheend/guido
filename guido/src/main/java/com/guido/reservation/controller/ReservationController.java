@@ -191,12 +191,10 @@ public class ReservationController {
 		map.put("orderNumber", orderNumber);
 		map.put("reservationNo", reservationNo);
 		
-		System.out.println(map);
 		
 		 if(reservationNo!=null)
 			 reservation = service.selectReservation(map);
 		 
-		 System.out.println(reservation);
 		 
 		 if(reservation==null)
 			 return "redirect:/";
@@ -279,6 +277,39 @@ public class ReservationController {
 		 
 		 return "redirect:/reservation/order_result?order_id=" + reservation.getOrderNumber();
 	 }
+	 
+	 
+	 // 가이드에게 보여지는 예약 확인창
+	 @GetMapping("/reservation_list")
+	 public String getReservationList(@RequestParam(value="reservation_no", required=false) String reservationNo,
+				Model model, @SessionAttribute("loginUser") User loginUser) {
+		 
+		 
+			Reservation reservation = null;
+			String orderNumber = null;
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("orderNumber", orderNumber);
+			map.put("reservationNo", reservationNo);
+			
+		 
+		 if(reservationNo!=null)
+			 reservation = service.selectReservation(map);		
+		 
+		 
+		 if(reservation.getGuideNo()!=loginUser.getUserNo())
+			 return "redirect:/";
+		 
+		 Product product = productService.selectProduct(reservation.getGuideNo());
+		 
+		 model.addAttribute("product", product);
+		 model.addAttribute("reservation", reservation);
+		 
+		 return "reservation/reservationList";
+		 
+	 }
+	 
 }
 	
 
