@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,8 @@ public class EmailServiceImpl implements EmailService{
 	
 	@Autowired
 	private EmailMapper mapper;
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
 	
 	// 메일 보내기 위해
 	@Autowired
@@ -125,7 +128,8 @@ public class EmailServiceImpl implements EmailService{
 			return 0; // 임시 비번 메일 전송 실패
 		}
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("tempPw", tempPw);
+			
+			map.put("tempPw", bcrypt.encode(tempPw));
 			map.put("email", email);
 			
 			System.out.println(map); // 임시 비번 확인
