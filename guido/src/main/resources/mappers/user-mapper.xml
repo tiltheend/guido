@@ -55,7 +55,7 @@
 		WHERE u."USER_STATE" = 'N'
 	</select>
 	
-	<!-- 투어리스트 회원가입 -->	
+	<!-- 회원가입 -->	
 	<insert id="signUp" parameterType="User" useGeneratedKeys="true">
 		
 		<selectKey order="BEFORE" resultType="_int" keyProperty="userNo">

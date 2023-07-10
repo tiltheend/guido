@@ -1,3 +1,4 @@
+*,*:focus{outline:none;}
 /* -----------------구매자 프로필---------------------- */
 
 /* 임시로 하나씩 안보이게 하기 위해 잠시 주는 것!! */
@@ -80,7 +81,7 @@
     width: 30px; margin-top: 14px;
     margin-left: 87px; margin-right: 30px;
 }
-
+/* ----------------------------------------------------------------- */
 /* 프로필 오른쪽 박스 */
 .buyer-profile-top .profile_right{
     margin-left: 80px; 
@@ -148,39 +149,82 @@ hr{
 .hidden,.hidden-area{
     display: none;
 }
+.hidden-area{display: flex;flex-direction: row;}
 
 /* 수정 버튼 누르면 나타나는 부분들 */
-/* 가이드 */
-/* 실명 */
+
+/* ----- uiverse ----- */
+.inputGroup:not(.emailPart>.inputGroup):not(.pwPart>.inputGroup):not(.namePart .inputGroup) {
+    margin: 0.7em 0;
+    width: 420px;
+    position: relative;
+}
+.namePart{
+    margin: 0.6em 0;
+    width: 420px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inputGroup input {
+    font-size: 100%;
+    padding: 0.8em;
+    height: 50px;
+    outline: none;
+    border: 1px solid #c5c5c5;
+    background-color: transparent;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: -0.15rem;
+}
+
+.inputGroup label {
+    font-size: 0.875rem;
+    position: absolute;
+    left: 0;
+    padding: 1em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: #6d6c6c;
+}
+
+.inputGroup :is(input:focus, input:valid)~label{
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    border-radius: 40%;
+    background-color: #fff;
+    color: #1c797d;
+}
+
+.inputGroup :is(input:focus, input:valid){
+    border-color: #1c797d;
+}
+
 .hidden-area{
     display: none;
 }
-.input-name-area{
+
+
+/* 실명 */
+/* 이름&성 칸 반반 */
+.last-name, .first-name{
     display: flex;
     flex-direction: column;
+    width: 207px;
+    position: relative;
 }
-.input-name{
-    display: flex;
-    flex-direction: row;
+.namePart .inputGroup{
+    width: 207px;
 }
-.inputFirstName{
-    width: 300px;
-    height: 50px;
-    border-radius: 8px;
-    border: 1px solid #c5c5c5;
-    padding-left: 10px;
-    margin: 30px 5px 20px 0;
-}
-.inputLastName{
-    width: 300px;
-    height: 50px;
-    border-radius: 8px;
-    border: 1px solid #c5c5c5;
-    padding-left: 10px;
-    margin: 30px 0 20px 5px;
-}
+
 /* 이름 수정 저장 버튼 */
-.input-name + button{
+.namePart + button{
     width: 90px;
     height: 42px;
     border-radius: 8px;
@@ -189,6 +233,9 @@ hr{
 }
 /* 비번 */
 /* form내 input 감싸는 부분 */
+.newPw-ment, .newPw-part{
+    display: none;
+}
 .password{
     display: flex;
     flex-direction: column;
@@ -217,7 +264,7 @@ hr{
     margin: 0 0 10px 0;
 }
 /* 수정 버튼 */
-.checkNewPw + button{
+.checkNewPw + button, .inputGroup ~ button{
     width: 90px;
     height: 42px;
     border-radius: 8px;
@@ -300,6 +347,37 @@ hr{
     border-radius: 8px;
     background-color: #1c797d;
     color: #fff;
+}
+
+/* 유효성 검사 메세지 */
+.error-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    color: rgba(255, 0, 0, 0.77);
+    justify-content: start;
+}
+.name-error{
+    width: 420px;
+    height: auto;
+    padding-left: 15px;
+    margin: 10px 0 10px 0px;
+    color: rgba(255, 0, 0, 0.77);
+    justify-content: start;
+}
+.possible-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    justify-content: start;
+    color: rgba(34, 139, 34, 0.77);
+}
+.normal-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    justify-content: start;
+    color: #5c5c5ca6;
 }
 
 
