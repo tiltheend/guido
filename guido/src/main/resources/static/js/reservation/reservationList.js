@@ -23,11 +23,13 @@ if(package==1){
 
 
 
+let modal = document.getElementById("faceImgModal");
+
 // 모달 창 토글
 function toggleModal() {
-  
-    let modal = document.getElementById("faceImgModal");
-    
     modal.style.display = (modal.style.display === "block") ? "none" : "block";
-    
-  }
+}
+
+modal.addEventListener('click', ()=>{
+    toggleModal();
+});

@@ -55,7 +55,7 @@ public class ProductDetailController {
 		Product product = service.selectProduct(productNo);
 		
 		if(product==null)
-			return "redirect:/";
+			return "error/404";
 		
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
