@@ -51,6 +51,36 @@
 		<result property="themeName" column="THEME_NAME"/>
 		<result property="themeImg" column="THEME_IMG"/>
 	</resultMap>
+	
+	<resultMap type="User" id="guide_rm" >
+		<id property="userNo" column="USER_NO"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="createDate" column="CREATE_DT"/>
+		<result property="languageSkill" column="LANGUAGE_SKILL"/>
+		<result property="superGuideFl" column="SUPER_GUIDE_FL"/>
+		<result property="countryCode" column="COUNTRY_CODE"/>
+		
+		<result property="reviewCount" column="REVIEW_COUNT"/>
+		<result property="starAverage" column="STARS_AVERAGE"/>
+		<result property="careerDate" column="CAREER_DT"/>
+	</resultMap>
+	
+		<resultMap  type="ProductOption" id="option_rm">
+		<id property="optionNo" column="OPTION_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="optionName" column="OPTION_NAME" />
+	 	<result property="optionRestCount" column="OPTION_REST" />
+	 	<result property="productDateNo" column="PRODUCT_DT_NO" />
+	</resultMap>
+	
+	
+	<resultMap  type="ProductDate" id="product_date_rm">
+		<id property="productDateNo" column="PRODUCT_DT_NO" />
+		<result property="productNo" column="PRODUCT_NO" />
+	 	<result property="productDate" column="PRODUCT_DT" />
+	 	<result property="availability" column="PRODUCT_DT_AVAILABILITY" />
+	</resultMap>
 	 
 	 <select id="selectTourTheme" resultMap="tourtheme_rm">
 		 SELECT * FROM THEME T
@@ -75,7 +105,7 @@
 					 #{themeCode}, 
 					  'N', 
 					  SYSDATE,
-					  'English',
+					  #{guideLanguage},
 					  0,
 					  #{regionName},
 					  #{tourDuration})

@@ -4,19 +4,28 @@ const $text3 = document.querySelector('.text3');
 const $text4 = document.querySelector('.text4');
 const $text5 = document.querySelector('.text5');
 const $text6 = document.querySelector('.text6');
+const $text7 = document.querySelector('.text7');
+const $text8 = document.querySelector('.text8');
+const $text9 = document.querySelector('.text9');
+const $text10 = document.querySelector('.text10');
+const $text11 = document.querySelector('.text11');
 const loginName = document.querySelector('#loginName').innerText;
 // const loginUserName = /*[[${session.loginUser.userName}]]*/ [];
 
 console.log(loginName);
 // const $text5 = document.querySelector('.text5');
 // 글자 모음
-const letters = [];
-letters.push(loginName + ' 가이드님, 환영합니다');
+const letters = [loginName + ' 가이드님, 환영합니다'];
 const letters2 = ['이제 가이드 하실 지역을 선택해주세요!'];
 const letters3 = ['여행 테마를 선택해주세요!'];
 const letters4 = ['이제 요금을 설정하세요.'];
 const letters5 = ['여행 기본 정보를 입력해주세요.'];
 const letters6 = ['여행 코스는 어디인가요?'];
+const letters7 = [loginName + '가이드님 여행만의 매력을 돋보이게 하세요!'];
+const letters8 = ['이제 ' + loginName + ' 가이드님 여행의 이름을 지어주세요.'];
+const letters9 = ['여행 일정과 여행 상품에 대한 설명을 작성해주세요.'];
+const letters10 = ['판매하실 여행 상품의 '];
+const letters11 = ['여행 일정과 여행 상품에 대한 설명을 작성해주세요.'];
 // const letters5 = ['여행 코스는 어디인가요?'];
 // 글자 입력 속도
 const speed = 50;
@@ -90,32 +99,36 @@ const typing6 = async () => {
 
   await wait(1000);
 };
+const typing7 = async () => {
+  const letter7 = letters7[i].split('');
 
-// const typing5 = async () => {
-//   const letter5 = letters5[i].split('');
+  while (letter7.length) {
+    await wait(speed);
+    $text7.innerHTML += letter7.shift();
+  }
 
-//   while (letter5.length) {
-//     await wait(speed);
-//     $text5.innerHTML += letter5.shift();
-//   }
+  await wait(1000);
+};
+const typing8 = async () => {
+  const letter8 = letters8[i].split('');
 
-//   await wait(1000);
-// };
-// 글자 지우는 효과
-// const remove = async () => {
-//   const letter = letters[i].split('');
+  while (letter8.length) {
+    await wait(speed);
+    $text8.innerHTML += letter8.shift();
+  }
 
-//   while (letter.length) {
-//     await wait(speed);
+  await wait(1000);
+};
+const typing9 = async () => {
+  const letter9 = letters9[i].split('');
 
-//     letter.pop();
-//     $text.innerHTML = letter.join('');
-//   }
+  while (letter9.length) {
+    await wait(speed);
+    $text9.innerHTML += letter9.shift();
+  }
 
-//   // 다음 순서의 글자로 지정, 타이핑 함수 다시 실행
-//   i = !letters[i + 1] ? 0 : i + 1;
-//   typing();
-// };
+  await wait(1000);
+};
 
 // 딜레이 기능 ( 마이크로초 )
 function wait(ms) {
@@ -129,4 +142,7 @@ setTimeout(typing3, 1000);
 setTimeout(typing4, 1000);
 setTimeout(typing5, 1000);
 setTimeout(typing6, 1000);
+setTimeout(typing7, 1000);
+setTimeout(typing8, 1000);
+setTimeout(typing9, 1000);
 // setTimeout(typing5, 1000);

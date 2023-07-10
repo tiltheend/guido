@@ -41,16 +41,24 @@ public class ProductUploadController {
 	@GetMapping("/upload")
 	public String productUpload(Model model
 //							 Product product
-//							 ,@SessionAttribute("loginMember") User loginMember
+							 ,@SessionAttribute("loginUser") User loginUser
 //							 ,@RequestParam(value="images", required=true) List<MultipartFile> productImages
-//							 , RedirectAttributes ra
+							 , RedirectAttributes ra
 							 ) throws IllegalStateException, IOException, Exception{
 		
 		List<TourTheme> tourTheme = service.selectTourTheme();
-		
+//		System.out.println(loginUser.getUserType());
+//		System.out.println(loginUser.getUserType().getClass().getSimpleName());
 			model.addAttribute("apiKey2", apiKey2);
 			model.addAttribute("tourTheme", tourTheme);
 			System.out.println("tourTheme" + tourTheme);
+//			System.out.println(loginUser.getLanguageSkill());
+			
+			if(loginUser.getProfileImage() == null ) {
+				return "redirect:/";
+			}else if(loginUser.getUserType().equals("T")){
+				return "redirect:/";
+			}
 			
 			return "productUpload/test";
 		
@@ -66,22 +74,26 @@ public class ProductUploadController {
 							 , RedirectAttributes ra
 							 , @RequestParam(value="productAddNotes", required=false) List<String> additionalList
 							 , @RequestParam(value="tourCourse2", required = true) String tourCourse2
+							 , @RequestParam(value="productDate", required = true) String productDate
 							 ) throws IllegalStateException, IOException, Exception{
 	
 //			List<TourCourse> tourCourse = new Gson().fromJson(tourCourse2, new TypeToken<List<TourCourse>>() {}.getType());
 			
 //			System.out.println(tourCourse + tourCourse2);
-			System.out.println(product);
+			
+
+		
 				
 	//		*로그인한 유저 번호 -> product에 세팅	
 			product.setUserNo(loginUser.getUserNo());
+			product.setGuideLanguage(loginUser.getLanguageSkill());
 			
 			
 			if(additionalList != null) {
 			   product.setProductAddNotes(String.join("^^^", additionalList));
 			}
 				
-			int productNo = service.productUpload(product, images, tourCourse2);
+			int productNo = service.productUpload(product, images, tourCourse2,productDate);
 		
 //		System.out.println(product);
 //	        String[] arr = str.split(",");
@@ -96,8 +108,10 @@ public class ProductUploadController {
 		String path = "redirect:";
 		
 		if(productNo > 0) {
+			System.out.println(product);
 			message = "상품이 등록 되었습니다.";
 			path += "/productDetail/" + "product/" + productNo;
+			
 		}else {
 			message = "상품 등록 실패,";
 			path += "/upload";
@@ -114,7 +128,6 @@ public class ProductUploadController {
 		public String productEdit(
 				@PathVariable("productNo") int productNo
 				,Model model) {
-			
 			
 			
 			Product product = productDetailService.selectProduct(productNo);
@@ -152,14 +165,14 @@ public class ProductUploadController {
 				,@RequestParam(value="images", required=false) List<MultipartFile> images
 				,@RequestParam(value="productAddPrice", required=false) List<String> additionalList
 				,@RequestParam(value="tourCourse2", required = true) String tourCourse2
-				,@RequestParam(value="deleteTourCourseList", required=false) String tourCourseDeleteList 
+//				,@RequestParam(value="deleteTourCourseList", required=false) String tourCourseDeleteList 
 				,@PathVariable("productNo") int productNo
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
 	
 				product.setProductAddNotes(String.join("^^^", additionalList));
 				product.setProductNo(productNo);
 	
-				int rowCount = service.productEdit(product,images,deleteList, tourCourse2, tourCourseDeleteList );
+				int rowCount = service.productEdit(product,images,deleteList, tourCourse2);
 				
 				String message = null;
 				String path = "redirect:";
