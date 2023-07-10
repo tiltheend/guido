@@ -86,9 +86,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public QNA selectQNA(int qnaNo) {
-		QNA qna = mapper.selectQNA(qnaNo);
-		System.out.println(qna);
-		return qna;
+		return mapper.selectQNA(qnaNo);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -145,5 +143,26 @@ public class AdminServiceImpl implements AdminService {
 		map.put("unprocessedQnaCount", mapper.countUnprocessedQna());
 		
 		return map;
+	}
+	
+	@Override
+	public Event selectEvent(int eventNo) {
+		return mapper.selectEvent(eventNo);
+	}
+	
+	@Override
+	public int updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl ) {
+		int result = mapper.updateEvent(event);
+		for(int i=0;i<imageDeleteFl.size();i++) {
+			if(imageDeleteFl.get(i).equals("y")) {
+				Map<String, Integer> map = new HashMap<>();
+				map.put("eventNo", event.getEventNo());
+				map.put("fileOrder", i);
+				mapper.deleteFile(map);
+			}
+		}
+		
+		
+		return 0;
 	}
 }

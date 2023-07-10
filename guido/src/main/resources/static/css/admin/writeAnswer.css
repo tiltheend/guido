@@ -1,8 +1,12 @@
 .content-area{
-    width: 800px;
+    width: 100%;
     margin:0 auto;
     display: flex;
     flex-direction: column;
+}
+
+@media screen {
+    
 }
 
 .write-header {
@@ -18,6 +22,7 @@
 }
 
 .q-title{
+    width: 100%;
     margin-top: 10px;
     border: 2px solid #C6DDDF;
     border-radius: 5px;

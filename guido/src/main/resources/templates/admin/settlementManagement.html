@@ -9,20 +9,10 @@
 
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
-    <style>
-        header {
-            width: 100%;
-            height: 80px;
-            background-color: #B1D8DA;
-        }
-    </style>
-    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header>
-        임시헤더
-    </header>
+    <th:block th:replace="@{admin/header}"></th:block>
     <main>
         <!-- 사이드 메뉴 -->
         <th:block th:replace="~{admin/sideMenu}"></th:block>
@@ -34,122 +24,40 @@
                 <h1 class="content-title">정산 관리</h1>
             </div>
             <hr>
-
-
-            <div>총 2건</div>
+            <div class="content-count-and-search">
+                <!-- 카운트 -->
+                <div class="count-container">총 <span th:text="${map.pagination.listCount}"></span>건</div>
+                <!-- 검색창 -->
+                <form th:action="${pageName}" method="get">
+                    <div class="search-container">
+                        <input type="text" name="query" id="search">
+                        <button id="searchBtn"><img th:src="@{/images/admin/searchBtn.svg}" alt="" id="searchImg"></button>
+                    </div>
+                </form>
+            </div>
             <table id="table">
                 <thead>
                     <tr>
-                        <th>상품 번호</th>
-                        <th>상품 제목</th>
-                        <th>구매자 이메일</th>
+                        <th>주문 번호</th>
+                        <th class="size1300">상품 제목</th>
+                        <th class="size1024">구매자 이메일</th>
                         <th>결제 금액(a)</th>
                         <th>수수료 10%(b)</th>
                         <th>총 정산 금액(a-b)</th>
+                        <th class="size500">정산 완료일</th>
                         <th>정산 상태</th>
-                        <th>정산 완료일</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>100</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>99</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>88</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>77</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>66</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>55</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>44</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>33</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>22</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>The Night tour of Chang.............................................</td>
-                        <td>user01@kh.or.kr</td>
-                        <td>250,000</td>
-                        <td>25,000</td>
-                        <td>225,000</td>
-                        <td>완료</td>
-                        <td>2023-06-02</td>
+                    <tr th:each="reservation:${map.list}" th:object="${reservation}">
+                        <td th:text="*{ORDER_NUMBER}">주문번호</td>
+                        <td class="size1300" th:text="*{PRODUCT_NAME}">상품 제목</td>
+                        <td class="size1024" th:text="*{USER_EMAIL}">구매자 이메일</td>
+                        <td th:text="*{TOTAL_PRICE}">결제 금액</td>
+                        <td th:text="*{COMMITION}">수수료</td>
+                        <td th:text="*{FINAL_PRICE}">정산 금액</td>
+                        <td class="size500"  th:text="*{DATE}">정산일</td>
+                        <td th:text="*{RESERVATION_STATE=='D'?'완료':'미완료'}">정산 상태</td>
                     </tr>
                 </tbody>
             </table>
