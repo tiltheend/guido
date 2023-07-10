@@ -101,7 +101,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         	notice.setSenderNo(notice.getSenderNo()); // 
         	notice.setProductNo(notice.getProductNo());
         	
-        	System.out.println("관심상품 : " + notice);
+        	// System.out.println("관심상품 : " + notice);
         	
         	break;
         }

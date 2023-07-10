@@ -98,14 +98,11 @@ function toggleHeart() {
 
         let productName = heartIcon.parentElement.parentElement.querySelector('.product-name').getAttribute("data-productname");
         // console.log(productName);
-        
 
-        /* 관심 상품 등록 O */
         if (heartIcon.classList.contains("selected")) {
-            check = 1;
+            check = 1; // 관심상품 등록 O
         } else {
-            /* 관심 상품 등록X */
-            check = 0;
+            check = 0; // 관심상품 등록 X
         }
         
         let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};

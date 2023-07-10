@@ -3,6 +3,21 @@
 <mapper namespace="com.guido.home.model.dao.AlarmMapper">
 	
 	
+	<resultMap id="notification_rm" type="Notification">
+		<id property="notificationNo" column="NOTIFICATION_NO" />
+		
+		<result property="receiverNo" column="RECEIVER_NO" />
+		<result property="senderNo" column="SENDER_NO" />
+		<result property="notificationContent" column="NOTIFICATION_CONTENT" />
+		<result property="createDt" column="CREATE_DT" />
+		<result property="notificationURL" column="NOTIFICATION_URL" />
+		<result property="notificationType" column="NOTIFICATION_TYPE" />
+		
+		<result property="userName" column="USER_NAME" />
+		<result property="productNo" column="PRODUCT_NO" />
+		<result property="productName" column="PRODUCT_NAME" />
+	</resultMap>
+	
 	
 	<!-- 알림 받는 회원 번호 -->
 	<select id="selectUserNo" resultType="int">
@@ -17,5 +32,17 @@
 		(NOTIFICATION_NO, RECEIVER_NO, SENDER_NO, NOTIFICATION_CONTENT, CREATE_DT, NOTIFICATION_URL, NOTIFICATION_TYPE)
 		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{receiverNo}, #{senderNo}, #{notificationContent}, SYSDATE, #{notificationURL}, #{notificationType})
 	</insert>
+	
+	<!-- 최근 알람 10개 조회 -->
+	<select id="selectAlarmList" resultMap="notification_rm">
+		SELECT NOTIFICATION_NO, RECEIVER_NO, SENDER_NO, PRODUCT_NO, USER_NAME, PRODUCT_NAME
+		FROM NOTIFICATION
+		JOIN "USER" ON USER_NO = SENDER_NO
+		JOIN PRODUCT USING (USER_NO)
+		WHERE USER_NO = #{userNo}
+		ORDER BY 1 DESC
+		FETCH FIRST 10 ROWS ONLY
+	</select>
+	
 	
 </mapper>
