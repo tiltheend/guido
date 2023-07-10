@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     reviewMoreBtnFn(); /* 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
     productwMoreBtnFn(); /* 상품 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
 
+    // prListFn(); /* 자기 소개 비동기 */
 })
 
 // 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기
@@ -1156,24 +1157,275 @@ let prBtn = document.querySelector('.pr-btn');
 prBtn.addEventListener("click",()=>{
     let prEditBox = document.querySelector(".seller-profile-top .pr-edit");
     prEditBox.style.display = "grid";
+
+    let aboutMe = document.querySelector(".seller-profile-top .about-me");
+    aboutMe.style.display = "none";
+
+    let prCancle = document.querySelector(".pr-edit-cancle");
+    prCancle.addEventListener("click",()=>{
+        prEditBox.style.display = "none";
+        aboutMe.style.display = "grid";
+    })
 })
 
 /* 자기 소개 수정 */
 function prEditFn(el){
-    fetch("/profile/guideReservationList",{
-        method : "POST",
-        headers : {"Content-Type" : "application/json"}, 
-        body : pageUserNo
+
+    let birthYear= document.querySelector("#birthYear").value;
+    let job = document.querySelector("#job").value;
+    let pets = document.querySelector("#pets").value;
+    let hobby = document.querySelector("#hobby").value;
+    let subLang = document.querySelector("#subLang").value;
+    let abroadExperience = document.querySelector("#abroadExperience").value;
+    let mbti = document.querySelector("#mbti").value;
+    let strength = document.querySelector("#strength").value;
+    let favoriteSong = document.querySelector("#favoriteSong").value;
+    let tmi = document.querySelector("#tmi").value;
+    let major = document.querySelector("#major").value;
+    let dopamine = document.querySelector("#dopamine").value;
+    let uselessTalent = document.querySelector("#uselessTalent").value;
+    let capList = document.querySelector("#capList").value;
+
+    let data = {
+        birthYear: birthYear,
+        job: job,
+        pets: pets,
+        hobby: hobby,
+        subLang: subLang,
+        abroadExperience: abroadExperience,
+        mbti: mbti,
+        strength: strength,
+        favoriteSong: favoriteSong,
+        tmi: tmi,
+        major: major,
+        dopamine: dopamine,
+        uselessTalent: uselessTalent,
+        capList: capList
+    };
+
+    // console.log(data);
+
+    // if(data == null){
+    //     alert("빈 값은 제출 하실 수 없습니다.");
+    // }
+
+    if(confirm("수정 하시겠습니까?")){
+        
+        
+        fetch("/profile/prEdit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        
+        .then(resp => resp.json())
+        .then(result => {
+            if(result>0){
+                alert("자기 소개가 수정 되었습니다.");
+
+                prListFn(); // 비동기로 조회
+
+                let prEditBox = document.querySelector(".seller-profile-top .pr-edit");
+                prEditBox.style.display = "none";
+            
+                let aboutMe = document.querySelector(".seller-profile-top .about-me");
+                aboutMe.style.display = "grid";
+
+            } else {
+                alert("수정에 실패하였습니다.");
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    } 
+
+}
+
+// 비동기로 조회
+function prListFn() {
+    fetch("/profile/prList", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify()
     })
     .then(resp => resp.json())
-    .then(result => {
-        if(result>0){
-            alert("자기 소개가 수정 되었습니다.");
-        } else {
-            alert("수정에 실패하였습니다.");
+    .then(pr => {
+        const ul = document.querySelector(".about-me");
+
+        // 기존 요소 제거
+        while (ul.firstChild) {
+            ul.firstChild.remove();
+        }
+        
+        if (pr.abroadExperience) {
+            let li = document.createElement("li");
+            const img1 = document.createElement("img");
+            img1.src = "/images/profile/abroadExperience.png";
+            const pre1 = document.createElement("pre");
+            pre1.innerText += "I have traveled to : ";
+            pre1.prepend(img1);
+            pre1.appendChild(document.createTextNode(pr.abroadExperience));
+            li.appendChild(pre1);
+            ul.appendChild(li);
+        }
+        
+        if (pr.subLang) {
+            let li = document.createElement("li");
+            const img2 = document.createElement("img");
+            img2.src = "/images/profile/subLang.png";
+            const pre2 = document.createElement("pre");
+            pre2.textContent = "Speaks ";
+            pre2.prepend(img2);
+            pre2.appendChild(document.createTextNode(pr.subLang));
+            li.appendChild(pre2);
+            ul.appendChild(li);
+        }
+        
+        if (pr.favoriteSong) {
+            let li = document.createElement("li");
+            const img3 = document.createElement("img");
+            img3.src = "/images/profile/favoriteSong.png";
+            const pre3 = document.createElement("pre");
+            pre3.textContent = "Favorite song : ";
+            pre3.prepend(img3);
+            pre3.appendChild(document.createTextNode(pr.favoriteSong));
+            li.appendChild(pre3);
+            ul.appendChild(li);
+        }
+        
+        if (pr.dopamine) {
+            let li = document.createElement("li");
+            const img4 = document.createElement("img");
+            img4.src = "/images/profile/dopamine.png";
+            const pre4 = document.createElement("pre");
+            pre4.textContent = "My dopamine : ";
+            pre4.prepend(img4);
+            pre4.appendChild(document.createTextNode(pr.dopamine));
+            li.appendChild(pre4);
+            ul.appendChild(li);
+        }
+        
+        if (pr.birthYear) {
+            let li = document.createElement("li");
+            const img5 = document.createElement("img");
+            img5.src = "/images/profile/birthDay.png";
+            const pre5 = document.createElement("pre");
+            pre5.textContent = "Born in the ";
+            pre5.prepend(img5);
+            pre5.appendChild(document.createTextNode(pr.birthYear));
+            li.appendChild(pre5);
+            ul.appendChild(li);
+        }
+        
+        if (pr.job) {
+            let li = document.createElement("li");
+            const img6 = document.createElement("img");
+            img6.src = "/images/profile/job.png";
+            const pre6 = document.createElement("pre");
+            pre6.textContent = "My work : ";
+            pre6.prepend(img6);
+            pre6.appendChild(document.createTextNode(pr.job));
+            li.appendChild(pre6);
+            ul.appendChild(li);
+        }
+        
+        if (pr.pets) {
+            let li = document.createElement("li");
+            const img7 = document.createElement("img");
+            img7.src = "/images/profile/pets.png";
+            const pre7 = document.createElement("pre");
+            pre7.textContent = "Live with ";
+            pre7.prepend(img7);
+            pre7.appendChild(document.createTextNode(pr.pets));
+            li.appendChild(pre7);
+            ul.appendChild(li);
+        }
+        
+        if (pr.hobby) {
+            let li = document.createElement("li");
+            const img8 = document.createElement("img");
+            img8.src = "/images/profile/hobby.png";
+            const pre8 = document.createElement("pre");
+            pre8.textContent = "My hobby : ";
+            pre8.prepend(img8);
+            pre8.appendChild(document.createTextNode(pr.hobby));
+            li.appendChild(pre8);
+            ul.appendChild(li);
+        }
+        
+        if (pr.mbti) {
+            let li = document.createElement("li");
+            const img9 = document.createElement("img");
+            img9.src = "/images/profile/MBTI.png";
+            const pre9 = document.createElement("pre");
+            pre9.textContent = "MBTI is : ";
+            pre9.prepend(img9);
+            pre9.appendChild(document.createTextNode(pr.mbti));
+            li.appendChild(pre9);
+            ul.appendChild(li);
+        }
+        
+        if (pr.strength) {
+            let li = document.createElement("li");
+            const img10 = document.createElement("img");
+            img10.src = "/images/profile/strength.png";
+            const pre10 = document.createElement("pre");
+            pre10.prepend(img10);
+            pre10.appendChild(document.createTextNode(pr.strength));
+            li.appendChild(pre10);
+            ul.appendChild(li);
+        }
+        
+        if (pr.tmi) {
+            let li = document.createElement("li");
+            const img11 = document.createElement("img");
+            img11.src = "/images/profile/TMI.png";
+            const pre11 = document.createElement("pre");
+            pre11.textContent = "TMI is ";
+            pre11.prepend(img11);
+            pre11.appendChild(document.createTextNode(pr.tmi));
+            li.appendChild(pre11);
+            ul.appendChild(li);
+        }
+        
+        if (pr.major) {
+            let li = document.createElement("li");
+            const img12 = document.createElement("img");
+            img12.src = "/images/profile/major.png";
+            const pre12 = document.createElement("pre");
+            pre12.textContent = "I majored in ";
+            pre12.prepend(img12);
+            pre12.appendChild(document.createTextNode(pr.major));
+            li.appendChild(pre12);
+            ul.appendChild(li);
+        }
+        
+        if (pr.uselessTalent) {
+            let li = document.createElement("li");
+            const img13 = document.createElement("img");
+            img13.src = "/images/profile/uselessTalent.png";
+            const pre13 = document.createElement("pre");
+            pre13.textContent = "Useless talent : ";
+            pre13.prepend(img13);
+            pre13.appendChild(document.createTextNode(pr.uselessTalent));
+            li.appendChild(pre13);
+            ul.appendChild(li);
+        }
+        
+        if (pr.capList) {
+            let li = document.createElement("li");
+            const img14 = document.createElement("img");
+            img14.src = "/images/profile/capList.png";
+            const pre14 = document.createElement("pre");
+            pre14.prepend(img14);
+            pre14.appendChild(document.createTextNode(pr.capList + " as guide"));
+            li.appendChild(pre14);
+            ul.appendChild(li);
         }
     })
-    .catch(err=>{
+    .catch(err => {
         console.log(err);
     });
 }
+

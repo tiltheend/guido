@@ -84,126 +84,132 @@
 
             <div class="seller-about"> <!-- 판매자 소개 -->
                 <h1><span>About Me !</span>
-                    <th:block th:if="${session.loginUser?.userNo == user.userNo}">
-                        <button th:if="${#lists.size(pr) == 0}" class="pr-btn" type="button">자기 소개 등록</button>
-                        <button th:if="${#lists.size(pr) > 0}" class="pr-btn" type="button">자기 소개 수정</button>
+                    <th:block th:if="${pr}">
+                        <th:block th:if="${session.loginUser?.userNo == user.userNo}">
+                            <button th:if="${#lists.size(pr) == 0}" class="pr-btn" type="button">자기 소개 등록</button>
+                            <!-- <button th:if="${#lists.size(pr) > 0}" class="pr-btn" type="button">자기 소개 수정</button> -->
+                        </th:block>
                     </th:block>
                 </h1>
-                <ul class="about-me" th:if="${#lists.size(pr) > 0}">
-                    <li th:if="${pr.abroadExperience}">
-                        <pre><img th:src="@{/images/profile/abroadExperience.png}">I have traveled to : [[${pr.abroadExperience}]] </pre>
-                    </li>
-                    <li th:if="${pr.subLang}">
-                        <pre><img th:src="@{/images/profile/subLang.png}">Speaks [[${pr.subLang}]]</pre>
-                    </li>
-                    <li th:if="${pr.favoriteSong}">
-                        <pre><img th:src="@{/images/profile/favoriteSong.png}">Favorite song :  [[${pr.favoriteSong}]]</pre>
-                    </li>
-                    <li th:if="${pr.dopamine}">
-                        <pre><img th:src="@{/images/profile/dopamine.png}">My dopamine: [[${pr.dopamine}]]</pre>
-                    </li>
-                    <li th:if="${pr.birthYear}">
-                        <pre><img th:src="@{/images/profile/birthDay.png}">Born in the [[${pr.birthYear}]]</pre>
-                    </li>
-                    <li th:if="${pr.job}">
-                        <pre><img th:src="@{/images/profile/job.png}">My work: [[${pr.job}]]</pre>
-                    </li>
-                    <li th:if="${pr.pets}">
-                        <pre><img th:src="@{/images/profile/pets.png}">Live with [[${pr.pets}]]</pre>
-                    </li>
-                    <li th:if="${pr.hobby}">
-                        <pre><img th:src="@{/images/profile/hobby.png}">My hobby: [[${pr.hobby}]]</pre>
-                    </li>
-                    <li th:if="${pr.mbti}">
-                        <pre><img th:src="@{/images/profile/MBTI.png}">MBTI is: [[${pr.mbti}]]</pre>
-                    </li>
-                    <li th:if="${pr.strength}">
-                        <pre><img th:src="@{/images/profile/strength.png}">[[${pr.strength}]]</pre>
-                    </li>
-                    <li th:if="${pr.tmi}">
-                        <pre><img th:src="@{/images/profile/TMI.png}">TMI is [[${pr.tmi}]]</pre>
-                    </li>
-                    <li th:if="${pr.major}">
-                        <pre><img th:src="@{/images/profile/major.png}">I majored in [[${pr.major}]]</pre>
-                    </li>
-                    <li th:if="${pr.uselessTalent}"> 
-                        <pre><img th:src="@{/images/profile/uselessTalent.png}">Useless talent: [[${pr.uselessTalent}]]</pre>
-                    </li>
-                    <li th:if="${pr.capList}">
-                        <pre><img th:src="@{/images/profile/capList.png}">[[${pr.capList}]] as guide</pre>
-                    </li>
-                </ul>
+                <th:block th:if="${pr}">
+                    <ul class="about-me" th:if="${#lists.size(pr) > 0}">
+                        <li th:if="${pr.abroadExperience}">
+                            <pre><img th:src="@{/images/profile/abroadExperience.png}">I have traveled to : [[${pr.abroadExperience}]] </pre>
+                        </li>
+                        <li th:if="${pr.subLang}">
+                            <pre><img th:src="@{/images/profile/subLang.png}">Speaks [[${pr.subLang}]]</pre>
+                        </li>
+                        <li th:if="${pr.favoriteSong}">
+                            <pre><img th:src="@{/images/profile/favoriteSong.png}">Favorite song :  [[${pr.favoriteSong}]]</pre>
+                        </li>
+                        <li th:if="${pr.dopamine}">
+                            <pre><img th:src="@{/images/profile/dopamine.png}">My dopamine: [[${pr.dopamine}]]</pre>
+                        </li>
+                        <li th:if="${pr.birthYear}">
+                            <pre><img th:src="@{/images/profile/birthDay.png}">Born in the [[${pr.birthYear}]]</pre>
+                        </li>
+                        <li th:if="${pr.job}">
+                            <pre><img th:src="@{/images/profile/job.png}">My work: [[${pr.job}]]</pre>
+                        </li>
+                        <li th:if="${pr.pets}">
+                            <pre><img th:src="@{/images/profile/pets.png}">Live with [[${pr.pets}]]</pre>
+                        </li>
+                        <li th:if="${pr.hobby}">
+                            <pre><img th:src="@{/images/profile/hobby.png}">My hobby: [[${pr.hobby}]]</pre>
+                        </li>
+                        <li th:if="${pr.mbti}">
+                            <pre><img th:src="@{/images/profile/MBTI.png}">MBTI is: [[${pr.mbti}]]</pre>
+                        </li>
+                        <li th:if="${pr.strength}">
+                            <pre><img th:src="@{/images/profile/strength.png}">[[${pr.strength}]]</pre>
+                        </li>
+                        <li th:if="${pr.tmi}">
+                            <pre><img th:src="@{/images/profile/TMI.png}">TMI is [[${pr.tmi}]]</pre>
+                        </li>
+                        <li th:if="${pr.major}">
+                            <pre><img th:src="@{/images/profile/major.png}">I majored in [[${pr.major}]]</pre>
+                        </li>
+                        <li th:if="${pr.uselessTalent}"> 
+                            <pre><img th:src="@{/images/profile/uselessTalent.png}">Useless talent: [[${pr.uselessTalent}]]</pre>
+                        </li>
+                        <li th:if="${pr.capList}">
+                            <pre><img th:src="@{/images/profile/capList.png}">[[${pr.capList}]] as guide</pre>
+                        </li>
+                    </ul>
+                </th:block>
                 <div class="pr-edit">
                     <label for="abroadExperience">
                         <img th:src="@{/images/profile/abroadExperience.png}"> <span class="txt-bg2">abroadExperience</span>
-                        <input th:if="${pr.abroadExperience}" type="text" th:value="${pr.abroadExperience}"/>        
-                        <input th:unless="${pr.abroadExperience}" type="text"/>
+                        <input id="abroadExperience" maxlength="100" th:if="${pr.abroadExperience}" type="text" th:value="${pr.abroadExperience}"/>        
+                        <input id="abroadExperience" maxlength="100" th:unless="${pr.abroadExperience}" type="text"/>
                     </label>
                     <label for="subLang">
                         <img th:src="@{/images/profile/subLang.png}"> <span class="txt-bg2">subLang</span>
-                        <input th:if="${pr.subLang}" type="text" th:value="${pr.subLang}"/>        
-                        <input th:unless="${pr.subLang}" type="text"/>
+                        <input id="subLang" maxlength="20" th:if="${pr.subLang}" type="text" th:value="${pr.subLang}"/>        
+                        <input id="subLang" maxlength="20" th:unless="${pr.subLang}" type="text"/>
                     </label>
                     <label for="favoriteSong">
                         <img th:src="@{/images/profile/favoriteSong.png}"> <span class="txt-bg2">favoriteSong</span>
-                        <input th:if="${pr.favoriteSong}" type="text" th:value="${pr.favoriteSong}"/>        
-                        <input th:unless="${pr.favoriteSong}" type="text"/>
+                        <input id="favoriteSong" maxlength="100" th:if="${pr.favoriteSong}" type="text" th:value="${pr.favoriteSong}"/>        
+                        <input id="favoriteSong" maxlength="100" th:unless="${pr.favoriteSong}" type="text"/>
                     </label>
                     <label for="dopamine">
                         <img th:src="@{/images/profile/dopamine.png}"> <span class="txt-bg2">dopamine</span>
-                        <input th:if="${pr.dopamine}" type="text" th:value="${pr.dopamine}"/>        
-                        <input th:unless="${pr.dopamine}" type="text"/>
+                        <input id="dopamine" maxlength="100" th:if="${pr.dopamine}" type="text" th:value="${pr.dopamine}"/>        
+                        <input id="dopamine" maxlength="100" th:unless="${pr.dopamine}" type="text"/>
                     </label>
                     <label for="birthYear">
                         <img th:src="@{/images/profile/birthDay.png}"> <span class="txt-bg2">birthYear</span>
-                        <input th:if="${pr.birthYear}" type="text" th:value="${pr.birthYear}"/>        
-                        <input th:unless="${pr.birthYear}" type="text"/>
+                        <input id="birthYear" th:if="${pr.birthYear}" type="number" th:value="${pr.birthYear}" min='1900'/>        
+                        <input id="birthYear" th:unless="${pr.birthYear}" type="number" min='1900'/>
                     </label>
                     <label for="job">
                         <img th:src="@{/images/profile/job.png}"> <span class="txt-bg2">job</span>
-                        <input th:if="${pr.job}" type="text" th:value="${pr.job}"/>        
-                        <input th:unless="${pr.job}" type="text"/>
+                        <input id="job" maxlength="100" th:if="${pr.job}" type="text" th:value="${pr.job}"/>        
+                        <input id="job" maxlength="100" th:unless="${pr.job}" type="text"/>
                     </label>
                     <label for="pets">
                         <img th:src="@{/images/profile/pets.png}"> <span class="txt-bg2">pets</span>
-                        <input th:if="${pr.pets}" type="text" th:value="${pr.pets}"/>        
-                        <input th:unless="${pr.pets}" type="text"/>
+                        <input id="pets" maxlength="100" th:if="${pr.pets}" type="text" th:value="${pr.pets}"/>        
+                        <input id="pets" maxlength="100" th:unless="${pr.pets}" type="text"/>
                     </label>
                     <label for="hobby">
                         <img th:src="@{/images/profile/hobby.png}"> <span class="txt-bg2">hobby</span>
-                        <input th:if="${pr.hobby}" type="text" th:value="${pr.hobby}"/>        
-                        <input th:unless="${pr.hobby}" type="text"/>
+                        <input id="hobby" maxlength="20" th:if="${pr.hobby}" type="text" th:value="${pr.hobby}"/>        
+                        <input id="hobby" maxlength="20" th:unless="${pr.hobby}" type="text"/>
                     </label>
                     <label for="mbti">
                         <img th:src="@{/images/profile/MBTI.png}"> <span class="txt-bg2">mbti</span>
-                        <input th:if="${pr.mbti}" type="text" th:value="${pr.mbti}"/>        
-                        <input th:unless="${pr.mbti}" type="text"/>
+                        <input id="mbti" maxlength="6" th:if="${pr.mbti}" type="text" th:value="${pr.mbti}"/>        
+                        <input id="mbti" maxlength="6" th:unless="${pr.mbti}" type="text"/>
                     </label>
                     <label for="strength">
                         <img th:src="@{/images/profile/strength.png}"> <span class="txt-bg2">strength</span>
-                        <input th:if="${pr.strength}" type="text" th:value="${pr.strength}"/>        
-                        <input th:unless="${pr.strength}" type="text"/>
+                        <input id="strength" maxlength="100" th:if="${pr.strength}" type="text" th:value="${pr.strength}"/>        
+                        <input id="strength" maxlength="100" th:unless="${pr.strength}" type="text"/>
                     </label>
                     <label for="tmi">
                         <img th:src="@{/images/profile/TMI.png}"> <span class="txt-bg2">tmi</span>
-                        <input th:if="${pr.tmi}" type="text" th:value="${pr.tmi}"/>        
-                        <input th:unless="${pr.tmi}" type="text"/>
+                        <input id="tmi" maxlength="100" th:if="${pr.tmi}" type="text" th:value="${pr.tmi}"/>        
+                        <input id="tmi" maxlength="100" th:unless="${pr.tmi}" type="text"/>
                     </label>
                     <label for="major">
                         <img th:src="@{/images/profile/major.png}"> <span class="txt-bg2">major</span>
-                        <input th:if="${pr.major}" type="text" th:value="${pr.major}"/>        
-                        <input th:unless="${pr.major}" type="text"/>
+                        <input id="major" maxlength="30" th:if="${pr.major}" type="text" th:value="${pr.major}"/>        
+                        <input id="major" maxlength="30" th:unless="${pr.major}" type="text"/>
                     </label>
                     <label for="uselessTalent"> 
                         <img th:src="@{/images/profile/uselessTalent.png}"> <span class="txt-bg2">uselessTalent</span>
-                        <input th:if="${pr.uselessTalent}" type="text" th:value="${pr.uselessTalent}"/>        
-                        <input th:unless="${pr.uselessTalent}" type="text"/>
+                        <input id="uselessTalent" maxlength="100" th:if="${pr.uselessTalent}" type="text" th:value="${pr.uselessTalent}"/>        
+                        <input id="uselessTalent" maxlength="100" th:unless="${pr.uselessTalent}" type="text"/>
                     </label>
                     <label for="capList">
                         <img th:src="@{/images/profile/capList.png}"> <span class="txt-bg2">capList</span>
-                        <input th:if="${pr.capList}" type="text" th:value="${pr.capList}"/>        
-                        <input th:unless="${pr.capList}" type="text"/>
+                        <input id="capList" maxlength="100" th:if="${pr.capList}" type="text" th:value="${pr.capList}"/>        
+                        <input id="capList" maxlength="100" th:unless="${pr.capList}" type="text"/>
                     </label>
+                    <button class="pr-edit-submit" onclick="prEditFn(this)" type="button">submit</button>
+                    <button class="pr-edit-cancle">cancle</button>
                 </div>
             </div>
                 

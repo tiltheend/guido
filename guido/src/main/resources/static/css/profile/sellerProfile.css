@@ -191,7 +191,7 @@
     display: grid; grid-template-columns: repeat(2,1fr);
     margin-bottom: 40px;
     display: none;
-    position: absolute;
+    /* position: absolute; */
     top: 72px; left: 0;
     background-color: #fff;
     margin-bottom: 50px;
@@ -210,7 +210,15 @@
 .txt-bg3 {background:linear-gradient(180deg,rgba(255,255,255,0) 50%, #FFE69A 50%);
 }
 
-
+.seller-profile-top .pr-edit button{
+    background-color: #1C797D; color: #fff;
+    width: 90%; height: 40px;
+    margin-top: 40px;
+    /* border-radius: 20px; */
+}
+.seller-profile-top .pr-edit button:hover{
+    background-color: #0F4957;
+}
 
 
 

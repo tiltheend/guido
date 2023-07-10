@@ -105,6 +105,27 @@ public interface ProfileGuideService {
 	List<Reservation> guideMoreReservationList(int userNo);
 
 
+	/** 자기 소개 수정하기
+	 * @param pr
+	 * @return
+	 */
+	int prEdit(PR pr);
+
+
+	/** pr 있는 지 체크
+	 * @param userNo
+	 * @return
+	 */
+	int prCheck(int userNo);
+
+
+	/** 자기 소개 삽입
+	 * @param pr
+	 * @return
+	 */
+	int prInsert(PR pr);
+
+
 
 
 

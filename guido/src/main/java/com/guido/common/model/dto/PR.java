@@ -27,4 +27,6 @@ public class PR {
 		private String dopamine;			// 요즘 나의 도파민
 		private String uselessTalent;		// 쓸모 없는 재능
 		private String capList;				// 가이드로서의 역량
+		
+		
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
@@ -183,6 +184,74 @@ public class ProfileGuideController {
 		return guideMoreReservationList;
 	}
 	
+	// 자기 소개 비동기로 조회하기
+	@ResponseBody
+	@PostMapping(value="/prList", produces="application/json; charset=UTF-8")
+	public PR prList(@SessionAttribute("loginUser") User loginUser){
+		
+		int userNo= loginUser.getUserNo();
+		
+		PR prList = service.selectPR(userNo);
+		
+		return prList;
+	}
+	
+	// 자기 소개 수정하기
+	@ResponseBody
+	@PostMapping("/prEdit")
+	public int prEdit(@RequestBody PR pr,
+			@SessionAttribute("loginUser") User loginUser){
+		
+		int userNo= loginUser.getUserNo();
+	
+		pr.setUserNo(userNo);
+		
+	    if (pr.getJob() == null) pr.setJob("");
+	    if (pr.getPets() == null) pr.setPets("");
+	    if (pr.getHobby() == null) pr.setHobby("");
+	    if (pr.getSubLang() == null) pr.setSubLang("");
+	    if (pr.getAbroadExperience() == null) pr.setAbroadExperience("");
+	    if (pr.getMbti() == null) pr.setMbti("");
+	    if (pr.getStrength() == null) pr.setStrength("");
+	    if (pr.getFavoriteSong() == null) pr.setFavoriteSong("");
+	    if (pr.getTmi() == null) pr.setTmi("");
+	    if (pr.getMajor() == null) pr.setMajor("");
+	    if (pr.getDopamine() == null) pr.setDopamine("");
+	    if (pr.getUselessTalent() == null) pr.setUselessTalent("");
+	    if (pr.getCapList() == null) pr.setCapList("");
+	    
+	    // pr 있는 지 체크
+	    int prCheck = service.prCheck(userNo);
+	    
+	    int result=-1;
+	    if(prCheck>0) { // 업데이트	
+	    	result = service.prEdit(pr);
+	    }
+	    else if(prCheck==0) { // 인설트 	
+	    	result = service.prInsert(pr);
+	    } else {
+	    	System.out.println("자기 소개 수정 실패");
+	    }
+	    
+		return result;
+		
+	}
+	
+//	// 자기 소개 등록하기
+//	@ResponseBody
+//	@PostMapping("prEdit")
+//	public int prEdit(PR pr,
+//			@SessionAttribute("loginUser") User loginUser){
+//		
+//		int userNo= loginUser.getUserNo();
+//		
+//		pr.setUserNo(userNo);
+//	
+//		int prEdit = service.prEdit(pr);
+//		
+//		return prEdit;
+//		
+//	}
 
 
 }

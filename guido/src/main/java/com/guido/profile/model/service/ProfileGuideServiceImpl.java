@@ -85,6 +85,7 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	}
 
 	// 리뷰 리플 삭제
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int reviewReplyDel(int reviewNo) {
 		return mapper.reviewReplyDel(reviewNo);
@@ -108,6 +109,28 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	public List<Reservation> guideMoreReservationList(int userNo) {
 		return mapper.guideMoreReservationList(userNo);
 	}
+
+	//  자기 소개 수정하기
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int prEdit(PR pr) {
+		return mapper.prEdit(pr);
+	}
+
+	// pr 있는 지 체크
+	@Override
+	public int prCheck(int userNo) {
+		return mapper.prCheck(userNo);
+	}
+
+	// 자기 소개 삽입
+	@Override
+	public int prInsert(PR pr) {
+		return mapper.prInsert(pr);
+	}
+	
+	
+	
 
 	
 
