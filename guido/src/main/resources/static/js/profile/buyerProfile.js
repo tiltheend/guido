@@ -458,7 +458,7 @@ function reviewAddFn(e){
                 reviewListFn();
                 reviewOptionFn(); // 리뷰 목록 다시 불러오기
 
-                // sendReview(productNo);
+                sendReview(productNo, productName); // 리뷰 등록 알림 
 
             } else if (result=0){
                 alert("리뷰 작성 실패");

@@ -32,11 +32,11 @@ function sendReview(productNo){
 	obj.senderNo = loginUserNo; // 보낸 회원 번호
 	// obj.userName = userName; // 보낸 회원 이름
 	obj.productNo = productNo; // 상품 번호
-	// obj.productName = productName; // 상품 이름
+	//obj.productName = productName; // 상품 이름
 	// 회원 타입?
 	obj.notificationType = "R";
 
-	console.log(obj);
+	// console.log(obj);
 
 	alarmSock.send(JSON.stringify(obj));
 }
@@ -58,7 +58,7 @@ function sendWish(productNo, productName){
 	// 관심상품 등록 개수
 	obj.notificationType = "L";
 
-	console.log(obj);
+	// console.log(obj);
 
 	alarmSock.send(JSON.stringify(obj));
 }

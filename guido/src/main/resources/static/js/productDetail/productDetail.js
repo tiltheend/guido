@@ -297,7 +297,12 @@ if(document.getElementById("wishHeart")!=null){
     
     const wishHeart = document.getElementById("wishHeart");
     let check;      // 관심상품 등록 여부
-    
+
+    let productNo = document.querySelector('.detail--text__title').getAttribute('data-productno');
+    let productName = document.querySelector('.detail--text__title').getAttribute('data-productname');
+    console.log(productNo);
+    console.log(productName);
+
     /* 관심 상품 등록O */
     if (wishHeart.checked) {
         check = 1;
@@ -306,7 +311,7 @@ if(document.getElementById("wishHeart")!=null){
         check = 0;
     }
     
-    const wishData = {"productNo" : product.productNo, "userNo": loginUserNo, "check": check};
+    const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
     // const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
     
     
@@ -323,8 +328,8 @@ if(document.getElementById("wishHeart")!=null){
             if(result==0){
                 console.log("관심상품 등록 실패");
             }
+            sendWish(productNo, productName)
 
-            sendWish(productNo);
     
         })
         .catch(err=>{
