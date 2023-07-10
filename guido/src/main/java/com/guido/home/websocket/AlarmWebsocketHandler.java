@@ -80,7 +80,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         	
         	userNo = service.selectUserNo(notice.getProductNo());
         	
-        	noticeContent = notice.getSenderNo() + "님이 '" + notice.getProductName() + "' 상품에 리뷰를 작성하였습니다.";
+        	noticeContent = "'" + notice.getProductName() + "' 상품에 리뷰가 작성되었습니다.";
         	
         	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
         	notice.setNotificationContent(noticeContent);
@@ -103,7 +103,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         	notice.setSenderNo(notice.getSenderNo());
         	notice.setProductNo(notice.getProductNo());
         	
-        	System.out.println("관심상품 : " + notice);
+        	// System.out.println("관심상품 : " + notice);
         	
         	break;
         }

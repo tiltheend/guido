@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <header>임시헤더</header>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="buyer-profile-top">
         <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
@@ -255,7 +255,7 @@
                                         </div>
                                         <p class="reviewer-name" th:text="${review.userName}">리뷰 작성자</p>
                                     </div>
-                                    <div class="sale-review-info">
+                                    <div class="sale-review-info" th:data-productname="${review.productName}">
                                         <p th:text="${review.productName}" th:data-productno="${review.productNo}">상품명</p>
                                         <div class="review-rating">
                                             <div class="review-star">

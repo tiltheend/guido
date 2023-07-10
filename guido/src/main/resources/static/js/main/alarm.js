@@ -16,7 +16,7 @@ let alarmSock = new SockJS("/alarm");
 */
 
 // 리뷰 등록 알람
-function sendReview(productNo){
+function sendReview(productNo, productName){
 
 	// [가이드]
 	// 리뷰 등록 : (상품 이름) 상품에 리뷰가 작성되었습니다.
@@ -28,15 +28,14 @@ function sendReview(productNo){
 	// 매개 변수 JS객체에 저장
 	let obj = {};
 
-	// 객체에 일치하는 key가 없다면 자동으로 추가
 	obj.senderNo = loginUserNo; // 보낸 회원 번호
 	// obj.userName = userName; // 보낸 회원 이름
 	obj.productNo = productNo; // 상품 번호
-	//obj.productName = productName; // 상품 이름
+	obj.productName = productName; // 상품 이름
 	// 회원 타입?
 	obj.notificationType = "R";
 
-	// console.log(obj);
+	console.log(obj);
 
 	alarmSock.send(JSON.stringify(obj));
 }

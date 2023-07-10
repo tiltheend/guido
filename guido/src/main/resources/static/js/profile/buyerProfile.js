@@ -378,6 +378,7 @@ let checkObj = {
 selectElement = document.querySelector(".review-write #reviewSaleList");
 let productNo;
 let productDtNo;
+let productName;
 // 상품 선택
 if(selectElement != null){
 
@@ -388,6 +389,8 @@ if(selectElement != null){
         // 속성 값 가져오기
         productNo = selectedOption.getAttribute("data-productno");
         productDtNo = selectedOption.getAttribute("data-productdtno");
+        productName = selectedOption.innerText;
+        // console.log("옵션 선택 됐을 때" + productName);
     
         if(productNo){
             if(productDtNo){
@@ -412,7 +415,8 @@ selectedStarScore.forEach(star => {
 /* 리뷰 등록 */
 function reviewAddFn(e){
     
-
+    // console.log("함수 안에" + productName);
+    
     if(!checkObj.selectElement){
         e.preventDefault();
         alert("상품을 선택해주세요.")
