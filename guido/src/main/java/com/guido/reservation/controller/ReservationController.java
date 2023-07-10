@@ -203,7 +203,7 @@ public class ReservationController {
 		 Product product = productService.selectProduct(reservation.getProductNo());
 		 
 		 if(reservation.getUserNo()!=loginUser.getUserNo())
-			 return "redirect:/";
+			 return "error/404";
 		 
 		 int orderPrice = 0;
 		 

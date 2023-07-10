@@ -187,7 +187,8 @@
                                 <div class="detail--title__pr">About Guide!</div>
         
                     
-                                <div class="detail--container__pr"  th:if="${#lists.size(pr) > 0}">
+                                <!-- <div class="detail--container__pr"  th:if="${#lists.size(pr) > 0}"> -->
+                                <div class="detail--container__pr"  th:if="${pr}">
                     
                                     <div class="detail--item__pr" th:if="${pr.abroadExperience}">
                                         <img th:src="@{/images/profile/abroadExperience.png}">
@@ -682,6 +683,7 @@
     </form>
     
 
+    <!-- 예약 전 얼굴 인증 사진 업로드 모달 -->
     <form th:action="@{/productDetail/faceImageUpload}" method="POST" enctype="multipart/form-data">
         <div id="faceImgModal" class="modal">
             <div class="modal-container">
@@ -706,6 +708,13 @@
             </div>
         </div>
     </form>
+
+
+    <!-- 원본 이미지 모달 -->
+    <div class="modal2">
+        <span class="close2">&times;</span>
+        <img class="modal_content2">
+    </div>
 
 
 

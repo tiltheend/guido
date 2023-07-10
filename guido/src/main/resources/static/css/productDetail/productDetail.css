@@ -1565,6 +1565,57 @@ td.select-day-td div.inactive{
 
 
 
+/* 상품 이미지 모달 */
+.modal2 {
+    display: none; /* 모달창 숨겨 놓기 */
+    position: fixed; 
+    z-index: 1; /* 모달창을 제일 앞에 두기 */
+    padding-top: 100px;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto; /* 스크롤 허용 auto */
+    cursor: pointer; /* 마우스 손가락모양 */
+    background-color: rgba(0, 0, 0, 0.8);
+}
+  /* 모달창 이미지 */
+.modal_content2 {
+    margin: auto;
+    display: block;
+    width: 50%; height: auto;
+    max-width: 1000px;
+    border-radius: 10px;
+    animation-name: zoom;
+    animation-duration: 0.3s;
+}
+  /* 모달창 애니메이션 추가 */
+@keyframes zoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+  /* 닫기 버튼 꾸미기 */
+.close2 {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 60px;
+    font-weight: 100;
+    transition: 0.3s;
+}
+.close2:hover, .close2:focus{
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+  /* 슬라이드 이미지 */
+.detail--silde__item-img{
+cursor: pointer;
+}
+
+
+
 /* 반응형 */
 
 @media screen and (max-width : 767px) {
