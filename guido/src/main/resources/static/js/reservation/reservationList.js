@@ -1,12 +1,12 @@
 
-const reservatonDate = document.getElementById("reservatonDate");
+const reservationDate = document.getElementById("reservationDate");
 let laterDate = new Date(productDate);
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 let dayOfWeek = daysOfWeek[laterDate.getDay()];
 
 if(package==1){
 
-    reservatonDate.innerText = productDate + "(" + dayOfWeek+ ") " + optionName;
+    reservationDate.innerText = productDate + "(" + dayOfWeek+ ") " + optionName;
     
 }else{
 
@@ -18,7 +18,7 @@ if(package==1){
     
     dayOfWeek = daysOfWeek[laterDate.getDay()];
 
-    reservatonDate.innerText = outputText + laterDate + "(" + dayOfWeek + ") ";
+    reservationDate.innerText = outputText + laterDate + "(" + dayOfWeek + ") ";
 }
 
 

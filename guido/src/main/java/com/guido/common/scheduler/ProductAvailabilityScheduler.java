@@ -22,8 +22,18 @@ public class ProductAvailabilityScheduler {
 	@Autowired
 	private ProductDetailService service;
 	
-	@Scheduled(cron = "0 0 12 * * ?")
+	@Scheduled(cron = "0 0 0,12 * * ?")
+//	@Scheduled(cron = "0 * * * * ?")
 	public void executeTask() throws ParseException {
+		
+		
+		List<ProductDate> pdList = service.selectPassedDateList();
+		
+		// 현재 날짜보다 이전인 일정 사용 불가 처리
+		for(ProductDate pd : pdList) {
+			service.updatePassedDateList(pd);
+		}
+		
 		
 		List<Product> productList = service.selectProductList();
 		
@@ -33,9 +43,7 @@ public class ProductAvailabilityScheduler {
 			
 			if(productDateList.size()!=0) {
 				
-				
 				String productLastDate = productDateList.get(productDateList.size()-1).getProductDate();
-				
 				
 				// 현재 날짜와 시간을 가져옴
 				Date currentDate = new Date();

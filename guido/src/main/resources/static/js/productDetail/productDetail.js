@@ -179,6 +179,7 @@ if(document.querySelector(".detail--right__price-total")!=null){
         if(dateHidden.value==""){
             alert("날짜를 선택해주세요!");
             e.preventDefault();
+            return;
         }
 
 

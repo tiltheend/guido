@@ -202,7 +202,29 @@ public class ReservationServiceImpl implements ReservationService{
 			
 			// 예약 성공
 			if(result>0) {
-				return mapper.updateAvailability(reservation);
+				
+				// 예약 가능 수량(1박 : 옵션 or n박 : 날짜) 업데이트
+				mapper.updateAvailability(reservation);
+
+				// 당일 상품의 경우
+				if(reservation.getProductPackage()==1) {
+					// PRODUCT_DT의 모든 옵션 조회 후 구매 가능 수량이 모두 0이면
+					// 해당 일정(날짜) PRODUCT_DT_AVAILABILITY = 'N' 처리
+					if(mapper.selectCountCanReserveOption(reservation)==0) {
+	
+						// 임의로 0 처리
+						reservation.setProductPackage(0);
+						// 해당 일정(날짜) 구매 불가능하도록 업데이트
+						mapper.updateAvailability(reservation);
+					}
+				}
+				
+				// 특정 상품의 모든 일정(날짜) 구매 가능 수량 조회 후 구매 가능한 날짜가 없다면
+				if(mapper.selectCountCanReserveDate(reservation) == 0)
+					return mapper.updateProductUnavailable(reservation);
+				else
+					return 1;
+				
 			}
 			
 		}else 
@@ -223,6 +245,7 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	// 예약 취소
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void reservationCancel(Reservation reservation) throws IOException {
 	 
 	    if(!"".equals(reservation.getImpUid())) {
@@ -233,8 +256,38 @@ public class ReservationServiceImpl implements ReservationService{
 	    
 	    int result = mapper.reservationCancel(reservation);
 	    
-	    if(result>0)
-	    	mapper.updateDateOrOption(reservation);
+	    if(result>0) {
+	    	
+	    	// 예약 가능 수량(1박: 시간대, n박:옵션) 업데이트
+	    	int result2 = mapper.updateDateOrOption(reservation);
+	    	
+	    	if(result2>0) {
+	    		
+	    		int productPackage = reservation.getProductPackage();
+	    		
+	    		// 1박의 경우 예약 가능 
+	    		if(productPackage==1) {
+	    			
+	    			// 특정 PROUDCT_DT(일정)의 모든 옵션(시간대) 조회 후 구매 가능 수량이 0 이상이면
+	    			if(mapper.selectCountCanReserveOption(reservation)>0) {
+	    				
+	    				// PROUDCT_DT 테이블의 PRODUCT_DT_AVAILABILITY = 'Y' 처리 
+	    				//  -> 특정 일정 구매 가능하도록 업데이트(임의로 -1 처리)
+	    				reservation.setProductPackage(-1);
+	    				mapper.updateDateOrOption(reservation);
+	    			}
+	    		}
+	    		
+	    		// 구매 가능한 일정 수 조회 후 PRODUCT_DT_AVAILABILITY가 하나라도 'Y' 인 경우
+	    		if(mapper.selectCountCanReserveDate(reservation)>0) {
+	    			
+	    			// 특정 상품 판매중으로 변경
+	    			mapper.updateProductAvailability(reservation);
+	    		}
+	    			
+	    	}
+	    		
+	    }
 	    
 	}
 

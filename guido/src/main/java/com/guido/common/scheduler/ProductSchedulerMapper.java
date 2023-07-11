@@ -14,6 +14,5 @@ public interface ProductSchedulerMapper {
 
 	// 스케줄러 - 마지막 일정이 현재 날짜보다 이른 경우 상태 변경
 	void updateProductAvailability(int productNo);
-
 	
 }
