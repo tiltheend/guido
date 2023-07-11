@@ -71,6 +71,8 @@
 		<result property="superGuideFl" column="SUPER_GUIDE_FL"/>
 		<result property="countryCode" column="COUNTRY_CODE"/>
 		
+		<result property="userType" column="USER_TYPE"/>
+		
 		<result property="reviewCount" column="REVIEW_COUNT"/>
 		<result property="starAverage" column="STARS_AVERAGE"/>
 		<result property="careerDate" column="CAREER_DT"/>

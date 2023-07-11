@@ -49,12 +49,12 @@ public class ProfileTouristController {
 		
 		String path;
 		// 가이드인지 판매자인지 체크 ( userType: 1 == G / 0 == T)
-		int userType = service.userTypeCheck(userNo);
+//		int userType = service.userTypeCheck(userNo);
 		
 		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
 		User user = service.userInfo(userNo);
 		
-		if(userType == 1) { // 가이드 일 경우
+		if(user.getUserType().equals("G")) { // 가이드 일 경우
 			path="profile/sellerProfile";
 			
 			model.addAttribute("user", user);
@@ -91,7 +91,7 @@ public class ProfileTouristController {
 			model.addAttribute("reviewCount", reviewCount);
 
 			
-		} else if(userType == 0) { // 여행객 일 경우
+		} else if(user.getUserType().equals("T")) { // 여행객 일 경우
 			path="profile/buyerProfile";
 			
 			model.addAttribute("user", user);
@@ -121,7 +121,7 @@ public class ProfileTouristController {
 			model.addAttribute("addReviewList", addReviewList);
 			
 			
-		} else {
+		} else{
 			path="common/main";
 			System.out.println("혹시 관리자?");
 		}
