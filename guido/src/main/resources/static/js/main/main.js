@@ -128,6 +128,7 @@ function toggleHeart() {
 
             } else {
                 // console.log("관심상품 등록 실패");
+                alert("로그인 후 사용 가능합니다.");
             }
     
         })
@@ -272,13 +273,14 @@ function loadProductByTheme(themeCode) {
             const priceDiv = document.createElement("div");
 
             const priceText = document.createElement("p");
-            priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // 천의 자리에 콤마 추가
+            const formattedPrice = new Intl.NumberFormat('en-US').format(themeProduct.productPrice);
+            priceText.innerHTML = `₩ ${formattedPrice} / total`;
             priceDiv.appendChild(priceText);
 
             salesText.appendChild(priceDiv);
-
             productRow.appendChild(salesText); 
-
             productListContainer.appendChild(productRow);
         }
 

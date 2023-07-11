@@ -49,6 +49,9 @@ whenButton.addEventListener('click', () => {
   // whenModal.style.display = 'block';
   // /* toggleModal(whenModal); */
   modalsBG.style.display = 'block';
+  document.querySelector("input[name='firstday']").focus()
+
+  
 });
 
 guestButton.addEventListener('click', () => {
