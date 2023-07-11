@@ -6,7 +6,7 @@
 /* ----- 판매자 프로필 ----- */
 .seller-profile-top{
     margin:80px;
-    margin-top: 160px;
+    margin-top: 140px; margin-bottom: 40px;
     /* display: flex; justify-content: space-between; */
     display: flex; justify-content: space-around;
 }
@@ -167,7 +167,7 @@
         margin: 0;
         margin-top: 20px;
         position: absolute;
-        top: 80px;
+        top: -80px;
     }
     .seller-profile-top .seller-btn button {
         justify-content: space-around;

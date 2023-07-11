@@ -7,13 +7,9 @@
     <title>Guido</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/profile/sellerProfile.css}">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;
-        position:absolute; top: 0;}
-    </style>
 </head>
 <body>
-    <header>임시헤더</header>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="seller-profile-top" th:object="${user}">
 
@@ -216,9 +212,11 @@
                 <div> <!-- 제목 -->
                     <h1>Sales List (<span th:text="${productCount}">구매내역 갯수</span>)</h1>
                     <!-- <img th:src="@{/images/profile/saleAdd.png}" alt="saleAdd"> -->
-                    <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
-                    </svg>
+                    <a th:href="@{/upload}">
+                        <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
+                        </svg>
+                    </a>
                 </div>
 
                 <ul class="sales-list-box">
@@ -375,16 +373,14 @@
     </div>
 
     <script th:inline="javascript">
-
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>       
     
     <script th:src="@{/js/profile/sellerProfile.js}"></script>                   
-    <script th:src="@{/js/profile/profileEdit.js}"></script>                   
+    <script th:src="@{/js/profile/profileEdit.js}"></script> 
+    
+    <th:block th:replace="~{/common/footer}"></th:block>
 </body>
 </html>

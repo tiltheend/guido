@@ -344,10 +344,6 @@
     </script>
 
     <script th:inline="javascript">
-
-        // const message = /*[[${message}]]*/  "전달 받은 message";
-        // if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";

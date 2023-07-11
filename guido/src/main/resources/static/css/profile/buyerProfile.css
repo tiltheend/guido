@@ -11,10 +11,10 @@
 /* ----- 구매자 프로필 ----- */
 .buyer-profile-top{
     margin:80px;
-    margin-top: 140px;
+    margin-top: 140px; margin-bottom: 80px;
     /* display: flex; justify-content: space-between; */
     display: flex; justify-content: space-around;
-    margin-bottom: 80px;
+
 }
 
 /* 프로필 위 가이드 배너 */
