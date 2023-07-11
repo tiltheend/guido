@@ -383,3 +383,19 @@ main {
 .recent-message{
 	text-align: left;
 }
+
+/* 나현 커스텀 */
+.chatting-h3{
+	margin-top: 60px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.chatting-h3 img{
+	width: 32px; height: 32px;
+	margin-right: 10px;
+}
+.chatting-h3 h3{
+	
+}

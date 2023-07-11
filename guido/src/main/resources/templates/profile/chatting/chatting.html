@@ -19,6 +19,11 @@
 
 		<th:block th:replace="~{/common/header}">header.html</th:block>
 
+		<div class="chatting-h3">
+			<img th:src="@{images/chattingIcon.png}" alt="chattingIcon">
+			<h3>Chatting</h3>
+		</div>
+		
 		<button id="addTarget">추가</button>
 
 		<div id="addTargetPopupLayer" class="popup-layer-close">  
@@ -41,7 +46,7 @@
 				<li class="result-row">일치하는 회원이 없습니다</li> -->
 			</ul>
 		</div>
-	
+
 		<div class="chatting-area">
 			<ul class="chatting-list">
 				<th:block th:each="room : ${roomList}">
