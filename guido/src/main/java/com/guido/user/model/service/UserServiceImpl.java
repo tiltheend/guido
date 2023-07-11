@@ -54,7 +54,9 @@ public class UserServiceImpl implements UserService {
 		if(result>0) { // 성공하면
 			int inputUserNo = mapper.signUpUserNo(inputUser); // userNo 가져와서 (select)
 			inputUser.setUserNo(inputUserNo); // userNo set 하고 
-			if(inputUser.getUserType().equals("T")) result = mapper.insertTourist(inputUser); // TOURIST 테이블 insert
+			if(inputUser.getUserType().equals("T")) { // TOURIST 테이블 insert
+				result = mapper.insertTourist(inputUser);
+			} 
 			if(inputUser.getUserType().equals("G")) result = mapper.insertGuide(inputUser); // GUIDE 테이블 insert
 		}else { // 실패하면 실패 
 			result = 0;

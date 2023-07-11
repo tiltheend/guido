@@ -218,13 +218,12 @@ nameBtn.addEventListener("click",e=>{
         headers : {'Content-Type' : 'application/json'},
         body : JSON.stringify(userName)
     })
-    .then(resp => resp.text())
-    .then(result => {
-        if(result==0){ //실패하면
+    .then(resp => resp.json())
+    .then(loginUser => {
+        if(!loginUser){ //실패하면
             alert("이름 수정에 실패했습니다. 다시 시도해주세요.");
-            return;
-        } 
-        if(result>0){
+        }
+        if(loginUser){
             lastName.value="";
             firstName.value="";
             nameMessage1.innerText="";
@@ -235,11 +234,13 @@ nameBtn.addEventListener("click",e=>{
             nameMessage2.classList.remove("error-message");
             alert("이름이 변경되었습니다.");
             
-            document.getElementById("getName").innerText = userName;
-
+            document.getElementById("getName").innerText = loginUser.userName;
+            // 바로 다시 버튼 눌리는 거 방지
         }
     })
     .catch(e=>console.log(e));
+    chk.firstName = false;
+    chk.lastName = false;
 });
 
 
@@ -282,6 +283,7 @@ originPwChkBtn.addEventListener("click",e=>{
         if(confirm>0){
             newPwMent.style.display = "block";
             newPwPart.style.display = "block";
+            chk.originPw = false;
         }
     })
     .catch(e=>console.log(e));
@@ -343,7 +345,6 @@ checkPassword.addEventListener("input",()=>{
         chkPwMessage.classList.add("error-message");
         chkPwMessage.classList.remove("possible-message");
         chk.checkPassword=false;
-
     }
 });
 
@@ -364,18 +365,223 @@ changePwBtn.addEventListener("click",e=>{
         .then(result => {
             if(result==0){ //실패하면
                 alert("비밀번호 수정에 실패했습니다. 다시 시도해주세요.");
-                return;
             } 
             if(result>0){
                 alert("비밀번호가 수정되었습니다.");
                 originPw.value="";
                 newPwMent.style.display = "none";
                 newPwPart.style.display = "none";
-
             }
         })
         .catch(e=>console.log(e));
+        chk.originPw = false;
     }
 });
 
-// 
+// 국제 번호
+// 국가를 다시 한번 확인해주세요
+const phone = document.getElementById("phone");
+const phoneMessage = document.getElementById("phoneMessage");
+// 숫자, 특수문자만
+const phoneRegex = /^[0-9!@#$%^&*()+-]+$/;
+
+phone.addEventListener("input",()=>{
+    if(phone.value.trim().length==0){
+        phone.value = "";
+        phoneMessage.innerText = "";
+        chk.phone = false;
+    }
+    if(phoneRegex.test(phone.value)){
+        phoneMessage.innerText = "국가를 다시 한번 확인해주세요.";
+        phoneMessage.classList.add("possible-message");
+        phoneMessage.classList.remove("error-message");
+        chk.phone = true;
+    }else{
+        phoneMessage.innerText = "숫자, 특수문자만 입력할 수 있습니다."
+        phoneMessage.classList.remove("possible-message");
+        phoneMessage.classList.add("error-message");
+        chk.phone = false;
+    }
+});
+
+telBtn.addEventListener("click",()=>{
+    if(!(chk.phone)){
+        e.preventDefault();
+        return;
+    }
+    const userTel = countryNo.value + " " + phone.value;
+    console.log(userTel);
+    const getUserTel = document.getElementById("getUserTel");
+
+    fetch("/edit/phone",{
+        method : 'post',
+        headers : {'Content-Type' : 'application/json'},
+        body : JSON.stringify({
+            "userTel" : userTel,
+            "countryCode": countryCode.value
+        })
+    })
+    .then(resp=>resp.json())
+    .then(loginUser=>{
+        if(!loginUser){ // 실패
+            alert("전화번호 수정에 실패했습니다. 다시 시도해주세요.");
+        }
+        if(loginUser){
+            phone.value = "";
+            phoneMessage.innerText = "";
+            phoneMessage.classList.remove("error-message");
+            phoneMessage.classList.remove("possible-message");
+            alert("전화번호가 수정되었습니다.");
+            getUserTel.innerText = loginUser.userTel;
+        }
+    })
+    .catch(e=>{console.log(e)});
+    chk.phone = false;
+});
+
+// 비상 연락처
+const emergencyCo = document.querySelector("#emergencyCo");
+const emergCoMessage = document.querySelector("#emergCoMessage");
+const getEmergencyContact = document.querySelector("#getEmergencyContact");
+const emgBtn = document.querySelector("#emgBtn");
+
+emergencyCo.addEventListener("focus",()=>{
+    emergCoMessage.innerText = "Twitter, Facebook, Instagram 등 SNS 주소도 가능합니다.";
+    emergCoMessage.classList.add("normal-message");
+});
+
+emergencyCo.addEventListener("input",()=>{
+    if(emergencyCo.value.trim().length==0){
+        emergencyCo.value="";
+    }
+});
+
+emgBtn.addEventListener("click",()=>{
+    if(emergencyCo.value.trim().length==0){
+        emergencyCo.value="";
+        return;
+    }
+    fetch("/edit/emergencyContact",{
+        method : 'post',
+        headers : {'Content-Type' : 'application/json'},
+        body : JSON.stringify(emergencyCo.value)
+    })
+    .then(resp=>resp.json())
+    .then(loginUser=>{
+        if(loginUser){ // 성공하면
+            alert("비상 연락처가 등록되었습니다.");
+            emergencyCo.value="";
+            getEmergencyContact.innerText = loginUser.emergencyContact;
+            emergCoMessage.innerText = "";
+            emergCoMessage.classList.remove("normal-message");
+        }
+        if(!loginUser){
+            alert("비상 연락처 등록에 실패했습니다. 다시 시도해주세요.");
+            emergencyCo.focus();
+            return;
+        }
+    })
+    .catch(e=>{console.log(e)});
+});
+
+// 여권 번호
+const passportNo = document.getElementById("passportNo");
+const passportMessage = document.getElementById("passportMessage");
+const passPortBtn = document.getElementById("passPortBtn");
+const getPassport = document.getElementById("getPassport");
+
+passportNo.addEventListener("input",()=>{
+    if(passportNo.value.trim().length==0){
+        passportNo.value="";
+        passportMessage.innerText="";
+        chk.passportNo = false;
+        return;
+    }else{
+        chk.passportNo = true;
+    }
+});
+passPortBtn.addEventListener("click",e=>{
+    if(!chk.passportNo){
+        e.preventDefault();
+        return;
+    }
+    fetch("/edit/passport",{
+        method : 'post',
+        headers : {'Cotent-Type':'application/json'},
+        body : JSON.stringify(passportNo.value)
+    })
+    .then(resp=>resp.json())
+    .then(loginUser=>{
+        if(loginUser){ // 성공하면
+            alert("여권 번호가 수정되었습니다. 임시 여권인 경우 여권 재발급 후 정상 여권 번호를 다시 등록해주세요.");
+            getPassport.innerText = loginUser.passportNo;
+            passportNo.value = "";
+            passportMessage.innerText="";
+        }
+        if(!loginUser){
+            alert("여권 번호 수정에 실패했습니다. 다시 시도해주세요.");
+            passportNo.focus();
+        }
+    })
+    .catch(e=>console.log(e));
+    chk.passportNo = false;
+});
+
+// 주 사용 언어
+// 영어로 작성해주세요.
+const primaryLanguage = document.getElementById("primaryLanguage");
+const pLanguageMessage = document.getElementById("pLanguageMessage");
+const langBtn = document.getElementById("langBtn");
+const getLang = document.getElementById("getLang");
+
+const engRegex = /^[A-Za-z]+$/; // 영어 검사
+
+primaryLanguage.addEventListener("input",()=>{
+    if(primaryLanguage.value.trim().length==0){
+        primaryLanguage.value="";
+        pLanguageMessage.innerText="";
+        chk.primaryLanguage = false;
+        return;
+    }
+    if(!engRegex.test(primaryLanguage.value)){
+        pLanguageMessage.innerText = "영어로 1개만 작성해주세요.";
+        pLanguageMessage.classList.add("error-message");
+        pLanguageMessage.classList.remove("possible-message");
+            chk.primaryLanguage = false;
+    }else{
+        pLanguageMessage.innerText="";
+        chk.primaryLanguage = true;
+    }    
+});   
+
+langBtn.addEventListener("click",e=>{
+    if(!chk.primaryLanguage){
+        e.preventDefault();
+        return;
+    }
+    fetch("/edit/primaryLanguage",{
+        method : 'post',
+        headers : {'Cotent-Type':'application/json'},
+        body : JSON.stringify(primaryLanguage.value)
+    })
+    .then(resp=>resp.json())
+    .then(loginUser=>{
+        if(loginUser){
+            getLang.innerText = loginUser.primaryLanguage;
+            primaryLanguage.value = "";
+            pLanguageMessage.innerText="";
+            pLanguageMessage.classList.remove("possible-message");
+            pLanguageMessage.classList.remove("remove-message");
+            alert("주 사용 언어가 수정되었습니다.");
+        }
+        if(!loginUser){
+            alert("주 사용 언어 수정에 실패했습니다. 다시 시도해주세요.");
+            primaryLanguage.focus();
+        }
+    })
+    .catch(e=>console.log(e));
+    chk.primaryLanguage;
+});
+
+
+

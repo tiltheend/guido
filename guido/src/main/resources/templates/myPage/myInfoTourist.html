@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My information_tourist</title>
+    <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/demo.css}"/>
+    <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/signUpIntlTelInput.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage/myInfoTourist.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
         header{width: 100%; height: 80px; background-color: #B1D8DA;
         position:absolute; top: 0;}
@@ -131,42 +134,44 @@
                         <div class="edit font4">수정</div>
                         <div class="cancel font4 hidden">닫기</div>
                     </div>
-                    <div class="ment font4">010-1234-1234</div>
-                    <div class="changeMent font4 hidden">예약이 확정된 가이드와 가이두가 연락할 수 있는 전화번호를 입력하세요.<br>다른 전화번호를 추가하고 어떻게 사용할 지 설정할 수있습니다.</div>
+                    <div class="ment font4" id="getUserTel" th:text="*{userTel}"></div>
+                    <div class="changeMent font4 hidden">예약이 확정된 가이드와 가이두가 연락할 수 있는 전화번호를 입력하세요.</div>
                     <!-- 숨은 부분 -->
-                    <div action="#" method="post" class="hidden-area hidden">
-                        <div class="input-call-area">
-                            <div class="input-call">
-                                <!-- 국제번호 api -->
-                                <input type="text" placeholder="기존 전화번호" name="inputPhoneNo" id="inputPhoneNo" class="inputCall">
-                            </div>
-                            <button>저장</button>
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="hidden" class="county-no" id="countryNo" name="userTel"/>
+                            <input id="phone" name="userTel" type="text" autocomplete="off" required/>
+                            <input type="hidden" class="county-code" id="countryCode" name="countryCode"/>
                         </div>
+                        <div class="font4" id="phoneMessage"></div>
+                        <button type="button" id="telBtn">저장</button>
                     </div>
                 </div>
                 <hr>
                 <!-- 비상 연락처 emergency -->
                 <div class="edit-info-area">
                     <div class="edit-info-top">
-                        <div class="tel font3">비상 연락처</div>
+                        <div class="emg font3">비상 연락처</div>
                         <div class="edit font4">수정</div>
                         <div class="cancel font4 hidden">닫기</div>
                     </div>
-                    <div class="ment font4">유사시 연락할 수 있는 비상 연락처를 추가하세요.</div>
+                    <!-- <th:block th:text="${session.loginUser.emergencyContact}">
+                        <div class="ment font4 getEmergenctContact" th:text="${session.loginUser.emergencyContact}"></div>
+                    </th:block> -->
+                    <div class="ment font4" id="getEmergencyContact" th:text="${session.loginUser.emergencyContact}?:''"></div>
                     <div class="changeMent font4 hidden">유사시 연락할 수 있는 비상 연락처를 추가하세요.</div>
                     <!-- 숨은 부분 -->
-                    <form action="#" method="post" class="hidden-area hidden">
-                        <div class="input-call-area">
-                            <div class="input-call">
-                                <!-- 국제번호 api -->
-                                <input type="text" placeholder="비상 연락처" name="inputEmergency" id="inputEmergency" class="inputCall">
-                            </div>
-                            <button>저장</button>
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="text" id="emergencyCo" name="emergencyContact" autocomplete="off" required>
+                            <label for="emergencyCo">비상 연락처</label>
                         </div>
-                    </form>
+                        <div class="font4" id="emergCoMessage"></div>
+                        <button type="button" id="emgBtn">저장</button>
+                    </div>
                 </div>
                 <hr>
-                <!-- 관심 지역 -->
+                <!-- 관심 지역
                 <div class="edit-info-area">
                     <div class="edit-info-top">
                         <div class="tel font3">관심 지역</div>
@@ -175,9 +180,9 @@
                     </div>
                     <div class="ment font4">관심 지역을 추가하고, 관심 지역의 관광 상품을 추천받아 보세요.</div>
                     <div class="changeMent font4 hidden">관심 지역을 추가하고, 관심 지역의 관광 상품을 추천받아 보세요.(5개까지)</div>
-                    <!-- 숨은 부분 -->
-                    <div  class="hidden-area hidden">
-                        <!-- 선택된 지역 -->
+                    숨은 부분 
+                    <div  class="hidden-area">
+                        선택된 지역
                         <div class="count-choosed-region-area">
                             <div>선택된 지역&nbsp(&nbsp</div>
                             <div class="count-choosed-region" id="countChoosedRegion">선택된 지역 수</div>
@@ -216,11 +221,11 @@
                                 <div class="delete-region">&nbsp&nbsp&times;</div>
                             </div>
                         </div>
-                        <!-- 지역 선택 영역 -->
+                        지역 선택 영역
                         <form method="post">
                             <div class="input-like-region-area">
                                 <div class="input-like-region">
-                                    <!-- 지역 선택 api -->
+                                    지역 선택 api
                                     <input type="text" placeholder="지역 선택 5개 까지" name="inputRegion" id="inputRegion" class="inputRegion">
                                 </div>
                                 <button>추가</button>
@@ -229,28 +234,45 @@
 
                     </div>
                 </div>
-                <hr>
+                <hr> -->
                 <!-- 여권 번호 -->
                 <div class="edit-info-area">
                     <div class="edit-info-top">
-                        <div class="tel font3">여권 번호</div>
+                        <div class="passPort font3">여권 번호</div>
                         <div class="edit font4">수정</div>
                         <div class="cancel font4 hidden">닫기</div>
                     </div>
-                    <div class="ment font4">기존 여권 번호</div>
-                    <div class="changeMent font4 hidden">여권 번호를 왜 수정해요?</div>
+                    <div class="ment font4" id="getPassport" th:text="*{passportNo}"></div>
+                    <div class="changeMent font4 hidden">임시 발급/변경된 여권 번호를 입력해주세요.</div>
                     <!-- 숨은 부분 -->
-                    <form action="#" method="post" class="hidden-area hidden">
-                        <div class="input-passport-area">
-                            <div class="input-passport">
-                                <!-- 지역 선택 api -->
-                                <input type="text" placeholder="지역 선택 5개 까지" name="inputPassport" id="inputPassport" class="inputPassport">
-                            </div>
-                            <button>수정</button>
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="text" id="passportNo" name="passportNo" autocomplete="off" required>
+                            <label for="passportNo">여권 번호</label>
                         </div>
-                    </form>
+                        <button type="button" id="passPortBtn">저장</button>
+                    </div>
                 </div>
                 <hr>
+                <!-- 주사용 언어 -->
+                <div class="edit-info-area">
+                    <div class="edit-info-top">
+                        <div class="lang font3">주 사용 언어</div>
+                        <div class="edit font4">수정</div>
+                        <div class="cancel font4 hidden">닫기</div>
+                    </div>
+                    <div class="ment font4" id="getLang" th:text="*{primaryLanguage}"></div>
+                    <div class="changeMent font4 hidden">임시 발급/변경된 여권 번호를 입력해주세요.</div>
+                    <!-- 숨은 부분 -->
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="text" id="primaryLanguage" name="primaryLanguage" autocomplete="off" required>
+                            <label for="primaryLanguage">주 사용 언어</label>
+                        </div>
+                        <div class="font4" id="pLanguageMessage"></div>
+                        <button type="button" id="langBtn">저장</button>
+                    </div>
+                </div>
                 <!-- 회원 탈퇴 링크 -->
                 <a th:href="@{/myPage/secession}">
                     <div class="secessionBtn-area font4" id="secessionBtn"><button>회원 탈퇴</button>
@@ -260,8 +282,41 @@
         </div>
         
     </div>
-    <th:block th:replace="~{common/footer}"></th:block>
+    <!-- <th:block th:replace="~{common/footer}"></th:block> -->
+    <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
+    <script th:inline="javascript">
 
+        // 국제 번호 intlTel
+        var input = document.querySelector("#phone");
+
+        var iti = window.intlTelInput(input, {
+            separateDialCode: true,
+            utilsScript: "build/js/utils.js"
+        });
+
+        const telBtn = document.getElementById("telBtn");
+
+        // 회원가입 버튼 누르면
+        telBtn.addEventListener("click",()=>{
+            // 국제 나라 번호, 국가 코드 가져오기 (name속성 추가)
+            // 국가 코드(문자열)
+            const selectedCountryData = iti.getSelectedCountryData();
+            const countryCodeString = selectedCountryData.iso2;
+            // 보이지 않는 input에 value 국가 코드 대입
+            const countryCode = document.getElementById("countryCode");
+            countryCode.value = countryCodeString;
+            
+            // 국제 번호 앞자리
+            const countryNoString = document.querySelector(".iti__selected-dial-code").innerText;
+            const countryNo = document.getElementById("countryNo");
+            countryNo.value = countryNoString;
+
+            console.log(countryCodeString);
+            console.log(countryNoString);
+            console.log(phone.value);
+
+    });
+    </script>
     <script th:src="@{/js/myPage/myInfoTourist.js}"></script>
     
 </body>
