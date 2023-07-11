@@ -50,7 +50,7 @@
                 </th:block> -->
 
                 <!-- <th:block th:unless="${#lists.size(productList)} == 0"> -->
-                    <li class="product-row" th:each="product : ${searchResultList}">
+                    <li class="product-row" th:each="product : ${superProductAll}">
                         <div class="slider single-item" th:data-productno="${product.productNo}"> 
                             <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}">
                                 <img th:src="${image.filePath}">
@@ -145,6 +145,6 @@
     <script th:src="@{/libraries/assets/js/app.js}"></script>
     
     <!-- js -->
-    <script th:src="@{/js/main/searchResult.js}"></script>
+    <script th:src="@{/js/main/main.js}"></script>
 </body>
 </html>

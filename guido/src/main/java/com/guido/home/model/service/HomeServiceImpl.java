@@ -116,5 +116,30 @@ public class HomeServiceImpl implements HomeService {
 	}
 
 
+	// 전체 상품 목록 조회
+	@Override
+	public List<Product> selectProductAll(int userNo) {
+		return mapper.selectProductAll(userNo);
+	}
+
+	// 인기 상품 목록 조회
+	@Override
+	public List<Product> selectPopularProductAll(int userNo) {
+		return mapper.selectPopularProductAll(userNo);
+	}
+
+	// 슈퍼가이드 상품 목록 조회
+	@Override
+	public List<Product> selectSuperProductAll(int userNo) {
+		return mapper.selectSuperProductAll(userNo);
+	}
+
+	// 추천 상품 목록 조회
+	@Override
+	public List<Product> selectRecommProductAll(int userNo) {
+		return mapper.selectRecommProductAll(userNo);
+	}
+
+
 
 }
