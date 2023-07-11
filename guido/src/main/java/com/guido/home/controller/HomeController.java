@@ -90,7 +90,7 @@ public class HomeController {
 		List<Product> productAll = service.selectProductAll(userNo);
 		model.addAttribute("productAll", productAll); 
 		
-		System.out.println("productAll" + productAll);
+		// System.out.println("productAll" + productAll);
 		
 		return "common/productList";
 	}
@@ -110,7 +110,7 @@ public class HomeController {
 		List<Product> popularProductAll = service.selectPopularProductAll(userNo);
 		model.addAttribute("popularProductAll", popularProductAll);
 		
-		System.out.println("popularProductAll" + popularProductAll);
+		// System.out.println("popularProductAll" + popularProductAll);
 		
 		return "common/popularList";
 	}
@@ -130,7 +130,7 @@ public class HomeController {
 		List<Product> superProductAll = service.selectSuperProductAll(userNo);
 		model.addAttribute("superProductAll", superProductAll);
 		
-		System.out.println("superProductAll" + superProductAll);
+		// System.out.println("superProductAll" + superProductAll);
 		
 		return "common/superList";
 	}
@@ -150,7 +150,7 @@ public class HomeController {
 		List<Product> recommProductAll = service.selectRecommProductAll(userNo);
 		model.addAttribute("recommProductAll", recommProductAll);
 		
-		System.out.println("recommProductAll" + recommProductAll);
+		// System.out.println("recommProductAll" + recommProductAll);
 		
 		return "common/recommList";
 	}

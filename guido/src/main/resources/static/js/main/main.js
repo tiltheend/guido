@@ -179,28 +179,31 @@ function loadProductByTheme(themeCode) {
             singleItem.classList.add("slider");
             singleItem.classList.add("single-item");
 
-            const productImage = document.createElement("div");
+            /* const productImage = document.createElement("div");
             productImage.classList.add("productImage");
-
+            
             for (let image of themeProduct.imageList) {
                 const img = document.createElement("img");
                 img.setAttribute("src", image.filePath);
                 productImage.appendChild(img);
-            }
+            } */
+            
+            for (let image of themeProduct.imageList) {
+                let div = document.createElement("div");
+                div.classList.add("productImage");
+                
+                let imgLink = document.createElement("a");
+                // imgLink.src="/productDetail/product/"+themeProduct.productNo;
+                // imgLink.setAttribute("text", themeProduct.productName);
 
-            /* for (let image of themeProduct.imageList) {
-                const imgLink = document.createElement("a");
-                imgLink.setAttribute("th:href", "'/productDetail/product/' + ${product.productNo}");
-                imgLink.setAttribute("th:text", "${product.productName}");
-
-                const img = document.createElement("img");
+                let img = document.createElement("img");
                 img.setAttribute("src", image.filePath);
                 imgLink.appendChild(img);
 
-                productImage.appendChild(imgLink);
-            } */
+                div.appendChild(imgLink);
+                singleItem.appendChild(div);
+            }
 
-            singleItem.appendChild(productImage);
             productRow.appendChild(singleItem);
 
             const slideBtn = document.createElement("div");

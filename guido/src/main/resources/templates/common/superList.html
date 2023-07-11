@@ -25,16 +25,7 @@
     <th:block th:replace="~{common/header}"></th:block>
 
     <!-- ***** 카테고리 아이콘 ***** -->
-    <div class="categori-icon-box-container">
-        <div class="categori-icon-box">
-            <div th:each="themeType : ${application.themeTypeList}">
-                <a th:onclick="|loadSelectedProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
-                    <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
-                    <button th:text="${themeType.THEME_NAME}">테마 이름</button>
-                </a>
-            </div>
-        </div>
-    </div>
+
 
     <!-- 상품 게시글 -->
     <article class="main-post">
