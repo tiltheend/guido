@@ -12,7 +12,8 @@ footer{
   display: flex; justify-content: space-around; align-items: center;
   background-color: #fff;
   /* margin-top: 80px; */
-  position: absolute; bottom: 0;
+  /* position: absolute;  */
+  bottom: 0;
 }
 
 footer .footer-event-link{position: absolute; left: 50%; transform: translateX(-15px);} 

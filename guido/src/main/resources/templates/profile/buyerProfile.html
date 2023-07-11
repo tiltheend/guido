@@ -348,8 +348,8 @@
 
     <script th:inline="javascript">
 
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
+        // const message = /*[[${message}]]*/  "전달 받은 message";
+        // if(message != null) alert(message);
 
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
@@ -359,6 +359,7 @@
     <script th:src="@{/js/profile/profileEdit.js}"></script>                   
     <script th:src="@{/js/profile/buyerProfile.js}"></script>   
 
+    <th:block th:replace="~{/common/footer}"></th:block>
     
 
 </body>

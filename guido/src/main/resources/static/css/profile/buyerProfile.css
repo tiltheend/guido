@@ -11,9 +11,10 @@
 /* ----- 구매자 프로필 ----- */
 .buyer-profile-top{
     margin:80px;
-    margin-top: 160px;
+    margin-top: 140px;
     /* display: flex; justify-content: space-between; */
     display: flex; justify-content: space-around;
+    margin-bottom: 80px;
 }
 
 /* 프로필 위 가이드 배너 */
@@ -38,7 +39,7 @@
 .buyer-profile-top .profile-img{
     width: 180px; height: 180px; border-radius: 50%;
     background-color: #B1D8DA; border: 2px solid #fff;
-    position: ; margin-top: 32px;
+    position: relative; margin-top: 32px;
 }
 
 .buyer-profile-top .profile-img>img:first-of-type{
