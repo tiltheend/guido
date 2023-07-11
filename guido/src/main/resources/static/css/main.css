@@ -629,6 +629,7 @@ hr{
   justify-content: center;
   align-items: flex-start;
   align-content: center;
+  margin-top: 30px;
 }
 
 .divide-main p{
@@ -652,6 +653,22 @@ hr{
 }
 .post-more button{
   background-color: transparent;
+}
+
+.post-more-first{
+  display: flex;
+  justify-content:center;
+}
+
+.post-more-first button{
+  background-color: #1C797D;
+  color: #fff;
+  width: 160px;
+  height: 35px;
+  font-size: 15px;
+  margin-top: 50px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 
