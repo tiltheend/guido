@@ -9,19 +9,10 @@
 
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
-    <style>
-        header {
-            width: 100%;
-            height: 80px;
-            background-color: #B1D8DA;
-        }
-    </style>
 </head>
 
 <body>
-    <header>
-        임시헤더
-    </header>
+    <th:block th:replace="@{admin/header}"></th:block>
     <main>
         <!-- 사이드 메뉴 -->
         <th:block th:replace="~{admin/sideMenu}"></th:block>
@@ -69,7 +60,7 @@
                 <thead>
                     <tr>
                         <th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">회원번호</th><th class="col-email">이메일</th>
-                        <th class="col-schedule">일정</th><th class="col-date">가입일</th><th class="col-state">회원 상태</th><th class="col-super-guide">슈퍼 가이드</th>
+                        <th class="col-date">가입일</th><th class="col-state">회원 상태</th><th class="col-super-guide">슈퍼 가이드</th>
 
                     </tr>
                 </thead>
@@ -80,7 +71,6 @@
                             <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{USER_NO}"></td>
                             <td th:text="*{USER_NO}">회원번호</td>
                             <td th:text="*{USER_EMAIL}">이메일</td>
-                            <td><img th:src="@{/images/admin/symbol-calendar.svg}"></td>
                             <td th:text="*{CREATE_DT}">가입일</td>
                             <!-- <td th:text="*{userState == 'N' ?'정상':(userState==Y?'미승인':(userState==B?'블락':(userState==D?'탈퇴':'')))}"></td> -->
                             <td th:text="*{USER_STATE == 'Y' ? '미승인' : (USER_STATE == 'N' ? '정상' : (USER_STATE == 'B' ? '블락' : (USER_STATE == 'D' ? '탈퇴' : '')))}"></td>

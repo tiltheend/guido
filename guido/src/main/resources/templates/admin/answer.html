@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>answer</title>
+    <style>
+    </style>
+</head>
+<body>
+    <img src='https://i.imgur.com/pQWCBfL.png'>
+    <div>안녕하세요 고객님.</div>
+    <div>문의하신 "[[${qna.qnaTitle}]]"에 대한 답변입니다.</div>
+    <div>문의 내용 :
+        <div th:text="${qna.qnaContent}" style="white-space: pre-wrap;"/>
+    </div>
+    <div>
+        <a th:each="file:${qna.fileList}" th:href="|http://localhost${file.filePath}|"><img th:src="|http://localhost${file.filePath}|"  style="width:100px; height: 100px; margin-left: 5px"></a>
+    </div>
+    
+    <div>답변 내용 :
+        <div th:text="${qna.qnaAnswer}" style="white-space: pre-wrap;"></div>
+    </div>
+    <br>
+    <img src='https://i.imgur.com/PcUN2ne.png'>
+    <br>
+    <img src='https://i.imgur.com/lpqS2eL.png'>
+</body>
+</html>

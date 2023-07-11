@@ -33,4 +33,8 @@ public interface AdminService {
 	Map<String, Object> sideMenuCount();
 
 	int setUserState(Map<String, Object> map);
+
+	Event selectEvent(int eventNo);
+
+	int updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl);
 }
