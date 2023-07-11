@@ -14,7 +14,7 @@
     <div class="qna--container">
 
 
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
 
             <div class="qna--top">
                 <div>
@@ -62,6 +62,10 @@
     
                 <div class="qna--file">
                     <div>스크린샷</div>
+                    <div>
+                        <input type="file" onchange="addFile(this);" multiple/>
+                        <div class="file-list"></div>
+                    </div>
                     <div>파일 올리기</div>
                 </div>
 
