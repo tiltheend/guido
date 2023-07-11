@@ -40,8 +40,6 @@ function handleFileDrop(event) {
 /* 첨부파일 추가 */
 function addFile(obj){
 
-    console.log(obj);
-
     var maxFileCnt = 3;   // 첨부파일 최대 개수
     var attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
     var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
@@ -56,7 +54,7 @@ function addFile(obj){
 
         const file = obj.files[i];
 
-        console.log(file);
+        const fileSize = getByteSize(file.size);
 
         // 첨부파일 검증
         if (validation(file)) {
@@ -72,12 +70,6 @@ function addFile(obj){
             fileDiv.setAttribute("id", "file" + fileNo);
             fileDiv.classList.add("filebox");
 
-            // const pTag = document.createElement("p");
-            // pTag.classList.add("name");
-            // pTag.innerText = file.name;
-            // fileDiv.append(pTag);
-
-            //  ------------------------------
 
             const firstDiv = document.createElement("div");
             firstDiv.classList.add("filebox-first-div");
@@ -101,7 +93,7 @@ function addFile(obj){
             fileNameDiv.classList.add("name");
             fileNameDiv.innerText = file.name;
 
-            sizeDiv.innerText = (file.size/1024)/1024;
+            sizeDiv.innerText = fileSize;
 
             secondDiv.append(fileNameDiv);
             secondDiv.append(sizeDiv);
@@ -109,8 +101,6 @@ function addFile(obj){
             fileDiv.append(firstDiv);
             fileDiv.append(secondDiv);
 
-            // =======================
-            
             
             const aTag = document.createElement("a");
             aTag.classList.add("delete");
@@ -191,3 +181,18 @@ function submitForm() {
         }
     })
 }
+
+const getByteSize = (size) => {
+    const byteUnits = ["KB", "MB", "GB", "TB"];
+  
+    for (let i = 0; i < byteUnits.length; i++) {
+      size = Math.floor(size / 1024);
+  
+      if (size < 1024) return size.toFixed(1) + byteUnits[i];
+    }
+  };
+  
+  console.log(getByteSize(1024)); // 1KB
+  console.log(getByteSize(1024 ** 2)); // 1MB
+  console.log(getByteSize(1024 ** 3)); // 1GB
+  console.log(getByteSize(1024 ** 4)); // 1TB
