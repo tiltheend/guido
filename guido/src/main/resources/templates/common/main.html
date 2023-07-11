@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>guido</title>
+
   </head>
   <style>
     main a button, main>form>button {
@@ -89,7 +90,7 @@
     <th:block th:replace="~{/common/footer}"></th:block>
     <script th:inline="javascript">
       const loginBtn = document.getElementById("loginBtn");
-      const loginUser = /*[[${session.loginUser}]]*/ "로그인된 유저"
+      // const loginUser = /*[[${session.loginUser}]]*/ "로그인된 유저"
       loginBtn.addEventListener('click',e=>{
         if(loginUser){
           loginBtn.parentElement.href = "http://localhost/";

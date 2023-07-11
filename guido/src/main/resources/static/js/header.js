@@ -46,9 +46,9 @@ whenButton.addEventListener('click', () => {
 
   mainSearchBox.style.display = 'none';
   searchBoxClickBox.style.display = 'block';
-  // whenModal.style.display = 'block'; /* ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ */
+  // whenModal.style.display = 'block';
   // /* toggleModal(whenModal); */
-  // modalsBG.style.display = 'block';
+  modalsBG.style.display = 'block';
 });
 
 guestButton.addEventListener('click', () => {

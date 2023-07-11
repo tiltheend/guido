@@ -218,6 +218,7 @@
 
     <script th:inline="javascript">
         const loginUser = /*[[${session.loginUser}]]*/ "로그인한 회원";
+        // const loginUserNoForHeader = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
     </script>
 
     <script th:src="@{/js/header.js}"></script>

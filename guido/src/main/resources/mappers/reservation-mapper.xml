@@ -80,12 +80,19 @@
 	</select>
 	
 	
-	<!-- 예약 -->
-	<insert id="insertReservation">
-		INSERT INTO "RESERVATION"
-		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
-		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
-	</insert>
+   <!-- 예약 -->
+   <insert id="insertReservation">
+      INSERT INTO "RESERVATION"
+      VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
+       'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, 
+       <if test="optionNo != 0">
+         #{optionNo}
+       </if>
+       <if test="optionNo == 0">
+         NULL
+       </if>
+    , #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
+   </insert>
 	
 	
 	<!-- 예약 조회 -->

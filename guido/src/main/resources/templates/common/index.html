@@ -20,9 +20,10 @@
 
     <!-- slick 슬라이드 -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main/slide/mainPostSlick.css}">
-
+    
+    <th:block th:replace="~{common/header}"></th:block>
     <!-- js -->
-    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
+    <!-- <script th:src="@{/js/main/slide/jquery.min.js}"></script> -->
     <script th:src="@{/js/main/slide/owl.carousel.js}"></script>
 
     <!-- 테마 검색 -->
@@ -33,7 +34,6 @@
 
 <body>
 
-    <th:block th:replace="~{common/header}"></th:block>
 
     <!-- 로그인한 가이드 글 작성 버튼 -->
     <!-- <th:block th:if="${session.loginMember != null}"> -->

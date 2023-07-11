@@ -28,7 +28,7 @@ function sendReview(productNo, productName){
 	// 매개 변수 JS객체에 저장
 	let obj = {};
 
-	obj.senderNo = loginUserNo; // 보낸 회원 번호
+	obj.senderNo = loginUser.userNo; // 보낸 회원 번호
 	// obj.userName = userName; // 보낸 회원 이름
 	obj.productNo = productNo; // 상품 번호
 	obj.productName = productName; // 상품 이름
@@ -49,7 +49,7 @@ function sendWish(productNo, productName){
 
 	let obj = {};
 
-	obj.senderNo = loginUserNo;
+	obj.senderNo = loginUser.userNo;
 	// obj.userName = userName;
 	obj.productNo = productNo;
 	obj.productName = productName;
@@ -75,7 +75,7 @@ function sendReservation(productNo, productName){
 	// 매개 변수 JS객체에 저장
 	let obj = {};
 
-	obj.senderNo = loginUserNo; // 보낸 회원 번호
+	obj.senderNo = loginUser.userNo; // 보낸 회원 번호
 	// obj.userName = userName; // 보낸 회원 이름
 	obj.productNo = productNo; // 상품 번호
 	obj.productName = productName; // 상품 이름
