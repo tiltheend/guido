@@ -19,7 +19,7 @@
     <div class="qna--container">
         
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <!-- <form th:action="@{/qna/insertQna}" method="POST" enctype="multipart/form-data"> -->
 
             <div class="qna--top">
                 <div class="qna--top__first">
@@ -38,16 +38,22 @@
             <div class="qna--bottom">
                 <div class="qna--email">
                     <div>답변받으실 이메일 <span class="essential--mark">&#42;</span></div>
-                    <input type="text" th:value="${session.loginUser?.userEmail}" placeholder="email.example.com" name="qnaEmail"
-                    th:disabled="${session.loginUser?.userEmail != null}" class="input--data">
+                    
+                    <div>
+                        <input type="text" th:value="${session.loginUser?.userEmail}" placeholder="email.example.com" name="qnaEmail"
+                        th:disabled="${session.loginUser?.userEmail != null}" class="input--data">
+                    </div>
                 </div>
     
                 <div class="qna--title">
                     <div class="qna--top__title">
                         <div>제목 <span class="essential--mark">&#42;</span> </div>
-                        <div class="qna--count">(<div>0</div>/20)</div>
+                        <div class="qna--count">(<div id="qnaTitleLength">0</div>/30)</div>
                     </div>
-                    <input type="text" placeholder="제목을 입력해주세요 (20자 이내)" name="qnaTitle" class="input--data">
+                    
+                    <div>
+                        <input type="text" placeholder="제목을 입력해주세요 (20자 이내)" name="qnaTitle" class="input--data" oninput="checkLength(30)">
+                    </div>
                 </div>
     
     
@@ -58,10 +64,12 @@
                 <div class="qna--content"> 
                     <div class="qna--top__content">
                         <div>문의 내용 <span class="essential--mark">&#42;</span></div>
-                        <div class="qna--count">(<div>0</div>/1000)</div>
+                        <div class="qna--count">(<div id="qnaContentLength">0</div>/1000)</div>
                     </div>
     
-                    <textarea name="qnaContent" placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다."></textarea>
+                    <div>
+                        <textarea name="qnaContent" placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다." oninput="checkLength(1000)"></textarea>
+                    </div>
                 </div>
     
     
@@ -72,7 +80,7 @@
                             <label for="file" class="file--label"> 
                                 <img src="/images/qna/fileupload_icon.png" class="file--img__label">
                                 <span><span class="click-to-upload">Click to upload</span> or drag and drop</span>
-                                <span>Maximum file size 50 MB.</span>
+                                <span>Maximum file size 10MB.</span>
                                 
                             </label>
 
@@ -84,35 +92,16 @@
 
             </div>
 
-            <!-- <div class="filebox">
-                <div class="filebox-first-div">
-                    <img src="/images/reservation/checkbox.png">
-                </div>
-
-                <div class="filebox-second-div">
-                    <div class="name">대충 파일명이지롱</div>
-                    <div>20MB</div>
-                </div>
-
-                <a>
-                    <img src="/images/reservation/checkbox.png">
-                </a>
-            </div> -->
-
 
             <button id="qnaButton">submit</button>
 
-        </form>
+        <!-- </form> -->
 
 
     </div>
 
     <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
     <script th:src="@{/js/qna/qnaWrite.js}"></script>
-
-    <script>
-
-    </script>
 
     <th:block th:replace="~{common/footer}"></th:block>
 

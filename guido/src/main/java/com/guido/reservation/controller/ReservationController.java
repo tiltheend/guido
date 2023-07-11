@@ -159,14 +159,16 @@ public class ReservationController {
 				return new ResponseEntity<String>("성공", HttpStatus.OK);
 			}
 
-			else if(result==0)
+			if(result==0)
 				return new ResponseEntity<String>("주문 오류", HttpStatus.BAD_REQUEST);
 			
-			else {
+			if(result==-1) {
 				service.paymentCancel(token, reservation.getImpUid(), amount, "주문 가능한 수량 초과");
 				return new ResponseEntity<String>("주문 가능한 수량을 초과합니다", HttpStatus.BAD_REQUEST);
 			}
 				
+			
+			return new ResponseEntity<String>("주문 실패", HttpStatus.BAD_REQUEST);
 			
 			
 		}catch(Exception e) {
