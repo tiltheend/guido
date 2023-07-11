@@ -26,7 +26,7 @@ public interface ProductUploadService {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	int productUpload(Product product, List<MultipartFile> images, String tourCourse2, String productDate)throws IllegalStateException, IOException;
+	int productUpload(Product product, List<MultipartFile> images, String tourCourse2, String productOption)throws IllegalStateException, IOException;
 
 
 	/** 여행 상품 수정 서비스
