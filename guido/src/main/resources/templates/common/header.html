@@ -180,7 +180,7 @@
             <div>
                 <div class="mypage-modal-close"></div>
                 <th:block th:if="${session.loginUser}">
-                    <a th:if="${session.loginUser}" th:href="@{/profile/{userNo}(userNo=${session.loginUser.userNo})}"><div>마이페이지</div></a>
+                    <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
                     <th:block th:switch="${session.loginUser.userType}">  
                         <th:block th:case="T">
                             <a th:href="@{/profile/touristReservation}"><div>결제 및 예약 내역</div></a>
@@ -215,6 +215,10 @@
     <!-- 캘린더 -->
     <!-- <script th:src="@{/js/main/calendar.js}"></scrip> -->
     <!-- <script th:src="@{/js/main/calendar/jquery.js}"></scrip> -->
+
+    <script th:inline="javascript">
+        const loginUser = /*[[${session.loginUser}]]*/ "로그인한 회원";
+    </script>
 
     <script th:src="@{/js/header.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>

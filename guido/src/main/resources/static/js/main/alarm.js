@@ -2,12 +2,12 @@
 
 // 로그인이 되어 있을 경우에만
 // /alarmSock 이라는 요청 주소로 통신할 수 있는  WebSocket 객체 생성
-//let alarmSock;
+let alarmSock;
 
-//if(loginUser != ""){
-//	alarmSock = new SockJS("/alarm");
-//}
-let alarmSock = new SockJS("/alarm");
+if(loginUser != null){
+	alarmSock = new SockJS("/alarm");
+}
+// let alarmSock = new SockJS("/alarm");
 
 /* 
 	회원 유형 
