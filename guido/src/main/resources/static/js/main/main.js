@@ -188,22 +188,23 @@ function loadProductByTheme(themeCode) {
                 productImage.appendChild(img);
             } */
             
-            for (let image of themeProduct.imageList) {
-                let div = document.createElement("div");
-                div.classList.add("productImage");
-                
-                let imgLink = document.createElement("a");
-                // imgLink.src="/productDetail/product/"+themeProduct.productNo;
-                // imgLink.setAttribute("text", themeProduct.productName);
 
-                let img = document.createElement("img");
-                img.setAttribute("src", image.filePath);
-                imgLink.appendChild(img);
-
-                div.appendChild(imgLink);
-                singleItem.appendChild(div);
+            if(themeProduct.imageList){
+                for (let image of themeProduct.imageList) {
+                    let div = document.createElement("div");
+                    div.classList.add("productImage");
+                    
+                    let imgLink = document.createElement("a");
+                    imgLink.setAttribute("href", "/productDetail/product/" + themeProduct.productNo);
+    
+                    let img = document.createElement("img");
+                    img.setAttribute("src", image.filePath);
+                    imgLink.appendChild(img);
+    
+                    div.appendChild(imgLink);
+                    singleItem.appendChild(div);
+                }
             }
-
             productRow.appendChild(singleItem);
 
             const slideBtn = document.createElement("div");
