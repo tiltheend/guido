@@ -36,5 +36,5 @@ public interface AdminService {
 
 	Event selectEvent(int eventNo);
 
-	int updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl);
+	int updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl) throws IllegalStateException, IOException ;
 }

@@ -38,9 +38,8 @@
                     목록
                 </button>
             </a>
-
-            <!-- 나중에 관리자인지 확인하는 조건문 추가 -->
-            <a th:if="${1==1}" th:href="@{/admin/updateEvent/{eventNo}(eventNo=${event.eventNo})}">
+            <!-- 관리자만 볼 수 있음. -->
+            <a th:if="${session.loginUser?.userType=='M'}" th:href="@{/admin/updateEvent/{eventNo}(eventNo=${event.eventNo})}">
                 <button type="button" class="btn" id="updateBtn">
                     수정
                 </button>

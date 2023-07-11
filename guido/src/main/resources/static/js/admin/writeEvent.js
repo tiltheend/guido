@@ -8,6 +8,8 @@ const previews = document.querySelectorAll(".preview");
 const inputImages = document.querySelectorAll(".input-image");
 // x버튼 5개
 const deleteBtn = document.getElementsByClassName("delete-btn");
+// 이미지 삭제 여부(수정시)
+const imgDeleteFl = document.querySelectorAll('.image-delete-fl');
 
 
 function updateCount(){
@@ -48,6 +50,7 @@ for(let i=0 ; i<inputImages.length ; i++) {
             addLabel[i].classList.remove("hidden");
             // inputImage Value 비우기(파일 경로 삭제)
             inputImages[i].value="";
+            imgDeleteFl[i].value="y";
         }
         updateCount();
     })
@@ -168,3 +171,4 @@ form.addEventListener('submit',e=>{
     
     form.submit();
 })
+

@@ -46,8 +46,8 @@
 
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
-                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">회원번호</th><th class="col-email">회원 이메일</th>
-                    <th class="col-date">요청일</th><th class="col-confirmationNo">확인증 번호</th><th class="col-approval">승인</th></tr>
+                    <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">회원 번호</th><th class="col-email size500">회원 이메일</th>
+                    <th class="col-date size500">요청일</th><th class="col-confirmationNo">확인증 번호</th><th class="col-approval">승인</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
@@ -55,8 +55,8 @@
                         <tr>
                             <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{USER_NO}"></td>
                             <td th:text="*{USER_NO}">회원번호</td>
-                            <td th:text="*{USER_EMAIL}">이메일</td>
-                            <td th:text="*{CREATE_DT}">가입일</td>
+                            <td class="size500" th:text="*{USER_EMAIL}">이메일</td>
+                            <td class="size500" th:text="*{CREATE_DT}">가입일</td>
                             <td th:text="*{CONFIRMATION_NO}"></td>
                             <td>
                                 <button class="btn btn6 approve-btn"><!-- 승인버튼 --></button>

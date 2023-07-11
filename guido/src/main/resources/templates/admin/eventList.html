@@ -53,9 +53,9 @@
                         <th class="col-checkbox"><input type="checkbox" id="checkAll"></th>
                         <th class="col-number">번호</th>
                         <th class="col-title">제목</th>
-                        <th class="col-date">작성일</th>
-                        <th class="col-date">종료일</th>
-                        <th class="col-blind">블라인드</th>
+                        <th class="col-date size500">작성일</th>
+                        <th class="col-date size500">종료일</th>
+                        <th class="col-blind size500">블라인드</th>
                         <th class="col-main-banner">메인 배너 설정</th>
                     </tr>
                 </thead>
@@ -65,10 +65,10 @@
                         <tr>
                             <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{EVENT_NO}"></td>
                             <td th:text="*{EVENT_NO}">글번호</td>
-                            <td th:utext='|<a href="@{/event/eventDetail}/*{EVENT_NO}">*{EVENT_NAME}</a>|'>글제목</td>
-                            <td th:text="*{CREATE_DT}">작성일</td>
-                            <td th:text="*{EVENT_END_DT}">종료일</td>
-                            <td>
+                            <td class="eventName" th:utext='|<a href="@{/event/eventDetail}/*{EVENT_NO}">*{EVENT_NAME}</a>|'>글제목</td>
+                            <td class="size500" th:text="*{CREATE_DT}">작성일</td>
+                            <td class="size500" th:text="*{EVENT_END_DT}">종료일</td>
+                            <td class="size500">
                                 <button type="buttion" th:if='*{EVENT_STATE=="N"}' class="btn btn3 blind-btn">블라인드</button>
                                 <button type="buttion" th:if='*{EVENT_STATE=="B"}' class="btn btn4 blind-cancel-btn">블라인드 해제</button>
                             </td>
