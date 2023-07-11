@@ -2,8 +2,46 @@
 var fileNo = 0;
 var filesArr = new Array();
 
+
+// 드래그 앤 드롭 이벤트 핸들러 등록
+const label = document.querySelector('.file--label');
+label.addEventListener('dragenter', handleDragEnter, false);
+label.addEventListener('dragover', handleDragOver, false);
+label.addEventListener('drop', handleFileDrop, false);
+
+// 드래그 진입 시 스타일 변경
+function handleDragEnter(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    label.classList.add('dragover');
+}
+
+// 드래그 오버 시 스타일 변경
+function handleDragOver(event) {
+    event.stopPropagation();
+    event.preventDefault();
+}
+
+// 파일 드롭 시 처리
+function handleFileDrop(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    label.classList.remove('dragover');
+
+    const files = event.dataTransfer.files;
+    // input 요소의 파일 값을 업데이트
+    const inputElement = document.getElementById('file');
+    inputElement.files = files;
+
+    // addFile 함수를 호출하여 파일 추가 및 처리
+    addFile(inputElement);
+}
+
 /* 첨부파일 추가 */
 function addFile(obj){
+
+    console.log(obj);
+
     var maxFileCnt = 3;   // 첨부파일 최대 개수
     var attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
     var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
@@ -34,16 +72,54 @@ function addFile(obj){
             fileDiv.setAttribute("id", "file" + fileNo);
             fileDiv.classList.add("filebox");
 
-            const pTag = document.createElement("p");
-            pTag.classList.add("name" + file.name);
-            fileDiv.append(pTag);
+            // const pTag = document.createElement("p");
+            // pTag.classList.add("name");
+            // pTag.innerText = file.name;
+            // fileDiv.append(pTag);
+
+            //  ------------------------------
+
+            const firstDiv = document.createElement("div");
+            firstDiv.classList.add("filebox-first-div");
+
+            const cropDiv = document.createElement("div");
+            cropDiv.classList.add("file--img__crop");
+
+            const firstImg = document.createElement("img");
+            // 사진 icon
+            firstImg.setAttribute("src", "/images/qna/upload_img_icon.png");
+            cropDiv.append(firstImg);
+
+            firstDiv.append(cropDiv);
+
+            const secondDiv = document.createElement("div");
+            const fileNameDiv = document.createElement("div");
+            const sizeDiv = document.createElement("div");
+
+            secondDiv.classList.add("filebox-second-div");
+
+            fileNameDiv.classList.add("name");
+            fileNameDiv.innerText = file.name;
+
+            sizeDiv.innerText = (file.size/1024)/1024;
+
+            secondDiv.append(fileNameDiv);
+            secondDiv.append(sizeDiv);
+
+            fileDiv.append(firstDiv);
+            fileDiv.append(secondDiv);
+
+            // =======================
+            
             
             const aTag = document.createElement("a");
             aTag.classList.add("delete");
             aTag.setAttribute("onclick", "deleteFile(" + fileNo + ");");
             
             const deleteIcon = document.createElement("img");
-            deleteIcon.setAttribute("src", "/images/reservation/checkbox.png");
+            deleteIcon.setAttribute("src", "/images/qna/x_icon.png");
+            deleteIcon.classList.add("delete--icon");
+
             aTag.appendChild(deleteIcon);
             fileDiv.append(aTag);
             
