@@ -37,9 +37,11 @@
 
     <!-- 로그인한 가이드 글 작성 버튼 -->
     <!-- <th:block th:if="${session.loginMember != null}"> -->
-        <div class="write-btn">
-            <img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기">
-        </div>
+    <div class="write-btn">
+        <th:block th:if="${session.loginUser != null and session.loginUser.userType == 'G'}">
+            <a th:href="@{#}"><img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기"></a> 
+        </th:block>
+    </div>
     <!-- </th:block> -->
 
     <!-- ***** 메인 영역 슬라이드 ***** -->
