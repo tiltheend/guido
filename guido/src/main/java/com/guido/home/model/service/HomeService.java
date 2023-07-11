@@ -53,8 +53,5 @@ public interface HomeService {
 	List<Event> selectEventBannerList();
 
 
-	// 이벤트 상세 페이지 이동 + 조회
-	Event selectEvent(int eventNo);
-
 
 }

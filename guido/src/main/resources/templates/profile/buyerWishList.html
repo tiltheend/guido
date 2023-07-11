@@ -10,14 +10,10 @@
 
     <!-- 슬릭 슬라이드 -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/profile/nabong_slick/nabongSlick.css}"/>
-    
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;
-        position:absolute; top: 0;}
-    </style>
+
 </head>
 <body>
-    <header>임시헤더</header>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="buyer-profile-top">
         <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
@@ -130,18 +126,17 @@
         </div>
     </div>
 
-    <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script>
+    <!-- <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script> -->
     <script th:src="@{/js/profile/nabong_slick/slick.js}"></script>
     <script th:src="@{/js/profile/buyerWishList.js}"></script>
     <script th:src="@{/js/profile/profileEdit.js}"></script>
     
     <script th:inline="javascript">
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>  
+
+    <th:block th:replace="~{/common/footer}"></th:block>
 </body>
 </html>

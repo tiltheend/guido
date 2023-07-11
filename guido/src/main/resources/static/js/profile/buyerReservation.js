@@ -270,7 +270,7 @@ function reservationListFn(){
                         const startTime = optionText;
                         const endTime = addTime(optionText, reservation.tourDuration);
                         optionText = `${startTime}~${endTime}`;
-                        console.log(reservation.tourDuration);
+                        // console.log(reservation.tourDuration);
 
                         dateH2.textContent = `${year}년 ${month}월 ${day}일 [${optionText}]`;
 

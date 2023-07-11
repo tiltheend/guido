@@ -215,10 +215,13 @@ function paymentComplete(data){
   .then(resp=>resp.text())
   .then(result=>{
     
-    if(result!='성공')
+    if(result!='성공'){
       alert(result);
-    else
+      sendReservation(productNo, productName); // 예약 완료 알림
+    }
+    else{
       location.replace("/reservation/order_result?order_id=" + data.orderNumber);
+    }
 
   })
   .catch(err=>{
@@ -275,22 +278,21 @@ document.querySelectorAll('input[name=payment]')
 
 
 // 페이팔 결제
-// function requestPaypalPay(){
-  
-//   fetch('/paypal/submit')
-//     .then(function(response) {
-//         if (response.ok) {
-//             return response.text();
-//         }
-//         throw new Error('Network response was not ok.');
-//     })
-//     .then(function(data) {
-//         // 응답 처리
-//     })
-//     .catch(function(error) {
-//         // 에러 처리
-//     });
-// }
+function requestPaypalPay(){
+  // fetch('/paypal/submit')
+  //   .then(function(response) {
+  //       if (response.ok) {
+  //           return response.text();
+  //       }
+  //       throw new Error('Network response was not ok.');
+  //   })
+  //   .then(function(data) {
+  //       // 응답 처리
+  //   })
+  //   .catch(function(error) {
+  //       // 에러 처리
+  //   });
+}
 
 
 /* 유의사항 전체 동의 */
@@ -368,5 +370,3 @@ function checkLength(el) {
     el.value = el.value.substring(0, maxLength);
   }
 }
-
-console.log(reservationDate.productDateNo);

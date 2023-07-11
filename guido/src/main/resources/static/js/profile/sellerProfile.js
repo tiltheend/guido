@@ -1153,20 +1153,43 @@ if(productMoreBtn !=null) {
 }
 
 /* 자기 소개 수정 요소 */
-let prBtn = document.querySelector('.pr-btn');
-prBtn.addEventListener("click",()=>{
+function editModalFn(){
+
     let prEditBox = document.querySelector(".seller-profile-top .pr-edit");
     prEditBox.style.display = "grid";
 
     let aboutMe = document.querySelector(".seller-profile-top .about-me");
     aboutMe.style.display = "none";
 
+    let prEditSubmit = document.querySelector(".pr-edit-submit");
+    prEditSubmit.style.display = "block";
+
     let prCancle = document.querySelector(".pr-edit-cancle");
     prCancle.addEventListener("click",()=>{
         prEditBox.style.display = "none";
         aboutMe.style.display = "grid";
     })
-})
+}
+
+/* 자기 소개 등록 요소 */
+function addModalFn(){
+
+    let prEditBox = document.querySelector(".seller-profile-top .pr-edit");
+    prEditBox.style.display = "grid";
+
+    let aboutMe = document.querySelector(".seller-profile-top .about-me");
+    aboutMe.style.display = "none";
+
+    let prEditAdd = document.querySelector(".pr-edit-add");
+    prEditAdd.style.display = "block";
+
+    let prCancle = document.querySelector(".pr-edit-cancle");
+    prCancle.addEventListener("click",()=>{
+        prEditBox.style.display = "none";
+        aboutMe.style.display = "grid";
+    })
+
+}
 
 /* 자기 소개 수정 */
 function prEditFn(el){
@@ -1241,6 +1264,101 @@ function prEditFn(el){
     } 
 
 }
+
+/* 자기 소개 등록 */
+function prAddFn(el){
+
+    let birthYear= document.querySelector("#birthYear").value;
+    let job = document.querySelector("#job").value;
+    let pets = document.querySelector("#pets").value;
+    let hobby = document.querySelector("#hobby").value;
+    let subLang = document.querySelector("#subLang").value;
+    let abroadExperience = document.querySelector("#abroadExperience").value;
+    let mbti = document.querySelector("#mbti").value;
+    let strength = document.querySelector("#strength").value;
+    let favoriteSong = document.querySelector("#favoriteSong").value;
+    let tmi = document.querySelector("#tmi").value;
+    let major = document.querySelector("#major").value;
+    let dopamine = document.querySelector("#dopamine").value;
+    let uselessTalent = document.querySelector("#uselessTalent").value;
+    let capList = document.querySelector("#capList").value;
+
+    let data = {
+        birthYear: birthYear,
+        job: job,
+        pets: pets,
+        hobby: hobby,
+        subLang: subLang,
+        abroadExperience: abroadExperience,
+        mbti: mbti,
+        strength: strength,
+        favoriteSong: favoriteSong,
+        tmi: tmi,
+        major: major,
+        dopamine: dopamine,
+        uselessTalent: uselessTalent,
+        capList: capList
+    };
+
+    // console.log(data);
+
+    // if(data == null){
+    //     alert("빈 값은 제출 하실 수 없습니다.");
+    // }
+
+    if(confirm("등록 하시겠습니까?")){
+        
+        
+        fetch("/profile/prAdd", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        
+        .then(resp => resp.json())
+        .then(result => {
+            if(result>0){
+                alert("자기 소개가 등록 되었습니다.");
+
+                let prBtnAdd = document.querySelector('.pr-btn-add');
+                prBtnAdd.style.display = "none";
+
+                // 수정 버튼 생성
+                let prBtnEdit = document.createElement("button");
+                prBtnEdit.classList.add("pr-btn-edit");
+                prBtnEdit.type = "button";
+                prBtnEdit.textContent="자기 소개 수정";
+
+                prBtnEdit.addEventListener('click', () => {
+                    editModalFn();
+                });
+
+                document.querySelector(".seller-about>h1").append(prBtnEdit);
+                prBtnEdit.style.display = "block";
+
+                prListFn(); // 비동기로 조회
+
+                let prEditBox = document.querySelector(".seller-profile-top .pr-edit");
+                prEditBox.style.display = "none";
+
+                let prEditAdd = document.querySelector(".pr-edit-add");
+                prEditAdd.style.display = "none";
+            
+                let aboutMe = document.querySelector(".seller-profile-top .about-me");
+                aboutMe.style.display = "grid";
+
+
+            } else {
+                alert("수정에 실패하였습니다.");
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    } 
+
+}
+
 
 // 비동기로 조회
 function prListFn() {

@@ -20,13 +20,10 @@
     <style>
         /* header{width: 100%; height: 80px; background-color: #B1D8DA;
         position:absolute; top: 0;} */
-        .datepicker {
-            top: 80px !important;
-        }
     </style>
 </head>
 <body>
-    <!-- <header>임시헤더</header> -->
+
     <div class="buyer-profile-top">
         <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
 
@@ -258,7 +255,7 @@
                                         </div>
                                         <p class="reviewer-name" th:text="${review.userName}">리뷰 작성자</p>
                                     </div>
-                                    <div class="sale-review-info">
+                                    <div class="sale-review-info" th:data-productname="${review.productName}">
                                         <p th:text="${review.productName}" th:data-productno="${review.productNo}">상품명</p>
                                         <div class="review-rating">
                                             <div class="review-star">
@@ -347,10 +344,6 @@
     </script>
 
     <script th:inline="javascript">
-
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
@@ -359,6 +352,7 @@
     <script th:src="@{/js/profile/profileEdit.js}"></script>                   
     <script th:src="@{/js/profile/buyerProfile.js}"></script>   
 
+    <th:block th:replace="~{/common/footer}"></th:block>
     
 
 </body>

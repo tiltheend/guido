@@ -29,6 +29,8 @@
 </head>
 <body th:object="${product}">
 
+    <th:block th:replace="~{common/header}"></th:block>
+
 
     <div class="reservation--blind" th:if="${product.productState=='B'}">
         <div  class="reservation--blind__top">
@@ -120,7 +122,7 @@
                         <!-- 상세 설명 -->
                         <div class="detail--middle__detail">
         
-                            <div class="detail--text__title font1">
+                            <div class="detail--text__title font1" th:data-productname="*{productName}" th:data-productno="*{productNo}">
                                 [[*{productName}]]
                                 <span class="detail--ongoing__title font4" th:if="*{productState}=='N'">ongoing</span>
                                 <span class="detail--finished__title font4" th:if="*{productState}=='E'">finished</span>

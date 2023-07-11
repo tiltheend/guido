@@ -6,7 +6,7 @@
 /* ----- 판매자 프로필 ----- */
 .seller-profile-top{
     margin:80px;
-    margin-top: 160px;
+    margin-top: 140px; margin-bottom: 80px;
     /* display: flex; justify-content: space-between; */
     display: flex; justify-content: space-around;
 }
@@ -158,7 +158,7 @@
     line-height: 32px; font-size: 1rem; white-space: pre-wrap;
 }
 
-.pr-btn { /* 자기 소개 등록 수정 버튼 */
+.pr-btn-add, .pr-btn-edit{ /* 자기 소개 등록 수정 버튼 */
     /* position: absolute;
     top: 10px;
     right: 10px; */
@@ -220,6 +220,9 @@
     background-color: #0F4957;
 }
 
+.pr-edit-submit, .pr-edit-add{
+    display: none;
+}
 
 
 /* ----- 판매자 상품 리스트 ----- */
@@ -814,7 +817,7 @@
         margin: 0;
         margin-top: 20px;
         position: absolute;
-        top: 80px;
+        top: -60px;
     }
     .seller-profile-top .seller-btn button {
         justify-content: space-around;

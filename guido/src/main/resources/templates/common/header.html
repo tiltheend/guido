@@ -179,9 +179,19 @@
         <div class="mypage-modal">
             <div>
                 <div class="mypage-modal-close"></div>
-                <div>마이페이지</div>
-                <div>결제 및 예약 내역</div>
-                <div>위시리스트</div>
+                <th:block th:if="${session.loginUser}">
+                    <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
+                    <th:block th:switch="${session.loginUser.userType}">  
+                        <th:block th:case="T">
+                            <a th:href="@{/profile/touristReservation}"><div>결제 및 예약 내역</div></a>
+                            <a th:href="@{/profile/touristWishList}"><div>위시리스트</div></a>
+                        </th:block>
+                        <th:block th:case="G">
+                            <a th:href="@{/profile/guideReservationSchedule}"><div>예약 일정 확인</div></a>
+                            <a th:href="@{/profile/guideReservation}"><div>예약 내역</div></a>
+                        </th:block>
+                    </th:block>
+                </th:block>
                 <hr>
                 <div>1:1 문의</div>
                 <div>
@@ -205,6 +215,10 @@
     <!-- 캘린더 -->
     <!-- <script th:src="@{/js/main/calendar.js}"></scrip> -->
     <!-- <script th:src="@{/js/main/calendar/jquery.js}"></scrip> -->
+
+    <script th:inline="javascript">
+        const loginUser = /*[[${session.loginUser}]]*/ "로그인한 회원";
+    </script>
 
     <script th:src="@{/js/header.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
