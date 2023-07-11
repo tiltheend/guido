@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.guido.common.model.dto.User;
 import com.guido.myPage.model.dao.MyPageMapper;
+import com.guido.myPage.model.exception.MyPageUpdateException;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{
@@ -54,7 +55,7 @@ public class MyPageServiceImpl implements MyPageService{
 		if((result1>0)&&(result2>0)) { // 둘 다 성공 해야만 함
 			return 1; // 성공
 		}else { // 둘 중 하나라도 실패 시
-			return 0;
+			throw new MyPageUpdateException();
 		}
 	}
 	

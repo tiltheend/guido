@@ -404,7 +404,7 @@ phone.addEventListener("input",()=>{
     }
 });
 
-telBtn.addEventListener("click",()=>{
+telBtn.addEventListener("click",e=>{
     if(!(chk.phone)){
         e.preventDefault();
         return;
