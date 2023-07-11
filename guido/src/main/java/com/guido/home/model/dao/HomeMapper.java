@@ -61,9 +61,6 @@ public interface HomeMapper {
 	// 메인 슬라이드 이벤트 배너 조회
 	List<Event> selectEventBannerList();
 
-	// 이벤트 상세 페이지 이동 + 조회
-	Event selectEvent(int eventNo);
-
 
 
 

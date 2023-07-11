@@ -87,7 +87,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         	notice.setSenderNo(notice.getSenderNo()); 
         	notice.setProductNo(notice.getProductNo());
         	
-        	System.out.println("리뷰등록 : " + notice);
+        	// System.out.println("리뷰등록 : " + notice);
         	
         	break;
         	
@@ -104,6 +104,21 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         	notice.setProductNo(notice.getProductNo());
         	
         	// System.out.println("관심상품 : " + notice);
+        	
+        	break;
+        	
+        case "O" : // 리뷰 등록 알람
+        	
+        	userNo = service.selectUserNo(notice.getProductNo());
+        	
+        	noticeContent = "'" + notice.getProductName() + "' 상품이 예약되었습니다.";
+        	
+        	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
+        	notice.setNotificationContent(noticeContent);
+        	notice.setSenderNo(notice.getSenderNo()); 
+        	notice.setProductNo(notice.getProductNo());
+        	
+        	System.out.println("예약 완료 : " + notice);
         	
         	break;
         }
@@ -124,7 +139,6 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
     				s.sendMessage(new TextMessage(new Gson().toJson(notice)));
 					break;
     			}
-        		
         	}
         }
     }

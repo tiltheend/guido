@@ -212,10 +212,13 @@ function paymentComplete(data){
   .then(resp=>resp.text())
   .then(result=>{
     
-    if(result!='성공')
+    if(result!='성공'){
       alert(result);
-    else
+      sendReservation(productNo, productName); // 예약 완료 알림
+    }
+    else{
       location.replace("/reservation/order_result?order_id=" + data.orderNumber);
+    }
 
   })
   .catch(err=>{
