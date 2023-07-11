@@ -17,6 +17,7 @@
 		<result property="primaryLanguage" column="PRIMARY_LANGUAGE"/>
 		<result property="emergencyContact" column="EMERGENCY_CONTACT"/>
 		<result property="faceImg" column="FACE_IMG"/>
+		<result property="countryCode" column="COUNTRY_CODE"/>
 		<!-- 가이드 -->
 		<result property="languageSkill" column="LANGUAGE_SKILL"/>
 		<result property="activityArea" column="ACTIVITY_AREA"/>
@@ -37,6 +38,30 @@
 	
 	<update id="pwEdit">
 		UPDATE "USER" SET USER_PASSWORD = #{userPassword} WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="telEdit">
+		UPDATE "USER" SET USER_TEL = #{userTel} WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="countryCodeEdit">
+		UPDATE "TOURIST" SET COUNTRY_CODE = #{countryCode} WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="updateEmergencyContact">
+		UPDATE "TOURIST" SET EMERGENCY_CONTACT = #{emergencyContact} WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="passportEdit">
+		UPDATE "TOURIST" SET PASSPORT_NO = #{passportNo} WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="primaryLanguageEdit">
+		UPDATE "TOURIST" SET PRIMARY_LANGUAGE = #{primaryLanguage} WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="secession">
+		UPDATE "USER" SET USER_STATE = 'D' WHERE USER_NO = #{userNo}
 	</update>
 	
 	

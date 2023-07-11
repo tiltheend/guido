@@ -374,6 +374,11 @@ emergencyCo.addEventListener("focusout",()=>{
     emergCoMessage.innerText = "";
     emergCoMessage.classList.remove("normal-message");
 });
+emergencyCo.addEventListener("input",()=>{
+    if(emergencyCo.value.trim().length==0){
+        emergencyCo.value="";
+    }
+});
 
 
 // 여권번호

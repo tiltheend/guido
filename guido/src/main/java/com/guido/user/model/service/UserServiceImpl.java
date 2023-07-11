@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.guido.common.model.dto.User;
 import com.guido.user.model.dao.UserMapper;
+import com.guido.user.model.exception.UserSignupException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,13 +50,26 @@ public class UserServiceImpl implements UserService {
 		String encPw = bcrypt.encode(inputUser.getUserPassword());
 		inputUser.setUserPassword(encPw);
 		
-		int result = mapper.signUp(inputUser);
+		
+		int result = mapper.signUp(inputUser); // USER 테이블 insert
 		
 		if(result>0) { // 성공하면
 			int inputUserNo = mapper.signUpUserNo(inputUser); // userNo 가져와서 (select)
+			
 			inputUser.setUserNo(inputUserNo); // userNo set 하고 
-			if(inputUser.getUserType().equals("T")) result = mapper.insertTourist(inputUser); // TOURIST 테이블 insert
-			if(inputUser.getUserType().equals("G")) result = mapper.insertGuide(inputUser); // GUIDE 테이블 insert
+			
+			if(inputUser.getUserType().equals("T")) { // TOURIST 테이블 insert
+				int TouristInsert = mapper.insertTourist(inputUser); 
+				if(TouristInsert==0) { // TOURIST 테이블 insert 실패 하면 commit 되지 않도록 강제 오류 발생
+					throw new UserSignupException();
+				}
+			}
+			if(inputUser.getUserType().equals("G")) { // GUIDE 테이블 insert
+				int GuideInsert = mapper.insertGuide(inputUser); 
+				if(GuideInsert==0) { // GUIDE 테이블 insert 실패 하면 commit 되지 않도록 강제 오류 발생
+					throw new UserSignupException();
+				}
+			}
 		}else { // 실패하면 실패 
 			result = 0;
 		}
