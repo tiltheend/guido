@@ -216,11 +216,10 @@ public class EmailServiceImpl implements EmailService{
 	public String sendAnswer(QNA qna) {
 		String subject = "[guido] "+ qna.getQnaTitle() +"문의에 대한 답변";
 		String charset = "UTF-8";
-//		String sendEmail = qna.getQnaEmail();
-		String sendEmail = "poer214@naver.com";
+		String sendEmail = qna.getQnaEmail();
 		MimeMessage mail = mailSender.createMimeMessage();
         try {
-			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, charset);
 			Context context = new Context();
 			context.setVariable("qna", qna);
 			mailHelper.setSubject(subject);

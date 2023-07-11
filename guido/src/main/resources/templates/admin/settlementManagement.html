@@ -50,7 +50,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="reservation:${map.list}" th:object="${reservation}">
-                        <td th:text="*{ORDER_NUMBER}">주문번호</td>
+                        <td class="orderNumber" th:text="*{ORDER_NUMBER}">주문번호</td>
                         <td class="size1300" th:text="*{PRODUCT_NAME}">상품 제목</td>
                         <td class="size1024" th:text="*{USER_EMAIL}">구매자 이메일</td>
                         <td th:text="*{TOTAL_PRICE}">결제 금액</td>

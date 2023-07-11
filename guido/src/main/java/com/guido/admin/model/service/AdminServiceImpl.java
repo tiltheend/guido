@@ -150,8 +150,9 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.selectEvent(eventNo);
 	}
 	
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl ) {
+	public int updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl ) throws IllegalStateException, IOException  {
 		int result = mapper.updateEvent(event);
 		for(int i=0;i<imageDeleteFl.size();i++) {
 			if(imageDeleteFl.get(i).equals("y")) {
@@ -159,6 +160,31 @@ public class AdminServiceImpl implements AdminService {
 				map.put("eventNo", event.getEventNo());
 				map.put("fileOrder", i);
 				mapper.deleteFile(map);
+			}
+		}
+		if (result > 0) {
+			int eventNo = event.getEventNo();
+			List<File> uploadList = new ArrayList<>();
+
+			for (int i = 0; i < files.size(); i++) {
+				if (files.get(i).getSize() > 0) {
+					File file = new File();
+					String rename = Util.fileRename(files.get(i).getOriginalFilename());
+					System.out.println(eventFilePath);
+					System.out.println(rename);
+					files.get(i).transferTo(new java.io.File(eventFilePath + rename));
+					file.setFilePath(eventWebPath + rename);
+					file.setEventNo(eventNo);
+					file.setFileOrder(i);
+					uploadList.add(file);
+				}
+			}
+
+			if (!uploadList.isEmpty()) {
+				result = mapper.insertFileList(uploadList);
+				if (uploadList.size() != result) {
+					throw new FileUploadException();
+				}
 			}
 		}
 		
