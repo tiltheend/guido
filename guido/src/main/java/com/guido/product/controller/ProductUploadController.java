@@ -194,5 +194,31 @@ public class ProductUploadController {
 		}
 
 		
+		@GetMapping("/productDetail/product/{productNo}/delete")
+		public String productDelete(
+						@PathVariable("productNo") int productNo
+						
+						,RedirectAttributes ra
+						) {
+			
+			int result = service.productDelete(productNo);
+			
+			String path = "redirect:";
+			String message = null;
+			if(result > 0) {
+				message = "삭제 되었습니다.";
+				path += "/";
+			}else {
+				message = "삭제 실패";
+				path += "/productDetail/product/" + productNo;
+				//path += referer;
+			}
+
+			ra.addFlashAttribute("message", message);
+			
+			return path;
+		}
+
+		
 	
 }

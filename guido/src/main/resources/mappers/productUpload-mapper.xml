@@ -209,24 +209,30 @@
 	</update>
     
     <!-- product date insert-->
-    <insert id="insertProductDate" parameterType="ProductDate" useGeneratedKeys="true">
-		<selectKey order="BEFORE" resultType="_int" keyProperty="productDateNo">
-	    	SELECT SEQ_PRODUCT_DT_NO.NEXTVAL FROM DUAL
-	  	</selectKey>
-			INSERT INTO PRODUCT_DT 
-	   		VALUES(#{productDateNo}, ${productNo}, #{productDate}, DEFAULT)
-	</insert>
+	    <insert id="insertProductDate" parameterType="ProductDate" useGeneratedKeys="true">
+			<selectKey order="BEFORE" resultType="_int" keyProperty="productDateNo">
+		    	SELECT SEQ_PRODUCT_DT_NO.NEXTVAL FROM DUAL
+		  	</selectKey>
+				INSERT INTO PRODUCT_DT 
+		   		VALUES(#{productDateNo}, ${productNo}, #{productDate}, DEFAULT)
+		</insert>
     
     
      <!-- product option insert  1일 투어일 경우에-->
-    <insert id="insertProductOptionList" parameterType="ProductOption" useGeneratedKeys="true">
-		<selectKey order="BEFORE" resultType="_int" keyProperty="optionNo">
-			SELECT SEQ_OPTION_NO.NEXTVAL FROM DUAL
-		</selectKey>
-			INSERT INTO PRODUCT_OPTION
-			VALUES(#{optionNo}, #{optionName}, #{optionRestCount}, ${productNo}, ${productDateNo})
-	</insert>
-    
-
+	    <insert id="insertProductOptionList" parameterType="ProductOption" useGeneratedKeys="true">
+			<selectKey order="BEFORE" resultType="_int" keyProperty="optionNo">
+				SELECT SEQ_OPTION_NO.NEXTVAL FROM DUAL
+			</selectKey>
+				INSERT INTO PRODUCT_OPTION
+				VALUES(#{optionNo}, #{optionName}, #{optionRestCount}, ${productNo}, ${productDateNo})
+		</insert>
+	
+	<!-- 여행상품 삭제-->
+	   <update id="productDelete">
+	      UPDATE PRODUCT SET
+	      PRODUCT_STATE = 'D'
+	      WHERE PRODUCT_NO = #{productNo}
+	      AND PRODUCT_STATE = 'N'
+	   </update>
 </mapper>
 
