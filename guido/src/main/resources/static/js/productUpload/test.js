@@ -26,69 +26,69 @@ const updatePage = () => {
 
   if (currentPage == 0) {
   }
-  if (currentPage == 1) {
-    document.querySelector('.text2').innerHTML = '';
-    typing2();
-    // updateNextBtnCity();
-  }
-  if (currentPage == 2) {
-    document.querySelector('.text6').innerHTML = '';
-    typing6();
-    init();
-    // checkTourCourse();
-  }
-  if (currentPage == 3) {
-    updateNextBtnState();
-    document.querySelector('.text3').innerHTML = '';
-    typing3();
-  }
-  if (currentPage == 4) {
-    document.querySelector('.text5').innerHTML = '';
-    typing5();
-    disableNextButtonCheckNum();
-    disableNextButtonCheckNum2();
-    checkMaxTourist();
-  }
-  if (currentPage == 5) {
-    document.querySelector('.text4').innerHTML = '';
-    typing4();
-    disableNextButtonFeeInput();
-  }
-  if (currentPage == 6) {
-    document.querySelector('.text7').innerHTML = '';
-    typing7();
-    checkImage();
-  }
-  if (currentPage == 7) {
-    document.querySelector('.text8').innerHTML = '';
-    typing8();
-    titleCharCheck();
-    inputTitle.focus();
-  }
-  if (currentPage == 8) {
-    document.querySelector('.text9').innerHTML = '';
-    typing9();
-    contentCharCheck();
-    inputContent.focus();
-  }
-  if (currentPage == 9) {
-    document.querySelector('.text11').innerHTML = '';
-    typing11();
-    displayNoneTime();
-  }
-  if (currentPage == 10) {
-    document.querySelector('.text12').innerHTML = '';
-    typing12();
-  }
-  if (currentPage == 11) {
-    document.querySelector('.text13').innerHTML = '';
-    typing13();
-    disableNextButton();
-  }
-  if (currentPage == 12) {
-    document.querySelector('.text14').innerHTML = '';
-    typing14();
-  }
+  // if (currentPage == 1) {
+  //   document.querySelector('.text2').innerHTML = '';
+  //   typing2();
+  //   // updateNextBtnCity();
+  // }
+  // if (currentPage == 2) {
+  //   document.querySelector('.text6').innerHTML = '';
+  //   typing6();
+  //   init();
+  //   // checkTourCourse();
+  // }
+  // if (currentPage == 3) {
+  //   updateNextBtnState();
+  //   document.querySelector('.text3').innerHTML = '';
+  //   typing3();
+  // }
+  // if (currentPage == 4) {
+  //   document.querySelector('.text5').innerHTML = '';
+  //   typing5();
+  //   disableNextButtonCheckNum();
+  //   disableNextButtonCheckNum2();
+  //   checkMaxTourist();
+  // }
+  // if (currentPage == 5) {
+  //   document.querySelector('.text4').innerHTML = '';
+  //   typing4();
+  //   disableNextButtonFeeInput();
+  // }
+  // if (currentPage == 6) {
+  //   document.querySelector('.text7').innerHTML = '';
+  //   typing7();
+  //   // checkImage();
+  // }
+  // if (currentPage == 7) {
+  //   document.querySelector('.text8').innerHTML = '';
+  //   typing8();
+  //   titleCharCheck();
+  //   inputTitle.focus();
+  // }
+  // if (currentPage == 8) {
+  //   document.querySelector('.text9').innerHTML = '';
+  //   typing9();
+  //   contentCharCheck();
+  //   inputContent.focus();
+  // }
+  // if (currentPage == 9) {
+  //   document.querySelector('.text11').innerHTML = '';
+  //   typing11();
+  //   displayNoneTime();
+  // }
+  // if (currentPage == 10) {
+  //   document.querySelector('.text12').innerHTML = '';
+  //   typing12();
+  // }
+  // if (currentPage == 11) {
+  //   document.querySelector('.text13').innerHTML = '';
+  //   typing13();
+  //   disableNextButton();
+  // }
+  // if (currentPage == 12) {
+  //   document.querySelector('.text14').innerHTML = '';
+  //   typing14();
+  // }
 };
 
 prevBtn.addEventListener('click', () => {
@@ -207,13 +207,13 @@ tourTypes.forEach(function (tourType) {
   nextBtn.disabled = true;
 });
 inputDay.addEventListener('input', function () {
-  if (this.value !== '') {
+  if (this.value > 0) {
     inputTime.value = '';
     inputDayHidden.value = inputDay.value;
     inputDay.addEventListener('input', function () {
       const value = inputDay.value;
 
-      if (!value || isNaN(value)) {
+      if (!value || isNaN(value) || value == 0) {
         inputDay.style.borderColor = 'red';
         inputDay.style.backgroundColor = 'rgb(255,232,232)';
         inputWarning.style.display = 'flex';
@@ -231,13 +231,13 @@ inputDay.addEventListener('input', function () {
   }
 });
 inputTime.addEventListener('input', function () {
-  if (this.value !== '') {
+  if (this.value > 0) {
     inputDay.value = '';
     inputTimeHidden.value = inputTime.value;
     inputTime.addEventListener('input', function () {
       const value = inputTime.value;
 
-      if (!value || isNaN(value)) {
+      if (!value || isNaN(value) || value == 0) {
         inputTime.style.borderColor = 'red';
         inputTime.style.backgroundColor = 'rgb(255,232,232)';
         inputWarning.style.display = 'flex';
@@ -806,38 +806,24 @@ for (let i = 0; i < inputImage.length; i++) {
     });
   });
 }
-//초기 상태에서 이벤트를 강제로 발생시킴
-const changeEvent = new Event('change');
-inputImage[4].dispatchEvent(changeEvent);
-inputImage[5].dispatchEvent(changeEvent);
 const plusImage = document.querySelectorAll('.plus-image');
-
-for (let i = 0; i < 5; i++) {
-  inputImage[i].addEventListener('change', () => {
-    let allImagesSelected = true;
-    for (let j = 0; j < 5; j++) {
-      if (preview[j].getAttribute('src') === '') {
-        allImagesSelected = false;
-        break;
-      }
+const constPreview = document.querySelectorAll('.const-preview');
+const checkImage = () => {
+  for (let i = 0; i < constPreview.length; i++) {
+    if (constPreview[i].getAttribute('src') == '') {
+      nextBtn.disabled = true;
     }
-
-    if (allImagesSelected) {
-      for (let i = 0; i < plusImage.length; i++) {
-        plusImage[i].style.display = 'inline-block';
-      }
+  }
+};
+for (const imgElement of constPreview) {
+  imgElement.addEventListener('change', () => {
+    if (imgElement.src !== '') {
       nextBtn.disabled = false;
     } else {
       nextBtn.disabled = true;
     }
   });
 }
-
-const checkImage = () => {
-  if (preview[i].getAttribute('src') == '') {
-    nextBtn.disabled = true;
-  }
-};
 const checkTourCourse = () => {
   if (tourCourse.length == 0) {
     nextBtn.disabled = true;

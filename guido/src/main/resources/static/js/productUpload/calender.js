@@ -87,7 +87,8 @@ function choiceDate(newDIV) {
   }
 
   const createDateElement = document.createElement('span');
-  createDateElement.innerText = selectedDate;
+  createDateElement.innerText =
+    nowMonth.getMonth() + 1 + '월' + newDIV.innerHTML + '일';
   createDateDiv.appendChild(createDateElement);
 
   // 선택된 날짜가 이전에 선택한 날짜와 동일한지 확인합니다.
@@ -148,9 +149,9 @@ function prevCalendar() {
   buildCalendar(); // 달력 다시 생성
 
   // 이전에 선택한 요소가 있으면 해당 요소에 "choiceDay" class 추가
-  if (lastClickedElement) {
-    lastClickedElement.classList.add('choiceDay');
-  }
+  // if (lastClickedElement) {
+  //   lastClickedElement.classList.add('choiceDay');
+  // }
 }
 // 다음달 버튼 클릭
 function nextCalendar() {
@@ -172,9 +173,3 @@ function leftPad(value) {
   }
   return value;
 }
-
-const displayNoneTime = () => {
-  if (onedayTourValue.value == '') {
-    document.getElementById('createTime').style.display = 'none';
-  }
-};

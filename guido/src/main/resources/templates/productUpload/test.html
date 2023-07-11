@@ -15,6 +15,9 @@
     <link rel="stylesheet" th:href="@{/css/productUpload/modal.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/typing.css}">
     <link rel="stylesheet" th:href="@{/css/productUpload/tourCourse.css}">
+    <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap-datepicker.css}">
+    <script th:src="@{/js/main/calendar/bootstrap-datepicker.js}"></script>
+    <script th:src="@{/js/main/calendar/bootstrap.js}"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    
@@ -371,7 +374,7 @@
       <div class="img-box">
         <div class="productImg thumbnail">
           <label for="img0">
-            <img class="preview" src="" alt="">
+            <img class="preview const-preview" src="" alt="">
             <input type="file" name="images" class="input-image" id="img0" accept="image/*"/>
             <span class="delete-image">&times;</span>
             <div class="add-image add-image-thumbnail">
@@ -387,7 +390,7 @@
       <div class="img-box">
         <div th:each="index: ${#numbers.sequence(1, 4)}" class="productImg">
           <label th:for="'img' + ${index}">
-            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <img class="preview const-preview" src="" alt="" th:id="'imgId' + ${index}">
             <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
             <span class="delete-image">&times;</span>
             <div class="add-image">
