@@ -1,86 +1,4 @@
-// //내정보 수정
-// var modifyName = document.getElementById("modifyName");
-// var modifyPw = document.getElementById("modifyPw");
-// var modifyTel = document.getElementById("modifyTel");
-// var modifyImage = document.getElementById("modifyImage");
 
-// var username = document.getElementById("username");
-// var userTel = document.getElementById("userTel");
-
-// var profileInfoName = document.querySelector(".profile-info-name");
-// var profileInfoPw = document.querySelector(".profile-info-pw");
-// var profileInfoTel = document.querySelector(".profile-info-tel");
-// var profileInfoImage = document.querySelector(".profile-info-image");
-
-// var form1 = document.getElementById("username").nextElementSibling;
-// var button = document.getElementById("inputFirstName").nextElementSibling;
-
-// // 클릭 이벤트 방지
-// var preventClick = function(e){
-//     e.preventDefault(); 
-//     e.stopPropagation(); return false; 
-
-// // 실명 수정
-// modifyName.addEventListener("click",()=>{
-    
-//     modifyName.classList.toggle("modify");
-//     modifyName.classList.toggle("cancel");
-
-//     if(modifyName.classList.contains("modify")){
-//         modifyName.innerText = "수정";
-//         form1.style.display = "none";
-//         username.innerText = "유저이름";
-//         // profileInfoPw.classList.remove("prevent");
-//         // profileInfoTel.classList.prevent("prevent");
-//         // profileInfoImage.classList.prevent("prevent");
-//     }
-//     if(modifyName.classList.contains("cancel")){
-//         modifyPw.addEventListener('click',preventClick,true);
-//         modifyTel.addEventListener('click',preventClick,true);
-//         modifyImage.addEventListener('click',preventClick,true);
-//         modifyName.innerText = "취소";
-//         form1.style.display = "block";
-//         username.innerText = "허가증이나 여권 등 여행 서류에 기재되어 있는 이름을 말합니다.";
-//         // profileInfoPw.classList.add("prevent");
-//         // profileInfoTel.classList.add("prevent");
-//         // profileInfoImage.classList.add("prevent");
-
-//     }
-
-
-// // 비번 수정
-// var originPwF = document.getElementById("originPwF");
-// var inputOriginPw = document.getElementById("inputOriginPw");
-// var newPwF = document.getElementById("newPwF");
-// var inputNewPw = document.getElementById("inputNewPw");
-// var checkNewPw = document.getElementById("checkNewPw");
-
-// modifyPw.addEventListener("click",()=>{
-//     modifyPw.classList.toggle("modify");
-//     modifyPw.classList.toggle("cancel");
-
-//     if(modifyPw.classList.contains("modify")){
-//         modifyPw.innerText = "수정";
-//         originPwF.style.display = "none";
-//         newPwF.style.display = "none";
-
-//     }
-//     if(modifyPw.classList.contains("cancel")){
-
-//         modifyPw.innerText = "취소";
-//         originPwF.style.display = "block";
-//         // 기존 비번 맞으면 
-//         inputOriginPw.nextElementSibling.addEventListener("click",()=>{
-//             // 비동기 추가하기
-//             // 비번 재설정
-//             originPwF.style.display = "none";
-//             newPwF.style.display = "block";
-//             // 비번 수정 비동기
-//         })
-
-//     }
-    
-// })
 
 // 수정 누르면 hidden 나오고 나머지 요소 막음 + 컬러 연하게
 
@@ -235,6 +153,7 @@ nameBtn.addEventListener("click",e=>{
             alert("이름이 변경되었습니다.");
             
             document.getElementById("getName").innerText = loginUser.userName;
+            document.getElementById("myInfoName").innerText = loginUser.userName;
             // 바로 다시 버튼 눌리는 거 방지
         }
     })

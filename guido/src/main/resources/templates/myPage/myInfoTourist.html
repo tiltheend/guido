@@ -9,14 +9,9 @@
     <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/signUpIntlTelInput.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage/myInfoTourist.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;
-        position:absolute; top: 0;}
-    </style>
 </head>
 <body>
-    <header>임시헤더</header>
-    <!-- <th:block th:replace="~{common/header}"></th:block> -->
+    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="buyer-profile-top" th:object="${session.loginUser}">
         <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
@@ -26,34 +21,40 @@
             </div>
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
-
-                <div class="profile-img-box"> <!-- 프로필+이름 -->
+                
+                <form class="profile-img-box" th:action="@{/profile/profileEdit}" method="POST" enctype="multipart/form-data"> <!-- 프로필+이름 -->
+                    <button class="profile-edit-btn">프로필 변경</button>
+                    <img th:src="@{/images/profile/profile_delete.png}" alt="profile_delete" class="profile-delete">
                     <div class="profile-img">
-                        <img src="" alt=""> <!-- 프로필 사진 칸 -->
+                        <img th:unless="${user.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                        <img th:if="${user.profileImage}" th:src="${user.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
 
-                        <input type="file" name="userProfileFile" id="userProfileFile">
+                        <input type="file" name="profileImage" id="userProfileFile" accept="image/*">
                         <!-- 프로필 편집 버튼 -->
                         <img th:src="@{/images/profile/profileEdit.png}" alt="profileEditIcon" class="profile-edit-icon"> 
+
                     </div>
-                    <h2>UserName</h2> <!-- 유저이름 -->
-                </div>
+                    <a th:href="@{/profile/{userNo}(userNo=${session.loginUser.userNo})}">
+                        <h2 th:text="*{userName}" id="myInfoName">UserName</h2> <!-- 유저이름 -->
+                    </a>
+                </form>
 
                 <div class="user-email"> <!-- 유저 이메일 -->
-                    <p>tiltheend@gmail.com</p>
+                    <p th:text="*{userEmail}">UserEmail</p>
                 </div>
 
             </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
             
             <div class="seller-btn">
-                <button> <!-- 내 정보 수정 -->
+                <button onclick="location.href='/user/myPage/editInfo/tourist'"> <!-- 내 정보 수정 -->
                     <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
                     <div>내 정보 수정</div>
                 </button>
-                <button th:onclick="|location.href='@{sellerReservationSchedule.html}'|"> <!-- 예약 관리 --> 
+                <button onclick="location.href='/profile/touristReservation'"> <!-- 예약 관리 --> 
                     <img th:src="@{/images/profile/buyerReservation.png}" alt="">
                     <div>예약 관리</div> 
                 </button>
-                <button th:onclick="|location.href='@{sellerReservation.html}'|"> <!-- 위시리스트 -->
+                <button onclick="location.href='/profile/touristWishList'"> <!-- 위시리스트 -->
                     <img th:src="@{/images/profile/buyerWishList.png}" alt="">
                     <div>위시 리스트</div>
                 </button>
@@ -305,7 +306,7 @@
         </div>
         
     </div>
-    <!-- <th:block th:replace="~{common/footer}"></th:block> -->
+    <th:block th:replace="~{common/footer}"></th:block>
     <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
     <script th:inline="javascript">
 
@@ -339,7 +340,10 @@
             console.log(phone.value);
 
     });
+
+        const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>
+    <script th:src="@{/js/profile/profileEdit.js}"></script>  
     <script th:src="@{/js/myPage/myInfoTourist.js}"></script>
     
 </body>

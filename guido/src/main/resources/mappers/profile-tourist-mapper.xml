@@ -110,7 +110,7 @@
 	
 	<!-- 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버) -->
 	 <select id="userInfo" resultMap="user_rm">
-		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG, USER_NO
+		SELECT USER_EMAIL, USER_NAME, PROFILE_IMG, USER_NO, USER_TYPE
 		FROM "USER"
 		WHERE USER_NO = #{userNo}
 	 </select>
