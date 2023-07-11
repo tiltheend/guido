@@ -278,22 +278,21 @@ document.querySelectorAll('input[name=payment]')
 
 
 // 페이팔 결제
-// function requestPaypalPay(){
-  
-//   fetch('/paypal/submit')
-//     .then(function(response) {
-//         if (response.ok) {
-//             return response.text();
-//         }
-//         throw new Error('Network response was not ok.');
-//     })
-//     .then(function(data) {
-//         // 응답 처리
-//     })
-//     .catch(function(error) {
-//         // 에러 처리
-//     });
-// }
+function requestPaypalPay(){
+  // fetch('/paypal/submit')
+  //   .then(function(response) {
+  //       if (response.ok) {
+  //           return response.text();
+  //       }
+  //       throw new Error('Network response was not ok.');
+  //   })
+  //   .then(function(data) {
+  //       // 응답 처리
+  //   })
+  //   .catch(function(error) {
+  //       // 에러 처리
+  //   });
+}
 
 
 /* 유의사항 전체 동의 */
@@ -371,5 +370,3 @@ function checkLength(el) {
     el.value = el.value.substring(0, maxLength);
   }
 }
-
-console.log(reservationDate.productDateNo);
