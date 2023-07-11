@@ -81,9 +81,9 @@ public class ChattingServiceImpl implements ChattingService{
 
 		String filePath = "C:/guidoImages/chatting/";
 
-		File forder = new File(filePath);
+		File folder = new File(filePath);
 
-		if(!forder.exists()) forder.mkdir(); // 폴더 없으면 생성
+		if(!folder.exists()) folder.mkdir(); // 폴더 없으면 생성
 
 		image.transferTo(new File(filePath+ rename));
 

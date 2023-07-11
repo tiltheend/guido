@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -135,7 +136,8 @@ public class ProfileTouristController {
 	public String updateProfile(
 			@RequestParam("profileImage") MultipartFile profileImage, // 업로드 파일
 			RedirectAttributes ra,
-			@SessionAttribute("loginUser") User loginUser
+			@SessionAttribute("loginUser") User loginUser,
+			@RequestHeader(value="referer") String referer
 			) throws IllegalStateException, IOException {
 
 		int userNo= loginUser.getUserNo();
@@ -149,7 +151,10 @@ public class ProfileTouristController {
 		
 		ra.addFlashAttribute("message",message);
 		
-		return "redirect:/profile/"+userNo;
+		loginUser.setProfileImage(message);
+		
+//		return "redirect:/profile/"+userNo;
+		return "redirect:"+referer;
 	}
 	
 	// 구매자 프로필 자신이 쓴 리뷰 목록 더보기 (3개씩)
