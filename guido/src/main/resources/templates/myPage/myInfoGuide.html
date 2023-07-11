@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My information</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" th:href="@{/css/myPage/myInfoGuide.css}">
+    <title>My information_tourist</title>
+    <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/demo.css}"/>
+    <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/signUpIntlTelInput.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage/myInfoTourist.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <th:block th:replace="~{common/header}"></th:block>
 
-    <div class="seller-profile-top">
-
+    <div class="buyer-profile-top" th:object="${session.loginUser}">
         <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
 
-            <div class="guide-banner"> <!-- 프로필 위 가이드 배너 -->
-                <img th:src="@{/images/profile/guideBanner.png}" alt="guideBanner" id="displayNone"> <!-- 일반 가이드 -->
-                <img th:src="@{/images/profile/superGuideBanner.png}" alt="superGuideBanner"> <!-- 슈퍼 가이드 -->
+            <div class="guide-banner"> <!-- 프로필 위 투어리스트 배너 -->
+                <img th:src="@{/images/profile/touristBanner.png}" alt="guideBanner"> <!-- 일반 가이드 -->
             </div>
 
             <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
@@ -33,22 +33,6 @@
                     <h2>UserName</h2> <!-- 유저이름 -->
                 </div>
 
-                <div class="profile-seller-info"> <!-- 판매자 정보 (후기/평점/경력) -->
-                    <div class="seller-info">
-                        <h2>36</h2>
-                        <p>후기</p>
-                    </div>
-                    <div class="seller-info">
-                        <h2>4.8</h2>
-                        <p>평점</p>
-                    </div>
-                    <div class="seller-info">
-                        <h2>10</h2>
-                        <p>경력</p>
-                        <p>(개월)</p>
-                    </div>
-                </div>
-
                 <div class="user-email"> <!-- 유저 이메일 -->
                     <p>tiltheend@gmail.com</p>
                 </div>
@@ -56,41 +40,53 @@
             </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
             
             <div class="seller-btn">
-                <button th:onclick="|location.href='@{myInfo.html}'|"> <!-- 내 정보 수정 -->
-                    <img th:src="@{/images/profile/myInfoEdit.png}" alt="">내 정보 수정
+                <button> <!-- 내 정보 수정 -->
+                    <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
+                    <div>내 정보 수정</div>
                 </button>
-                <button th:onclick="|location.href='@{sellerReservationSchedule.html}'|"> <!-- 예약 일정 확인 --> 
-                    <img th:src="@{/images/profile/reservationCalender.png}" alt="">예약 일정 확인
+                <button th:onclick="|location.href='@{sellerReservationSchedule.html}'|"> <!-- 예약 관리 --> 
+                    <img th:src="@{/images/profile/buyerReservation.png}" alt="">
+                    <div>예약 관리</div> 
                 </button>
-                <button th:onclick="|location.href='@{sellerReservation.html}'|"> <!-- 예약 내역 -->
-                    <img th:src="@{/images/profile/reservationList.png}" alt="">예약 내역
+                <button th:onclick="|location.href='@{sellerReservation.html}'|"> <!-- 위시리스트 -->
+                    <img th:src="@{/images/profile/buyerWishList.png}" alt="">
+                    <div>위시 리스트</div>
                 </button>
             </div>
         </div> <!-- // profile-box (프로필 + 버튼) -->
-        
-        <!-- ------------------------------------------ -->
+        <!-- --------------------------------- -->
         <div class="profile_right"> <!-- 프로필 오른쪽 박스 -->
             <div class="profile-my-info">
                 <div class="profile-info-title font0">회원 정보</div>
                 <!-- 실명 -->
                 <div class="edit-info-area">
                     <div class="edit-info-top">
-                        <div class="name font3" id="prevElem">실명</div>
+                        <div class="name font3" id="prevElem">이름</div>
                         <div class="edit font4">수정</div>
-                        <div class="cancel font4 hidden">취소</div>
+                        <div class="cancel font4 hidden">닫기</div>
                     </div>
-                    <div class="ment username font4" id="username">유저이름</div>
-                    <div class="changeMent font4 hidden">허가증이나 여권 등 여행 서류에 기재되어 있는 이름을 기재해주세요.</div>
+                    <div class="ment font4" id="getName" th:text="*{userName}">유저이름</div>
+                    <div class="changeMent font4 hidden">여권상 영문명 (성, 이름)을 기재해주세요.</div>
                     <!-- 숨은 부분 -->
-                    <form th:action="#" method="post" class="hidden-area hidden">
-                        <div class="input-name-area">
-                            <div class="input-name">
-                                <input type="text" placeholder="이름" name="inputFirstName" id="inputFirstName" class="inputFirstName">
-                                <input type="text" placeholder="성" name="inputLastName" id="inputLastName" class="inputLastName">
+                    <div class="hidden-area">
+                        <div class="namePart">
+                            <div class="last-name">
+                                <div class="inputGroup">
+                                    <input type="text" id="lastName" autocomplete="off" required>
+                                    <label for="lastName">성</label>
+                                </div>
+                                <div class="font4" id="nameMessage1"></div>
                             </div>
-                            <button>저장</button>
+                            <div class="first-name">
+                                <div class="inputGroup">
+                                    <input type="text" id="firstName" autocomplete="off" required>
+                                    <label for="firstName">이름</label>
+                                </div>
+                                <div class="font4" id="nameMessage2"></div>
+                            </div>
                         </div>
-                    </form>
+                        <button id="nameBtn">저장</button>
+                    </div>
                 </div>
                 <hr>
                 <!-- 비밀번호 -->
@@ -98,18 +94,32 @@
                     <div class="edit-info-top">
                         <div class="pw font3" id="pw">비밀번호</div>
                         <div class="edit font4">수정</div>
-                        <div class="cancel font4 hidden">취소</div>
+                        <div class="cancel font4 hidden">닫기</div>
                     </div>
-                    <div class="changeMent font4 hidden">영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자</div>
+                    <div class="ment font4"></div>
+                    <div class="changeMent font4 hidden">기존 비밀번호를 확인 후 비밀번호를 변경해주세요.</div>
                     <!-- 숨은 부분(기존 비번 확인) -->
-                    <form th:action="#" method="post" id="originPwF"  class="hidden-area">
-                        <div class="password">
-                            <input type="password" placeholder="기존 비밀번호" name="inputOriginPw" id="inputOriginPw" class="inputOriginPw">
-                            <input type="password" placeholder="새 비밀번호" name="inputNewPw" id="inputNewPw" class="inputNewPw">
-                            <input type="text" placeholder="새 비밀번호 확인" name="checkNewPw" id="checkNewPw" class="checkNewPw">
-                            <button type="button" class="pw-change-button">수정</button>
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="password" id="originPw" autocomplete="off" required>
+                            <label for="orignPw">기존 비밀번호</label>
                         </div>
-                    </form>
+                        <button id="originPwChkBtn">확인</button>
+                        <div class="changeMent font4 newPw-ment" id="newPwMent">영어 소문자, 숫자, 특수문자(@,$,!,%,*,?,&)를 포함한 10~20자의 비밀번호를 입력해주세요.</div>
+                        <div class="newPw-part" id="newPwPart">
+                            <div class="inputGroup" id="newPwPart">
+                                <input type="password" id="password" autocomplete="off" required>
+                                <label for="password">새 비밀번호</label>
+                            </div>
+                            <div class="font4" id="pwMessage"></div>
+                            <div class="inputGroup">
+                                <input type="password" id="checkPassword" autocomplete="off" required>
+                                <label for="checkPassword">새 비밀번호 확인</label>
+                            </div>
+                            <div class="font4" id="chkPwMessage"></div>
+                            <button id="changePwBtn">저장</button>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <!-- 전화번호 -->
@@ -117,33 +127,215 @@
                     <div class="edit-info-top">
                         <div class="tel font3">전화번호</div>
                         <div class="edit font4">수정</div>
-                        <div class="cancel font4 hidden">취소</div>
+                        <div class="cancel font4 hidden">닫기</div>
                     </div>
-                    <div class="ment user_tel font4" id="userTel">010-1234-1234</div>
-                    <div class="changeMent font4 hidden">예약이 확정된 가이드와 가이두가 연락할 수 있는 전화번호를 입력하세요.<br>다른 전화번호를 추가하고 어떻게 사용할 지 설정할 수있습니다.</div>
+                    <div class="ment font4" id="getUserTel" th:text="*{userTel}"></div>
+                    <div class="changeMent font4 hidden">예약이 확정된 가이드와 가이두가 연락할 수 있는 전화번호를 입력하세요.</div>
                     <!-- 숨은 부분 -->
-                    <form th:action="#" method="post" class="hidden-area hidden">
-                        <div class="input-phoneNo-area">
-                            <div class="input-phoneNo">
-                                <!-- 국제번호 api -->
-                                <input type="text" placeholder="기존 전화번호" name="inputPhoneNo" id="inputPhoneNo" class="inputPhoneNo">
-                            </div>
-                            <button>저장</button>
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="hidden" class="county-no" id="countryNo" name="userTel"/>
+                            <input id="phone" name="userTel" type="text" autocomplete="off" required/>
+                            <input type="hidden" class="county-code" id="countryCode" name="countryCode"/>
                         </div>
-                    </form>
+                        <div class="font4" id="phoneMessage"></div>
+                        <button type="button" id="telBtn">저장</button>
+                    </div>
+                </div>
+                <hr>
+                <!-- 비상 연락처 emergency -->
+                <div class="edit-info-area">
+                    <div class="edit-info-top">
+                        <div class="emg font3">비상 연락처</div>
+                        <div class="edit font4">수정</div>
+                        <div class="cancel font4 hidden">닫기</div>
+                    </div>
+                    <!-- <th:block th:text="${session.loginUser.emergencyContact}">
+                        <div class="ment font4 getEmergenctContact" th:text="${session.loginUser.emergencyContact}"></div>
+                    </th:block> -->
+                    <div class="ment font4" id="getEmergencyContact" th:text="${session.loginUser.emergencyContact}?:''"></div>
+                    <div class="changeMent font4 hidden">유사시 연락할 수 있는 비상 연락처를 추가하세요.</div>
+                    <!-- 숨은 부분 -->
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="text" id="emergencyCo" name="emergencyContact" autocomplete="off" required>
+                            <label for="emergencyCo">비상 연락처</label>
+                        </div>
+                        <div class="font4" id="emergCoMessage"></div>
+                        <button type="button" id="emgBtn">저장</button>
+                    </div>
+                </div>
+                <hr>
+                <!-- 관심 지역
+                <div class="edit-info-area">
+                    <div class="edit-info-top">
+                        <div class="tel font3">관심 지역</div>
+                        <div class="edit font4">수정</div>
+                        <div class="cancel font4 hidden">닫기</div>
+                    </div>
+                    <div class="ment font4">관심 지역을 추가하고, 관심 지역의 관광 상품을 추천받아 보세요.</div>
+                    <div class="changeMent font4 hidden">관심 지역을 추가하고, 관심 지역의 관광 상품을 추천받아 보세요.(5개까지)</div>
+                    숨은 부분 
+                    <div  class="hidden-area">
+                        선택된 지역
+                        <div class="count-choosed-region-area">
+                            <div>선택된 지역&nbsp(&nbsp</div>
+                            <div class="count-choosed-region" id="countChoosedRegion">선택된 지역 수</div>
+                            <div>&nbsp/&nbsp</div>
+                            <div>5&nbsp)</div>
+                        </div>
+                        <div class="wrap-choosed-like-region">
+                            <div class="choosed-like-region">
+                                <div class="region-1d">제주도</div>
+                                <div>&nbsp>&nbsp</div>
+                                <div class="region-2d">서귀포시</div>
+                                <div class="delete-region">&nbsp&nbsp&times;</div>
+                            </div>
+                            <div class="choosed-like-region">
+                                <div class="region-1d">전라북도</div>
+                                <div>&nbsp>&nbsp</div>
+                                <div class="region-2d">전주시</div>
+                                <div class="delete-region">&nbsp&nbsp&times;</div>
+                            </div>
+                            <div class="choosed-like-region">
+                                <div class="region-1d">서울특별시</div>
+                                <div>&nbsp>&nbsp</div>
+                                <div class="region-2d">종로구</div>
+                                <div class="delete-region">&nbsp&nbsp&times;</div>
+                            </div>
+                            <div class="choosed-like-region">
+                                <div class="region-1d">강원도</div>
+                                <div>&nbsp>&nbsp</div>
+                                <div class="region-2d">양양군</div>
+                                <div class="delete-region">&nbsp&nbsp&times;</div>
+                            </div>
+                            <div class="choosed-like-region">
+                                <div class="region-1d">대전광역시</div>
+                                <div>&nbsp>&nbsp</div>
+                                <div class="region-2d">중구</div>
+                                <div class="delete-region">&nbsp&nbsp&times;</div>
+                            </div>
+                        </div>
+                        지역 선택 영역
+                        <form method="post">
+                            <div class="input-like-region-area">
+                                <div class="input-like-region">
+                                    지역 선택 api
+                                    <input type="text" placeholder="지역 선택 5개 까지" name="inputRegion" id="inputRegion" class="inputRegion">
+                                </div>
+                                <button>추가</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <hr> -->
+                <!-- 여권 번호 -->
+                <div class="edit-info-area">
+                    <div class="edit-info-top">
+                        <div class="passPort font3">여권 번호</div>
+                        <div class="edit font4">수정</div>
+                        <div class="cancel font4 hidden">닫기</div>
+                    </div>
+                    <div class="ment font4" id="getPassport" th:text="*{passportNo}"></div>
+                    <div class="changeMent font4 hidden">임시 발급/변경된 여권 번호를 입력해주세요.</div>
+                    <!-- 숨은 부분 -->
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="text" id="passportNo" name="passportNo" autocomplete="off" required>
+                            <label for="passportNo">여권 번호</label>
+                        </div>
+                        <button type="button" id="passPortBtn">저장</button>
+                    </div>
+                </div>
+                <hr>
+                <!-- 주사용 언어 -->
+                <div class="edit-info-area">
+                    <div class="edit-info-top">
+                        <div class="lang font3">주 사용 언어</div>
+                        <div class="edit font4">수정</div>
+                        <div class="cancel font4 hidden">닫기</div>
+                    </div>
+                    <div class="ment font4" id="getLang" th:text="*{primaryLanguage}"></div>
+                    <div class="changeMent font4 hidden">임시 발급/변경된 여권 번호를 입력해주세요.</div>
+                    <!-- 숨은 부분 -->
+                    <div class="hidden-area">
+                        <div class="inputGroup">
+                            <input type="text" id="primaryLanguage" name="primaryLanguage" autocomplete="off" required>
+                            <label for="primaryLanguage">주 사용 언어</label>
+                        </div>
+                        <div class="font4" id="pLanguageMessage"></div>
+                        <button type="button" id="langBtn">저장</button>
+                    </div>
                 </div>
                 <hr>
                 <!-- 회원 탈퇴 링크 -->
-                <a th:href="@{/myPage/secession.html}">
-                    <div class="secessionBtn-area font4" id="secessionBtn"><button>회원 탈퇴</button>
+                <div class="secession-modal-open" id="show">탈퇴하기</div>
+                <!-- 탈퇴 모달 -->
+                <div class="modal-secession" id="modalSecession">
+                    <div class="window" id="modalWindow">
+                        <div class="popup-secession">
+                            <div class="modal_top">
+                                <div class="modal_title font3">회원 탈퇴</div>
+                                <button id="close" class="close">&times;</button>
+                            </div>
+                            <hr class="modal-hr">
+                            <div class="modal_body">
+                                <div class="modal_body_title font1">정말 탈퇴하시겠습니까?</div>
+                                <div class="modal_body_content font3">탈퇴 시 모든 정보가 삭제되며, 복구되지 않습니다.<br>탈퇴하시려면 현재 비밀번호를 입력해주세요.</div>
+                                <!-- ajax -->
+                                <form>
+                                    <input type="password" id="chkPw" class="modal_input_secession font4" placeholder="Enter your password">
+                                    <!-- <div class="inputError font5"></div> -->
+                                    <div class="secession-btn-area">
+                                        <button class="secession-btn font3" id="secessionUserBtn" type="button">탈퇴</button>
+                                        <button class="secession-cancel-btn font3" id="close2" type="button">취소</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
+        
     </div>
     <th:block th:replace="~{common/footer}"></th:block>
+    <script th:src="@{/libraries/intl-tel-input/build/js/intlTelInput.js}"></script>
+    <script th:inline="javascript">
 
-    <script th:src="@{/js/myPage/myInfo.js}"></script>
+        // 국제 번호 intlTel
+        var input = document.querySelector("#phone");
+
+        var iti = window.intlTelInput(input, {
+            separateDialCode: true,
+            utilsScript: "build/js/utils.js"
+        });
+
+        const telBtn = document.getElementById("telBtn");
+
+        // 회원가입 버튼 누르면
+        telBtn.addEventListener("click",()=>{
+            // 국제 나라 번호, 국가 코드 가져오기 (name속성 추가)
+            // 국가 코드(문자열)
+            const selectedCountryData = iti.getSelectedCountryData();
+            const countryCodeString = selectedCountryData.iso2;
+            // 보이지 않는 input에 value 국가 코드 대입
+            const countryCode = document.getElementById("countryCode");
+            countryCode.value = countryCodeString;
+            
+            // 국제 번호 앞자리
+            const countryNoString = document.querySelector(".iti__selected-dial-code").innerText;
+            const countryNo = document.getElementById("countryNo");
+            countryNo.value = countryNoString;
+
+            console.log(countryCodeString);
+            console.log(countryNoString);
+            console.log(phone.value);
+
+    });
+    </script>
+    <script th:src="@{/js/myPage/myInfoTourist.js}"></script>
     
 </body>
 </html>

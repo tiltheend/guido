@@ -16,4 +16,25 @@ public interface MyPageMapper {
 	// 비번 수정
 	int pwEdit(User user);
 
+	// 전화번호 수정
+	int telEdit(User user);
+
+	// 국가코드 수정
+	int countryCodeEdit(User user);
+
+	// 비상 연락처 수정
+	int updateEmergencyContact(User user);
+
+	// 여권 번호 수정
+	int passportEdit(User user);
+
+	
+	// 주사용 언어 수정
+	int primaryLanguageEdit(User user);
+
+	
+	// 회원 탈퇴
+	int secession(User user);
+	
+
 }

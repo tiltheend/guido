@@ -182,7 +182,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("/updateEvent")
-	public String updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl,RedirectAttributes ra) {
+	public String updateEvent(Event event, List<MultipartFile> files, @RequestParam List<String> imageDeleteFl,RedirectAttributes ra) throws IllegalStateException, IOException  {
+		System.out.println(imageDeleteFl);
 		System.out.println(event);
 		System.out.println(files);
 		

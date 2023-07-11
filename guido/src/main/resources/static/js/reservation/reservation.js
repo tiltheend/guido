@@ -103,10 +103,6 @@ function toggleModal() {
   modalCost.innerText = totalPaymentCost.innerText;
 }
 
-// modal.addEventListener('click', ()=>{
-//   toggleModal();
-//   });
-
 
 /* 예약하고자 하는 날짜 출력 */
 const reservationDateDiv = document.querySelector(".reservation--date__decription>div");

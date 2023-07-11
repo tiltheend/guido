@@ -225,4 +225,17 @@
 
 .tooltip:hover>.tooltip-content {
     display: block;
+    white-space: pre-wrap;
+}
+
+
+
+@media screen and (max-width : 500px) {
+    .name-and-period{
+        flex-direction: column;
+    }
+
+    .date{
+        width: 180px;
+    }
 }

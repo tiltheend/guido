@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.guido.common.model.dto.User;
+import com.guido.profile.model.service.ProfileTouristService;
 import com.guido.user.model.service.UserService;
 
 import jakarta.servlet.http.Cookie;
@@ -28,6 +30,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	@Autowired
+	private ProfileTouristService service2;
+	
 	
 	// 로그인 페이지
 	@GetMapping("/loginPage")
@@ -49,13 +54,14 @@ public class UserController {
 	// 관광객 회원가입 페이지
 	@GetMapping("/signUp/touristPage")
 	public String touristSignupPge() {
+		
 		return "signUp/signUpAsTourist";
 	}
 	
 	
 	//--------------------------------
 	
-	// 임시 내정보수정 페이지 이동
+	// 내정보수정 페이지 이동
 	// 가이드 
 	@GetMapping("/myPage/editInfo/guide")
 	public String editMyPageGuide() {
@@ -63,7 +69,15 @@ public class UserController {
 	}
 	// 투어리스트 
 	@GetMapping("/myPage/editInfo/tourist")
-	public String editMyPageTourist() {
+	public String editMyPageTourist(@SessionAttribute("loginUser") User loginUser, Model model) {
+		
+		int userNo= loginUser.getUserNo();
+		
+		User user = service2.userInfo(userNo);
+		
+		model.addAttribute("user", user);
+		System.out.println(user);
+		
 		return "myPage/myInfoTourist";
 	}
 	
@@ -107,8 +121,8 @@ public class UserController {
 			
 		}else { // 로그인 실패
 			
-			path = new RedirectView(referer);  
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			path = new RedirectView(referer);
 			
 		}
 		return path;

@@ -38,11 +38,11 @@
                     <!-- 라디오버튼 -->
                     <div class="radio-area">
                         <span>회원 상태</span>
-                        <input type="radio" name="state" id="whole" value="whole" th:checked="${param.state?.toString()=='whole' or param.state == null}"><label for="whole">전체</label>
-                        <input type="radio" name="state" id="normal" value="N" th:checked="${param.state?.toString()=='N'}"><label for="normal">정상</label>
-                        <input type="radio" name="state" id="secession" value="D" th:checked="${param.state?.toString()=='D'}"><label for="secession">탈퇴</label>
-                        <input type="radio" name="state" id="block" value="B" th:checked="${param.state?.toString()=='B'}"><label for="block">블락</label>
-                        <input type="checkbox" name="super" id="super" value="Y" th:checked="${param.super?.toString()=='Y'}"><label for="super">슈퍼가이드</label>
+                        <label for="whole"><input type="radio" name="state" id="whole" value="whole" th:checked="${param.state?.toString()=='whole' or param.state == null}">전체</label>
+                        <label for="normal"><input type="radio" name="state" id="normal" value="N" th:checked="${param.state?.toString()=='N'}">정상</label>
+                        <label for="secession"><input type="radio" name="state" id="secession" value="D" th:checked="${param.state?.toString()=='D'}">탈퇴</label>
+                        <label for="block"><input type="radio" name="state" id="block" value="B" th:checked="${param.state?.toString()=='B'}">블락</label>
+                        <label for="super"><input type="checkbox" name="super" id="super" value="Y" th:checked="${param.super?.toString()=='Y'}">슈퍼가이드</label>
                     </div>
                     <div class="search-container">
                         <input type="text" name="query" id="search">
@@ -60,7 +60,7 @@
                 <thead>
                     <tr>
                         <th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">회원번호</th><th class="col-email">이메일</th>
-                        <th class="col-date">가입일</th><th class="col-state">회원 상태</th><th class="col-super-guide">슈퍼 가이드</th>
+                        <th class="col-date size500">가입일</th><th class="col-state">회원 상태</th><th class="col-super-guide">슈퍼 가이드</th>
 
                     </tr>
                 </thead>
@@ -71,7 +71,7 @@
                             <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{USER_NO}"></td>
                             <td th:text="*{USER_NO}">회원번호</td>
                             <td th:text="*{USER_EMAIL}">이메일</td>
-                            <td th:text="*{CREATE_DT}">가입일</td>
+                            <td class="size500"th:text="*{CREATE_DT}">가입일</td>
                             <!-- <td th:text="*{userState == 'N' ?'정상':(userState==Y?'미승인':(userState==B?'블락':(userState==D?'탈퇴':'')))}"></td> -->
                             <td th:text="*{USER_STATE == 'Y' ? '미승인' : (USER_STATE == 'N' ? '정상' : (USER_STATE == 'B' ? '블락' : (USER_STATE == 'D' ? '탈퇴' : '')))}"></td>
                             <td><img th:src="*{SUPER_GUIDE_FL == 'N' ? '/images/admin/generalGuide.svg' : '/images/admin/superGuide.svg'}"></td>

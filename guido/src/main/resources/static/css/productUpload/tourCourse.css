@@ -28,7 +28,7 @@
 .map_wrap {
   position: relative;
   width: 100%;
-  height: 500px;
+  /* height: 500px; */
 }
 #menu_wrap {
   position: absolute;
@@ -109,8 +109,7 @@
   width: 36px;
   height: 37px;
   margin: 10px 0 0 10px;
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
-    no-repeat;
+  background: url(https://i.esdrop.com/d/f/l9Kn9J2hcu/WglSTV4NFU.png) no-repeat;
 }
 #placesList .item .marker_1 {
   background-position: 0 -10px;

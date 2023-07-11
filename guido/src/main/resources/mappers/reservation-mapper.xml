@@ -84,7 +84,14 @@
 	<insert id="insertReservation">
 		INSERT INTO "RESERVATION"
 		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{productNo}, #{userNo}, SYSDATE,
-		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, #{optionNo}, #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
+		 'Y', #{paymentMethod}, #{guestCount}, #{productDateNo}, 
+		 <if test="optionNo != 0">
+	      #{optionNo}
+	    </if>
+	    <if test="optionNo == 0">
+	      NULL
+	    </if>
+    , #{requestContent}, #{orderNumber}, #{totalPrice}, #{impUid}, NULL)
 	</insert>
 	
 	
@@ -194,5 +201,38 @@
 		SET EMERGENCY_CONTACT = #{emergencyContact}
 		WHERE USER_NO = #{userNo}
 	</update>
+	
+	
+	<!-- 특정 일정의 모든 옵션(시간대) 구매 가능 수량 조회 -->
+	<select id="selectCountCanReserveOption" resultType="_int">
+		SELECT COUNT(*) FROM "PRODUCT_OPTION"
+		WHERE PRODUCT_DT_NO = #{productDateNo}
+		AND OPTION_REST > 0
+	</select>
+	
+	
+	<!-- 특정 상품의 모든 일정(날짜) 구매 가능 수량 조회 -->
+	<select id="selectCountCanReserveDate" resultType="_int">
+		SELECT COUNT(*) FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		AND PRODUCT_DT_AVAILABILITY = 'Y'
+	</select>
+	
+	<!-- 특정 상품 판매중으로 변경 -->
+	 <update id="updateProductAvailability">
+		 UPDATE "PRODUCT"
+		 SET PRODUCT_STATE = 'N'
+		 WHERE PRODUCT_NO = #{productNo}
+ 	</update>
+ 	
+ 	
+ 	<!-- 특정 상품 판매 종료로 변경-->
+ 	<update id="updateProductUnavailable">
+		 UPDATE "PRODUCT"
+		 SET PRODUCT_STATE = 'E'
+		 WHERE PRODUCT_NO = #{productNo}
+	 </update>
+	 
+	
 	
 </mapper>

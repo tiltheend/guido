@@ -57,6 +57,10 @@ public class ProductDetailController {
 		if(product==null)
 			return "error/404";
 		
+		if(product.getProductState().equals("D"))
+			return "error/404";
+		
+		
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
 		List<Review> reviewList = service.selectReviewList(productNo);

@@ -42,9 +42,9 @@
                 <div class="write-header">
                     첨부 사진(<span id="count"></span>/5) <span class="red">*</span>
                     <span class="tooltip">?
-                        <span class="tooltip-content">
-                            첫 번째 이미지는 반드시 등록해야 합니다. 첫 번째 이미지는 썸네일로 사용되며, 본문 내용에는 포함되지 않습니다.
-                        </span>
+                        <span class="tooltip-content">1. 첫 번째 이미지는 반드시 등록해야 합니다.
+2. 첫 번째 이미지는 썸네일로 사용되며, 본문 내용에는 포함되지 않습니다.
+3. 썸네일의 최적화 사이즈는 880:400 입니다.</span>
                     </span>
                 </div>
                 <div class="img-slide-area">
@@ -56,7 +56,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img0">
-                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
+                            <input type="hidden" name="imageDeleteFl" class="image-delete-fl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img1" class="add-label">
@@ -65,7 +65,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img1">
-                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
+                            <input type="hidden" name="imageDeleteFl" class="image-delete-fl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img2" class="add-label">
@@ -74,7 +74,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img2">
-                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
+                            <input type="hidden" name="imageDeleteFl" class="image-delete-fl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img3" class="add-label">
@@ -83,7 +83,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img3">
-                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
+                            <input type="hidden" name="imageDeleteFl" class="image-delete-fl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img4" class="add-label">
@@ -92,7 +92,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img4">
-                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
+                            <input type="hidden" name="imageDeleteFl" class="image-delete-fl" value="n">
                         </div>
                     </div>
                     <button type="button" class="img-slide-left-btn"><img th:src="@{/images/admin/slide_left_btn.svg}" alt=""></button>
@@ -101,9 +101,7 @@
                 <div class="write-header">
                     썸네일 배경 색상 지정
                     <span class="tooltip">?
-                        <span class="tooltip-content">
-                            배경색상은 메인 배너 지정시 사용됩니다. 썸네일 이미지의 배경색과 동일하게 지정해주세요. 배경 색상을 지정하지 않으면 자동으로 white 색상이 지정됩니다.
-                        </span>
+                        <span class="tooltip-content">배경색상은 메인 배너 지정시 사용됩니다. 썸네일 이미지의 배경색과 동일하게 지정해주세요. 배경 색상을 지정하지 않으면 기본값으로 white 색상이 지정됩니다.</span>
                     </span>
                 </div>
                 <div class="clr-field">

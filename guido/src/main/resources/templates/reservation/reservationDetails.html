@@ -202,6 +202,7 @@
                         <input type="hidden" name="optionNo" th:value="*{optionNo}">
                         <input type="hidden" name="productDateNo" th:value="*{productDateNo}">
                         <input type="hidden" name="productPackage" th:value="${product.productPackage}">
+                        <input type="hidden" name="productNo" th:value="${product.productNo}">
 
                         <button id="realCancelBtn">확인</button>
 
@@ -224,6 +225,7 @@
 
     <script th:src="@{/js/reservation/reservationDetails.js}"></script>
 
+    <th:block th:replace="~{common/footer}"></th:block>
 
 </body>
 </html>
