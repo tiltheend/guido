@@ -633,8 +633,9 @@ secessionUserBtn.addEventListener("click",e=>{
             return;
         }
         if(result>0){ // 탈퇴 성공
-            alert("탈퇴 되었습니다. guido를 잊지 말아주세요..");
-            window.location.href = "/common/home";
+            alert("탈퇴 되었습니다. guido를 잊지 말아주세요...");
+            // window.location.href = "/common/home";
+            window.location.href = "/";
         }
     })
     .catch(err=>console.log(err));

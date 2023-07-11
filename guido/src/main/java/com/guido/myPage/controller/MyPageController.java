@@ -6,15 +6,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.guido.common.model.dto.User;
 import com.guido.myPage.model.service.MyPageService;
 
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/edit")
+@SessionAttributes({"loginUser"})
 public class MyPageController {
 	
 	@Autowired
@@ -123,7 +126,7 @@ public class MyPageController {
 	
 	// 회원 탈퇴
 	@PostMapping("/secession")
-	public int secession(@RequestBody String chkPw, @SessionAttribute("loginUser") User user, SessionStatus status, HttpSession session) {
+	public int secession(@RequestBody String chkPw, @SessionAttribute("loginUser") User user, SessionStatus status, HttpServletResponse resp) {
 		
 		String inputPw = chkPw.replace("\"","");
 		
@@ -131,7 +134,13 @@ public class MyPageController {
 		
 		System.out.println(result);
 		
-		if(result==0) status.setComplete();
+		if(result==1) {
+			status.setComplete();
+			Cookie cookie = new Cookie("saved","");
+			cookie.setMaxAge(0);
+			cookie.setPath("/");
+			resp.addCookie(cookie);
+		}
 		
 		return result;
 		
