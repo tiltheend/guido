@@ -204,7 +204,6 @@ const requestContent = document.getElementById("request").value;
   });
 }
 
-let complete = -1;
 
 // 결제 완료
 function paymentComplete(data){
@@ -221,7 +220,7 @@ function paymentComplete(data){
     }
     else{
       location.replace("/reservation/order_result?order_id=" + data.orderNumber);
-      complete = 1;
+      sendReservation(productNo, productName); // 예약 완료 알림
     }
     
   })
@@ -231,9 +230,6 @@ function paymentComplete(data){
   })
 }
 
-if(complete==1){
-  sendReservation(productNo, productName); // 예약 완료 알림
-}
 
 
 
