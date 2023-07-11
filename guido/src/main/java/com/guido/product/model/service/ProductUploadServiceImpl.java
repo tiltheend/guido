@@ -134,6 +134,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				result = mapper.insertProductDate(pd);
 				
 				
+				// 투어 패키지가 1이라면 == 당일 투어라면
 				if(product.getProductPackage() == 1) {
 				
 					ProductOption po = new ProductOption();
@@ -144,8 +145,6 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 						
 							optionNameArr[j] = optionNameArr[j].trim();
 	
-							
-							
 							po.setProductNo(productNo);
 							po.setOptionRestCount(productOptionList.get(j).getOptionRestCount());
 							po.setOptionName(optionNameArr[j]);

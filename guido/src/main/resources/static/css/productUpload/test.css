@@ -110,9 +110,11 @@ footer {
 }
 .progress {
   height: 100%;
-  background-color: black;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #0f4957, #5dc2c2);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   width: 0px;
-  transition: width 0.1s ease-in-out;
+  transition: width 0.5s ease-in-out;
   align-items: center;
 }
 .progress-btn {
@@ -600,7 +602,7 @@ div.tour-theme > span > span {
   appearance: none; */
   border: 2px solid black;
   border-radius: 10px;
-  transition-duration: 0.25s !important;
+  transition-duration: 0.45s !important;
 }
 
 #titleCountContainer {
@@ -659,7 +661,7 @@ button:disabled {
   border: 2px solid black;
   border-radius: 8px;
   font-size: 1.2rem;
-  transition-duration: 0.25s !important;
+  transition-duration: 0.45s !important;
 }
 
 #contentCountContainer {
@@ -797,12 +799,13 @@ button:disabled {
 }
 #inputDay,
 #inputTime {
-  border: 1px solid #333;
+  border: 3px solid #0f4957;
   border-radius: 15px;
   outline: none;
   font-size: 30px;
   text-align: center;
   width: 100px;
+  transition-duration: 0.55s !important;
 }
 
 /* 10페이지 상품 검토하기 */
@@ -1263,4 +1266,11 @@ input[type='checkbox']:checked + label.optionName-item {
 }
 #maxTotal2 {
   border: 10px;
+}
+#page10 > div.confirm-container:hover {
+  background-color: rgb(232, 228, 228);
+  transition-duration: 0.55s;
+}
+#page10 > div.confirm-container:not(hover) {
+  transition-duration: 0.55s;
 }

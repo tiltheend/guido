@@ -47,6 +47,7 @@ const updatePage = () => {
     typing5();
     disableNextButtonCheckNum();
     disableNextButtonCheckNum2();
+    checkMaxTourist();
   }
   if (currentPage == 5) {
     document.querySelector('.text4').innerHTML = '';
@@ -71,10 +72,22 @@ const updatePage = () => {
     inputContent.focus();
   }
   if (currentPage == 9) {
+    document.querySelector('.text11').innerHTML = '';
+    typing11();
     displayNoneTime();
   }
+  if (currentPage == 10) {
+    document.querySelector('.text12').innerHTML = '';
+    typing12();
+  }
   if (currentPage == 11) {
+    document.querySelector('.text13').innerHTML = '';
+    typing13();
     disableNextButton();
+  }
+  if (currentPage == 12) {
+    document.querySelector('.text14').innerHTML = '';
+    typing14();
   }
 };
 
@@ -815,31 +828,31 @@ for (let i = 0; i < inputImage.length; i++) {
     });
   });
 }
-// 초기 상태에서 이벤트를 강제로 발생시킴
-// const changeEvent = new Event('change');
-// inputImage[4].dispatchEvent(changeEvent);
-// inputImage[5].dispatchEvent(changeEvent);
-// const plusImage = document.querySelectorAll('.plus-image');
-// for (let i = 0; i < 5; i++) {
-//   inputImage[i].addEventListener('change', () => {
-//     let allImagesSelected = true;
-//     for (let j = 0; j < 5; j++) {
-//       if (preview[j].getAttribute('src') === '') {
-//         allImagesSelected = false;
-//         break;
-//       }
-//     }
+//초기 상태에서 이벤트를 강제로 발생시킴
+const changeEvent = new Event('change');
+inputImage[4].dispatchEvent(changeEvent);
+inputImage[5].dispatchEvent(changeEvent);
+const plusImage = document.querySelectorAll('.plus-image');
+for (let i = 0; i < 5; i++) {
+  inputImage[i].addEventListener('change', () => {
+    let allImagesSelected = true;
+    for (let j = 0; j < 5; j++) {
+      if (preview[j].getAttribute('src') === '') {
+        allImagesSelected = false;
+        break;
+      }
+    }
 
-//     if (allImagesSelected) {
-//       for (let i = 0; i < plusImage.length; i++) {
-//         plusImage[i].style.display = 'inline-block';
-//       }
-//       nextBtn.disabled = false;
-//     } else {
-//       nextBtn.disabled = true;
-//     }
-//   });
-// }
+    if (allImagesSelected) {
+      for (let i = 0; i < plusImage.length; i++) {
+        plusImage[i].style.display = 'inline-block';
+      }
+      nextBtn.disabled = false;
+    } else {
+      nextBtn.disabled = true;
+    }
+  });
+}
 
 const checkImage = () => {
   for (let i = 0; i < 5; i++) {
@@ -1009,3 +1022,9 @@ form.addEventListener('submit', (e) => {
   console.log(document.getElementById('productOption').value);
   form.submit();
 });
+
+const checkMaxTourist = () => {
+  if (maxInput.value != '') {
+    nextBtn.disabled = false;
+  }
+};
