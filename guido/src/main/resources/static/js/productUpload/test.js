@@ -26,69 +26,69 @@ const updatePage = () => {
 
   if (currentPage == 0) {
   }
-  // if (currentPage == 1) {
-  //   document.querySelector('.text2').innerHTML = '';
-  //   typing2();
-  //   // updateNextBtnCity();
-  // }
-  // if (currentPage == 2) {
-  //   document.querySelector('.text6').innerHTML = '';
-  //   typing6();
-  //   init();
-  //   // checkTourCourse();
-  // }
-  // if (currentPage == 3) {
-  //   updateNextBtnState();
-  //   document.querySelector('.text3').innerHTML = '';
-  //   typing3();
-  // }
-  // if (currentPage == 4) {
-  //   document.querySelector('.text5').innerHTML = '';
-  //   typing5();
-  //   disableNextButtonCheckNum();
-  //   disableNextButtonCheckNum2();
-  //   checkMaxTourist();
-  // }
-  // if (currentPage == 5) {
-  //   document.querySelector('.text4').innerHTML = '';
-  //   typing4();
-  //   disableNextButtonFeeInput();
-  // }
-  // if (currentPage == 6) {
-  //   document.querySelector('.text7').innerHTML = '';
-  //   typing7();
-  //   // checkImage();
-  // }
-  // if (currentPage == 7) {
-  //   document.querySelector('.text8').innerHTML = '';
-  //   typing8();
-  //   titleCharCheck();
-  //   inputTitle.focus();
-  // }
-  // if (currentPage == 8) {
-  //   document.querySelector('.text9').innerHTML = '';
-  //   typing9();
-  //   contentCharCheck();
-  //   inputContent.focus();
-  // }
-  // if (currentPage == 9) {
-  //   document.querySelector('.text11').innerHTML = '';
-  //   typing11();
-  //   displayNoneTime();
-  // }
-  // if (currentPage == 10) {
-  //   document.querySelector('.text12').innerHTML = '';
-  //   typing12();
-  // }
-  // if (currentPage == 11) {
-  //   document.querySelector('.text13').innerHTML = '';
-  //   typing13();
-  //   disableNextButton();
-  // }
-  // if (currentPage == 12) {
-  //   document.querySelector('.text14').innerHTML = '';
-  //   typing14();
-  // }
+  if (currentPage == 1) {
+    document.querySelector('.text2').innerHTML = '';
+    typing2();
+    // updateNextBtnCity();
+  }
+  if (currentPage == 2) {
+    document.querySelector('.text6').innerHTML = '';
+    typing6();
+    init();
+    // checkTourCourse();
+  }
+  if (currentPage == 3) {
+    updateNextBtnState();
+    document.querySelector('.text3').innerHTML = '';
+    typing3();
+  }
+  if (currentPage == 4) {
+    document.querySelector('.text5').innerHTML = '';
+    typing5();
+    disableNextButtonCheckNum();
+    disableNextButtonCheckNum2();
+    checkMaxTourist();
+  }
+  if (currentPage == 5) {
+    document.querySelector('.text4').innerHTML = '';
+    typing4();
+    disableNextButtonFeeInput();
+  }
+  if (currentPage == 6) {
+    document.querySelector('.text7').innerHTML = '';
+    typing7();
+    // checkImage();
+  }
+  if (currentPage == 7) {
+    document.querySelector('.text8').innerHTML = '';
+    typing8();
+    titleCharCheck();
+    inputTitle.focus();
+  }
+  if (currentPage == 8) {
+    document.querySelector('.text9').innerHTML = '';
+    typing9();
+    contentCharCheck();
+    inputContent.focus();
+  }
+  if (currentPage == 9) {
+    document.querySelector('.text11').innerHTML = '';
+    typing11();
+    displayNoneTime();
+  }
+  if (currentPage == 10) {
+    document.querySelector('.text12').innerHTML = '';
+    typing12();
+  }
+  if (currentPage == 11) {
+    document.querySelector('.text13').innerHTML = '';
+    typing13();
+    disableNextButton();
+  }
+  if (currentPage == 12) {
+    document.querySelector('.text14').innerHTML = '';
+    typing14();
+  }
 };
 
 prevBtn.addEventListener('click', () => {
