@@ -86,6 +86,19 @@ public class MyPageServiceImpl implements MyPageService{
 		
 	}
 	
+	// 회원 탈퇴
+	@Override
+	public int secession(String inputPw, User user) {
+		
+		String pw = mapper.selectPw(user);
+		
+		if(bcrypt.matches(inputPw, pw)) { // 맞으면 탈퇴 진행
+			return mapper.secession(user); 
+		}
+		else return 0; // 틀리면 실패
+		
+	}
+	
 	
 	
 	

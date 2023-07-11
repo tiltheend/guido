@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.guido.common.model.dto.User;
 import com.guido.myPage.model.service.MyPageService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/edit")
@@ -115,6 +118,22 @@ public class MyPageController {
 		
 		if(result>0) return user;
 		else return null;
+		
+	}
+	
+	// 회원 탈퇴
+	@PostMapping("/secession")
+	public int secession(@RequestBody String chkPw, @SessionAttribute("loginUser") User user, SessionStatus status, HttpSession session) {
+		
+		String inputPw = chkPw.replace("\"","");
+		
+		int result = service.secession(inputPw, user);
+		
+		System.out.println(result);
+		
+		if(result==0) status.setComplete();
+		
+		return result;
 		
 	}
 	

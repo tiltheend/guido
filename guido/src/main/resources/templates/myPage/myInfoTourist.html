@@ -273,11 +273,34 @@
                         <button type="button" id="langBtn">저장</button>
                     </div>
                 </div>
+                <hr>
                 <!-- 회원 탈퇴 링크 -->
-                <a th:href="@{/myPage/secession}">
-                    <div class="secessionBtn-area font4" id="secessionBtn"><button>회원 탈퇴</button>
+                <div class="secession-modal-open" id="show">탈퇴하기</div>
+                <!-- 탈퇴 모달 -->
+                <div class="modal-secession" id="modalSecession">
+                    <div class="window" id="modalWindow">
+                        <div class="popup-secession">
+                            <div class="modal_top">
+                                <div class="modal_title font3">회원 탈퇴</div>
+                                <button id="close" class="close">&times;</button>
+                            </div>
+                            <hr class="modal-hr">
+                            <div class="modal_body">
+                                <div class="modal_body_title font1">정말 탈퇴하시겠습니까?</div>
+                                <div class="modal_body_content font3">탈퇴 시 모든 정보가 삭제되며, 복구되지 않습니다.<br>탈퇴하시려면 현재 비밀번호를 입력해주세요.</div>
+                                <!-- ajax -->
+                                <form>
+                                    <input type="password" id="chkPw" class="modal_input_secession font4" placeholder="Enter your password">
+                                    <!-- <div class="inputError font5"></div> -->
+                                    <div class="secession-btn-area">
+                                        <button class="secession-btn font3" id="secessionUserBtn" type="button">탈퇴</button>
+                                        <button class="secession-cancel-btn font3" id="close2" type="button">취소</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
         

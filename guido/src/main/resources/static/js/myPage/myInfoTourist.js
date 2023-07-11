@@ -584,4 +584,76 @@ langBtn.addEventListener("click",e=>{
 });
 
 
+//---------------
+
+// 탈퇴 모달
+const show = document.querySelector('#show');
+const modalWindow = document.querySelector('#modalWindow');
+const modalSecession = document.querySelector('#modalSecession');
+const close = document.querySelector('#close');
+const close2 = document.querySelector('#close2');
+const secessionUserBtn = document.querySelector('#secessionUserBtn');
+
+// 모달 띄우기
+show.addEventListener("click",()=>{
+    modalSecession.style.display = "block";
+})
+
+// 탈퇴 버튼 ajax
+
+// chkPw 입력 받아서 
+const chkPw = document.getElementById("chkPw");
+
+// 탈퇴 버튼 
+secessionUserBtn.addEventListener("click",e=>{
+
+    // 비어있으면 막기
+    if(chkPw.value.trim().length==0){
+        chkPw.style.border = "1px solid red";
+        chkPw.value="";
+        chkPw.focus();
+        e.preventDefault();
+        return;
+    }
+    console.log(chk.value);
+    // 넘어가서 비번 검사하고 탈퇴 성공/실패
+    fetch('/edit/secession',{
+        method : "post",
+        headers : {"Content-Type":'applicatioin/json'},
+        body : JSON.stringify(chkPw.value)
+    })
+    .then(response=>response.text())
+    .then(result=>{
+        // 탈퇴 실패 시 
+        if(result==0){
+            e.preventDefault();
+            alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+            chkPw.style.border = "1px solid red";
+            chkPw.focus();
+            return;
+        }
+        if(result>0){ // 탈퇴 성공
+            alert("탈퇴 되었습니다. guido를 잊지 말아주세요..");
+            window.location.href = "/common/home";
+        }
+    })
+    .catch(err=>console.log(err));
+})
+
+//  모달 x 버튼
+close.addEventListener("click",()=>{
+    modalSecession.style.display = "none";
+    chkPw.value="";
+    chkPw.style.border = "1px solid #c5c5c5";
+})
+// 모달 취소 버튼
+close2.addEventListener("click",()=>{
+    modalSecession.style.display = "none";
+    chkPw.value="";
+    chkPw.style.border = "1px solid #c5c5c5";
+    window.location.reload;
+
+})
+
+
 

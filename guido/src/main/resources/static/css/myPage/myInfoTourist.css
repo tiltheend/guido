@@ -109,20 +109,7 @@
     /* color:  #5C5C5C; */
 }
 
-/* 탈퇴 링크 버튼 */
-.secessionBtn-area{
-    margin-top: 10px;
-    display: flex;
-    justify-content: end;
-}
-.secessionBtn-area>button{
-    background-color: #fff;
-    color: #7b7a7a;
-}
-.secessionBtn-area>button:hover{
-    color: #1c797d;
-    text-decoration: underline;
-}
+
 hr{
     background-color: #c5c5c5;
     height: 1px;
@@ -380,6 +367,126 @@ hr{
     color: #5c5c5ca6;
 }
 
+/* 탈퇴 모달 */
+/* 탈퇴 링크 버튼 */
+.secession-modal-open{
+    margin: 20px 10px 0 0 !important;
+    display: flex;
+    justify-content: end;
+    color: #5c5c5c80;
+}
+.secession-modal-open:hover{
+    color: #1c797d;
+    transition-duration: 0.2s;
+}
+
+.modal-secession{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #5c5c5c60;
+    display: none;
+} 
+
+.modal-secession>.window{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.popup-secession{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* padding: 10px; */
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    /* box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3); */
+    border-radius: 20px;
+    width: 500px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    transition: all .5s;
+}
+
+.modal_top>.close{
+    font-size: 20px;
+    display: flex;
+    justify-content: end;
+    background-color: #fff;
+}
+.modal_top{
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    justify-items: end;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px
+}
+.popup-secession .hr{
+    /* width: 90%; */
+    background-color: #c5c5c5;
+    height: 1px;
+    margin-top: 0px;
+}
+.popup-secession .modal_body{
+    width: 500px;
+    height: 360px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal_body *{
+    margin: 10px 0;
+    width: 400px;
+}
+.modal_body_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 30px 0;
+}
+.modal_input_secession{
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #c5c5c5;
+    color: #5C5C5C;
+    padding: 10px;
+}
+/* .inputError{
+    color: red;
+    margin: 0 10px 20px 5px;
+    visibility: hidden;
+} */
+
+.secession-btn-area{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.secession-btn{
+    width: 195px;
+    height: 42px;
+    color: #1c797d;
+    background-color: #fff;
+    border: 1px solid #1c797d;
+    border-radius: 8px;
+    
+}
+.secession-cancel-btn{
+    width: 195px;
+    height: 42px;
+    color: #fff;
+    background-color: #1c797d;
+    border-radius: 8px;
+}
 
 
 

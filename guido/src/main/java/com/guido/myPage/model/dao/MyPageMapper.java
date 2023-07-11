@@ -31,6 +31,10 @@ public interface MyPageMapper {
 	
 	// 주사용 언어 수정
 	int primaryLanguageEdit(User user);
+
+	
+	// 회원 탈퇴
+	int secession(User user);
 	
 
 }
