@@ -60,6 +60,10 @@
 		UPDATE "TOURIST" SET PRIMARY_LANGUAGE = #{primaryLanguage} WHERE USER_NO = #{userNo}
 	</update>
 	
+	<update id="languageSkillEdit">
+		UPDATE "GUIDE" SET LANGUAGE_SKILL = #{languageSkill} WHERE USER_NO = #{userNo}
+	</update>
+	
 	<update id="secession">
 		UPDATE "USER" SET USER_STATE = 'D' WHERE USER_NO = #{userNo}
 	</update>

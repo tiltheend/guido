@@ -71,7 +71,14 @@ public class MyPageController {
 		String tel = editUser.getUserTel().replace("\"","");
 		
 		user.setUserTel(tel);
-		user.setCountryCode(editUser.getCountryCode());
+		
+		// 가이드/투어리스트 비교 
+		System.out.println(user);
+		
+		// 가이드는 countryCode 없음 -> 투어리스트만 countryCode set
+		if(editUser.getCountryCode()!=null) {
+			user.setCountryCode(editUser.getCountryCode());
+		}
 		
 		int result = service.telEdit(user);
 		
@@ -80,7 +87,7 @@ public class MyPageController {
 		
 	}
 	
-	// 비상 연락처 변경
+	// 비상 연락처 변경 (투어리스트)
 	@PostMapping("/emergencyContact")
 	public User emergencyContactEdit(@RequestBody String emergency, @SessionAttribute("loginUser") User user) {
 		String emergencyContact = emergency.replace("\"","");
@@ -94,7 +101,7 @@ public class MyPageController {
 		
 	}
 	
-	// 여권 번호 변경
+	// 여권 번호 변경 (투어리스트)
 	@PostMapping("/passport")
 	public User passportEdit(@RequestBody String passport, @SessionAttribute("loginUser") User user) {
 		
@@ -109,7 +116,7 @@ public class MyPageController {
 		
 	}
 	
-	// 주사용 언어 변경
+	// 주사용 언어 변경 (투어리스트)
 	@PostMapping("/primaryLanguage")
 	public User primaryLanguageEdit(@RequestBody String language, @SessionAttribute("loginUser") User user) {
 		
@@ -123,6 +130,24 @@ public class MyPageController {
 		else return null;
 		
 	}
+	
+	
+	// 구사 가능 언어 변경 (가이드)
+	@PostMapping("/languageSkill")
+	public User languageSkillEdit(@RequestBody String skill, @SessionAttribute("loginUser") User user) {
+		
+		String languageSkill = skill.replace("\"","");
+		
+		user.setLanguageSkill(languageSkill);
+		
+		int result =service.languageSkillEdit(user);
+		
+		if(result>0) return user;
+		else return null;
+		
+	}
+	
+	
 	
 	// 회원 탈퇴
 	@PostMapping("/secession")

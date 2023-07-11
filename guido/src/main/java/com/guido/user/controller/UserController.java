@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.guido.common.model.dto.User;
+import com.guido.profile.model.service.ProfileGuideService;
 import com.guido.profile.model.service.ProfileTouristService;
 import com.guido.user.model.service.UserService;
 
@@ -32,6 +33,8 @@ public class UserController {
 	private UserService service;
 	@Autowired
 	private ProfileTouristService service2;
+	@Autowired
+	private ProfileGuideService service3;
 	
 	
 	// 로그인 페이지
@@ -60,11 +63,22 @@ public class UserController {
 	
 	
 	//--------------------------------
-	
 	// 내정보수정 페이지 이동
+	
 	// 가이드 
 	@GetMapping("/myPage/editInfo/guide")
-	public String editMyPageGuide() {
+	public String editMyPageGuide(@SessionAttribute("loginUser") User loginUser, Model model) {
+		
+		int userNo= loginUser.getUserNo();
+		
+		User user = service2.userInfo(userNo);
+		
+		model.addAttribute("user", user);
+		
+		User guide = service3.selectGuideInfo(userNo);
+		
+		model.addAttribute("guide", guide);
+		
 		return "myPage/myInfoGuide";
 	}
 	// 투어리스트 
@@ -76,7 +90,6 @@ public class UserController {
 		User user = service2.userInfo(userNo);
 		
 		model.addAttribute("user", user);
-		System.out.println(user);
 		
 		return "myPage/myInfoTourist";
 	}

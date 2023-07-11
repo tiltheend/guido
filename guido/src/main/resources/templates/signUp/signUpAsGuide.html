@@ -477,6 +477,14 @@
             // // console.log("국가 : " + title.title);
             // console.log("국제전화 나라번호 : " + countryNo.innerText);
 
+            // 국가코드 한국 아니면 chk.phone = false
+            if(countryCode.value!='kr'){
+                phoneMessage.innerText = "국가(대한민국)를 다시 한번 확인해주세요.";
+                phoneMessage.classList.remove("possible-message");
+                phoneMessage.classList.add("error-message");
+                chk.phone = false;
+            }
+
     });
 
     
