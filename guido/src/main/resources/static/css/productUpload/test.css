@@ -110,9 +110,11 @@ footer {
 }
 .progress {
   height: 100%;
-  background-color: black;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #0f4957, #5dc2c2);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   width: 0px;
-  transition: width 0.1s ease-in-out;
+  transition: width 0.5s ease-in-out;
   align-items: center;
 }
 .progress-btn {
@@ -1263,4 +1265,11 @@ input[type='checkbox']:checked + label.optionName-item {
 }
 #maxTotal2 {
   border: 10px;
+}
+#page10 > div.confirm-container:hover {
+  background-color: rgb(232, 228, 228);
+  transition-duration: 0.55s;
+}
+#page10 > div.confirm-container:not(hover) {
+  transition-duration: 0.55s;
 }
