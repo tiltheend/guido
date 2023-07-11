@@ -131,7 +131,10 @@ function choiceDate(newDIV) {
     availability: 'Y',
     optionRestCount: maxInput.value,
   };
-
+  if (onedayTourValue.value != '1') {
+    delete dateObject.optionName;
+    delete dateObject.optionRestCount;
+  }
   productOption.push(dateObject);
 }
 
@@ -169,3 +172,9 @@ function leftPad(value) {
   }
   return value;
 }
+
+const displayNoneTime = () => {
+  if (onedayTourValue.value == '') {
+    document.getElementById('createTime').style.display = 'none';
+  }
+};

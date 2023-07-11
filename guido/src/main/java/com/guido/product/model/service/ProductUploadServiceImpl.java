@@ -122,23 +122,6 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 			List<ProductOption> tempProductOptionList = new ArrayList<>();
 			List<ProductDate> tempProductDateList = new ArrayList<>();
 			
-			
-			String optionNameString = productOptionList.get(0).getOptionName();
-
-			
-			String[] optionNameArr = optionNameString.split(",");
-
-			// 각 요소에서 공백을 제거합니다.
-			for (int i = 0; i < optionNameArr.length; i++) {
-				optionNameArr[i] = optionNameArr[i].trim();
-			}
-
-			// 결과를 출력합니다.
-			for (String time : optionNameArr) {
-			    System.out.println(time);
-			}
-			
-			
 			for(int i=0; i<productDateList.size(); i++) {
 				ProductDate pd = new ProductDate();
 				
@@ -149,28 +132,32 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 				
 				
 				result = mapper.insertProductDate(pd);
-				System.out.println(pd.getProductDateNo());
 				
 				
-				for(int j=0; j<productOptionList.size(); j++) {
-					
+				if(product.getProductPackage() == 1) {
+				
 					ProductOption po = new ProductOption();
+					String optionNameString = productOptionList.get(0).getOptionName();
+					String[] optionNameArr = optionNameString.split(",");
 					
-					po.setProductNo(productNo);
-					po.setOptionRestCount(productOptionList.get(j).getOptionRestCount());
-					po.setOptionName(optionNameArr[j]);
-					po.setProductDateNo(pd.getProductDateNo());
-					tempProductOptionList.add(po);
-					
-					
-					if(result > 0) {
+						for(int j=0; j<optionNameArr.length; j++) {
 						
-						result = mapper.insertProductOptionList(po);
+							optionNameArr[j] = optionNameArr[j].trim();
+	
+							
+							
+							po.setProductNo(productNo);
+							po.setOptionRestCount(productOptionList.get(j).getOptionRestCount());
+							po.setOptionName(optionNameArr[j]);
+							po.setProductDateNo(pd.getProductDateNo());
+							tempProductOptionList.add(po);
+							
+							result = mapper.insertProductOptionList(po);
+							
+						
 					}
-					
+				
 				}
-				
-				
 			}
 		
 			

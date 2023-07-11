@@ -70,6 +70,9 @@ const updatePage = () => {
     contentCharCheck();
     inputContent.focus();
   }
+  if (currentPage == 9) {
+    displayNoneTime();
+  }
   if (currentPage == 11) {
     disableNextButton();
   }
