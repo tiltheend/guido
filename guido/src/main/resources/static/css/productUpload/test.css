@@ -602,7 +602,7 @@ div.tour-theme > span > span {
   appearance: none; */
   border: 2px solid black;
   border-radius: 10px;
-  transition-duration: 0.25s !important;
+  transition-duration: 0.45s !important;
 }
 
 #titleCountContainer {
@@ -661,7 +661,7 @@ button:disabled {
   border: 2px solid black;
   border-radius: 8px;
   font-size: 1.2rem;
-  transition-duration: 0.25s !important;
+  transition-duration: 0.45s !important;
 }
 
 #contentCountContainer {
@@ -799,12 +799,13 @@ button:disabled {
 }
 #inputDay,
 #inputTime {
-  border: 1px solid #333;
+  border: 3px solid #0f4957;
   border-radius: 15px;
   outline: none;
   font-size: 30px;
   text-align: center;
   width: 100px;
+  transition-duration: 0.55s !important;
 }
 
 /* 10페이지 상품 검토하기 */

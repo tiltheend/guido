@@ -47,6 +47,7 @@ const updatePage = () => {
     typing5();
     disableNextButtonCheckNum();
     disableNextButtonCheckNum2();
+    checkMaxTourist();
   }
   if (currentPage == 5) {
     document.querySelector('.text4').innerHTML = '';
@@ -1021,3 +1022,9 @@ form.addEventListener('submit', (e) => {
   console.log(document.getElementById('productOption').value);
   form.submit();
 });
+
+const checkMaxTourist = () => {
+  if (maxInput.value != '') {
+    nextBtn.disabled = false;
+  }
+};
