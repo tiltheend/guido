@@ -237,21 +237,37 @@ public class ProfileGuideController {
 		
 	}
 	
-//	// 자기 소개 등록하기
-//	@ResponseBody
-//	@PostMapping("prEdit")
-//	public int prEdit(PR pr,
-//			@SessionAttribute("loginUser") User loginUser){
-//		
-//		int userNo= loginUser.getUserNo();
-//		
-//		pr.setUserNo(userNo);
-//	
-//		int prEdit = service.prEdit(pr);
-//		
-//		return prEdit;
-//		
-//	}
+	// 자기 소개 등록하기
+	@ResponseBody
+	@PostMapping("/prAdd")
+	public int prAdd(@RequestBody PR pr,
+			@SessionAttribute("loginUser") User loginUser){
+		
+		int userNo= loginUser.getUserNo();
+		
+		pr.setUserNo(userNo);
+		
+	    if (pr.getJob() == null) pr.setJob("");
+	    if (pr.getPets() == null) pr.setPets("");
+	    if (pr.getHobby() == null) pr.setHobby("");
+	    if (pr.getSubLang() == null) pr.setSubLang("");
+	    if (pr.getAbroadExperience() == null) pr.setAbroadExperience("");
+	    if (pr.getMbti() == null) pr.setMbti("");
+	    if (pr.getStrength() == null) pr.setStrength("");
+	    if (pr.getFavoriteSong() == null) pr.setFavoriteSong("");
+	    if (pr.getTmi() == null) pr.setTmi("");
+	    if (pr.getMajor() == null) pr.setMajor("");
+	    if (pr.getDopamine() == null) pr.setDopamine("");
+	    if (pr.getUselessTalent() == null) pr.setUselessTalent("");
+	    if (pr.getCapList() == null) pr.setCapList("");
+	
+		int prAdd = service.prInsert(pr);
+		
+		System.out.println(pr);
+		
+		return prAdd;
+		
+	}
 
 
 }

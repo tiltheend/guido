@@ -124,10 +124,12 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	}
 
 	// 자기 소개 삽입
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int prInsert(PR pr) {
 		return mapper.prInsert(pr);
 	}
+
 	
 	
 	
