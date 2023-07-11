@@ -117,6 +117,13 @@
 				"QNA"
 				<if test="query != null">WHERE QNA_TITLE LIKE '%${query}%' OR QNA_CONTENT LIKE '%${query}%'</if>
 			</when>
+			<when test="pageName == 'settlementManagement'">
+				RESERVATION R
+				JOIN PRODUCT USING (PRODUCT_NO)
+				JOIN "USER" U ON (R.USER_NO = U.USER_NO)
+				JOIN "PRODUCT_DT" PDT ON (R.PRODUCT_DT_NO = PDT.PRODUCT_DT_NO)
+				WHERE RESERVATION_STATE != 'N'
+			</when>
 		</choose>
 	</select>
 	
@@ -172,13 +179,25 @@
 				  CASE WHEN QNA_CHECK_FL = 'Y' THEN QNA_NO END DESC,
 				  CASE WHEN QNA_CHECK_FL = 'N' THEN QNA_NO END ASC
 			</when>
+			<when test="pageName == 'settlementManagement'">
+				RESERVATION_NO, ORDER_NUMBER, PRODUCT_NAME, U.USER_EMAIL, TOTAL_PRICE,
+				TOTAL_PRICE*0.1 COMMITION, TOTAL_PRICE*0.9 FINAL_PRICE, RESERVATION_STATE ,
+				TO_CHAR(PDT.PRODUCT_DT + (PRODUCT_PACKAGE * INTERVAL '1' DAY),'YYYY-MM-DD') "DATE"
+				FROM RESERVATION R
+				JOIN PRODUCT USING (PRODUCT_NO)
+				JOIN "USER" U ON (R.USER_NO = U.USER_NO)
+				JOIN "PRODUCT_DT" PDT ON (R.PRODUCT_DT_NO = PDT.PRODUCT_DT_NO)
+				WHERE RESERVATION_STATE != 'N'
+				ORDER BY RESERVATION_NO DESC
+			</when>
 		</choose>
 	</select>
 	
 	
 	
 	<select id="selectEvent" resultMap="event_rm">
-		SELECT EVENT_NO, EVENT_NAME, EVENT_CONTENT, TO_CHAR(CREATE_DT,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') CREATE_DT
+		SELECT EVENT_NO, EVENT_NAME, EVENT_CONTENT, CREATE_DT
+		, BG_COLOR, EVENT_END_DT
 		FROM EVENT
 		WHERE EVENT_NO=#{eventNo}
 	</select>
@@ -282,4 +301,13 @@
 		SELECT COUNT(*) FROM QNA WHERE QNA_CHECK_FL = 'N'
 	</select>
 	
+	<update id="updateEvent">
+		UPDATE "EVENT" SET
+		EVENT_NAME = #{eventName}, EVENT_CONTENT = #{eventContent}, EVENT_END_DT = #{eventEndDt}, BG_COLOR = #{bgColor}
+		WHERE EVENT_NO=#{eventNo}
+	</update>
+	
+	<delete id="deleteFile">
+		DELETE FROM "FILE" WHERE EVENT_NO=#{eventNo} AND FILE_ORDER=#{fileOrder}
+	</delete>
 </mapper>

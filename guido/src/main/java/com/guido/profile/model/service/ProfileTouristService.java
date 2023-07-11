@@ -119,4 +119,5 @@ public interface ProfileTouristService {
 	int updateWish(Map<String, Integer> map);
 
 
+
 }

@@ -10,14 +10,10 @@
 
     <!-- 슬릭 슬라이드 -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/profile/nabong_slick/nabongSlick.css}"/>
-    
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;
-        position:absolute; top: 0;}
-    </style>
+
 </head>
 <body>
-    <header>임시헤더</header>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="buyer-profile-top">
         <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
@@ -81,13 +77,23 @@
                 <ul>
                     <li th:each="product : ${myWishList}">
                         <div class="slider single-item" th:data-productno="${product.productNo}">
-                            <div th:each="image : ${product.imageList}">
+                            <div th:if=${product.imageList} th:each="image : ${product.imageList}">
                                 <img th:src="${image.filePath}">
                             </div>
+                            <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                            </th:block>
                         </div>
                         <div class="slide-btn">
-                            <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next">
-                            <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre">
+                            <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next" onclick="slideNextFn(this)">
+                            <img th:src="@{/images/profile/PreBtn.png}" alt="slidePre" class="slick-slide-pre" onclick="slidePreFn(this)">
                         </div>
                         <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
                             <img th:if="${wish==1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
@@ -104,8 +110,9 @@
                                 </div>
                             </div>
                             <div th:with="pack = ${product.productPackage}">
-                                <p th:if="${pack==1}">₩ [[${product.productPrice}]] / person</p>
-                                <p th:if="${pack>1}">₩ [[${product.productPrice}]] / total</p>
+                                <p th:if="${pack==1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / person'"></p>
+                                <p th:if="${pack>1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / total'"></p>
+                                <!-- th:text="'₩'+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / total'" -->
                                 <div>
                                     <img th:src="@{/images/profile/location.png}" alt="location">
                                     <span th:text="${product.regionName}">지역명</span>
@@ -119,18 +126,17 @@
         </div>
     </div>
 
-    <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script>
+    <!-- <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script> -->
     <script th:src="@{/js/profile/nabong_slick/slick.js}"></script>
     <script th:src="@{/js/profile/buyerWishList.js}"></script>
     <script th:src="@{/js/profile/profileEdit.js}"></script>
     
     <script th:inline="javascript">
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>  
+
+    <th:block th:replace="~{/common/footer}"></th:block>
 </body>
 </html>

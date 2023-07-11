@@ -1,31 +1,106 @@
-a {
-  color: #000000;
-  text-decoration: none;
+@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+.calendar-div {
+  background-color: white;
+  height: auto;
+  width: 400px;
+  margin: 0px;
+  padding: 20px;
+  /* margin: 0 auto; */
+  border: 2px solid lightgrey;
+  border-radius: 15px;
+  box-shadow: 0px 40px 30px -20px rgba(0, 0, 0, 0.3);
+  display: flex;
 }
-.scriptCalendar {
-  text-align: center;
-  width: 48%;
-  height: 50%;
-  border: 0.5px solid #999;
-  border-radius: 20px;
+#createContainer {
+  display: block;
+}
+#createDate {
+  width: 100%;
+  height: 40%;
+  display: inline-block;
+  /* padding: 20px; */
+}
+#createTime {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  /* padding: 20px; */
+}
+#createDate > span {
+  margin-left: 30px;
+  border: 2px solid #5555;
+  border-radius: 5px;
+  /* padding: 12px; */
+  margin: 5px;
   box-shadow: 5px 5px 5px gray;
-  padding: 15px;
-  font-weight: bolder;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  gap: 3px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: auto;
 }
-.scriptCalendar > thead > tr > td {
+
+td {
   width: 50px;
   height: 50px;
 }
-.scriptCalendar > thead > tr:first-child > td {
+
+.Calendar {
+  text-align: center;
+}
+
+.Calendar > thead > tr:first-child > td {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1.1em;
   font-weight: bold;
 }
-.scriptCalendar > thead > tr:last-child > td {
-  color: #777;
+
+.Calendar > thead > tr:last-child > td {
+  font-family: 'Questrial', sans-serif;
+  font-weight: 600;
 }
-.scriptCalendar > tbody > tr > td {
-  width: 50px;
-  height: 50px;
+
+.Calendar > tbody > tr > td > p {
+  font-family: 'Montserrat', sans-serif;
+  height: 45px;
+  width: 45px;
+  border-radius: 45px;
+  transition-duration: 0.2s;
+  line-height: 45px;
+  margin: 2.5px;
+  display: block;
+  text-align: center;
 }
-.calendarBtn {
+
+.pastDay {
+  color: lightgray;
+}
+
+.today {
+  background-color: #f5d042;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.futureDay {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.futureDay:hover {
+  background: #eee;
+}
+
+.futureDay.choiceDay,
+.today.choiceDay {
+  background: #0f4957;
+  color: #fff;
+  font-weight: 600;
   cursor: pointer;
 }

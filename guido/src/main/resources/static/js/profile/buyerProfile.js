@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(addReview != null){
         reviewModalClose = document.querySelector(".review-write .review-modal-close");
         addReview.addEventListener('click',()=>{
+            reviewOptionFn(); // 리뷰 작성 목록 불러오기
             reviewWriteModal.style.display="flex";
 
             // 라디오 버튼 초기 선택 해제
@@ -377,6 +378,7 @@ let checkObj = {
 selectElement = document.querySelector(".review-write #reviewSaleList");
 let productNo;
 let productDtNo;
+let productName;
 // 상품 선택
 if(selectElement != null){
 
@@ -387,6 +389,8 @@ if(selectElement != null){
         // 속성 값 가져오기
         productNo = selectedOption.getAttribute("data-productno");
         productDtNo = selectedOption.getAttribute("data-productdtno");
+        productName = selectedOption.innerText;
+        // console.log("옵션 선택 됐을 때" + productName);
     
         if(productNo){
             if(productDtNo){
@@ -411,7 +415,8 @@ selectedStarScore.forEach(star => {
 /* 리뷰 등록 */
 function reviewAddFn(e){
     
-
+    // console.log("함수 안에" + productName);
+    
     if(!checkObj.selectElement){
         e.preventDefault();
         alert("상품을 선택해주세요.")
@@ -455,8 +460,9 @@ function reviewAddFn(e){
                 reviewWriteModal.style.display="none";
 
                 reviewListFn();
-                reviewMoreBtnFn();
-                // location.href='/profile/'+loginUserNo;
+                reviewOptionFn(); // 리뷰 목록 다시 불러오기
+
+                sendReview(productNo, productName); // 리뷰 등록 알림 
 
             } else if (result=0){
                 alert("리뷰 작성 실패");
@@ -620,7 +626,6 @@ function reviewListFn(e){
                 myReviewList.appendChild(newReviewItemUl);
                 
                 reviewMoreFn();
-                reviewMoreBtnFn();
             }
 
         }
@@ -655,7 +660,7 @@ function reviewDelFn(el){
             alert("리뷰가 삭제 되었습니다.");
 
             reviewListFn();
-            // location.href='/profile/'+loginUserNo;
+            reviewOptionFn(); // 리뷰 목록 다시 불러오기
 
         } else if (result=0){
             alert("리뷰 삭제 실패");
@@ -783,7 +788,6 @@ function reviewEditSubmitFn(e){
 
                 reviewEditModal.style.display="none";
                 reviewListFn();
-                // location.href='/profile/'+loginUserNo;
 
             } else if (result=0){
                 alert("리뷰 수정 실패");
@@ -801,4 +805,39 @@ function reviewEditSubmitFn(e){
     }
     
 
+}
+
+
+// 리뷰 작성 option 비동기 불러오기
+function reviewOptionFn(e) {
+    fetch("/profile/reviewOption", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            "userNo": pageUserNo
+        })
+    })
+    .then(resp => resp.json())
+    .then(reviewOption => {
+        let selectElement = document.getElementById("reviewSaleList");
+
+        // 기존 옵션 제거
+        while (selectElement.options.length > 1) {
+            selectElement.remove(1);
+        }
+
+        // 새로운 옵션 추가
+        reviewOption.forEach(option => {
+            let newOption = document.createElement("option");
+            newOption.text = option.productName;
+            newOption.setAttribute("value", option.productNo);
+            newOption.setAttribute("data-productno", option.productNo);
+            newOption.setAttribute("data-productdtno", option.productDtNo);
+            selectElement.appendChild(newOption);
+        });
+
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }

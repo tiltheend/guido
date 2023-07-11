@@ -8,13 +8,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/profile/buyerReservation.css}">
     
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;
-        position:absolute; top: 0;}
-    </style>
 </head>
 <body>
-    <header>임시헤더</header>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="buyer-profile-top">
         <div class="profile-box" th:object="${user}"> <!-- profile-box (프로필 + 버튼) -->
@@ -77,11 +73,13 @@
 
                 <ul class="reservation-list-box">
 
-                    <li th:each="reservation : ${reservationList}">
+                    <li th:each="reservation : ${reservationList}" th:data-reservationno="${reservation.reservationNo}" onclick="gotoTouristRFn(this)">
                         <div>
-                            <span>예약 번호</span><span>12345678-12345678</span>
+                            <span>예약 번호</span>
+                            <a th:href="@{/reservation/reservation_info(reservation_no=${reservation.reservationNo})}">
+                                <span th:text="${reservation.orderNumber}">12345678-12345678</span>
+                            </a>
                         </div>
-                        <!-- (Y: 예약 완료, N: 예약 취소, D: 구매확정 완료) -->
                         <div th:with="state = ${reservation.reservationState}">
                             <span>주문 처리</span>
                             <span th:if="${state=='Y'}">예약 완료</span>
@@ -93,15 +91,20 @@
                                 <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}"><img th:src="${reservation.thumbnail}" alt="reservationImg"></a>
                             </div>
                             <div class="reservation-content">
-                                <h2 th:text="${reservation.productDate}">0000년 0월 0일 - 0월 0일</h2>
+                                <h2 th:with="package = ${reservation.productPackage}"> 
+                                    <th:block th:if="${package==1}">[[${reservation.productDate}]]
+                                        <th:block th:if="${reservation.optionName}">[ [[${reservation.optionName}]] ]</th:block> 
+                                    </th:block>
+                                    <th:block th:if="${package>1}">[[${reservation.productDate}]]</th:block>
+                                </h2>
                                 <h2 th:text="${reservation.productName}">상품 제목</h2>
-                                <span>KRW</span><span>000,000</span>
+                                <span>KRW</span><span th:text="${#numbers.formatInteger(reservation.totalPrice, 1, 'COMMA')}+ ' / total'">000,000</span>
                             </div>
                         </div>
                     </li>
                 </ul>
 
-                <button class="reservation-list-more">more sales list</button>
+                <button class="reservation-list-more">more reservation list</button>
 
             </div> <!-- // 판매자 판매 상품 -->
 
@@ -112,12 +115,10 @@
     
     <script th:inline="javascript">
 
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>  
+    <th:block th:replace="~{/common/footer}"></th:block>
 </body>
 </html>

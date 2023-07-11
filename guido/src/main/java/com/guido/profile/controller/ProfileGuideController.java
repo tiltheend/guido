@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
@@ -155,14 +156,118 @@ public class ProfileGuideController {
 		List<Reservation> GuideReservationList = service.GuideReservationList(userNo);
 		model.addAttribute("GuideReservationList", GuideReservationList);
 		
-		// 0.5 단위로 별점 바꾸기
-		for(Reservation r : GuideReservationList) {
-			System.out.println(r);
-		}
+		// 예약 개수 세기
+		int reservarionCount = service.reservarionCount(userNo);
+		model.addAttribute("reservarionCount", reservarionCount);
 		
 		return "profile/sellerReservation";
 	}
 	
+	// 가이드 예약 리스트 (비동기 조회)
+	@ResponseBody
+	@PostMapping(value="/guideReservationList", produces="application/json; charset=UTF-8")
+	public List<Reservation> guideReservationList(@RequestBody int userNo){
+
+		List<Reservation> guideReservationList = service.GuideReservationList(userNo);
+		// int reservationCount = service.reservationCount(userNo);
+		
+		return guideReservationList;
+	}
+	
+	// 가이드 예약 리스트 (3개씩 더보기)
+	@ResponseBody
+	@PostMapping(value="/guideMoreReservationList", produces="application/json; charset=UTF-8")
+	public List<Reservation> guideMoreReservationList(@RequestBody int userNo){
+		
+		List<Reservation> guideMoreReservationList = service.guideMoreReservationList(userNo);
+		
+		return guideMoreReservationList;
+	}
+	
+	// 자기 소개 비동기로 조회하기
+	@ResponseBody
+	@PostMapping(value="/prList", produces="application/json; charset=UTF-8")
+	public PR prList(@SessionAttribute("loginUser") User loginUser){
+		
+		int userNo= loginUser.getUserNo();
+		
+		PR prList = service.selectPR(userNo);
+		
+		return prList;
+	}
+	
+	// 자기 소개 수정하기
+	@ResponseBody
+	@PostMapping("/prEdit")
+	public int prEdit(@RequestBody PR pr,
+			@SessionAttribute("loginUser") User loginUser){
+		
+		int userNo= loginUser.getUserNo();
+	
+		pr.setUserNo(userNo);
+		
+	    if (pr.getJob() == null) pr.setJob("");
+	    if (pr.getPets() == null) pr.setPets("");
+	    if (pr.getHobby() == null) pr.setHobby("");
+	    if (pr.getSubLang() == null) pr.setSubLang("");
+	    if (pr.getAbroadExperience() == null) pr.setAbroadExperience("");
+	    if (pr.getMbti() == null) pr.setMbti("");
+	    if (pr.getStrength() == null) pr.setStrength("");
+	    if (pr.getFavoriteSong() == null) pr.setFavoriteSong("");
+	    if (pr.getTmi() == null) pr.setTmi("");
+	    if (pr.getMajor() == null) pr.setMajor("");
+	    if (pr.getDopamine() == null) pr.setDopamine("");
+	    if (pr.getUselessTalent() == null) pr.setUselessTalent("");
+	    if (pr.getCapList() == null) pr.setCapList("");
+	    
+	    // pr 있는 지 체크
+	    int prCheck = service.prCheck(userNo);
+	    
+	    int result=-1;
+	    if(prCheck>0) { // 업데이트	
+	    	result = service.prEdit(pr);
+	    }
+	    else if(prCheck==0) { // 인설트 	
+	    	result = service.prInsert(pr);
+	    } else {
+	    	System.out.println("자기 소개 수정 실패");
+	    }
+	    
+		return result;
+		
+	}
+	
+	// 자기 소개 등록하기
+	@ResponseBody
+	@PostMapping("/prAdd")
+	public int prAdd(@RequestBody PR pr,
+			@SessionAttribute("loginUser") User loginUser){
+		
+		int userNo= loginUser.getUserNo();
+		
+		pr.setUserNo(userNo);
+		
+	    if (pr.getJob() == null) pr.setJob("");
+	    if (pr.getPets() == null) pr.setPets("");
+	    if (pr.getHobby() == null) pr.setHobby("");
+	    if (pr.getSubLang() == null) pr.setSubLang("");
+	    if (pr.getAbroadExperience() == null) pr.setAbroadExperience("");
+	    if (pr.getMbti() == null) pr.setMbti("");
+	    if (pr.getStrength() == null) pr.setStrength("");
+	    if (pr.getFavoriteSong() == null) pr.setFavoriteSong("");
+	    if (pr.getTmi() == null) pr.setTmi("");
+	    if (pr.getMajor() == null) pr.setMajor("");
+	    if (pr.getDopamine() == null) pr.setDopamine("");
+	    if (pr.getUselessTalent() == null) pr.setUselessTalent("");
+	    if (pr.getCapList() == null) pr.setCapList("");
+	
+		int prAdd = service.prInsert(pr);
+		
+		System.out.println(pr);
+		
+		return prAdd;
+		
+	}
 
 
 }

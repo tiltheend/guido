@@ -32,6 +32,7 @@ public class HomeController {
 	private HomeService service;
 	
 	
+	
 	// 메인 페이지 이동 + 상품 목록 조회
 	@GetMapping("/home")
 	public String mainPage(Model model
@@ -73,6 +74,7 @@ public class HomeController {
 	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
 	    return service.selectThemeProdList(themeCode);
 	}
+
 	
 	
 	// 검색 페이지

@@ -164,6 +164,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // 클릭된 div에만 .clicked 클래스 추가
       this.classList.toggle('clicked');
+
+      const temp = this.children[0].lastElementChild;
+
+      if(temp.className === 'form-control'){
+        temp.focus();
+      }
     });
   });
 });
@@ -272,17 +278,17 @@ $(document).ready(function(){
 
 /* ************************************** 0707 ************************************** */
 // startdayModal 내 검색 값 클릭하면 모달창 닫히고 lastday로 마우스 커서 옮겨감
-locationDiv.addEventListener("click", () => {
-  location.value = list; 
-  document.querySelector(".where-modal").style.display = "none";
-  document.querySelector('input[name="lastday"]').focus();
-});
+//locationDiv.addEventListener("click", () => {
+//  location.value = list; 
+//  document.querySelector(".where-modal").style.display = "none";
+//  document.querySelector('input[name="lastday"]').focus();
+//});
 // lastdayModal 내 검색 값 클릭하면 모달창 닫히고 guests로 마우스 커서 옮겨감
-locationDiv.addEventListener("click", () => {
-  location.value = list; 
-  document.querySelector(".where-modal").style.display = "none";
-  document.querySelector('input[name="firstday"]').focus();
-});
+//locationDiv.addEventListener("click", () => {
+//  location.value = list; 
+//  document.querySelector(".where-modal").style.display = "none";
+//  document.querySelector('input[name="firstday"]').focus();
+//});
 /* ************************************** 0707 ************************************** */
 
 
@@ -356,6 +362,22 @@ mypageModalClose.addEventListener("click", () => {
 });
 
 
+// 헤더 1320px까지 위치 조정
+if(document.querySelector('.search-box-click') != null){
+  const searchBoxClick = document.querySelector('.search-box-click');
+  const whereModal = document.querySelector('.where-modal');
 
+  if(document.body.clientWidth > 1320){
+    searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+    whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+  }
 
+  
+  window.addEventListener('resize', e => {
+    if(document.body.clientWidth > 1320){
+      searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+      whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+    }
+  });
+}
 

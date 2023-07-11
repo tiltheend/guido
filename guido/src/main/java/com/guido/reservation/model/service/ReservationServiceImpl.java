@@ -216,8 +216,8 @@ public class ReservationServiceImpl implements ReservationService{
 
 	// 예약 확인
 	@Override
-	public Reservation selectReservation(String orderNumber) {
-		return mapper.selectReservation(orderNumber);
+	public Reservation selectReservation(Map map) {
+		return mapper.selectReservation(map);
 	}
 	
 	

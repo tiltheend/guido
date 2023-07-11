@@ -20,12 +20,13 @@ public interface ProductUploadService {
 	 * @param product
 	 * @param images
 	 * @param tourCourse2
+	 * @param productDate 
 	 * @return
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	int productUpload(Product product, List<MultipartFile> images, String tourCourse2)throws IllegalStateException, IOException;
+	int productUpload(Product product, List<MultipartFile> images, String tourCourse2, String productOption)throws IllegalStateException, IOException;
 
 
 	/** 여행 상품 수정 서비스
@@ -33,12 +34,11 @@ public interface ProductUploadService {
 	 * @param images
 	 * @param deleteList
 	 * @param tourCourse2 
-	 * @param tourCourseDeleteList 
 	 * @return
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
-	int productEdit(Product product, List<MultipartFile> images, String deleteList, String tourCourse2, String tourCourseDeleteList)throws IllegalStateException, IOException;
+	int productEdit(Product product, List<MultipartFile> images, String deleteList, String tourCourse2)throws IllegalStateException, IOException;
 
 
 }

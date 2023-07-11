@@ -1,12 +1,207 @@
 
 let totalCost = document.getElementById("totalCost");
 
-if(package==0){
-    /* 총 금액 : 1박 시 = 인원수 * productPrice */
-    totalCost.innerText = Number(product.productPrice)*Number(guestCount);
-}else{
-    /* 총 금액 : n박 시 = productPrice */
-    totalCost.innerText = product.productPrice;
+// 총금액 표기하는 div가 존재할 때만
+if(document.querySelector(".detail--right__price-total")!=null){
+    
+    if(package==0){
+        /* 총 금액 : 1박 시 = 인원수 * productPrice */
+        totalCost.innerText = Number(product.productPrice)*Number(guestCount);
+    }else{
+        /* 총 금액 : n박 시 = productPrice */
+        totalCost.innerText = product.productPrice;
+    }
+
+
+
+    /* 예약 인원 수 증가 버튼 클릭 이벤트 */
+    const plusBtn = document.querySelector(".detail--right__price-plus");
+    const minusBtn = document.querySelector(".detail--right__price-minus");
+    
+    
+    /* 증가 버튼 클릭 시 */
+    plusBtn.addEventListener("click", ()=>{
+      
+      const count = document.querySelector(".detail--right__price-count");
+    
+      count.innerText = Number(count.innerText) + 1;
+    
+    }); 
+    
+    
+    /* 감소 버튼 클릭 시 */
+    minusBtn.addEventListener("click", ()=>{
+      
+        /* 인원 수 */
+      const count = document.querySelector(".detail--right__price-count");
+      
+      /* 최소 인원수 제한 */
+      if(Number(count.innerText)>1){
+          count.innerText = Number(count.innerText) - 1;
+      }
+    
+    });
+
+
+
+    const priceBtn = document.querySelectorAll(".priceBtn");
+
+    priceBtn.forEach((btn)=>{
+
+        btn.addEventListener("click", ()=>{
+
+            const count = Number(document.querySelector(".detail--right__price-count").innerText);
+        
+            /* 1박 이상 패키지 
+                -> 인원 수 증감하는대로 1인당 금액 변동(product price/인원 수)  
+                -> 총 금액 고정 (product price) 
+            */
+            if(package!=0){
+                document.getElementById("eachCost").innerText = Math.ceil(product.productPrice/count);
+            }
+        
+        
+            /* 1박 패키지 
+                ->  1인당 금액 고정(product price 값)
+                -> 인원 수 증감하는대로 총 금액 변동 (product price * 인원 수)
+            */
+            if(package==0){
+                document.getElementById("totalCost").innerText = product.productPrice*count;
+            }
+
+
+            guestCountWarning(count);
+
+        
+        });
+
+    });
+
+
+
+
+
+        /* 게스트 최대/최소 인원 수 경고 */
+    const inputGuestCount = document.querySelector(".detail--right__price-count");
+
+    function guestCountWarning(count){
+            
+        if(count<product.minTourist || count>product.maxTourist){
+            inputGuestCount.style.color = 'red';
+        }else{
+            inputGuestCount.style.color = '#000000';
+        }
+    }
+
+
+    guestCountWarning(guestCount);
+
+
+    const reserveBtn = document.getElementById("reserveBtn");
+
+    /* 예약 버튼 클릭 시 게스트 최대 최소 인원 수 기준을 충족하지 못하면 제출 막기 */
+    reserveBtn.addEventListener("click", e=>{
+
+
+        /* 비로그인 유저 예약 막기 */
+        if(loginUserNo == null){
+            alert("로그인 후 이용 가능합니다.");
+            return;
+        }
+
+        /* 게스트 수 최소 인원 미만 */
+        if(inputGuestCount.innerText<product.minTourist){
+            e.preventDefault();
+            alert("최소 " + product.minTourist + "명 이상 예약 가능합니다");
+            return;
+        }
+        
+        /* 게스트 수 최대 인원 초과 */
+        if(inputGuestCount.innerText>product.maxTourist){
+            e.preventDefault();
+            alert("예약 가능한 최대 인원 수를 초과합니다.");
+            return;
+        }
+        
+
+        /* 게스트 수가 옵션 여분을 초과할 시 */
+        if(Object.keys(product.optionList).length != 0){
+            
+            const options = document.getElementsByName("option");
+            let selectedOption;
+            let optionRestCount;
+
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    selectedOption = options[i].value;
+                    break;
+                }
+            }
+            
+            for (let i = 0; i < options.length; i++) {
+                
+                if(product.optionList[i].optionNo == selectedOption){
+                    optionRestCount = product.optionList[i].optionRestCount;
+                    break;
+                }
+            }
+
+
+            if(optionRestCount<inputGuestCount.innerText){
+                alert("현재 예약 가능한 인원 수를 초과합니다");
+                e.preventDefault();
+                return;
+            }
+        }
+
+        /* 여행객이 아닌 경우 */
+        if(loginUserType!='T'){
+            alert("tourist 계정으로 접속해주세요");
+            e.preventDefault();
+            return;
+        }
+
+        /* 얼굴 인증사진을 등록하지 않았을 경우 */
+        if(faceImg==null){
+            toggleModal();
+            e.preventDefault();
+        }
+
+
+        
+        
+        const guestHidden = document.getElementById("guestHidden");
+        const dateHidden = document.getElementById("dateHidden");
+        
+        guestHidden.value = inputGuestCount.innerText;
+        
+        /* 날짜 미선택 시 */
+        if(dateHidden.value==""){
+            alert("날짜를 선택해주세요!");
+            e.preventDefault();
+        }
+
+
+        /* 당일 투어의 경우 옵션 미선택 시 */
+        if(package==0){
+            const radios = document.querySelectorAll('input[type="radio"][name="option"]');
+            let checked = false;
+
+            radios.forEach(radio => {
+                if (radio.checked) {
+                checked = true;
+                }
+            });
+
+            if (!checked) {
+                alert("옵션을 선택해주세요.");
+                e.preventDefault();
+            }
+        }
+
+    });
+
+
 }
 
 
@@ -26,69 +221,6 @@ menuLinks.forEach(function(link) {
     });
 });
 
-
-
-/* 예약 인원 수 증가 버튼 클릭 이벤트 */
-const plusBtn = document.querySelector(".detail--right__price-plus");
-const minusBtn = document.querySelector(".detail--right__price-minus");
-
-
-/* 증가 버튼 클릭 시 */
-plusBtn.addEventListener("click", ()=>{
-  
-  const count = document.querySelector(".detail--right__price-count");
-
-  count.innerText = Number(count.innerText) + 1;
-
-}); 
-
-
-/* 감소 버튼 클릭 시 */
-minusBtn.addEventListener("click", ()=>{
-  
-    /* 인원 수 */
-  const count = document.querySelector(".detail--right__price-count");
-  
-  /* 최소 인원수 제한 */
-  if(Number(count.innerText)>1){
-      count.innerText = Number(count.innerText) - 1;
-  }
-
-});
-
-
-const priceBtn = document.querySelectorAll(".priceBtn");
-
-priceBtn.forEach((btn)=>{
-
-    btn.addEventListener("click", ()=>{
-
-        const count = Number(document.querySelector(".detail--right__price-count").innerText);
-    
-        /* 1박 이상 패키지 
-            -> 인원 수 증감하는대로 1인당 금액 변동(product price/인원 수)  
-            -> 총 금액 고정 (product price) 
-        */
-        if(package!=0){
-            document.getElementById("eachCost").innerText = Math.ceil(product.productPrice/count);
-        }
-    
-    
-        /* 1박 패키지 
-            ->  1인당 금액 고정(product price 값)
-            -> 인원 수 증감하는대로 총 금액 변동 (product price * 인원 수)
-        */
-        if(package==0){
-            document.getElementById("totalCost").innerText = product.productPrice*count;
-        }
-
-
-        guestCountWarning(count);
-
-    
-    });
-
-});
 
 
 
@@ -165,7 +297,12 @@ if(document.getElementById("wishHeart")!=null){
     
     const wishHeart = document.getElementById("wishHeart");
     let check;      // 관심상품 등록 여부
-    
+
+    let productNo = document.querySelector('.detail--text__title').getAttribute('data-productno');
+    let productName = document.querySelector('.detail--text__title').getAttribute('data-productname');
+    console.log(productNo);
+    console.log(productName);
+
     /* 관심 상품 등록O */
     if (wishHeart.checked) {
         check = 1;
@@ -174,7 +311,7 @@ if(document.getElementById("wishHeart")!=null){
         check = 0;
     }
     
-    const wishData = {"productNo" : product.productNo, "userNo": loginUserNo, "check": check};
+    const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
     // const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
     
     
@@ -191,6 +328,8 @@ if(document.getElementById("wishHeart")!=null){
             if(result==0){
                 console.log("관심상품 등록 실패");
             }
+            sendWish(productNo, productName) // 관심상품 등록 알림
+
     
         })
         .catch(err=>{
@@ -201,136 +340,18 @@ if(document.getElementById("wishHeart")!=null){
 }
 
 
-/* 게스트 최대/최소 인원 수 경고 */
-const inputGuestCount = document.querySelector(".detail--right__price-count");
-
-function guestCountWarning(count){
-        
-    if(count<product.minTourist || count>product.maxTourist){
-        inputGuestCount.style.color = 'red';
-    }else{
-        inputGuestCount.style.color = '#000000';
-    }
-}
 
 
-guestCountWarning(guestCount);
-
-
-const reserveBtn = document.getElementById("reserveBtn");
-
-/* 예약 버튼 클릭 시 게스트 최대 최소 인원 수 기준을 충족하지 못하면 제출 막기 */
-reserveBtn.addEventListener("click", e=>{
-
-
-    /* 비로그인 유저 예약 막기 */
-    if(loginUserNo == null){
-        alert("로그인 후 이용 가능합니다.");
-        return;
-    }
-
-    /* 게스트 수 최소 인원 미만 */
-    if(inputGuestCount.innerText<product.minTourist){
-        e.preventDefault();
-        alert("최소 " + product.minTourist + "명 이상 예약 가능합니다");
-        return;
-    }
-    
-    /* 게스트 수 최대 인원 초과 */
-    if(inputGuestCount.innerText>product.maxTourist){
-        e.preventDefault();
-        alert("예약 가능한 최대 인원 수를 초과합니다.");
-        return;
-    }
-    
-
-    /* 게스트 수가 옵션 여분을 초과할 시 */
-    if(Object.keys(product.optionList).length != 0){
-        
-        const options = document.getElementsByName("option");
-        let selectedOption;
-        let optionRestCount;
-
-        for (let i = 0; i < options.length; i++) {
-            if (options[i].checked) {
-                selectedOption = options[i].value;
-                break;
-            }
-        }
-        
-        for (let i = 0; i < options.length; i++) {
-            
-            if(product.optionList[i].optionNo == selectedOption){
-                optionRestCount = product.optionList[i].optionRestCount;
-                break;
-            }
-        }
-
-
-        if(optionRestCount<inputGuestCount.innerText){
-            alert("현재 예약 가능한 인원 수를 초과합니다");
-            e.preventDefault();
-            return;
-        }
-    }
-
-    /* 여행객이 아닌 경우 */
-    if(loginUserType!='T'){
-        alert("tourist 계정으로 접속해주세요");
-        e.preventDefault();
-        return;
-    }
-
-    /* 얼굴 인증사진을 등록하지 않았을 경우 */
-    if(faceImg==null){
-        toggleModal();
-        e.preventDefault();
-    }
-
-
-    
-    
-    const guestHidden = document.getElementById("guestHidden");
-    const dateHidden = document.getElementById("dateHidden");
-    
-    guestHidden.value = inputGuestCount.innerText;
-    
-    /* 날짜 미선택 시 */
-    if(dateHidden.value==""){
-        alert("날짜를 선택해주세요!");
-        e.preventDefault();
-    }
-
-
-    /* 당일 투어의 경우 옵션 미선택 시 */
-    if(package==0){
-        const radios = document.querySelectorAll('input[type="radio"][name="option"]');
-        let checked = false;
-
-        radios.forEach(radio => {
-            if (radio.checked) {
-            checked = true;
-            }
-        });
-
-        if (!checked) {
-            alert("옵션을 선택해주세요.");
-            e.preventDefault();
-        }
-    }
-
-});
-
-
+let faceModal = document.getElementById("faceImgModal");
 
 // 모달 창 토글
 function toggleModal() {
-
-    let modal = document.getElementById("faceImgModal");
-    
-    modal.style.display = (modal.style.display === "block") ? "none" : "block";
-    
+    faceModal.style.display = (faceModal.style.display === "block") ? "none" : "block";
 }
+
+faceModal.addEventListener('click', ()=>{
+    toggleModal();
+});
 
 
 
@@ -404,14 +425,23 @@ document.querySelector(".close").addEventListener("click", ()=>{
 /* 여행 코스 지도 */
 function showTourcourseMap(latitude, longitude, number){
 
-    const geocoder = new kakao.maps.services.Geocoder();
+    let geocoder = new kakao.maps.services.Geocoder();
 
-    const coord = new kakao.maps.LatLng(latitude, longitude);
-    const callback = function(result, status) {
+    let coord = new kakao.maps.LatLng(latitude, longitude);
+
+    
+    let callback = function(result, status) {
             if (status === kakao.maps.services.Status.OK) {
+
                 createMap(result[0].address.address_name, coord);
+
+            }else if(status === kakao.maps.services.Status.ZERO_RESULT){
+                
+                geocoder.coord2RegionCode(coord.getLng(), coord.getLat(), function(result, status) {
+                    createMap(result[0].address_name, coord);
+                })
             }
-        };
+    };
 
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 
@@ -580,7 +610,7 @@ if(document.getElementById('editBtn')!=null){
 
 
 /* 일정 소개 예약 가능한 일자 첫번째~마지막번째 세팅 */
-// 21 Jun 2023 - 24 Jun 2023
+// 21 Jun, 2023 - 24 Jun, 2023
 
 let allDates = product.productDateList.map(item => item.productDate);
 
@@ -594,3 +624,80 @@ firstDate = firstDate.toLocaleDateString('en-US', { day: 'numeric', month: 'shor
 lastDate = lastDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
 
 document.querySelector(".detail--text__date-second").innerText = firstDate + " - " + lastDate;
+
+
+
+/* 슬라이드 사진 클릭 시 크게 보기 팝업 */
+const slideImages = document.getElementsByClassName("detail--silde__item-img");
+
+Array.from(slideImages).forEach(function(slide){
+    slide.addEventListener("click", ()=>{
+
+        const modal = document.querySelector(".modal2");
+        const modal_img = document.querySelector(".modal_content2");
+        const span = document.querySelector(".close2");
+
+        modalDisplay("block");
+        modal_img.src = slide.getAttribute("src");
+
+        span.addEventListener('click', ()=>{
+        modalDisplay("none");
+        });
+
+        modal.addEventListener('click', ()=>{
+        modalDisplay("none");
+        });
+
+        function modalDisplay(text){
+        modal.style.display = text;
+        }
+    })
+});
+
+
+/* 총 일정 확인 캘린더 */
+const fullCalendar = document.querySelector(".detail--calendar__date");
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    let events = allProductDateList.map(function(item) {
+
+        return {
+            start : item.productDate,
+            end : calculateLastDate(item.productDate),
+            overlap: false,
+            display: 'background'
+        }
+    });
+
+
+    let calendar = new FullCalendar.Calendar(fullCalendar, {
+        initialView: 'dayGridMonth',
+        initialDate: allProductDateList[0].productDate,
+        headerToolbar:{
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        },
+        events : events
+    });
+    calendar.render();
+
+});
+
+
+/* 마지막 날짜 계산 */
+function calculateLastDate(productDate){
+
+    const package = product.productPackage;
+    let lastDate = new Date(productDate);
+
+    lastDate.setDate(lastDate.getDate() + package);
+    const year = lastDate.getFullYear();
+    const month = String(lastDate.getMonth() + 1).padStart(2, "0");
+    const day = String(lastDate.getDate()).padStart(2, "0");
+    lastDate = `${year}-${month}-${day}`;
+    
+    return lastDate;
+}
+

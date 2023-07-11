@@ -137,7 +137,7 @@ function displayPlaces(places) {
         }
 
         if (!isDuplicate) {
-          if (createCourseDiv.childElementCount < 20) {
+          if (createCourseDiv.childElementCount + tourCourse.length < 20) {
             createCourseDiv.appendChild(checkboxElement);
             createCourseDiv.appendChild(labelElement);
             labelElement.appendChild(deleteIcon);

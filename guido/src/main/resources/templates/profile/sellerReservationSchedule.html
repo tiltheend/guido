@@ -8,19 +8,14 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/profile/sellerReservationSchedule.css}">
 
+    <th:block th:replace="~{common/header}"></th:block>
     <!-- 달력 -->
     <link th:href='@{/css/profile/calender_main.css}' rel='stylesheet' />
-    <script th:src='@{/js/profile/calender.js}'></script>
+    <!-- <script th:src="@{/js/profile/nabong_owl/jquery.min.js}"></script> -->
+    <script th:src='@{/js/profile/sellerCalender.js}'></script>
     <script th:src="@{/js/profile/calender_main.js}"></script>                   
-
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;
-        position:absolute; top: 0;}
-    </style>
 </head>
 <body>
-    <header>임시헤더</header>
-
     <div class="seller-profile-top" th:object="${user}">
 
         <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
@@ -102,6 +97,24 @@
     </div>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let calendarElement = document.getElementById('calendar');
+        adjustCalendarSize(); // 초기 로드 시 캘린더 크기 조절
+
+        function adjustCalendarSize() {
+            if (window.innerWidth <= 1100) {
+                calendarElement.style.width = '80vw';
+                calendarElement.style.height = '65vh';
+            } else {
+                calendarElement.style.width = '1000px';
+                calendarElement.style.height = '650px';
+            }
+        }
+
+        window.addEventListener('resize', adjustCalendarSize);
+    });
+
+
         // 캘린더 사이즈 조절
         let calendarElement = document.getElementById('calendar');
 
@@ -119,15 +132,12 @@
     </script>
 
     <script th:inline="javascript">
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>       
 
     <script th:src="@{/js/profile/profileEdit.js}"></script>  
-    
+    <th:block th:replace="~{/common/footer}"></th:block>
 </body>
 </html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guido.profile.model.dao.CalendarMapper">
+
+
+	<resultMap type="Schedule" id="schedule_rm">
+		<id property="productNo" column="PRODUCT_NO" />
+
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="productPackage" column="PRODUCT_PACKAGE" />
+		<result property="tourDuration" column="TOUR_DURATION"/>
+		
+		<result property="productDateNo" column="PRODUCT_DT_NO"/>
+		<result property="productDateStart" column="PRODUCT_DT"/>
+		<result property="productDateEnd" column="PRODUCT_DT_END"/>
+		<result property="userNo" column="USER_NO" />
+		
+		<result property="optionNo" column="OPTION_NO"/>
+		<result property="optionName" column="OPTION_NAME"/>
+		
+		<result property="reservationNo" column="RESERVATION_NO"/>
+		
+
+	</resultMap>
+	
+	
+	<!-- 판매자 일정 조회 -->
+	<select id="sellerScheduleList" resultMap="schedule_rm">
+		SELECT R.RESERVATION_NO, R.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PACKAGE, R.USER_NO, P.TOUR_DURATION,
+		    R.PRODUCT_DT_NO, PRODUCT_DT, R.OPTION_NO, OPTION_NAME,
+		    CASE
+		        WHEN P.PRODUCT_PACKAGE >= 2 THEN PRODUCT_DT + (P.PRODUCT_PACKAGE)
+		        ELSE PRODUCT_DT
+		    END AS PRODUCT_DT_END
+		FROM RESERVATION R
+		RIGHT JOIN "PRODUCT" P ON (P.PRODUCT_NO = R.PRODUCT_NO)
+		RIGHT JOIN "PRODUCT_DT" PD ON (R.PRODUCT_DT_NO = PD.PRODUCT_DT_NO)
+		RIGHT JOIN "PRODUCT_OPTION" PO ON (R.OPTION_NO = PO.OPTION_NO)
+		WHERE P.USER_NO = #{useNo}
+	</select>
+	
+	<!--	
+	
+		SELECT R.RESERVATION_NO, R.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PACKAGE, R.USER_NO, P.TOUR_DURATION,
+		    R.PRODUCT_DT_NO, TO_CHAR(PD.PRODUCT_DT, 'YYYY-MM-DD"T"HH24:MI:SS') AS PRODUCT_DT, 
+		    R.OPTION_NO, OPTION_NAME,
+		    CASE
+		        WHEN P.PRODUCT_PACKAGE >= 2 
+		        THEN PD.PRODUCT_DT + (P.PRODUCT_PACKAGE - 1)
+		        ELSE PRODUCT_DT
+		    END AS PRODUCT_DT_END_A,
+		    TO_CHAR(PD.PRODUCT_DT + (P.PRODUCT_PACKAGE - 1), 'YYYY-MM-DD"T"HH24:MI:SS') AS PRODUCT_DT_END
+		FROM RESERVATION R
+		RIGHT JOIN "PRODUCT" P ON (P.PRODUCT_NO = R.PRODUCT_NO)
+		RIGHT JOIN "PRODUCT_DT" PD ON (R.PRODUCT_DT_NO = PD.PRODUCT_DT_NO)
+		RIGHT JOIN "PRODUCT_OPTION" PO ON (R.OPTION_NO = PO.OPTION_NO)
+		WHERE P.USER_NO = #{useNo}
+
+	-->
+	
+	
+	 
+</mapper>

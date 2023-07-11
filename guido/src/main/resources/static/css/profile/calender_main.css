@@ -200,26 +200,26 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc .fc-button-primary {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #2C3E50;
-    background-color: var(--fc-button-bg-color, #2C3E50);
-    border-color: #2C3E50;
-    border-color: var(--fc-button-border-color, #2C3E50);
+    background-color: #1C797D;
+    background-color: var(--fc-button-bg-color, #1C797D);
+    border-color: #1C797D;
+    border-color: var(--fc-button-border-color, #1C797D);
   }
 .fc .fc-button-primary:hover {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #1e2b37;
-    background-color: var(--fc-button-hover-bg-color, #1e2b37);
-    border-color: #1a252f;
-    border-color: var(--fc-button-hover-border-color, #1a252f);
+    background-color: #0F4957;
+    background-color: var(--fc-button-hover-bg-color, #0F4957);
+    border-color: #0F4957;
+    border-color: var(--fc-button-hover-border-color, #0F4957);
   }
 .fc .fc-button-primary:disabled { /* not DRY */
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #2C3E50;
-    background-color: var(--fc-button-bg-color, #2C3E50);
-    border-color: #2C3E50;
-    border-color: var(--fc-button-border-color, #2C3E50); /* overrides :hover */
+    background-color: #B1D8DA;
+    background-color: var(--fc-button-bg-color, #B1D8DA);
+    border-color: #B1D8DA;
+    border-color: var(--fc-button-border-color, #B1D8DA); /* overrides :hover */
   }
 .fc .fc-button-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
@@ -228,10 +228,10 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
   .fc .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #1a252f;
-    background-color: var(--fc-button-active-bg-color, #1a252f);
-    border-color: #151e27;
-    border-color: var(--fc-button-active-border-color, #151e27);
+    background-color: #0F4957;
+    background-color: var(--fc-button-active-bg-color, #0F4957);
+    border-color: #0F4957;
+    border-color: var(--fc-button-active-border-color, #0F4957);
   }
 .fc .fc-button-primary:not(:disabled):active:focus,
   .fc .fc-button-primary:not(:disabled).fc-button-active:focus {

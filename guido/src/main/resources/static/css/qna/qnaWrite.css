@@ -1,0 +1,16 @@
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qna--container{
+    width: 60vw;
+    margin-top: 30px;
+}
+
+/* 글자수 div */
+.qna--count{
+    display: flex;
+}

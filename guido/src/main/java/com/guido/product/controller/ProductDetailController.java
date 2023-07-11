@@ -53,10 +53,15 @@ public class ProductDetailController {
 		
 		
 		Product product = service.selectProduct(productNo);
+		
+		if(product==null)
+			return "error/404";
+		
 		User guide = service.selectGuideInfo(product.getUserNo());
 		PR pr = service.selectPR(product.getUserNo());
 		List<Review> reviewList = service.selectReviewList(productNo);
 		List<Product> recommendList = null;
+		List<ProductDate> allProductDateList = service.selectAllProductDateList(productNo);
 		
 		
 		// 비로그인 유저 => 인기 상품 랜덤으로 조회
@@ -97,7 +102,6 @@ public class ProductDetailController {
 			eachCost = (product.getProductPrice()/guestCount);
 		
 		
-		
 		model.addAttribute("product", product);
 		model.addAttribute("guide", guide);
 		model.addAttribute("pr", pr);
@@ -106,6 +110,7 @@ public class ProductDetailController {
 		model.addAttribute("eachCost", eachCost);
 		model.addAttribute("wishOrNot", wishOrNot);
 		model.addAttribute("addNotesList", addNotesList);
+		model.addAttribute("allProductDateList", allProductDateList);
 		model.addAttribute("apiKey", apiKey);
 		model.addAttribute("recommendList", recommendList);
 		

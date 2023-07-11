@@ -43,4 +43,10 @@ public interface AdminMapper {
 	int countUnapprovedGuide();
 
 	int countUnprocessedQna();
+
+	Event selectEvent(int eventNo);
+
+	int updateEvent(Event event);
+
+	int deleteFile(Map<String, Integer> map);
 }

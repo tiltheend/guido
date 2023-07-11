@@ -101,5 +101,25 @@ public interface ProductDetailService {
 	List<ProductOption> getOptionInfo(Map<String, Object> map);
 
 
+	/** 스케쥴러 모든 상품 조회
+	 * @return
+	 */
+	List<Product> selectProductList();
+
+
+	
+	/** 스케줄러 - 마지막 일정이 현재 날짜보다 이른 경우 상태 변경
+	 * @param productNo
+	 */
+	void updateProductAvailability(int productNo);
+
+
+	/** 전체 일정 조회
+	 * @param productNo
+	 * @return allProductDateList
+	 */
+	List<ProductDate> selectAllProductDateList(int productNo);
+
+
 
 }

@@ -75,10 +75,10 @@ public interface ReservationService {
 
 
 	/** 예약 확인
-	 * @param orderNumber
+	 * @param map
 	 * @return reservation
 	 */
-	Reservation selectReservation(String orderNumber);
+	Reservation selectReservation(Map<String, Object> map);
 
 
 	/** 예약 취소

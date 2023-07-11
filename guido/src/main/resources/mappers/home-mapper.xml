@@ -378,6 +378,20 @@
 	</select>
 	
 	
+	<!-- 이벤트 상세 페이지 조회 -->
+	<!--<select id="selectEvent" resultMap="event_rm">
+		SELECT EVENT_NO, EVENT_NAME, EVENT_CONTENT, TO_CHAR(CREATE_DT,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') CREATE_DT
+		FROM EVENT
+		WHERE EVENT_NO=#{eventNo}
+	</select>
+	
+	<select id="selectFileList" resultMap="file_rm">
+		SELECT FILE_ORDER, FILE_PATH FROM "FILE"
+		WHERE EVENT_NO = #{eventNo}
+		ORDER BY FILE_ORDER
+	</select> -->
+	
+	
 
 
 </mapper>

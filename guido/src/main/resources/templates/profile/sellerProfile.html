@@ -7,13 +7,9 @@
     <title>Guido</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/profile/sellerProfile.css}">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;
-        position:absolute; top: 0;}
-    </style>
 </head>
 <body>
-    <header>임시헤더</header>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="seller-profile-top" th:object="${user}">
 
@@ -82,61 +78,145 @@
         
         <div class="profile_right"> <!-- 프로필 오른쪽 박스 -->
 
-            <div class="seller-about" th:if="${#lists.size(pr) > 0}"> <!-- 판매자 소개 -->
-                <h1>About Me !</h1>
+            <div class="seller-about"> <!-- 판매자 소개 -->
+                <h1><span>About Me !</span>
+                    <th:block th:if="${session.loginUser?.userNo == user.userNo}">
+                        <button th:unless="${pr}" class="pr-btn-add" type="button" onclick="addModalFn()">자기 소개 등록</button>
+                        <button th:if="${pr}" class="pr-btn-edit" type="button" onclick="editModalFn()">자기 소개 수정</button>
+                    </th:block>
+                </h1>
                 <ul class="about-me">
-                    <li th:if="${pr.abroadExperience}">
-                        <pre><img th:src="@{/images/profile/abroadExperience.png}">I have traveled to : [[${pr.abroadExperience}]] </pre>
-                    </li>
-                    <li th:if="${pr.subLang}">
-                        <pre><img th:src="@{/images/profile/subLang.png}">Speaks [[${pr.subLang}]]</pre>
-                    </li>
-                    <li th:if="${pr.favoriteSong}">
-                        <pre><img th:src="@{/images/profile/favoriteSong.png}">Favorite song :  [[${pr.favoriteSong}]]</pre>
-                    </li>
-                    <li th:if="${pr.dopamine}">
-                        <pre><img th:src="@{/images/profile/dopamine.png}">My dopamine: [[${pr.dopamine}]]</pre>
-                    </li>
-                    <li th:if="${pr.birthYear}">
-                        <pre><img th:src="@{/images/profile/birthDay.png}">Born in the [[${pr.birthYear}]]</pre>
-                    </li>
-                    <li th:if="${pr.job}">
-                        <pre><img th:src="@{/images/profile/job.png}">My work: [[${pr.job}]]</pre>
-                    </li>
-                    <li th:if="${pr.pets}">
-                        <pre><img th:src="@{/images/profile/pets.png}">Live with [[${pr.pets}]]</pre>
-                    </li>
-                    <li th:if="${pr.hobby}">
-                        <pre><img th:src="@{/images/profile/hobby.png}">My hobby: [[${pr.hobby}]]</pre>
-                    </li>
-                    <li th:if="${pr.mbti}">
-                        <pre><img th:src="@{/images/profile/MBTI.png}">MBTI is: [[${pr.mbti}]]</pre>
-                    </li>
-                    <li th:if="${pr.strength}">
-                        <pre><img th:src="@{/images/profile/strength.png}">[[${pr.strength}]]</pre>
-                    </li>
-                    <li th:if="${pr.tmi}">
-                        <pre><img th:src="@{/images/profile/TMI.png}">TMI is [[${pr.tmi}]]</pre>
-                    </li>
-                    <li th:if="${pr.major}">
-                        <pre><img th:src="@{/images/profile/major.png}">I majored in [[${pr.major}]]</pre>
-                    </li>
-                    <li th:if="${pr.uselessTalent}"> 
-                        <pre><img th:src="@{/images/profile/uselessTalent.png}">Useless talent: [[${pr.uselessTalent}]]</pre>
-                    </li>
-                    <li th:if="${pr.capList}">
-                        <pre><img th:src="@{/images/profile/capList.png}">[[${pr.capList}]] as guide</pre>
-                    </li>
+                    <th:block th:if="${pr}">
+                        <li th:if="${pr?.abroadExperience}">
+                            <pre><img th:src="@{/images/profile/abroadExperience.png}">I have traveled to : [[${pr.abroadExperience}]] </pre>
+                        </li>
+                        <li th:if="${pr?.subLang}">
+                            <pre><img th:src="@{/images/profile/subLang.png}">Speaks [[${pr.subLang}]]</pre>
+                        </li>
+                        <li th:if="${pr?.favoriteSong}">
+                            <pre><img th:src="@{/images/profile/favoriteSong.png}">Favorite song :  [[${pr.favoriteSong}]]</pre>
+                        </li>
+                        <li th:if="${pr?.dopamine}">
+                            <pre><img th:src="@{/images/profile/dopamine.png}">My dopamine: [[${pr.dopamine}]]</pre>
+                        </li>
+                        <li th:if="${pr?.birthYear}">
+                            <pre><img th:src="@{/images/profile/birthDay.png}">Born in the [[${pr.birthYear}]]</pre>
+                        </li>
+                        <li th:if="${pr?.job}">
+                            <pre><img th:src="@{/images/profile/job.png}">My work: [[${pr.job}]]</pre>
+                        </li>
+                        <li th:if="${pr?.pets}">
+                            <pre><img th:src="@{/images/profile/pets.png}">Live with [[${pr.pets}]]</pre>
+                        </li>
+                        <li th:if="${pr?.hobby}">
+                            <pre><img th:src="@{/images/profile/hobby.png}">My hobby: [[${pr.hobby}]]</pre>
+                        </li>
+                        <li th:if="${pr?.mbti}">
+                            <pre><img th:src="@{/images/profile/MBTI.png}">MBTI is: [[${pr.mbti}]]</pre>
+                        </li>
+                        <li th:if="${pr?.strength}">
+                            <pre><img th:src="@{/images/profile/strength.png}">[[${pr.strength}]]</pre>
+                        </li>
+                        <li th:if="${pr?.tmi}">
+                            <pre><img th:src="@{/images/profile/TMI.png}">TMI is [[${pr.tmi}]]</pre>
+                        </li>
+                        <li th:if="${pr?.major}">
+                            <pre><img th:src="@{/images/profile/major.png}">I majored in [[${pr.major}]]</pre>
+                        </li>
+                        <li th:if="${pr?.uselessTalent}"> 
+                            <pre><img th:src="@{/images/profile/uselessTalent.png}">Useless talent: [[${pr.uselessTalent}]]</pre>
+                        </li>
+                        <li th:if="${pr?.capList}">
+                            <pre><img th:src="@{/images/profile/capList.png}">[[${pr.capList}]] as guide</pre>
+                        </li>
+                    </th:block>
                 </ul>
+                <div class="pr-edit">
+                    <label for="abroadExperience">
+                        <img th:src="@{/images/profile/abroadExperience.png}"> <span class="txt-bg2">abroadExperience</span>
+                        <input id="abroadExperience" maxlength="100" th:if="${pr?.abroadExperience}" type="text" th:value="${pr.abroadExperience}"/>        
+                        <input id="abroadExperience" maxlength="100" th:unless="${pr?.abroadExperience}" type="text"/>
+                    </label>
+                    <label for="subLang">
+                        <img th:src="@{/images/profile/subLang.png}"> <span class="txt-bg2">subLang</span>
+                        <input id="subLang" maxlength="20" th:if="${pr?.subLang}" type="text" th:value="${pr.subLang}"/>        
+                        <input id="subLang" maxlength="20" th:unless="${pr?.subLang}" type="text"/>
+                    </label>
+                    <label for="favoriteSong">
+                        <img th:src="@{/images/profile/favoriteSong.png}"> <span class="txt-bg2">favoriteSong</span>
+                        <input id="favoriteSong" maxlength="100" th:if="${pr?.favoriteSong}" type="text" th:value="${pr.favoriteSong}"/>        
+                        <input id="favoriteSong" maxlength="100" th:unless="${pr?.favoriteSong}" type="text"/>
+                    </label>
+                    <label for="dopamine">
+                        <img th:src="@{/images/profile/dopamine.png}"> <span class="txt-bg2">dopamine</span>
+                        <input id="dopamine" maxlength="100" th:if="${pr?.dopamine}" type="text" th:value="${pr.dopamine}"/>        
+                        <input id="dopamine" maxlength="100" th:unless="${pr?.dopamine}" type="text"/>
+                    </label>
+                    <label for="birthYear">
+                        <img th:src="@{/images/profile/birthDay.png}"> <span class="txt-bg2">birthYear</span>
+                        <input id="birthYear" th:if="${pr?.birthYear}" type="number" th:value="${pr.birthYear}" min='1900'/>        
+                        <input id="birthYear" th:unless="${pr?.birthYear}" type="number" min='1900'/>
+                    </label>
+                    <label for="job">
+                        <img th:src="@{/images/profile/job.png}"> <span class="txt-bg2">job</span>
+                        <input id="job" maxlength="100" th:if="${pr?.job}" type="text" th:value="${pr.job}"/>        
+                        <input id="job" maxlength="100" th:unless="${pr?.job}" type="text"/>
+                    </label>
+                    <label for="pets">
+                        <img th:src="@{/images/profile/pets.png}"> <span class="txt-bg2">pets</span>
+                        <input id="pets" maxlength="100" th:if="${pr?.pets}" type="text" th:value="${pr.pets}"/>        
+                        <input id="pets" maxlength="100" th:unless="${pr?.pets}" type="text"/>
+                    </label>
+                    <label for="hobby">
+                        <img th:src="@{/images/profile/hobby.png}"> <span class="txt-bg2">hobby</span>
+                        <input id="hobby" maxlength="20" th:if="${pr?.hobby}" type="text" th:value="${pr.hobby}"/>        
+                        <input id="hobby" maxlength="20" th:unless="${pr?.hobby}" type="text"/>
+                    </label>
+                    <label for="mbti">
+                        <img th:src="@{/images/profile/MBTI.png}"> <span class="txt-bg2">mbti</span>
+                        <input id="mbti" maxlength="6" th:if="${pr?.mbti}" type="text" th:value="${pr.mbti}"/>        
+                        <input id="mbti" maxlength="6" th:unless="${pr?.mbti}" type="text"/>
+                    </label>
+                    <label for="strength">
+                        <img th:src="@{/images/profile/strength.png}"> <span class="txt-bg2">strength</span>
+                        <input id="strength" maxlength="100" th:if="${pr?.strength}" type="text" th:value="${pr.strength}"/>        
+                        <input id="strength" maxlength="100" th:unless="${pr?.strength}" type="text"/>
+                    </label>
+                    <label for="tmi">
+                        <img th:src="@{/images/profile/TMI.png}"> <span class="txt-bg2">tmi</span>
+                        <input id="tmi" maxlength="100" th:if="${pr?.tmi}" type="text" th:value="${pr.tmi}"/>        
+                        <input id="tmi" maxlength="100" th:unless="${pr?.tmi}" type="text"/>
+                    </label>
+                    <label for="major">
+                        <img th:src="@{/images/profile/major.png}"> <span class="txt-bg2">major</span>
+                        <input id="major" maxlength="30" th:if="${pr?.major}" type="text" th:value="${pr.major}"/>        
+                        <input id="major" maxlength="30" th:unless="${pr?.major}" type="text"/>
+                    </label>
+                    <label for="uselessTalent"> 
+                        <img th:src="@{/images/profile/uselessTalent.png}"> <span class="txt-bg2">uselessTalent</span>
+                        <input id="uselessTalent" maxlength="100" th:if="${pr?.uselessTalent}" type="text" th:value="${pr.uselessTalent}"/>        
+                        <input id="uselessTalent" maxlength="100" th:unless="${pr?.uselessTalent}" type="text"/>
+                    </label>
+                    <label for="capList">
+                        <img th:src="@{/images/profile/capList.png}"> <span class="txt-bg2">capList</span>
+                        <input id="capList" maxlength="100" th:if="${pr?.capList}" type="text" th:value="${pr.capList}"/>        
+                        <input id="capList" maxlength="100" th:unless="${pr?.capList}" type="text"/>
+                    </label>
+                    <button class="pr-edit-submit" onclick="prEditFn(this)" type="button">submit</button>
+                    <button class="pr-edit-add" onclick="prAddFn(this)" type="button">submit</button>
+                    <button class="pr-edit-cancle">cancle</button>
+                </div>
             </div>
                 
             <div class="sales-list"> <!-- 판매자 판매 상품 -->
                 <div> <!-- 제목 -->
                     <h1>Sales List (<span th:text="${productCount}">구매내역 갯수</span>)</h1>
                     <!-- <img th:src="@{/images/profile/saleAdd.png}" alt="saleAdd"> -->
-                    <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
-                    </svg>
+                    <a th:href="@{/upload}">
+                        <svg th:if="${session.loginUser?.userNo == user.userNo}" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.0643 12.06H29.6443V17.64H18.0643V29.34H12.4243V17.64H0.904297V12.06H12.4243V0.23999H18.0643V12.06Z" fill="#C5C5C5"/>
+                        </svg>
+                    </a>
                 </div>
 
                 <ul class="sales-list-box">
@@ -145,7 +225,8 @@
                             <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${product.thumbnail}" alt="productImg"></a>
                         </div>
                         <div class="sale-content">
-                            <h2 th:text="${product.productName}">상품 타이틀</h2>
+                            <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}">
+                            <h2 th:text="${product.productName}">상품 타이틀</h2></a>
                             <p><img th:src="@{/images/profile/location.png}" alt="location">[[${product.regionName}]]
                                 <th:block th:each="course : ${product.tourCourse}">
                                     <span th:if="${course.bossCourseFL=='Y'}">- [[${course.courseName}]]</span>
@@ -159,7 +240,17 @@
                                 <th:block th:text="${product.productDateList.get(0).productDate}"></th:block>
                                 <th:block th:if="${#lists.size(product.productDateList)>1}" th:text="|~ ${product.productDateList.get(product.productDateList.size() - 1).productDate}|"></th:block>
                             </p>
-                            <p><img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${product.guideLanguage}]]</p>
+                            <p>
+                                <img th:src="@{/images/profile/language.png}" alt="language">Guided language: [[${product.guideLanguage}]]
+                            </p>
+                            <div th:with="pack = ${product.productPackage}">
+                                <span>
+                                    <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
+                                    <span th:text="${product.reviewStars}">평균 별점</span>
+                                </span>
+                                <h3 th:if="${pack==1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / person'"></h3>
+                                <h3 th:if="${pack>1}" th:text="'₩ '+ ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')}+ ' / total'"></h3>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -219,7 +310,9 @@
                                             <img th:unless="${review.profileImage}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                             <img th:if="${review.profileImage}" th:src="${review.profileImage}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
                                         </div>
-                                        <p class="reviewer-name" th:text="${review.userName}">리뷰 쓴 사람</p>
+                                        <a th:href="@{/profile/{userNo}(userNo=${review.userNo})}">
+                                            <p class="reviewer-name" th:text="${review.userName}">리뷰 쓴 사람</p>
+                                        </a>
                                     </div>
                                     <div class="sale-review-info">
                                         <p th:text="${review.productName}">상품 제목</p>
@@ -280,16 +373,14 @@
     </div>
 
     <script th:inline="javascript">
-
-        const message = /*[[${message}]]*/  "전달 받은 message";
-        if(message != null) alert(message);
-
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         const pageUserNo = /*[[${user?.userNo}]]*/ "보고 있는 페이지 회원";
         const userType = /*[[${session.loginUser?.userType}]]*/ "유저 타입";
     </script>       
     
     <script th:src="@{/js/profile/sellerProfile.js}"></script>                   
-    <script th:src="@{/js/profile/profileEdit.js}"></script>                   
+    <script th:src="@{/js/profile/profileEdit.js}"></script> 
+    
+    <th:block th:replace="~{/common/footer}"></th:block>
 </body>
 </html>

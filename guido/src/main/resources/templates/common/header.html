@@ -11,12 +11,14 @@
     
     <!-- 캘린더 -->
     <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap-datepicker.css}">
-    <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap.css}">
-    <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap-responsive.css}">
+    <!-- <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap.css}"> -->
+    <!-- <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap-responsive.css}"> -->
 
     <!-- css -->
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/header.css}">
+
+    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
 
     <!-- <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js}"></script> -->
     <!-- <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"></script> -->
@@ -177,9 +179,19 @@
         <div class="mypage-modal">
             <div>
                 <div class="mypage-modal-close"></div>
-                <div>마이페이지</div>
-                <div>결제 및 예약 내역</div>
-                <div>위시리스트</div>
+                <th:block th:if="${session.loginUser}">
+                    <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
+                    <th:block th:switch="${session.loginUser.userType}">  
+                        <th:block th:case="T">
+                            <a th:href="@{/profile/touristReservation}"><div>결제 및 예약 내역</div></a>
+                            <a th:href="@{/profile/touristWishList}"><div>위시리스트</div></a>
+                        </th:block>
+                        <th:block th:case="G">
+                            <a th:href="@{/profile/guideReservationSchedule}"><div>예약 일정 확인</div></a>
+                            <a th:href="@{/profile/guideReservation}"><div>예약 내역</div></a>
+                        </th:block>
+                    </th:block>
+                </th:block>
                 <hr>
                 <div>1:1 문의</div>
                 <div>
@@ -190,11 +202,11 @@
 
         <!-- 알람 모달창 -->
         <div class="alarm-modal">
-            <div>
+            <div class="alarm-modal-content">
                 <div class="alarm-modal-close"></div>
-                <div><img th:src="@{/images/icons/alarm_guide.png}" alt="">tiltheend 가이드님의 예약이 완료되었습니다.</div>
+                <!-- <div><img th:src="@{/images/icons/alarm_guide.png}" alt="">tiltheend 가이드님의 예약이 완료되었습니다.</div>
                 <div><img th:src="@{/images/icons/alarm_guide.png}" alt="">tiltheend 가이드님이 메세지를 보내셨습니다.</div>
-                <div><img th:src="@{/images/icons/alarm_wish.svg}" alt="">관심 상품 “경복궁” 상품이 등록되었습니다.</div>
+                <div><img th:src="@{/images/icons/alarm_wish.svg}" alt="">관심 상품 “경복궁” 상품이 등록되었습니다.</div> -->
             </div>
         </div>
 
@@ -204,8 +216,13 @@
     <!-- <script th:src="@{/js/main/calendar.js}"></scrip> -->
     <!-- <script th:src="@{/js/main/calendar/jquery.js}"></scrip> -->
 
+    <script th:inline="javascript">
+        const loginUser = /*[[${session.loginUser}]]*/ "로그인한 회원";
+    </script>
+
     <script th:src="@{/js/header.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script th:src="@{/js/main/alarm.js}"></script>
     
 </body>
 </html>

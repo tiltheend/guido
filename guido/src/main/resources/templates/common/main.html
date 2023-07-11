@@ -14,14 +14,26 @@
       color: #fff;
       margin: 10px;
     }
+    main {
+      margin-top: 100px;
+      height: 100vh;
+    }
+    /* body{
+      width: 100vw;
+      height: 100vh;
+    } */
   </style>
   <body>
-    <main th:object="${session.loginUser}">
-      <!-- <th:block th:replace="~{common/header}"></th:block> -->
+    <main>
+      <th:block th:replace="~{common/header}"></th:block>
 
       <a th:href="@{/productDetail/product/15?guest=3}"><button>상품 상세 페이지</button></a> <br>
-      <a th:href="@{/reservation/order_result?order_id=20230705-542802}"><button>예약 완료 페이지</button></a> <br>
-    
+      <a th:href="@{/reservation/order_result?order_id=20230705-542802}"><button>예약 결제 완료 페이지</button></a> <br>
+      <a th:href="@{/reservation/reservation_info?reservation_no=18}"><button>예약 확인 페이지</button></a> <br>
+      <a th:href="@{/reservation/reservation_list?reservation_no=18}"><button>가이드 측 예약 확인 페이지</button></a> <br>
+      <a th:href="@{/qna/write}"><button>문의사항 작성 페이지</button></a> <br><br>
+
+
       <a th:if="${session.loginUser}" th:href="@{/profile/{userNo}(userNo=${session.loginUser.userNo})}">
         <button>마이페이지</button>
       </a>      

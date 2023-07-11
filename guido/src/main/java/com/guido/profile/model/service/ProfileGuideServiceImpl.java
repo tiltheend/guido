@@ -85,16 +85,54 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	}
 
 	// 리뷰 리플 삭제
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int reviewReplyDel(int reviewNo) {
 		return mapper.reviewReplyDel(reviewNo);
 	}
+
+	// 예약 개수 세기
+	@Override
+	public int reservarionCount(int userNo) {
+		return mapper.reservarionCount(userNo);
+	}
+
 
 	// 가이드 예약 리스트 (구매자들 예약 확인용)
 	@Override
 	public List<Reservation> GuideReservationList(int userNo) {
 		return mapper.GuideReservationList(userNo);
 	}
+	
+	// 가이드 예약 리스트 (3개씩 더보기)
+	@Override
+	public List<Reservation> guideMoreReservationList(int userNo) {
+		return mapper.guideMoreReservationList(userNo);
+	}
+
+	//  자기 소개 수정하기
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int prEdit(PR pr) {
+		return mapper.prEdit(pr);
+	}
+
+	// pr 있는 지 체크
+	@Override
+	public int prCheck(int userNo) {
+		return mapper.prCheck(userNo);
+	}
+
+	// 자기 소개 삽입
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int prInsert(PR pr) {
+		return mapper.prInsert(pr);
+	}
+
+	
+	
+	
 
 	
 

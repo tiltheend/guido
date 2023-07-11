@@ -18,6 +18,7 @@ import com.guido.common.model.dto.ProductDate;
 import com.guido.common.model.dto.ProductOption;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
+import com.guido.common.scheduler.ProductSchedulerMapper;
 import com.guido.common.utility.Util;
 import com.guido.product.model.dao.ProductDetailMapper;
 
@@ -27,6 +28,9 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 	
 	@Autowired
 	private ProductDetailMapper mapper;
+	
+	@Autowired
+	private ProductSchedulerMapper schedulerMapper;
 
 	
 	@Value("${my.faceimg.webpath}")
@@ -157,6 +161,27 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 	@Override
 	public List<ProductOption> getOptionInfo(Map<String, Object> map) {
 		return mapper.getOptionInfo(map);
+	}
+
+
+	// 스케줄러 모든 상품 조회
+	@Override
+	public List<Product> selectProductList() {
+		return schedulerMapper.selectProductList();
+	}
+
+
+	// 스케줄러 - 마지막 일정이 현재 날짜보다 이른 경우 상태 변경
+	@Override
+	public void updateProductAvailability(int productNo) {
+		schedulerMapper.updateProductAvailability(productNo);
+	}
+
+
+	// 상품 전체 일정 조회
+	@Override
+	public List<ProductDate> selectAllProductDateList(int productNo) {
+		return mapper.selectAllProductDateList(productNo);
 	}
 
 }
