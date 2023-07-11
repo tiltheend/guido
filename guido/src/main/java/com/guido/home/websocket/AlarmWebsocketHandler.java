@@ -80,12 +80,14 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         	
         	userNo = service.selectUserNo(notice.getProductNo());
         	
-        	noticeContent = notice.getSenderNo() + "님이 " + notice.getProductNo() + "를 관심상품으로 등록하였습니다.";
+        	noticeContent = "'" + notice.getProductName() + "' 상품에 리뷰가 작성되었습니다.";
         	
         	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
         	notice.setNotificationContent(noticeContent);
-        	notice.setSenderNo(notice.getSenderNo()); // 
+        	notice.setSenderNo(notice.getSenderNo()); 
         	notice.setProductNo(notice.getProductNo());
+        	
+        	// System.out.println("리뷰등록 : " + notice);
         	
         	break;
         	
@@ -94,14 +96,29 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
         
         	userNo = service.selectUserNo(notice.getProductNo());
         	
-        	noticeContent = "'" + notice.getProductName() + "'" + " 상품이 총 #건 관심상품으로 등록되었습니다.";
+        	noticeContent = "'" + notice.getProductName() + "' 상품이 관심상품으로 등록되었습니다.";
         	
         	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
         	notice.setNotificationContent(noticeContent);
-        	notice.setSenderNo(notice.getSenderNo()); // 
+        	notice.setSenderNo(notice.getSenderNo());
         	notice.setProductNo(notice.getProductNo());
         	
         	// System.out.println("관심상품 : " + notice);
+        	
+        	break;
+        	
+        case "O" : // 리뷰 등록 알람
+        	
+        	userNo = service.selectUserNo(notice.getProductNo());
+        	
+        	noticeContent = "'" + notice.getProductName() + "' 상품이 예약되었습니다.";
+        	
+        	notice.setReceiverNo(userNo); // 알림 받는 회원 번호
+        	notice.setNotificationContent(noticeContent);
+        	notice.setSenderNo(notice.getSenderNo()); 
+        	notice.setProductNo(notice.getProductNo());
+        	
+        	System.out.println("예약 완료 : " + notice);
         	
         	break;
         }
@@ -122,7 +139,6 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
     				s.sendMessage(new TextMessage(new Gson().toJson(notice)));
 					break;
     			}
-        		
         	}
         }
     }
