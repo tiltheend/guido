@@ -46,7 +46,7 @@
                     <li class="product-row" th:each="product : ${popularProductAll}">
                         <div class="slider single-item" th:data-productno="${product.productNo}"> 
                             <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}">
-                                <img th:src="${image.filePath}">
+                                <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${image.filePath}"></a>
                             </div>
                             <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
                                 <div>
@@ -87,7 +87,14 @@
                                 <span>[[${product.regionName}]]</span>
                             </div>
                             <div>
-                                <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                <th:block th:switch="${product.productPackage}">
+                                    <th:block th:case="1">
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                    </th:block>
+                                    <th:block th:case="*">
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                    </th:block>
+                                </th:block>
                             </div>
                         </div>
                     </li>

@@ -46,7 +46,7 @@ public class HomeController {
 		
 		// 상품 목록 조회
 		List<Product> productList = service.selectProductList(userNo);
-		model.addAttribute("productList", productList); 
+		model.addAttribute("productList", productList);
 		
 		// 인기 여행지 목록 조회
 		List<Product> popularProductList = service.selectPopularProductList(userNo);

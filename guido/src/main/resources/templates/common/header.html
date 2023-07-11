@@ -192,10 +192,15 @@
                         </th:block>
                     </th:block>
                 </th:block>
-                <hr>
                 <div>1:1 문의</div>
                 <div>
-                    <a th:href="@{/user/logout}">로그아웃</a>
+                    <th:block th:if="${session.loginUser}">
+                        <hr>
+                        <a th:href="@{/user/logout}">로그아웃</a>
+                    </th:block>
+                    <th:block th:unless="${session.loginUser}">
+                        <a th:href="@{/user/loginPage}">로그인</a>
+                    </th:block>
                 </div>
             </div>
         </div>
