@@ -73,7 +73,7 @@ function slideNextFn(el){
 }
 
 // 하트 색 바꾸기
-function toggleHeart() {
+function toggleHeart(btn) {
     let heartIcon = event.target;
     // heartIcon.setAtrribute("src",'');
     // heartIcon.classList.toggle("selected");
@@ -87,8 +87,12 @@ function toggleHeart() {
         let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
         // console.log(productNo);
 
-        let productName = heartIcon.parentElement.parentElement.querySelector('.product-name').getAttribute("data-productname");
-        // console.log(productName);
+        // let productName = heartIcon.parentElement.parentElement.querySelector('.product-name').getAttribute("data-productname");
+        // let productName = document.getElementById("productName").textContent;
+        // let productName = document.querySelector(".product-name").getAttribute("data-productname" + productNo);
+        
+        let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
+        console.log(productName);
 
         if (heartIcon.classList.contains("selected")) {
             check = 1; // 관심상품 등록 O
@@ -128,6 +132,7 @@ function toggleHeart() {
 
             } else {
                 // console.log("관심상품 등록 실패");
+                alert("로그인 후 사용 가능합니다.");
             }
     
         })
@@ -272,13 +277,14 @@ function loadProductByTheme(themeCode) {
             const priceDiv = document.createElement("div");
 
             const priceText = document.createElement("p");
-            priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // 천의 자리에 콤마 추가
+            const formattedPrice = new Intl.NumberFormat('en-US').format(themeProduct.productPrice);
+            priceText.innerHTML = `₩ ${formattedPrice} / total`;
             priceDiv.appendChild(priceText);
 
             salesText.appendChild(priceDiv);
-
             productRow.appendChild(salesText); 
-
             productListContainer.appendChild(productRow);
         }
 

@@ -21,7 +21,8 @@
 
     <!-- slick 슬라이드 -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main/slide/mainPostSlick.css}">
-
+    
+    <th:block th:replace="~{common/header}"></th:block>
     <!-- js -->
     <!-- <script th:src="@{/js/main/slide/jquery.min.js}"></script> -->
     <script th:src="@{/js/main/slide/owl.carousel.js}"></script>
@@ -34,7 +35,6 @@
 
 <body>
 
-    
 
     <!-- 로그인한 가이드 글 작성 버튼 -->
     <!-- <th:block th:if="${session.loginMember != null}"> -->
@@ -131,17 +131,17 @@
                         <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
                             <!-- 로그인 상태인 경우 -->
                             <th:block th:if="${session.loginUser != null}">
-                                <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                                <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                                <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
+                                <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                             </th:block>
                             <!-- 로그인 상태가 아닌 경우 -->
                             <th:block th:unless="${session.loginUser != null}">
-                                <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                                <img class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                             </th:block>
                         </div>
                         <div class="sales-text">
                             <div> 
-                                <p class="product-name">[[${product.productName}]]</p>
+                                <p class="product-name" data-productname="${product.productName}">[[${product.productName}]]</p>
                                 <div>
                                     <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                     <span>[[${product.reviewStars}]]</span>
@@ -207,7 +207,7 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p class="product-name" th:data-productname="${product.productName}">[[${product.productName}]]</p>
+                            <p class="product-name" th:data-productname="|${product.productName}${product.productNo}|">[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                 <span>[[${product.reviewStars}]]</span>
@@ -270,7 +270,7 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p class="product-name">[[${product.productName}]]</p>
+                            <p class="product-name" th:data-productname="|${product.productName}${product.productNo}|">[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                 <span>[[${product.reviewStars}]]</span>
@@ -334,7 +334,7 @@
                     </div>
                     <div class="sales-text">
                         <div>
-                            <p class="product-name">[[${product.productName}]]</p>
+                            <p class="product-name" th:data-productname="|${product.productName}${product.productNo}|">[[${product.productName}]]</p>
                             <div>
                                 <img th:src="@{/images/profile/slideStar.png}" alt="slideStar">
                                 <span>[[${product.reviewStars}]]</span>

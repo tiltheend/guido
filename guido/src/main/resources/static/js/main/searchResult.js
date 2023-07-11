@@ -285,13 +285,14 @@ function loadSelectedProductByTheme(themeCode) {
             const priceDiv = document.createElement("div");
 
             const priceText = document.createElement("p");
-            priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // 천의 자리에 콤마 추가
+            const formattedPrice = new Intl.NumberFormat('en-US').format(themeProduct.productPrice);
+            priceText.innerHTML = `₩ ${formattedPrice} / total`;
             priceDiv.appendChild(priceText);
 
             salesText.appendChild(priceDiv);
-
             productRow.appendChild(salesText); 
-
             productListContainer.appendChild(productRow);
         }
 
