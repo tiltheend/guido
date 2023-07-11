@@ -337,7 +337,7 @@ telBtn.addEventListener("click",e=>{
         method : 'post',
         headers : {'Content-Type' : 'application/json'},
         // 가이드는 국가코드 저장 x
-        body : JSON.stringify(userTel)
+        body : JSON.stringify({"userTel" : userTel})
     })
     .then(resp=>resp.json())
     .then(loginUser=>{
@@ -387,10 +387,6 @@ languageSkill.addEventListener("input",()=>{
         chk.languageSkill = true;
     }    
 });    
-languageSkill.addEventListener("focusout",()=>{
-    languageSkillMessage.innerText = "";
-    languageSkillMessage.classList.remove("normal-message");
-});
 // 수정
 skillBtn.addEventListener("click",e=>{
     if(!(chk.languageSkill)){
