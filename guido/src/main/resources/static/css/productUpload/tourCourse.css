@@ -28,7 +28,7 @@
 .map_wrap {
   position: relative;
   width: 100%;
-  height: 500px;
+  /* height: 500px; */
 }
 #menu_wrap {
   position: absolute;
