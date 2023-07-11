@@ -14,27 +14,7 @@ let slickDot; /* 슬라이드 도트 */
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    /* 슬라이드 화살표 커스텀 */
-    // 내가 만든 버튼
-    const boardSlidePrevious = document.querySelectorAll(".slick-slide-pre");
-    const boardSlideNext = document.querySelectorAll(".slick-slide-next");
-
-    // 원래 버튼
-    const boardSlidePreviousOriginal = document.querySelectorAll(".slick-prev");
-    const boardSlideNextOriginal = document.querySelectorAll(".slick-next");
-
-    if (boardSlidePrevious.length > 0) {
-        for (let i = 0; i < boardSlidePrevious.length; i++) {
-            boardSlidePrevious[i].addEventListener('click', () => boardSlidePreviousOriginal[i].click());
-        }
-    }
-
-    if (boardSlideNext.length > 0) {
-        for (let i = 0; i < boardSlideNext.length; i++) {
-            boardSlideNext[i].addEventListener('click', () => boardSlideNextOriginal[i].click());
-        }
-    }
-
+    
     /* 호버하면 슬라이드 넘기는 버튼 나오기 */
     boardSlide = document.querySelectorAll(".slider");
     boardSlideBtn = document.querySelectorAll(".slide-btn");
@@ -42,44 +22,55 @@ document.addEventListener("DOMContentLoaded", () => {
     if (boardSlide.length > 0) {
         for (let i = 0; i < boardSlide.length; i++) {
             boardSlide[i].addEventListener('mouseover', () => {
-                boardSlideBtn[i].style.display = "block";
+                boardSlideBtn[i].style.display="block";
             });
             boardSlideBtn[i].addEventListener('mouseover', () => {
-                boardSlideBtn[i].style.display = "block";
+                boardSlideBtn[i].style.display="block";
             });
         }
         for (let i = 0; i < boardSlide.length; i++) {
             boardSlide[i].addEventListener('mouseout', () => {
-                boardSlideBtn[i].style.display = "none";
+                boardSlideBtn[i].style.display="none";
             });
         }
     }
 
     /* 호버하면 슬라이드 도트 나오게 */
-    // slickDot = document.querySelectorAll(".slick-dots");
-    // if (boardSlide.length > 0){
-    //     for (let i = 0; i < boardSlide.length; i++) {
-    //         slickDot[i].style.display = "none";
-    //         boardSlide[i].addEventListener('mouseover', () => {
-    //             slickDot[i].style.display = "block";
-    //         });
-    //         slickDot[i].addEventListener('mouseover', () => {
-    //             slickDot[i].style.display = "block";
-    //         });
-    //         boardSlideBtn[i].addEventListener('mouseover', () => {
-    //             slickDot[i].style.display = "block";
-    //         });
-    //     }
-    //     for (let i = 0; i < boardSlide.length; i++) {
-    //         boardSlide[i].addEventListener('mouseout', () => {
-    //             slickDot[i].style.display = "none";
-    //         });
-    //     }
-    // }
+    slickDot = document.querySelectorAll(".slick-dots");
+    if (boardSlide.length > 0) {
+        
+        for (let i = 0; i < boardSlide.length; i++) {
+            slickDot[i].style.display="none";
+            boardSlide[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+            slickDot[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+            boardSlideBtn[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+        }
+        for (let i = 0; i < boardSlide.length; i++) {
+            boardSlide[i].addEventListener('mouseout', () => {
+                slickDot[i].style.display="none";
+            });
+        }
+    }
+});    
 
-});       
+/* 슬라이드 화살표 커스텀 */
+function slidePreFn(el){
 
+    let boardSlidePreviousOriginal = el.parentElement.previousElementSibling.firstElementChild;
+    boardSlidePreviousOriginal.click();
+}
 
+function slideNextFn(el){
+
+    let boardSlideNextOriginal = el.parentElement.previousElementSibling.lastElementChild.previousElementSibling;
+    boardSlideNextOriginal.click();
+}
 
 // 하트 색 바꾸기
 function toggleHeart() {
@@ -96,12 +87,13 @@ function toggleHeart() {
         let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
         // console.log(productNo);
 
-        /* 관심 상품 등록 O */
+        let productName = heartIcon.parentElement.parentElement.querySelector('.product-name').getAttribute("data-productname");
+        // console.log(productName);
+
         if (heartIcon.classList.contains("selected")) {
-            check = 1;
+            check = 1; // 관심상품 등록 O
         } else {
-            /* 관심 상품 등록X */
-            check = 0;
+            check = 0; // 관심상품 등록 X
         }
         
         let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
@@ -129,10 +121,10 @@ function toggleHeart() {
                     for(i of selected){
                         i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
                     }
+                    sendWish(productNo, productName);
                 }
                 // console.log("관심상품 등록 성공");
 
-                sendWish(productNo);
 
             } else {
                 // console.log("관심상품 등록 실패");

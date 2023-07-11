@@ -53,7 +53,39 @@
 		LEFT JOIN "GUIDE" g ON u."USER_NO" = g."USER_NO" AND u."USER_TYPE" = 'G'
 		LEFT JOIN "TOURIST" t ON u."USER_NO" = t."USER_NO" AND u."USER_TYPE" = 'T'
 		WHERE u."USER_STATE" = 'N'
-	</select>	
+	</select>
+	
+	<!-- 회원가입 -->	
+	<insert id="signUp" parameterType="User" useGeneratedKeys="true">
+		
+		<selectKey order="BEFORE" resultType="_int" keyProperty="userNo">
+			SELECT SEQ_USER_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		<!-- USER -->
+		INSERT INTO "USER"
+		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, #{userType}, 'N')
+		
+		<!-- TOURIST -->
+		<!--INSERT INTO "TOURIST"
+		VALUES (#{userNo}, #{passportNo},#{primaryLanguage},#{emergencyContact}, NULL, #{countryCode});-->
+	</insert>
+	
+	<select id="signUpUserNo" resultType="_int">
+		SELECT "USER_NO" FROM "USER" WHERE "USER_EMAIL" = #{userEmail}
+	</select>
+	
+	<insert id="insertTourist" parameterType="User">
+		INSERT INTO "TOURIST"
+		VALUES (#{userNo}, #{passportNo},#{primaryLanguage},#{emergencyContact}, NULL, #{countryCode})
+	</insert>
+	
+	<insert id="insertGuide" parameterType="User">
+		INSERT INTO "GUIDE"
+		VALUES (#{userNo}, #{languageSkill},#{activityArea},#{confirmationNo},DEFAULT)
+	</insert>
+	
+
 	
 	
 	

@@ -12,20 +12,10 @@
     <link rel="stylesheet" th:href="@{/css/admin/writeAnswer.css}">
     <link rel="stylesheet" th:href="@{/css/lightbox/lightbox.css}">
     <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
-    
-    <style>
-        header {
-            width: 100%;
-            height: 80px;
-            background-color: #B1D8DA;
-        }
-    </style>
 </head>
 
 <body>
-    <header>
-        임시헤더
-    </header>
+    <th:block th:replace="@{admin/header}"></th:block>
     <main>
         <!-- 사이드 메뉴 -->
         <th:block th:replace="~{admin/sideMenu}"></th:block>
@@ -52,7 +42,7 @@
                         <a th:href="${file.filePath}" data-lightbox="gallery"><img th:src="${file.filePath}"></img></a>
                     </th:block>
                 </div>
-                <form th:action="@{/admin/writeAnswer}" method="POST">
+                <form th:action="@{/admin/writeAnswer}" method="POST" id="form">
                     <div class="answer-area">
                         <div>
                             <img th:src="@{/images/admin/material-symbols_reply.svg}" alt="">
@@ -74,6 +64,12 @@
     </script>
     <script th:inline="javascript">
         const list = /*[[${qna}]]*/"리스트";
+        const form = document.getElementById('form');
+        form.addEventListener('submit',e=>{
+            e.preventDefault();
+            if(confirm('답변을 등록하면 답변 완료 처리되고, 문의자에게 답변 메일이 전송됩니다. 정말 등록하시겠습니까?'))
+                form.submit();
+        })
     </script>
 </body>
 </html>

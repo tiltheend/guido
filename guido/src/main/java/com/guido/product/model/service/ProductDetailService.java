@@ -114,5 +114,12 @@ public interface ProductDetailService {
 	void updateProductAvailability(int productNo);
 
 
+	/** 전체 일정 조회
+	 * @param productNo
+	 * @return allProductDateList
+	 */
+	List<ProductDate> selectAllProductDateList(int productNo);
+
+
 
 }

@@ -388,6 +388,29 @@
 		<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
 			ORDER BY NUM
 	</select>
+
+
+	<!--  자기 소개 수정하기 -->	
+	<update id="prEdit">		
+		UPDATE PR
+		SET BIRTH_YEAR=#{birthYear}, JOB=#{job}, PETS=#{pets}, HOBBY=#{hobby}, SUB_LANG=#{subLang}, 
+		ABROAD_EXPERIENCE=#{abroadExperience}, MBTI=#{mbti}, STRENGTH=#{strength}, FAVORITE_SONG=#{favoriteSong}, 
+		TMI=#{tmi}, MAJOR=#{major}, DOPAMINE=#{dopamine}, USELESS_TALENT=#{uselessTalent}, CAP_LIST=#{capList}
+		WHERE USER_NO= #{userNo}
+	</update>
 	
+	<!-- pr 있는 지 체크 -->
+	<select id="prCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM PR
+		WHERE USER_NO = #{userNo}
+	</select>
+	
+	<!-- 자기 소개 삽입 -->
+	<insert id="prInsert">
+		INSERT INTO PR
+		(USER_NO, BIRTH_YEAR, JOB, PETS, HOBBY, SUB_LANG, ABROAD_EXPERIENCE, MBTI, STRENGTH, FAVORITE_SONG, TMI, MAJOR, DOPAMINE, USELESS_TALENT, CAP_LIST)
+		VALUES(#{userNo}, #{birthYear}, #{job}, #{pets}, #{hobby}, #{subLang}, #{abroadExperience}, #{mbti}, #{strength}, #{favoriteSong}, #{tmi}, #{major}, #{dopamine}, #{uselessTalent}, #{capList})
+	</insert>
 	
 </mapper>

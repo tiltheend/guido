@@ -144,6 +144,8 @@
 }
 .seller-profile-top .profile_right h1{
     font-size: 2rem; margin-bottom: 32px; margin-top: 50px;
+    display: flex; 
+    /* justify-content: space-between;  */
 }
 .seller-profile-top .profile_right .seller-about li{
     margin-bottom: 30px; margin-right: 30px;
@@ -155,6 +157,70 @@
     width: 100%;
     line-height: 32px; font-size: 1rem; white-space: pre-wrap;
 }
+
+.pr-btn { /* 자기 소개 등록 수정 버튼 */
+    /* position: absolute;
+    top: 10px;
+    right: 10px; */
+    background-color: #1C797D;
+    color: #fff;
+    width: 100px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    align-items: end;
+    /* display: none; */
+    margin: 10px;
+}
+.pr-btn:hover{
+    background-color: #0F4957;
+}
+
+.seller-profile-top .profile_right .seller-about .pr-edit img {
+    width: 32px;
+    margin-right: 16px;
+    transform: translateY(8px);
+    /* align-items: flex-start; */
+}
+.seller-about{
+    position: relative;
+}
+
+.seller-profile-top .pr-edit{
+    width: 100%;  height: auto;
+    display: grid; grid-template-columns: repeat(2,1fr);
+    margin-bottom: 40px;
+    display: none;
+    /* position: absolute; */
+    top: 72px; left: 0;
+    background-color: #fff;
+    margin-bottom: 50px;
+}
+
+.seller-profile-top .pr-edit input {
+    width: 90%;
+    height: 35px;
+    resize: none;
+    padding: 8px;
+    border: 1px solid #B1D8DA;
+    margin-top: 12px;
+}
+.txt-bg2 {background:linear-gradient(180deg,rgba(255,255,255,0) 50%, #B1D8DA 50%);
+}
+.txt-bg3 {background:linear-gradient(180deg,rgba(255,255,255,0) 50%, #FFE69A 50%);
+}
+
+.seller-profile-top .pr-edit button{
+    background-color: #1C797D; color: #fff;
+    width: 90%; height: 40px;
+    margin-top: 40px;
+    /* border-radius: 20px; */
+}
+.seller-profile-top .pr-edit button:hover{
+    background-color: #0F4957;
+}
+
+
 
 /* ----- 판매자 상품 리스트 ----- */
 .seller-profile-top .sales-list div{ /* 제목 + 상품 등록 아이콘 */

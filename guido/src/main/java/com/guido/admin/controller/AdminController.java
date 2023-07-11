@@ -1,7 +1,6 @@
 package com.guido.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.guido.admin.model.service.AdminService;
 import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.QNA;
+import com.guido.user.model.service.EmailService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,18 +35,19 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	
+	@Autowired private EmailService emailService;
 
 	@GetMapping("/{pageName}")
 	public String listPage(@PathVariable("pageName") String pageName, Model model,
 			@RequestParam(value = "cp", defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> paramMap) {
-		System.out.println(paramMap);
 		paramMap.put("pageName", pageName);
 		
 		
 		List<String> pageNameList =
 				List.of("eventList","touristManagement","guideManagement","guideApprovalRequest",
-						"productManagement","","qna","settlementManagement");
+						"productManagement","qna","settlementManagement");
 		if(!pageNameList.contains(pageName))
 			return "redirect:/";
 		
@@ -87,7 +88,6 @@ public class AdminController {
 	@GetMapping("/writeAnswer/{qnaNo}")
 	public String writeAnswer(@PathVariable("qnaNo") int qnaNo, Model model) {
 		model.addAttribute("qna", service.selectQNA(qnaNo));
-		
 		model.addAttribute("map", service.sideMenuCount());
 
 		return "admin/writeAnswer";
@@ -96,6 +96,8 @@ public class AdminController {
 	@PostMapping("/writeAnswer")
 	public String writeAnswer(QNA qna, Model model,  RedirectAttributes ra) {
 		int result = service.writeAnswer(qna);
+		QNA selectQna = service.selectQNA(qna.getQnaNo());
+		emailService.sendAnswer(selectQna);
 		
 		return "redirect:/admin/qna";
 	}
@@ -164,12 +166,35 @@ public class AdminController {
 	@PostMapping("/setUserState")
 	@ResponseBody
 	public ResponseEntity<String> setUserState(@RequestBody Map<String,Object> map){
-		System.out.println(map);
 		int result = service.setUserState(map);
 		if(result == ((List)map.get("userNoList")).size()) {
 			return ResponseEntity.ok("");
 		} else {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
 		}
+	}
+	
+	@GetMapping("/updateEvent/{eventNo}")
+	public String updateEvent(@PathVariable("eventNo") int eventNo, Model model) {
+		model.addAttribute("event", service.selectEvent(eventNo));
+		model.addAttribute("map", service.sideMenuCount());
+		return "admin/writeEvent";
+	}
+	
+	@PostMapping("/updateEvent")
+	public String updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl,RedirectAttributes ra) {
+		System.out.println(event);
+		System.out.println(files);
+		
+		if(files.get(0).getSize()==0 && imageDeleteFl.get(0).equals("y")) {
+			ra.addFlashAttribute("message","썸네일은 반드시 있어야합니다.");
+			return "redirect:/admin/eventList";
+		}
+		
+		files.forEach(t -> 
+			System.out.println( t.getSize() )
+		);
+		int result = service.updateEvent(event,files,imageDeleteFl);
+		return "redirect:/admin/eventList";
 	}
 }

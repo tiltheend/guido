@@ -4,18 +4,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import com.guido.common.model.dto.QNA;
 import com.guido.user.model.dao.EmailMapper;
 
 import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class EmailServiceImpl implements EmailService{
+	
+	@Autowired
+	private SpringTemplateEngine templateEngine;
 	
 	@Autowired
 	private EmailMapper mapper;
@@ -203,5 +212,29 @@ public class EmailServiceImpl implements EmailService{
 	}
 	
 	
-	
+	@Override
+	public String sendAnswer(QNA qna) {
+		String subject = "[guido] "+ qna.getQnaTitle() +"문의에 대한 답변";
+		String charset = "UTF-8";
+//		String sendEmail = qna.getQnaEmail();
+		String sendEmail = "poer214@naver.com";
+		MimeMessage mail = mailSender.createMimeMessage();
+        try {
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+			Context context = new Context();
+			context.setVariable("qna", qna);
+			mailHelper.setSubject(subject);
+			mailHelper.setFrom(fromEmail);
+			mailHelper.setTo(sendEmail);
+			String html = templateEngine.process("admin/answer",context);
+			mailHelper.setText(html,true);
+			mailSender.send(mail);
+			
+			return "성공";
+			
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return "실패";
+		}
+	}
 }

@@ -10,19 +10,10 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- 초기 세팅 css -->
     <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
     <link rel="stylesheet" th:href="@{/css/admin/writeEvent.css}">
-    <style>
-        header {
-            width: 100%;
-            height: 80px;
-            background-color: #B1D8DA;
-        }
-    </style>
 </head>
 
 <body>
-    <header>
-        임시헤더
-    </header>
+    <th:block th:replace="@{admin/header}"></th:block>
     <main>
         <!-- 사이드 메뉴 -->
         <th:block th:replace="~{admin/sideMenu}"></th:block>
@@ -30,24 +21,32 @@
         <!-- 내용 컨테이너 -->
         <div class="content-container">
             <div class="content-header">
-                <h1 class="content-title">이벤트 작성</h1>
+                <h1 class="content-title" th:text="${event}?'이벤트 수정':'이벤트 작성'">타이틀</h1>
             </div>
             <hr>
 
-            <form class="event-write-form" th:action="@{/admin/writeEvent}" method="POST" id="eventWriteForm" enctype="multipart/form-data">
+            <form class="event-write-form" th:action="@{/admin/}+(${event}?'updateEvent':'writeEvent')" method="POST" id="eventWriteForm" enctype="multipart/form-data">
+                <input th:if="${event}" type="hidden" name="eventNo" th:value="${event.eventNo}">
                 <div class="name-and-period">
                     <div class="name-area">
                         <div class="write-header">이벤트 제목 <span class="red">*</span></div>
-                        <input type="text" name="eventName" id="eventTitle" placeholder="이벤트 명과 이벤트 기간을 입력해주세요.">
+                        <input type="text" name="eventName" id="eventTitle" placeholder="이벤트 명과 이벤트 기간을 입력해주세요." th:value="${event?.eventName}">
                     </div>
                     <div class="period-container">
                         <div class="write-header">이벤트 기간 <span class="red">*</span></div>
-                        <input type="date" id="today" class="date" readonly>
+                        <input type="date" id="createDt" class="date" readonly>
                         <span> ~ </span>
                         <input type="date" name="eventEndDt" id="eventEndDt" class="date">
                     </div>
                 </div>
-                <div class="write-header">첨부 사진(<span class="count">1</span>/5) <span class="red">*</span></div>
+                <div class="write-header">
+                    첨부 사진(<span id="count"></span>/5) <span class="red">*</span>
+                    <span class="tooltip">?
+                        <span class="tooltip-content">
+                            첫 번째 이미지는 반드시 등록해야 합니다. 첫 번째 이미지는 썸네일로 사용되며, 본문 내용에는 포함되지 않습니다.
+                        </span>
+                    </span>
+                </div>
                 <div class="img-slide-area">
                     <div class="img-area">
                         <div class="img-box">
@@ -57,6 +56,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img0">
+                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img1" class="add-label">
@@ -65,6 +65,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img1">
+                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img2" class="add-label">
@@ -73,6 +74,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img2">
+                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img3" class="add-label">
@@ -81,6 +83,7 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img3">
+                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
                         </div>
                         <div class="img-box">
                             <label for="img4" class="add-label">
@@ -89,18 +92,27 @@
                             <img class="preview hidden">
                             <div th:src="@{/images/admin/flat-color-icons_plus.svg}" class="delete-btn hidden">&times;</div>
                             <input type="file" name="files" class="input-image hidden" accept="image/*" id="img4">
+                            <input type="hidden" name="imageDeleteFl" class="imageDeleteFl" value="n">
                         </div>
                     </div>
-                    <button type="button" class="img-slide-left-btn"><img src="../images/admin/slide_left_btn.svg" alt=""></button>
-                    <button type="button" class="img-slide-right-btn"><img src="../images/admin/slide_right_btn.svg" alt=""></button>
+                    <button type="button" class="img-slide-left-btn"><img th:src="@{/images/admin/slide_left_btn.svg}" alt=""></button>
+                    <button type="button" class="img-slide-right-btn"><img th:src="@{/images/admin/slide_right_btn.svg}" alt=""></button>
                 </div>
-                <div class="write-header">썸네일 배경 색상 지정</div>
+                <div class="write-header">
+                    썸네일 배경 색상 지정
+                    <span class="tooltip">?
+                        <span class="tooltip-content">
+                            배경색상은 메인 배너 지정시 사용됩니다. 썸네일 이미지의 배경색과 동일하게 지정해주세요. 배경 색상을 지정하지 않으면 자동으로 white 색상이 지정됩니다.
+                        </span>
+                    </span>
+                </div>
                 <div class="clr-field">
                     <button class="clr-field" aria-labelledby="clr-open-label"></button>
-                    <input type="text" data-coloris id="clr" name="bgColor">
+                    <input type="text" data-coloris id="clr" name="bgColor" th:value="${event?.bgColor}">
                 </div>
                 <div class="write-header">이벤트 설명 <span class="red">*</span></div>
-                <textarea name="eventContent" id="eventContent" placeholder="이벤트에 대한 설명(이벤트명, 기간, 장소, 시간, 참여비, 문의처 등등) 을 상세히 작성해주세요."></textarea>
+                <textarea name="eventContent" id="eventContent" placeholder="이벤트에 대한 설명(이벤트명, 기간, 장소, 시간, 참여비, 문의처 등등) 을 상세히 작성해주세요."
+                th:text="${event?.eventContent}"></textarea>
                 <div class="btn-area">
                     <button type="submit" class="sbmt-btn">
                         등록
@@ -111,5 +123,29 @@
     </main>
     <script th:src="@{https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js}"></script>
     <script th:src="@{/js/admin/writeEvent.js}"></script>
+    <script th:inline="javascript">
+        const createDt = /*[[${event?.createDt}]]*/ createDt;
+        const eventEndDt = /*[[${event?.eventEndDt}]]*/ eventEndDt;
+
+        if(createDt == null)
+        /* 이벤트 시작 일을 오늘 날짜로 설정 */
+            document.getElementById('createDt').value = new Date().toISOString().split('T')[0];
+        else {
+            document.getElementById('createDt').value = createDt.split(' ')[0];
+            document.getElementById('eventEndDt').value = eventEndDt.split(' ')[0];
+        }
+
+        const imageList = /*[[${event?.fileList}]]*/[];
+        const previewList = document.querySelectorAll(".preview")
+
+        if(imageList != null)
+            for(let img of imageList) {
+                previewList[img.fileOrder].src = img.filePath;
+                previewList[img.fileOrder].classList.remove('hidden');
+                addLabel[img.fileOrder].classList.add("hidden");
+            }
+
+        updateCount();
+    </script>
 </body>
 </html>

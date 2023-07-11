@@ -30,6 +30,11 @@ if(reservationMoreBtn !=null) {
 
                 const li = document.createElement("li");
 
+                li.setAttribute('data-reservationno',reservation.reservationNo);
+                li.addEventListener('click', function() {
+                    gotoTouristRFn(this);
+                });
+
                 // 예약 번호
                 const reservationNumberDiv = document.createElement("div");
                 const reservationNumberSpan1 = document.createElement("span");
@@ -197,6 +202,11 @@ function reservationListFn(){
 
                 const li = document.createElement("li");
 
+                li.setAttribute('data-reservationno',reservation.reservationNo);
+                li.addEventListener('click', function() {
+                    gotoTouristRFn(this);
+                });
+
                 // 예약 번호
                 const reservationNumberDiv = document.createElement("div");
                 const reservationNumberSpan1 = document.createElement("span");
@@ -357,4 +367,10 @@ function addTime(time, duration) {
     endTime.setMinutes(Number(minute));
     endTime.setMinutes(endTime.getMinutes() + duration * 60);
     return `${endTime.getHours()}:${endTime.getMinutes().toString().padStart(2, '0')}`;
+}
+
+// 구매자 예약 페이지 보기
+function gotoTouristRFn(el){
+    let reservationNo = el.getAttribute('data-reservationno');
+    location.href="/reservation/reservation_info?reservation_no="+reservationNo;
 }

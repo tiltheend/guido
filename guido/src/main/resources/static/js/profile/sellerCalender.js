@@ -19,14 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 start: startDate,
                 end: endDate,
                 color: i.color,
-                textColor : i.textColor
+                textColor : i.textColor,
+                url : i.url
                 });
             }
         }
 
         console.log(events);
         let calendar = new FullCalendar.Calendar(calendarEl, {
-            defaultDate: new Date(),
+            // defaultDate: new Date(),
             // initialDate: '2023-07-09',
             // initialView: 'timeGridWeek',
             headerToolbar: {

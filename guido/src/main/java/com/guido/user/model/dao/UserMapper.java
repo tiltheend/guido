@@ -12,7 +12,16 @@ public interface UserMapper {
 
 	// 구글 로그인 - 가입된 회원인지 확인
 	User checkGoogleSignedup(String googleEmail);
+
+	// 회원가입
+	int signUp(User inputUser);
+
+	int signUpUserNo(User inputUser);
+
+	int insertTourist(User inputUser);
+
+	int insertGuide(User inputUser);
+
 	
-	// 
 
 }

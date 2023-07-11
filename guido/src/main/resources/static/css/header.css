@@ -235,11 +235,18 @@ header .search-box-click-box button{
   background-color: #5C5C5C50;
   z-index: 250;
 } */
+input[name="firstday"], input[name="lastday"], input[name="tourist"] {
+  pointer-events: none;
+}
+
+
+
 .modal-background {
-  position: absolute;
-  top: 110px; left: 0;
-  width: 100%; 
-  height: 2496px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: none;
   background-color: #5C5C5C50;
   z-index: 250;
@@ -391,6 +398,7 @@ header .search-box-click-box button{
   height: 226px;
   background-color: #fff;
   border: 1px solid #C5C5C5;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   position: fixed;
   top: 70px;
@@ -428,10 +436,11 @@ header .search-box-click-box button{
 
 /* 알람 */
 .alarm-modal{
-  width: 320px;
-  height: 360px;
+  width: 340px;
+  /* height: 360px; */
   background-color: #fff;
   border: 1px solid #C5C5C5;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   position: fixed;
   top: 70px;
@@ -443,7 +452,7 @@ header .search-box-click-box button{
 .alarm-modal>div{
   margin: 20px;
   margin-top: 30px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .alarm-modal>div>div{
   margin-top: 12px;
@@ -451,9 +460,9 @@ header .search-box-click-box button{
   text-align: center;
 }
 .alarm-modal img{
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
+  width: 15px;
+  /* height: 20px; */
+  margin-right: 3px;
 }
 
 .alarm-modal-close{
@@ -574,11 +583,11 @@ border-radius: 50% !important;
 background-color: #eee;
 }
 
-.active {
+/* .active {
 border-radius: 50% !important;
 background-image: linear-gradient(#90CAF9, #64B5F6) !important;
 color: #fff !important;
-}
+} */
 
 .range-start, .range-end {
 border-radius: 50% !important;
@@ -628,4 +637,28 @@ background-color: #000 !important;
 }
 .datepicker::after {
   content: none;
+}
+
+/* 슬라이드 css */
+.datepicker{
+  width: 310px;
+  position: absolute;
+  top: 0;
+  /* right: -24px; */
+  margin: 20px;
+  padding: 20px;
+  transform: translateX(-20px);
+}
+
+@media screen and (max-width : 1024px) {
+    
+}
+
+@media screen and (max-width : 767px) {
+  header .logo img{
+    display: none;
+  }
+  header .main-icons-box{
+    display: none;
+  }
 }

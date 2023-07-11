@@ -44,6 +44,7 @@ public class CalendarController {
 	        schedule.put("start", s.getProductDateStart());
 	        // 종료일이 1 빼고 출력 되는 이슈가 있어서 종료일이 원래 종료일보다 하루 빠르게 출력 시켜놓음 (mapper)
 	        schedule.put("end", s.getProductDateEnd());
+	        schedule.put("url", "/reservation/reservation_list?reservation_no="+s.getReservationNo());
 	        
 	        if(s.getProductPackage()>1) {
 	        	schedule.put("color", "#B1D8DA");

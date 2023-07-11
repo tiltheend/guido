@@ -1,22 +1,31 @@
 /* 전체 */
+*,*:focus{outline:none;}
 .container_total{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     padding: 400px 0;
+    overflow: scroll;
+    margin-top: 120px;
 }
 /* 유효성 검사 색상 */
 .correct{color: green;}
 .incorrect{color: red;}
+.signUp-message{
+    display: none;
+    justify-content: start;
+    width: 420px;
+    padding: 10px;
+}
 /* 회원가입 */
 .container_top_title{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 25px;
+    margin: 40px;
 }
 /* 입력 부분 */
 .container_middle_input{
@@ -25,54 +34,183 @@
     justify-content: center;
     align-items: center;
 }
-.container_middle_input>*{
+
+/* ----- uiverse ----- */
+.inputGroup:not(.emailPart>.inputGroup):not(.authPart>.inputGroup):not(.namePart .inputGroup) {
+    margin: 0.7em 0;
     width: 420px;
-    height: 55px;
+    position: relative;
+}
+.emailPart, .authPart, .namePart{
+    margin: 0.6em 0;
+    width: 420px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inputGroup input {
+    font-size: 100%;
+    padding: 0.8em;
+    height: 50px;
+    outline: none;
     border: 1px solid #c5c5c5;
+    background-color: transparent;
     border-radius: 8px;
-    padding: 20px;
-    margin: 5px;
-    color: #5c5c5c;
+    width: 100%;
+    margin-top: -0.15rem;
 }
-/* 확인서 링크 */
-.qNet{
+
+.inputGroup label {
+    font-size: 0.875rem;
+    position: absolute;
+    left: 0;
+    padding: 1em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: #6d6c6c;
+}
+
+.inputGroup :is(input:focus, input:valid)~label, .google-email label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    border-radius: 40%;
+    background-color: #fff;
     color: #1c797d;
-    margin: 5px 20px;
 }
+
+.inputGroup :is(input:focus, input:valid), .google-email {
+    border-color: #1c797d;
+}
+
+/* 이메일,인증번호 칸 작게 */
+.emailPart>.inputGroup, .authPart>.inputGroup{
+    width: 325px;
+    padding-right: 5px;
+} 
+/* 이메일, 인증번호 버튼 */
+.emailPart>button, .authPart>button{
+    width: 90px;
+    height: 50px;
+    background-color: #1c797d;
+    color: #fff;
+    border-radius: 8px;
+    margin-top: -0.2em;
+    font-size: 14px;
+    font-weight: lighter;
+    /* display: flex;
+    align-items: end; */
+
+}
+/* 이름&성 칸 반반 */
+.last-name, .first-name{
+    display: flex;
+    flex-direction: column;
+    width: 207px;
+    position: relative;
+}
+.namePart .inputGroup{
+    width: 207px;
+}
+
+
 /* 동의 체크 */
 .container_middle_check{
     width: 420px;
     display: flex;
     flex-direction: column;
-    margin: 20px 10px 30px 10px;
+    margin: 10px 10px 20px 10px;
+}
+[type="checkbox"]{
+    display: none;
 }
 .container_middle_check>div{
-    margin: 5px 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
+.chk-all{
+    display: flex;
+    align-items: flex-start;
+    padding: 5px 5px;
+}
+.chk0, .chk1, .chk2{
+    display: flex;
+    align-items: flex-start;
+    margin-left: 15px;
+}
+.ment1,.ment2{
+    color: #5c5c5c;
+    vertical-align: 3px;
+}
+.box:hover{
+    cursor: pointer;
+}
+/* 체크 해제 */
 .box{
     display: inline-block;
     width: 12px;
     height: 12px;
     border: 1px solid #c5c5c5;
 }
-[type="checkbox"]{
-    display: none;
-}
-.ment1,.ment2{
-    color: #5c5c5c;
-    vertical-align: 2px;
-}
-.box:hover{
-    cursor: pointer;
-    color: black;
-}
+/* 체크 o */
 input[type="checkbox"]:checked + label{
-    background: url("../../images/signUp/check.png") 0 0 no-repeat;
+/* .box::before{ */
+    background: url("/images/signUp/check.png") 0 0 no-repeat;
     background-size: cover;
     border: none;
 }
 .required{
     color:forestgreen; vertical-align: 3px;}
+.downArrow{
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 0.75rem;
+    height: 0.75rem;
+    /* background-size: cover; */
+    background: rgba(255, 255, 255, 0.5) url("/images/signUp/downArrow.png") 0 0 /cover no-repeat;
+    border: none;
+}
+.upArrow{
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: rgba(255, 255, 255, 0.7) url("/images/signUp/upArrow.png") 0 0 /cover no-repeat;
+    background-size: cover;
+    border: none;
+}
+/* 약관 설명 */
+.terms-explain{
+    height: 200px;
+    margin: 0 15px 20px 30px;
+    padding: 15px;
+    font-weight: lighter;
+    font-size: 0.7rem;
+    display: none;
+    border: #1c7a7d3d solid 2px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    overflow-y:scroll;
+    
+}
+.terms-explain::-webkit-scrollbar-track{
+    background-color: transparent;
+    height: 90%;
+}
+.terms-explain::-webkit-scrollbar-thumb{
+    height: 20%;
+    background: #1c7a7d72;
+    border-radius: 15px;
+    margin: 5px;
+}
+.terms-explain::-webkit-scrollbar{
+    width: 5px;
+}
 
 /* 제출 버튼 */
 .container_bottom{
@@ -84,8 +222,62 @@ input[type="checkbox"]:checked + label{
 .container_bottom_button{
     width: 420px;
     height: 50px;
-    background-color: #1c797d;
+    background-color: #c5c5c5;
     border-radius: 8px;
     color: #fff;
+    transition-duration: 0.1s;
+}
+.container_bottom_button:hover{
+    box-shadow: 3px 3px 2px #5c5c5c3c;
+    transition-duration: 0.2s;
+}
+
+/* 유효성 검사 메세지 */
+.error-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    color: rgba(255, 0, 0, 0.77);
+    justify-content: start;
+}
+.name-error{
+    width: 420px;
+    height: auto;
+    padding-left: 15px;
+    margin: 10px 0 10px 0px;
+    color: rgba(255, 0, 0, 0.77);
+    justify-content: start;
+}
+.possible-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    justify-content: start;
+    color: rgba(34, 139, 34, 0.77);
+}
+.for-authTimer{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    justify-content: start;
+    color: #1c797d;
+    font-weight: bold;
+}
+.normal-message{
+    width: 420px;
+    padding-left: 15px;
+    margin: -3px 0 10px 0px;
+    justify-content: start;
+    color: #5c5c5ca6;
+}
+
+/* 관광 통역 안내사 링크 */
+.qNet{
+    margin: 5px 0 20px 20px;
+    color: #c5c5c5;
+}
+.qNet:hover{
+    color: #1c797d;
+    transition-duration: 0.1s;
 }
 

@@ -77,7 +77,7 @@
 
                 <ul class="reservation-list-box">
 
-                    <li th:each="reservation : ${reservationList}">
+                    <li th:each="reservation : ${reservationList}" th:data-reservationno="${reservation.reservationNo}" onclick="gotoTouristRFn(this)">
                         <div>
                             <span>예약 번호</span>
                             <a th:href="@{/reservation/reservation_info(reservation_no=${reservation.reservationNo})}">

@@ -91,6 +91,11 @@ COMMIT;
 SELECT USER_NO, BIRTH_YEAR, JOB, PETS, HOBBY, SUB_LANG, ABROAD_EXPERIENCE, MBTI, STRENGTH, FAVORITE_SONG, TMI, MAJOR, DOPAMINE, USELESS_TALENT, CAP_LIST
 FROM PR;
 
+SELECT COUNT(*)
+FROM PR
+WHERE USER_NO =23
+;
+
 INSERT INTO PR
 (USER_NO, BIRTH_YEAR, JOB, PETS, HOBBY, SUB_LANG, ABROAD_EXPERIENCE, MBTI, STRENGTH, FAVORITE_SONG, TMI, MAJOR, DOPAMINE, USELESS_TALENT, CAP_LIST)
 VALUES(23, 1988, 'guide', NULL , 'cook', 'English', 'studying at university in Japan', 'ENFP', 'a cheerful disposition', 'Country Roads','I like seafood.', 'Tourism', 'take a photo', 'sing', 'It will give you a wonderful experience.');

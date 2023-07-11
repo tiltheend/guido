@@ -2,7 +2,7 @@
 /* 예약 날짜 */
 const reservationDate = document.getElementById("reservationDate");
 
-let date = new Date(createDate);
+let date = new Date(productDate);
 let formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 let outputDate;
 

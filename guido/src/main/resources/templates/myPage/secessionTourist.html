@@ -1,99 +1,23 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>secession_tourist</title>
-    <link rel="stylesheet" href="../css/style.css"> <!-- 초기 세팅 css -->
-    <link rel="stylesheet" href="../css/myPage/secession.css">
-    <style>
-        header{width: 100%; height: 80px; background-color: #B1D8DA;}
-    </style>
+    <title>secession</title>
+    <link rel="stylesheet" th:href="@{/css/myPage/secession.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>임시헤더</header>
+    <!-- <th:block th:replace="~{common/header}"></th:block> -->
 
-    <div class="buyer-profile-top">
-        <div class="profile-box"> <!-- profile-box (프로필 + 버튼) -->
 
-            <div class="guide-banner"> <!-- 프로필 위 투어리스트 배너 -->
-                <img src="../images/profile/touristBanner.png" alt="guideBanner"> <!-- 일반 가이드 -->
-            </div>
 
-            <div class="profile-left"> <!-- 프로필 왼쪽 박스 -->
 
-                <div class="profile-img-box"> <!-- 프로필+이름 -->
-                    <div class="profile-img">
-                        <img src="" alt=""> <!-- 프로필 사진 칸 -->
 
-                        <input type="file" name="userProfileFile" id="userProfileFile">
-                        <!-- 프로필 편집 버튼 -->
-                        <img src="../images/profile/profileEdit.png" alt="profileEditIcon" class="profile-edit-icon"> 
-                    </div>
-                    <h2>UserName</h2> <!-- 유저이름 -->
-                </div>
 
-                <div class="user-email"> <!-- 유저 이메일 -->
-                    <p>tiltheend@gmail.com</p>
-                </div>
 
-            </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
-            
-            <div class="seller-btn">
-                <button> <!-- 내 정보 수정 -->
-                    <img src="../images/profile/myInfoEdit.png" alt="">
-                    <div>내 정보 수정</div>
-                </button>
-                <button onclick="location.href='sellerReservationSchedule.html'"> <!-- 예약 관리 --> 
-                    <img src="../images/profile/buyerReservation.png" alt="">
-                    <div>예약 관리</div> 
-                </button>
-                <button onclick="location.href='sellerReservation.html'"> <!-- 위시리스트 -->
-                    <img src="../images/profile/buyerWishList.png" alt="">
-                    <div>위시 리스트</div>
-                </button>
-            </div>
-        </div> <!-- // profile-box (프로필 + 버튼) -->
-        <!-- --------------------------------- -->
-        <div class="profile_right"> <!-- 프로필 오른쪽 박스 -->
-            <div class="profile-secession">
-                <div class="profile-secession-title font0">회원 탈퇴</div>
-                <div class="profile-secession-subtitle font1">
-                    <div class="nbsp">&nbsp&nbsp</div>
-                    <div class="subtitle">&nbsp주의 사항</div>
-                </div>
-                <form action="#" method="post" id="secessionForm">
-                    <div class="profile-secession-content">
-                        <ol>
-                            <li>회원 탈퇴를 하시면 해당 계정으로 이전 기록, 메시지 등의 정보를 열람 및 조회하실 수 없으며, 서비스도 더 이상 이용하실 수 없습니다.</li>
-                            <li>회원 탈퇴를 하시면 회원님의 계정 정보를 복원할 수 없습니다.</li>
-                            <li>회원 탈퇴 후, 이전에 수집된 개인 데이터는 삭제됩니다. (단, 해당 법에 따라 필요한 자료를 일정 기간 동안 보존하고 법정 보존 기간 후에 삭제합니다.)</li>
-                            <li>미완료 거래건이 있는 경우 원활히 상품이나 서비스를 제공하지 못하는 일이 없도록 회원 탈퇴 신청이 거부될 수 있습니다.</li>
-                        </ol>
-                    </div>
-                    <div class="profile-secession-check">
-                        <input type="checkbox" name="secessionAgree" id="secessionAgree"><label for="secessionAgree" class="box"></label><span class="font3 ment2">&nbsp&nbsp위의 주의사항을 모두 읽었으며, 회원 탈퇴로 인한 모든 책임을 질 것에 동의합니다.</span>
-                    </div>
-                    <div class="profile-secession-subtitle font1">
-                        <div class="nbsp">&nbsp&nbsp</div>
-                        <div class="subtitle">&nbsp회원 탈퇴하시는 이유가 무엇인가요?</div>
-                    </div>
-                    <div class="profile-secession-radio">
-                        <label for="reason1" class="ment"><input type="radio" name="secessionReason" id="reason1">&nbsp&nbsp더 이상 사이트 이용 계획이 없습니다.</label>
-                        <label for="reason2" class="ment"><input type="radio" name="secessionReason" id="reason2">&nbsp&nbsp이용 경험이 좋지 않았습니다.</label>
-                        <label for="reason3" class="ment"><input type="radio" name="secessionReason" id="reason3">&nbsp&nbsp고객 서비스가 좋지 않았습니다.</label>
-                        <label for="reason4" class="ment"><input type="radio" name="secessionReason" id="reason4">&nbsp&nbsp광고 정보 / 메시지가 너무 많습니다.</label>
-                        <label for="reason5" class="ment"><input type="radio" name="secessionReason" id="reason5">&nbsp&nbsp직접 입력<textarea name="writeReason" id="writeReason" cols="30" rows="10"></textarea></label>
-                    </div>
-                    <button>회원 탈퇴</button>
-                </form>
-            </div>
-        </div>
-        
-    </div>
 
-    <script src="../js/myPage/secession.js"></script>
+    
     
 </body>
 </html>

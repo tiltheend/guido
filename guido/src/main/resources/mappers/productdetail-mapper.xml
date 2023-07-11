@@ -335,6 +335,15 @@
 		AND PRODUCT_DT = #{productDate}
 		ORDER BY OPTION_NAME
 	</select>
+	
+	
+	<!-- 상품 전체 일정 조회 -->
+	<select id="selectAllProductDateList" resultMap="product_date_rm">
+		SELECT PRODUCT_DT_NO, PRODUCT_NO, TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT
+		 FROM "PRODUCT_DT"
+		WHERE PRODUCT_NO = #{productNo}
+		ORDER BY PRODUCT_DT
+	</select>
 		 
 	
 </mapper>

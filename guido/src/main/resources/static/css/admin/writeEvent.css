@@ -199,3 +199,30 @@
     outline: none;
     border: 2px solid #0F4957;
 }
+
+.tooltip {
+    background-color: #C6DDDF;
+    color: white;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.tooltip-content {
+    display: none;
+    position: absolute;
+    max-width: 200px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0.8em;
+    color: white;
+    background: #C6DDDF;
+    z-index: 1;
+}
+
+.tooltip:hover>.tooltip-content {
+    display: block;
+}

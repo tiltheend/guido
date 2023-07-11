@@ -40,7 +40,7 @@
             </a>
 
             <!-- 나중에 관리자인지 확인하는 조건문 추가 -->
-            <a th:if="${1==1}" th:href="@{/admin/updateEvent}">
+            <a th:if="${1==1}" th:href="@{/admin/updateEvent/{eventNo}(eventNo=${event.eventNo})}">
                 <button type="button" class="btn" id="updateBtn">
                     수정
                 </button>

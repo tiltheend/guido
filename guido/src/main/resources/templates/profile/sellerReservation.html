@@ -89,20 +89,20 @@
                 </div>
 
                 <ul class="reservation-list-box">
-                    <li th:each="reservation : ${GuideReservationList}">
+                    <li th:each="reservation : ${GuideReservationList}" th:data-reservationno="${reservation.reservationNo}" onclick="gotoGuideRFn(this)">
                         <div class="sale-img">
                             <img th:src="${reservation.thumbnail}" alt="thumbnail">
                             <div class="guest-profile-img">
-                                <a th:href="@{/profile/{userNo}(userNo=${reservation.userNo})}">
-                                    <img th:unless="${reservation.faceImg}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
-                                    <img th:if="${reservation.faceImg}" th:src="${reservation.faceImg}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->        
-                                </a>
+                                <!-- <a th:href="@{/profile/{userNo}(userNo=${reservation.userNo})}"> -->
+                                <img th:unless="${reservation.faceImg}" th:src="@{/images/userProfile/basicUser.png}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->
+                                <img th:if="${reservation.faceImg}" th:src="${reservation.faceImg}" alt="profileImage" class="img-content"> <!-- 프로필 사진 칸 -->        
+                                <!-- </a> -->
                             </div>
                         </div>
                         <div class="sale-content">
-                            <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}">
-                                <h3 th:text="${reservation.productName}">상품명</h3>
-                            </a>
+                            <!-- <a th:href="@{/productDetail/product/{productNo}(productNo=${reservation.productNo})}"> -->
+                            <h3 th:text="${reservation.productName}">상품명</h3>
+                            <!-- </a> -->
                             <h3 th:with="package = ${reservation.productPackage}"> 
                                 <th:block th:if="${package==1}">[[${reservation.productDate}]]
                                     <th:block th:if="${reservation.optionName}">[ [[${reservation.optionName}]] ]</th:block> 
@@ -121,7 +121,9 @@
                             <p><img th:src="@{/images/profile/language.png}" alt="language">Tourist language: [[${reservation.primaryLanguage}]]</p>
                             <div>
                                 <h2><span th:text="${reservation.guestCount}">guestCount</span> Guests</h2>
-                                <p><span>[[${reservation.userName}]]</span> <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting"></p>
+                                <p><span>[[${reservation.userName}]]</span> 
+                                    <img th:src="@{/images/profile/guestChatting.png}" alt="guestChatting">
+                                </p>
                             </div>
                         </div>
                     </li>

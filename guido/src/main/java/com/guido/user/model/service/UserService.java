@@ -6,4 +6,7 @@ public interface UserService {
 
 	User login(User inputUser);
 
+	// 회원가입
+	int signUp(User inputUser);
+
 }

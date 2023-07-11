@@ -430,8 +430,8 @@ hr{
   width: 300px; height: 360px;
   position: relative;
   /* margin: 10px; (임시)게시글 왼쪽 정렬!!!! */
-  margin: 17px;
-  margin-bottom: 20px;
+  margin: 10px;
+  margin-bottom: 30px;
 }
 .main-post .product-post .slider>div{
   width: 300px; height: 280px;
@@ -670,4 +670,54 @@ hr{
 .detail--silde__item-img{
   height: 360px;
   background-color: #5C5C5C;
+}
+
+/* 게시글 그리드 반응형 */
+.main-post .product-post>ul{
+  margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  max-width: 1280px; grid-template-rows: auto;
+  width: 100%;
+}
+
+
+@media screen and (max-width : 1800px) {
+  .main-post .product-post>ul{
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      max-width: 960px; grid-template-rows: auto;
+  }
+}
+  
+@media screen and (max-width : 1200px) {
+  .main-post .product-post>ul{
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      max-width: 960px; grid-template-rows: auto;
+  }
+
+}
+
+@media screen and (max-width : 1024px) {
+  .main-post .product-post>ul{
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      max-width: 640px; grid-template-rows: auto;
+  }
+}
+
+
+@media screen and (max-width : 780px) {
+  .main-post .product-post>ul{
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      max-width: 640px; grid-template-rows: auto;
+  }
+}
+
+@media screen and (max-width : 720px) {
+
+  .main-post .product-post>ul{
+      display: grid; grid-template-columns: repeat(1, 1fr);
+      max-width: 320px; grid-template-rows: auto;
+  }
+  .buyer-profile-top .profile_right{
+      width: 320px;
+  }
 }

@@ -43,7 +43,7 @@ function sendReview(productNo){
 
 
 // 관심상품 등록 알람
-function sendWish(productNo){
+function sendWish(productNo, productName){
 
 	// [가이드]
 	// 관심상품 등록 : (상품 이름) 상품이 총 #건 관심상품으로 등록되었습니다.
@@ -54,7 +54,7 @@ function sendWish(productNo){
 	obj.senderNo = loginUserNo;
 	// obj.userName = userName;
 	obj.productNo = productNo;
-	// obj.productName = productName;
+	obj.productName = productName;
 	// 관심상품 등록 개수
 	obj.notificationType = "L";
 
@@ -66,11 +66,66 @@ function sendWish(productNo){
 
 
 
-alarmSock.onmessage = function(e) {
+/* alarmSock.onmessage = function(e) {
 
 	// e : 이벤트 객체, e.data : 전달 받은 메시지(JSON)
 
 	const obj = JSON.parse(e.data);
 	console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
-}
 
+	// 알림 내용을 표시할 요소 선택
+	const alarmModalContent = document.querySelector('.alarm-modal-content');
+
+	// 알림 내용을 요소에 설정
+	alarmModalContent.textContent = obj.notificationContent;
+}
+ */
+window.addEventListener('DOMContentLoaded', function() {
+    // 알림 내용을 표시할 요소 선택
+    const alarmModalContent = document.querySelector('.alarm-modal-content');
+
+    alarmSock.onmessage = function(e) {
+        const obj = JSON.parse(e.data);
+        console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
+
+        // 알림 내용을 요소에 설정
+        //alarmModalContent.textContent = obj.notificationContent;
+		const contentWithImage = `<img src="/images/icons/alarm_wish.svg" alt=""> ${obj.notificationContent}`;
+        alarmModalContent.innerHTML = contentWithImage;
+
+    };
+});
+
+
+
+function alarmFn(){
+
+	alarmModalBox = document.querySelector(".alarm-modal");
+	alarmModalBox.innerHTML = "";
+
+	fetch("/alarm/send")
+	.then(resp => resp.json())
+	.then(alarmList => {
+
+		if(alarmList.length > 0){
+			for(let alarm of alarmList){
+				// 각 알림에 대한 처리 수행
+				const notificationContent = alarm.notificationContent;
+				const senderNo = alarm.senderNo;
+
+				// 예시: 알림 내용과 보낸 사람 정보를 표시
+				const alarmContent = document.createElement("div");
+				alarmContent.textContent = `알림 내용: ${notificationContent}, 보낸 사람: ${senderNo}`;
+
+				alarmModalBox.appendChild(alarmContent);
+			}
+		}
+
+		else{
+			alarmModalBox.innerHTML = ""
+		}
+	})
+	.catch(err => {
+		console.log(err);
+	})
+}

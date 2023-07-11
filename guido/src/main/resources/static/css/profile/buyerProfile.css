@@ -38,7 +38,7 @@
 .buyer-profile-top .profile-img{
     width: 180px; height: 180px; border-radius: 50%;
     background-color: #B1D8DA; border: 2px solid #fff;
-    position: relative; margin-top: 32px;
+    position: ; margin-top: 32px;
 }
 
 .buyer-profile-top .profile-img>img:first-of-type{

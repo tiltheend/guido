@@ -1,30 +1,20 @@
-// // 전체 약관 동의
+// 유효성 검사용 chk
 
-const checkAllLabel = document.getElementById("checkAllLabel");
-const checkAll = document.getElementById("checkAll");
-
-const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#checkAll)');
-
-// 전체 동의 체크박스
-checkAllLabel.addEventListener('click', function() {
-    const isChecked = checkAll.checked;
-
-  // 하위 체크박스들의 상태를 전체 동의 체크박스와 동일하게 설정
-    checkboxes.forEach(function(checkbox) {
-        checkbox.checked = !(isChecked);
-    });
-});
-
-// 하위 체크박스 클릭 이벤트 리스너 등록
-checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('click', function() {
-    // 하위 체크박스 중 하나라도 해제되었을 때 전체 동의 체크박스도 체크 해제
-        if (!this.checked) {
-            checkAll.checked = false;
-        }
-    });
-});
-
+// tourist(구매자)용 회원가입
+// 항목 작성했는지 체크 - 모두 작성해야 가입 진행
+const chk = {
+    "email" : false,
+    "inputAuth" : false,
+    "password" : false,
+    "checkPassword" : false,
+    "lastName" : false,
+    "firstName" : false,
+    "phone" : false,
+    "passportNo" : false,
+    "primaryLanguage" : false,
+    "infoAgree1" : false,
+    "infoAgree2" : false
+};
 
 // 약관 설명 펼치기
 const arrow1 = document.querySelector("#arrow1");
@@ -79,25 +69,27 @@ arrow2.addEventListener("click",()=>{
 
 // ------------ 유효성 검사 ------------
 
-// tourist(구매자)용 회원가입
-// 항목 작성했는지 체크 - 모두 작성해야 가입 진행
-const chk = {
-    "email" : false,
-    "inputAuth" : false,
-    "password" : false,
-    "checkPassword" : false,
-    "lastName" : false,
-    "firstName" : false,
-    "phone" : false,
-    "passportNo" : false,
-    "primaryLanguage" : false,
-    "infoAgree1" : false,
-    "infoAgree2" : false
-};
+ // 구글 이메일 input value로 set
 
-// 이메일 유효성 검사
+const authLable = document.querySelector('label[for="inputAuth"]');
+const authPart = document.querySelector(".authPart");
+const sendAuthBtn = document.getElementById("sendAuthBtn");
+
 const email = document.getElementById("email");
 const emailMessage = document.getElementById("emailMessage");
+
+if(googleEmail){
+    email.validity.valid = true;
+}
+if(email.value==googleEmail){
+    chk.email=true;
+    chk.inputAuth=true;
+    sendAuthBtn.style.display="none";
+    authPart.style.display="none";
+}
+
+
+// 이메일 유효성 검사
 
 // 이메일 입력중 검사
 email.addEventListener("input",()=>{
@@ -142,7 +134,7 @@ email.addEventListener("input",()=>{
 // 이메일로 인증번호 보내기
 
 // 인증 번호 발송
-const sendAuthBtn = document.getElementById("sendAuthBtn");
+
 // 인증 번호 입력 타이머
 const authMessage = document.getElementById("authMessage");
 let authTimer;
@@ -370,7 +362,6 @@ phone.addEventListener("input",()=>{
 
     }
 });
-// 백) 전화번호의 첫부분에 붙은 0을 지우고??(할까말까)?? 그 앞에 국가별 전화코드를 붙이면 국제전화번호
 
 // 비상 연락처
 const emergencyCo = document.querySelector("#emergencyCo");
@@ -420,8 +411,45 @@ primaryLanguage.addEventListener("input",()=>{
     }else{
         pLanguageMessage.innerText="";
         chk.primaryLanguage = true;
-    }
-});
+    }    
+});    
+
+// 약관 동의 체크
+
+const infoAgree1 = document.getElementById("infoAgree1");
+const infoAgree2 = document.getElementById("infoAgree2");
+
+// 전체 약관 동의
+
+const checkAllLabel = document.getElementById("checkAllLabel");
+const checkAll = document.getElementById("checkAll");
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#checkAll)');
+
+// 전체 동의 체크박스
+checkAllLabel.addEventListener('click', function() {
+    const isChecked = checkAll.checked;
+
+  // 하위 체크박스들의 상태를 전체 동의 체크박스와 동일하게 설정  
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = !(isChecked);
+        if(infoAgree1.checked) chk.infoAgree1 = true;
+        else chk.infoAgree1 = false;
+        if(infoAgree2.checked) chk.infoAgree2 = true;
+        else chk.infoAgree2 = false;
+    });    
+    
+});    
+
+// 하위 체크박스 클릭 이벤트 리스너 등록
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('click', function() {
+    // 하위 체크박스 중 하나라도 해제되었을 때 전체 동의 체크박스도 체크 해제    
+        if (!this.checked) {
+            checkAll.checked = false;
+        }    
+    });    
+});    
 
 // input 다 채워지면(유효성 검사는 x) 회원가입 버튼 색상 변경
 // +체크 추가
@@ -430,51 +458,37 @@ const signUpBtn = document.getElementById("signUpBtn");
 const validity = {email, inputAuth, password, checkPassword, lastName, firstName, phone, passportNo,primaryLanguage};
 for(let valid in validity)
 validity[valid].addEventListener('input',chagneSignupBtn);
-// 체크 동의
+
+// 제출 버튼 유효화
 infoAgree1.addEventListener('change',chagneSignupBtn);
 infoAgree2.addEventListener('change',chagneSignupBtn);
+checkAll.addEventListener('change', chagneSignupBtn);
 
 function chagneSignupBtn(){
     if (email.validity.valid&&
-        inputAuth.validity.valid&&
         checkPassword.validity.valid&&
         lastName.validity.valid&&
         firstName.validity.valid&&
         phone.validity.valid&&
         passportNo.validity.valid&&
         primaryLanguage.validity.valid&&
-        password.validity.valid&&
+        password.validity.valid
+        &&
         infoAgree1.checked&&
-        infoAgree2.checked){
+        infoAgree2.checked
+        ){
             signUpBtn.style.backgroundColor = "#1c797d";
         }else{
             signUpBtn.style.backgroundColor = "#c5c5c5";
         }
-    }
-    
-    infoAgree1.addEventListener('change',()=>{
-        if(infoAgree1.checked){
-            chk.infoAgree1 = true;
-        }else{
-            chk.infoAgree1 = false;
-        }
-    })
-    infoAgree2.addEventListener('change',()=>{
-        if(infoAgree2.checked){
-            chk.infoAgree2 = true;
-        }else{
-            chk.infoAgree2 = false;
-        }
-    })
+}
     
 // 필수 입력 검사
 const signUpForm = document.getElementById("signUpForm");
 
 signUpForm.addEventListener("submit",e=>{
-    if (
-        !(
+    if (!(
         email.validity.valid &&
-        inputAuth.validity.valid &&
         checkPassword.validity.valid &&
         lastName.validity.valid &&
         firstName.validity.valid &&
@@ -523,55 +537,7 @@ signUpForm.addEventListener("submit",e=>{
     }
 });
 
-// 회원가입 진행
 
-// 국제 번호 intlTel
-var input = document.querySelector("#phone");
-
-var iti = window.intlTelInput(input, {
-    separateDialCode: true,
-    utilsScript: "build/js/utils.js"
-});
-
-// 회원가입 버튼 누르면
-// function submitForm() {}
-signUpForm.addEventListener("click",()=>{
-    // 국제 나라 번호, 국가 코드 가져오기 (name속성 추가)
-    const selectedCountryData = iti.getSelectedCountryData();
-    const countryCode = selectedCountryData.iso2;
-    countryCode.setAttribute("name", "countryCode");
-    // 선택한 국가의 국가 코드
-    // document.getElementById("result").innerText = countryCode;
-    console.log("국가 코드:", countryCode);
-    
-    // const countryName = "Korea"
-    // iti.setCountry(countryName);
-
-    // 국가명
-    // var title = document.querySelector(".iti__selected-flag");
-    
-    // 국제 번호 앞자리
-    const countryNo = document.querySelector(".iti__selected-dial-code");
-    countryNo.setAttribute("name", "userTel");
-
-    // console.log("전화번호 : " + input.value);
-    // // console.log("국가 : " + title.title);
-    // console.log("국제전화 나라번호 : " + countryNo.innerText);
-
-    // name 값 
-    const data = {
-        "email": email, "password" : password, "lastName" : lastname, "firstName" : firstName, "countryCode" : countryCode, "phone" : phone, "countryNo" : countryNo, "emergencyCo" : emergencyCo, "passportNo" : passportNo,
-        "primaryLanguage" : primaryLanguage
-    }
-
-
-
-
-
-
-
-
-    });
 
 
 

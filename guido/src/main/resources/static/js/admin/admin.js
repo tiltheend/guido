@@ -179,6 +179,8 @@ if (blindCancelBtn !== null)
 /*********************************************************************************/
 
 function setUserState(action,userNoList) {
+    if (!confirm(userNoList + '번 유저 ' + action + '처리 하시겠습니까?'))
+        return;
     const endpoint = '/admin/setUserState';
     const options = {
         method: 'POST',
@@ -209,8 +211,6 @@ function checkedBtnHandler(action) {
         alert('선택된 체크박스가 없습니다.');
         return;
     }
-    if (!confirm(userNoList + '번 유저 ' + action + '처리 하시겠습니까?'))
-        return;
     setUserState(action,userNoList);
 }
 

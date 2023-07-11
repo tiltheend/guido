@@ -1,14 +1,22 @@
 // 미리보기 관련 요소 모두 얻어오기
 
 // add 5개
-const addLabel = document.getElementsByClassName("add-label");
+const addLabel = document.querySelectorAll(".add-label");
 // img 5개
-const previews = document.getElementsByClassName("preview");
+const previews = document.querySelectorAll(".preview");
 // file 5개
-const inputImages = document.getElementsByClassName("input-image");
+const inputImages = document.querySelectorAll(".input-image");
 // x버튼 5개
 const deleteBtn = document.getElementsByClassName("delete-btn");
-for(let i=0 ; i<inputImages.length ; i++){
+
+
+function updateCount(){
+    let count=0;
+    previews.forEach(preview => {if(preview.src!='') count++;});
+    document.getElementById("count").innerText=count;
+}
+
+for(let i=0 ; i<inputImages.length ; i++) {
     // 파일이 선택되거나, 선택 후 취소 되었을 때
     inputImages[i].addEventListener('change', e => {
         const file = e.target.files[0]; // 선택된 파일의 데이터
@@ -20,12 +28,14 @@ for(let i=0 ; i<inputImages.length ; i++){
                 previews[i].setAttribute("src",e.target.result);
                 previews[i].classList.remove("hidden");
                 addLabel[i].classList.add("hidden");
+                updateCount();
             }
         } else { // 파일 선택 후 취소 되었을 때
                 // -> 선택된 파일 없음 -> 미리보기 삭제
             previews[i].removeAttribute("src");
             previews[i].classList.add("hidden");
             addLabel[i].classList.remove("hidden");
+            updateCount();
         }
     })
     // 미리보기 삭제 버튼(X버튼) 클릭 시
@@ -39,10 +49,9 @@ for(let i=0 ; i<inputImages.length ; i++){
             // inputImage Value 비우기(파일 경로 삭제)
             inputImages[i].value="";
         }
+        updateCount();
     })
 }
-
-
 
 
 const slideArea = document.querySelector('.img-slide-area');
@@ -103,8 +112,6 @@ slideArea.addEventListener('touchmove', handleTouchMove);
 slideArea.addEventListener('touchend', handleTouchEnd);
 
 
-/* 이벤트 시작 일을 오늘 날짜로 설정 */
-document.getElementById('today').value = new Date().toISOString().split('T')[0];
 
 
 
@@ -134,9 +141,15 @@ form.addEventListener('submit',e=>{
     // 유효성 검사
 
     const eventEndDtInput = document.getElementById('eventEndDt');
-    const todayInput = document.getElementById('today');
+    const createDt = document.getElementById('createDt');
     const eventEndDt = new Date(eventEndDtInput.value);
-    const today = new Date(todayInput.value);
+    const today = new Date(createDt.value);
+    const eventTitle = document.getElementById('eventTitle');
+
+    if(eventTitle.value.trim().length == 0){
+        alert('제목 입력')
+        return;
+    }
 
     if (!eventEndDtInput.value) {
         alert('이벤트 종료일을 입력해주세요.');
@@ -148,7 +161,7 @@ form.addEventListener('submit',e=>{
         return false;
     }
 
-    if(inputImages[0].value==''){
+    if(previews[0].src==''){
         alert('첫 번째 이미지(썸네일)은 반드시 필요합니다.');
         return false;
     }
