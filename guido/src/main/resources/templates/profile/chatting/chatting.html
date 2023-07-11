@@ -23,31 +23,32 @@
 			<img th:src="@{images/chattingIcon.png}" alt="chattingIcon">
 			<h3>Chatting</h3>
 		</div>
+		<!-- <button id="addTarget">추가</button> -->
 		
-		<button id="addTarget">추가</button>
 
-		<div id="addTargetPopupLayer" class="popup-layer-close">  
-			<span id="closeBtn">&times</span>
-
-			<div class="target-input-area">
-				<input type="search" id="targetInput" placeholder="닉네임 또는 이메일을 입력하세요" autocomplete="off">
-			</div>
-
-			<ul id="resultArea">
-				<!-- <li class="result-row" data-id="1">
-					<img class="result-row-img" src="/images/user.png">
-					<span> <mark>유저</mark>일</span>
-				</li>
-				<li class="result-row"  data-id="2">
-					<img class="result-row-img" src="/images/user.png">
-					<span><mark>유저</mark>이</span>
-				</li>
-
-				<li class="result-row">일치하는 회원이 없습니다</li> -->
-			</ul>
-		</div>
-
+		
 		<div class="chatting-area">
+			<div id="addTargetPopupLayer" class="popup-layer-close">  
+				<span id="closeBtn">&times</span>
+	
+				<div class="target-input-area">
+					<input type="search" id="targetInput" placeholder="닉네임 또는 이메일을 입력하세요" autocomplete="off">
+				</div>
+	
+				<ul id="resultArea">
+					<!-- <li class="result-row" data-id="1">
+						<img class="result-row-img" src="/images/user.png">
+						<span> <mark>유저</mark>일</span>
+					</li>
+					<li class="result-row"  data-id="2">
+						<img class="result-row-img" src="/images/user.png">
+						<span><mark>유저</mark>이</span>
+					</li>
+	
+					<li class="result-row">일치하는 회원이 없습니다</li> -->
+				</ul>
+			</div>
+			<img id="addTarget" th:src="@{images/addUser.png}" alt="addUser">
 			<ul class="chatting-list">
 				<th:block th:each="room : ${roomList}">
 
@@ -56,7 +57,7 @@
 
 							<img th:if="${room.targetProfile}" class="list-profile" th:src="${room.targetProfile}">
 
-							<img th:unless="${room.targetProfile}" class="list-profile" src="/images/user.png">
+							<img th:unless="${room.targetProfile}" class="list-profile" src="/images/userProfile/basicUser.png">
 							
 						</div>
 						<div class="item-body">
@@ -99,11 +100,15 @@
 				</ul>	
 			
 				<div class="input-area">
-					<textarea id="inputChatting" rows="3"></textarea>
-					<!-- 이미지 보내기 버튼 추가 -->
 					<input type="file" name="sendImage" id="sendImage" accept="image/*">
-					<label for="sendImage">이미지</label>
-					<button id="send">보내기</button>
+					<label for="sendImage"><img th:src="@{images/imageAdd.png}" alt="imageAdd"></label>
+					<div>
+						<textarea id="inputChatting" rows="3" placeholder="메세지를 입력하세요."></textarea>
+						<!-- 이미지 보내기 버튼 추가 -->
+						<!-- <button id="send">보내기</button> -->
+						<img id="send" th:src="@{images/sendBtn.png}" alt="sendBtn">
+					</div>
+					
 				</div>
 			</div>
 		</div>
