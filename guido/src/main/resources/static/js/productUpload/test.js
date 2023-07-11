@@ -57,7 +57,7 @@ const updatePage = () => {
   if (currentPage == 6) {
     document.querySelector('.text7').innerHTML = '';
     typing7();
-    // checkImage();
+    checkImage();
   }
   if (currentPage == 7) {
     document.querySelector('.text8').innerHTML = '';
@@ -312,10 +312,7 @@ for (let i = 0; i < clickElements.length; i++) {
   });
 }
 
-// function disableNextButton() {
-//   nextBtn.disabled = true;
-// }
-//2페이지일 때 width 800px로 조정
+//페이지별 width 조정
 window.addEventListener('DOMContentLoaded', function () {
   var mainElement = document.getElementById('page2');
   if (mainElement) {
@@ -586,23 +583,7 @@ window.onclick = function (event) {
   }
 };
 // 요금설정
-
 //숫자 이외 텍스트(문자포함) 막기
-
-// $('#feeInput').on('keydown', (e) => {
-//   let keyCode = e.keyCode || e.which;
-//   let allowedKeys = [8, 37, 39]; // 백스페이스(8), 왼쪽 화살표(37), 오른쪽 화살표(39)
-
-//   if (
-//     !(
-//       (keyCode >= 48 && keyCode <= 57) || // 0-9
-//       (keyCode >= 96 && keyCode <= 105) || // Numpad 0-9
-//       allowedKeys.includes(keyCode)
-//     )
-//   ) {
-//     e.preventDefault();
-//   }
-// });
 $('#inputDay').on('input', (e) => {
   let v = e.currentTarget.value;
   if (/[ㄱ-힣]+/.test(v)) {
@@ -764,9 +745,6 @@ feeInput.addEventListener('keyup', (e) => {
   maxTotal2.style.transitionDuration = '0.3s';
 });
 
-// .replace(/[^0-9]/g, '');
-
-// "document.getElementsByName('productPrice')[0].value" = extractedNumber;
 //이미지 업로드
 const preview = document.getElementsByClassName('preview');
 const inputImage = document.getElementsByClassName('input-image');
@@ -833,6 +811,7 @@ const changeEvent = new Event('change');
 inputImage[4].dispatchEvent(changeEvent);
 inputImage[5].dispatchEvent(changeEvent);
 const plusImage = document.querySelectorAll('.plus-image');
+
 for (let i = 0; i < 5; i++) {
   inputImage[i].addEventListener('change', () => {
     let allImagesSelected = true;
@@ -855,10 +834,8 @@ for (let i = 0; i < 5; i++) {
 }
 
 const checkImage = () => {
-  for (let i = 0; i < 5; i++) {
-    if (preview[i].getAttribute('src') == '') {
-      nextBtn.disabled = true;
-    }
+  if (preview[i].getAttribute('src') == '') {
+    nextBtn.disabled = true;
   }
 };
 const checkTourCourse = () => {
@@ -866,15 +843,7 @@ const checkTourCourse = () => {
     nextBtn.disabled = true;
   }
 };
-// document
-//   .getElementsByClassName('create-course')[0]
-//   .addEventListener('change', () => {
-//     if (tourCourse.length == 0) {
-//       nextBtn.disabled = true;
-//     } else {
-//       nextBtn.disabled = false;
-//     }
-//   });
+
 // 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가
 const imgId1 = document.getElementById('imgId1');
 const imgId2 = document.getElementById('imgId2');

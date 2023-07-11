@@ -169,8 +169,9 @@ function displayPlaces(places) {
       // });
 
       itemEl.onmouseover = function () {
-        displayInfowindow(marker, x, y);
+        displayInfowindow(marker, title);
       };
+      itemEl.addEventListener('click', () => {});
 
       itemEl.onmouseout = function () {
         infowindow.close();
@@ -293,3 +294,4 @@ function removeAllChildNods(el) {
     el.removeChild(el.lastChild);
   }
 }
+// const clickItems2 = document.querySelectorAll('.item');
