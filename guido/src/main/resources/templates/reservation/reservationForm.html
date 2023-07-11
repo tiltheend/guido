@@ -21,6 +21,8 @@
 </head>
 <body th:object="${product}">
 
+    <th:block th:replace="~{common/header}"></th:block>
+
     <form th:action="@{/reservation/reserve}" method="POST">
 
 

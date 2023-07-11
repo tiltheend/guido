@@ -183,6 +183,18 @@ function loadProductByTheme(themeCode) {
                 productImage.appendChild(img);
             }
 
+            /* for (let image of themeProduct.imageList) {
+                const imgLink = document.createElement("a");
+                imgLink.setAttribute("th:href", "'/productDetail/product/' + ${product.productNo}");
+                imgLink.setAttribute("th:text", "${product.productName}");
+
+                const img = document.createElement("img");
+                img.setAttribute("src", image.filePath);
+                imgLink.appendChild(img);
+
+                productImage.appendChild(imgLink);
+            } */
+
             singleItem.appendChild(productImage);
             productRow.appendChild(singleItem);
 
