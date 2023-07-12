@@ -224,8 +224,7 @@ public class EmailServiceImpl implements EmailService{
 	public String sendAnswer(QNA qna) {
 		String subject = "[guido] "+ qna.getQnaTitle() +"문의에 대한 답변";
 		String charset = "UTF-8";
-//		String sendEmail = qna.getQnaEmail();
-		String sendEmail = "poer214@naver.com";
+		String sendEmail = qna.getQnaEmail();
 		MimeMessage mail = mailSender.createMimeMessage();
         try {
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, charset);
@@ -236,7 +235,9 @@ public class EmailServiceImpl implements EmailService{
 			mailHelper.setTo(sendEmail);
 			String html = templateEngine.process("admin/answer",context);
 			mailHelper.setText(html,true);
-			String filePath = "C:\\guidoImages\\qnaImage\\";
+//			String filePath = "C:\\guidoImages\\qnaImage\\";
+			
+			String filePath = "/Users/jy_green/Desktop/project/guidoImages/qnaImage/";
 			
 			for(int i=0; i<qna.getFileList().size(); i++) {
 				String arr[] = qna.getFileList().get(i).getFilePath().split("/");
