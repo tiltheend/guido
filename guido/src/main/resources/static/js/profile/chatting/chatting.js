@@ -18,78 +18,85 @@ let selectTargetProfile; // 대상의 프로필
 
 
 // 검색 팝업 레이어 열기
-addTarget.addEventListener("click", e => {
-	addTargetPopupLayer.classList.toggle("popup-layer-close");
-	targetInput.focus();
-});
+if(addTarget!=null){
+	addTarget.addEventListener("click", e => {
+		addTargetPopupLayer.classList.toggle("popup-layer-close");
+		targetInput.focus();
+	});
+}
 
 // 검색 팝업 레이어  닫기
-closeBtn.addEventListener("click", e => {
-	addTargetPopupLayer.classList.toggle("popup-layer-close");
-	resultArea.innerHTML = "";
-});
+if(closeBtn!=null){
+	closeBtn.addEventListener("click", e => {
+		addTargetPopupLayer.classList.toggle("popup-layer-close");
+		resultArea.innerHTML = "";
+	});
+}
 
 
 // 사용자 검색(ajax)
-targetInput.addEventListener("input", e => {
+if(targetInput != null){
 
-	const query = e.target.value.trim();
-
-	// 입력된게 없을 때
-	if(query.length == 0){
-		resultArea.innerHTML = ""; // 이전 검색 결과 비우기
-		return;
-	}
-
-
-	// 입력된게 있을 때
-	if(query.length > 0){
-		fetch("/chatting/selectTarget?query="+query)
-		.then(resp => resp.json())
-		.then(list => {
-			//console.log(list);
-
+	targetInput.addEventListener("input", e => {
+	
+		const query = e.target.value.trim();
+	
+		// 입력된게 없을 때
+		if(query.length == 0){
 			resultArea.innerHTML = ""; // 이전 검색 결과 비우기
-
-			if(list.length == 0){
-				const li = document.createElement("li");
-				li.classList.add("result-row");
-				li.innerText = "일치하는 회원이 없습니다";
-				resultArea.append(li);
-			}
-
-			for(let user of list){
-				// li요소 생성(한 행을 감싸는 요소)
-				const li = document.createElement("li");
-				li.classList.add("result-row");
-				li.setAttribute("data-id", user.userNo);
-
-				// 프로필 이미지 요소
-				const img = document.createElement("img");
-				img.classList.add("result-row-img");
-				
-				// 프로필 이미지 여부에 따른 src 속성 선택
-				if(user.profileImage == null) img.setAttribute("src", "/images/userProfile/basicUser.png");
-				else	img.setAttribute("src", user.profileImage);
-
-				let nickname = user.userName;
-				let email = user.userEmail;
-
-				const span = document.createElement("span");
-				span.innerHTML = `${nickname} ${email}`.replace(query, `<mark>${query}</mark>`);
-
-				// 요소 조립(화면에 추가)
-				li.append(img, span);
-				resultArea.append(li);
-
-				// li요소에 클릭 시 채팅방에 입장하는 이벤트 추가
-				li.addEventListener('click', chattingEnter);
-			}
-
-		})
-		.catch(err => console.log(err) );
-	}
-});
+			return;
+		}
+	
+	
+		// 입력된게 있을 때
+		if(query.length > 0){
+			fetch("/chatting/selectTarget?query="+query)
+			.then(resp => resp.json())
+			.then(list => {
+				//console.log(list);
+	
+				resultArea.innerHTML = ""; // 이전 검색 결과 비우기
+	
+				if(list.length == 0){
+					const li = document.createElement("li");
+					li.classList.add("result-row");
+					li.innerText = "일치하는 회원이 없습니다";
+					resultArea.append(li);
+				}
+	
+				for(let user of list){
+					// li요소 생성(한 행을 감싸는 요소)
+					const li = document.createElement("li");
+					li.classList.add("result-row");
+					li.setAttribute("data-id", user.userNo);
+	
+					// 프로필 이미지 요소
+					const img = document.createElement("img");
+					img.classList.add("result-row-img");
+					
+					// 프로필 이미지 여부에 따른 src 속성 선택
+					if(user.profileImage == null) img.setAttribute("src", "/images/userProfile/basicUser.png");
+					else	img.setAttribute("src", user.profileImage);
+	
+					let nickname = user.userName;
+					let email = user.userEmail;
+	
+					const span = document.createElement("span");
+					span.innerHTML = `${nickname} ${email}`.replace(query, `<mark>${query}</mark>`);
+	
+					// 요소 조립(화면에 추가)
+					li.append(img, span);
+					resultArea.append(li);
+	
+					// li요소에 클릭 시 채팅방에 입장하는 이벤트 추가
+					li.addEventListener('click', chattingEnter);
+				}
+	
+			})
+			.catch(err => console.log(err) );
+		}
+	});
+}
 
 
 // 채팅방 입장 또는 선택 함수
