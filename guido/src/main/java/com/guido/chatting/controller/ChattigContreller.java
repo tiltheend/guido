@@ -32,8 +32,13 @@ public class ChattigContreller {
     
     // 채팅 페이지
     @GetMapping("/chatting")
-    public String chatting(@SessionAttribute("loginUser") User loginUser, Model model) {
+    public String chatting(
+    		/*@SessionAttribute("loginUser") User loginUser*/    		
+    		@SessionAttribute(value="loginUser", required=false) User loginUser , Model model) {
         
+    	if(loginUser==null)
+    		return "redirect:/";
+    	
         List<ChattingRoom> roomList = service.selectRoomList(loginUser.getUserNo());
         model.addAttribute("roomList", roomList);
         return "/profile/chatting/chatting";

@@ -217,7 +217,7 @@ menuLinks.forEach(function(link) {
 
         const targetSectionId = this.getAttribute('href');
         const targetSection = document.querySelector(targetSectionId);
-        const topOffset = targetSection.getBoundingClientRect().top + 1;
+        const topOffset = targetSection.getBoundingClientRect().top - 80;
         window.scrollBy({ top: topOffset, behavior: 'smooth' });
     });
 });
@@ -230,14 +230,14 @@ window.addEventListener("scroll", ()=>{
     
     const scroll = window.scrollY;
 
-    const section1 = scroll + document.getElementById("section1").getBoundingClientRect().top;
-    const section2 = scroll + document.getElementById("section2").getBoundingClientRect().top;
-    const section3 = scroll + document.getElementById("section3").getBoundingClientRect().top;
-    const section4 = scroll + document.getElementById("section4").getBoundingClientRect().top;
-    const section6 = scroll + document.getElementById("section6").getBoundingClientRect().top;
+    const section1 = scroll + document.getElementById("section1").getBoundingClientRect().top - 120;
+    const section2 = scroll + document.getElementById("section2").getBoundingClientRect().top - 120;
+    const section3 = scroll + document.getElementById("section3").getBoundingClientRect().top - 120;
+    const section4 = scroll + document.getElementById("section4").getBoundingClientRect().top - 120;
+    const section6 = scroll + document.getElementById("section6").getBoundingClientRect().top - 120;
     
     if(document.getElementById("section5")!=null){
-        var section5 = scroll + document.getElementById("section5").getBoundingClientRect().top;
+        var section5 = scroll + document.getElementById("section5").getBoundingClientRect().top - 120;
     }
 
     menuLi.forEach(function(li){
