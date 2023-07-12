@@ -47,7 +47,7 @@ function handleFileDrop(event) {
 /* 첨부파일 추가 */
 function addFile(obj){
 
-    let maxFileCnt = 3;   // 첨부파일 최대 개수
+    let maxFileCnt = 5;   // 첨부파일 최대 개수
     let attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
     let remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
     let curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
@@ -186,20 +186,11 @@ function submitForm() {
         })
         .then(function (response) {
             if (response.ok) {
-                return response.json();
+                alert("문의가 접수되었습니다. 빠른 시일 내 확인 후 답변 드리겠습니다.");
+                location.replace("/");
             } else {
             throw new Error('에러가 발생 하였습니다.');
             }
-        }).then(function (result) {
-            // 성공적으로 반환된 결과(result)를 처리
-
-            if(result>0){
-                alert("문의가 접수되었습니다. 빠른 시일 내 확인 후 답변 드리겠습니다.");
-                location.replace("/");
-            }else
-                location.reload();
-            
-            
         })
         .catch(function (error) {
             alert(error.message);

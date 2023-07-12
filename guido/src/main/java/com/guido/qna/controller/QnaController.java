@@ -36,8 +36,7 @@ public class QnaController {
 	
 	// QNA 작성
 	@PostMapping("/insertQna")
-	@ResponseBody
-	private int insertQna(@RequestParam(value="attach_files", required=false) List<MultipartFile> files, 
+	private String insertQna(@RequestParam(value="attach_files", required=false) List<MultipartFile> files, 
 			QNA qna, @SessionAttribute(value="loginUser", required=false) User loginUser) throws IllegalStateException, IOException{
 		
 		if(loginUser==null)
@@ -50,9 +49,9 @@ public class QnaController {
 		
 		
 		if(result>0)
-			return result;
+			return "redirect:/";
 		
-		return 0;
+		return "/insertQna";
 	}
 	
 	

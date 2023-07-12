@@ -62,7 +62,7 @@ public class QnaServiceImpl implements QnaService{
 					 
 					 file.setFileOrder(i);
 					 file.setQnaNo(qnaNo);
-					 file.setFilePath(webPath + Util.fileRename(files.get(i).getOriginalFilename()));
+					 file.setFilePath(Util.fileRename(files.get(i).getOriginalFilename()));
 
 					 fileList.add(file);
 						
@@ -72,7 +72,6 @@ public class QnaServiceImpl implements QnaService{
 			 
 			 if(!fileList.isEmpty()) {
 				 result = mapper.insertFileList(fileList);
-				 
 				 
 				 if(result == fileList.size()) {
 						for(int i=0; i<fileList.size(); i++) {

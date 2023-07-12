@@ -51,9 +51,9 @@
 	SELECT SEQ_FILE_NO.NEXTVAL, A.* 
 	FROM(
 		<foreach collection="list" item="file" separator=" UNION ALL">
-			SELECT #{file.qnaNo} IMG_PATH, 
-							#{file.fileOrder} IMG_RENAME, 
-							#{file.filePath} IMG_ORIGINAL
+			SELECT #{file.qnaNo} QNA_NO, 
+							#{file.fileOrder} FILE_ORDER, 
+							'/images/qnaImage/' || #{file.filePath} FILE_PATH
 			FROM DUAL
 		</foreach>
 		)A
