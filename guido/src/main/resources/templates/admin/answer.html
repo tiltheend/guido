@@ -20,8 +20,8 @@
         <div th:text="${qna.qnaContent}" style="width:520px; white-space: pre-wrap; word-wrap: break-word;"/>
     </div>
     <div>
-        <a th:each="file:${qna.fileList}" th:href="|http://localhost${file.filePath}|">
-            <img th:src="|http://localhost${file.filePath}|"  style="width:100px; height: 100px; margin-left: 5px">
+        <a th:each="file:${qna.fileList}" th:href="@{'cid:' + ${file.filePath}}">
+            <img th:src="@{'cid:' + ${file.filePath}}" style="width:100px; height: 100px; margin-left: 5px">
         </a>
     </div>
     <br>
