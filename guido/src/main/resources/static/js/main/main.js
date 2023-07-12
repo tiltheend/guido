@@ -89,7 +89,7 @@ function toggleHeart(btn) {
         // console.log(loginUserNo);
 
         let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
-        // console.log(productName);
+        console.log(productName);
 
         if (heartIcon.classList.contains("selected")) {
             check = 1; // 관심상품 등록 O

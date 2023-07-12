@@ -34,13 +34,20 @@
 	</insert>
 	
 	<!-- 최근 알람 10개 조회 -->
-	<select id="selectAlarmList" resultMap="notification_rm">
+	<!--<select id="selectAlarmList" resultMap="notification_rm">
 		SELECT N.NOTIFICATION_NO, N.RECEIVER_NO, N.SENDER_NO, P.PRODUCT_NO, U.USER_NAME, P.PRODUCT_NAME, N.NOTIFICATION_CONTENT, N.CREATE_DT 
 		FROM NOTIFICATION N
 		LEFT JOIN "USER" U ON USER_NO = RECEIVER_NO
 		LEFT JOIN PRODUCT P USING (USER_NO)
 		WHERE N.RECEIVER_NO = #{userNo}
 		ORDER BY N.CREATE_DT DESC
+		FETCH FIRST 10 ROWS ONLY
+	</select>-->
+	<select id="selectAlarmList" resultMap="notification_rm">
+		SELECT NOTIFICATION_NO, NOTIFICATION_CONTENT
+		FROM NOTIFICATION
+		WHERE RECEIVER_NO = #{userNo}
+		ORDER BY CREATE_DT DESC
 		FETCH FIRST 10 ROWS ONLY
 	</select>
 	

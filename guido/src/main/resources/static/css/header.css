@@ -414,9 +414,9 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
   font-size: 16px;
 }
 .mypage-modal hr{
-  position: fixed;
-  width: 8%;
-  margin-top: -36px;
+  position: absolute;
+  width: 80%;
+  margin-top: 85px;
   /* margin-bottom: 16px; */
 }
 .mypage-modal a{
@@ -477,7 +477,9 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
   cursor: pointer;
 }
 .alarm-modal-close:after{
-  display: inline-block;content: "\00d7"; font-size:15pt;
+  display: inline-block;
+  content: "\00d7"; 
+  font-size:15pt;
 }
 
 

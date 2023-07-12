@@ -365,6 +365,9 @@ mypageModalClose.addEventListener("click", () => {
 });
 
 
+
+
+
 // 헤더 1320px까지 위치 조정
 if(document.querySelector('.search-box-click') != null){
   const searchBoxClick = document.querySelector('.search-box-click');

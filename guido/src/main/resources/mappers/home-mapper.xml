@@ -275,7 +275,7 @@
 	
 	<!-- 헤더 위치 검색 -->
 	<select id="locationSearch" resultType="String">
-	    SELECT DISTINCT column_alias
+	    <!--SELECT DISTINCT column_alias
 	    FROM (
 	        SELECT 
 	            CASE
@@ -291,7 +291,24 @@
 	        WHERE P.PRODUCT_STATE = 'N'
 	        AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
 	        ORDER BY priority ASC
-	    )
+	    )-->
+	    SELECT DISTINCT column_alias, PRIORITY
+		FROM (
+		    SELECT 
+		        CASE
+		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN TRIM(C.COURSE_NAME)
+		            ELSE TRIM(P.REGION_NAME)
+		        END AS column_alias,
+		        CASE
+		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN 2
+		            ELSE 1
+		        END AS priority
+		    FROM PRODUCT P
+		    LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO
+		    WHERE P.PRODUCT_STATE = 'N'
+		    AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
+		   )
+		ORDER BY PRIORITY
 	</select>
 	
 	
