@@ -160,6 +160,7 @@ const inputDayHidden = document.querySelector('#inputDayHidden');
 const inputTime = document.querySelector('#inputTime');
 const inputTimeHidden = document.querySelector('#inputTimeHidden');
 const inputWarning = document.querySelector('#inputWarning');
+const createTime = document.querySelector('#createTime');
 // 초기값 설정
 
 tourTypes.forEach(function (tourType) {
@@ -981,5 +982,13 @@ form.addEventListener('submit', (e) => {
 const checkMaxTourist = () => {
   if (maxInput.value != '') {
     nextBtn.disabled = false;
+  }
+};
+
+const displayNoneTime = () => {
+  if (inputDay.value != '') {
+    createTime.style.display = 'none';
+  } else {
+    createTime.style.display = 'inline-block';
   }
 };
