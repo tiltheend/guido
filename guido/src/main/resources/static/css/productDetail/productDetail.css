@@ -19,6 +19,7 @@
     flex-direction: column;
     align-items: center;
     margin: auto;
+    margin-top: 100px;
 }
 
 
@@ -159,7 +160,7 @@
 .detail--right__scroll{
     transition: top 0.5s;
     position: sticky;
-    top: 3%;
+    top: 12%;
 }
 
 
@@ -1330,6 +1331,7 @@ a {
     height: 100%;
     /* overflow: auto; */
     background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
 }
 
 .modal-container {
@@ -1626,6 +1628,7 @@ h2#fc-dom-1{
     overflow: auto; /* 스크롤 허용 auto */
     cursor: pointer; /* 마우스 손가락모양 */
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
 }
   /* 모달창 이미지 */
 .modal_content2 {

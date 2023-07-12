@@ -16,12 +16,11 @@
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.theme.default.min.css}">
     
-    <script th:src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+    <th:block th:replace="~{common/header}"></th:block>
     
     <script th:src="@{/libraries/bootstrap/js/bootstrap.min.js}"></script>
     <script th:src="@{/libraries/bootstrap/js/bootstrap.js}"></script>
     
-    <script th:src="@{/libraries/assets/vendors/jquery.min.js}"></script>
     <script th:src="@{/libraries/assets/owlcarousel/owl.carousel.js}"></script>
 
     <script th:src='@{https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js}'></script>
@@ -29,7 +28,6 @@
 </head>
 <body th:object="${product}">
 
-    <th:block th:replace="~{common/header}"></th:block>
 
 
     <div class="reservation--blind" th:if="${product.productState=='B'}">
@@ -771,6 +769,7 @@
     <script th:src="@{/js/productDetail/calendar.js}"></script>
     <script th:src="@{/js/productDetail/productDetail.js}"></script>
 
+    <th:block th:replace="~{common/footer}"></th:block>
 
 </body>
 </html>

@@ -12,6 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
 
+    <th:block th:replace="~{common/header}"></th:block>
     <!-- owl 슬라이드 -->
     <!-- <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}"> -->
     <!-- <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.theme.default.min.css}"> -->
@@ -22,7 +23,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/main/slide/mainPostSlick.css}">
 
     <!-- js -->
-    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
+    <!-- <script th:src="@{/js/main/slide/jquery.min.js}"></script> -->
     <script th:src="@{/js/main/slide/owl.carousel.js}"></script>
 
     <!-- 테마 검색 -->
@@ -33,7 +34,7 @@
 
 <body>
 
-    <th:block th:replace="~{common/header}"></th:block>
+    
 
     <!-- 로그인한 가이드 글 작성 버튼 -->
     <!-- <th:block th:if="${session.loginMember != null}"> -->

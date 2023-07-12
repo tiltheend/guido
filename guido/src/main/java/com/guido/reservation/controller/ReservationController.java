@@ -116,7 +116,8 @@ public class ReservationController {
 
 	// 카드 결제 성공 후
 	@PostMapping("/payment/complete")
-	public ResponseEntity<String> liquidate(@RequestBody Reservation reservation, @RequestParam("emergencyContact") String emergencyContact,
+	public ResponseEntity<String> liquidate(@RequestBody Reservation reservation, 
+			@RequestParam(value="emergencyContact", required=false) String emergencyContact,
 			@SessionAttribute("loginUser") User loginUser) throws IOException {
 		
 		// 아임포트 API 키와 SECRET키로 토큰을 생성
@@ -158,18 +159,21 @@ public class ReservationController {
 				return new ResponseEntity<String>("성공", HttpStatus.OK);
 			}
 
-			else if(result==0)
+			if(result==0)
 				return new ResponseEntity<String>("주문 오류", HttpStatus.BAD_REQUEST);
 			
-			else {
+			if(result==-1) {
 				service.paymentCancel(token, reservation.getImpUid(), amount, "주문 가능한 수량 초과");
 				return new ResponseEntity<String>("주문 가능한 수량을 초과합니다", HttpStatus.BAD_REQUEST);
 			}
 				
 			
+			return new ResponseEntity<String>("주문 실패", HttpStatus.BAD_REQUEST);
+			
 			
 		}catch(Exception e) {
 			
+			e.printStackTrace();
 			 // 4. 결제에러 시 결제 취소
 			service.paymentCancel(token, reservation.getImpUid(), amount, "결제 에러");
 			 return new ResponseEntity<String>("결제 에러", HttpStatus.BAD_REQUEST);
@@ -275,7 +279,7 @@ public class ReservationController {
 
 		 service.reservationCancel(reservation);
 		 
-		 return "redirect:/reservation/order_result?order_id=" + reservation.getOrderNumber();
+		 return "redirect:/reservation/reservation_info?reservation_no" + reservation.getReservationNo();
 	 }
 	 
 	 

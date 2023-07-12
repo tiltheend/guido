@@ -44,8 +44,8 @@
                             <div th:if="${product.productPackage==1}">Duration: [[${product.tourDuration}]] hr(s)</div>
                         </div>
                         
-                        <div id="reservatonDate">
-                            <!-- 투어 날짜 -->대충 투어 날짜다
+                        <div id="reservationDate">
+                            <!-- 투어 날짜 -->
                         </div>
                     
                     </div>
@@ -198,7 +198,7 @@
     </script>
 
     <script th:src="@{/js/reservation/reservationList.js}"></script>
-
+    <th:block th:replace="~{common/footer}"></th:block>
 
 </body>
 </html>

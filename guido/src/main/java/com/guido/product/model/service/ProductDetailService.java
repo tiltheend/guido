@@ -121,5 +121,17 @@ public interface ProductDetailService {
 	List<ProductDate> selectAllProductDateList(int productNo);
 
 
+	/** 스케줄러 - 현재 날짜보다 이전인 일정 조회
+	 * @return  pdList
+	 */
+	List<ProductDate> selectPassedDateList();
+
+	
+	/** 스케줄러 - 현재 날짜보다 이전인 날짜 사용 불가 처리
+	 * @param pd
+	 */
+	void updatePassedDateList(ProductDate pd);
+
+
 
 }

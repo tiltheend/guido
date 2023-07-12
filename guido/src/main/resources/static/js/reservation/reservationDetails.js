@@ -42,16 +42,14 @@ if(package==1){
 
 
 
-let modal = document.getElementById("cancelModal");
 
 // 모달 창 토글
 function toggleModal() {
+  
+  let modal = document.getElementById("cancelModal");
   modal.style.display = (modal.style.display === "block") ? "none" : "block";
 }
 
-modal.addEventListener('click', ()=>{
-  toggleModal();
-});
 
 
 // textarea 글자수 제한

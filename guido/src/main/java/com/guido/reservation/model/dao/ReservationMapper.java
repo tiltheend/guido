@@ -25,7 +25,7 @@ public interface ReservationMapper {
 	int insertReservation(Reservation reservation);
 
 	// 예약 확인
-	Reservation selectReservation(Map map);
+	Reservation selectReservation(Map<String, Object> map);
 
 	// 예약 취소
 	int reservationCancel(Reservation reservation);
@@ -40,13 +40,25 @@ public interface ReservationMapper {
 	int updateAvailability(Reservation reservation);
 
 	// 예약 가능 수량 업데이트 (취소 후)
-	void updateDateOrOption(Reservation reservation);
+	int updateDateOrOption(Reservation reservation);
 
 	// 예약 날짜(일정) 정보 조회
 	ProductDate selectReservationDate(Map<String, Object> map);
 
 	// 비상 연락처 업데이트
 	void updateEmergencyContact(User loginUser);
+
+	// 모든 남은 옵션(시간대 조회)
+	int selectCountCanReserveOption(Reservation reservation);
+
+	// 특정 상품의 모든 일정(날짜) 구매 가능 수량 조회
+	int selectCountCanReserveDate(Reservation reservation);
+
+	// 특정 상품 판매중으로 변경
+	void updateProductAvailability(Reservation reservation);
+
+	// 특정 상품 판매 종료로 변경
+	int updateProductUnavailable(Reservation reservation);
 	
 
 }
