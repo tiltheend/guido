@@ -270,23 +270,22 @@
 	 </delete>
 	 
 	 
-	 <!-- 인기상품 랜덤 조회 -->
+	 <!-- 인기상품 랜덤(위시 기준 상위 10개 중 랜덤으로 4개) 조회 -->
 	 <select id="selectPopularList" resultMap="product_rm">
 		 SELECT * FROM "PRODUCT"
-		WHERE PRODUCT_NO IN(
-			SELECT PRODUCT_NO
-			FROM (
-				  SELECT USER_NO, PRODUCT_NO, COUNT(*)
-				  FROM "WISHLIST"
-				  GROUP BY USER_NO, PRODUCT_NO
-				  ORDER BY COUNT(*) DESC
-				)
+			WHERE PRODUCT_STATE = 'N'
+			AND PRODUCT_NO IN (
+					SELECT PRODUCT_NO 
+					FROM(SELECT PRODUCT_NO, COUNT(USER_NO) WISH_COUNT 
+						FROM "WISHLIST"
+						GROUP BY PRODUCT_NO
+						ORDER BY WISH_COUNT DESC)
+			)
 			<![CDATA[
-					WHERE ROWNUM <= 10
-		     	]]>
+			AND ROWNUM <= 10
+			]]>
 			ORDER BY DBMS_RANDOM.VALUE
 			FETCH FIRST 4 ROWS ONLY
-		)
 
 	 </select>
 
@@ -299,7 +298,7 @@
 			  WHERE GUIDE_LANGUAGE = (
 				SELECT PRIMARY_LANGUAGE 
 				FROM "TOURIST" 
-				WHERE USER_NO = #{userNo})
+				WHERE USER_NO = #{userNo} AND PRODUCT_STATE = 'N')
 			  ORDER BY DBMS_RANDOM.VALUE)
 			<![CDATA[
 					WHERE ROWNUM <= 4
