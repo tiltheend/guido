@@ -1,10 +1,13 @@
 package com.guido.user.model.service;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.ServletContext;
 
 @Service
 public class EmailServiceImpl implements EmailService{
@@ -28,6 +32,9 @@ public class EmailServiceImpl implements EmailService{
 	
 	@Autowired
 	private EmailMapper mapper;
+	
+	@Autowired
+	ServletContext servletContext;
 	
 	// 메일 보내기 위해
 	@Autowired
@@ -216,7 +223,8 @@ public class EmailServiceImpl implements EmailService{
 	public String sendAnswer(QNA qna) {
 		String subject = "[guido] "+ qna.getQnaTitle() +"문의에 대한 답변";
 		String charset = "UTF-8";
-		String sendEmail = qna.getQnaEmail();
+//		String sendEmail = qna.getQnaEmail();
+		String sendEmail = "poer214@naver.com";
 		MimeMessage mail = mailSender.createMimeMessage();
         try {
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, charset);
@@ -227,8 +235,16 @@ public class EmailServiceImpl implements EmailService{
 			mailHelper.setTo(sendEmail);
 			String html = templateEngine.process("admin/answer",context);
 			mailHelper.setText(html,true);
-			mailSender.send(mail);
+			String filePath = "C:\\guidoImages\\qnaImage\\";
 			
+			for(int i=0; i<qna.getFileList().size(); i++) {
+				String arr[] = qna.getFileList().get(i).getFilePath().split("/");
+				String realPath = filePath+arr[arr.length-1];
+				FileSystemResource file = new FileSystemResource(new File(realPath));
+				mailHelper.addInline(qna.getFileList().get(i).getFilePath(), file);
+			}
+			
+			mailSender.send(mail);
 			return "성공";
 			
 		} catch (MessagingException e) {
