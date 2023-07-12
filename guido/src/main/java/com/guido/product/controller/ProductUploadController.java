@@ -46,6 +46,7 @@ public class ProductUploadController {
 							 , RedirectAttributes ra
 							 ) throws IllegalStateException, IOException, Exception{
 		
+		
 		List<TourTheme> tourTheme = service.selectTourTheme();
 //		System.out.println(loginUser.getUserType());
 //		System.out.println(loginUser.getUserType().getClass().getSimpleName());
@@ -54,13 +55,26 @@ public class ProductUploadController {
 			System.out.println("tourTheme" + tourTheme);
 //			System.out.println(loginUser.getLanguageSkill());
 			
+			String path = "redirect:";
+			String message = null;
+			
 			if(loginUser.getProfileImage() == null ) {
-				return "redirect:/";
+				
+				message = "프로필 이미지 등록 후 상품 등록이 가능합니다.";
+				path += "/";
+				
 			}else if(loginUser.getUserType().equals("T")){
-				return "redirect:/";
+				
+				message = "가이드로 로그인 후 이용해주세요.";
+				path += "/";
 			}
 			
-			return "productUpload/test";
+			else {
+				
+				return "productUpload/test";
+			}
+			ra.addFlashAttribute("message", message);
+			return path;
 		
 	}	
 	
