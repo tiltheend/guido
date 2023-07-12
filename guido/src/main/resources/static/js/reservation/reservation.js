@@ -479,7 +479,7 @@ function reservationChattingFn(data){
       }
 
       titleH2.textContent = data.productName;
-      priceSpan1.textContent = "KRW";
+      priceSpan1.textContent = "KRW  ";
       priceSpan2.textContent = data.totalPrice.toLocaleString() + ' / total';
 
       imageLink.appendChild(image);

@@ -607,14 +607,22 @@ div.chatting-area label > img{
     margin-top: 20px;
 }
 .reservation-content h2{
-	font-size: 0.875rem;
-	margin-bottom: 3px;
+    font-size: 0.875rem;
+    margin-bottom: 3px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 96%;
+    line-height: 21px;
+
 }
 .reservation-content span{
-	height: 30px;
     display: block;
-    margin-top: 20px;
-    margin-left: 56px;
+    margin-top: 10px;
+    /* margin-left: 0px; */
     float: left;
 
 }
