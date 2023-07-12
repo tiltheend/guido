@@ -1,3 +1,4 @@
+*,*:focus{outline:none;}
 /* -----------------구매자 프로필---------------------- */
 
 .buyer-profile-top{
@@ -122,9 +123,13 @@
     justify-content: space-between;
     width: 850px;
 }
-.ment,.changeMent{
+.ment{
     margin: 15px 0 0 2px;
     /* color:  #5C5C5C; */
+}
+.changeMent{
+    margin: 15px 0 0 2px;
+    margin-bottom: 30px;
 }
 
 
@@ -165,7 +170,7 @@ hr{
     position: relative;
 }
 .namePart{
-    margin: 0.6em 0;
+    margin: 0.6em 0 2em 0;
     width: 420px;
     height: 50px;
     position: relative;
@@ -219,7 +224,7 @@ hr{
 /* 실명 */
 /* 이름&성 칸 반반 */
 .last-name, .first-name{
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     width: 207px;
     position: relative;

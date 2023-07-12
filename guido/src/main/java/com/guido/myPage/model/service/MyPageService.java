@@ -24,6 +24,9 @@ public interface MyPageService {
 
 	// 주사용 언어 변경
 	int primaryLanguageEdit(User user);
+	
+	// 구사 가능 언어
+	int languageSkillEdit(User user);
 
 	// 회원 탈퇴
 	int secession(String inputPw, User user);

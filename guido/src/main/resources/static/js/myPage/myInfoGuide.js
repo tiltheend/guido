@@ -1,5 +1,3 @@
-
-
 // 수정 누르면 hidden 나오고 나머지 요소 막음 + 컬러 연하게
 
 const editInfoAreas = document.querySelectorAll(".edit-info-area");
@@ -65,22 +63,19 @@ const chk = {
     "lastName" : false,
     "firstName" : false,
     "phone" : false,
-    "passportNo" : false,
-    "primaryLanguage" : false,
-    "infoAgree1" : false,
-    "infoAgree2" : false
+    "languageSkill" : false,
+    "confirmationNo" : false
 };
 
-// 여권상 이름 검사, 변경
+// 이름 검사, 변경
 // 이름 검사
 const lastName = document.getElementById("lastName");
 const firstName = document.getElementById("firstName");
 const nameMessage1 = document.getElementById("nameMessage1");
 const nameMessage2 = document.getElementById("nameMessage2");
-
-// 유효성 검사
-// 하나 이상의 영어 알파벳, 공백, 마침표, 작은따옴표, 대시가 포함된 문자열
-const nameRegex = /^[a-zA-Z\s.'-]+$/;
+// 한글or영어로만.
+const nameRegex = /^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+$/
+;
 
 lastName.addEventListener("input",()=>{
     if(lastName.value.trim().length==0){
@@ -92,8 +87,8 @@ lastName.addEventListener("input",()=>{
     if(nameRegex.test(lastName.value)){
         nameMessage1.innerText = "";
         chk.lastName = true;
-    }else{ // 여권상 영문 아닐 때
-        nameMessage1.innerText = "여권상 영문명으로 작성해주세요.";
+    }else{ 
+        nameMessage1.innerText = "영어 혹은 한글로만 작성해주세요.";
         nameMessage1.classList.add("name-error");
         nameMessage1.classList.remove("possible-message");
         chk.lastName = false;
@@ -108,7 +103,7 @@ firstName.addEventListener("input",()=>{
         return;
     }
     if(!nameRegex.test(firstName.value)){
-        nameMessage2.innerText = "여권상 영문명으로 작성해주세요.";
+        nameMessage2.innerText = "영어 혹은 한글로만 작성해주세요.";
         nameMessage2.classList.add("name-error");
         nameMessage2.classList.remove("possible-message");
         chk.firstName = false;
@@ -309,7 +304,7 @@ phone.addEventListener("input",()=>{
         chk.phone = false;
     }
     if(phoneRegex.test(phone.value)){
-        phoneMessage.innerText = "국가를 다시 한번 확인해주세요.";
+        phoneMessage.innerText = "국가(대한민국)를 다시 한번 확인해주세요.";
         phoneMessage.classList.add("possible-message");
         phoneMessage.classList.remove("error-message");
         chk.phone = true;
@@ -322,21 +317,27 @@ phone.addEventListener("input",()=>{
 });
 
 telBtn.addEventListener("click",e=>{
+    // 국가코드 한국 아니면 chk.phone = false
+    if(countryCode.value!='kr'){
+        phoneMessage.innerText = "국가(대한민국)를 다시 한번 확인해주세요.";
+        phoneMessage.classList.remove("possible-message");
+        phoneMessage.classList.add("error-message");
+        e.preventDefault();
+        chk.phone = false;
+        return;
+    }
     if(!(chk.phone)){
-        // console.log("클릭 실패");
         e.preventDefault();
         return;
     }
     const userTel = countryNo.value + " " + phone.value;
-    console.log(userTel);
     const getUserTel = document.getElementById("getUserTel");
+    
     fetch("/edit/phone",{
         method : 'post',
         headers : {'Content-Type' : 'application/json'},
-        body : JSON.stringify({
-            "userTel" : userTel,
-            "countryCode": countryCode.value
-        })
+        // 가이드는 국가코드 저장 x
+        body : JSON.stringify({"userTel" : userTel})
     })
     .then(resp=>resp.json())
     .then(loginUser=>{
@@ -356,149 +357,66 @@ telBtn.addEventListener("click",e=>{
     .catch(e=>{console.log(e)});
 });
 
-// 비상 연락처
-const emergencyCo = document.querySelector("#emergencyCo");
-const emergCoMessage = document.querySelector("#emergCoMessage");
-const getEmergencyContact = document.querySelector("#getEmergencyContact");
-const emgBtn = document.querySelector("#emgBtn");
+// 구사 가능 언어
+// err)영어로 작성해주세요, 기본) 1개 이상 작성 시 ','로 구분해주세요. (ex. English, Korean, French)
+const languageSkill = document.getElementById("languageSkill");
+const languageSkillMessage = document.getElementById("languageSkillMessage");
+const getLanguageSkill = document.getElementById("getLanguageSkill");
+const skillBtn = document.getElementById("skillBtn");
 
-emergencyCo.addEventListener("focus",()=>{
-    emergCoMessage.innerText = "Twitter, Facebook, Instagram 등 SNS 주소도 가능합니다.";
-    emergCoMessage.classList.add("normal-message");
-});
+const skillRegex = /^[a-zA-Z,]+$/; // 영어, ',' 검사
 
-emergencyCo.addEventListener("input",()=>{
-    if(emergencyCo.value.trim().length==0){
-        emergencyCo.value="";
-    }
-});
-
-emgBtn.addEventListener("click",()=>{
-    if(emergencyCo.value.trim().length==0){
-        emergencyCo.value="";
+languageSkill.addEventListener("input",()=>{
+    if(languageSkill.value.trim().length==0){
+        languageSkill.value="";
+        languageSkillMessage.innerText="1개 이상 작성 시 ','로 구분해주세요. (ex. English,Korean,French)";
+        languageSkillMessage.classList.add("normal-message");
+        languageSkillMessage.classList.remove("error-message");
+        chk.languageSkill = false;
         return;
     }
-    fetch("/edit/emergencyContact",{
+    if(!skillRegex.test(languageSkill.value)){
+        languageSkillMessage.innerText = "영어로 작성해주세요.";
+        languageSkillMessage.classList.add("error-message");
+        languageSkillMessage.classList.remove("normal-message");
+        chk.languageSkill = false;
+    }else{
+        languageSkillMessage.innerText="1개 이상 작성 시 ','로 구분해주세요. (ex. English,Korean,French)";
+        languageSkillMessage.classList.add("normal-message");
+        languageSkillMessage.classList.remove("error-message");
+        chk.languageSkill = true;
+    }    
+});    
+// 수정
+skillBtn.addEventListener("click",e=>{
+    if(!(chk.languageSkill)){
+        e.preventDefault();
+        return;
+    }
+    fetch("/edit/languageSkill",{
         method : 'post',
         headers : {'Content-Type' : 'application/json'},
-        body : JSON.stringify(emergencyCo.value)
+        body : JSON.stringify(languageSkill.value)
     })
     .then(resp=>resp.json())
     .then(loginUser=>{
-        if(loginUser){ // 성공하면
-            alert("비상 연락처가 등록되었습니다.");
-            emergencyCo.value="";
-            getEmergencyContact.innerText = loginUser.emergencyContact;
-            emergCoMessage.innerText = "";
-            emergCoMessage.classList.remove("normal-message");
+        if(!loginUser){ // 실패
+            alert("구사 가능 언어 수정에 실패했습니다. 다시 시도해주세요.");
         }
-        if(!loginUser){
-            alert("비상 연락처 등록에 실패했습니다. 다시 시도해주세요.");
-            emergencyCo.focus();
-            return;
+        if(loginUser){
+            languageSkill.value = "";
+            languageSkillMessage.innerText = "";
+            languageSkillMessage.classList.remove("error-message");
+            languageSkillMessage.classList.remove("possible-message");
+            alert("구사 가능 언어가 수정되었습니다.");
+            getLanguageSkill.innerText = loginUser.languageSkill;
+            chk.languageSkill = false;
         }
     })
     .catch(e=>{console.log(e)});
 });
 
-// 여권 번호
-const passportNo = document.getElementById("passportNo");
-const passportMessage = document.getElementById("passportMessage");
-const passPortBtn = document.getElementById("passPortBtn");
-const getPassport = document.getElementById("getPassport");
 
-passportNo.addEventListener("input",()=>{
-    if(passportNo.value.trim().length==0){
-        passportNo.value="";
-        passportMessage.innerText="";
-        chk.passportNo = false;
-        return;
-    }else{
-        chk.passportNo = true;
-    }
-});
-passPortBtn.addEventListener("click",e=>{
-    if(!chk.passportNo){
-        e.preventDefault();
-        return;
-    }
-    fetch("/edit/passport",{
-        method : 'post',
-        headers : {'Cotent-Type':'application/json'},
-        body : JSON.stringify(passportNo.value)
-    })
-    .then(resp=>resp.json())
-    .then(loginUser=>{
-        if(loginUser){ // 성공하면
-            alert("여권 번호가 수정되었습니다. 임시 여권인 경우 여권 재발급 후 정상 여권 번호를 다시 등록해주세요.");
-            getPassport.innerText = loginUser.passportNo;
-            passportNo.value = "";
-            passportMessage.innerText="";
-        }
-        if(!loginUser){
-            alert("여권 번호 수정에 실패했습니다. 다시 시도해주세요.");
-            passportNo.focus();
-            chk.passportNo = false;
-        }
-    })
-    .catch(e=>console.log(e));
-});
-
-// 주 사용 언어
-// 영어로 작성해주세요.
-const primaryLanguage = document.getElementById("primaryLanguage");
-const pLanguageMessage = document.getElementById("pLanguageMessage");
-const langBtn = document.getElementById("langBtn");
-const getLang = document.getElementById("getLang");
-
-const engRegex = /^[A-Za-z]+$/; // 영어 검사
-
-primaryLanguage.addEventListener("input",()=>{
-    if(primaryLanguage.value.trim().length==0){
-        primaryLanguage.value="";
-        pLanguageMessage.innerText="";
-        chk.primaryLanguage = false;
-        return;
-    }
-    if(!engRegex.test(primaryLanguage.value)){
-        pLanguageMessage.innerText = "영어로 1개만 작성해주세요.";
-        pLanguageMessage.classList.add("error-message");
-        pLanguageMessage.classList.remove("possible-message");
-            chk.primaryLanguage = false;
-    }else{
-        pLanguageMessage.innerText="";
-        chk.primaryLanguage = true;
-    }    
-});   
-
-langBtn.addEventListener("click",e=>{
-    if(!chk.primaryLanguage){
-        e.preventDefault();
-        return;
-    }
-    fetch("/edit/primaryLanguage",{
-        method : 'post',
-        headers : {'Cotent-Type':'application/json'},
-        body : JSON.stringify(primaryLanguage.value)
-    })
-    .then(resp=>resp.json())
-    .then(loginUser=>{
-        if(loginUser){
-            getLang.innerText = loginUser.primaryLanguage;
-            primaryLanguage.value = "";
-            pLanguageMessage.innerText="";
-            pLanguageMessage.classList.remove("possible-message");
-            pLanguageMessage.classList.remove("remove-message");
-            alert("주 사용 언어가 수정되었습니다.");
-        }
-        if(!loginUser){
-            alert("주 사용 언어 수정에 실패했습니다. 다시 시도해주세요.");
-            primaryLanguage.focus();
-            chk.primaryLanguage;
-        }
-    })
-    .catch(e=>console.log(e));
-});
 
 
 //---------------
