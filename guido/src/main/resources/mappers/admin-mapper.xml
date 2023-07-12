@@ -123,6 +123,7 @@
 				JOIN "USER" U ON (R.USER_NO = U.USER_NO)
 				JOIN "PRODUCT_DT" PDT ON (R.PRODUCT_DT_NO = PDT.PRODUCT_DT_NO)
 				WHERE RESERVATION_STATE != 'N'
+				<if test="query != null">AND (USER_EMAIL LIKE '%${query}%' OR PRODUCT_NAME LIKE '%${query}%')</if>
 			</when>
 		</choose>
 	</select>
@@ -188,6 +189,7 @@
 				JOIN "USER" U ON (R.USER_NO = U.USER_NO)
 				JOIN "PRODUCT_DT" PDT ON (R.PRODUCT_DT_NO = PDT.PRODUCT_DT_NO)
 				WHERE RESERVATION_STATE != 'N'
+				<if test="query != null">AND (USER_EMAIL LIKE '%${query}%' OR PRODUCT_NAME LIKE '%${query}%')</if>
 				ORDER BY RESERVATION_NO DESC
 			</when>
 		</choose>
@@ -310,4 +312,57 @@
 	<delete id="deleteFile">
 		DELETE FROM "FILE" WHERE EVENT_NO=#{eventNo} AND FILE_ORDER=#{fileOrder}
 	</delete>
+	
+	
+	<update id="updateSuperGuide">
+		<![CDATA[  
+		UPDATE "GUIDE" G
+		SET G.SUPER_GUIDE_FL = 'Y'
+		WHERE G.USER_NO IN (
+			SELECT U.USER_NO
+			FROM "USER" U
+			JOIN "GUIDE" SG ON(U.USER_NO = SG.USER_NO)
+			WHERE SG.SUPER_GUIDE_FL = 'N' 
+			AND U.CREATE_DT <= ADD_MONTHS(SYSDATE, -1)
+			AND EXISTS (
+				SELECT 1
+				FROM "PRODUCT" P
+				INNER JOIN "REVIEW" R ON P.PRODUCT_NO = R.PRODUCT_NO
+				WHERE P.USER_NO = U.USER_NO
+				GROUP BY P.USER_NO
+				HAVING AVG(R.REVIEW_STARS) >= 4.5
+			)
+			AND EXISTS (
+				SELECT 1
+				FROM "PRODUCT" P
+				INNER JOIN "RESERVATION" RV ON P.PRODUCT_NO = RV.PRODUCT_NO
+				WHERE P.USER_NO = U.USER_NO
+				AND RV.RESERVATION_STATE = 'D'
+				GROUP BY P.USER_NO
+				HAVING COUNT(RV.RESERVATION_STATE) >= 2
+			)
+		)
+		]]>
+	</update>
+	
+	<update id="updateGeneralGuide">
+		<![CDATA[  
+		UPDATE "GUIDE"
+		SET SUPER_GUIDE_FL = 'N'
+		WHERE USER_NO IN (
+			SELECT U.USER_NO
+			FROM "USER" U
+			JOIN "GUIDE" SG ON(U.USER_NO = SG.USER_NO)
+			WHERE SG.SUPER_GUIDE_FL = 'Y'
+			AND U.USER_NO IN (
+		    	SELECT P.USER_NO
+		        FROM "PRODUCT" P
+		        INNER JOIN "REVIEW" R ON P.PRODUCT_NO = R.PRODUCT_NO
+		    	WHERE R.REVIEW_DEL_FL = 'N'
+		        GROUP BY P.USER_NO
+		        HAVING AVG(R.REVIEW_STARS) < 4.5
+			)
+		)
+		]]>
+	</update>
 </mapper>

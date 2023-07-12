@@ -230,7 +230,7 @@
 
 
 
-@media screen and (max-width : 500px) {
+@media screen and (max-width : 1300px) {
     .name-and-period{
         flex-direction: column;
     }
