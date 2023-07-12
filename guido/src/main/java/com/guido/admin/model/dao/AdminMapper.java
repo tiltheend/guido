@@ -9,6 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.QNA;
+import com.guido.common.model.dto.User;
 
 @Mapper
 public interface AdminMapper {
@@ -49,4 +50,8 @@ public interface AdminMapper {
 	int updateEvent(Event event);
 
 	int deleteFile(Map<String, Integer> map);
+
+	int updateSuperGuide();
+
+	int updateGeneralGuide();
 }

@@ -5,10 +5,6 @@
     flex-direction: column;
 }
 
-@media screen {
-    
-}
-
 .write-header {
     font-size: 16px;
     margin-top: 10px;
@@ -91,4 +87,11 @@
 input:focus{
     outline:2px solid #1C797D;
     border: 2px solid #1C797D;
+}
+
+@media screen and (max-width : 1000px){
+    .q-img-container img {
+        width: 70px;
+        height: 70px;
+    }
 }

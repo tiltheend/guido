@@ -11,21 +11,27 @@
 </head>
 <body>
     <img src='https://i.imgur.com/pQWCBfL.png'>
+    <div style="padding:10px">
+    <br>
     <div>안녕하세요 고객님.</div>
-    <div>문의하신 "[[${qna.qnaTitle}]]"에 대한 답변입니다.</div>
+    <div style="width:520px; white-space: pre-wrap; word-wrap: break-word;">문의하신 "[[${qna.qnaTitle}]]"에 대한 답변입니다.</div>
+    <br>
     <div>문의 내용 :
-        <div th:text="${qna.qnaContent}" style="white-space: pre-wrap;"/>
+        <div th:text="${qna.qnaContent}" style="width:520px; white-space: pre-wrap; word-wrap: break-word;"/>
     </div>
     <div>
-        <a th:each="file:${qna.fileList}" th:href="|http://localhost${file.filePath}|"><img th:src="|http://localhost${file.filePath}|"  style="width:100px; height: 100px; margin-left: 5px"></a>
+        <a th:each="file:${qna.fileList}" th:href="|http://localhost${file.filePath}|">
+            <img th:src="|http://localhost${file.filePath}|"  style="width:100px; height: 100px; margin-left: 5px">
+        </a>
     </div>
-    
+    <br>
     <div>답변 내용 :
-        <div th:text="${qna.qnaAnswer}" style="white-space: pre-wrap;"></div>
+        <div th:text="${qna.qnaAnswer}" style="width:520px; white-space: pre-wrap; word-wrap: break-word;"></div>
     </div>
     <br>
     <img src='https://i.imgur.com/PcUN2ne.png'>
     <br>
+    </div>
     <img src='https://i.imgur.com/lpqS2eL.png'>
 </body>
 </html>
