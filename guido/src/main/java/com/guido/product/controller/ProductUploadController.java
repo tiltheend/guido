@@ -61,12 +61,12 @@ public class ProductUploadController {
 			if(loginUser.getProfileImage() == null ) {
 				
 				message = "프로필 이미지 등록 후 상품 등록이 가능합니다.";
-				path += "/";
+				path += "/profile/" + loginUser.getUserNo();
 				
 			}else if(loginUser.getUserType().equals("T")){
 				
 				message = "가이드로 로그인 후 이용해주세요.";
-				path += "/";
+				path += "/user/loginPage";
 			}
 			
 			else {
@@ -131,7 +131,7 @@ public class ProductUploadController {
 			
 		}else {
 			message = "상품 등록 실패,";
-			path += "/upload";
+			path += "/common/home";
 		}
 		
 		ra.addFlashAttribute("message", message);
@@ -178,7 +178,7 @@ public class ProductUploadController {
 				
 			}else {
 				message = "비정상적인 접근입니다.";
-				path += "redirect:/";
+				path += "redirect:/common/home";
 			}
 			
 			ra.addFlashAttribute("message", message);
@@ -228,22 +228,24 @@ public class ProductUploadController {
 		
 		@GetMapping("/productDetail/product/{productNo}/delete")
 		public String productDelete(
-						@PathVariable("productNo") int productNo
+						@SessionAttribute User loginUser
+						,@PathVariable("productNo") int productNo
 						
 						,RedirectAttributes ra
 						) {
+			
 			
 			int result = service.productDelete(productNo);
 			
 			String path = "redirect:";
 			String message = null;
 			if(result > 0) {
+				
 				message = "삭제 되었습니다.";
-				path += "/";
+				path += "/common/home";
 			}else {
 				message = "삭제 실패";
 				path += "/productDetail/product/" + productNo;
-				//path += referer;
 			}
 
 			ra.addFlashAttribute("message", message);
