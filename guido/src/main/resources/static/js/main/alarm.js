@@ -7,56 +7,41 @@ let alarmSock;
 if(loginUser != null){
 	alarmSock = new SockJS("/alarm");
 }
-// let alarmSock = new SockJS("/alarm");
 
-/* 
-	회원 유형 
-	가이드 : G
-	여행객 : T
-*/
-
-// 리뷰 등록 알람
-function sendReview(productNo, productName){
-
-	// [가이드]
-	// 리뷰 등록 : (상품 이름) 상품에 리뷰가 작성되었습니다.
-	// -> 마이페이지 해당 상품에 리뷰로 이동
-
-	// [여행객]
-	// 리뷰 등록 : (판매자 이름)님이 댓글을 작성하였습니다.
-
-	// 매개 변수 JS객체에 저장
-	let obj = {};
-
-	obj.senderNo = loginUserNo; // 보낸 회원 번호
-	// obj.userName = userName; // 보낸 회원 이름
-	obj.productNo = productNo; // 상품 번호
-	obj.productName = productName; // 상품 이름
-	obj.notificationType = "R";
-
-	// console.log(obj);
-
-	alarmSock.send(JSON.stringify(obj));
-}
+/* 회원 유형 (가이드 G / 여행객 T) */
 
 
 // 관심상품 등록 알람
 function sendWish(productNo, productName){
 
-	// [가이드]
-	// 관심상품 등록 : (상품 이름) 상품이 총 #건 관심상품으로 등록되었습니다.
-	// -> 해당 상품 상세 페이지로 이동
-
+	// 매개 변수 JS객체에 저장
 	let obj = {};
 
-	obj.senderNo = loginUserNo;
+	obj.senderNo = loginUser.userNo;
 	// obj.userName = userName;
 	obj.productNo = productNo;
 	obj.productName = productName;
 	// 관심상품 등록 개수
 	obj.notificationType = "L";
 
-	// console.log(obj);
+	console.log(obj);
+
+	alarmSock.send(JSON.stringify(obj));
+}
+
+
+// 리뷰 등록 알람
+function sendReview(productNo, productName){
+
+	let obj = {};
+
+	obj.senderNo = loginUser.userNo; 
+	// obj.userName = userName; 
+	obj.productNo = productNo; 
+	obj.productName = productName; 
+	obj.notificationType = "R";
+
+	console.log(obj);
 
 	alarmSock.send(JSON.stringify(obj));
 }
@@ -65,20 +50,12 @@ function sendWish(productNo, productName){
 // 예약 완료 알람
 function sendReservation(productNo, productName){
 
-	// [가이드]
-	// - 예약 완료 : (상품 이름) 상품이 예약되었습니다.
-	// 	-> 판매자 예약완료 페이지로 이동
-	
-	// [여행객]
-	// - 예약 완료 : (상품 이름)의 예약이 완료되었습니다.
-
-	// 매개 변수 JS객체에 저장
 	let obj = {};
 
-	obj.senderNo = loginUserNo; // 보낸 회원 번호
-	// obj.userName = userName; // 보낸 회원 이름
-	obj.productNo = productNo; // 상품 번호
-	obj.productName = productName; // 상품 이름
+	obj.senderNo = loginUser.userNo;
+	// obj.userName = userName; 
+	obj.productNo = productNo; 
+	obj.productName = productName; 
 	obj.notificationType = "O";
 
 	console.log(obj);
@@ -103,20 +80,32 @@ function sendReservation(productNo, productName){
 	alarmModalContent.textContent = obj.notificationContent;
 }
  */
+
+// 웹소켓 새로 온 알림
 window.addEventListener('DOMContentLoaded', function() {
     // 알림 내용을 표시할 요소 선택
     const alarmModalContent = document.querySelector('.alarm-modal-content');
 
     alarmSock.onmessage = function(e) {
-
-		alarmModalContent.innerHTML = "";
+        alarmModalContent.innerHTML = "";
 
         const obj = JSON.parse(e.data);
-        console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
+        console.log(`보낸 사람: ${obj.senderNo} / ${obj.notificationContent}`);
+
+        // 이미지 경로를 저장할 변수
+        let imageSrc = '';
+
+        // 이미지 경로 설정
+        if (obj.notificationType === 'L') {
+            imageSrc = '/images/icons/alarm_wish.png';
+        } else {
+            imageSrc = '/images/icons/alarm_guide.png';
+        }
+
+        // 이미지 요소와 알림 내용을 포함하는 HTML 생성
+        const contentWithImage = `<div><img src="${imageSrc}"><span>${obj.notificationContent}</span></div>`;
 
         // 알림 내용을 요소에 설정
-        //alarmModalContent.textContent = obj.notificationContent;
-		const contentWithImage = `<img src="/images/icons/alarm_wish.svg" alt=""> ${obj.notificationContent}`;
         alarmModalContent.innerHTML = contentWithImage;
     };
 
@@ -124,7 +113,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
+// 누적 알림 10개 조회
 function alarmFn(){
 
 	alarmModalBox = document.querySelector(".alarm-modal");
@@ -137,29 +126,27 @@ function alarmFn(){
 		if(alarmList.length > 0){
 			for(let alarm of alarmList){
 
-				// // 각 알림에 대한 처리 수행
-				// const notificationContent = alarm.notificationContent;
-				// const senderNo = alarm.senderNo;
-
-				// console.log('누적 알림 : ' + notificationContent);
-
-				// // 예시: 알림 내용과 보낸 사람 정보를 표시
-				// const alarmContent = document.createElement("div");
-				// alarmContent.textContent = `${notificationContent}`;
-
-				// alarmModalBox.appendChild(alarmContent);
-
-
 				// 각 알림에 대한 처리 수행
 				const notificationContent = alarm.notificationContent;
 				const senderNo = alarm.senderNo;
+				const notificationType = alarm.notificationType;
 			
-				console.log('누적 알림 : ' + notificationContent);
-			
-				// 예시: 알림 내용과 보낸 사람 정보를 표시
+				// console.log('누적 알림 : ' + notificationContent);
+				
 				const alarmContent = document.createElement("div");
+
+				/* const alarmClose = document.createElement("div");
+				alarmClose.classList.add("alarm-modal-close");
+				alarmContent.appendChild(alarmClose); */
+
 				const image = document.createElement("img");
-				image.src = "/images/icons/alarm_wish.svg";
+				let imageSrc = '';
+				if (notificationType === 'L') {
+					imageSrc = "/images/icons/alarm_wish.png";
+				} else {
+					imageSrc = "/images/icons/alarm_guide.png";
+				}
+				image.src = imageSrc;
 				image.alt = "알림 이미지";
 				alarmContent.appendChild(image);
 			
@@ -179,3 +166,5 @@ function alarmFn(){
 		console.log(err);
 	})
 }
+
+

@@ -21,6 +21,7 @@
 		<result property="senderNo" column="SENDER_NO" />
 		<result property="chattingNo" column="CHATTING_NO" />
 		<result property="sendTime" column="SEND_TIME" />
+		<result property="type" column="TYPE" />
 	</resultMap>
 
 	
@@ -49,6 +50,11 @@
 				WHERE M2.CHATTING_NO = R.CHATTING_NO
 				ORDER BY MESSAGE_NO DESC) 
 				WHERE ROWNUM = 1) LAST_MESSAGE
+			,(SELECT TYPE FROM (
+				SELECT * FROM MESSAGE M2
+				WHERE M2.CHATTING_NO = R.CHATTING_NO
+				ORDER BY MESSAGE_NO DESC) 
+				WHERE ROWNUM = 1) TYPE
 			,TO_CHAR(NVL((SELECT MAX(SEND_TIME) SEND_TIME 
 					FROM MESSAGE M
 					WHERE R.CHATTING_NO  = M.CHATTING_NO), CH_CREATE_DATE), 
@@ -102,7 +108,7 @@
 	<!-- 채팅 메세지 삽입 -->
 	<insert id="insertMessage">
 		INSERT INTO "MESSAGE"
-		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, #{senderNo}, #{chattingNo})
+		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, #{senderNo}, #{chattingNo}, ${type})
 	</insert>
 	
 	

@@ -73,8 +73,8 @@ function slideNextFn(el){
 }
 
 // 하트 색 바꾸기
-function toggleHeart() {
-    let heartIcon = event.target;
+function toggleHeart(btn) {
+    let heartIcon = btn;
     // heartIcon.setAtrribute("src",'');
     // heartIcon.classList.toggle("selected");
     
@@ -86,9 +86,10 @@ function toggleHeart() {
 
         let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
         // console.log(productNo);
+        // console.log(loginUserNo);
 
-        let productName = heartIcon.parentElement.parentElement.querySelector('.product-name').getAttribute("data-productname");
-        // console.log(productName);
+        let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
+        console.log(productName);
 
         if (heartIcon.classList.contains("selected")) {
             check = 1; // 관심상품 등록 O
@@ -125,9 +126,9 @@ function toggleHeart() {
                 }
                 // console.log("관심상품 등록 성공");
 
-
             } else {
                 // console.log("관심상품 등록 실패");
+                alert("로그인 후 사용 가능합니다.");
             }
     
         })
@@ -140,7 +141,7 @@ function toggleHeart() {
 
 
 // 상품 제목 "..."
-document.addEventListener("DOMContentLoaded", function() {
+/* document.addEventListener("DOMContentLoaded", function() {
     var productNameElements = document.querySelectorAll(".product-name");
     if (productNameElements) {
         productNameElements.forEach(function(element) {
@@ -151,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
+}); */
 
 
 
@@ -173,29 +174,24 @@ function loadProductByTheme(themeCode) {
             const singleItem = document.createElement("div");
             singleItem.classList.add("slider");
             singleItem.classList.add("single-item");
+            singleItem.setAttribute("data-productno", themeProduct.productNo);
 
-            const productImage = document.createElement("div");
-            productImage.classList.add("productImage");
-
-            for (let image of themeProduct.imageList) {
-                const img = document.createElement("img");
-                img.setAttribute("src", image.filePath);
-                productImage.appendChild(img);
+            if(themeProduct.imageList){
+                for (let image of themeProduct.imageList) {
+                    let div = document.createElement("div");
+                    div.classList.add("productImage");
+                    
+                    let imgLink = document.createElement("a");
+                    imgLink.setAttribute("href", "/productDetail/product/" + themeProduct.productNo);
+    
+                    let img = document.createElement("img");
+                    img.setAttribute("src", image.filePath);
+                    imgLink.appendChild(img);
+    
+                    div.appendChild(imgLink);
+                    singleItem.appendChild(div);
+                }
             }
-
-            /* for (let image of themeProduct.imageList) {
-                const imgLink = document.createElement("a");
-                imgLink.setAttribute("th:href", "'/productDetail/product/' + ${product.productNo}");
-                imgLink.setAttribute("th:text", "${product.productName}");
-
-                const img = document.createElement("img");
-                img.setAttribute("src", image.filePath);
-                imgLink.appendChild(img);
-
-                productImage.appendChild(imgLink);
-            } */
-
-            singleItem.appendChild(productImage);
             productRow.appendChild(singleItem);
 
             const slideBtn = document.createElement("div");
@@ -215,7 +211,7 @@ function loadProductByTheme(themeCode) {
 
             productRow.appendChild(slideBtn);
 
-            const addWishHeart = document.createElement("div");
+            /* const addWishHeart = document.createElement("div");
             addWishHeart.classList.add("add-wish-heart");
 
             const heartIcon = document.createElement("img");
@@ -223,6 +219,33 @@ function loadProductByTheme(themeCode) {
             heartIcon.setAttribute("src", "/images/profile/empty.png");
             heartIcon.setAttribute("onclick", "toggleHeart()");
             addWishHeart.appendChild(heartIcon);
+
+            productRow.appendChild(addWishHeart); */
+
+            const addWishHeart = document.createElement("div");
+            addWishHeart.classList.add("add-wish-heart");
+            
+            const wish = themeProduct.wishOrNot;
+            console.log(wish);
+            if (loginUserNo != 0) { // 로그인 상태인 경우
+
+                const heartIcon = document.createElement("img");
+                heartIcon.classList.add("heart-icon");
+                heartIcon.setAttribute("onclick", "toggleHeart(this)");
+                heartIcon.setAttribute("src", "/images/profile/empty.png");
+                addWishHeart.appendChild(heartIcon);
+                
+                if (wish === '1') {
+                    heartIcon.classList.add("selected");
+                }
+            } 
+            else { // 로그인 상태가 아닌 경우
+                const heartIcon = document.createElement("img");
+                heartIcon.classList.add("heart-icon");
+                heartIcon.setAttribute("onclick", "toggleHeart(this)");
+                heartIcon.setAttribute("src", "/images/profile/empty.png");
+                addWishHeart.appendChild(heartIcon);
+            }
 
             productRow.appendChild(addWishHeart);
 
@@ -237,9 +260,9 @@ function loadProductByTheme(themeCode) {
             productNameDiv.appendChild(productName);
 
             // 상품 이름 글자수
-            if (productName.textContent.length > 23) {
+            /* if (productName.textContent.length > 23) {
                 productName.textContent = productName.textContent.substring(0, 23) + "...";
-            }
+            } */
 
             const reviewDiv = document.createElement("div");
             
@@ -272,7 +295,10 @@ function loadProductByTheme(themeCode) {
             const priceDiv = document.createElement("div");
 
             const priceText = document.createElement("p");
-            priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+            // 천의 자리에 콤마 추가
+            const formattedPrice = new Intl.NumberFormat('en-US').format(themeProduct.productPrice);
+            priceText.innerHTML = `₩ ${formattedPrice} / total`;
             priceDiv.appendChild(priceText);
 
             salesText.appendChild(priceDiv);

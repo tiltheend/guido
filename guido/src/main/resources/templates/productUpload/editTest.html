@@ -140,7 +140,7 @@
       </div>
       <div class="set-fee">
        <div class="set-fee-container">
-        <input type="text" name="" id="feeInput" placeholder="₩35,000">
+        <input type="text" name="" id="feeInput" placeholder="₩35,000" th:value="'₩' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')}">
         <input type="hidden" name="productPrice">
         <span>가이드 최소,최대 수입 확인하기<i class="fa-thin fa-chevron-up"></i></span>
       </div>

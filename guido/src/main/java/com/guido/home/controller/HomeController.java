@@ -46,7 +46,7 @@ public class HomeController {
 		
 		// 상품 목록 조회
 		List<Product> productList = service.selectProductList(userNo);
-		model.addAttribute("productList", productList); 
+		model.addAttribute("productList", productList);
 		
 		// 인기 여행지 목록 조회
 		List<Product> popularProductList = service.selectPopularProductList(userNo);
@@ -74,7 +74,86 @@ public class HomeController {
 	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
 	    return service.selectThemeProdList(themeCode);
 	}
-
+	
+	
+	// 전체 상품 목록 조회
+	@GetMapping("/products")
+	public String productList(Model model
+			, @SessionAttribute(value="loginUser", required=false) User loginUser) {
+		
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
+		
+		List<Product> productAll = service.selectProductAll(userNo);
+		model.addAttribute("productAll", productAll); 
+		
+		// System.out.println("productAll" + productAll);
+		
+		return "common/productList";
+	}
+	
+	
+	// 인기 상품 목록 조회
+	@GetMapping("/popular_products")
+	public String popularProductList(Model model
+			, @SessionAttribute(value="loginUser", required=false) User loginUser) {
+		
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
+		
+		List<Product> popularProductAll = service.selectPopularProductAll(userNo);
+		model.addAttribute("popularProductAll", popularProductAll);
+		
+		// System.out.println("popularProductAll" + popularProductAll);
+		
+		return "common/popularList";
+	}
+	
+	
+	// 슈퍼가이드 상품 목록 조회
+	@GetMapping("/superguide_products")
+	public String superguideProductList(Model model
+			, @SessionAttribute(value="loginUser", required=false) User loginUser) {
+		
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
+		
+		List<Product> superProductAll = service.selectSuperProductAll(userNo);
+		model.addAttribute("superProductAll", superProductAll);
+		
+		// System.out.println("superProductAll" + superProductAll);
+		
+		return "common/superList";
+	}
+	
+	
+	// 추천 상품 목록 조회
+	@GetMapping("/recommendation_products")
+	public String recommendationProductList(Model model
+			, @SessionAttribute(value="loginUser", required=false) User loginUser) {
+		
+		int userNo = 0;
+		
+		if(loginUser != null) {
+			userNo = loginUser.getUserNo();
+		}
+		
+		List<Product> recommProductAll = service.selectRecommProductAll(userNo);
+		model.addAttribute("recommProductAll", recommProductAll);
+		
+		// System.out.println("recommProductAll" + recommProductAll);
+		
+		return "common/recommList";
+	}
 	
 	
 	// 검색 페이지

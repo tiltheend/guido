@@ -59,8 +59,6 @@ editInfoAreas.forEach((editArea)=>{
 // 유효성 검사
 
 const chk = {
-    "email" : false,
-    "inputAuth" : false,
     "originPw" : false,
     "password" : false,
     "checkPassword" : false,
@@ -155,11 +153,11 @@ nameBtn.addEventListener("click",e=>{
             document.getElementById("getName").innerText = loginUser.userName;
             document.getElementById("myInfoName").innerText = loginUser.userName;
             // 바로 다시 버튼 눌리는 거 방지
+            chk.firstName = false;
+            chk.lastName = false;
         }
     })
     .catch(e=>console.log(e));
-    chk.firstName = false;
-    chk.lastName = false;
 });
 
 
@@ -290,10 +288,10 @@ changePwBtn.addEventListener("click",e=>{
                 originPw.value="";
                 newPwMent.style.display = "none";
                 newPwPart.style.display = "none";
+                chk.originPw = false;
             }
         })
         .catch(e=>console.log(e));
-        chk.originPw = false;
     }
 });
 
@@ -325,13 +323,13 @@ phone.addEventListener("input",()=>{
 
 telBtn.addEventListener("click",e=>{
     if(!(chk.phone)){
+        // console.log("클릭 실패");
         e.preventDefault();
         return;
     }
     const userTel = countryNo.value + " " + phone.value;
     console.log(userTel);
     const getUserTel = document.getElementById("getUserTel");
-
     fetch("/edit/phone",{
         method : 'post',
         headers : {'Content-Type' : 'application/json'},
@@ -352,10 +350,10 @@ telBtn.addEventListener("click",e=>{
             phoneMessage.classList.remove("possible-message");
             alert("전화번호가 수정되었습니다.");
             getUserTel.innerText = loginUser.userTel;
+            chk.phone = false;
         }
     })
     .catch(e=>{console.log(e)});
-    chk.phone = false;
 });
 
 // 비상 연락처
@@ -440,10 +438,10 @@ passPortBtn.addEventListener("click",e=>{
         if(!loginUser){
             alert("여권 번호 수정에 실패했습니다. 다시 시도해주세요.");
             passportNo.focus();
+            chk.passportNo = false;
         }
     })
     .catch(e=>console.log(e));
-    chk.passportNo = false;
 });
 
 // 주 사용 언어
@@ -496,10 +494,10 @@ langBtn.addEventListener("click",e=>{
         if(!loginUser){
             alert("주 사용 언어 수정에 실패했습니다. 다시 시도해주세요.");
             primaryLanguage.focus();
+            chk.primaryLanguage;
         }
     })
     .catch(e=>console.log(e));
-    chk.primaryLanguage;
 });
 
 
@@ -553,8 +551,7 @@ secessionUserBtn.addEventListener("click",e=>{
         }
         if(result>0){ // 탈퇴 성공
             alert("탈퇴 되었습니다. guido를 잊지 말아주세요...");
-            // window.location.href = "/common/home";
-            window.location.href = "/";
+            window.location.href = "/common/home";
         }
     })
     .catch(err=>console.log(err));

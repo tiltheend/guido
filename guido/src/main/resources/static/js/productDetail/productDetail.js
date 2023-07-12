@@ -329,7 +329,7 @@ if(document.getElementById("wishHeart")!=null){
             if(result==0){
                 console.log("관심상품 등록 실패");
             }
-            sendWish(productNo, productName) // 관심상품 등록 알림
+            sendWish(productNo, productName); // 관심상품 등록 알림
 
     
         })
@@ -343,16 +343,13 @@ if(document.getElementById("wishHeart")!=null){
 
 
 
-let faceModal = document.getElementById("faceImgModal");
 
 // 모달 창 토글
 function toggleModal() {
+    let faceModal = document.getElementById("faceImgModal");
     faceModal.style.display = (faceModal.style.display === "block") ? "none" : "block";
 }
 
-faceModal.addEventListener('click', ()=>{
-    toggleModal();
-});
 
 
 

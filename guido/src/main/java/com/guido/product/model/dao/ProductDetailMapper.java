@@ -62,11 +62,6 @@ public interface ProductDetailMapper {
 	// 상품 전체 일정 조회
 	List<ProductDate> selectAllProductDateList(int productNo);
 
-	// 현재 날짜보다 이전인 일정 조회
-	List<ProductDate> selectPassedDateList();
-
-	// 현재 날짜보다 이전인 일정 사용 불가 처리
-	void updatePassedDateList(ProductDate pd);
 
 	
 }

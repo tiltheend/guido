@@ -469,9 +469,6 @@ td {
 }
 
 @media screen and (max-width : 500px) {
-    .name-and-period{
-        flex-direction: column;
-    }
 
     .size500{
         display: none;
@@ -527,4 +524,8 @@ td {
     #search{
         width:auto;
     }
+}
+
+.confirmation-no{
+    font-size: 0.8rem;
 }

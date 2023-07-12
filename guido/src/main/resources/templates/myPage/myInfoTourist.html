@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/libraries/intl-tel-input/build/css/signUpIntlTelInput.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage/myInfoTourist.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
 </head>
 <body>
     <th:block th:replace="~{common/header}"></th:block>
@@ -263,7 +264,7 @@
                         <div class="cancel font4 hidden">닫기</div>
                     </div>
                     <div class="ment font4" id="getLang" th:text="*{primaryLanguage}"></div>
-                    <div class="changeMent font4 hidden">임시 발급/변경된 여권 번호를 입력해주세요.</div>
+                    <div class="changeMent font4 hidden">주로 사용하는 언어 1개만 입력해주세요.</div>
                     <!-- 숨은 부분 -->
                     <div class="hidden-area">
                         <div class="inputGroup">

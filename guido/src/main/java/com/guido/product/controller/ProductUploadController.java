@@ -46,6 +46,7 @@ public class ProductUploadController {
 							 , RedirectAttributes ra
 							 ) throws IllegalStateException, IOException, Exception{
 		
+		
 		List<TourTheme> tourTheme = service.selectTourTheme();
 //		System.out.println(loginUser.getUserType());
 //		System.out.println(loginUser.getUserType().getClass().getSimpleName());
@@ -54,13 +55,26 @@ public class ProductUploadController {
 			System.out.println("tourTheme" + tourTheme);
 //			System.out.println(loginUser.getLanguageSkill());
 			
+			String path = "redirect:";
+			String message = null;
+			
 			if(loginUser.getProfileImage() == null ) {
-				return "redirect:/";
+				
+				message = "프로필 이미지 등록 후 상품 등록이 가능합니다.";
+				path += "/profile/" + loginUser.getUserNo();
+				
 			}else if(loginUser.getUserType().equals("T")){
-				return "redirect:/";
+				
+				message = "가이드로 로그인 후 이용해주세요.";
+				path += "/user/loginPage";
 			}
 			
-			return "productUpload/test";
+			else {
+				
+				return "productUpload/test";
+			}
+			ra.addFlashAttribute("message", message);
+			return path;
 		
 	}	
 	
@@ -113,11 +127,11 @@ public class ProductUploadController {
 		if(productNo > 0) {
 			System.out.println(product);
 			message = "상품이 등록 되었습니다.";
-			path += "/productDetail/" + "product/" + productNo;
+			path += "/productDetail/product/" + productNo;
 			
 		}else {
 			message = "상품 등록 실패,";
-			path += "/upload";
+			path += "/common/home";
 		}
 		
 		ra.addFlashAttribute("message", message);
@@ -130,10 +144,16 @@ public class ProductUploadController {
 		@GetMapping("/productDetail/product/{productNo}/edit")
 		public String productEdit(
 				@PathVariable("productNo") int productNo
+				,@SessionAttribute("loginUser") User loginUser
+				,RedirectAttributes ra
 				,Model model) {
-			
+	
 			
 			Product product = productDetailService.selectProduct(productNo);
+			
+			String message = null;
+			String path = "";
+			
 			
 			//투어 테마 호출
 			List<TourTheme> tourTheme = service.selectTourTheme();
@@ -149,16 +169,28 @@ public class ProductUploadController {
 			model.addAttribute("addNotesList", addNotesList);
 			model.addAttribute("tourTheme", tourTheme);
 			
-//			System.out.println(product.getImageList().get(0).getFilePath());
-//			System.out.println(product.getProductAddPrice());
-			
-			// 구분자로 문자열 나누기(addNotes)
 		
-//			System.out.println(product.getTourCourse().get(0).getCourseOrder());
+			
+			if(loginUser.getUserNo() == product.getUserNo()) {
+				
+				message = "수정페이지로 이동합니다.";
+				path += "productUpload/editTest";
+				
+			}else {
+				message = "비정상적인 접근입니다.";
+				path += "redirect:/common/home";
+			}
+			
+			ra.addFlashAttribute("message", message);
+			
+			return path;
+		}
+		
+			
 
 			
-			return "productUpload/editTest";
-		}
+		
+			
 		
 		// 여행상품 수정
 		@PostMapping("/productDetail/product/{productNo}/edit")
@@ -191,6 +223,34 @@ public class ProductUploadController {
 				ra.addFlashAttribute("message", message);
 				
 				return path;
+		}
+
+		
+		@GetMapping("/productDetail/product/{productNo}/delete")
+		public String productDelete(
+						@SessionAttribute User loginUser
+						,@PathVariable("productNo") int productNo
+						
+						,RedirectAttributes ra
+						) {
+			
+			
+			int result = service.productDelete(productNo);
+			
+			String path = "redirect:";
+			String message = null;
+			if(result > 0) {
+				
+				message = "삭제 되었습니다.";
+				path += "/common/home";
+			}else {
+				message = "삭제 실패";
+				path += "/productDetail/product/" + productNo;
+			}
+
+			ra.addFlashAttribute("message", message);
+			
+			return path;
 		}
 
 		

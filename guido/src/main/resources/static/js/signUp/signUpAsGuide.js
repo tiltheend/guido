@@ -348,7 +348,6 @@ phone.addEventListener("input",()=>{
         phone.value = "";
         phoneMessage.innerText = "";
         chk.phone = false;
-        return;    
     }
     if(phoneRegex.test(phone.value)){
         phoneMessage.innerText = "국가(대한민국)를 다시 한번 확인해주세요.";
@@ -360,8 +359,8 @@ phone.addEventListener("input",()=>{
         phoneMessage.classList.remove("possible-message");
         phoneMessage.classList.add("error-message");
         chk.phone = false;
-
     }
+    
 });
 
 

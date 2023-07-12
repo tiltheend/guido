@@ -49,14 +49,19 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public int telEdit(User user) {
 		
-		int result1 = mapper.telEdit(user);
-		int result2= mapper.countryCodeEdit(user);
+		int result = mapper.telEdit(user); // 유저 테이블 (공통)
 		
-		if((result1>0)&&(result2>0)) { // 둘 다 성공 해야만 함
-			return 1; // 성공
-		}else { // 둘 중 하나라도 실패 시
-			throw new MyPageUpdateException();
+		if(user.getCountryCode()!=null) { // 투어리스트만 추가로 투어리스트 테이블 update
+			int touristResult= mapper.countryCodeEdit(user); 
+			if((result>0)&&(touristResult>0)) { // 둘 다 성공 해야만 함
+				return 1; // 성공
+			}else { // 둘 중 하나라도 실패 시
+				throw new MyPageUpdateException(); // 강제 오류 발생
+			}
 		}
+		
+		return result;
+		
 	}
 	
 	// 비상 연락처 저장 
@@ -84,6 +89,15 @@ public class MyPageServiceImpl implements MyPageService{
 	public int primaryLanguageEdit(User user) {
 		
 		return mapper.primaryLanguageEdit(user);
+		
+	}
+	
+	// 구사 가능 언어 저장 
+	@Transactional(rollbackFor = { Exception.class })
+	@Override
+	public int languageSkillEdit(User user) {
+		
+		return mapper.languageSkillEdit(user);
 		
 	}
 	

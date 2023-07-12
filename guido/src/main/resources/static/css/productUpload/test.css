@@ -469,7 +469,7 @@ div.tour-theme > span > span {
 }
 /* 이미지 */
 .productImg img {
-  min-width: 100%;
+  min-width: 80%;
   height: 100%;
   border-radius: 5px;
 }
