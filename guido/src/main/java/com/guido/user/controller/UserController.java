@@ -67,31 +67,53 @@ public class UserController {
 	
 	// 가이드 
 	@GetMapping("/myPage/editInfo/guide")
-	public String editMyPageGuide(@SessionAttribute("loginUser") User loginUser, Model model) {
+	public String editMyPageGuide(@SessionAttribute("loginUser") User loginUser, Model model, RedirectAttributes ra, @RequestHeader(value="referer") String referer) {
 		
-		int userNo= loginUser.getUserNo();
+		System.out.println(loginUser.getUserType());
 		
-		User user = service2.userInfo(userNo);
+		if(loginUser.getUserType().equals("G")) { // 가이드가 맞으면  
+			
+			int userNo= loginUser.getUserNo();
+			
+			//(나현) 프로필에서 가져올 추가 정보들
+			User user = service2.userInfo(userNo);
+			User guide = service3.selectGuideInfo(userNo);
+			
+			model.addAttribute("user", user);
+			model.addAttribute("guide", guide);
+			
+			return "myPage/myInfoGuide";
+			
+		}else { // 가이드가 아니면 
+			
+			ra.addFlashAttribute("message", "비정상적인 접근입니다.");
+			return "redirect:"+referer;
+			
+		}
 		
-		model.addAttribute("user", user);
-		
-		User guide = service3.selectGuideInfo(userNo);
-		
-		model.addAttribute("guide", guide);
-		
-		return "myPage/myInfoGuide";
 	}
+	
 	// 투어리스트 
 	@GetMapping("/myPage/editInfo/tourist")
-	public String editMyPageTourist(@SessionAttribute("loginUser") User loginUser, Model model) {
+	public String editMyPageTourist(@SessionAttribute("loginUser") User loginUser, Model model, RedirectAttributes ra, @RequestHeader(value="referer") String referer) {
 		
-		int userNo= loginUser.getUserNo();
+		System.out.println(loginUser.getUserType());
 		
-		User user = service2.userInfo(userNo);
-		
-		model.addAttribute("user", user);
-		
-		return "myPage/myInfoTourist";
+		if(loginUser.getUserType().equals("T")) { // 투어리스트가 맞으면  
+			
+			int userNo= loginUser.getUserNo();
+			
+			User user = service2.userInfo(userNo);
+			
+			model.addAttribute("user", user);
+			
+			return "myPage/myInfoTourist";
+			
+		}else { // 투어리스트 아니면
+			
+			ra.addFlashAttribute("message", "비정상적인 접근입니다.");
+			return "redirect:"+referer;
+		}
 	}
 	
 	//----------------
