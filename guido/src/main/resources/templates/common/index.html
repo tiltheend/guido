@@ -39,7 +39,7 @@
     <!-- <th:block th:if="${session.loginMember != null}"> -->
     <div class="write-btn">
         <th:block th:if="${session.loginUser != null and session.loginUser.userType == 'G'}">
-            <a th:href="@{#}"><img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기"></a> 
+            <a th:href="@{/upload}"><img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기"></a> 
         </th:block>
     </div>
     <!-- </th:block> -->
