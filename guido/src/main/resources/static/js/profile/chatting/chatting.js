@@ -420,6 +420,7 @@ inputChatting.addEventListener("keyup", e => {
 })
 
 
+let alarmOn = document.querySelector(".chatting-icon .alarm-on");
 
 // WebSocket 객체 chattingSock이 서버로 부터 메세지를 통지 받으면 자동으로 실행될 콜백 함수
 chattingSock.onmessage = function(e) {
@@ -427,6 +428,7 @@ chattingSock.onmessage = function(e) {
 	const msg = JSON.parse(e.data);
 	console.log(msg);
 
+	if(alarmOn!=null) document.querySelector(".chatting-icon .alarm-on").style.display="block";
 
 	// 현재 채팅방을 보고있는 경우
 	if(selectChattingNo == msg.chattingNo){
