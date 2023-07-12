@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Guido</title>
+
+    
     <!-- 캘린더 -->
     <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap-datepicker.css}">
     <!-- <link rel="stylesheet" th:href="@{/css/main/calendar/bootstrap.css}"> -->
@@ -23,6 +25,7 @@
     <!-- <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js}"></script> -->
     <script th:src="@{/js/main/calendar/bootstrap-datepicker.js}"></script>
     <script th:src="@{/js/main/calendar/bootstrap.js}"></script>
+
 
 </head>
 
@@ -195,8 +198,8 @@
             <div>
                 <th:block th:if="${session.loginUser}">
                     <div class="mypage-modal-close"></div>
+                    <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
                     <th:block th:switch="${session.loginUser.userType}">  
-                        <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
                         <th:block th:case="T">
                             <a th:href="@{/profile/touristReservation}"><div>결제 및 예약 내역</div></a>
                             <a th:href="@{/profile/touristWishList}"><div>위시리스트</div></a>
