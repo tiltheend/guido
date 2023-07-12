@@ -141,7 +141,7 @@ function toggleHeart(btn) {
 
 
 // 상품 제목 "..."
-document.addEventListener("DOMContentLoaded", function() {
+/* document.addEventListener("DOMContentLoaded", function() {
     var productNameElements = document.querySelectorAll(".product-name");
     if (productNameElements) {
         productNameElements.forEach(function(element) {
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
+}); */
 
 
 
@@ -226,7 +226,7 @@ function loadProductByTheme(themeCode) {
             addWishHeart.classList.add("add-wish-heart");
             
             const wish = themeProduct.wishOrNot;
-            
+            console.log(wish);
             if (loginUserNo != 0) { // 로그인 상태인 경우
 
                 const heartIcon = document.createElement("img");
@@ -235,7 +235,7 @@ function loadProductByTheme(themeCode) {
                 heartIcon.setAttribute("src", "/images/profile/empty.png");
                 addWishHeart.appendChild(heartIcon);
                 
-                if (wish === 1) {
+                if (wish === '1') {
                     heartIcon.classList.add("selected");
                 }
             } 
@@ -260,9 +260,9 @@ function loadProductByTheme(themeCode) {
             productNameDiv.appendChild(productName);
 
             // 상품 이름 글자수
-            if (productName.textContent.length > 23) {
+            /* if (productName.textContent.length > 23) {
                 productName.textContent = productName.textContent.substring(0, 23) + "...";
-            }
+            } */
 
             const reviewDiv = document.createElement("div");
             

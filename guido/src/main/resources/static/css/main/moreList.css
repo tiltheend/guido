@@ -270,6 +270,13 @@
   }
   .main-post .product-post .sales-text>div:nth-child(1)>p{
     font-weight: bold;
+    width: 250px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
   .main-post .product-post .sales-text>div:nth-child(1) img{
     width: 12px; margin-right: 4px;
@@ -665,6 +672,13 @@
     }
     .main-post .product-post .sales-text>div:nth-child(1)>p{
       font-weight: bold;
+      width: 250px;
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
     }
     .main-post .product-post .sales-text>div:nth-child(1) img{
       width: 12px; margin-right: 4px;
