@@ -303,8 +303,7 @@ function loadProductByTheme(themeCode) {
             const priceDiv = document.createElement("div");
 
             const priceText = document.createElement("p");
-            // priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
-            // 천의 자리에 콤마 추가
+
             const formattedPrice = new Intl.NumberFormat('en-US').format(themeProduct.productPrice);
             priceText.innerHTML = `₩ ${formattedPrice} / total`;
             priceDiv.appendChild(priceText);
@@ -312,6 +311,25 @@ function loadProductByTheme(themeCode) {
             salesText.appendChild(priceDiv);
 
             productRow.appendChild(salesText); 
+
+            // const priceDiv = document.createElement("div");
+            // const priceText = document.createElement("p");
+
+            // switch (product.productPackage) {
+            // case 1:
+            //     const formattedTotalPrice = new Intl.NumberFormat('en-US').format(product.productPrice);
+            //     priceText.innerHTML = `₩ ${formattedTotalPrice} / total`;
+            //     break;
+            // default:
+            //     const formattedPrice = new Intl.NumberFormat('en-US').format(product.productPrice);
+            //     priceText.innerHTML = `₩ ${formattedPrice} / each`;
+            //     break;
+            // }
+
+            // priceDiv.appendChild(priceText);
+            // salesText.appendChild(priceDiv);
+
+            // productRow.appendChild(salesText);
 
             productListContainer.appendChild(productRow);
         }
