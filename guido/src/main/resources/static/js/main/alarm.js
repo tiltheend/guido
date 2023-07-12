@@ -91,9 +91,17 @@ window.addEventListener('DOMContentLoaded', function() {
         const obj = JSON.parse(e.data);
         console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
 
+		let contentWithImage = '';
+
+		if (obj.notificationType === 'L') {
+			contentWithImage = `<img src="/images/icons/alarm_wish.png" alt=""> ${obj.notificationContent}`;
+        } 
+		else{
+			contentWithImage = `<img src="/images/icons/alarm_guide.png" alt=""> ${obj.notificationContent}`;
+        }
+
         // 알림 내용을 요소에 설정
         //alarmModalContent.textContent = obj.notificationContent;
-		const contentWithImage = `<img src="/images/icons/alarm_wish.svg" alt=""> ${obj.notificationContent}`;
         alarmModalContent.innerHTML = contentWithImage;
     };
 
@@ -118,10 +126,14 @@ function alarmFn(){
 				const notificationContent = alarm.notificationContent;
 				const senderNo = alarm.senderNo;
 			
-				console.log('누적 알림 : ' + notificationContent);
-			
-				// 예시: 알림 내용과 보낸 사람 정보를 표시
+				// console.log('누적 알림 : ' + notificationContent);
+				
 				const alarmContent = document.createElement("div");
+
+				const alarmClose = document.createElement("div");
+				alarmClose.classList.add("alarm-modal-close");
+				alarmContent.appendChild(alarmClose);
+
 				const image = document.createElement("img");
 				image.src = "/images/icons/alarm_wish.svg";
 				image.alt = "알림 이미지";
@@ -143,3 +155,5 @@ function alarmFn(){
 		console.log(err);
 	})
 }
+
+

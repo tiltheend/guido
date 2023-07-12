@@ -395,7 +395,7 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
 /* 마이페이지 */
 .mypage-modal{
   width: 200px;
-  height: 226px;
+  /* height: 226px; */
   background-color: #fff;
   border: 1px solid #C5C5C5;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -414,12 +414,17 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
   font-size: 16px;
 }
 .mypage-modal hr{
+  position: absolute;
+  width: 80%;
+  margin-top: 85px;
+  /* margin-bottom: 16px; */
+}
+.mypage-modal a{
   width: 100%;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .mypage-modal>div>div{
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .mypage-modal-close{
@@ -472,7 +477,9 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
   cursor: pointer;
 }
 .alarm-modal-close:after{
-  display: inline-block;content: "\00d7"; font-size:15pt;
+  display: inline-block;
+  content: "\00d7"; 
+  font-size:15pt;
 }
 
 

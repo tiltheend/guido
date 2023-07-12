@@ -9,28 +9,24 @@
     <title>Guido</title>
 
     <!-- css -->
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- <link rel="stylesheet" th:href="@{/css/style.css}"> -->
     <link rel="stylesheet" th:href="@{/css/main.css}">
 
-    <th:block th:replace="~{common/header}"></th:block>
     <!-- owl 슬라이드 -->
-    <!-- <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.carousel.min.css}"> -->
-    <!-- <link rel="stylesheet" th:href="@{/libraries/assets/owlcarousel/assets/owl.theme.default.min.css}"> -->
     <link rel="stylesheet" th:href="@{/css/main/slide/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/css/main/slide/owl.theme.default.min.css}">
 
     <!-- slick 슬라이드 -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main/slide/mainPostSlick.css}">
-    
-    <th:block th:replace="~{common/header}"></th:block>
+
     <!-- js -->
-    <!-- <script th:src="@{/js/main/slide/jquery.min.js}"></script> -->
+    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
     <script th:src="@{/js/main/slide/owl.carousel.js}"></script>
+    <th:block th:replace="~{common/header}"></th:block>
 
     <!-- 테마 검색 -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
-
 </head>
 
 <body>
@@ -38,9 +34,11 @@
 
     <!-- 로그인한 가이드 글 작성 버튼 -->
     <!-- <th:block th:if="${session.loginMember != null}"> -->
-        <div class="write-btn">
-            <img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기">
-        </div>
+    <div class="write-btn">
+        <th:block th:if="${session.loginUser != null and session.loginUser.userType == 'G'}">
+            <a th:href="@{#}"><img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기"></a> 
+        </th:block>
+    </div>
     <!-- </th:block> -->
 
     <!-- ***** 메인 영역 슬라이드 ***** -->
@@ -82,9 +80,7 @@
     <div class="categori-icon-box-container">
         <div class="categori-icon-box">
             <div th:each="themeType : ${application.themeTypeList}">
-                <!-- <a th:href="@{#}"> -->
                 <a th:onclick="|loadProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
-                <!-- <a th:href="@{/common/index/themeType.themeCode}"> -->
                     <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
                     <button th:text="${themeType.THEME_NAME}">테마 이름</button>
                 </a>
@@ -94,7 +90,6 @@
 
     <!-- ***** 게시글 영역 ***** -->
     <!-- 상품 게시글 -->
-    <!-- <div class="post-more"><button type="button">more +</button></div> -->
     <article class="main-post">
 
         <div class="product-post">
@@ -152,7 +147,14 @@
                                 <span>[[${product.regionName}]]</span>
                             </div>
                             <div>
-                                <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                <th:block th:switch="${product.productPackage}">
+                                    <th:block th:case="1">
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                    </th:block>
+                                    <th:block th:case="*">
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                    </th:block>
+                                </th:block>
                             </div>
                         </div>
                     </li>
@@ -161,14 +163,16 @@
             </ul>
         </div>
     </article>
-    
+    <div class="post-more-first"><button type="button" th:onclick="location.href='/common/products'">more</button></div>
+
     <hr>
     
     <div class="divide-main">
         <p>인기 여행지</p>
+        <!-- <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="@{/images/icons/popular-spot.png}" alt=""></a> -->
         <img th:src="@{/images/icons/popular-spot.png}" alt="">
     </div>
-    <div class="post-more"><button type="button">more +</button></div>
+    <div class="post-more"><button type="button" th:onclick="location.href='/common/popular_products'">more +</button></div>
     <!-- 인기 여행지 -->
     <article class="main-post">
     
@@ -197,12 +201,12 @@
                     <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
                         <!-- 로그인 상태인 경우 -->
                         <th:block th:if="${session.loginUser != null}">
-                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                         </th:block>
                         <!-- 로그인 상태가 아닌 경우 -->
                         <th:block th:unless="${session.loginUser != null}">
-                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                         </th:block>
                     </div>
                     <div class="sales-text">
@@ -218,7 +222,14 @@
                             <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                            <th:block th:switch="${product.productPackage}">
+                                <th:block th:case="1">
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                </th:block>
+                                <th:block th:case="*">
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                </th:block>
+                            </th:block>
                         </div>
                     </div>
                 </li>
@@ -232,7 +243,7 @@
         <p>슈퍼 가이드 PICK</p>
         <img th:src="@{/images/icons/superguide-pick.png}" alt="">
     </div>
-    <div class="post-more"><button type="button">more +</button></div>
+    <div class="post-more"><button type="button" th:onclick="location.href='/common/superguide_products'">more +</button></div>
     <!-- 슈퍼가이드 추천 여행지 -->
     <article class="main-post">
         <div class="product-post"> 
@@ -260,12 +271,12 @@
                     <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
                         <!-- 로그인 상태인 경우 -->
                         <th:block th:if="${session.loginUser != null}">
-                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                         </th:block>
                         <!-- 로그인 상태가 아닌 경우 -->
                         <th:block th:unless="${session.loginUser != null}">
-                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                         </th:block>
                     </div>
                     <div class="sales-text">
@@ -281,7 +292,14 @@
                             <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 1, 'COMMA')} + ' / total'"></p>
+                            <th:block th:switch="${product.productPackage}">
+                                <th:block th:case="1">
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                </th:block>
+                                <th:block th:case="*">
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                </th:block>
+                            </th:block>
                         </div>
                     </div>
                 </li>
@@ -292,10 +310,10 @@
     <hr>
 
     <div class="divide-main">
-        <p>추천 상품</p>
+        <p>추천 여행지</p>
         <img th:src="@{/images/icons/recommendation.png}" alt="">
     </div>
-    <div class="post-more"><button type="button">more +</button></div>
+    <div class="post-more"><button type="button" th:onclick="location.href='/common/recommendation_products'">more +</button></div>
     <!-- 관심지역 기반 추천 상품 -->
     <article class="main-post">
     
@@ -324,12 +342,12 @@
                     <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
                         <!-- 로그인 상태인 경우 -->
                         <th:block th:if="${session.loginUser != null}">
-                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
+                            <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                         </th:block>
                         <!-- 로그인 상태가 아닌 경우 -->
                         <th:block th:unless="${session.loginUser != null}">
-                            <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                            <img class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                         </th:block>
                     </div>
                     <div class="sales-text">
@@ -345,7 +363,14 @@
                             <span>[[${product.regionName}]]</span>
                         </div>
                         <div>
-                            <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                            <th:block th:switch="${product.productPackage}">
+                                <th:block th:case="1">
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                </th:block>
+                                <th:block th:case="*">
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                </th:block>
+                            </th:block>
                         </div>
                     </div>
                 </li>

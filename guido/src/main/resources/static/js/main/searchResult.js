@@ -78,8 +78,8 @@ function slideNextFn(el){
 
 
 // 하트 색 바꾸기
-function toggleHeart() {
-    let heartIcon = event.target;
+function toggleHeart(btn) {
+    let heartIcon = btn;
     // heartIcon.setAtrribute("src",'');
     // heartIcon.classList.toggle("selected");
     
@@ -87,24 +87,25 @@ function toggleHeart() {
     if(document.querySelector(".heart-icon")!=null){
         
         let check;      // 관심상품 등록 여부
-        console.log(check);
+        // console.log(check);
 
         let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
-        console.log(productNo);
+        // console.log(productNo);
 
-        /* 관심 상품 등록 O */
+        let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
+        // console.log(productName);
+
         if (heartIcon.classList.contains("selected")) {
-            check = 1;
+            check = 1; // 관심상품 등록 O
         } else {
-            /* 관심 상품 등록X */
-            check = 0;
+            check = 0; // 관심상품 등록 X
         }
         
         let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
 
         const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
 
-        console.log(selected);
+        // console.log(selected);
 
         fetch("/common/updateWishList",{
             method : "POST",
@@ -113,7 +114,6 @@ function toggleHeart() {
         })
         .then(resp=>resp.text())
         .then(result=>{
-            
 
             if(result==1){
                 if (heartIcon.classList.contains("selected")) {
@@ -126,10 +126,13 @@ function toggleHeart() {
                     for(i of selected){
                         i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
                     }
+                    sendWish(productNo, productName); // 관심상품 등록 알림
                 }
-                console.log("위시 성공?");
+                // console.log("관심상품 등록 성공");
+
             } else {
-                console.log("관심상품 등록 실패");
+                // console.log("관심상품 등록 실패");
+                alert("로그인 후 사용 가능합니다.");
             }
     
         })
@@ -198,17 +201,25 @@ function loadSelectedProductByTheme(themeCode) {
             const singleItem = document.createElement("div");
             singleItem.classList.add("slider");
             singleItem.classList.add("single-item");
+            singleItem.setAttribute("data-productno", themeProduct.productNo);
 
-            const productImage = document.createElement("div");
-            productImage.classList.add("productImage");
-
-            for (let image of themeProduct.imageList) {
-                const img = document.createElement("img");
-                img.setAttribute("src", image.filePath);
-                productImage.appendChild(img);
+            if(themeProduct.imageList){
+                for (let image of themeProduct.imageList) {
+                    let div = document.createElement("div");
+                    div.classList.add("productImage");
+                    
+                    let imgLink = document.createElement("a");
+                    imgLink.setAttribute("href", "/productDetail/product/" + themeProduct.productNo);
+    
+                    let img = document.createElement("img");
+                    img.setAttribute("src", image.filePath);
+                    imgLink.appendChild(img);
+    
+                    div.appendChild(imgLink);
+                    singleItem.appendChild(div);
+                }
             }
 
-            singleItem.appendChild(productImage);
             productRow.appendChild(singleItem);
 
             const slideBtn = document.createElement("div");
@@ -228,7 +239,7 @@ function loadSelectedProductByTheme(themeCode) {
 
             productRow.appendChild(slideBtn);
 
-            const addWishHeart = document.createElement("div");
+            /* const addWishHeart = document.createElement("div");
             addWishHeart.classList.add("add-wish-heart");
 
             const heartIcon = document.createElement("img");
@@ -236,6 +247,33 @@ function loadSelectedProductByTheme(themeCode) {
             heartIcon.setAttribute("src", "/images/profile/empty.png");
             heartIcon.setAttribute("onclick", "toggleHeart()");
             addWishHeart.appendChild(heartIcon);
+
+            productRow.appendChild(addWishHeart); */
+
+            const addWishHeart = document.createElement("div");
+            addWishHeart.classList.add("add-wish-heart");
+            
+            const wish = themeProduct.wishOrNot;
+            
+            if (loginUserNo != 0) { // 로그인 상태인 경우
+
+                const heartIcon = document.createElement("img");
+                heartIcon.classList.add("heart-icon");
+                heartIcon.setAttribute("onclick", "toggleHeart(this)");
+                heartIcon.setAttribute("src", "/images/profile/empty.png");
+                addWishHeart.appendChild(heartIcon);
+                
+                if (wish === 1) {
+                    heartIcon.classList.add("selected");
+                }
+            } 
+            else { // 로그인 상태가 아닌 경우
+                const heartIcon = document.createElement("img");
+                heartIcon.classList.add("heart-icon");
+                heartIcon.setAttribute("onclick", "toggleHeart(this)");
+                heartIcon.setAttribute("src", "/images/profile/empty.png");
+                addWishHeart.appendChild(heartIcon);
+            }
 
             productRow.appendChild(addWishHeart);
 

@@ -94,7 +94,7 @@
 	<select id="selectProductList" resultMap="product_rm">
 	    SELECT *
 		FROM (
-		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME,
+		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
@@ -121,7 +121,7 @@
 	<select id="selectPopularProductList" resultMap="product_rm">
 		SELECT *
 		FROM (
-		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME,
+		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
@@ -148,7 +148,7 @@
 	<select id="selectSuperProductList" resultMap="product_rm">
 		SELECT *
 		FROM (
-		    SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, G.SUPER_GUIDE_FL, 
+		    SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, G.SUPER_GUIDE_FL, P.PRODUCT_PACKAGE,
 		           (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		            FROM REVIEW 
 		            WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
@@ -176,7 +176,7 @@
 	<select id="selectRecommProductList" resultMap="product_rm">
 	    SELECT *
 		FROM (
-		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME,
+		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
 		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
 		          FROM REVIEW
 		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
@@ -202,7 +202,7 @@
 	
 	<!-- 테마검색 상품목록 조회 -->
 	<select id="selectThemeProdList" resultMap="product_rm">
-		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, 
+		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
 		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		        FROM REVIEW 
 		        WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS
@@ -236,7 +236,7 @@
 
 	<!-- 검색 조건 일치하는 상품 목록 조회 -->
 	<select id="selectSearchResult" resultMap="product_rm">
-		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, 
+		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
 		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		        FROM REVIEW 
 		        WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
@@ -269,13 +269,13 @@
 		<if test="tourist != ''"> 
 			AND '${tourist}' BETWEEN P.PRODUCT_MIN_TOURIST AND P.PRODUCT_MAX_TOURIST
 		</if>
-		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME
+		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE
 	</select>
 	
 	
 	<!-- 헤더 위치 검색 -->
 	<select id="locationSearch" resultType="String">
-	    SELECT DISTINCT column_alias
+	    <!--SELECT DISTINCT column_alias
 	    FROM (
 	        SELECT 
 	            CASE
@@ -291,13 +291,30 @@
 	        WHERE P.PRODUCT_STATE = 'N'
 	        AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
 	        ORDER BY priority ASC
-	    )
+	    )-->
+	    SELECT DISTINCT column_alias, PRIORITY
+		FROM (
+		    SELECT 
+		        CASE
+		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN TRIM(C.COURSE_NAME)
+		            ELSE TRIM(P.REGION_NAME)
+		        END AS column_alias,
+		        CASE
+		            WHEN C.COURSE_NAME LIKE '%${location}%' THEN 2
+		            ELSE 1
+		        END AS priority
+		    FROM PRODUCT P
+		    LEFT JOIN TOUR_COURSE C ON P.PRODUCT_NO = C.PRODUCT_NO
+		    WHERE P.PRODUCT_STATE = 'N'
+		    AND (P.REGION_NAME LIKE '%${location}%' OR C.COURSE_NAME LIKE '%${location}%')
+		   )
+		ORDER BY PRIORITY
 	</select>
 	
 	
 	<!-- 검색 페이지 내에서 테마 검색 상품 목록 조회 -->
 	<select id="selectSearchThemeProdList" resultMap="product_rm">
-		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME,
+		SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
 		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		        FROM REVIEW 
 		        WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS
@@ -322,7 +339,7 @@
 			AND '${tourist}' BETWEEN P.PRODUCT_MIN_TOURIST AND P.PRODUCT_MAX_TOURIST
 		</if>
 		AND P.THEME_CODE = #{themeCode}
-		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME
+		GROUP BY P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE
 	</select>
 	
 	
@@ -390,6 +407,103 @@
 		WHERE EVENT_NO = #{eventNo}
 		ORDER BY FILE_ORDER
 	</select> -->
+	
+	
+	<!-- 전체 상품 목록 조회 -->
+	<select id="selectProductAll" resultMap="product_rm">
+	    SELECT *
+		FROM (
+		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
+		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
+		          FROM REVIEW
+		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
+		          <if test="userNo != 0">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
+            	  <if test="userNo == 0">
+				  NULL
+				  </if>
+		  FROM PRODUCT P
+		  WHERE P.PRODUCT_STATE = 'N'
+		  ORDER BY P.CREATE_DT DESC
+		)
+	</select>
+	
+	
+	<!-- 인기 여행지 목록 조회 -->
+	<select id="selectPopularProductAll" resultMap="product_rm">
+		SELECT *
+		FROM (
+		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
+		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
+		          FROM REVIEW
+		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
+		         <if test="userNo != 0">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
+            	  <if test="userNo == 0">
+				  NULL
+				  </if>
+		  FROM PRODUCT P
+		  WHERE P.PRODUCT_STATE = 'N'
+		  ORDER BY (SELECT COUNT(*) FROM WISHLIST WHERE PRODUCT_NO = P.PRODUCT_NO) DESC
+		)
+	</select>
+
+
+	<!-- 슈퍼가이드 상품 목록 조회 -->
+	<select id="selectSuperProductAll" resultMap="product_rm">
+		SELECT *
+		FROM (
+		    SELECT P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, G.SUPER_GUIDE_FL, P.PRODUCT_PACKAGE,
+		           (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
+		            FROM REVIEW 
+		            WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
+		          <if test="userNo != 0">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
+            	  <if test="userNo == 0">
+				  NULL
+				  </if>
+		    FROM PRODUCT P
+		    LEFT JOIN GUIDE G ON P.USER_NO = G.USER_NO
+		    WHERE P.PRODUCT_STATE = 'N' AND G.SUPER_GUIDE_FL = 'Y'
+		    ORDER BY REVIEW_STARS DESC
+		)
+	</select>
+	
+
+	<!-- ********** 추천 상품 목록 조회 ********** -->
+	<select id="selectRecommProductAll" resultMap="product_rm">
+	    SELECT *
+		FROM (
+		  SELECT ROWNUM, P.PRODUCT_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.REGION_NAME, P.PRODUCT_PACKAGE,
+		         (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0')
+		          FROM REVIEW
+		          WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS,
+		          <if test="userNo != 0">
+	              (SELECT COUNT(*) 
+	              FROM WISHLIST
+	              WHERE USER_NO = #{userNo}
+	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
+            	  </if>
+            	  <if test="userNo == 0">
+				  NULL
+				  </if>
+		  FROM PRODUCT P
+		  WHERE P.PRODUCT_STATE = 'N'
+		  ORDER BY P.CREATE_DT DESC
+		)
+	</select>
 	
 	
 

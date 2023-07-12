@@ -9,7 +9,7 @@
     <title>Guido</title>
 
     <!-- css -->
-    <link rel="stylesheet" th:href="@{/css/main/searchResult.css}">
+    <link rel="stylesheet" th:href="@{/css/main/moreList.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <!-- slick 슬라이드 -->
@@ -25,16 +25,7 @@
     <th:block th:replace="~{common/header}"></th:block>
 
     <!-- ***** 카테고리 아이콘 ***** -->
-    <div class="categori-icon-box-container">
-        <div class="categori-icon-box">
-            <div th:each="themeType : ${application.themeTypeList}">
-                <a th:onclick="|loadSelectedProductByTheme(${themeType.THEME_CODE})|" class="theme-icon-link">
-                    <img th:src="${themeType.THEME_IMG}" alt="테마 이미지">
-                    <button th:text="${themeType.THEME_NAME}">테마 이름</button>
-                </a>
-            </div>
-        </div>
-    </div>
+    <div class="small-title" style="font-size: 0;">  </div>
 
     <!-- 상품 게시글 -->
     <article class="main-post">
@@ -50,7 +41,7 @@
                 </th:block> -->
 
                 <!-- <th:block th:unless="${#lists.size(productList)} == 0"> -->
-                    <li class="product-row" th:each="product : ${searchResultList}">
+                    <li class="product-row" th:each="product : ${productAll}">
                         <div class="slider single-item" th:data-productno="${product.productNo}"> 
                             <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}">
                                 <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${image.filePath}"></a>
@@ -96,10 +87,10 @@
                             <div>
                                 <th:block th:switch="${product.productPackage}">
                                     <th:block th:case="1">
-                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
                                     </th:block>
                                     <th:block th:case="*">
-                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
                                     </th:block>
                                 </th:block>
                             </div>
@@ -152,6 +143,6 @@
     <script th:src="@{/libraries/assets/js/app.js}"></script>
     
     <!-- js -->
-    <script th:src="@{/js/main/searchResult.js}"></script>
+    <script th:src="@{/js/main/main.js}"></script>
 </body>
 </html>

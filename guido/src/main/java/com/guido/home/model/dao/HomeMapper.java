@@ -62,6 +62,19 @@ public interface HomeMapper {
 	List<Event> selectEventBannerList();
 
 
+	// 전체 상품 목록 조회
+	List<Product> selectProductAll(int userNo);
+
+	// 인기 상품 목록 조회
+	List<Product> selectPopularProductAll(int userNo);
+
+	// 슈퍼가이드 상품 목록 조회
+	List<Product> selectSuperProductAll(int userNo);
+
+	// 추천 상품 목록 조회
+	List<Product> selectRecommProductAll(int userNo);
+
+
 
 
 }
