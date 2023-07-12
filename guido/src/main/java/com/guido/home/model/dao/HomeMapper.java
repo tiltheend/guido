@@ -29,7 +29,7 @@ public interface HomeMapper {
 
 	
 	// 테마검색 상품목록 조회
-	List<Product> selectThemeProdList(int themeCode);
+	List<Product> selectThemeProdList(Map<String, Integer> map);
 
 
 	// 검색 페이지

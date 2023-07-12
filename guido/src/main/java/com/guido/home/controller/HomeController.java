@@ -77,14 +77,11 @@ public class HomeController {
 		Map<String, Integer> map = new HashMap<>();
 		
 		map.put("themeCode", themeCode);
-		
-		if(loginUser == null) {
-			map.put("userNo", -1);			
-		} else {
+		if(loginUser != null) {			
 			map.put("userNo", loginUser.getUserNo());						
 		}
-		
-		List<Product> themeList = service.selectThemeProdList(themeCode);
+
+		List<Product> themeList = service.selectThemeProdList(map);
 		
 	    return themeList;
 	}
