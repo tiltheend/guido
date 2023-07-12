@@ -11,6 +11,11 @@ const btnContainer = document.getElementById('btnContainer');
 // const tourBox = document.getElementbyClassName('tour-box');
 var body = document.querySelector('body');
 // sbmtBtn.classList.add('.hidden');
+
+nextBtn.addEventListener('click', () => {
+  if (currentPage < pages.length) currentPage++;
+  updatePage();
+});
 const updatePage = () => {
   nextBtn.disabled = false;
 
@@ -36,6 +41,9 @@ const updatePage = () => {
     typing6();
     init();
     // checkTourCourse();
+    if (tourCourse.length == 0) {
+      nextBtn.disabled = true;
+    }
   }
   if (currentPage == 3) {
     updateNextBtnState();
@@ -84,20 +92,20 @@ const updatePage = () => {
     document.querySelector('.text13').innerHTML = '';
     typing13();
     disableNextButton();
+    nextBtn.style.display = 'flex';
+    sbmtBtn.style.display = 'none';
   }
   if (currentPage == 12) {
+    // submintBtnDisplay();
     document.querySelector('.text14').innerHTML = '';
     typing14();
+    nextBtn.style.display = 'none';
+    sbmtBtn.style.display = 'flex';
   }
 };
 
 prevBtn.addEventListener('click', () => {
   if (currentPage > 0) currentPage--;
-  updatePage();
-});
-
-nextBtn.addEventListener('click', () => {
-  if (currentPage < pages.length) currentPage++;
   updatePage();
 });
 
@@ -121,22 +129,6 @@ function updateTourValue3() {
 var selectedElement = null;
 const tourThemeItems = document.querySelectorAll('[name="tourTheme"]');
 
-// const checkTheme = () => {
-//   nextBtn.disabled = true;
-//   for (var i = 0; i < themeList.length; i++) {
-//     themeList[i].addEventListener('change', function () {
-//       let isChecked = false;
-
-//       for (let j = 0; j < themeList.length; j++) {
-//         if (themeList[j].checked) {
-//           isChecked = true;
-//           break;
-//         }
-//       }
-//       nextBtn.disabled = !isChecked;
-//     });
-//   }
-// };
 function updateNextBtnState() {
   let isChecked = false;
   for (let i = 0; i < themeList.length; i++) {
@@ -357,7 +349,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var mainElement14 = document.getElementById('page15');
   if (mainElement14) {
-    mainElement14.style.width = '70%';
+    mainElement14.style.width = '85%';
   }
 });
 //3페이지
@@ -927,6 +919,14 @@ inputDay.addEventListener('input', () => {
   minTouristName.value = '';
 });
 
+// var hasBossCourse = tourCourse.some(function (course) {
+//   return course.bossCourseFl === 'Y';
+// });
+
+// if (!hasBossCourse) {
+//   nextBtn.disabled = true;
+// }
+
 inputTime.addEventListener('input', () => {
   if (inputTime.value > 0) {
     minTouristNum[0].style.display = 'block';
@@ -970,12 +970,18 @@ function validateMinMaxInput2() {
 const form = document.getElementById('productUploadFrm');
 
 form.addEventListener('submit', (e) => {
+  if (tourCourse.length == 0) {
+    e.preventDefault();
+    alert('투어 코스를 입력해야 합니다.');
+    return;
+  }
   e.preventDefault();
   document.getElementById('tourCourse').value = JSON.stringify(tourCourse);
   document.getElementById('productOption').value =
     JSON.stringify(productOption);
   console.log(document.getElementById('tourCourse').value);
   console.log(document.getElementById('productOption').value);
+
   form.submit();
 });
 
@@ -990,5 +996,44 @@ const displayNoneTime = () => {
     createTime.style.display = 'none';
   } else {
     createTime.style.display = 'inline-block';
+  }
+};
+
+const selectOptionName = document.getElementById('selectOptionName');
+const insertTimeBtn = document.getElementById('insertTimeBtn');
+const optionNameArray = [];
+
+insertTimeBtn.addEventListener('click', function () {
+  if (
+    selectOptionName.value !== '' &&
+    !optionNameArray.includes(selectOptionName.value)
+  ) {
+    optionNameArray.push(selectOptionName.value);
+    console.log(optionNameArray);
+  } else if (optionNameArray.includes(selectOptionName.value)) {
+    alert('같은 시간은 입력할 수 없습니다');
+    return;
+  }
+});
+// String.prototype.toHHMMSS = function () {
+//   var myNum = parseInt(this, 10);
+//   var hours = Math.floor(myNum / 3600);
+//   var minutes = Math.floor((myNum - hours * 3600) / 60);
+//   var seconds = myNum - hours * 3600 - minutes * 60;
+
+//   if (hours < 10) {
+//     hours = '0' + hours;
+//   }
+//   if (minutes < 10) {
+//     minutes = '0' + minutes;
+//   }
+//   if (seconds < 10) {
+//     seconds = '0' + seconds;
+//   }
+//   return hours + ':' + minutes;
+// };
+const disabledTourCourse = () => {
+  for (let i = 0; i < tourCourse.length; i++) {
+    tourCourse[i].bossCourseFL;
   }
 };

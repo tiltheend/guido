@@ -95,7 +95,9 @@ function displayPlaces(places) {
       //클릭하면 요소 생성되는 코드 작성하기**
 
       kakao.maps.event.addListener(marker, 'click', function () {
+        nextBtn.disabled = false;
         console.log(x, y);
+
         var checkboxElement = document.createElement('input');
         checkboxElement.setAttribute('type', 'radio');
         checkboxElement.setAttribute('name', 'tourCourse');
@@ -112,41 +114,26 @@ function displayPlaces(places) {
         deleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-xmark');
         deleteIcon.style.color = '#000000';
 
-        deleteIcon.addEventListener('click', function (e) {
-          e.stopPropagation();
-          deleteIcon.parentNode.remove();
-          var index = tourCourse.indexOf(courseInfo);
-          if (index !== -1) {
-            tourCourse.splice(index, 1);
-          }
-        });
-
         var createCourseDiv = document.querySelector('.create-course');
 
         // 같은 경로가 이미 등록되어 있는지 확인합니다.
-        var isDuplicate = false;
-        for (var i = 0; i < createCourseDiv.childElementCount; i++) {
-          var existingInput = createCourseDiv.children[i];
-          if (existingInput.value === checkboxElement.value) {
+        var isDuplicate = false; // 중복 체크를 위한 변수
+        var checkedRadio = null; // 체크된 radio 요소
+        var previousRadio = null; // 이전에 체크된 radio 요소
+
+        for (var i = 0; i < tourCourse.length; i++) {
+          if (tourCourse[i].latitude === y && tourCourse[i].longitude === x) {
             isDuplicate = true;
             break;
           }
         }
 
         if (!isDuplicate) {
-          if (createCourseDiv.childElementCount < 20) {
+          if (createCourseDiv.childElementCount < 30) {
             createCourseDiv.appendChild(checkboxElement);
             createCourseDiv.appendChild(labelElement);
             labelElement.appendChild(deleteIcon);
             numElements++; // numElements 변수를 증가시킴
-
-            checkboxElement.addEventListener('change', function () {
-              if (checkboxElement.checked) {
-                courseInfo.bossCourseFL = 'Y';
-              } else {
-                courseInfo.bossCourseFL = 'N';
-              }
-            });
 
             var courseInfo = {
               courseName: title,
@@ -155,13 +142,39 @@ function displayPlaces(places) {
               courseOrder: numElements,
               bossCourseFL: 'N',
             };
+
+            checkboxElement.addEventListener('change', function () {
+              if (this.checked) {
+                if (checkedRadio !== null) {
+                  checkedRadio.bossCourseFL = 'N';
+                }
+                courseInfo.bossCourseFL = 'Y';
+                checkedRadio = courseInfo;
+              } else {
+                courseInfo.bossCourseFL = 'N';
+                checkedRadio = null;
+              }
+            });
+
             tourCourse.push(courseInfo);
           } else {
-            alert('10개 이상 등록할 수 없습니다.');
+            alert('15개 이상 등록할 수 없습니다.');
           }
         } else {
           alert('같은 경로는 등록할 수 없습니다.');
         }
+
+        deleteIcon.addEventListener('click', function (e) {
+          e.stopPropagation();
+          deleteIcon.parentNode.remove();
+          var index = tourCourse.indexOf(courseInfo);
+          if (index !== -1) {
+            if (courseInfo.bossCourseFL === 'Y') {
+              checkedRadio = null;
+            }
+            tourCourse.splice(index, 1);
+          }
+        });
       });
 
       // kakao.maps.event.addListener(marker, 'mouseout', function () {
