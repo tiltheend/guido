@@ -200,32 +200,38 @@
 
         <!-- 마이페이지 모달창 -->
         <div class="mypage-modal">
-            <div>
-                <th:block th:if="${session.loginUser}">
-                    <div class="mypage-modal-close"></div>
-                    <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
-                    <th:block th:switch="${session.loginUser.userType}">  
-                        <th:block th:case="T">
-                            <a th:href="@{/profile/touristReservation}"><div>결제 및 예약 내역</div></a>
-                            <a th:href="@{/profile/touristWishList}"><div>위시리스트</div></a>
-                        </th:block>
-                        <th:block th:case="G">
-                            <a th:href="@{/profile/guideReservationSchedule}"><div>예약 일정 확인</div></a>
-                            <a th:href="@{/profile/guideReservation}"><div>예약 내역</div></a>
-                        </th:block>
-                    </th:block>
-                </th:block>
-                <hr>
-                <div>1:1 문의</div>
+            <th:block th:switch="${session.loginUser.userType}">  
                 <div>
                     <th:block th:if="${session.loginUser}">
-                        <a th:href="@{/user/logout}">로그아웃</a>
-                    </th:block>
-                    <th:block th:unless="${session.loginUser}">
-                        <a th:href="@{/user/loginPage}">로그인</a>
-                    </th:block>
-                </div>
-            </div>
+                        <div class="mypage-modal-close"></div>
+                            <th:block th:case="M">
+                                <a th:href="@{/admin/eventList}"><div>관리자페이지</div></a>
+                            </th:block>
+                            <th:block th:case="T">
+                                <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
+                                <a th:href="@{/profile/touristReservation}"><div>결제 및 예약 내역</div></a>
+                                <a th:href="@{/profile/touristWishList}"><div>위시리스트</div></a>
+                                <hr>
+                                <a th:href="@{/qna/write}"><div>1:1 문의</div></a>
+                            </th:block>
+                            <th:block th:case="G">
+                                <a th:href="@{/profile/{userNo}(userNo=${session.loginUser?.userNo})}"><div>마이페이지</div></a>
+                                <a th:href="@{/profile/guideReservationSchedule}"><div>예약 일정 확인</div></a>
+                                <a th:href="@{/profile/guideReservation}"><div>예약 내역</div></a>
+                                <hr>
+                                <a th:href="@{/qna/write}"><div>1:1 문의</div></a>
+                            </th:block>
+                        </th:block>
+                        <div>
+                        <th:block th:if="${session.loginUser}">
+                            <a th:href="@{/user/logout}">로그아웃</a>
+                        </th:block>
+                        <th:block th:unless="${session.loginUser}">
+                            <a th:href="@{/user/loginPage}">로그인</a>
+                        </th:block>
+                    </div>
+                </div>      
+            </th:block>
         </div>
 
         <!-- 알람 모달창 -->
