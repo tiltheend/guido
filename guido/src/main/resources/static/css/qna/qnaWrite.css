@@ -211,6 +211,7 @@ textarea:focus{
 }
 
 
+
 /* input 태그 감싸고 있는 div들 */
 .qna--email>div:nth-of-type(2),
 .qna--title>div:nth-of-type(2){
@@ -220,10 +221,7 @@ textarea:focus{
     border-radius: 4px;
 }
 
-.input--data:focus {
-    outline: none; /* 포커스 표시 제거 */
-    border-color: red; /* 포커스 시 빨간색으로 변경 */
-}
+
 
 @media screen and (max-width : 950px) {
     .qna--container{

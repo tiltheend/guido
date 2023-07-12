@@ -317,7 +317,5 @@ function checkLength(maxLength) {
 
     }
 
-
-
 }
 
