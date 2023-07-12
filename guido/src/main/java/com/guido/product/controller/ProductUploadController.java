@@ -113,7 +113,7 @@ public class ProductUploadController {
 		if(productNo > 0) {
 			System.out.println(product);
 			message = "상품이 등록 되었습니다.";
-			path += "/productDetail/" + "product/" + productNo;
+			path += "/productDetail/product/" + productNo;
 			
 		}else {
 			message = "상품 등록 실패,";
@@ -130,10 +130,16 @@ public class ProductUploadController {
 		@GetMapping("/productDetail/product/{productNo}/edit")
 		public String productEdit(
 				@PathVariable("productNo") int productNo
+				,@SessionAttribute("loginUser") User loginUser
+				,RedirectAttributes ra
 				,Model model) {
-			
+	
 			
 			Product product = productDetailService.selectProduct(productNo);
+			
+			String message = null;
+			String path = "";
+			
 			
 			//투어 테마 호출
 			List<TourTheme> tourTheme = service.selectTourTheme();
@@ -149,16 +155,28 @@ public class ProductUploadController {
 			model.addAttribute("addNotesList", addNotesList);
 			model.addAttribute("tourTheme", tourTheme);
 			
-//			System.out.println(product.getImageList().get(0).getFilePath());
-//			System.out.println(product.getProductAddPrice());
-			
-			// 구분자로 문자열 나누기(addNotes)
 		
-//			System.out.println(product.getTourCourse().get(0).getCourseOrder());
+			
+			if(loginUser.getUserNo() == product.getUserNo()) {
+				
+				message = "수정페이지로 이동합니다.";
+				path += "productUpload/editTest";
+				
+			}else {
+				message = "비정상적인 접근입니다.";
+				path += "redirect:/";
+			}
+			
+			ra.addFlashAttribute("message", message);
+			
+			return path;
+		}
+		
+			
 
 			
-			return "productUpload/editTest";
-		}
+		
+			
 		
 		// 여행상품 수정
 		@PostMapping("/productDetail/product/{productNo}/edit")
