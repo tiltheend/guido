@@ -145,7 +145,7 @@ function toggleHeart(btn) {
 
 
 // 상품 제목 "..."
-document.addEventListener("DOMContentLoaded", function() {
+/* document.addEventListener("DOMContentLoaded", function() {
     var productNameElements = document.querySelectorAll(".product-name");
     if (productNameElements) {
         productNameElements.forEach(function(element) {
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
+}); */
 
 
 
@@ -288,9 +288,9 @@ function loadSelectedProductByTheme(themeCode) {
             productNameDiv.appendChild(productName);
 
             // 상품 이름 글자수
-            if (productName.textContent.length > 23) {
+            /* if (productName.textContent.length > 23) {
                 productName.textContent = productName.textContent.substring(0, 23) + "...";
-            }
+            } */
 
             const reviewDiv = document.createElement("div");
             
