@@ -465,6 +465,7 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
   margin-top: 20px;
   font-size: 14px;
   display: flex;
+  align-items: center;
 }
 .alarm-modal>div>div{
   margin-top: 12px;
