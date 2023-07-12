@@ -55,6 +55,9 @@ public class ProfileTouristController {
 		// 회원 정보 가져오기 (이메일, 이름, 프로필 이미지, 유저 넘버)
 		User user = service.userInfo(userNo);
 		
+		if(user==null)
+			return "redirect:/";
+		
 		if(user.getUserType().equals("G")) { // 가이드 일 경우
 			path="profile/sellerProfile";
 			

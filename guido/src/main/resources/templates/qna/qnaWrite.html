@@ -41,7 +41,7 @@
                     
                     <div>
                         <input type="text" th:value="${session.loginUser?.userEmail}" placeholder="email.example.com" name="qnaEmail"
-                        th:disabled="${session.loginUser?.userEmail != null}" class="input--data">
+                        th:disabled="${session.loginUser?.userEmail != null}" class="input--data" autocomplete='off'>
                     </div>
                 </div>
     
@@ -52,7 +52,8 @@
                     </div>
                     
                     <div>
-                        <input type="text" placeholder="제목을 입력해주세요 (20자 이내)" name="qnaTitle" class="input--data" oninput="checkLength(30)">
+                        <input type="text" placeholder="제목을 입력해주세요 (20자 이내)" name="qnaTitle" class="input--data" 
+                            oninput="checkLength(30)" autocomplete='off'>
                     </div>
                 </div>
     

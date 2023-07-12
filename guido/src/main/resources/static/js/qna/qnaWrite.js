@@ -182,7 +182,7 @@ function submitForm() {
         headers: {
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
-        }
+            }
         })
         .then(function (response) {
             if (response.ok) {

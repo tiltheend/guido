@@ -136,7 +136,7 @@ textarea:focus{
 
 /* 첨부 파일 text div */
 .qna--file>div:nth-of-type(1){
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 /* 파일 업로드 div */
@@ -196,7 +196,9 @@ textarea:focus{
 }
 
 .filebox>a{
+    display: block;
     width: 5%;
+    margin-right: 10px;
 }
 
 .delete--icon{
@@ -218,9 +220,36 @@ textarea:focus{
     border-radius: 4px;
 }
 
+.input--data:focus {
+    outline: none; /* 포커스 표시 제거 */
+    border-color: red; /* 포커스 시 빨간색으로 변경 */
+}
+
+@media screen and (max-width : 950px) {
+    .qna--container{
+        width: 60vw;
+    }
+}
 
 @media screen and (max-width : 767px) {
     .qna--container{
         width: 80vw;
     }
+    
 }
+
+@media screen and (max-width : 1430px) {
+    .filebox-first-div{
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width : 1145px) {
+    .filebox-first-div{
+        margin-right: 15px;
+    }
+}
+
+
+
+
