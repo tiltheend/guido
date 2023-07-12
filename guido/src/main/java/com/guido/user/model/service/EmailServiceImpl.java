@@ -155,6 +155,7 @@ public class EmailServiceImpl implements EmailService{
 		// 인증 번호 발송
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
+			
 			String subject = "[guido] 이메일 인증 번호 발급";
 			String charset = "UTF-8";
 			String mailContent = 
