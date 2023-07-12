@@ -1,9 +1,13 @@
 *{
 	box-sizing: border-box;
 }
+ul, li{
+	list-style: none;
+}
 
 ul::-webkit-scrollbar, textarea::-webkit-scrollbar {
     width: 8px;  /* 스크롤바의 너비 */
+	height: 60%;
 }
 
 ul::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
@@ -173,6 +177,7 @@ main {
 	position: relative;
 }
 
+
 /*  채팅 목록 */
 .chatting-list{
 	width: 30%;
@@ -180,15 +185,17 @@ main {
 	list-style: none;
 	overflow: auto;
 	height: 70vh;
+	position: relative;
 }
 
 .chatting-item{
-	/* height: 12%; */
+	height: 12%;
 	height: 80px;
 	display: flex;
 	padding: 5px 0;
 	border-bottom: 3px solid #B1D8DA;
 	cursor: pointer;
+	/* position: relative; */
 }
 
 .chatting-item * {
@@ -530,4 +537,110 @@ div.chatting-area label > img{
 }
 .chatting-h3 h3{
 	
+}
+
+
+/* 예약자에게 예약 채팅 보내기 */
+
+.buyer-profile-top .reservation-list div{ /* 제목 */
+    /* display: flex; justify-content: space-between; align-items: center; */
+}
+.buyer-profile-top .reservation-list{
+    width: 60vw;
+}
+
+/* 구매자 리스트 썸네일 */
+.chat>li{
+    margin-bottom: 40px;
+}
+.chat>li{
+    width: 100%; background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex; flex-direction: column;
+    /* align-items: center; */
+    margin-bottom: 12px;
+	border-radius: 20px;
+    margin-top: 10px;
+	border: none;
+}
+.chat>li div>a{
+    /* margin: 20px; */
+}
+.chat>li .reservation-img{ /* 구매자 썸네일 */
+    /* max-width: 260px;
+    min-width: 260px; 
+    height: 170px; */
+    background-color: #FFE69A;
+    border-radius: 15px; margin: 20px;
+	/* width: 100px; height: 60px; */
+	width: 120px; height: 100px;
+}
+.chat>li .reservation-img img{
+    height: 100%;
+    border-radius: 15px;
+    /* max-width: 260px;
+    min-width: 260px;  */
+    /* height: 170px; */
+	width: 100%; height: 100%;
+}
+
+
+.chat>li{
+    display: flex; flex-direction: column; 
+    height: 180pxx;
+}
+.chat>li>div:first-of-type{
+    width: 100%; height: 10%;
+    margin-top: 20px;
+}
+
+.chat>li>div>span{
+    margin: 20px;
+}
+.chat .flex-direction-row{
+    display: flex; flex-direction: row;
+    /* overflow: auto; height: 260px; */
+}
+
+.reservation-content{
+	width: 80%;
+    margin-top: 20px;
+}
+.reservation-content h2{
+	font-size: 0.875rem;
+	margin-bottom: 3px;
+}
+.reservation-content span{
+	height: 30px;
+    display: block;
+    margin-top: 20px;
+    margin-left: 56px;
+    float: left;
+
+}
+
+div.chatting-area > ul > li.priview-list{
+	height: 35px;
+	position: absolute;
+	top: 34px;
+	overflow: hidden;
+	left: 25%;
+    width: 220px;
+}
+
+div.chatting-area > ul > li.priview-list>*{
+	/* width: 0;  */
+	height: 0;
+}
+
+.chatting-list .priview-list img{
+	max-width: 60px;
+	max-height: 0px;
+}
+.chatting-list .flex-direction-row{
+	height: 0;
+}
+
+.chatting-list.reservation-content {
+	height: 0;
 }

@@ -15,5 +15,6 @@ public class ChattingRoom {
     private String targetNickName;
     private String targetProfile;
     private int notReadCount;
+    private int type;
     
 }

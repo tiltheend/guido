@@ -188,10 +188,15 @@ function selectRoomList(){
 			const div = document.createElement("div");
 			
 			const recentMessage = document.createElement("p");
+			// const recentMessage = document.createElement("ul");
 			recentMessage.classList.add("recent-message");
 
+			console.log(room);
 			if(room.lastMessage != undefined){
-				recentMessage.innerHTML = room.lastMessage;
+
+				if(room.type === 0) recentMessage.innerHTML = room.lastMessage;
+				if(room.type === 1) recentMessage.innerHTML = '이미지';
+				if(room.type === 2) recentMessage.innerHTML = '예약 내용';
 			}
 			
 			div.append(recentMessage);
@@ -318,7 +323,8 @@ function selectChattingFn() {
 			if(loginUserNo == msg.senderNo){ 
 				li.classList.add("my-chat");
 				
-				li.append(span, p);
+				li.append(span);
+				li.append(p);
 				
 			}else{ // 상대가 작성한 메세지인 경우
 				li.classList.add("target-chat");
@@ -337,7 +343,8 @@ function selectChattingFn() {
 				const br = document.createElement("br");
 
 				div.append(b, br, p, span);
-				li.append(img,div);
+				li.append(img);
+				li.append(div);
 
 			}
 
@@ -384,6 +391,7 @@ const sendMessage = () => {
 			"targetNo": selectTargetNo,
 			"chattingNo": selectChattingNo,
 			"messageContent": inputChatting.value,
+			"type" : 0
 		};
 		console.log(obj)
 
@@ -516,6 +524,7 @@ sendImage.addEventListener('change', async (e) => {
 			"targetNo": selectTargetNo,
 			"chattingNo": selectChattingNo,
 			"messageContent": `<img class='chatting-image' src='${result}'>`,
+			"type" : 1
 		};
 		console.log(obj)
 
