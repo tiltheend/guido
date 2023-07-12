@@ -188,13 +188,13 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 	// 현재 날짜보다 이전인 일정 조회
 	@Override
 	public List<ProductDate> selectPassedDateList() {
-		return mapper.selectPassedDateList();
+		return schedulerMapper.selectPassedDateList();
 	}
 
 	// 현재 날짜보다 이전인 일정 사용 불가 처리
 	@Override
 	public void updatePassedDateList(ProductDate pd) {
-		mapper.updatePassedDateList(pd);
+		schedulerMapper.updatePassedDateList(pd);
 	}
 
 }

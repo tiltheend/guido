@@ -43,13 +43,16 @@ public class QnaServiceImpl implements QnaService{
 		 int result = mapper.insertQna(qna);
 		 
 		 if(result==0) return 0;
-			 
+		 
+		 // 파일 존재하지 않을 경우
+		 if(files==null)
+			 return 1;
 		 
 		 int qnaNo = qna.getQnaNo();
 		 
 		 
 		 if(qnaNo>0) {
-			 List<File> imageList = new ArrayList<>();
+			 List<File> fileList = new ArrayList<>();
 			 
 			 for(int i=0; i<files.size(); i++) {
 				 
@@ -58,26 +61,25 @@ public class QnaServiceImpl implements QnaService{
 					 File file = new File();
 					 
 					 file.setFileOrder(i);
-					 file.setFilePath(webPath);			 
 					 file.setQnaNo(qnaNo);
-					 file.setFilePath(Util.fileRename(files.get(i).getOriginalFilename()));
+					 file.setFilePath(webPath + Util.fileRename(files.get(i).getOriginalFilename()));
 
-					 imageList.add(file);
+					 fileList.add(file);
 						
 				 }
 			 }
 			 
 			 
-			 if(imageList.isEmpty()) {
-				 result = mapper.insertImageList(imageList);
+			 if(!fileList.isEmpty()) {
+				 result = mapper.insertFileList(fileList);
 				 
 				 
-				 if(result == imageList.size()) {
-						for(int i=0; i<imageList.size(); i++) {
+				 if(result == fileList.size()) {
+						for(int i=0; i<fileList.size(); i++) {
 							
-							int index = imageList.get(i).getFileOrder();
+							int index = fileList.get(i).getFileOrder();
 							
-							String rename = imageList.get(i).getFilePath();
+							String rename = fileList.get(i).getFilePath();
 
 							files.get(index).transferTo(new java.io.File(filePath + rename));
 						}

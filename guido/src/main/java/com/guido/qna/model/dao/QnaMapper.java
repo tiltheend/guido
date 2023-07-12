@@ -14,6 +14,6 @@ public interface QnaMapper {
 	int insertQna(QNA qna);
 
 	// 문의 파일 삽입
-	int insertImageList(List<File> imageList);
+	int insertFileList(List<File> imageList);
 
 }

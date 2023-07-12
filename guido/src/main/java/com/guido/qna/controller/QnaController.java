@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +36,8 @@ public class QnaController {
 	
 	// QNA 작성
 	@PostMapping("/insertQna")
-	private String insertQna(@RequestParam(value="attach_files", required=false) List<MultipartFile> files, 
+	@ResponseBody
+	private int insertQna(@RequestParam(value="attach_files", required=false) List<MultipartFile> files, 
 			QNA qna, @SessionAttribute(value="loginUser", required=false) User loginUser) throws IllegalStateException, IOException{
 		
 		if(loginUser==null)
@@ -49,9 +50,9 @@ public class QnaController {
 		
 		
 		if(result>0)
-			return "redirect:/";
+			return result;
 		
-		return "qna/qnaWrite";
+		return 0;
 	}
 	
 	

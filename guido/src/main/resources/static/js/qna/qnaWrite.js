@@ -182,16 +182,24 @@ function submitForm() {
         headers: {
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
-            // 'Content-Type' : 'multipart/form-data'
         }
         })
         .then(function (response) {
             if (response.ok) {
-            alert("문의가 접수되었습니다.");
-
+                return response.json();
             } else {
             throw new Error('에러가 발생 하였습니다.');
             }
+        }).then(function (result) {
+            // 성공적으로 반환된 결과(result)를 처리
+
+            if(result>0){
+                alert("문의가 접수되었습니다. 빠른 시일 내 확인 후 답변 드리겠습니다.");
+                location.replace("/");
+            }else
+                location.reload();
+            
+            
         })
         .catch(function (error) {
             alert(error.message);

@@ -455,6 +455,3 @@ VALUES(SEQ_QNA_NO.NEXTVAL, #{qnaEmail}, DEFAULT, DEFAULT, #{userNo}, #{qnaTitle}
 
 SELECT * FROM "QNA";
 
-SELECT * FROM "FILE"
-WHERE QNA_NO = 15;
-

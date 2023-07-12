@@ -46,11 +46,19 @@
 
 	
 	<!-- 파일 삽입 -->
-	<insert id="insertImageList">
-		INSERT INTO "FILE" (FILE_NO, QNA_NO, FILE_ORDER, FILE_PATH)
-		VALUES (SEQ_FILE_NO.NEXTVAL, #{qnaNo}, #{fileOrder}, #{filePath})
+	<insert id="insertFileList" parameterType="list">
+	INSERT INTO "FILE" (FILE_NO, QNA_NO, FILE_ORDER, FILE_PATH)
+	SELECT SEQ_FILE_NO.NEXTVAL, A.* 
+	FROM(
+		<foreach collection="list" item="file" separator=" UNION ALL">
+			SELECT #{file.qnaNo} IMG_PATH, 
+							#{file.fileOrder} IMG_RENAME, 
+							#{file.filePath} IMG_ORIGINAL
+			FROM DUAL
+		</foreach>
+		)A
 	</insert>
-	
+
 	
 	<!-- 특정 문의 조회 -->
 	<select id="selectQna" resultMap="qna_rm">
