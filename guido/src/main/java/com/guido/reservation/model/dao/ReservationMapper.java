@@ -25,7 +25,7 @@ public interface ReservationMapper {
 	int insertReservation(Reservation reservation);
 
 	// 예약 확인
-	Reservation selectReservation(Map map);
+	Reservation selectReservation(Map<String, Object> map);
 
 	// 예약 취소
 	int reservationCancel(Reservation reservation);

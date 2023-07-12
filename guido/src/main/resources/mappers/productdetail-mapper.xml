@@ -245,22 +245,6 @@
 	 </select>
 	 
 	 
-	 <!-- (스케줄러) 현재 날짜보다 이전의 일정 조회 -->
-	 <select id="selectPassedDateList" resultMap="product_date_rm">
-		 SELECT * FROM "PRODUCT_DT"
-		 <![CDATA[
-			WHERE PRODUCT_DT_AVAILABILITY = 'Y'
-			AND PRODUCT_DT < SYSDATE
-		]]>
-	 </select>
-	 
-	 <!-- 현재 날짜보다 이전인 일정 사용 불가 처리 -->
-	 <update id="updatePassedDateList">
-		 UPDATE "PRODUCT_DT"
-		 SET PRODUCT_DT_AVAILABILITY = 'N'
-		 WHERE PRODUCT_DT_NO = #{productDateNo}
-	 </update>
-	 
 	 
 	 <!-- 관심 상품 등록 체크-->
 	 <select id="selectWishCheck" resultType="_int">

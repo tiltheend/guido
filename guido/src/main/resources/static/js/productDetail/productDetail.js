@@ -343,16 +343,13 @@ if(document.getElementById("wishHeart")!=null){
 
 
 
-let faceModal = document.getElementById("faceImgModal");
 
 // 모달 창 토글
 function toggleModal() {
+    let faceModal = document.getElementById("faceImgModal");
     faceModal.style.display = (faceModal.style.display === "block") ? "none" : "block";
 }
 
-faceModal.addEventListener('click', ()=>{
-    toggleModal();
-});
 
 
 

@@ -1,16 +1,255 @@
 
-body{
+@media screen and (max-width : 767px) {
+    html{
+        font-size: 12px;
+    }
+}
+
+
+.qna--container{
+    width: 45vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
+    padding: 20px 0;
+    margin-top: 130px;
+    margin-bottom: 120px;
 }
 
-.qna--container{
-    width: 60vw;
-    margin-top: 30px;
+.qna--container >div{
+    width: 100%;
 }
 
 /* 글자수 div */
 .qna--count{
     display: flex;
 }
+
+/* 추가된 파일 div */
+.filebox{
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    width: 100%;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #c5c5c5;
+}
+
+.filebox:hover{
+    box-shadow: 0 0 0 1px inset #121927;
+    border: 1px solid #121927;
+}
+
+/* 삭제 버튼 */
+.delete{
+    display: flex;
+    align-items: center;
+}
+
+.delete>img{
+    width: 17px;
+    height: 17px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/*  문의사항 상단 text*/
+.qna--top__first{
+    font-size: 20px;    
+}
+
+/* 문의사항 하단 컨테이너 */
+.qna--top__second{
+    margin: 20px 0 50px 0;
+    color: #5C5C5C;
+    font-size: 14px;
+}
+
+
+.input--data{
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+
+.input--data:hover{
+    outline: none;
+}
+
+textarea {
+    width: 100%;
+    height: 500px;
+    resize: none;
+    font-size: 16px;
+    border: none;
+    padding: 18px;
+}
+
+
+.qna--content>div:nth-of-type(2){
+    border: 1px solid #121927;
+    margin-top: 10px;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+
+textarea:focus{
+    outline: none;
+}
+
+
+/* 제목 div + 문의내용 div */
+.qna--top__title,
+.qna--top__content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* 글자수 div */
+.qna--count{
+    margin-left: 5px;
+}
+
+/* (필수)별표 */
+.essential--mark{
+    color: red;
+}
+
+
+/* 문의하기 버튼 */
+#qnaButton{
+    background-color: #121927;
+    padding: 15px 20px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-top: 20px;
+    color: white;
+}
+
+/* 첨부 파일 text div */
+.qna--file>div:nth-of-type(1){
+    margin-top: 30px;
+}
+
+/* 파일 업로드 div */
+.file--label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #c5c5c5;
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.file--label:hover{
+    cursor: pointer;
+}
+
+/* 파일 업로드 영역 내 이미지 */
+.file--img__label{
+    width: 75px;
+    height: 75px;
+    margin-bottom: 5px;
+}
+
+/* 파일 업로드 click to upload 텍스트 */
+.click-to-upload{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* 파일 선택 후 보이는 div */
+/*  img 아이콘 */
+.filebox-first-div{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.file--img__crop{
+    padding: 4px;
+    border: 1px solid #c5c5c5;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.file--img__crop>img{
+    width: 30px;
+    height: 30px;
+}
+
+.filebox-second-div{
+    width: 85%;
+}
+
+.filebox>a{
+    display: block;
+    width: 5%;
+    margin-right: 10px;
+}
+
+.delete--icon{
+    width: 23px;
+    height: 23px;
+}
+
+#file{
+    display: none;
+}
+
+
+/* input 태그 감싸고 있는 div들 */
+.qna--email>div:nth-of-type(2),
+.qna--title>div:nth-of-type(2){
+    padding: 12px 15px;
+    border: 1px solid #121927;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.input--data:focus {
+    outline: none; /* 포커스 표시 제거 */
+    border-color: red; /* 포커스 시 빨간색으로 변경 */
+}
+
+@media screen and (max-width : 950px) {
+    .qna--container{
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width : 767px) {
+    .qna--container{
+        width: 80vw;
+    }
+    
+}
+
+@media screen and (max-width : 1430px) {
+    .filebox-first-div{
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width : 1145px) {
+    .filebox-first-div{
+        margin-right: 15px;
+    }
+}
+
+
+
+
