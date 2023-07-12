@@ -64,12 +64,12 @@
                         <div class="add-wish-heart" th:with="wish = ${product.wishOrNot}">
                             <!-- 로그인 상태인 경우 -->
                             <th:block th:if="${session.loginUser != null}">
-                                <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
-                                <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                                <img th:if="${wish == 1}" class="heart-icon selected" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
+                                <img th:if="${wish == 0}" class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                             </th:block>
                             <!-- 로그인 상태가 아닌 경우 -->
                             <th:block th:unless="${session.loginUser != null}">
-                                <img class="heart-icon" onclick="toggleHeart()" th:src="@{/images/profile/empty.png}">
+                                <img class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                             </th:block>
                         </div>
                         <div class="sales-text">
