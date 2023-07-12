@@ -371,7 +371,7 @@
       <div class="img-box">
         <div class="productImg thumbnail">
           <label for="img0">
-            <img class="preview" src="" alt="">
+            <img class="preview const-preview" src="" alt="">
             <input type="file" name="images" class="input-image" id="img0" accept="image/*"/>
             <span class="delete-image">&times;</span>
             <div class="add-image add-image-thumbnail">
@@ -387,7 +387,7 @@
       <div class="img-box">
         <div th:each="index: ${#numbers.sequence(1, 4)}" class="productImg">
           <label th:for="'img' + ${index}">
-            <img class="preview" src="" alt="" th:id="'imgId' + ${index}">
+            <img class="preview const-preview" src="" alt="" th:id="'imgId' + ${index}">
             <input type="file" name="images" class="input-image" th:id="'img' + ${index}" accept="image/*"/>
             <span class="delete-image">&times;</span>
             <div class="add-image">
@@ -443,9 +443,9 @@
         <textarea name="productContent" id="inputContent" cols="30" rows="20" ></textarea>
         <div id="contentCountContainer">
           <div id="contentCharCount">0</div>
-            <div>/1000</div>
+            <div>/3000</div>
           </div>
-          <div id="contentWarning"><div>!</div><span>1000자까지 입력하실 수 있습니다.</span>
+          <div id="contentWarning"><div>!</div><span>3000자까지 입력하실 수 있습니다.</span>
     </div>
     </main>
     <!-- 상품 일정 등록 -->
@@ -486,9 +486,10 @@
       </div>
       <div id="createContainer">
       <div id="createDate">
-          
+        <h3>날짜를 선택해 주세요.</h3>
       </div>
       <div id="createTime">
+        <h3>출발 시간을 선택해주세요.</h3>
         <input type="checkbox" class="hidden option-name" id="optionName1">
         <label class="optionName-item" for="optionName1">09:00</label>
         <input type="checkbox" class="hidden option-name" id="optionName2">

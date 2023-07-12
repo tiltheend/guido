@@ -10,11 +10,10 @@
     
     <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css" />
     
-
+    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
+    <th:block th:replace="~{common/header}"></th:block>
 </head>
 <body>
-    
-    <th:block th:replace="~{common/header}"></th:block>
 
     <div class="qna--container">
         
@@ -41,7 +40,7 @@
                     
                     <div>
                         <input type="text" th:value="${session.loginUser?.userEmail}" placeholder="email.example.com" name="qnaEmail"
-                        th:disabled="${session.loginUser?.userEmail != null}" class="input--data">
+                        th:disabled="${session.loginUser?.userEmail != null}" class="input--data" autocomplete='off'>
                     </div>
                 </div>
     
@@ -52,7 +51,8 @@
                     </div>
                     
                     <div>
-                        <input type="text" placeholder="제목을 입력해주세요 (20자 이내)" name="qnaTitle" class="input--data" oninput="checkLength(30)">
+                        <input type="text" placeholder="제목을 입력해주세요 (20자 이내)" name="qnaTitle" class="input--data" 
+                            oninput="checkLength(30)" autocomplete='off'>
                     </div>
                 </div>
     
@@ -68,7 +68,8 @@
                     </div>
     
                     <div>
-                        <textarea name="qnaContent" placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다." oninput="checkLength(1000)"></textarea>
+                        <textarea name="qnaContent" placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다." 
+                        oninput="checkLength(1000)"></textarea>
                     </div>
                 </div>
     

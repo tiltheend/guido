@@ -361,14 +361,15 @@
         const optionNo = /*[[${selectedTime?.optionNo}]]*/"옵션 번호";
         const impCode = /*[[${impCode}]]*/"포트원 가맹점 식별코드"
         const pgMid = /*[[${pgMid}]]*/"상점 ID"
-        const productName = /*[[${product.productName}]]*/"상품명"
-        const productNo = /*[[${product.productNo}]]*/"상품번호"
-        
+        const productName = /*[[${product.productName}]]*/"상품명";
+        const productNo = /*[[${product.productNo}]]*/"상품번호";
+        // 채팅 추가 데이터
+        const guideNo = /*[[${product.userNo}]]*/"가이드 번호";
+        const thumbnail = /*[[${product.imageList[0].filePath}]]*/"썸네일";
         
     </script>
 
     <script th:src="@{/js/reservation/reservation.js}"></script>
-
     <th:block th:replace="~{common/footer}"></th:block>
 </body>
 </html>

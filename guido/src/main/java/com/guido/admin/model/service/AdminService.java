@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.QNA;
+import com.guido.common.model.dto.User;
 
 public interface AdminService {
 	int writeEvent(Event event, List<MultipartFile> files) throws IllegalStateException, IOException;
@@ -37,4 +38,8 @@ public interface AdminService {
 	Event selectEvent(int eventNo);
 
 	int updateEvent(Event event, List<MultipartFile> files, List<String> imageDeleteFl) throws IllegalStateException, IOException ;
+
+	int updateSuperGuide();
+
+	int updateGeneralGuide();
 }

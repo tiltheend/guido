@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>guido</title>
+    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
   </head>
   <style>
     main a button, main>form>button {
@@ -62,7 +63,7 @@
       <a th:href="@{/admin/eventList}"><button>관리자 페이지</button></a>
       <form th:action="@{/user/login}" method="POST" style="display:inline">
         <input type="hidden" name="userEmail" value="manager00@gmail.com">
-        <input type="hidden" name="userPassword" value="pass00">
+        <input type="hidden" name="userPassword" value="pass01">
         <button>관리자 로그인</button>
       </form>
 
@@ -90,7 +91,7 @@
     <th:block th:replace="~{/common/footer}"></th:block>
     <script th:inline="javascript">
       const loginBtn = document.getElementById("loginBtn");
-      const loginUser = /*[[${session.loginUser}]]*/ "로그인된 유저"
+      // const loginUser = /*[[${session.loginUser}]]*/ "로그인된 유저"
       loginBtn.addEventListener('click',e=>{
         if(loginUser){
           loginBtn.parentElement.href = "http://localhost/";

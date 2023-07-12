@@ -46,9 +46,12 @@ whenButton.addEventListener('click', () => {
 
   mainSearchBox.style.display = 'none';
   searchBoxClickBox.style.display = 'block';
-  // whenModal.style.display = 'block'; /* ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ */
+  // whenModal.style.display = 'block';
   // /* toggleModal(whenModal); */
-  // modalsBG.style.display = 'block';
+  modalsBG.style.display = 'block';
+  document.querySelector("input[name='firstday']").focus()
+
+  
 });
 
 guestButton.addEventListener('click', () => {
@@ -360,6 +363,9 @@ alarmModalClose.addEventListener("click", () => {
 mypageModalClose.addEventListener("click", () => {
   mypageModal.style.display = "none";
 });
+
+
+
 
 
 // 헤더 1320px까지 위치 조정

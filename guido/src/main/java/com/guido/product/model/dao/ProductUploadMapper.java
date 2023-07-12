@@ -79,6 +79,12 @@ public interface ProductUploadMapper {
 
 	public int insertProductOptionList(ProductOption po);
 
+	/**여행 상품 삭제
+	 * @param productNo
+	 * @return
+	 */
+	public int productDelete(int productNo);
+
 	
 
 

@@ -7,11 +7,12 @@
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/reservation/reservationCheck.css}">
-
+    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
+    <th:block th:replace="~{common/header}"></th:block>
+    
 </head>
 <body th:object="${reservation}">
-
-    <th:block th:replace="~{common/header}"></th:block>
+    
 
     <div class="ordercheck--container">
 

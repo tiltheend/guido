@@ -1,84 +1,45 @@
-/* ***** 테마 카테고리 ***** */
-.categori-icon-box-container{
+.small-title{
     display: flex;
     justify-content: center;
-  }
-  
-  .categori-icon-box {
-    width: 69.5%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
     align-items: center;
-    text-align: center;
-    margin-top: 120px;
-    margin-bottom: 25px;
-  }
-  
-  .categori-icon-box a {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .categori-icon-box>div:first-child{
-    margin-left: 0px;
-  }
-  
-  .categori-icon-box img{
-    width: 40px;
-  }
-  
-  .categori-icon-box button {
-    background-color: transparent;
-    font-size: 12px;
-  }
-  .categori-icon-box button:focus{
-    color: #1C797D;
-    text-decoration: underline;
-  }
-  
-  hr{
-    width: 68%;
-    margin: 0 auto;
-    margin-top: 100px;
-    background-color: #C5C5C5;
-    height: 1px;
-    border: 0;
-  }
-  
-  
-  
-  
-  
-  /* ***** 게시글 슬라이드 ***** */
-  .container--inner__top__left{
+    margin-top: 130px;
+}
+
+.small-title div{
+    font-size: 30px;
+}
+
+.small-title img{
+    width: 30px;
+    margin-left: 5px;
+}
+
+
+
+/* ***** 게시글 슬라이드 ***** */
+.container--inner__top__left{
     /* border: 1px solid brown; */
     width: 300px;
     height: 370px;
     display: flex;
     justify-content: start;
-    margin-right: 50px;
-  
-  }
-  
-  .carousel-wrapper{
+    margin-right: 20px;
+
+}
+
+.carousel-wrapper{
     width: 300px;
     height: 280px;
     overflow: hidden;
-  }
-  
-  .carousel-wrapper > .carousel {
+}
+
+.carousel-wrapper > .carousel {
     display: flex;
     position: relative;
     transition-duration: 0.3s;
-  }
-  
-  /* .prev{
+}
+
+/* .prev{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -230,6 +191,7 @@
   flex-wrap: wrap;
   /* justify-content: space-around; (임시)게시글 왼쪽 정렬!!!! */
   justify-content: flex-start;
+  margin-top: 100px;
 }
 .main-post .product-post>ul>li{
   /* width: 100%; */
@@ -845,6 +807,7 @@
   display: grid; grid-template-columns: repeat(4, 1fr);
   max-width: 1280px; grid-template-rows: auto;
   width: 100%;
+  margin-top: 45px;
 }
 
 

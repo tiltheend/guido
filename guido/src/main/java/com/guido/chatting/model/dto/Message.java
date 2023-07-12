@@ -15,4 +15,5 @@ public class Message {
     private int targetNo;
     private int chattingNo;
     private String sendTime;
+    private int type;
 }

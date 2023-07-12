@@ -20,6 +20,7 @@ import com.guido.common.model.dto.Event;
 import com.guido.common.model.dto.File;
 import com.guido.common.model.dto.Pagination;
 import com.guido.common.model.dto.QNA;
+import com.guido.common.model.dto.User;
 import com.guido.common.utility.Util;
 
 @Service
@@ -187,8 +188,30 @@ public class AdminServiceImpl implements AdminService {
 				}
 			}
 		}
+		return result;
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateSuperGuide() {
+		/* 
+		 * - 슈퍼가이드 조건 - 
+		 * 1. 가입일 1달 이상
+		 * 2. 모든 리뷰 별점 4.5 이상
+		 * 3. 정산 완료 2건 이상
+		 */
+		return mapper.updateSuperGuide();
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateGeneralGuide() {
 		
-		
-		return 0;
+		/*
+		 * - 강등 조건 -
+		 * 이미 슈퍼 가이드가 되었다면, 가입일과 정산 완료 건수는 만족하는 것으로 간주하여
+		 * 리뷰 별점이 4.5 미만인지 확인
+		 */
+		return mapper.updateGeneralGuide();
 	}
 }

@@ -246,7 +246,16 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 		return rowCount;
 	}
 
+	//여행상품 삭제
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int productDelete(int productNo) {
+		return mapper.productDelete(productNo);
+	}
 
+
+	
+			
 	
 	
 	
