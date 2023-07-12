@@ -392,7 +392,7 @@ const contentWarning = document.querySelector('#contentWarning');
 const contentCharCheck = () => {
   const remainingChars2 = inputContent.value.length;
   contentCharCount.textContent = String(remainingChars2);
-  if (remainingChars2 > 1000) {
+  if (remainingChars2 > 3000) {
     contentCountContainer.classList.add('red');
     inputContent.style.borderColor = 'red';
     inputContent.style.backgroundColor = 'rgb(255,232,232)';

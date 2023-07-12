@@ -57,7 +57,7 @@ const updatePage = () => {
   if (currentPage == 6) {
     document.querySelector('.text7').innerHTML = '';
     typing7();
-    checkImage();
+    // checkImage();
   }
   if (currentPage == 7) {
     document.querySelector('.text8').innerHTML = '';
@@ -160,6 +160,7 @@ const inputDayHidden = document.querySelector('#inputDayHidden');
 const inputTime = document.querySelector('#inputTime');
 const inputTimeHidden = document.querySelector('#inputTimeHidden');
 const inputWarning = document.querySelector('#inputWarning');
+const createTime = document.querySelector('#createTime');
 // 초기값 설정
 
 tourTypes.forEach(function (tourType) {
@@ -207,13 +208,13 @@ tourTypes.forEach(function (tourType) {
   nextBtn.disabled = true;
 });
 inputDay.addEventListener('input', function () {
-  if (this.value !== '') {
+  if (this.value > 0) {
     inputTime.value = '';
     inputDayHidden.value = inputDay.value;
     inputDay.addEventListener('input', function () {
       const value = inputDay.value;
 
-      if (!value || isNaN(value)) {
+      if (!value || isNaN(value) || value == 0) {
         inputDay.style.borderColor = 'red';
         inputDay.style.backgroundColor = 'rgb(255,232,232)';
         inputWarning.style.display = 'flex';
@@ -231,13 +232,13 @@ inputDay.addEventListener('input', function () {
   }
 });
 inputTime.addEventListener('input', function () {
-  if (this.value !== '') {
+  if (this.value > 0) {
     inputDay.value = '';
     inputTimeHidden.value = inputTime.value;
     inputTime.addEventListener('input', function () {
       const value = inputTime.value;
 
-      if (!value || isNaN(value)) {
+      if (!value || isNaN(value) || value == 0) {
         inputTime.style.borderColor = 'red';
         inputTime.style.backgroundColor = 'rgb(255,232,232)';
         inputWarning.style.display = 'flex';
@@ -410,7 +411,7 @@ const contentWarning = document.querySelector('#contentWarning');
 const contentCharCheck = () => {
   const remainingChars2 = inputContent.value.length;
   contentCharCount.textContent = String(remainingChars2);
-  if (remainingChars2 > 1000) {
+  if (remainingChars2 > 3000) {
     contentCountContainer.classList.add('red');
     inputContent.style.borderColor = 'red';
     inputContent.style.backgroundColor = 'rgb(255,232,232)';
@@ -806,38 +807,24 @@ for (let i = 0; i < inputImage.length; i++) {
     });
   });
 }
-//초기 상태에서 이벤트를 강제로 발생시킴
-const changeEvent = new Event('change');
-inputImage[4].dispatchEvent(changeEvent);
-inputImage[5].dispatchEvent(changeEvent);
 const plusImage = document.querySelectorAll('.plus-image');
-
-for (let i = 0; i < 5; i++) {
-  inputImage[i].addEventListener('change', () => {
-    let allImagesSelected = true;
-    for (let j = 0; j < 5; j++) {
-      if (preview[j].getAttribute('src') === '') {
-        allImagesSelected = false;
-        break;
-      }
+const constPreview = document.querySelectorAll('.const-preview');
+const checkImage = () => {
+  for (let i = 0; i < constPreview.length; i++) {
+    if (constPreview[i].getAttribute('src') == '') {
+      nextBtn.disabled = true;
     }
-
-    if (allImagesSelected) {
-      for (let i = 0; i < plusImage.length; i++) {
-        plusImage[i].style.display = 'inline-block';
-      }
+  }
+};
+for (const imgElement of constPreview) {
+  imgElement.addEventListener('change', () => {
+    if (imgElement.src !== '') {
       nextBtn.disabled = false;
     } else {
       nextBtn.disabled = true;
     }
   });
 }
-
-const checkImage = () => {
-  if (preview[i].getAttribute('src') == '') {
-    nextBtn.disabled = true;
-  }
-};
 const checkTourCourse = () => {
   if (tourCourse.length == 0) {
     nextBtn.disabled = true;
@@ -995,5 +982,13 @@ form.addEventListener('submit', (e) => {
 const checkMaxTourist = () => {
   if (maxInput.value != '') {
     nextBtn.disabled = false;
+  }
+};
+
+const displayNoneTime = () => {
+  if (inputDay.value != '') {
+    createTime.style.display = 'none';
+  } else {
+    createTime.style.display = 'inline-block';
   }
 };
