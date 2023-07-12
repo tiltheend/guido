@@ -71,8 +71,22 @@ public class HomeController {
 	// 테마검색 상품목록 조회
 	@GetMapping(value = "/home/{themeCode}", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
-	    return service.selectThemeProdList(themeCode);
+	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode
+			, @SessionAttribute(value="loginUser", required=false) User loginUser) {
+		
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("themeCode", themeCode);
+		
+		if(loginUser == null) {
+			map.put("userNo", -1);			
+		} else {
+			map.put("userNo", loginUser.getUserNo());						
+		}
+		
+		List<Product> themeList = service.selectThemeProdList(themeCode);
+		
+	    return themeList;
 	}
 	
 	
@@ -223,6 +237,7 @@ public class HomeController {
 	@ResponseBody
 	public int updateWish(@RequestBody Map<String, Integer> paramMap) {
 		return service.updateWish(paramMap);
+		// {"senderNo":11,"productNo":"16","productName":"대도시 서울에서 만나는 여유로운 힐링의 시간","notificationType":"L"}
 	}
 	
 

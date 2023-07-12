@@ -329,7 +329,8 @@ if(document.getElementById("wishHeart")!=null){
             if(result==0){
                 console.log("관심상품 등록 실패");
             }
-            sendWish(productNo, productName); // 관심상품 등록 알림
+            
+            // sendWish(productNo, productName); // 관심상품 등록 알림
 
     
         })

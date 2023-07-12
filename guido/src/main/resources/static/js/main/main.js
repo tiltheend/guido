@@ -1,9 +1,4 @@
 
-/* 슬라이드 */
-$('.single-item').slick({
-    dots: true,
-    dotsClass: "slick-dots"
-});
 
 
 let boardSlide; /* 게시글 슬라이드 박스 */
@@ -73,67 +68,78 @@ function slideNextFn(el){
 }
 
 // 하트 색 바꾸기
-function toggleHeart(btn) {
-    let heartIcon = btn;
-    // heartIcon.setAtrribute("src",'');
-    // heartIcon.classList.toggle("selected");
+if(loginUserNo != null && userType == "T"){
+    function toggleHeart(btn) {
+        let heartIcon = btn;
+        // heartIcon.setAtrribute("src",'');
+        // heartIcon.classList.toggle("selected");
+        
+        /* 관심상품 등록/제거 처리 */
+        if(document.querySelector(".heart-icon")!=null){
+            
+            let check;      // 관심상품 등록 여부
+            // console.log(check);
     
-    /* 관심상품 등록/제거 처리 */
-    if(document.querySelector(".heart-icon")!=null){
-        
-        let check;      // 관심상품 등록 여부
-        // console.log(check);
-
-        let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
-        // console.log(productNo);
-        // console.log(loginUserNo);
-
-        let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
-        console.log(productName);
-
-        if (heartIcon.classList.contains("selected")) {
-            check = 1; // 관심상품 등록 O
-        } else {
-            check = 0; // 관심상품 등록 X
-        }
-        
-        let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
-
-        const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
-
-        // console.log(selected);
-
-        fetch("/common/updateWishList",{
-            method : "POST",
-            headers : {"Content-Type" : "application/json"},
-            body : JSON.stringify(wishData)
-        })
-        .then(resp=>resp.text())
-        .then(result=>{
-
-            if(result==1){
-                if (heartIcon.classList.contains("selected")) {
-                    heartIcon.classList.remove("selected");
-                    for(i of selected){
-                        i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
-                    }
-                } else {
-                    heartIcon.classList.add("selected");
-                    for(i of selected){
-                        i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
-                    }
-                    sendWish(productNo, productName); // 관심상품 등록 알림
-                }
-                // console.log("관심상품 등록 성공");
-
+            let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
+            // console.log(productNo);
+            // console.log(loginUserNo);
+    
+            let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
+            console.log(productName);
+    
+            if (heartIcon.classList.contains("selected")) {
+                check = 1; // 관심상품 등록 O
             } else {
-                // console.log("관심상품 등록 실패");
-                alert("로그인 후 사용 가능합니다.");
+                check = 0; // 관심상품 등록 X
             }
+            
+            let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
     
-        })
-        .catch(err=>{
-            console.log(err);
+            const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
+    
+            // console.log(selected);
+    
+            fetch("/common/updateWishList",{
+                method : "POST",
+                headers : {"Content-Type" : "application/json"},
+                body : JSON.stringify(wishData)
+            })
+            .then(resp=>resp.text())
+            .then(result=>{
+    
+                if(result==1){
+                    if (heartIcon.classList.contains("selected")) {
+                        heartIcon.classList.remove("selected");
+                        for(i of selected){
+                            i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
+                        }
+                    } else {
+                        heartIcon.classList.add("selected");
+                        for(i of selected){
+                            i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
+                        }
+                        sendWish(productNo, productName); // 관심상품 등록 알림
+                    }
+                    // console.log("관심상품 등록 성공");
+    
+                } else {
+                    // console.log("관심상품 등록 실패");
+                    alert("관심상품 등록 실패");
+                }
+        
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        }
+    }
+}
+
+if(loginUserNo == null){
+    let heartList = document.querySelectorAll(".heart-icon")
+    for(let heart of heartList){
+        heart.addEventListener("click", () => {
+            alert("로그인 후 사용하세요.");
         })
     }
 }
@@ -227,6 +233,7 @@ function loadProductByTheme(themeCode) {
             
             const wish = themeProduct.wishOrNot;
             console.log(wish);
+
             if (loginUserNo != 0) { // 로그인 상태인 경우
 
                 const heartIcon = document.createElement("img");
@@ -234,15 +241,16 @@ function loadProductByTheme(themeCode) {
                 heartIcon.setAttribute("onclick", "toggleHeart(this)");
                 heartIcon.setAttribute("src", "/images/profile/empty.png");
                 addWishHeart.appendChild(heartIcon);
-                
-                if (wish === '1') {
-                    heartIcon.classList.add("selected");
+                if(wish!=null){
+                    if (wish == 1) {
+                        heartIcon.classList.add("selected");
+                    }
                 }
             } 
             else { // 로그인 상태가 아닌 경우
                 const heartIcon = document.createElement("img");
                 heartIcon.classList.add("heart-icon");
-                heartIcon.setAttribute("onclick", "toggleHeart(this)");
+                // heartIcon.setAttribute("onclick", "toggleHeart(this)");
                 heartIcon.setAttribute("src", "/images/profile/empty.png");
                 addWishHeart.appendChild(heartIcon);
             }
@@ -326,3 +334,9 @@ function loadProductByTheme(themeCode) {
 
 
 
+
+/* 슬라이드 */
+$('.single-item').slick({
+    dots: true,
+    dotsClass: "slick-dots"
+});
