@@ -158,6 +158,7 @@ const createTime = document.querySelector('#createTime');
 tourTypes.forEach(function (tourType) {
   tourType.addEventListener('click', function () {
     // 배경색 초기화
+    buildCalendar();
     tourTypes.forEach(function (type) {
       type.style.backgroundColor = '';
       type.style.borderColor = '';
@@ -1003,18 +1004,18 @@ const selectOptionName = document.getElementById('selectOptionName');
 const insertTimeBtn = document.getElementById('insertTimeBtn');
 const optionNameArray = [];
 
-insertTimeBtn.addEventListener('click', function () {
-  if (
-    selectOptionName.value !== '' &&
-    !optionNameArray.includes(selectOptionName.value)
-  ) {
-    optionNameArray.push(selectOptionName.value);
-    console.log(optionNameArray);
-  } else if (optionNameArray.includes(selectOptionName.value)) {
-    alert('같은 시간은 입력할 수 없습니다');
-    return;
-  }
-});
+// insertTimeBtn.addEventListener('click', function () {
+//   if (
+//     selectOptionName.value !== '' &&
+//     !optionNameArray.includes(selectOptionName.value)
+//   ) {
+//     optionNameArray.push(selectOptionName.value);
+//     console.log(optionNameArray);
+//   } else if (optionNameArray.includes(selectOptionName.value)) {
+//     alert('같은 시간은 입력할 수 없습니다');
+//     return;
+//   }
+// });
 // String.prototype.toHHMMSS = function () {
 //   var myNum = parseInt(this, 10);
 //   var hours = Math.floor(myNum / 3600);
