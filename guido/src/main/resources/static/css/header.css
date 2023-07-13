@@ -421,6 +421,7 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
 }
 .mypage-modal hr{
   margin: 8px 0;
+  width: 100%;
 }
 .mypage-modal a{
   width: 100%;

@@ -170,6 +170,12 @@ function loadProductByTheme(themeCode) {
     .then(themeProdList => {
         console.log(themeProdList);
 
+        
+        let moreBtn = document.querySelector(".post-more-first button");
+        if(moreBtn!=null){
+            moreBtn.style.display = "none";
+        }
+
         const productListContainer = document.getElementById("productListContainer");
         productListContainer.innerHTML = "";
 
