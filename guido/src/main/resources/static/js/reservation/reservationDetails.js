@@ -80,7 +80,7 @@ document.getElementById("realCancelBtn").addEventListener("click", (e)=>{
     return;
   }
 
-  const cancelReason = document.querySelector(".cancel-reason");
+  const cancelReason = document.querySelector(".cancel--textarea");
 
   if(cancelReason.value==''){
     alert("정확한 취소 사유를 입력해주세요!");
