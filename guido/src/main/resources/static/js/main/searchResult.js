@@ -143,23 +143,6 @@ function toggleHeart(btn) {
 }
 
 
-
-// 상품 제목 "..."
-/* document.addEventListener("DOMContentLoaded", function() {
-    var productNameElements = document.querySelectorAll(".product-name");
-    if (productNameElements) {
-        productNameElements.forEach(function(element) {
-            var productName = element.innerText;
-            if (productName.length > 23) {
-                productName = productName.substring(0, 23) + "...";
-                element.innerText = productName;
-            }
-        });
-    }
-}); */
-
-
-
 // 검색페이지 테마 검색 상품 목록 조회 
 function loadSelectedProductByTheme(themeCode) {
 
@@ -194,145 +177,140 @@ function loadSelectedProductByTheme(themeCode) {
         const productListContainer = document.getElementById("productListContainer");
         productListContainer.innerHTML = "";
 
-        for (let themeProduct of themeProdList) {
-            const productRow = document.createElement("li");
-            productRow.classList.add("product-row");
-
-            const singleItem = document.createElement("div");
-            singleItem.classList.add("slider");
-            singleItem.classList.add("single-item");
-            singleItem.setAttribute("data-productno", themeProduct.productNo);
-
-            if(themeProduct.imageList){
-                for (let image of themeProduct.imageList) {
-                    let div = document.createElement("div");
-                    div.classList.add("productImage");
-                    
-                    let imgLink = document.createElement("a");
-                    imgLink.setAttribute("href", "/productDetail/product/" + themeProduct.productNo);
-    
-                    let img = document.createElement("img");
-                    img.setAttribute("src", image.filePath);
-                    imgLink.appendChild(img);
-    
-                    div.appendChild(imgLink);
-                    singleItem.appendChild(div);
-                }
-            }
-
-            productRow.appendChild(singleItem);
-
-            const slideBtn = document.createElement("div");
-            slideBtn.classList.add("slide-btn");
-
-            const slideNextImg = document.createElement("img");
-            slideNextImg.setAttribute("src", "/images/profile/NextBtn.png");
-            slideNextImg.setAttribute("alt", "slideNext");
-            slideNextImg.classList.add("slick-slide-next");
-            slideBtn.appendChild(slideNextImg);
-
-            const slidePreImg = document.createElement("img");
-            slidePreImg.setAttribute("src", "/images/profile/PreBtn.png");
-            slidePreImg.setAttribute("alt", "slidePre");
-            slidePreImg.classList.add("slick-slide-pre");
-            slideBtn.appendChild(slidePreImg);
-
-            productRow.appendChild(slideBtn);
-
-            /* const addWishHeart = document.createElement("div");
-            addWishHeart.classList.add("add-wish-heart");
-
-            const heartIcon = document.createElement("img");
-            heartIcon.classList.add("heart-icon");
-            heartIcon.setAttribute("src", "/images/profile/empty.png");
-            heartIcon.setAttribute("onclick", "toggleHeart()");
-            addWishHeart.appendChild(heartIcon);
-
-            productRow.appendChild(addWishHeart); */
-
-            const addWishHeart = document.createElement("div");
-            addWishHeart.classList.add("add-wish-heart");
-            
-            const wish = themeProduct.wishOrNot;
-            
-            if (loginUserNo != 0) { // 로그인 상태인 경우
-
-                const heartIcon = document.createElement("img");
-                heartIcon.classList.add("heart-icon");
-                heartIcon.setAttribute("onclick", "toggleHeart(this)");
-                heartIcon.setAttribute("src", "/images/profile/empty.png");
-                addWishHeart.appendChild(heartIcon);
-                
-                if (wish === 1) {
-                    heartIcon.classList.add("selected");
-                }
-            } 
-            else { // 로그인 상태가 아닌 경우
-                const heartIcon = document.createElement("img");
-                heartIcon.classList.add("heart-icon");
-                heartIcon.setAttribute("onclick", "toggleHeart(this)");
-                heartIcon.setAttribute("src", "/images/profile/empty.png");
-                addWishHeart.appendChild(heartIcon);
-            }
-
-            productRow.appendChild(addWishHeart);
-
-            const salesText = document.createElement("div");
-            salesText.classList.add("sales-text");
-
-            const productNameDiv = document.createElement("div");
-            productNameDiv.classList.add("product-name"); //
-
-            const productName = document.createElement("p");
-            productName.textContent = themeProduct.productName;
-            productNameDiv.appendChild(productName);
-
-            // 상품 이름 글자수
-            /* if (productName.textContent.length > 23) {
-                productName.textContent = productName.textContent.substring(0, 23) + "...";
-            } */
-
-            const reviewDiv = document.createElement("div");
-            
-            const reviewStarImg = document.createElement("img");
-            reviewStarImg.setAttribute("src", "/images/profile/slideStar.png");
-            reviewStarImg.setAttribute("alt", "slideStar");
-            reviewDiv.appendChild(reviewStarImg);
-            
-            const reviewStars = document.createElement("span");
-            reviewStars.textContent = themeProduct.reviewStars;
-            reviewDiv.appendChild(reviewStars);
-            
-            productNameDiv.appendChild(reviewDiv);
-
-            salesText.appendChild(productNameDiv);
-
-            const regionDiv = document.createElement("div");
-
-            const locationImg = document.createElement("img");
-            locationImg.setAttribute("src", "/images/profile/location.png");
-            locationImg.setAttribute("alt", "location");
-            regionDiv.appendChild(locationImg);
-
-            const regionName = document.createElement("span");
-            regionName.textContent = themeProduct.regionName;
-            regionDiv.appendChild(regionName);
-
-            salesText.appendChild(regionDiv);
-
-            const priceDiv = document.createElement("div");
-
-            const priceText = document.createElement("p");
-            // priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
-            // 천의 자리에 콤마 추가
-            const formattedPrice = new Intl.NumberFormat('en-US').format(themeProduct.productPrice);
-            priceText.innerHTML = `₩ ${formattedPrice} / total`;
-            priceDiv.appendChild(priceText);
-
-            salesText.appendChild(priceDiv);
-            productRow.appendChild(salesText); 
-            productListContainer.appendChild(productRow);
+        if(themeProdList.length === 0){
+            const noProductBox = document.createElement("div");
+            noProductBox.classList.add("no-product-box");
+            const noProductMsg = document.createElement("div");
+            noProductMsg.textContent = "등록된 상품이 존재하지 않습니다.";
+            noProductBox.appendChild(noProductMsg)
+            productListContainer.appendChild(noProductBox);
         }
+        else{
+            for (let themeProduct of themeProdList) {
+                const productRow = document.createElement("li");
+                productRow.classList.add("product-row");
+    
+                const singleItem = document.createElement("div");
+                singleItem.classList.add("slider");
+                singleItem.classList.add("single-item");
+                singleItem.setAttribute("data-productno", themeProduct.productNo);
+    
+                if(themeProduct.imageList){
+                    for (let image of themeProduct.imageList) {
+                        let div = document.createElement("div");
+                        div.classList.add("productImage");
+                        
+                        let imgLink = document.createElement("a");
+                        imgLink.setAttribute("href", "/productDetail/product/" + themeProduct.productNo);
+        
+                        let img = document.createElement("img");
+                        img.setAttribute("src", image.filePath);
+                        imgLink.appendChild(img);
+        
+                        div.appendChild(imgLink);
+                        singleItem.appendChild(div);
+                    }
+                }
+    
+                productRow.appendChild(singleItem);
+    
+                const slideBtn = document.createElement("div");
+                slideBtn.classList.add("slide-btn");
+    
+                const slideNextImg = document.createElement("img");
+                slideNextImg.setAttribute("src", "/images/profile/NextBtn.png");
+                slideNextImg.setAttribute("alt", "slideNext");
+                slideNextImg.classList.add("slick-slide-next");
+                slideBtn.appendChild(slideNextImg);
+    
+                const slidePreImg = document.createElement("img");
+                slidePreImg.setAttribute("src", "/images/profile/PreBtn.png");
+                slidePreImg.setAttribute("alt", "slidePre");
+                slidePreImg.classList.add("slick-slide-pre");
+                slideBtn.appendChild(slidePreImg);
+    
+                productRow.appendChild(slideBtn);
+    
+                const addWishHeart = document.createElement("div");
+                addWishHeart.classList.add("add-wish-heart");
+                
+                const wish = themeProduct.wishOrNot;
+                
+                if (loginUserNo != 0) { // 로그인 상태인 경우
+    
+                    const heartIcon = document.createElement("img");
+                    heartIcon.classList.add("heart-icon");
+                    heartIcon.setAttribute("onclick", "toggleHeart(this)");
+                    heartIcon.setAttribute("src", "/images/profile/empty.png");
+                    addWishHeart.appendChild(heartIcon);
+                    
+                    if (wish === 1) {
+                        heartIcon.classList.add("selected");
+                    }
+                } 
+                else { // 로그인 상태가 아닌 경우
+                    const heartIcon = document.createElement("img");
+                    heartIcon.classList.add("heart-icon");
+                    heartIcon.setAttribute("onclick", "toggleHeart(this)");
+                    heartIcon.setAttribute("src", "/images/profile/empty.png");
+                    addWishHeart.appendChild(heartIcon);
+                }
+    
+                productRow.appendChild(addWishHeart);
+    
+                const salesText = document.createElement("div");
+                salesText.classList.add("sales-text");
+    
+                const productNameDiv = document.createElement("div");
+                productNameDiv.classList.add("product-name"); //
+    
+                const productName = document.createElement("p");
+                productName.textContent = themeProduct.productName;
+                productNameDiv.appendChild(productName);
+    
+                const reviewDiv = document.createElement("div");
+                
+                const reviewStarImg = document.createElement("img");
+                reviewStarImg.setAttribute("src", "/images/profile/slideStar.png");
+                reviewStarImg.setAttribute("alt", "slideStar");
+                reviewDiv.appendChild(reviewStarImg);
+                
+                const reviewStars = document.createElement("span");
+                reviewStars.textContent = themeProduct.reviewStars;
+                reviewDiv.appendChild(reviewStars);
+                
+                productNameDiv.appendChild(reviewDiv);
+    
+                salesText.appendChild(productNameDiv);
+    
+                const regionDiv = document.createElement("div");
+    
+                const locationImg = document.createElement("img");
+                locationImg.setAttribute("src", "/images/profile/location.png");
+                locationImg.setAttribute("alt", "location");
+                regionDiv.appendChild(locationImg);
+    
+                const regionName = document.createElement("span");
+                regionName.textContent = themeProduct.regionName;
+                regionDiv.appendChild(regionName);
+    
+                salesText.appendChild(regionDiv);
+    
+                const priceDiv = document.createElement("div");
+    
+                const priceText = document.createElement("p");
+                // priceText.innerHTML = `₩ ${themeProduct.productPrice} / total`;
+                // 천의 자리에 콤마 추가
+                const formattedPrice = new Intl.NumberFormat('en-US').format(themeProduct.productPrice);
+                priceText.innerHTML = `₩ ${formattedPrice} / total`;
+                priceDiv.appendChild(priceText);
+    
+                salesText.appendChild(priceDiv);
+                productRow.appendChild(salesText); 
+                productListContainer.appendChild(productRow);
+            }
+        }
+
 
         // 슬라이드 라이브러리 초기화
         $('.single-item').slick({
@@ -346,7 +324,15 @@ function loadSelectedProductByTheme(themeCode) {
 
 
 
+// 상품이 존재하지 않는다면
+// const productListContainer = document.getElementById("productListContainer");
+// const productRows = productListContainer.querySelectorAll(".product-row");
 
+// if (productRows.length === 0) {
+//     const noProductMessage = document.createElement("li");
+//     noProductMessage.textContent = "등록된 상품이 존재하지 않습니다.";
+//     productListContainer.appendChild(noProductMessage);
+// }
 
 
 
