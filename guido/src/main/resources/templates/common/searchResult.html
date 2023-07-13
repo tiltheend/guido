@@ -18,6 +18,16 @@
     <!-- js -->
     <script th:src="@{/js/main/slide/jquery.min.js}"></script>
     <script th:src="@{/js/main/slide/owl.carousel.js}"></script>
+    <style>
+        footer{
+            /* margin-top: 80px !important; */
+            position: absolute !important; 
+            bottom: 0;
+        }
+        #productListContainer{
+            margin-bottom: 80px;
+        }
+    </style>
 </head>
 
 <body>
@@ -143,7 +153,7 @@
 
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         // if(loginUserNo == null) loginUserNo = "";
-
+        const userType = /*[[${session.loginUser?.userType}]]*/ "로그인한 회원 타입";
     </script>
     
     <!-- 게시글 슬라이드 -->
@@ -153,5 +163,6 @@
     
     <!-- js -->
     <script th:src="@{/js/main/searchResult.js}"></script>
+    
 </body>
 </html>

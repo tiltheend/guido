@@ -30,49 +30,58 @@ public class HomeController {
 	
 	@Autowired
 	private HomeService service;
-	
-	
-	
-	// 메인 페이지 이동 + 상품 목록 조회
-	@GetMapping("/home")
-	public String mainPage(Model model
-						, @SessionAttribute(value="loginUser", required=false) User loginUser) {
 
-		int userNo = 0;
-		
-		if(loginUser != null) {
-			userNo = loginUser.getUserNo();
-		}
-		
-		// 상품 목록 조회
-		List<Product> productList = service.selectProductList(userNo);
-		model.addAttribute("productList", productList);
-		
-		// 인기 여행지 목록 조회
-		List<Product> popularProductList = service.selectPopularProductList(userNo);
-		model.addAttribute("popularProductList", popularProductList);
-		
-		// 슈퍼가이드 상품 목록 조회
-		List<Product> superProductList = service.selectSuperProductList(userNo);
-		model.addAttribute("superProductList", superProductList);
-		
-		// 추천 상품 목록 조회
-		List<Product> recommProductList = service.selectRecommProductList(userNo);
-		model.addAttribute("recommProductList", recommProductList);
-		
-		// 메인 슬라이드 이벤트 배너 조회
-		List<Event> eventBannerList = service.selectEventBannerList();
-		model.addAttribute("eventBannerList", eventBannerList);
-		
-		return "common/index";
-	}
+//	// 메인 페이지 이동 + 상품 목록 조회
+//	@GetMapping("/home")
+//	public String mainPage(Model model
+//						, @SessionAttribute(value="loginUser", required=false) User loginUser) {
+//
+//		int userNo = 0;
+//		
+//		if(loginUser != null) {
+//			userNo = loginUser.getUserNo();
+//		}
+//		
+//		// 상품 목록 조회
+//		List<Product> productList = service.selectProductList(userNo);
+//		model.addAttribute("productList", productList);
+//		
+//		// 인기 여행지 목록 조회
+//		List<Product> popularProductList = service.selectPopularProductList(userNo);
+//		model.addAttribute("popularProductList", popularProductList);
+//		
+//		// 슈퍼가이드 상품 목록 조회
+//		List<Product> superProductList = service.selectSuperProductList(userNo);
+//		model.addAttribute("superProductList", superProductList);
+//		
+//		// 추천 상품 목록 조회
+//		List<Product> recommProductList = service.selectRecommProductList(userNo);
+//		model.addAttribute("recommProductList", recommProductList);
+//		
+//		// 메인 슬라이드 이벤트 배너 조회
+//		List<Event> eventBannerList = service.selectEventBannerList();
+//		model.addAttribute("eventBannerList", eventBannerList);
+//		
+//		return "common/index";
+//	}
 	
 	
 	// 테마검색 상품목록 조회
 	@GetMapping(value = "/home/{themeCode}", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode) {
-	    return service.selectThemeProdList(themeCode);
+	public List<Product> selectThemeProdList(@PathVariable("themeCode") int themeCode
+			, @SessionAttribute(value="loginUser", required=false) User loginUser) {
+		
+		Map<String, Integer> map = new HashMap<>();
+		
+		map.put("themeCode", themeCode);
+		if(loginUser != null) {			
+			map.put("userNo", loginUser.getUserNo());						
+		}
+
+		List<Product> themeList = service.selectThemeProdList(map);
+		
+	    return themeList;
 	}
 	
 	
@@ -223,6 +232,7 @@ public class HomeController {
 	@ResponseBody
 	public int updateWish(@RequestBody Map<String, Integer> paramMap) {
 		return service.updateWish(paramMap);
+		// {"senderNo":11,"productNo":"16","productName":"대도시 서울에서 만나는 여유로운 힐링의 시간","notificationType":"L"}
 	}
 	
 

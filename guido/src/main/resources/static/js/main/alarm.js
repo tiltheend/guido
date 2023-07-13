@@ -80,28 +80,37 @@ function sendReservation(productNo, productName){
 	alarmModalContent.textContent = obj.notificationContent;
 }
  */
+
+// 웹소켓 새로 온 알림
 window.addEventListener('DOMContentLoaded', function() {
     // 알림 내용을 표시할 요소 선택
     const alarmModalContent = document.querySelector('.alarm-modal-content');
 
+	let alarmOn = document.querySelector(".alarm-icon .alarm-on");
+
     alarmSock.onmessage = function(e) {
 
-		alarmModalContent.innerHTML = "";
+		if(alarmOn!=null) document.querySelector(".alarm-icon .alarm-on").style.display="block";
+
+        alarmModalContent.innerHTML = "";
 
         const obj = JSON.parse(e.data);
-        console.log(`보낸 사람 : ${obj.senderNo} / ${obj.notificationContent}`);
+        console.log(`보낸 사람: ${obj.senderNo} / ${obj.notificationContent}`);
 
-		let contentWithImage = '';
+        // 이미지 경로를 저장할 변수
+        let imageSrc = '';
 
-		if (obj.notificationType === 'L') {
-			contentWithImage = `<img src="/images/icons/alarm_wish.png" alt=""> ${obj.notificationContent}`;
-        } 
-		else{
-			contentWithImage = `<img src="/images/icons/alarm_guide.png" alt=""> ${obj.notificationContent}`;
+        // 이미지 경로 설정
+        if (obj.notificationType === 'L') {
+            imageSrc = '/images/icons/alarm_wish.png';
+        } else {
+            imageSrc = '/images/icons/alarm_guide.png';
         }
 
+        // 이미지 요소와 알림 내용을 포함하는 HTML 생성
+        const contentWithImage = `<div><img src="${imageSrc}"><span>${obj.notificationContent}</span></div>`;
+
         // 알림 내용을 요소에 설정
-        //alarmModalContent.textContent = obj.notificationContent;
         alarmModalContent.innerHTML = contentWithImage;
     };
 
@@ -109,7 +118,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
+// 누적 알림 10개 조회
 function alarmFn(){
 
 	alarmModalBox = document.querySelector(".alarm-modal");
@@ -125,17 +134,24 @@ function alarmFn(){
 				// 각 알림에 대한 처리 수행
 				const notificationContent = alarm.notificationContent;
 				const senderNo = alarm.senderNo;
+				const notificationType = alarm.notificationType;
 			
 				// console.log('누적 알림 : ' + notificationContent);
 				
 				const alarmContent = document.createElement("div");
 
-				const alarmClose = document.createElement("div");
+				/* const alarmClose = document.createElement("div");
 				alarmClose.classList.add("alarm-modal-close");
-				alarmContent.appendChild(alarmClose);
+				alarmContent.appendChild(alarmClose); */
 
 				const image = document.createElement("img");
-				image.src = "/images/icons/alarm_wish.svg";
+				let imageSrc = '';
+				if (notificationType === 'L') {
+					imageSrc = "/images/icons/alarm_wish.png";
+				} else {
+					imageSrc = "/images/icons/alarm_guide.png";
+				}
+				image.src = imageSrc;
 				image.alt = "알림 이미지";
 				alarmContent.appendChild(image);
 			

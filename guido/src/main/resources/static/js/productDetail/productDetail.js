@@ -217,7 +217,7 @@ menuLinks.forEach(function(link) {
 
         const targetSectionId = this.getAttribute('href');
         const targetSection = document.querySelector(targetSectionId);
-        const topOffset = targetSection.getBoundingClientRect().top + 1;
+        const topOffset = targetSection.getBoundingClientRect().top - 80;
         window.scrollBy({ top: topOffset, behavior: 'smooth' });
     });
 });
@@ -230,14 +230,14 @@ window.addEventListener("scroll", ()=>{
     
     const scroll = window.scrollY;
 
-    const section1 = scroll + document.getElementById("section1").getBoundingClientRect().top;
-    const section2 = scroll + document.getElementById("section2").getBoundingClientRect().top;
-    const section3 = scroll + document.getElementById("section3").getBoundingClientRect().top;
-    const section4 = scroll + document.getElementById("section4").getBoundingClientRect().top;
-    const section6 = scroll + document.getElementById("section6").getBoundingClientRect().top;
+    const section1 = scroll + document.getElementById("section1").getBoundingClientRect().top - 120;
+    const section2 = scroll + document.getElementById("section2").getBoundingClientRect().top - 120;
+    const section3 = scroll + document.getElementById("section3").getBoundingClientRect().top - 120;
+    const section4 = scroll + document.getElementById("section4").getBoundingClientRect().top - 120;
+    const section6 = scroll + document.getElementById("section6").getBoundingClientRect().top - 120;
     
     if(document.getElementById("section5")!=null){
-        var section5 = scroll + document.getElementById("section5").getBoundingClientRect().top;
+        var section5 = scroll + document.getElementById("section5").getBoundingClientRect().top - 120;
     }
 
     menuLi.forEach(function(li){
@@ -296,27 +296,22 @@ window.addEventListener("scroll", ()=>{
 /* 관심상품 등록/제거 처리 */
 if(document.getElementById("wishHeart")!=null){
     
-    const wishHeart = document.getElementById("wishHeart");
-    let check;      // 관심상품 등록 여부
-
-    let productNo = document.querySelector('.detail--text__title').getAttribute('data-productno');
-    let productName = document.querySelector('.detail--text__title').getAttribute('data-productname');
-    console.log(productNo);
-    console.log(productName);
-
-    /* 관심 상품 등록O */
-    if (wishHeart.checked) {
-        check = 1;
-    } else {
-        /* 관심 상품 등록X */
-        check = 0;
-    }
-    
-    const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
-    // const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
-    
     
     wishHeart.addEventListener("click", ()=> {
+        
+        const wishHeart = document.getElementById("wishHeart");
+        let check;      // 관심상품 등록 여부
+    
+        /* 관심 상품 등록O */
+        if (wishHeart.checked) {
+            check = 1;
+        } else {
+            /* 관심 상품 등록X */
+            check = 0;
+        }
+        
+        const wishData = {"productNo" : product.productNo, "userNo": loginUserNo, "check": check};
+        // const wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
         
         fetch("/productDetail/updateWish",{
             method : "POST",
@@ -329,8 +324,10 @@ if(document.getElementById("wishHeart")!=null){
             if(result==0){
                 console.log("관심상품 등록 실패");
             }
-            sendWish(productNo, productName); // 관심상품 등록 알림
 
+            if(check){
+                sendWish(product.productNo, product.productName); // 관심상품 등록 알림
+            }
     
         })
         .catch(err=>{
@@ -602,6 +599,12 @@ if(document.getElementById('editBtn')!=null){
 
     document.getElementById('editBtn').addEventListener('click', function () {
         location.href = location.pathname + '/edit';
+    });
+}
+
+if (document.getElementById('deleteBtn') != null) {
+    document.getElementById('deleteBtn').addEventListener('click', function () {
+        location.href = location.pathname + '/delete';
     });
 }
 

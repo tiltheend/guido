@@ -90,10 +90,12 @@ public class ProductDetailServiceImpl implements ProductDetailService{
 		int result = 0;
 		
 		// 관심상품 등록 X
-		if(map.get("check")==0)
+		if(map.get("check")==1)
 			result = mapper.insertProductWish(map);
 		else
 			result = mapper.deleteProductWish(map);
+		
+		if(result==0) return -1;
 		
 		return result;
 	}

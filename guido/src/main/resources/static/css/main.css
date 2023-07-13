@@ -494,44 +494,6 @@ hr{
 .heart-icon.selected{
   background-image: url('/images/profile/heartClick.png'); 
 }
-  /* 좋아요 버튼 */
-/*   .like--container{
-    margin-top: 5vh;
-}
-
-  .like--container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  .like--container {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .like--container svg {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 40px;
-    width: 40px;
-    transition: all 0.3s;
-    fill: #666;
-  }
-  
-  .like--container svg:hover {
-    transform: scale(1.1);
-  }
-  
-  .like--container input:checked ~ svg {
-    fill: #E3474F;
-  } */
-  /* 진 */
 
 
 /* 게시글 텍스트 */
@@ -543,6 +505,13 @@ hr{
 }
 .main-post .product-post .sales-text>div:nth-child(1)>p{
   font-weight: bold;
+  width: 250px;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .main-post .product-post .sales-text>div:nth-child(1) img{
   width: 12px; margin-right: 4px;
@@ -653,6 +622,7 @@ hr{
 }
 .post-more button{
   background-color: transparent;
+  font-size: 16px;
 }
 
 .post-more-first{

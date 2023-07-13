@@ -12,7 +12,10 @@ header .logo{margin-left: 100px; user-select: none;}
 header .main-icons-box{display: flex; margin-right: 100px; justify-content: flex-end;}
 
 header .logo img{width: 87px;}
-
+header form{
+  width: 100%;
+  position: relative;
+}
 header .main-search-box{
   height: 48px;
   border: 1px solid #C5C5C5; border-radius: 50px;
@@ -44,20 +47,21 @@ header .search-box-click-box{
   width: 100%; height: 30px; box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   display: flex; justify-content: space-between; align-items: center;
   position: fixed; background-color: #fff; top: 80px;
-
+  justify-content: center;
   display: none;
 }
 
 header .search-box-click{
-  /* width: 840px; */ width: 44vw;
+  /* width: 840px; width: 44vw; */
   height: 60px;
   border: 1px solid #C5C5C5; border-radius: 50px;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
   display: flex; justify-content: space-around; align-items: center;
   /* transition: opacity 0.5s; */
-  transform: translateX(500px);
+  /* transform: translateX(500px); */
   position: absolute;
-  top: -55px;
+  top: -58px;
+  background-color: #fff;
 }
 
 .final-search-btn{
@@ -83,14 +87,14 @@ header .search-box-click-box button{
 }
 
 .search-box-click-box div{
-  color: #fff;
+  /* color: #fff; */
 }
 
 .where-button-click input{
   border: none;
   font-size: 16px;
   /* width: 288px; */
-  width: 15.5vw;
+  /* width: 15.5vw; */
   height: 48px;
   background-color: #fff;
   border-radius: 50px;
@@ -101,6 +105,8 @@ header .search-box-click-box button{
   background-position: 15px center;
   padding-left: 40px;
   outline: none;
+  width: 300px;
+  padding: 0 40px;
 }
 .check-in-button-click input, .check-out-button-click input, .guest-button-click input{
   border: none;
@@ -414,10 +420,8 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
   font-size: 16px;
 }
 .mypage-modal hr{
-  position: absolute;
-  width: 80%;
-  margin-top: 85px;
-  /* margin-bottom: 16px; */
+  margin: 8px 0;
+  width: 100%;
 }
 .mypage-modal a{
   width: 100%;
@@ -456,18 +460,20 @@ input[name="firstday"], input[name="lastday"], input[name="tourist"] {
 }
 .alarm-modal>div{
   margin: 20px;
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 .alarm-modal>div>div{
   margin-top: 12px;
   display: flex;
-  text-align: center;
+  margin-right: 7px;
 }
 .alarm-modal img{
-  width: 15px;
-  /* height: 20px; */
-  margin-right: 6px;
+  /* width: 15px; */
+  height: 30px;
+  margin-right: 10px;
 }
 
 .alarm-modal-close{
@@ -658,8 +664,33 @@ background-color: #000 !important;
   margin-top: 50px;
 }
 
-@media screen and (max-width : 1024px) {
-    
+@media screen and (max-width : 1400px) {
+  /* header .main-icons-box{
+    display: none;
+  } */
+}
+
+@media screen and (max-width : 970px) {
+  .modal-modal-width {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .where-modal {
+    display: flex;
+    width: 380px;
+    background-color: #fff;
+    border-radius: 20px;
+    margin-top: 14px;
+    /* position: fixed; */
+    /* left: 500px; */
+    top: 110px;
+    z-index: 300;
+    transform: translateY(110px);
+    display: none;
+  }
+
 }
 
 @media screen and (max-width : 767px) {
@@ -669,4 +700,32 @@ background-color: #000 !important;
   header .main-icons-box{
     display: none;
   }
+}
+
+.modal-modal-width{
+  width: 100%;
+  /* margin: auto; */
+}
+
+/* 알림 빨갛게 */
+.chatting-icon a{
+  position: relative;
+  display: block;
+  width: 100%; height: 100%;
+}
+.chatting-icon .alarm-on{
+  width: 10px; height: 10px;
+  position: absolute;
+  right: 2px; top: 2px;
+  display: none;
+}
+.alarm-icon{
+  position: relative;
+  display: block;
+}
+.alarm-icon .alarm-on{
+  width: 10px; height: 10px;
+  position: absolute;
+  right: 4px; top: 2px;
+  display: none;
 }

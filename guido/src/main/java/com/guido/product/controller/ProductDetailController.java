@@ -68,14 +68,20 @@ public class ProductDetailController {
 		List<ProductDate> allProductDateList = service.selectAllProductDateList(productNo);
 		
 		
-		// 비로그인 유저 => 인기 상품 랜덤으로 조회
+		// 비로그인 유저 => 인기 상품 랜덤 조회 (상위 10개 중 랜덤 4개 조회)
 		if(loginUser==null)
 			recommendList = service.selectPopularList();
 		else {
-			// 추천 상품 조회
-			recommendList = service.selectRecommendList(loginUser.getUserNo());
 			
-			if(recommendList.isEmpty())
+			// 여행객의 경우 => 가이드 언어 일치하는 상품 랜덤으로 4개 조회
+			if(loginUser.getUserType().equals("T"))
+				recommendList = service.selectRecommendList(loginUser.getUserNo());
+			// 가이드 or 관리자의 경우 => 인기 상품 랜덤 조회 (상위 10개 중 랜덤 4개 조회)
+			else
+				recommendList = service.selectPopularList();
+				
+			// (조회 데이터가 4개 이하라면) 인기상품 랜덤 조회
+			if(recommendList.size()<4)
 				recommendList = service.selectPopularList();
 		}
 		

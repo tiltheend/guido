@@ -51,8 +51,8 @@ public class HomeServiceImpl implements HomeService {
 
 	// 테마검색 상품목록 조회
 	@Override
-	public List<Product> selectThemeProdList(int themeCode) {
-		return mapper.selectThemeProdList(themeCode);
+	public List<Product> selectThemeProdList(Map<String, Integer> map) {
+		return mapper.selectThemeProdList(map);
 	}
 
 	

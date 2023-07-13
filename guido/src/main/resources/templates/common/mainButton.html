@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>guido</title>
+    <script th:src="@{/js/main/slide/jquery.min.js}"></script>
+  </head>
+  <style>
+    main a button, main>form>button {
+      width: 200px;
+      height: 30px;
+      background-color: #0f4957;
+      color: #fff;
+      margin: 10px;
+    }
+    main {
+      margin-top: 100px;
+      height: 100vh;
+    }
+    /* body{
+      width: 100vw;
+      height: 100vh;
+    } */
+  </style>
+  <body>
+    <main th:object="${session.loginUser}">
+      <th:block th:replace="~{common/header}"></th:block>
+
+      <a th:href="@{/productDetail/product/15?guest=3}"><button>상품 상세 페이지</button></a> <br>
+      <a th:href="@{/reservation/order_result?order_id=20230705-542802}"><button>예약 결제 완료 페이지</button></a> <br>
+      <a th:href="@{/reservation/reservation_info?reservation_no=18}"><button>예약 확인 페이지</button></a> <br>
+      <a th:href="@{/reservation/reservation_list?reservation_no=18}"><button>가이드 측 예약 확인 페이지</button></a> <br>
+      <a th:href="@{/qna/write}"><button>문의사항 작성 페이지</button></a> <br><br>
+
+
+      <a th:if="${session.loginUser}" th:href="@{/profile/{userNo}(userNo=${session.loginUser.userNo})}">
+        <button>마이페이지</button>
+      </a>      
+      <!-- <a th:href="@{/profile/25}"><button>구매자 프로필 페이지 (25번 구매자)</button></a> -->
+      <!-- <a th:href="@{/profile/23}"><button>가이드 프로필 페이지 (23번 가이드)</button></a> <br> -->
+      <!-- <a th:href="@{/chatting}"><button>채팅</button></a> <br> -->
+
+      <a th:href="@{/common/home}"><button>메인 페이지</button></a> 
+      <a th:href="@{/common/searchResult}"><button>검색 페이지</button></a> 
+
+      <br/>
+
+      <a th:href="@{/user/loginPage}"><button id="loginBtn">로그인 페이지</button></a>
+
+      <br/>
+
+      <a th:href="@{/user/myPage/editInfo/guide}"><button>가이드 내정보수정 페이지</button></a>
+      <a th:href="@{/user/myPage/editInfo/tourist}"><button>관광객 내정보수정 페이지</button></a>
+
+      <br/>
+
+      <a th:href="@{/upload}"><button>상품 등록 페이지</button></a>
+
+      <br/>
+
+      <a th:href="@{/admin/eventList}"><button>관리자 페이지</button></a>
+      <form th:action="@{/user/login}" method="POST" style="display:inline">
+        <input type="hidden" name="userEmail" value="manager00@gmail.com">
+        <input type="hidden" name="userPassword" value="pass01">
+        <button>관리자 로그인</button>
+      </form>
+
+      <br/>
+      <hr/>
+      <h1>확인</h1>
+      <th:block th:if="${session.loginUser}">
+          회원 이메일 : <div th:text="*{userEmail}"></div>
+          <br>
+          회원 유형 :
+          <th:block th:switch="${session.loginUser.userType}">
+            <p th:case="T">관광객</p>
+            <p th:case="G">가이드</p>
+            <p th:case="*">관리자</p>
+          </th:block>
+          <br>
+          <a href="/user/logout"><button>로그아웃</button></a>
+      </th:block>
+
+      <br>
+
+      
+    </main>
+
+    <th:block th:replace="~{/common/footer}"></th:block>
+    <script th:inline="javascript">
+      const loginBtn = document.getElementById("loginBtn");
+      // const loginUser = /*[[${session.loginUser}]]*/ "로그인된 유저"
+      loginBtn.addEventListener('click',e=>{
+        if(loginUser){
+          loginBtn.parentElement.href = "http://localhost/";
+          alert("이미 로그인 되어있습니다.");
+        } 
+      })
+
+    </script>
+  </body>
+</html>
