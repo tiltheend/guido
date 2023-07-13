@@ -481,7 +481,8 @@ function chagneSignupBtn(){
             signUpBtn.style.backgroundColor = "#c5c5c5";
         }
 }
-    
+
+
 // 필수 입력 검사
 const signUpForm = document.getElementById("signUpForm");
 
