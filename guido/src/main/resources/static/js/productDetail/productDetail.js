@@ -602,6 +602,12 @@ if(document.getElementById('editBtn')!=null){
     });
 }
 
+if (document.getElementById('deleteBtn') != null) {
+    document.getElementById('deleteBtn').addEventListener('click', function () {
+        location.href = location.pathname + '/delete';
+    });
+}
+
 
 
 /* 일정 소개 예약 가능한 일자 첫번째~마지막번째 세팅 */
