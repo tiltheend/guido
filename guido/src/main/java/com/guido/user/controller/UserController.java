@@ -135,7 +135,7 @@ public class UserController {
 			
 		}else { // 로그인 실패
 			
-			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			ra.addFlashAttribute("message", "이메일 또는 비밀번호가 일치하지 않습니다.");
 			path = new RedirectView(referer);
 			
 		}
