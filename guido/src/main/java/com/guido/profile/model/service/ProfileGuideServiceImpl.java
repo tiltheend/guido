@@ -106,8 +106,8 @@ public class ProfileGuideServiceImpl implements ProfileGuideService{
 	
 	// 가이드 예약 리스트 (3개씩 더보기)
 	@Override
-	public List<Reservation> guideMoreReservationList(int userNo) {
-		return mapper.guideMoreReservationList(userNo);
+	public List<Reservation> guideMoreReservationList(Map<String, Integer> request) {
+		return mapper.guideMoreReservationList(request);
 	}
 
 	//  자기 소개 수정하기

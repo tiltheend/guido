@@ -609,7 +609,6 @@ if (document.getElementById('deleteBtn') != null) {
 }
 
 
-
 /* 일정 소개 예약 가능한 일자 첫번째~마지막번째 세팅 */
 // 21 Jun, 2023 - 24 Jun, 2023
 

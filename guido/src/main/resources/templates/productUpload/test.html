@@ -510,6 +510,7 @@
         <label class="optionName-item" for="optionName9">17:00</label>
         <input type="checkbox" class="hidden option-name" id="optionName10">
         <label class="optionName-item" for="optionName10">18:00</label>
+        <!-- <input type="time" class="option-name" id="selectOptionName"><span onclick="" id="insertTimeBtn">시간 입력</span> -->
       </div>
     </div>
     </div>
@@ -638,16 +639,17 @@
         </div>
       </div>
     </main>
-    <div class="save"><button class="save-btn" id="submitBtn">제출하기</button></div>
-  </form>
+    <div class="save"></div>
+
     <footer>
       <div class="progress-bar">
         <div class="progress"></div>
       </div>
       <div class="progress-btn">
         <button type="button" class="back-btn">이전</button>
-        <button type="button" class="next-btn">다음</button>
+        <button type="button" class="next-btn">다음</button><button class="save-btn" id="submitBtn">제출하기</button>
       </div>
+    </form>
     </footer>
   </body>
   <script th:src="@{/js/productUpload/test.js}"></script>

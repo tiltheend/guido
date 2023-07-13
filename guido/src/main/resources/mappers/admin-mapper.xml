@@ -173,7 +173,7 @@
 			</when>
 			<when test="pageName == 'qna'">
 				
-				QNA_NO, QNA_TITLE, QNA_EMAIL, QNA_DATE, QNA_CHECK_FL
+				QNA_NO, QNA_TITLE, QNA_EMAIL, TO_CHAR(QNA_DATE, 'YYYY-MM-DD') QNA_DATE, QNA_CHECK_FL
 				FROM QNA
 				<if test="query != null">WHERE QNA_TITLE LIKE '%${query}%' OR QNA_CONTENT LIKE '%${query}%'</if>
 				ORDER BY

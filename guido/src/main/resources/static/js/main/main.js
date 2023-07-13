@@ -231,17 +231,6 @@ function loadProductByTheme(themeCode) {
 
             productRow.appendChild(slideBtn);
 
-            /* const addWishHeart = document.createElement("div");
-            addWishHeart.classList.add("add-wish-heart");
-
-            const heartIcon = document.createElement("img");
-            heartIcon.classList.add("heart-icon");
-            heartIcon.setAttribute("src", "/images/profile/empty.png");
-            heartIcon.setAttribute("onclick", "toggleHeart()");
-            addWishHeart.appendChild(heartIcon);
-
-            productRow.appendChild(addWishHeart); */
-
             const addWishHeart = document.createElement("div");
             addWishHeart.classList.add("add-wish-heart");
             
@@ -280,11 +269,6 @@ function loadProductByTheme(themeCode) {
             const productName = document.createElement("p");
             productName.textContent = themeProduct.productName;
             productNameDiv.appendChild(productName);
-
-            // 상품 이름 글자수
-            /* if (productName.textContent.length > 23) {
-                productName.textContent = productName.textContent.substring(0, 23) + "...";
-            } */
 
             const reviewDiv = document.createElement("div");
             
@@ -357,13 +341,5 @@ function loadProductByTheme(themeCode) {
     })
     .catch(e => { console.log(e) });
 }
-
-
-
-
-
-
-
-
 
 

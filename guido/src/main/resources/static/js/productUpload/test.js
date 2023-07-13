@@ -11,6 +11,11 @@ const btnContainer = document.getElementById('btnContainer');
 // const tourBox = document.getElementbyClassName('tour-box');
 var body = document.querySelector('body');
 // sbmtBtn.classList.add('.hidden');
+
+nextBtn.addEventListener('click', () => {
+  if (currentPage < pages.length) currentPage++;
+  updatePage();
+});
 const updatePage = () => {
   nextBtn.disabled = false;
 
@@ -36,6 +41,9 @@ const updatePage = () => {
     typing6();
     init();
     // checkTourCourse();
+    if (tourCourse.length == 0) {
+      nextBtn.disabled = true;
+    }
   }
   if (currentPage == 3) {
     updateNextBtnState();
@@ -57,7 +65,7 @@ const updatePage = () => {
   if (currentPage == 6) {
     document.querySelector('.text7').innerHTML = '';
     typing7();
-    // checkImage();
+    checkImage();
   }
   if (currentPage == 7) {
     document.querySelector('.text8').innerHTML = '';
@@ -84,20 +92,20 @@ const updatePage = () => {
     document.querySelector('.text13').innerHTML = '';
     typing13();
     disableNextButton();
+    nextBtn.style.display = 'flex';
+    sbmtBtn.style.display = 'none';
   }
   if (currentPage == 12) {
+    // submintBtnDisplay();
     document.querySelector('.text14').innerHTML = '';
     typing14();
+    nextBtn.style.display = 'none';
+    sbmtBtn.style.display = 'flex';
   }
 };
 
 prevBtn.addEventListener('click', () => {
   if (currentPage > 0) currentPage--;
-  updatePage();
-});
-
-nextBtn.addEventListener('click', () => {
-  if (currentPage < pages.length) currentPage++;
   updatePage();
 });
 
@@ -121,22 +129,6 @@ function updateTourValue3() {
 var selectedElement = null;
 const tourThemeItems = document.querySelectorAll('[name="tourTheme"]');
 
-// const checkTheme = () => {
-//   nextBtn.disabled = true;
-//   for (var i = 0; i < themeList.length; i++) {
-//     themeList[i].addEventListener('change', function () {
-//       let isChecked = false;
-
-//       for (let j = 0; j < themeList.length; j++) {
-//         if (themeList[j].checked) {
-//           isChecked = true;
-//           break;
-//         }
-//       }
-//       nextBtn.disabled = !isChecked;
-//     });
-//   }
-// };
 function updateNextBtnState() {
   let isChecked = false;
   for (let i = 0; i < themeList.length; i++) {
@@ -166,6 +158,7 @@ const createTime = document.querySelector('#createTime');
 tourTypes.forEach(function (tourType) {
   tourType.addEventListener('click', function () {
     // 배경색 초기화
+    buildCalendar();
     tourTypes.forEach(function (type) {
       type.style.backgroundColor = '';
       type.style.borderColor = '';
@@ -353,11 +346,11 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var mainElement10 = document.getElementById('page11');
   if (mainElement10) {
-    mainElement10.style.width = '850px';
+    mainElement10.style.width = '950px';
   }
   var mainElement14 = document.getElementById('page15');
   if (mainElement14) {
-    mainElement14.style.width = '70%';
+    mainElement14.style.width = '85%';
   }
 });
 //3페이지
@@ -809,28 +802,35 @@ for (let i = 0; i < inputImage.length; i++) {
 }
 const plusImage = document.querySelectorAll('.plus-image');
 const constPreview = document.querySelectorAll('.const-preview');
-const checkImage = () => {
-  for (let i = 0; i < constPreview.length; i++) {
-    if (constPreview[i].getAttribute('src') == '') {
-      nextBtn.disabled = true;
-    }
-  }
-};
-for (const imgElement of constPreview) {
-  imgElement.addEventListener('change', () => {
-    if (imgElement.src !== '') {
-      nextBtn.disabled = false;
-    } else {
-      nextBtn.disabled = true;
-    }
-  });
-}
-const checkTourCourse = () => {
-  if (tourCourse.length == 0) {
-    nextBtn.disabled = true;
-  }
-};
+// const checkImage = () => {
+//   for (let i = 0; i < constPreview.length; i++) {
+//     if (constPreview[i].getAttribute('src') == '') {
+//       nextBtn.disabled = true;
+//     }
+//   }
+// };
+// for (const imgElement of constPreview) {
+//   imgElement.addEventListener('change', () => {
+//     if (imgElement.src !== '') {
+//       nextBtn.disabled = false;
+//     } else {
+//       nextBtn.disabled = true;
+//     }
+//   });
+// }
+// const checkTourCourse = () => {
+//   if (tourCourse.length == 0) {
+//     nextBtn.disabled = true;
+//   }
+// };
 
+const checkImage = () => {
+  for (let i = 0; i < 5; i++) {
+    if (preview[i].getAttribute('src') == '') {
+      nextBtn.disabled = true;
+    }
+  }
+};
 // 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가
 const imgId1 = document.getElementById('imgId1');
 const imgId2 = document.getElementById('imgId2');
@@ -927,6 +927,14 @@ inputDay.addEventListener('input', () => {
   minTouristName.value = '';
 });
 
+// var hasBossCourse = tourCourse.some(function (course) {
+//   return course.bossCourseFl === 'Y';
+// });
+
+// if (!hasBossCourse) {
+//   nextBtn.disabled = true;
+// }
+
 inputTime.addEventListener('input', () => {
   if (inputTime.value > 0) {
     minTouristNum[0].style.display = 'block';
@@ -970,12 +978,18 @@ function validateMinMaxInput2() {
 const form = document.getElementById('productUploadFrm');
 
 form.addEventListener('submit', (e) => {
+  if (tourCourse.length == 0) {
+    e.preventDefault();
+    alert('투어 코스를 입력해야 합니다.');
+    return;
+  }
   e.preventDefault();
   document.getElementById('tourCourse').value = JSON.stringify(tourCourse);
   document.getElementById('productOption').value =
     JSON.stringify(productOption);
   console.log(document.getElementById('tourCourse').value);
   console.log(document.getElementById('productOption').value);
+
   form.submit();
 });
 
@@ -992,3 +1006,66 @@ const displayNoneTime = () => {
     createTime.style.display = 'inline-block';
   }
 };
+
+const selectOptionName = document.getElementById('selectOptionName');
+const insertTimeBtn = document.getElementById('insertTimeBtn');
+const optionNameArray = [];
+
+// insertTimeBtn.addEventListener('click', function () {
+//   if (
+//     selectOptionName.value !== '' &&
+//     !optionNameArray.includes(selectOptionName.value)
+//   ) {
+//     optionNameArray.push(selectOptionName.value);
+//     console.log(optionNameArray);
+//   } else if (optionNameArray.includes(selectOptionName.value)) {
+//     alert('같은 시간은 입력할 수 없습니다');
+//     return;
+//   }
+// });
+// String.prototype.toHHMMSS = function () {
+//   var myNum = parseInt(this, 10);
+//   var hours = Math.floor(myNum / 3600);
+//   var minutes = Math.floor((myNum - hours * 3600) / 60);
+//   var seconds = myNum - hours * 3600 - minutes * 60;
+
+//   if (hours < 10) {
+//     hours = '0' + hours;
+//   }
+//   if (minutes < 10) {
+//     minutes = '0' + minutes;
+//   }
+//   if (seconds < 10) {
+//     seconds = '0' + seconds;
+//   }
+//   return hours + ':' + minutes;
+// };
+const disabledTourCourse = () => {
+  for (let i = 0; i < tourCourse.length; i++) {
+    tourCourse[i].bossCourseFL;
+  }
+};
+// 초기 상태에서 이벤트를 강제로 발생시킴
+const changeEvent = new Event('change');
+inputImage[4].dispatchEvent(changeEvent);
+inputImage[5].dispatchEvent(changeEvent);
+for (let i = 0; i < 5; i++) {
+  inputImage[i].addEventListener('change', () => {
+    let allImagesSelected = true;
+    for (let j = 0; j < 5; j++) {
+      if (preview[j].getAttribute('src') === '') {
+        allImagesSelected = false;
+        break;
+      }
+    }
+
+    if (allImagesSelected) {
+      for (let i = 0; i < plusImage.length; i++) {
+        plusImage[i].style.display = 'inline-block';
+      }
+      nextBtn.disabled = false;
+    } else {
+      nextBtn.disabled = true;
+    }
+  });
+}

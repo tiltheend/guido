@@ -149,10 +149,10 @@
                             <div>
                                 <th:block th:switch="${product.productPackage}">
                                     <th:block th:case="1">
-                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
                                     </th:block>
                                     <th:block th:case="*">
-                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                        <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
                                     </th:block>
                                 </th:block>
                             </div>
@@ -224,10 +224,10 @@
                         <div>
                             <th:block th:switch="${product.productPackage}">
                                 <th:block th:case="1">
-                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
                                 </th:block>
                                 <th:block th:case="*">
-                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
                                 </th:block>
                             </th:block>
                         </div>
@@ -294,10 +294,10 @@
                         <div>
                             <th:block th:switch="${product.productPackage}">
                                 <th:block th:case="1">
-                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
                                 </th:block>
                                 <th:block th:case="*">
-                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
                                 </th:block>
                             </th:block>
                         </div>
@@ -365,10 +365,10 @@
                         <div>
                             <th:block th:switch="${product.productPackage}">
                                 <th:block th:case="1">
-                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
                                 </th:block>
                                 <th:block th:case="*">
-                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / each'"></p>
+                                    <p th:text="'₩ ' + ${#numbers.formatInteger(product.productPrice, 3, 'COMMA')} + ' / total'"></p>
                                 </th:block>
                             </th:block>
                         </div>

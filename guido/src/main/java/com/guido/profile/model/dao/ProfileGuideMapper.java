@@ -54,7 +54,7 @@ public interface ProfileGuideMapper {
 	List<Reservation> GuideReservationList(int userNo);
 
 	// 가이드 예약 리스트 (3개씩 더보기)
-	List<Reservation> guideMoreReservationList(int userNo);
+	List<Reservation> guideMoreReservationList(Map<String, Integer> request);
 
 	// 자기 소개 수정하기
 	int prEdit(PR pr);

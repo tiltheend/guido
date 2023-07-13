@@ -52,8 +52,13 @@
   }
   
   
-  
-  
+  /* 상품 없을 경우 */  
+  .no-product-box{
+    width: 1300px;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
   
   /* ***** 게시글 슬라이드 ***** */
   .container--inner__top__left{

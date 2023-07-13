@@ -131,7 +131,7 @@ public class ProductUploadController {
 			
 		}else {
 			message = "상품 등록 실패,";
-			path += "/common/home";
+			path += "/";
 		}
 		
 		ra.addFlashAttribute("message", message);
@@ -178,7 +178,7 @@ public class ProductUploadController {
 				
 			}else {
 				message = "비정상적인 접근입니다.";
-				path += "redirect:/common/home";
+				path += "redirect:/";
 			}
 			
 			ra.addFlashAttribute("message", message);
@@ -242,7 +242,7 @@ public class ProductUploadController {
 			if(result > 0) {
 				
 				message = "삭제 되었습니다.";
-				path += "/common/home";
+				path += "/";
 			}else {
 				message = "삭제 실패";
 				path += "/productDetail/product/" + productNo;
