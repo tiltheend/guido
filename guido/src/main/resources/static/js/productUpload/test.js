@@ -503,7 +503,6 @@ function addElement() {
     var container = document.getElementById('add-container');
     var warningMessage = document.querySelector('#addWarning');
 
-    // Check if the value already exists in the container
     var existingElements = container.getElementsByClassName('added-element');
     for (var i = 0; i < existingElements.length; i++) {
       if (existingElements[i].textContent === value) {
@@ -512,7 +511,6 @@ function addElement() {
       }
     }
 
-    // Hide the warning message if input value has changed
     if (warningMessage.style.display === 'flex') {
       warningMessage.style.display = 'none';
     }
@@ -531,6 +529,7 @@ function addElement() {
     deleteIcon.addEventListener('click', function (e) {
       e.stopPropagation();
       deleteIcon.parentNode.remove();
+      newInputElement.remove();
     });
 
     newElement.innerHTML = value;
