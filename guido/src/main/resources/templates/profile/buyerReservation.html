@@ -49,7 +49,7 @@
             </div> <!-- // profile-left 프로필 왼쪽 박스 -->            
             
             <div class="seller-btn" th:if="${session.loginUser?.userNo == user.userNo}">
-                <button onclick="location.href='/user/myPage/editInfo/tourist'"> <!-- 내 정보 수정 -->
+                <button onclick="location.href='/user/myPage/editInfo'"> <!-- 내 정보 수정 -->
                     <img th:src="@{/images/profile/myInfoEdit.png}" alt="">
                     <div>내 정보 수정</div>
                 </button>

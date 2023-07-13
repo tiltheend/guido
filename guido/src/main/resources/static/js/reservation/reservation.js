@@ -386,126 +386,131 @@ function reservationChattingFn(data){
 	const targetNo = data.guideNo;
 	const loginUserNo  = data.userNo;
 
+  let alarmOn = document.querySelector(".chatting-icon .alarm-on");
+
+
 	fetch("/chatting/enter?targetNo="+targetNo)
 	.then(resp => resp.text())
 	.then(chattingNo => {
 		// console.log(chattingNo);
 		
-      // 예약 리스트 요소 생성 하기
-      const li = document.createElement("li");
-      li.classList.add('priview-list');
-      // 예약 번호
-      const reservationNumberDiv = document.createElement("div");
-      const reservationNumberSpan1 = document.createElement("span");
-      const reservationNumberSpan2 = document.createElement("span");
-      reservationNumberSpan1.textContent = "예약 번호";
-      // const reservationNumberA = document.createElement("a");
-      // reservationNumberA.href = `/reservation/reservation_info?reservation_no=${data.reservationNo}`;
-      reservationNumberSpan2.textContent = `${data.orderNumber}`;
+    if(alarmOn!=null) document.querySelector(".chatting-icon .alarm-on").style.display="block";
 
-      reservationNumberDiv.appendChild(reservationNumberSpan1);
-      reservationNumberDiv.appendChild(reservationNumberSpan2);
-      // reservationNumberDiv.appendChild(reservationNumberA);
-      
-      li.appendChild(reservationNumberDiv);
+    // 예약 리스트 요소 생성 하기
+    const li = document.createElement("li");
+    li.classList.add('priview-list');
+    // 예약 번호
+    const reservationNumberDiv = document.createElement("div");
+    const reservationNumberSpan1 = document.createElement("span");
+    const reservationNumberSpan2 = document.createElement("span");
+    reservationNumberSpan1.textContent = "예약 번호";
+    // const reservationNumberA = document.createElement("a");
+    // reservationNumberA.href = `/reservation/reservation_info?reservation_no=${data.reservationNo}`;
+    reservationNumberSpan2.textContent = `${data.orderNumber}`;
 
-      // 이미지 및 내용 요소
-      const imageDiv = document.createElement("div");
-      imageDiv.className = "reservation-img";
-      const imageLink = document.createElement("a");
-      const image = document.createElement("img");
-      const contentDiv = document.createElement("div");
-      contentDiv.className = "reservation-content";
-      const dateH2 = document.createElement("h2");
-      const titleH2 = document.createElement("h2");
-      const priceSpan1 = document.createElement("span");
-      const priceSpan2 = document.createElement("span");
+    reservationNumberDiv.appendChild(reservationNumberSpan1);
+    reservationNumberDiv.appendChild(reservationNumberSpan2);
+    // reservationNumberDiv.appendChild(reservationNumberA);
+    
+    li.appendChild(reservationNumberDiv);
 
-      imageLink.href = `/productDetail/product/${data.productNo}`;
-      image.src = data.thumbnail;
-      image.alt = "reservationImg";
+    // 이미지 및 내용 요소
+    const imageDiv = document.createElement("div");
+    imageDiv.className = "reservation-img";
+    const imageLink = document.createElement("a");
+    const image = document.createElement("img");
+    const contentDiv = document.createElement("div");
+    contentDiv.className = "reservation-content";
+    const dateH2 = document.createElement("h2");
+    const titleH2 = document.createElement("h2");
+    const priceSpan1 = document.createElement("span");
+    const priceSpan2 = document.createElement("span");
+
+    imageLink.href = `/productDetail/product/${data.productNo}`;
+    image.src = data.thumbnail;
+    image.alt = "reservationImg";
 
 
-      if(data.package=='1'){
-          if(data.optionName != null){
-              const orderDate = new Date(data.reservationDate.productDate);
-              const year = orderDate.getFullYear();
-              const month = String(orderDate.getMonth() + 1).padStart(2, '0');
-              const day = String(orderDate.getDate()).padStart(2, '0');
-              let optionText = data.optionName;
+    if(data.package=='1'){
+        if(data.optionName != null){
+            const orderDate = new Date(data.reservationDate.productDate);
+            const year = orderDate.getFullYear();
+            const month = String(orderDate.getMonth() + 1).padStart(2, '0');
+            const day = String(orderDate.getDate()).padStart(2, '0');
+            let optionText = data.optionName;
 
-              // const startTime = optionText;
-              // const endTime = addTime(optionText, reservation.tourDuration);
-              // optionText = `${startTime}~${endTime}`;
-              // // console.log(reservation.tourDuration);
+            // const startTime = optionText;
+            // const endTime = addTime(optionText, reservation.tourDuration);
+            // optionText = `${startTime}~${endTime}`;
+            // // console.log(reservation.tourDuration);
 
-              dateH2.textContent = `${year}년 ${month}월 ${day}일 [${optionText}]`;
+            dateH2.textContent = `${year}년 ${month}월 ${day}일 [${optionText}]`;
 
-          } else {
-              const orderDate = new Date(data.reservationDate.productDate);
-              const year = orderDate.getFullYear();
-              const month = String(orderDate.getMonth() + 1).padStart(2, '0');
-              const day = String(orderDate.getDate()).padStart(2, '0');
-              dateH2.textContent = `${year}년 ${month}월 ${day}일`;
-          }
-      } else {
-          const orderDate = new Date(data.reservationDate.productDate);
+        } else {
+            const orderDate = new Date(data.reservationDate.productDate);
+            const year = orderDate.getFullYear();
+            const month = String(orderDate.getMonth() + 1).padStart(2, '0');
+            const day = String(orderDate.getDate()).padStart(2, '0');
+            dateH2.textContent = `${year}년 ${month}월 ${day}일`;
+        }
+    } else {
+        const orderDate = new Date(data.reservationDate.productDate);
 
-          const package = Number(data.package);
+        const package = Number(data.package);
 
-          // 투어 시작 날짜 계산
-          const newYear = orderDate.getFullYear();
-          const newMonth = String(orderDate.getMonth() + 1).padStart(2, "0");
-          const newDay = String(orderDate.getDate()).padStart(2, "0");
-          
-          const formattedDate = `${newYear}년 ${newMonth}월 ${newDay}일`;
+        // 투어 시작 날짜 계산
+        const newYear = orderDate.getFullYear();
+        const newMonth = String(orderDate.getMonth() + 1).padStart(2, "0");
+        const newDay = String(orderDate.getDate()).padStart(2, "0");
+        
+        const formattedDate = `${newYear}년 ${newMonth}월 ${newDay}일`;
 
-          orderDate.setDate(orderDate.getDate() + package - 1);
-          
-          const lastYear = orderDate.getFullYear();
-          const lastMonth = String(orderDate.getMonth() + 1).padStart(2, "0");
-          const lastDay = String(orderDate.getDate()).padStart(2, "0");
+        orderDate.setDate(orderDate.getDate() + package - 1);
+        
+        const lastYear = orderDate.getFullYear();
+        const lastMonth = String(orderDate.getMonth() + 1).padStart(2, "0");
+        const lastDay = String(orderDate.getDate()).padStart(2, "0");
 
-          let twoDaysLater;
-          
-          if (lastYear !== newYear) {
-              twoDaysLater = `${lastYear}년 ${lastMonth}월 ${lastDay}일`;
-          } else {
-              twoDaysLater = `${lastMonth}월 ${lastDay}일`;
-          }
-          
-          dateH2.textContent = formattedDate + " ~ " + twoDaysLater;
-          
-      }
+        let twoDaysLater;
+        
+        if (lastYear !== newYear) {
+            twoDaysLater = `${lastYear}년 ${lastMonth}월 ${lastDay}일`;
+        } else {
+            twoDaysLater = `${lastMonth}월 ${lastDay}일`;
+        }
+        
+        dateH2.textContent = formattedDate + " ~ " + twoDaysLater;
+        
+    }
 
-      titleH2.textContent = data.productName;
-      priceSpan1.textContent = "KRW  ";
-      priceSpan2.textContent = data.totalPrice.toLocaleString() + ' / total';
+    titleH2.textContent = data.productName;
+    priceSpan1.textContent = "KRW  ";
+    priceSpan2.textContent = data.totalPrice.toLocaleString() + ' / total';
 
-      imageLink.appendChild(image);
-      imageDiv.appendChild(imageLink);
-      contentDiv.appendChild(dateH2);
-      contentDiv.appendChild(titleH2);
-      contentDiv.appendChild(priceSpan1);
-      contentDiv.appendChild(priceSpan2);
+    imageLink.appendChild(image);
+    imageDiv.appendChild(imageLink);
+    contentDiv.appendChild(dateH2);
+    contentDiv.appendChild(titleH2);
+    contentDiv.appendChild(priceSpan1);
+    contentDiv.appendChild(priceSpan2);
 
-      const flexDiv = document.createElement("div");
-      flexDiv.className = "flex-direction-row";
-      flexDiv.appendChild(imageDiv);
-      flexDiv.appendChild(contentDiv);
+    const flexDiv = document.createElement("div");
+    flexDiv.className = "flex-direction-row";
+    flexDiv.appendChild(imageDiv);
+    flexDiv.appendChild(contentDiv);
 
-      li.appendChild(flexDiv);
+    li.appendChild(flexDiv);
 
-      var obj = {
-        "senderNo": loginUserNo,
-        "targetNo": targetNo,
-        "chattingNo": chattingNo,
-        "messageContent": li.outerHTML,
-        "type": 2
-      };
-      // console.log(obj)
+    var obj = {
+      "senderNo": loginUserNo,
+      "targetNo": targetNo,
+      "chattingNo": chattingNo,
+      "messageContent": li.outerHTML,
+      "type": 2
+    };
+    // console.log(obj)
 
-      chattingSock.send(JSON.stringify(obj));
+    chattingSock.send(JSON.stringify(obj));
 
 	})
 	.catch(err => console.log(err));
