@@ -874,6 +874,10 @@ function productListFn(e){
     .then(resp => resp.json())
     .then(guideProductList => {
 
+        // if (guideProductList.length < 4) {
+        //     productMoreBtn.style.display = "none";
+        // }
+
         let productList = document.querySelector('.sales-list-box');
         if(guideProductList.length >0){
 
@@ -1026,8 +1030,9 @@ if(productMoreBtn !=null) {
         .then(resp => resp.json())
         .then(moreProductList => {
 
+            console.log(moreProductList.length);
             if (moreProductList.length < 4) {
-                productMoreBtn.style.display = "none";
+                document.querySelector(".sales-list-more").style.display = "none";
             }
     
             if (moreProductList.length > 0) {
@@ -1082,8 +1087,8 @@ if(productMoreBtn !=null) {
                     }
                     saleContentElement.appendChild(h3Element);
 
-                    console.log(product);
-                    console.log(product.productDateList);
+                    // console.log(product);
+                    // console.log(product.productDateList);
                     if (product.productDateList.length > 0) {
                         const pElement2 = document.createElement("p");
                         const productDateBlock = document.createElement("block");
@@ -1140,7 +1145,7 @@ if(productMoreBtn !=null) {
                     productList.appendChild(liElement);
                 }
     
-                productwMoreBtnFn();
+                // productwMoreBtnFn();
             }
     
         })
