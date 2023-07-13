@@ -181,7 +181,7 @@ public class ProfileGuideController {
 		
 		List<Reservation> guideMoreReservationList = service.guideMoreReservationList(request);
 		
-		System.out.println(guideMoreReservationList);
+//		System.out.println(guideMoreReservationList);
 		return guideMoreReservationList;
 	}
 	
