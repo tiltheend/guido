@@ -34,7 +34,7 @@ const updatePage = () => {
   if (currentPage == 1) {
     document.querySelector('.text2').innerHTML = '';
     typing2();
-    // updateNextBtnCity();
+    checkCity();
   }
   if (currentPage == 2) {
     document.querySelector('.text6').innerHTML = '';
@@ -257,9 +257,13 @@ const textElements = document.getElementsByClassName('TEXT');
 const clickElements = document.getElementsByClassName('OUTLINE');
 const city = document.getElementById('space');
 const checkSpace = document.getElementById('checkSpace');
+const checkCity = () => {
+  nextBtn.disabled = true;
+};
 
 for (let i = 0; i < clickElements.length; i++) {
   clickElements[i].addEventListener('click', () => {
+    nextBtn.disabled = false;
     // 기존 클릭한 요소의 효과 초기화
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
@@ -278,11 +282,12 @@ for (let i = 0; i < clickElements.length; i++) {
   });
 
   textElements[i].addEventListener('click', () => {
+    nextBtn.disabled = false;
     // 기존 클릭한 요소의 효과 초기화
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
         clickElements[j].style.fill = '#333';
-        s;
+
         clickElements[j].style.transform = 'none';
       } else {
         clickElements[j].style.fill = 'rgb(59, 119, 124)';
