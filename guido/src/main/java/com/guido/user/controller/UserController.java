@@ -66,12 +66,50 @@ public class UserController {
 	// 내정보수정 페이지 이동
 	
 	// 가이드 
-	@GetMapping("/myPage/editInfo/guide")
-	public String editMyPageGuide(@SessionAttribute("loginUser") User loginUser, Model model, RedirectAttributes ra, @RequestHeader(value="referer") String referer) {
+//	@GetMapping("/myPage/editInfo/guide")
+//	public String editMyPageGuide(@SessionAttribute("loginUser") User loginUser, Model model, RedirectAttributes ra, @RequestHeader(value="referer") String referer) {
+//		
+//		System.out.println(loginUser.getUserType());
+//		
+//		if(loginUser.getUserType().equals("G")) { // 가이드가 맞으면  
+//			
+//			int userNo= loginUser.getUserNo();
+//			
+//			//(나현) 프로필에서 가져올 추가 정보들
+//			User user = service2.userInfo(userNo);
+//			User guide = service3.selectGuideInfo(userNo);
+//			
+//			model.addAttribute("user", user);
+//			model.addAttribute("guide", guide);
+//			
+//			return "myPage/myInfoGuide";
+//			
+//		}else{ // 가이드 아니면 
+//			
+//			ra.addFlashAttribute("message", "비정상적인 접근입니다.");
+//			return "error/404";
+//			
+//		}
+//		
+//	}
+	
+	// 내정보 수정 페이지
+	@GetMapping("/myPage/editInfo")
+	public String editMyPageTourist(@SessionAttribute("loginUser") User loginUser, Model model) {
 		
 		System.out.println(loginUser.getUserType());
 		
-		if(loginUser.getUserType().equals("G")) { // 가이드가 맞으면  
+		if(loginUser.getUserType().equals("T")) { // 투어리스트
+			
+			int userNo= loginUser.getUserNo();
+			
+			User user = service2.userInfo(userNo);
+			
+			model.addAttribute("user", user);
+			
+			return "myPage/myInfoTourist";
+			
+		} else if(loginUser.getUserType().equals("G")) { // 가이드
 			
 			int userNo= loginUser.getUserNo();
 			
@@ -84,35 +122,10 @@ public class UserController {
 			
 			return "myPage/myInfoGuide";
 			
-		}else { // 가이드가 아니면 
+		}else{ // 가이드 아니면 
 			
-			ra.addFlashAttribute("message", "비정상적인 접근입니다.");
-			return "redirect:"+referer;
+			return "error/404";
 			
-		}
-		
-	}
-	
-	// 투어리스트 
-	@GetMapping("/myPage/editInfo/tourist")
-	public String editMyPageTourist(@SessionAttribute("loginUser") User loginUser, Model model, RedirectAttributes ra, @RequestHeader(value="referer") String referer) {
-		
-		System.out.println(loginUser.getUserType());
-		
-		if(loginUser.getUserType().equals("T")) { // 투어리스트가 맞으면  
-			
-			int userNo= loginUser.getUserNo();
-			
-			User user = service2.userInfo(userNo);
-			
-			model.addAttribute("user", user);
-			
-			return "myPage/myInfoTourist";
-			
-		}else { // 투어리스트 아니면
-			
-			ra.addFlashAttribute("message", "비정상적인 접근입니다.");
-			return "redirect:"+referer;
 		}
 	}
 	
