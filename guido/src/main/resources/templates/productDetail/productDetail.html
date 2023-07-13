@@ -123,7 +123,7 @@
                         <!-- 상세 설명 -->
                         <div class="detail--middle__detail">
         
-                            <div class="detail--text__title font1" th:data-productname="*{productName}" th:data-productno="*{productNo}">
+                            <div class="detail--text__title font1">
                                 [[*{productName}]]
                                 <span class="detail--ongoing__title font4" th:if="*{productState}=='N'">ongoing</span>
                                 <span class="detail--finished__title font4" th:if="*{productState}=='E'">finished</span>
