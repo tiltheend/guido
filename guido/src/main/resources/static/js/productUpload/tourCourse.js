@@ -75,6 +75,7 @@ function displayPlaces(places) {
   removeMarker();
 
   for (var i = 0; i < places.length; i++) {
+    nextBtn.disabled = false;
     // 마커를 생성하고 지도에 표시합니다
     var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
       marker = addMarker(placePosition, i),
@@ -95,13 +96,17 @@ function displayPlaces(places) {
       //클릭하면 요소 생성되는 코드 작성하기**
 
       kakao.maps.event.addListener(marker, 'click', function () {
-        nextBtn.disabled = false;
+        // if (hasBossCourse) {
+        //   nextBtn.disabled = 'false';
+        // } else {
+        //   nextBtn.disabled = 'true';
+        // }
         console.log(x, y);
 
         var checkboxElement = document.createElement('input');
         checkboxElement.setAttribute('type', 'radio');
         checkboxElement.setAttribute('name', 'tourCourse');
-        checkboxElement.setAttribute('class', 'hidden');
+        checkboxElement.setAttribute('class', 'hidden radioBox');
         checkboxElement.setAttribute('id', 'tourCourse' + (numElements + 1));
         checkboxElement.setAttribute('value', title);
 
@@ -115,11 +120,8 @@ function displayPlaces(places) {
         deleteIcon.style.color = '#000000';
 
         var createCourseDiv = document.querySelector('.create-course');
-
         // 같은 경로가 이미 등록되어 있는지 확인합니다.
         var isDuplicate = false; // 중복 체크를 위한 변수
-        var checkedRadio = null; // 체크된 radio 요소
-        var previousRadio = null; // 이전에 체크된 radio 요소
 
         for (var i = 0; i < tourCourse.length; i++) {
           if (tourCourse[i].latitude === y && tourCourse[i].longitude === x) {
@@ -143,22 +145,9 @@ function displayPlaces(places) {
               bossCourseFL: 'N',
             };
 
-            checkboxElement.addEventListener('change', function () {
-              if (this.checked) {
-                if (checkedRadio !== null) {
-                  checkedRadio.bossCourseFL = 'N';
-                }
-                courseInfo.bossCourseFL = 'Y';
-                checkedRadio = courseInfo;
-              } else {
-                courseInfo.bossCourseFL = 'N';
-                checkedRadio = null;
-              }
-            });
-
             tourCourse.push(courseInfo);
           } else {
-            alert('15개 이상 등록할 수 없습니다.');
+            alert('10개 이상 등록할 수 없습니다.');
           }
         } else {
           alert('같은 경로는 등록할 수 없습니다.');
@@ -173,6 +162,30 @@ function displayPlaces(places) {
               checkedRadio = null;
             }
             tourCourse.splice(index, 1);
+          }
+          if (tourCourse.length == 0) {
+            nextBtn.disabled = true;
+          }
+        });
+
+        labelElement.addEventListener('click', function () {
+          // 클릭한 요소의 bossCourseFL 값을 'Y'로 설정
+          courseInfo.bossCourseFL = 'Y';
+
+          var hasBossCourse = tourCourse.some(function (element) {
+            return element.bossCourseFL === 'Y';
+          });
+
+          // 나머지 요소들의 bossCourseFL 값을 'N'으로 초기화
+          for (var i = 0; i < tourCourse.length; i++) {
+            if (tourCourse[i].courseOrder !== courseInfo.courseOrder) {
+              tourCourse[i].bossCourseFL = 'N';
+            }
+          }
+          if (hasBossCourse) {
+            nextBtn.disabled = false;
+          } else {
+            nextBtn.disabled = true;
           }
         });
       });
