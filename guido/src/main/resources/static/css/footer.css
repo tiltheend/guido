@@ -11,8 +11,8 @@ footer{
   font-size: 12px;
   display: flex; justify-content: space-around; align-items: center;
   background-color: #fff;
-  /* margin-top: 80px; */
-  /* position: absolute;  */
+  margin-top: 80px;
+  position: absolute; 
   bottom: 0;
 }
 
