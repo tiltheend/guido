@@ -197,7 +197,95 @@ function displayPlaces(places) {
       itemEl.onmouseover = function () {
         displayInfowindow(marker, title);
       };
-      itemEl.addEventListener('click', () => {});
+      itemEl.addEventListener('click', () => {
+        console.log(x, y);
+
+        var checkboxElement = document.createElement('input');
+        checkboxElement.setAttribute('type', 'radio');
+        checkboxElement.setAttribute('name', 'tourCourse');
+        checkboxElement.setAttribute('class', 'hidden radioBox');
+        checkboxElement.setAttribute('id', 'tourCourse' + (numElements + 1));
+        checkboxElement.setAttribute('value', title);
+
+        var labelElement = document.createElement('label');
+        labelElement.setAttribute('class', 'tourCourse-item');
+        labelElement.setAttribute('for', 'tourCourse' + (numElements + 1));
+        labelElement.innerText = title;
+
+        var deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fa-sharp', 'fa-solid', 'fa-xmark');
+        deleteIcon.style.color = '#000000';
+
+        var createCourseDiv = document.querySelector('.create-course');
+        // 같은 경로가 이미 등록되어 있는지 확인합니다.
+        var isDuplicate = false; // 중복 체크를 위한 변수
+
+        for (var i = 0; i < tourCourse.length; i++) {
+          if (tourCourse[i].latitude === y && tourCourse[i].longitude === x) {
+            isDuplicate = true;
+            break;
+          }
+        }
+
+        if (!isDuplicate) {
+          if (createCourseDiv.childElementCount < 30) {
+            createCourseDiv.appendChild(checkboxElement);
+            createCourseDiv.appendChild(labelElement);
+            labelElement.appendChild(deleteIcon);
+            numElements++; // numElements 변수를 증가시킴
+
+            var courseInfo = {
+              courseName: title,
+              latitude: y,
+              longitude: x,
+              courseOrder: numElements,
+              bossCourseFL: 'N',
+            };
+
+            tourCourse.push(courseInfo);
+          } else {
+            alert('10개 이상 등록할 수 없습니다.');
+          }
+        } else {
+          alert('같은 경로는 등록할 수 없습니다.');
+        }
+
+        deleteIcon.addEventListener('click', function (e) {
+          e.stopPropagation();
+          deleteIcon.parentNode.remove();
+          var index = tourCourse.indexOf(courseInfo);
+          if (index !== -1) {
+            if (courseInfo.bossCourseFL === 'Y') {
+              checkedRadio = null;
+            }
+            tourCourse.splice(index, 1);
+          }
+          if (tourCourse.length == 0) {
+            nextBtn.disabled = true;
+          }
+        });
+
+        labelElement.addEventListener('click', function () {
+          // 클릭한 요소의 bossCourseFL 값을 'Y'로 설정
+          courseInfo.bossCourseFL = 'Y';
+
+          var hasBossCourse = tourCourse.some(function (element) {
+            return element.bossCourseFL === 'Y';
+          });
+
+          // 나머지 요소들의 bossCourseFL 값을 'N'으로 초기화
+          for (var i = 0; i < tourCourse.length; i++) {
+            if (tourCourse[i].courseOrder !== courseInfo.courseOrder) {
+              tourCourse[i].bossCourseFL = 'N';
+            }
+          }
+          if (hasBossCourse) {
+            nextBtn.disabled = false;
+          } else {
+            nextBtn.disabled = true;
+          }
+        });
+      });
 
       itemEl.onmouseout = function () {
         infowindow.close();
@@ -236,7 +324,7 @@ function getListItem(index, places) {
   // itemStr += '  <span class="tel">' + places.phone + '</span>' + '</div>';
 
   el.innerHTML = itemStr;
-  el.className = 'item';
+  el.className = 'map-search-item';
 
   return el;
 }

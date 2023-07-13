@@ -931,13 +931,9 @@ inputDay.addEventListener('input', () => {
   minTouristName.value = '';
 });
 
-// var hasBossCourse = tourCourse.some(function (course) {
-//   return course.bossCourseFl === 'Y';
-// });
-
-// if (!hasBossCourse) {
-//   nextBtn.disabled = true;
-// }
+var hasBossCourse = tourCourse.some(function (course) {
+  return course.bossCourseFl === 'Y';
+});
 
 inputTime.addEventListener('input', () => {
   if (inputTime.value > 0) {
