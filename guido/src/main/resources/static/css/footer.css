@@ -12,7 +12,7 @@ footer{
   display: flex; justify-content: space-around; align-items: center;
   background-color: #fff;
   margin-top: 80px;
-  position: absolute; 
+  /* position: absolute;  */
   bottom: 0;
 }
 
