@@ -67,9 +67,9 @@ public class GoogleLoginController {
     	
     	redirectView.setUrl("https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
     			// localhost
-    			+ "&redirect_uri=http://localhost:80/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+//    			+ "&redirect_uri=http://localhost:80/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
     			// 학원 발표용
-//    			+ "&redirect_uri=http://class-a.xyz/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+    			+ "&redirect_uri=http://class-a.xyz/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
     			);
     	return redirectView;
     }
@@ -84,9 +84,9 @@ public class GoogleLoginController {
                 .clientSecret(googleClientPw)
                 .code(authCode)
                 // localhost
-                .redirectUri("http://localhost:80/google/login/oauth")
+//                .redirectUri("http://localhost:80/google/login/oauth")
                 // 학원 발표용
-//                .redirectUri("http://class-a.xyz/google/login/oauth")
+                .redirectUri("http://class-a.xyz/google/login/oauth")
                 .grantType("authorization_code").build();
         ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
                 googleOAuthRequestParam, GoogleResponse.class);
@@ -110,7 +110,7 @@ public class GoogleLoginController {
         if(googleUser != null) {
         	path = "redirect:/";
         	model.addAttribute("loginUser", googleUser);
-        	ra.addFlashAttribute("message", "즐거운 여행되세요!");
+//        	ra.addFlashAttribute("message", "즐거운 여행되세요!");
         }else { // 가입된 회원 아니면 (이메일, 프로필 사진 가지고 회원가입 화면으로) 
         	path = "redirect:/user/signUp/chooseMemberType";
         	// 유저 타입 고르는 화면으로 구글 유저 정보 가져가서 -> 회원가입 페이지로 이동.

@@ -304,28 +304,17 @@ phone.addEventListener("input",()=>{
         chk.phone = false;
     }
     if(phoneRegex.test(phone.value)){
-        phoneMessage.innerText = "국가(대한민국)를 다시 한번 확인해주세요.";
-        phoneMessage.classList.add("possible-message");
+        phoneMessage.innerText = "";
         phoneMessage.classList.remove("error-message");
         chk.phone = true;
     }else{
         phoneMessage.innerText = "숫자, 특수문자만 입력할 수 있습니다."
-        phoneMessage.classList.remove("possible-message");
         phoneMessage.classList.add("error-message");
         chk.phone = false;
     }
 });
 
 telBtn.addEventListener("click",e=>{
-    // 국가코드 한국 아니면 chk.phone = false
-    if(countryCode.value!='kr'){
-        phoneMessage.innerText = "국가(대한민국)를 다시 한번 확인해주세요.";
-        phoneMessage.classList.remove("possible-message");
-        phoneMessage.classList.add("error-message");
-        e.preventDefault();
-        chk.phone = false;
-        return;
-    }
     if(!(chk.phone)){
         e.preventDefault();
         return;
@@ -469,7 +458,7 @@ secessionUserBtn.addEventListener("click",e=>{
         }
         if(result>0){ // 탈퇴 성공
             alert("탈퇴 되었습니다. guido를 잊지 말아주세요...");
-            window.location.href = "/common/home";
+            window.location.href = "/";
         }
     })
     .catch(err=>console.log(err));

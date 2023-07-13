@@ -441,8 +441,11 @@
         var input = document.querySelector("#phone");
 
         var iti = window.intlTelInput(input, {
+            allowDropdown: false,
+            autoInsertDialCode: true,
             separateDialCode: true,
-            utilsScript: "build/js/utils.js"
+            initialCountry: "kr",
+            utilsScript: "/libraries/intl-tel-input/build/js/utils.js"
         });
 
         // intl test 버튼
