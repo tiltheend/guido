@@ -937,8 +937,8 @@ function productListFn(e){
                 }
                 saleContentElement.appendChild(h3Element);
 
-                console.log(product);
-                console.log(product.productDateList);
+                // console.log(product);
+                // console.log(product.productDateList);
                 if (product.productDateList.length > 0) {
                     const pElement2 = document.createElement("p");
                     const productDateBlock = document.createElement("block");
@@ -1031,13 +1031,13 @@ if(productMoreBtn !=null) {
             }
     
             if (moreProductList.length > 0) {
-                console.log(1);
+                // console.log(1);
                 for (let i = 0; i < 3; i++) {
                     const product = moreProductList[i];
-                    console.log(product);
-                    console.log(2);
+                    // console.log(product);
+                    // console.log(2);
                     if(product == null) break;
-                    console.log(3);
+                    // console.log(3);
                     const liElement = document.createElement("li");
 
                     const saleImgElement = document.createElement("div");
@@ -1074,9 +1074,8 @@ if(productMoreBtn !=null) {
                             pElement.appendChild(spanElement);
                         }
                     });
-
                     const h3Element = document.createElement("h3");
-                    if (product.productPackage === 1) {
+                    if (product.productPackage == '1') {
                         h3Element.innerText = "a " + product.tourDuration + "-hours day trip in " + product.regionName;
                     } else if (product.productPackage > 1) {
                         h3Element.innerText = product.productPackage + " day trip in " + product.regionName;
@@ -1117,14 +1116,15 @@ if(productMoreBtn !=null) {
                     starSpan.appendChild(starImage);
     
                     const reviewSpan = document.createElement('span');
-                    const reviewStars = document.createTextNode(product.reviewStars);
-                    reviewSpan.appendChild(reviewStars);
+                    // const reviewStars = document.createTextNode(product.reviewStars);
+                    reviewSpan.textContent=product.reviewStars;
+                    // starSpan.appendChild(reviewStars);
     
+                    starSpan.appendChild(reviewSpan);
                     containerDiv.appendChild(starSpan);
-                    containerDiv.appendChild(reviewSpan);
     
                     const priceH3 = document.createElement('h3');
-                    if (reservation.productPackage=='1') {
+                    if (product.productPackage=='1') {
                     const priceText = document.createTextNode(`₩ ${product.productPrice.toLocaleString()} / person`);
                         priceH3.appendChild(priceText);
                     } else {

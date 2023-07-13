@@ -54,6 +54,10 @@ public class ProfileGuideController {
 			
 		List<Product> guideProductMore = service.guideProductMore(request);
 		
+		for(Product p: guideProductMore) {
+			System.out.println(p.getProductPackage());
+		}
+		
 		return guideProductMore;
 	}
 
