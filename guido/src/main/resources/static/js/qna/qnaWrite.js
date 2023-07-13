@@ -253,7 +253,7 @@ qnaButton.addEventListener("click", (e)=>{
         return;
     }
 
-    if(qnaTitle.value.length>200){
+    if(qnaTitle.value.length>30){
         alert("작성 가능한 글자수를 초과합니다.");  
         qnaTitle.focus();
         e.preventDefault();
