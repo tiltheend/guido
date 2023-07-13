@@ -65,7 +65,7 @@ const updatePage = () => {
   if (currentPage == 6) {
     document.querySelector('.text7').innerHTML = '';
     typing7();
-    // checkImage();
+    checkImage();
   }
   if (currentPage == 7) {
     document.querySelector('.text8').innerHTML = '';
@@ -346,7 +346,7 @@ window.addEventListener('DOMContentLoaded', function () {
   }
   var mainElement10 = document.getElementById('page11');
   if (mainElement10) {
-    mainElement10.style.width = '850px';
+    mainElement10.style.width = '950px';
   }
   var mainElement14 = document.getElementById('page15');
   if (mainElement14) {
@@ -802,28 +802,35 @@ for (let i = 0; i < inputImage.length; i++) {
 }
 const plusImage = document.querySelectorAll('.plus-image');
 const constPreview = document.querySelectorAll('.const-preview');
-const checkImage = () => {
-  for (let i = 0; i < constPreview.length; i++) {
-    if (constPreview[i].getAttribute('src') == '') {
-      nextBtn.disabled = true;
-    }
-  }
-};
-for (const imgElement of constPreview) {
-  imgElement.addEventListener('change', () => {
-    if (imgElement.src !== '') {
-      nextBtn.disabled = false;
-    } else {
-      nextBtn.disabled = true;
-    }
-  });
-}
-const checkTourCourse = () => {
-  if (tourCourse.length == 0) {
-    nextBtn.disabled = true;
-  }
-};
+// const checkImage = () => {
+//   for (let i = 0; i < constPreview.length; i++) {
+//     if (constPreview[i].getAttribute('src') == '') {
+//       nextBtn.disabled = true;
+//     }
+//   }
+// };
+// for (const imgElement of constPreview) {
+//   imgElement.addEventListener('change', () => {
+//     if (imgElement.src !== '') {
+//       nextBtn.disabled = false;
+//     } else {
+//       nextBtn.disabled = true;
+//     }
+//   });
+// }
+// const checkTourCourse = () => {
+//   if (tourCourse.length == 0) {
+//     nextBtn.disabled = true;
+//   }
+// };
 
+const checkImage = () => {
+  for (let i = 0; i < 5; i++) {
+    if (preview[i].getAttribute('src') == '') {
+      nextBtn.disabled = true;
+    }
+  }
+};
 // 이미지 업로드  5장 이상 업로드 시 이미지 업로드 요소 추가
 const imgId1 = document.getElementById('imgId1');
 const imgId2 = document.getElementById('imgId2');
@@ -1038,3 +1045,27 @@ const disabledTourCourse = () => {
     tourCourse[i].bossCourseFL;
   }
 };
+// 초기 상태에서 이벤트를 강제로 발생시킴
+const changeEvent = new Event('change');
+inputImage[4].dispatchEvent(changeEvent);
+inputImage[5].dispatchEvent(changeEvent);
+for (let i = 0; i < 5; i++) {
+  inputImage[i].addEventListener('change', () => {
+    let allImagesSelected = true;
+    for (let j = 0; j < 5; j++) {
+      if (preview[j].getAttribute('src') === '') {
+        allImagesSelected = false;
+        break;
+      }
+    }
+
+    if (allImagesSelected) {
+      for (let i = 0; i < plusImage.length; i++) {
+        plusImage[i].style.display = 'inline-block';
+      }
+      nextBtn.disabled = false;
+    } else {
+      nextBtn.disabled = true;
+    }
+  });
+}
