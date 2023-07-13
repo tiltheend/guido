@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     reviewMoreBtnFn(); /* 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
     productwMoreBtnFn(); /* 상품 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
 
+    reviewListFn();
+
     // prListFn(); /* 자기 소개 비동기 */
 })
 
@@ -849,7 +851,7 @@ if(reviewMoreBtn !=null) {
                     
                 }
     
-                reviewMoreFn();
+                // reviewMoreFn();
             }
     
         })

@@ -179,7 +179,7 @@ if(reservationMoreBtn !=null) {
                 guestChattingImg.src = '/images/profile/guestChatting.png';
                 guestChattingImg.alt = 'guestChatting';
                 userNameP.appendChild(userNameSpan);
-                userNameP.appendChild(guestChattingImg);
+                // userNameP.appendChild(guestChattingImg);
                 guestDiv.appendChild(userNameP);
 
                 saleContentDiv.appendChild(guestDiv);
@@ -374,7 +374,7 @@ function reservationListFn(){
                 guestChattingImg.src = '/images/profile/guestChatting.png';
                 guestChattingImg.alt = 'guestChatting';
                 userNameP.appendChild(userNameSpan);
-                userNameP.appendChild(guestChattingImg);
+                // userNameP.appendChild(guestChattingImg);
                 guestDiv.appendChild(userNameP);
 
                 saleContentDiv.appendChild(guestDiv);
