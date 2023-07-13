@@ -387,7 +387,7 @@
 				WHERE  P.USER_NO = #{userNo}
 				ORDER BY RESERVATION_NO DESC
 			)
-		<![CDATA[ WHERE NUM > #{startReviewNum} ]]>
+		<![CDATA[ WHERE NUM > #{startReservationNum} ]]>
 			ORDER BY NUM
 	</select>
 

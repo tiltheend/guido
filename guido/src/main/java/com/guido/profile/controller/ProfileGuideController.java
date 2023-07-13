@@ -177,10 +177,11 @@ public class ProfileGuideController {
 	// 가이드 예약 리스트 (3개씩 더보기)
 	@ResponseBody
 	@PostMapping(value="/guideMoreReservationList", produces="application/json; charset=UTF-8")
-	public List<Reservation> guideMoreReservationList(@RequestBody int userNo){
+	public List<Reservation> guideMoreReservationList(@RequestBody Map<String, Integer> request){
 		
-		List<Reservation> guideMoreReservationList = service.guideMoreReservationList(userNo);
+		List<Reservation> guideMoreReservationList = service.guideMoreReservationList(request);
 		
+		System.out.println(guideMoreReservationList);
 		return guideMoreReservationList;
 	}
 	
