@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <th:block th:replace="@{admin/header}"></th:block>
+    <th:block th:replace="~{admin/header}"></th:block>
     <main>
         <!-- 사이드 메뉴 -->
         <th:block th:replace="~{admin/sideMenu}"></th:block>
@@ -43,7 +43,7 @@
                 <!---------------------------------- 테이블 제목 ------------------------------>
                 <thead>
                     <tr><th class="col-checkbox"><input type="checkbox" id="checkAll"></th><th class="col-number">번호</th><th class="col-title">제목</th>
-                        <th class="col-writer">작성자</th><th class="col-date size500">작성일</th><th class="col-ans">답변 상태</th></tr>
+                        <th class="col-writer size500">작성자</th><th class="col-date size500">작성일</th><th class="col-ans">답변 상태</th></tr>
                 </thead>
                 <tbody>
                     <tr class="여백"></tr>
@@ -52,7 +52,7 @@
                             <td><input type="checkbox" name="checkbox" class="checkbox" th:value="*{QNA_NO}"></td>
                             <td th:text="*{QNA_NO}">번호</td>
                             <td th:text="*{QNA_TITLE}">제목</td>
-                            <td th:text="*{QNA_EMAIL}">작성자</td>
+                            <td class="size500" th:text="*{QNA_EMAIL}">작성자</td>
                             <td class="size500" th:text="*{QNA_DATE}">등록일</td>
                             <td>
                                 <a th:href="@{writeAnswer/}+*{QNA_NO}">

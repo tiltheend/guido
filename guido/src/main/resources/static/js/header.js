@@ -33,10 +33,33 @@ const modalsBG = document.querySelector('.modal-background');
 /* *** 헤더 열고 닫기 *** */
 whereButton.addEventListener('click', () => {
   mainSearchBox.style.display = 'none';
-  searchBoxClickBox.style.display = 'block';
+  searchBoxClickBox.style.display = 'flex';
   whereModal.style.display = 'block';
   /* toggleModal(whereModal); */
   modalsBG.style.display = 'block';
+  
+  const inconBox = document.querySelector('.main-icons-box');
+  const inconSvg = document.querySelectorAll('.main-icons-box svg,.main-icons-box svg>*');
+  if(document.body.clientWidth < 1400){
+    // searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+    // whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+    if(searchBoxClickBox.style.display === 'flex'){
+      inconBox.style.display = 'none';
+      for(let i of inconSvg){
+        i.style.display = 'block';
+      }
+    }
+  }
+  if(document.body.clientWidth >= 1400){
+    // searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+    // whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+    if(searchBoxClickBox.style.display === 'none'){
+      inconBox.style.display = 'flex';
+      for(let i of inconSvg){
+        i.style.display = 'none';
+      }
+    }
+  }
 });
 
 whenButton.addEventListener('click', () => {
@@ -45,7 +68,7 @@ whenButton.addEventListener('click', () => {
   // startDateInput.click();
 
   mainSearchBox.style.display = 'none';
-  searchBoxClickBox.style.display = 'block';
+  searchBoxClickBox.style.display = 'flex';
   // whenModal.style.display = 'block';
   // /* toggleModal(whenModal); */
   modalsBG.style.display = 'block';
@@ -56,7 +79,7 @@ whenButton.addEventListener('click', () => {
 
 guestButton.addEventListener('click', () => {
   mainSearchBox.style.display = 'none';
-  searchBoxClickBox.style.display = 'block';
+  searchBoxClickBox.style.display = 'flex';
   guestModal.style.display = 'flex';
   /* toggleModal(guestModal); */
   modalsBG.style.display = 'block';
@@ -373,17 +396,57 @@ if(document.querySelector('.search-box-click') != null){
   const searchBoxClick = document.querySelector('.search-box-click');
   const whereModal = document.querySelector('.where-modal');
 
-  if(document.body.clientWidth > 1320){
-    searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
-    whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
-  }
+  // let headerRicon = document.querySelector("header .main-icons-box");
+  // let headerLlogo = document.querySelector("header .logo");
 
+  const inconBox = document.querySelector('.main-icons-box');
+  const inconSvg = document.querySelectorAll('.main-icons-box svg,.main-icons-box svg>*');
   
   window.addEventListener('resize', e => {
-    if(document.body.clientWidth > 1320){
-      searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
-      whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+
+    if(document.body.clientWidth >= 1400){
+      // searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+      // whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+      if(inconBox.style.display === 'none'){
+        // headerRicon.style.display = 'flex';
+        // headerLlogo.style.display = 'flex';
+        inconBox.style.display = 'flex';
+        for(let i of inconSvg){
+          i.style.display = 'block';
+        }
+      }
+    }
+
+    if(document.body.clientWidth < 1400){
+      // searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+      // whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+      if(inconBox.style.display === 'flex'){
+        // headerRicon.style.display = 'none';
+        // headerLlogo.style.display = 'none';
+        inconBox.style.display = 'none';
+        for(let i of inconSvg){
+          i.style.display = 'none';
+        }
+      }
     }
   });
+
 }
 
+
+// if(document.body.clientWidth < 1400){
+//   // searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+//   // whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+//   if(searchBoxClickBox.style.display === 'flex'){
+//     inconBox.style.display = 'none';
+//     inconSvg.style.display = 'none';
+//   }
+// }
+// if(document.body.clientWidth >= 1400){
+//   // searchBoxClick.style.left = (document.body.clientWidth - 1920)/2 + 'px';
+//   // whereModal.style.left = 500 + (document.body.clientWidth - 1920)/2 + 'px';
+//   if(searchBoxClickBox.style.display === 'none'){
+//     inconBox.style.display = 'flex';
+//     inconSvg.style.display = 'block';
+//   }
+// }

@@ -66,7 +66,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         
         Message msg = objectMapper.readValue( message.getPayload(), Message.class);
         // Message 객체 확인
-        System.out.println(msg); 
+        // System.out.println(msg); 
         
         // DB 삽입 서비스 호출
         int result = service.insertMessage(msg);

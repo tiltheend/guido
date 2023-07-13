@@ -86,7 +86,12 @@ window.addEventListener('DOMContentLoaded', function() {
     // 알림 내용을 표시할 요소 선택
     const alarmModalContent = document.querySelector('.alarm-modal-content');
 
+	let alarmOn = document.querySelector(".alarm-icon .alarm-on");
+
     alarmSock.onmessage = function(e) {
+
+		if(alarmOn!=null) document.querySelector(".alarm-icon .alarm-on").style.display="block";
+
         alarmModalContent.innerHTML = "";
 
         const obj = JSON.parse(e.data);

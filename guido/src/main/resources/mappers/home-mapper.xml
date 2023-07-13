@@ -206,16 +206,12 @@
 		       (SELECT NVL(TO_CHAR(AVG(REVIEW_STARS), 'FM9.09'), '0.0') 
 		        FROM REVIEW 
 		        WHERE PRODUCT_NO = P.PRODUCT_NO) AS REVIEW_STARS
-		        ,
-		          <if test="userNo != 0">
-	              (SELECT COUNT(*) 
+		          <if test="userNo != null">
+	              ,(SELECT COUNT(*) 
 	              FROM WISHLIST
 	              WHERE USER_NO = #{userNo}
 	              AND PRODUCT_NO = P.PRODUCT_NO) AS WISH_OR_NOT
             	  </if>
-            	  <if test="userNo == 0">
-				  NULL
-				  </if>
 		FROM PRODUCT P
 		WHERE P.PRODUCT_STATE = 'N'
 		AND THEME_CODE = #{themeCode}

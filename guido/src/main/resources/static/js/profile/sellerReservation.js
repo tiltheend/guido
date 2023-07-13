@@ -1,6 +1,6 @@
 /* 예약 더보기 js */
 const reservationMoreBtn = document.querySelector(".reservation-list-more");
-const myReviewList = document.querySelector(".reservation-list-box");
+const myReservationList = document.querySelector(".reservation-list-box");
 
 document.addEventListener("DOMContentLoaded", () => {
     reservationMoreBtnFn(); /* 더보기 버튼 css */
@@ -9,13 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 if(reservationMoreBtn !=null) {
     reservationMoreBtn.addEventListener("click", e => {
-        let startReservationNum = myReviewList.childElementCount;
+        let startReservationNum = myReservationList.childElementCount;
 
         fetch("/profile/guideMoreReservationList",{
             method : "POST",
             headers : {"Content-Type" : "application/json"}, 
-            body : startReservationNum
-        })
+            body : JSON.stringify({
+                "startReservationNum" : startReservationNum,
+                "userNo" : pageUserNo
+                })
+            })
         .then(resp => resp.json())
         .then(guideReservationList => {
             
@@ -67,8 +70,8 @@ if(reservationMoreBtn !=null) {
 
                 const productNameH3 = document.createElement('h3');
                 productNameH3.textContent = reservation.productName;
-                productLink.appendChild(productNameH3);
-                saleContentDiv.appendChild(productLink);
+                // productLink.appendChild(productNameH3);
+                saleContentDiv.appendChild(productNameH3);
 
                 const dateH2 = document.createElement('h3');
                 if(reservation.productPackage=='1'){
