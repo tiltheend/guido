@@ -68,69 +68,73 @@ function slideNextFn(el){
 }
 
 // 하트 색 바꾸기
-if(loginUserNo != null && userType == "T"){
-    function toggleHeart(btn) {
-        let heartIcon = btn;
-        // heartIcon.setAtrribute("src",'');
-        // heartIcon.classList.toggle("selected");
-        
-        /* 관심상품 등록/제거 처리 */
-        if(document.querySelector(".heart-icon")!=null){
+if(loginUserNo != null){
+    if(userType != null){
+        if(userType == "T"){
+            function toggleHeart(btn) {
+                let heartIcon = btn;
+                // heartIcon.setAtrribute("src",'');
+                // heartIcon.classList.toggle("selected");
+                
+                /* 관심상품 등록/제거 처리 */
+                if(document.querySelector(".heart-icon")!=null){
+                    
+                    let check;      // 관심상품 등록 여부
+                    // console.log(check);
             
-            let check;      // 관심상품 등록 여부
-            // console.log(check);
-    
-            let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
-            // console.log(productNo);
-            // console.log(loginUserNo);
-    
-            let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
-            console.log(productName);
-    
-            if (heartIcon.classList.contains("selected")) {
-                check = 1; // 관심상품 등록 O
-            } else {
-                check = 0; // 관심상품 등록 X
-            }
+                    let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
+                    // console.log(productNo);
+                    // console.log(loginUserNo);
             
-            let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
-    
-            const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
-    
-            // console.log(selected);
-    
-            fetch("/common/updateWishList",{
-                method : "POST",
-                headers : {"Content-Type" : "application/json"},
-                body : JSON.stringify(wishData)
-            })
-            .then(resp=>resp.text())
-            .then(result=>{
-    
-                if(result==1){
+                    let productName = btn.parentElement.nextElementSibling.children[0].children[0].innerText;
+                    console.log(productName);
+            
                     if (heartIcon.classList.contains("selected")) {
-                        heartIcon.classList.remove("selected");
-                        for(i of selected){
-                            i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
-                        }
+                        check = 1; // 관심상품 등록 O
                     } else {
-                        heartIcon.classList.add("selected");
-                        for(i of selected){
-                            i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
-                        }
-                        sendWish(productNo, productName); // 관심상품 등록 알림
+                        check = 0; // 관심상품 등록 X
                     }
-                    // console.log("관심상품 등록 성공");
-    
-                } else {
-                    // console.log("관심상품 등록 실패");
-                    alert("관심상품 등록 실패");
+                    
+                    let wishData = {"productNo" : productNo, "userNo": loginUserNo, "check": check};
+            
+                    const selected = document.querySelectorAll(`[data-productno='${productNo}']`);
+            
+                    // console.log(selected);
+            
+                    fetch("/common/updateWishList",{
+                        method : "POST",
+                        headers : {"Content-Type" : "application/json"},
+                        body : JSON.stringify(wishData)
+                    })
+                    .then(resp=>resp.text())
+                    .then(result=>{
+            
+                        if(result==1){
+                            if (heartIcon.classList.contains("selected")) {
+                                heartIcon.classList.remove("selected");
+                                for(i of selected){
+                                    i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
+                                }
+                            } else {
+                                heartIcon.classList.add("selected");
+                                for(i of selected){
+                                    i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
+                                }
+                                sendWish(productNo, productName); // 관심상품 등록 알림
+                            }
+                            // console.log("관심상품 등록 성공");
+            
+                        } else {
+                            // console.log("관심상품 등록 실패");
+                            alert("관심상품 등록 실패");
+                        }
+                
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    })
                 }
-        
-            })
-            .catch(err=>{
-                console.log(err);
-            })
+            }
         }
     }
 }

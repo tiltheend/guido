@@ -52,7 +52,7 @@ header .search-box-click-box{
 }
 
 header .search-box-click{
-  /* width: 840px; */ width: 44vw;
+  /* width: 840px; width: 44vw; */
   height: 60px;
   border: 1px solid #C5C5C5; border-radius: 50px;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
@@ -665,16 +665,32 @@ background-color: #000 !important;
 }
 
 @media screen and (max-width : 1400px) {
-  /* header .logo img{
-    display: none;
-  }
-  header .main-icons-box{
+  /* header .main-icons-box{
     display: none;
   } */
 }
 
-@media screen and (max-width : 1024px) {
-    
+@media screen and (max-width : 970px) {
+  .modal-modal-width {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .where-modal {
+    display: flex;
+    width: 380px;
+    background-color: #fff;
+    border-radius: 20px;
+    margin-top: 14px;
+    /* position: fixed; */
+    /* left: 500px; */
+    top: 110px;
+    z-index: 300;
+    transform: translateY(110px);
+    display: none;
+  }
+
 }
 
 @media screen and (max-width : 767px) {
@@ -687,8 +703,8 @@ background-color: #000 !important;
 }
 
 .modal-modal-width{
-  width: 44vw;
-  margin: auto;
+  width: 100%;
+  /* margin: auto; */
 }
 
 /* 알림 빨갛게 */

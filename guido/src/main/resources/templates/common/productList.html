@@ -10,7 +10,7 @@
 
     <!-- css -->
     <link rel="stylesheet" th:href="@{/css/main/moreList.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- <link rel="stylesheet" th:href="@{/css/style.css}"> -->
 
     <!-- slick 슬라이드 -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main/slide/mainPostSlick.css}">
@@ -134,7 +134,7 @@
 
         const loginUserNo = /*[[${session.loginUser?.userNo}]]*/ "로그인한 회원";
         // if(loginUserNo == null) loginUserNo = "";
-
+        const userType = /*[[${session.loginUser?.userType}]]*/ "로그인한 회원 타입";
     </script>
     
     <!-- 게시글 슬라이드 -->
