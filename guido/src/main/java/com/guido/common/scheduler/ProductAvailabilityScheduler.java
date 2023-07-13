@@ -22,8 +22,8 @@ public class ProductAvailabilityScheduler {
 	@Autowired
 	private ProductDetailService service;
 	
-//	@Scheduled(cron = "0 0 0,12 * * ?")
-	@Scheduled(cron = "0 * * * * ?")
+	@Scheduled(cron = "0 0 0,12 * * ?")
+//	@Scheduled(cron = "0 * * * * ?")
 	public void executeTask() throws ParseException {
 		
 		
