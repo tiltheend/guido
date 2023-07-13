@@ -120,7 +120,7 @@ public class UserController {
 		if(loginUser != null) { // 로그인 성공
 			
 			path = new RedirectView("/");
-			ra.addFlashAttribute("message", "즐거운 여행되세요!");
+//			ra.addFlashAttribute("message", "즐거운 여행되세요!");
 			
 //			cookie (아이디 기억하기 체크)
 			Cookie cookie =new Cookie("rememberId", loginUser.getUserEmail());
@@ -135,7 +135,7 @@ public class UserController {
 			
 		}else { // 로그인 실패
 			
-			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			ra.addFlashAttribute("message", "이메일 또는 비밀번호가 일치하지 않습니다.");
 			path = new RedirectView(referer);
 			
 		}

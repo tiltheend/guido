@@ -110,7 +110,7 @@ public class GoogleLoginController {
         if(googleUser != null) {
         	path = "redirect:/";
         	model.addAttribute("loginUser", googleUser);
-        	ra.addFlashAttribute("message", "즐거운 여행되세요!");
+//        	ra.addFlashAttribute("message", "즐거운 여행되세요!");
         }else { // 가입된 회원 아니면 (이메일, 프로필 사진 가지고 회원가입 화면으로) 
         	path = "redirect:/user/signUp/chooseMemberType";
         	// 유저 타입 고르는 화면으로 구글 유저 정보 가져가서 -> 회원가입 페이지로 이동.

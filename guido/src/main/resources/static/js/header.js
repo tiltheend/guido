@@ -271,8 +271,8 @@ document.addEventListener("DOMContentLoaded", () =>{
             // whereModal 내 검색 값 클릭하면 모달창 닫히고 startday로 마우스 커서 옮겨감 
             locationDiv.addEventListener("click", () => {
               location.value = list; 
-              document.querySelector(".where-modal").style.display = "none";
-              document.querySelector('input[name="firstday"]').focus();
+              // document.querySelector(".where-modal").style.display = "none";
+              // document.querySelector('input[name="firstday"]').focus();
             });
           }
 

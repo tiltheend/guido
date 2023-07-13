@@ -211,6 +211,10 @@ textarea:focus{
 }
 
 
+input[name="qnaEmail"]:disabled{
+    background-color: #ffffff;
+}
+
 
 /* input 태그 감싸고 있는 div들 */
 .qna--email>div:nth-of-type(2),

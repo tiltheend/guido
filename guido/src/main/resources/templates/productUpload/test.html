@@ -187,7 +187,8 @@
         <div class="typing title">
           <h4 class="text6"></h4>
         </div>
-        <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span>
+        <div>
+        <span class="sub-title">1박 이상인 경우 주요 여행 코스를 모두 입력해주세요.</span><span id="warningMainCourse">입력한 여행지 중 1곳을 클릭하여 주요 여행지로 설정해주세요!</span></div>
       </div>
       <div class="course-container">
       <div class="map_wrap">
@@ -460,7 +461,7 @@
       <div style="display: flex;">
       <div class="calendar-div">
         <input type="hidden" name="productOption" id="productOption" value="">
-        <table class="Calendar">
+        <table class="Calendar" id="calendarTable">
           <thead>
             <tr>
               <td onClick="prevCalendar();" style="cursor: pointer">&#60;</td>
@@ -486,10 +487,10 @@
       </div>
       <div id="createContainer">
       <div id="createDate">
-        <h3>날짜를 선택해 주세요.</h3>
+        <div style="display: flex; justify-content: space-between;"><h3>날짜를 선택해 주세요.</h3><h3 id="submitDate" onclick="submitDate2()">선택 완료</h3></div>
       </div>
-      <div id="createTime">
-        <h3>출발 시간을 선택해주세요.</h3>
+      <div id="createTime" style="display: none;">
+        <div style="display: flex; justify-content: space-between;"><h3>출발 시간을 선택해주세요.</h3></div>
         <input type="checkbox" class="hidden option-name" id="optionName1">
         <label class="optionName-item" for="optionName1">09:00</label>
         <input type="checkbox" class="hidden option-name" id="optionName2">

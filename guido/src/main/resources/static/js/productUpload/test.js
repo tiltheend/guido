@@ -29,79 +29,79 @@ const updatePage = () => {
 
   prevBtn.style.display = 'block';
 
-  if (currentPage == 0) {
-  }
-  if (currentPage == 1) {
-    document.querySelector('.text2').innerHTML = '';
-    typing2();
-    // updateNextBtnCity();
-  }
-  if (currentPage == 2) {
-    document.querySelector('.text6').innerHTML = '';
-    typing6();
-    init();
-    // checkTourCourse();
-    if (tourCourse.length == 0) {
-      nextBtn.disabled = true;
-    }
-  }
-  if (currentPage == 3) {
-    updateNextBtnState();
-    document.querySelector('.text3').innerHTML = '';
-    typing3();
-  }
-  if (currentPage == 4) {
-    document.querySelector('.text5').innerHTML = '';
-    typing5();
-    disableNextButtonCheckNum();
-    disableNextButtonCheckNum2();
-    checkMaxTourist();
-  }
-  if (currentPage == 5) {
-    document.querySelector('.text4').innerHTML = '';
-    typing4();
-    disableNextButtonFeeInput();
-  }
-  if (currentPage == 6) {
-    document.querySelector('.text7').innerHTML = '';
-    typing7();
-    checkImage();
-  }
-  if (currentPage == 7) {
-    document.querySelector('.text8').innerHTML = '';
-    typing8();
-    titleCharCheck();
-    inputTitle.focus();
-  }
-  if (currentPage == 8) {
-    document.querySelector('.text9').innerHTML = '';
-    typing9();
-    contentCharCheck();
-    inputContent.focus();
-  }
-  if (currentPage == 9) {
-    document.querySelector('.text11').innerHTML = '';
-    typing11();
-    displayNoneTime();
-  }
-  if (currentPage == 10) {
-    document.querySelector('.text12').innerHTML = '';
-    typing12();
-  }
-  if (currentPage == 11) {
-    document.querySelector('.text13').innerHTML = '';
-    typing13();
-    disableNextButton();
-    nextBtn.style.display = 'flex';
-    sbmtBtn.style.display = 'none';
-  }
-  if (currentPage == 12) {
-    // submintBtnDisplay();
-    document.querySelector('.text14').innerHTML = '';
-    typing14();
-    nextBtn.style.display = 'none';
-    sbmtBtn.style.display = 'flex';
-  }
+  // if (currentPage == 0) {
+  // }
+  // if (currentPage == 1) {
+  //   document.querySelector('.text2').innerHTML = '';
+  //   typing2();
+  //   checkCity();
+  // }
+  // if (currentPage == 2) {
+  //   document.querySelector('.text6').innerHTML = '';
+  //   typing6();
+  //   init();
+  //   // checkTourCourse();
+  //   if (tourCourse.length == 0) {
+  //     nextBtn.disabled = true;
+  //   }
+  // }
+  // if (currentPage == 3) {
+  //   updateNextBtnState();
+  //   document.querySelector('.text3').innerHTML = '';
+  //   typing3();
+  // }
+  // if (currentPage == 4) {
+  //   document.querySelector('.text5').innerHTML = '';
+  //   typing5();
+  //   disableNextButtonCheckNum();
+  //   disableNextButtonCheckNum2();
+  //   checkMaxTourist();
+  // }
+  // if (currentPage == 5) {
+  //   document.querySelector('.text4').innerHTML = '';
+  //   typing4();
+  //   disableNextButtonFeeInput();
+  // }
+  // if (currentPage == 6) {
+  //   document.querySelector('.text7').innerHTML = '';
+  //   typing7();
+  //   checkImage();
+  // }
+  // if (currentPage == 7) {
+  //   document.querySelector('.text8').innerHTML = '';
+  //   typing8();
+  //   titleCharCheck();
+  //   inputTitle.focus();
+  // }
+  // if (currentPage == 8) {
+  //   document.querySelector('.text9').innerHTML = '';
+  //   typing9();
+  //   contentCharCheck();
+  //   inputContent.focus();
+  // }
+  // if (currentPage == 9) {
+  //   document.querySelector('.text11').innerHTML = '';
+  //   typing11();
+  //   displayNoneTime();
+  // }
+  // if (currentPage == 10) {
+  //   document.querySelector('.text12').innerHTML = '';
+  //   typing12();
+  // }
+  // if (currentPage == 11) {
+  //   document.querySelector('.text13').innerHTML = '';
+  //   typing13();
+  //   disableNextButton();
+  //   nextBtn.style.display = 'flex';
+  //   sbmtBtn.style.display = 'none';
+  // }
+  // if (currentPage == 12) {
+  //   // submintBtnDisplay();
+  //   document.querySelector('.text14').innerHTML = '';
+  //   typing14();
+  //   nextBtn.style.display = 'none';
+  //   sbmtBtn.style.display = 'flex';
+  // }
 };
 
 prevBtn.addEventListener('click', () => {
@@ -257,9 +257,13 @@ const textElements = document.getElementsByClassName('TEXT');
 const clickElements = document.getElementsByClassName('OUTLINE');
 const city = document.getElementById('space');
 const checkSpace = document.getElementById('checkSpace');
+const checkCity = () => {
+  nextBtn.disabled = true;
+};
 
 for (let i = 0; i < clickElements.length; i++) {
   clickElements[i].addEventListener('click', () => {
+    nextBtn.disabled = false;
     // 기존 클릭한 요소의 효과 초기화
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
@@ -278,11 +282,12 @@ for (let i = 0; i < clickElements.length; i++) {
   });
 
   textElements[i].addEventListener('click', () => {
+    nextBtn.disabled = false;
     // 기존 클릭한 요소의 효과 초기화
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
         clickElements[j].style.fill = '#333';
-        s;
+
         clickElements[j].style.transform = 'none';
       } else {
         clickElements[j].style.fill = 'rgb(59, 119, 124)';
@@ -503,7 +508,6 @@ function addElement() {
     var container = document.getElementById('add-container');
     var warningMessage = document.querySelector('#addWarning');
 
-    // Check if the value already exists in the container
     var existingElements = container.getElementsByClassName('added-element');
     for (var i = 0; i < existingElements.length; i++) {
       if (existingElements[i].textContent === value) {
@@ -512,7 +516,6 @@ function addElement() {
       }
     }
 
-    // Hide the warning message if input value has changed
     if (warningMessage.style.display === 'flex') {
       warningMessage.style.display = 'none';
     }
@@ -531,6 +534,7 @@ function addElement() {
     deleteIcon.addEventListener('click', function (e) {
       e.stopPropagation();
       deleteIcon.parentNode.remove();
+      newInputElement.remove();
     });
 
     newElement.innerHTML = value;
@@ -927,14 +931,6 @@ inputDay.addEventListener('input', () => {
   minTouristName.value = '';
 });
 
-// var hasBossCourse = tourCourse.some(function (course) {
-//   return course.bossCourseFl === 'Y';
-// });
-
-// if (!hasBossCourse) {
-//   nextBtn.disabled = true;
-// }
-
 inputTime.addEventListener('input', () => {
   if (inputTime.value > 0) {
     minTouristNum[0].style.display = 'block';
@@ -998,18 +994,25 @@ const checkMaxTourist = () => {
     nextBtn.disabled = false;
   }
 };
-
+const submitDate = document.getElementById('submitDate');
 const displayNoneTime = () => {
   if (inputDay.value != '') {
     createTime.style.display = 'none';
+    submitDate.style.display = 'none';
   } else {
-    createTime.style.display = 'inline-block';
+    // createTime.style.display = 'inline-block';
+    submitDate.style.display = 'flex';
   }
 };
+const calendarTable = document.getElementById('calendarTable');
+function submitDate2() {
+  createTime.style.display = 'inline-block';
+  calendarTable.style.pointerEvents = 'none';
+}
 
-const selectOptionName = document.getElementById('selectOptionName');
-const insertTimeBtn = document.getElementById('insertTimeBtn');
-const optionNameArray = [];
+// const selectOptionName = document.getElementById('selectOptionName');
+// const insertTimeBtn = document.getElementById('insertTimeBtn');
+// const optionNameArray = [];
 
 // insertTimeBtn.addEventListener('click', function () {
 //   if (
