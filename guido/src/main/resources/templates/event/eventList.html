@@ -8,8 +8,6 @@
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/event/eventList.css}">
-    <link rel="stylesheet" th:href="@{/css/event/header.css}">
-    <link rel="stylesheet" th:href="@{/css/event/footer.css}">
 
     <!-- owl 슬라이드  -->
     <!-- <link rel="stylesheet" th:href="@{css/main/docs.theme.min.css}"> -->
@@ -38,43 +36,18 @@
     <div class="local-trip-title">국내 여행 이벤트</div>
     <div class="slide-container">
         <section id="demos_1">
+
             <div class="row">
                 <div class="large-12 columns">
-                    <div class="owl-carousel owl-theme">
-                        <div class="item">
-                            <a th:href="@{/}" class="slider-item-link">
-                                <img th:src="@{../images/slide1.png}" class="item-picture textImg">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a th:href="@{/}" class="slider-item-link">
-                                <img th:src="@{../images/slide2.png}" class="item-picture textImg">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a th:href="@{/}" class="slider-item-link">
-                                <img th:src="@{../images/slide3.png}" class="item-picture textImg">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a th:href="@{/}" class="slider-item-link">
-                                <img th:src="@{../images/slide1.png}" class="item-picture textImg">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a th:href="@{/}" class="slider-item-link">
-                                <img th:src="@{../images/slide2.png}" class="item-picture textImg">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a th:href="@{/}" class="slider-item-link">
-                                <img th:src="@{../images/slide3.png}" class="item-picture textImg">
-                            </a>
-                        </div>
-                        <!-- <div class="item">
-                            <h4>2</h4>
-                        </div> -->
-
+                    <div class="loop owl-carousel owl-theme" >
+                        <th:block th:each="banner : ${eventBannerList}">
+                            <div class="item" th:each="file : ${banner.fileList}" th:style="'background-color: ' + ${banner.bgColor}">
+                                <!-- <td th:utext='|<a href="@{/event/eventDetail}/*{EVENT_NO}">*{EVENT_NAME}</a>|'>글제목</td> -->
+                                <a th:href="@{/event/eventDetail/{eventNo}(eventNo=${banner.eventNo})}">
+                                    <img class="detail--silde__item-img" th:src="${file.filePath}">
+                                </a>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
             </div>
@@ -85,40 +58,15 @@
     <section id="demos_2">
         <div class="row">
             <div class="large-12 columns">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <a th:href="@{/}" class="slider-item-link">
-                            <img th:src="@{../images/slide1.png}" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a th:href="@{/}" class="slider-item-link">
-                            <img th:src="@{../images/slide2.png}" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a th:href="@{/}" class="slider-item-link">
-                            <img th:src="@{../images/slide3.png}" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a th:href="@{/}" class="slider-item-link">
-                            <img th:src="@{../images/slide1.png}" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a th:href="@{/}" class="slider-item-link">
-                            <img th:src="@{../images/slide2.png}" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a th:href="@{/}" class="slider-item-link">
-                            <img th:src="@{../images/slide3.png}" class="item-picture textImg">
-                        </a>
-                    </div>
-                    <!-- <div class="item">
-                        <h4>2</h4>
-                    </div> -->
+                <div class="loop owl-carousel owl-theme" >
+                    <th:block th:each="banner : ${eventBannerList}">
+                        <div class="item" th:each="file : ${banner.fileList}" th:style="'background-color: ' + ${banner.bgColor}">
+                            <!-- <td th:utext='|<a href="@{/event/eventDetail}/*{EVENT_NO}">*{EVENT_NAME}</a>|'>글제목</td> -->
+                            <a th:href="@{/event/eventDetail/{eventNo}(eventNo=${banner.eventNo})}">
+                                <img class="detail--silde__item-img" th:src="${file.filePath}">
+                            </a>
+                        </div>
+                    </th:block>
                 </div>
             </div>
         </div>
