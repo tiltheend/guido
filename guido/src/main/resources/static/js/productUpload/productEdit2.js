@@ -86,6 +86,16 @@ function changeBackgroundColor(element) {
     element.style.backgroundColor = 'rgb(185, 215, 218)';
     element.style.borderColor = 'rgb(59, 119, 124)';
   }
+  const tourBoxCheck = () => {
+    let count = 0;
+    tourThemeItems.forEach((element) => {
+      if (count < 1 || count > 1) {
+        nextBtn.disabled = true;
+      } else {
+        nextBtn.disabled = false;
+      }
+    });
+  };
 }
 // 여행 테마 선택 체크박스
 

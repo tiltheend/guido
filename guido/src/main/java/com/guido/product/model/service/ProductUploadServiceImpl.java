@@ -175,7 +175,7 @@ public class ProductUploadServiceImpl implements ProductUploadService{
 						Product product
 					  , List<MultipartFile> images
 					  , String deleteList
-					  , String tourCourse2) throws IllegalStateException, IOException {
+					  ) throws IllegalStateException, IOException {
 		
 		int rowCount = mapper.productEdit(product);
 		
