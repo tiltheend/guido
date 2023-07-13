@@ -66,7 +66,11 @@ public class GoogleLoginController {
     	
     	
     	redirectView.setUrl("https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
-    			+ "&redirect_uri=http://localhost:80/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline");
+    			// localhost
+    			+ "&redirect_uri=http://localhost:80/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+    			// 학원 발표용
+//    			+ "&redirect_uri=http://class-a.xyz/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+    			);
     	return redirectView;
     }
     
@@ -79,7 +83,10 @@ public class GoogleLoginController {
                 .clientId(googleClientId)
                 .clientSecret(googleClientPw)
                 .code(authCode)
+                // localhost
                 .redirectUri("http://localhost:80/google/login/oauth")
+                // 학원 발표용
+//                .redirectUri("http://class-a.xyz/google/login/oauth")
                 .grantType("authorization_code").build();
         ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
                 googleOAuthRequestParam, GoogleResponse.class);
