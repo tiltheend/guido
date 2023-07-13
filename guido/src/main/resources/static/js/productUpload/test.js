@@ -931,10 +931,6 @@ inputDay.addEventListener('input', () => {
   minTouristName.value = '';
 });
 
-var hasBossCourse = tourCourse.some(function (course) {
-  return course.bossCourseFl === 'Y';
-});
-
 inputTime.addEventListener('input', () => {
   if (inputTime.value > 0) {
     minTouristNum[0].style.display = 'block';
@@ -1007,9 +1003,9 @@ const displayNoneTime = () => {
   }
 };
 
-const selectOptionName = document.getElementById('selectOptionName');
-const insertTimeBtn = document.getElementById('insertTimeBtn');
-const optionNameArray = [];
+// const selectOptionName = document.getElementById('selectOptionName');
+// const insertTimeBtn = document.getElementById('insertTimeBtn');
+// const optionNameArray = [];
 
 // insertTimeBtn.addEventListener('click', function () {
 //   if (

@@ -1338,3 +1338,9 @@ input[type='time']::-webkit-inner-spin-button {
   background-color: lightgray;
   margin-left: 100px;
 }
+#page15 > div.greeting > div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  /* display: none; */
+  color: red;
+}

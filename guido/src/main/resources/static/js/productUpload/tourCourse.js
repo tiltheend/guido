@@ -75,8 +75,8 @@ function displayPlaces(places) {
   removeMarker();
 
   for (var i = 0; i < places.length; i++) {
-    nextBtn.disabled = false;
     // 마커를 생성하고 지도에 표시합니다
+
     var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
       marker = addMarker(placePosition, i),
       itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
@@ -184,8 +184,10 @@ function displayPlaces(places) {
           }
           if (hasBossCourse) {
             nextBtn.disabled = false;
+            warningMainCourse.style.display = 'none';
           } else {
             nextBtn.disabled = true;
+            warningMainCourse.style.display = 'flex';
           }
         });
       });
@@ -281,8 +283,10 @@ function displayPlaces(places) {
           }
           if (hasBossCourse) {
             nextBtn.disabled = false;
+            warningMainCourse.style.display = 'none';
           } else {
             nextBtn.disabled = true;
+            warningMainCourse.style.display = 'flex';
           }
         });
       });

@@ -38,7 +38,7 @@ public interface ProductUploadService {
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
-	public int productEdit(Product product, List<MultipartFile> images, String deleteList, String tourCourse2)throws IllegalStateException, IOException;
+	public int productEdit(Product product, List<MultipartFile> images, String deleteList)throws IllegalStateException, IOException;
 
 
 	/**여행 상품 삭제
@@ -46,6 +46,7 @@ public interface ProductUploadService {
 	 * @return
 	 */
 	public int productDelete(int productNo);
+
 
 
 }
