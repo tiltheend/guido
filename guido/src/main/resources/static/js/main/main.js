@@ -1,4 +1,8 @@
-
+/* 슬라이드 */
+$('.single-item').slick({
+    dots: true,
+    dotsClass: "slick-dots"
+});
 
 
 let boardSlide; /* 게시글 슬라이드 박스 */
@@ -363,8 +367,3 @@ function loadProductByTheme(themeCode) {
 
 
 
-/* 슬라이드 */
-$('.single-item').slick({
-    dots: true,
-    dotsClass: "slick-dots"
-});
