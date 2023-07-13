@@ -236,6 +236,7 @@ public class EmailServiceImpl implements EmailService{
 			String html = templateEngine.process("admin/answer",context);
 			mailHelper.setText(html,true);
 			String filePath = "C:\\guidoImages\\qnaImage\\";
+//			String filePath = "/Users/jy_green/Desktop/project/guidoImages/";
 			
 			for(int i=0; i<qna.getFileList().size(); i++) {
 				String arr[] = qna.getFileList().get(i).getFilePath().split("/");
