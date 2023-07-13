@@ -994,14 +994,21 @@ const checkMaxTourist = () => {
     nextBtn.disabled = false;
   }
 };
-
+const submitDate = document.getElementById('submitDate');
 const displayNoneTime = () => {
   if (inputDay.value != '') {
     createTime.style.display = 'none';
+    submitDate.style.display = 'none';
   } else {
-    createTime.style.display = 'inline-block';
+    // createTime.style.display = 'inline-block';
+    submitDate.style.display = 'flex';
   }
 };
+const calendarTable = document.getElementById('calendarTable');
+function submitDate2() {
+  createTime.style.display = 'inline-block';
+  calendarTable.style.pointerEvents = 'none';
+}
 
 // const selectOptionName = document.getElementById('selectOptionName');
 // const insertTimeBtn = document.getElementById('insertTimeBtn');

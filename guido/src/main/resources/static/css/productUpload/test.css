@@ -1343,4 +1343,12 @@ input[type='time']::-webkit-inner-spin-button {
   justify-content: space-between;
   /* display: none; */
   color: red;
+  transition-duration: 0.55s;
+}
+#submitDate {
+  padding: 5px;
+  background-color: #0f4957;
+  border-radius: 5px;
+  margin-left: 50px;
+  color: white;
 }
