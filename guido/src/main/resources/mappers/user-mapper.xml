@@ -64,7 +64,7 @@
 		
 		<!-- USER -->
 		INSERT INTO "USER"
-		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, #{userType}, 'N')
+		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, #{userType}, 'Y')
 		
 		<!-- TOURIST -->
 		<!--INSERT INTO "TOURIST"

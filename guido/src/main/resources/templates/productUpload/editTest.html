@@ -278,7 +278,7 @@
       </div>
       <div id="titleContainer">
         <div id="writeTitle">상품 이름</div>
-        <input type="text" name="productName" id="inputTitle" onkeydown="return event.key != 'Enter';">
+        <input type="text" name="productName" id="inputTitle" onkeydown="return event.key != 'Enter';" th:value="${product.productName}">
         <div id="titleCountContainer">
           <div id="titleCharCount">0</div>
             <div>/75</div>
@@ -297,7 +297,7 @@
       </div>
       <div id="contentContainer">
         <div id="writeTitle">여행 일정 및 상품 설명 작성</div>
-        <textarea name="productContent" id="inputContent" cols="30" rows="20" ></textarea>
+        <textarea name="productContent" id="inputContent" cols="30" rows="20" th:text="${product.productContent}"></textarea>
         <div id="contentCountContainer">
           <div id="contentCharCount">0</div>
             <div>/1000</div>
