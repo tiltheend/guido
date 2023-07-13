@@ -77,6 +77,15 @@ document.getElementById("realCancelBtn").addEventListener("click", (e)=>{
   if(textarea.value.length>maxLength){
     alert("작성 가능한 글자수를 초과합니다.");    
     e.preventDefault();
+    return;
   }
+
+  const cancelReason = document.querySelector(".cancel-reason");
+
+  if(cancelReason.value==''){
+    alert("정확한 취소 사유를 입력해주세요!");
+    e.preventDefault();
+  }
+
 
 })
