@@ -1338,3 +1338,20 @@ input[type='time']::-webkit-inner-spin-button {
   background-color: lightgray;
   margin-left: 100px;
 }
+#page15 > div.greeting > div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  /* display: none; */
+  color: red;
+  transition-duration: 0.55s;
+}
+#submitDate {
+  padding: 5px;
+  background-color: #0f4957;
+  border-radius: 5px;
+  margin-left: 50px;
+  color: white;
+}
+#createContainer {
+  width: 100%;
+}

@@ -31,7 +31,7 @@ public class FileUploadConfig implements WebMvcConfigurer {
 	private long maxRequestSize;
 	
 	
-	@Bean	// 개발자가 수동으로 bean 등록(생성은 개발자, 관리는 Spring)
+	@Bean // 개발자가 수동으로 bean 등록(생성은 개발자, 관리는 Spring)
 	public  MultipartConfigElement configElement() {
 		
 		MultipartConfigFactory factory = new MultipartConfigFactory();

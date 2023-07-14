@@ -350,13 +350,11 @@ phone.addEventListener("input",()=>{
         chk.phone = false;
     }
     if(phoneRegex.test(phone.value)){
-        phoneMessage.innerText = "국가(대한민국)를 다시 한번 확인해주세요.";
-        phoneMessage.classList.add("possible-message");
+        phoneMessage.innerText = "";
         phoneMessage.classList.remove("error-message");
         chk.phone = true;
     }else{
         phoneMessage.innerText = "숫자, 특수문자만 입력할 수 있습니다."
-        phoneMessage.classList.remove("possible-message");
         phoneMessage.classList.add("error-message");
         chk.phone = false;
     }
@@ -483,7 +481,8 @@ function chagneSignupBtn(){
             signUpBtn.style.backgroundColor = "#c5c5c5";
         }
 }
-    
+
+
 // 필수 입력 검사
 const signUpForm = document.getElementById("signUpForm");
 

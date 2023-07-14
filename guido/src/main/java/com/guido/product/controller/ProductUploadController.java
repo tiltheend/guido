@@ -126,7 +126,7 @@ public class ProductUploadController {
 		
 		if(productNo > 0) {
 			System.out.println(product);
-			message = "상품이 등록 되었습니다.";
+			message = "가이두와 함께 떠나는 여행을 시작하세요~!";
 			path += "/productDetail/product/" + productNo;
 			
 		}else {
@@ -174,7 +174,7 @@ public class ProductUploadController {
 			if(loginUser.getUserNo() == product.getUserNo()) {
 				
 				message = "수정페이지로 이동합니다.";
-				path += "productUpload/editTest";
+				path += "productUpload/productEdit2";
 				
 			}else {
 				message = "비정상적인 접근입니다.";
@@ -199,7 +199,7 @@ public class ProductUploadController {
 				,@RequestParam(value="deleteList", required=false) String deleteList
 				,@RequestParam(value="images", required=false) List<MultipartFile> images
 				,@RequestParam(value="productAddPrice", required=false) List<String> additionalList
-				,@RequestParam(value="tourCourse2", required = true) String tourCourse2
+//				,@RequestParam(value="tourCourse2", required = true) String tourCourse2
 //				,@RequestParam(value="deleteTourCourseList", required=false) String tourCourseDeleteList 
 				,@PathVariable("productNo") int productNo
 				,RedirectAttributes ra)throws IllegalStateException, IOException{
@@ -207,7 +207,7 @@ public class ProductUploadController {
 				product.setProductAddNotes(String.join("^^^", additionalList));
 				product.setProductNo(productNo);
 	
-				int rowCount = service.productEdit(product,images,deleteList, tourCourse2);
+				int rowCount = service.productEdit(product,images,deleteList);
 				
 				String message = null;
 				String path = "redirect:";

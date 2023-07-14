@@ -23,7 +23,9 @@ const letters3 = ['여행 테마를 선택해주세요!'];
 const letters4 = ['이제 요금을 설정하세요.'];
 const letters5 = ['여행 기본 정보를 입력해주세요.'];
 const letters6 = ['여행 코스는 어디인가요?'];
-const letters7 = [loginName + '가이드님 여행만의 매력을 돋보이게 하세요!'];
+const letters7 = [
+  '"' + loginName + '"' + ' 가이드님 여행만의 매력을 돋보이게 하세요!',
+];
 const letters8 = ['이제 ' + loginName + ' 가이드님 여행의 이름을 지어주세요.'];
 const letters9 = ['여행 일정과 여행 상품에 대한 설명을 작성해주세요.'];
 const letters11 = ['여행 일정을 선택해주세요!'];
