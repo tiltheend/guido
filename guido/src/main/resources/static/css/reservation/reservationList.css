@@ -169,7 +169,7 @@
     width: 100%;
 }
 
-.orderer--info>div:not(:last-of-type){
+.orderer--info>div{
     display: flex;
     align-items: center;
     justify-content: space-between;

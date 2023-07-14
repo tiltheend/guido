@@ -15,7 +15,7 @@ import com.guido.common.model.dto.ProductDate;
 import com.guido.product.model.service.ProductDetailService;
 
 // 매일 정각 12시에 상품의 마지막 일정이 당일 날짜보다 이전인 경우에 
-// 상품의 상태를 ongoing->done으로 변경
+// 상품의 상태를 ongoing->finished로 변경
 @Component
 public class ProductAvailabilityScheduler {
 	
