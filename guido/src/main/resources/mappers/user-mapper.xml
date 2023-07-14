@@ -63,8 +63,15 @@
 		</selectKey>
 		
 		<!-- USER -->
+	<!--	INSERT INTO "USER"
+		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, #{userType}, 'Y') -->
+		
 		INSERT INTO "USER"
-		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, #{userType}, 'Y')
+		VALUES (#{userNo}, #{userEmail}, #{userPassword}, #{userName}, #{userTel}, NULL, SYSDATE, #{userType},
+		CASE
+		WHEN #{userType} = 'G' THEN 'Y'
+		WHEN #{userType} = 'T' THEN 'N'
+		END)
 		
 		<!-- TOURIST -->
 		<!--INSERT INTO "TOURIST"
