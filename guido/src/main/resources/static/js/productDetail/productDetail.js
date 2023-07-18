@@ -625,3 +625,76 @@ function calculateLastDate(productDate) {
 
   return lastDate;
 }
+
+
+// 공공데이터 request param 오늘 날짜 형식 지정
+function getFormattedDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${year}${month}${day}`;
+  return formattedDate;
+}
+
+
+// 랜덤 4개 추출
+function getRandomIndexs(max, num) {
+  const indexs = [];
+  while (indexs.length < num) {
+    const randomIndex = Math.floor(Math.random() * max);
+    if (!indexs.includes(randomIndex)) {
+      indexs.push(randomIndex);
+    }
+  }
+  return indexs;
+}
+
+
+
+// 공공데이터 페스티벌 데이터 
+fetch("http://apis.data.go.kr/B551011/KorService1/searchFestival1?serviceKey=" + festivalApikey +"&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A&listYN=Y&eventStartDate=" + getFormattedDate() + "&_type=json")
+.then(resp=>resp.json())
+.then(result=>{
+  
+  let festivalList = result.response.body.items.item;
+  
+  // 랜덤 4개 추출
+  const randomIndexList = getRandomIndexs(festivalList.length - 1, 4);
+  const randomElements = randomIndexList.map(index => festivalList[index]);
+
+
+console.log(randomElements);
+  
+  const festivalContainer = document.querySelector(".detail--list_festival");
+
+  for(let i=0; i<randomElements.length; i++){
+
+    const itemDiv = document.createElement("div");
+    itemDiv.classList.add("detail--item__festival");
+
+    const imgDiv = document.createElement("div");
+    imgDiv.classList.add("detail--item__festival-img");
+
+    const img = document.createElement("img");
+    img.setAttribute("src", randomElements[i].firstimage);
+
+    imgDiv.append(img);
+    itemDiv.append(imgDiv);
+
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("detail--item__festival-title");
+    titleDiv.innerText = randomElements[i].title;
+
+    itemDiv.append(titleDiv);
+
+    festivalContainer.append(itemDiv);
+
+  }
+
+
+
+
+
+  
+})

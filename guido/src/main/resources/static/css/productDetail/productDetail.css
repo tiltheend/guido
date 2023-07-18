@@ -935,24 +935,28 @@ box-shadow:  5px 5px 8px #e2e2e2,
 }
 
 /* 추천 컨테이너 */
-.detail--list_recommend{
+.detail--list_recommend,
+.detail--list_festival{
     display: flex;
     margin: 2vh  0 10vh 0;
 }
 
 /* 추천 item */
-.detail--item__recommend{
+.detail--item__recommend,
+.detail--item__festival{
     cursor: pointer;
 }
 
 
-.detail--item__recommend:not(:first-of-type){
+.detail--item__recommend:not(:first-of-type),
+.detail--item__festival:not(:first-of-type){
     margin-left: 2vw;
 }
 
 
 /* 추천 item 속 img 크롭 */
-.detail--item__recommend-img{
+.detail--item__recommend-img,
+.detail--item__festival-img{
     border-radius: 10px;
     width: 21vw;
     height: 40vh;
@@ -960,7 +964,8 @@ box-shadow:  5px 5px 8px #e2e2e2,
     position: relative;
 }
 
-.detail--item__recommend-img::before{
+.detail--item__recommend-img::before,
+.detail--item__festival-img::before{
     content: "";
     display: block;
     padding-top: calc(100% / (21 / 40)); /* 높이 대비 너비의 비율을 계산하여 적용 */
@@ -968,7 +973,8 @@ box-shadow:  5px 5px 8px #e2e2e2,
 
 
 /* 추천 item 속 img */
-.detail--item__recommend-img>img{  
+.detail--item__recommend-img>img,
+.detail--item__festival-img>img{  
     position: absolute;
     top: 0;
     left: 0;
@@ -1718,26 +1724,31 @@ cursor: pointer;
         margin-right: 10px;
     }
 
-    .detail--list_recommend{
+    .detail--list_recommend,
+    .detail--list_festival{
         display: block;
     }
 
-    .detail--item__recommend{
+    .detail--item__recommend,
+    .detail--item__festival{
         margin: 30px 0;
     }
 
-    .detail--item__recommend:not(:first-of-type){
+    .detail--item__recommend:not(:first-of-type),
+    .detail--item__festival:not(:first-of-type){
         margin-left: 0;
     }
 
-    .detail--item__recommend-img{
+    .detail--item__recommend-img,
+    .detail--item__festival-img{
         width: 400px;
         height: 230px;
         overflow: hidden;
         position: relative;
     }
     
-    .detail--item__recommend-img::before{
+    .detail--item__recommend-img::before,
+    .detail--item__festival-img::before{
         content: "";
         display: block;
         padding-top: calc(100% / (400 / 230)); /* 높이 대비 너비의 비율을 계산하여 적용 */

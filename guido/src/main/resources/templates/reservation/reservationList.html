@@ -190,7 +190,7 @@
 
 
     <script th:inline="javascript">
-        const productDate = /*[[*{productDate}]]*/"선택한 일자";
+        let productDate = /*[[*{productDate}]]*/"선택한 일자";
         const optionName = /*[[*{optionName}]]*/"선택한 시간대";
         const package = /*[[${product.productPackage}]]*/"선택한 시간대";
     </script>

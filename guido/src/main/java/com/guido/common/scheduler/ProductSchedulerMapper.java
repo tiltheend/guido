@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.ProductDate;
+import com.guido.common.model.dto.Reservation;
 
 @Mapper
 public interface ProductSchedulerMapper {
@@ -22,5 +23,14 @@ public interface ProductSchedulerMapper {
 
 	// 현재 날짜보다 이전인 일정 사용 불가 처리
 	void updatePassedDateList(ProductDate pd);
+
+	
+	// 투어 일정이 현재 날짜보다 이전인 (이미 끝난) 예약 내역 조회
+	List<Reservation> selectFinishedReservationList();
+
+	// 투어 일정이 현재 날짜보다 이전인 (이미 끝난) 예약 내역 구매확정 처리
+	void updateFinishedReservationList(Reservation reservation);
+	
+	
 	
 }
