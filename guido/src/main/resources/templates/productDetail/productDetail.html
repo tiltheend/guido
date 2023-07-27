@@ -677,7 +677,39 @@
         <span class="close2">&times;</span>
         <img class="modal_content2">
     </div>
+    
+    
+    <!-- 페스티벌 정보 모달 -->
+    <div class="modal3">
+        <div class="modal--container3">
+            <span class="close3">&times;</span>
+            <div class="modal--content3">
+                
+                <div class="modal--festival__title"></div>
 
+                <div>
+                    <div class="festival--date">
+                        <img th:src="@{/images/productDetail/calendar_icon.png}">
+                        <div class="modal--festival__date"></div>
+                    </div>
+
+                    <div class="festival--location">
+                        <img th:src="@{/images/productDetail/location_icon.png}">
+                        <div class="modal--festival__location"></div>
+                    </div>
+                </div>
+    
+
+                <div>
+                    <div class="modal--festival__img">
+                        <img src="">
+                    </div>
+        
+                    <div class="modal--festival__map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script th:inline="javascript">

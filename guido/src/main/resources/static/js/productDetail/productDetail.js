@@ -663,10 +663,9 @@ fetch("http://apis.data.go.kr/B551011/KorService1/searchFestival1?serviceKey=" +
   const randomIndexList = getRandomIndexs(festivalList.length - 1, 4);
   const randomElements = randomIndexList.map(index => festivalList[index]);
 
-
-console.log(randomElements);
-  
   const festivalContainer = document.querySelector(".detail--list_festival");
+
+  console.log(randomElements);
 
   for(let i=0; i<randomElements.length; i++){
 
@@ -690,11 +689,97 @@ console.log(randomElements);
 
     festivalContainer.append(itemDiv);
 
+
+    itemDiv.addEventListener("click", ()=>{
+      showFestivalModal(randomElements[i]);
+    })
+
+  }
+})
+
+
+// 페스티벌 추천 모달
+function showFestivalModal(element){
+
+  const modal = document.querySelector('.modal3');
+  const modalTitle = document.querySelector('.modal--festival__title');
+  const modalImg = document.querySelectorAll('.modal--festival__img>img');
+  const modalLocation = document.querySelector('.modal--festival__location');
+  const modalDate = document.querySelector('.modal--festival__date');
+  const span = document.querySelector('.close3');
+
+  modalDisplay('block');
+
+  span.addEventListener('click', () => {
+    modalDisplay('none');
+  });
+
+  modal.addEventListener('click', () => {
+    modalDisplay('none');
+  });
+
+  function modalDisplay(text) {
+    modal.style.display = text;
   }
 
 
+  modalTitle.innerText = element.title;
+  modalImg[0].setAttribute("src", element.firstimage);
+  modalDate.innerText = createFestivalDate(element.eventstartdate) + " ~ " + createFestivalDate(element.eventenddate);
+  modalLocation.innerText = element.addr1;
+
+
+  showFestivalMap(element.mapy, element.mapx);
+
+}
+
+
+// 페스티벌 날짜 형식 재조합
+function createFestivalDate(date){
+  const year = date.slice(0, 4);
+  const month = date.slice(4, 6);
+  const day = date.slice(6, 8);
+
+  // 원하는 형식으로 날짜 문자열 조합
+  return `${year}.${month}.${day}`;
+
+}
 
 
 
-  
-})
+function showFestivalMap(latitude, longitude) {
+
+  let coord = new kakao.maps.LatLng(latitude, longitude);
+
+  const modalMap = document.querySelector('.modal--festival__map'), // 지도의 중심좌표
+    mapOption = {
+      center: new kakao.maps.LatLng(
+        coord.getLat(),
+        coord.getLng()
+      ), // 지도의 중심좌표
+      draggable: false, // 지도 이동 막기
+      level: 3, // 지도의 확대 레벨
+    };
+
+  const map = new kakao.maps.Map(modalMap, mapOption); // 지도를 생성
+
+  // 지도에 마커를 표시
+  const marker = new kakao.maps.Marker({
+    map: map,
+    position: new kakao.maps.LatLng(
+      coord.getLat(),
+      coord.getLng()
+    ),
+  });
+
+  const overlay = new kakao.maps.CustomOverlay({
+    map: map,
+    position: marker.getPosition(),
+  });
+
+
+  overlay.setMap(modalMap);
+
+}
+
+
