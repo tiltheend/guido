@@ -177,7 +177,11 @@
     margin: 8px 0;
 }
 
-
+.orderer--info>div:last-of-type{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
 
 /* 예약 정보 */
 .reservation--content__info>div{
@@ -203,6 +207,7 @@
 /* 요청사항 text */
 .request--text{
     display: flex;
+    width: 100%;
     align-items: center;
     color: #92b7b9;
     font-size: 1.07rem;
