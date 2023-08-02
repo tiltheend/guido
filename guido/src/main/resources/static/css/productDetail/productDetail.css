@@ -1707,6 +1707,11 @@ cursor: pointer;
     min-width: 400px;
 }
 
+.modal--content3>div:nth-of-type(1){
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
 
 .modal--content3>div:nth-of-type(2){
     display: flex;
@@ -1737,7 +1742,6 @@ cursor: pointer;
 .modal--festival__title{
     font-size: 20px;
     font-weight: bold;
-    margin-top: 20px;
 }
 
 .modal--festival__map{
@@ -1798,8 +1802,18 @@ cursor: pointer;
     object-fit: cover;
 }
 
+/* 페스티벌 모달 디데이 */
+#festivalRestDays{
+    background-color: #E3474F;
+    color: white;
+    border-radius: 3px;
+    padding: 2px 8px;
+    margin-right: 10px;
+}
 
-
+#festivalRestDays span{
+    font-size: 16px;
+}
 
 /* 반응형 */
 

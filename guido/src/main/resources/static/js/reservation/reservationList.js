@@ -30,6 +30,7 @@ if(package==1){
 
 
 let modal = document.getElementById("faceImgModal");
+let closeBtn = document.getElementById("closeBtn");
 
 // 모달 창 토글
 function toggleModal() {

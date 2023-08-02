@@ -714,14 +714,16 @@ function showFestivalModal(element){
     modalDisplay('none');
   });
 
-  modal.addEventListener('click', () => {
-    modalDisplay('none');
-  });
 
   function modalDisplay(text) {
     modal.style.display = text;
   }
 
+  
+    /* 페스티벌 모달 d-day 날짜 계산 */
+    const festivalRestDays = document.querySelector("#festivalRestDays>span:nth-of-type(2)");
+
+   festivalRestDays.innerText =  getDday(createFestivalDate(element.eventstartdate), createFestivalDate(element.eventenddate));
 
   modalTitle.innerText = element.title;
   modalImg[0].setAttribute("src", element.firstimage);
@@ -730,6 +732,8 @@ function showFestivalModal(element){
 
 
   showFestivalMap(element.mapy, element.mapx);
+
+
 
 }
 
@@ -783,3 +787,27 @@ function showFestivalMap(latitude, longitude) {
 }
 
 
+/* 페스티벌 디데이 계산 */
+function getDday(startDate, endDate) {
+
+  console.log(startDate);
+  console.log(endDate);
+  const today = new Date();
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
+
+  // 시작일보다 이전인 경우
+  if (today < startDate) {
+    const timeDiff = startDate.getTime() - today.getTime();
+    const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log(daysLeft);
+    return daysLeft;
+  }
+  
+  // 시작일과 마지막 날짜 사이인 경우
+  if (today >= startDate && today <= endDate) {
+    console.log('day');
+    return 'day';
+  }
+
+}

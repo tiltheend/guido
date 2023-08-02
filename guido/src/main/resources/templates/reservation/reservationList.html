@@ -168,7 +168,7 @@
         </div>
 
 
-        <a href="javascript:window.history.back();" style="width: 100%;"><button class="orderlist-btn">view reservation list</button></a>
+        <a th:href="@{/profile/guideReservation}" style="width: 100%;"><button class="orderlist-btn">view reservation list</button></a>
         
         <button id="cancelBtn" th:unless="*{reservationState=='D'}">cancel</button>
 
