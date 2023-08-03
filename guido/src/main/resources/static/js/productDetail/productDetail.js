@@ -625,3 +625,189 @@ function calculateLastDate(productDate) {
 
   return lastDate;
 }
+
+
+// 공공데이터 request param 오늘 날짜 형식 지정
+function getFormattedDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${year}${month}${day}`;
+  return formattedDate;
+}
+
+
+// 랜덤 4개 추출
+function getRandomIndexs(max, num) {
+  const indexs = [];
+  while (indexs.length < num) {
+    const randomIndex = Math.floor(Math.random() * max);
+    if (!indexs.includes(randomIndex)) {
+      indexs.push(randomIndex);
+    }
+  }
+  return indexs;
+}
+
+
+
+// 공공데이터 페스티벌 데이터 
+fetch("http://apis.data.go.kr/B551011/KorService1/searchFestival1?serviceKey=" + festivalApikey +"&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A&listYN=Y&eventStartDate=" + getFormattedDate() + "&_type=json")
+.then(resp=>resp.json())
+.then(result=>{
+  
+  let festivalList = result.response.body.items.item;
+  
+  // 랜덤 4개 추출
+  const randomIndexList = getRandomIndexs(festivalList.length - 1, 4);
+  const randomElements = randomIndexList.map(index => festivalList[index]);
+
+  const festivalContainer = document.querySelector(".detail--list_festival");
+
+  console.log(randomElements);
+
+  for(let i=0; i<randomElements.length; i++){
+
+    const itemDiv = document.createElement("div");
+    itemDiv.classList.add("detail--item__festival");
+
+    const imgDiv = document.createElement("div");
+    imgDiv.classList.add("detail--item__festival-img");
+
+    const img = document.createElement("img");
+    img.setAttribute("src", randomElements[i].firstimage);
+
+    imgDiv.append(img);
+    itemDiv.append(imgDiv);
+
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("detail--item__festival-title");
+    titleDiv.innerText = randomElements[i].title;
+
+    itemDiv.append(titleDiv);
+
+    festivalContainer.append(itemDiv);
+
+
+    itemDiv.addEventListener("click", ()=>{
+      showFestivalModal(randomElements[i]);
+    })
+
+  }
+})
+
+
+// 페스티벌 추천 모달
+function showFestivalModal(element){
+
+  const modal = document.querySelector('.modal3');
+  const modalTitle = document.querySelector('.modal--festival__title');
+  const modalImg = document.querySelectorAll('.modal--festival__img>img');
+  const modalLocation = document.querySelector('.modal--festival__location');
+  const modalDate = document.querySelector('.modal--festival__date');
+  const span = document.querySelector('.close3');
+
+  modalDisplay('block');
+
+  span.addEventListener('click', () => {
+    modalDisplay('none');
+  });
+
+
+  function modalDisplay(text) {
+    modal.style.display = text;
+  }
+
+  
+    /* 페스티벌 모달 d-day 날짜 계산 */
+    const festivalRestDays = document.querySelector("#festivalRestDays>span:nth-of-type(2)");
+
+   festivalRestDays.innerText =  getDday(createFestivalDate(element.eventstartdate), createFestivalDate(element.eventenddate));
+
+  modalTitle.innerText = element.title;
+  modalImg[0].setAttribute("src", element.firstimage);
+  modalDate.innerText = createFestivalDate(element.eventstartdate) + " ~ " + createFestivalDate(element.eventenddate);
+  modalLocation.innerText = element.addr1;
+
+
+  showFestivalMap(element.mapy, element.mapx);
+
+
+
+}
+
+
+// 페스티벌 날짜 형식 재조합
+function createFestivalDate(date){
+  const year = date.slice(0, 4);
+  const month = date.slice(4, 6);
+  const day = date.slice(6, 8);
+
+  // 원하는 형식으로 날짜 문자열 조합
+  return `${year}.${month}.${day}`;
+
+}
+
+
+
+function showFestivalMap(latitude, longitude) {
+
+  let coord = new kakao.maps.LatLng(latitude, longitude);
+
+  const modalMap = document.querySelector('.modal--festival__map'), // 지도의 중심좌표
+    mapOption = {
+      center: new kakao.maps.LatLng(
+        coord.getLat(),
+        coord.getLng()
+      ), // 지도의 중심좌표
+      draggable: false, // 지도 이동 막기
+      level: 3, // 지도의 확대 레벨
+    };
+
+  const map = new kakao.maps.Map(modalMap, mapOption); // 지도를 생성
+
+  // 지도에 마커를 표시
+  const marker = new kakao.maps.Marker({
+    map: map,
+    position: new kakao.maps.LatLng(
+      coord.getLat(),
+      coord.getLng()
+    ),
+  });
+
+  const overlay = new kakao.maps.CustomOverlay({
+    map: map,
+    position: marker.getPosition(),
+  });
+
+
+  overlay.setMap(modalMap);
+
+}
+
+
+/* 페스티벌 디데이 계산 */
+function getDday(startDate, endDate) {
+
+  console.log(startDate);
+  console.log(endDate);
+  const today = new Date();
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
+
+  // 시작일보다 이전인 경우
+  if (today < startDate) {
+    const timeDiff = startDate.getTime() - today.getTime();
+    const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log(daysLeft);
+    return daysLeft;
+  }
+  
+  // 시작일과 마지막 날짜 사이인 경우
+  if (today >= startDate && today <= endDate) {
+    console.log('day');
+    return 'day';
+  }
+
+}

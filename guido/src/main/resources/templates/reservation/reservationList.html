@@ -168,10 +168,13 @@
         </div>
 
 
-        <a href="#" style="width: 100%;"><button class="orderlist-btn">view reservation list</button></a>
+        <a th:href="@{/profile/guideReservation}" style="width: 100%;"><button class="orderlist-btn">view reservation list</button></a>
+        
+        <button id="cancelBtn" th:if="*{reservationState=='Y'}">cancel</button>
 
+        
 
-
+        <!-- 예약자 인증 사진 모달창 -->
         <div id="faceImgModal" class="modal">
             <div class="modal-container">
                 <div class="modal--content">
@@ -186,11 +189,40 @@
             </div>
         </div>
 
+
+
+        <form th:action="@{/reservation/cancel}" method="POST">
+            
+            <input type="hidden" name="impUid" th:value="*{impUid}">
+            <input type="hidden" name="orderNumber" th:value="*{orderNumber}">
+            <input type="hidden" name="guestCount" th:value="*{guestCount}">
+            <input type="hidden" name="optionNo" th:value="*{optionNo}">
+            <input type="hidden" name="productDateNo" th:value="*{productDateNo}">
+            <input type="hidden" name="productPackage" th:value="${product.productPackage}">
+            <input type="hidden" name="productNo" th:value="${product.productNo}">
+            <input type="hidden" name="reservationNo" th:value="*{reservationNo}">
+
+            <!-- 예약 취소 모달창  -->
+            <div id="cancelModal" class="modal">
+                <div class="modal-container">
+                    <div class="modal--content">
+                        
+                        <div class="modal--cancel__info">
+                        </div>
+                        
+                        <button id="realCancelBtn" onclick="">cancel</button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+
+
     </div>
 
 
     <script th:inline="javascript">
-        const productDate = /*[[*{productDate}]]*/"선택한 일자";
+        let productDate = /*[[*{productDate}]]*/"선택한 일자";
         const optionName = /*[[*{optionName}]]*/"선택한 시간대";
         const package = /*[[${product.productPackage}]]*/"선택한 시간대";
     </script>

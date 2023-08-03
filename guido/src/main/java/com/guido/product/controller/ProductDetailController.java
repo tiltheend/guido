@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.ProductDate;
@@ -43,6 +46,9 @@ public class ProductDetailController {
 	
 	@Value("${kakao.map.apikey}")
 	private String apiKey;
+	
+	@Value("${tourapi.festival.key}")
+	private String festivalApikey;
 	
 	
 	// 상품 상세 조회
@@ -111,7 +117,7 @@ public class ProductDetailController {
 		if(product.getProductPackage()!=1)
 			eachCost = (product.getProductPrice()/guestCount);
 		
-		
+			
 		model.addAttribute("product", product);
 		model.addAttribute("guide", guide);
 		model.addAttribute("pr", pr);
@@ -122,6 +128,7 @@ public class ProductDetailController {
 		model.addAttribute("addNotesList", addNotesList);
 		model.addAttribute("allProductDateList", allProductDateList);
 		model.addAttribute("apiKey", apiKey);
+		model.addAttribute("festivalApikey", festivalApikey);
 		model.addAttribute("recommendList", recommendList);
 		
 		

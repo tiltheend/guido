@@ -153,7 +153,7 @@
                                 
                                 
                                     <!-- 관심 상품 등록 -->
-                                    <label class="like--container" th:if="${session.loginUser}">
+                                    <label class="like--container" th:if="${session.loginUser?.userType=='T'}">
                                         <input type="checkbox" id="wishHeart" th:checked="${wishOrNot}>0">
                                         <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path></svg>
                                     </label>
@@ -621,66 +621,23 @@
                 </div>
         
 
-                <!-- <div class="detail--divisionline"></div> -->
+                <div class="detail--divisionline"></div>
                 
         
                 <!-- 페스티벌 추천 -->
-                <!-- <div class="detail--bottom--festival">
+                <div class="detail--bottom--festival">
                     
                     <div class="detail--text__recommend">
                         How about a festival like this?
                     </div>
                     
-                    <div class="detail--list_recommend"> 
-
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/글로벌EDM페스티벌.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Don't Let Daddy Know 2023
-                            </div>
-                        </div>
-                
-        
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/피크페스티벌.jpg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Peak Festival
-                            </div>
-                        </div>
-                
-        
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/힙합플레이야.jpeg}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                HIPHOPPLAYA 2023
-                            </div>
-                        </div>
-        
-
-                        <div class="detail--item__recommend">
-                            <div class="detail--item__recommend-img">
-                                <img th:src="@{/images/productDetail/위버스콘.png}">
-                            </div>
-                
-                            <div class="detail--item__recommend-title">
-                                Weverse Concert
-                            </div>
-                        </div>
+                    <div class="detail--list_festival"> 
 
                     </div>
                         
 
         
-                </div> -->
+                </div>
                 
             </section>
             
@@ -720,7 +677,42 @@
         <span class="close2">&times;</span>
         <img class="modal_content2">
     </div>
+    
+    
+    <!-- 페스티벌 정보 모달 -->
+    <div class="modal3">
+        <div class="modal--container3">
+            <span class="close3">&times;</span>
+            <div class="modal--content3">
+                
+                <div>
+                    <div id="festivalRestDays"><span>D-</span><span></span></div>
+                    <div class="modal--festival__title"></div>
+                </div>
 
+                <div>
+                    <div class="festival--date">
+                        <img th:src="@{/images/productDetail/calendar_icon.png}">
+                        <div class="modal--festival__date"></div>
+                    </div>
+
+                    <div class="festival--location">
+                        <img th:src="@{/images/productDetail/location_icon.png}">
+                        <div class="modal--festival__location"></div>
+                    </div>
+                </div>
+    
+
+                <div>
+                    <div class="modal--festival__img">
+                        <img src="">
+                    </div>
+        
+                    <div class="modal--festival__map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script th:inline="javascript">
@@ -761,6 +753,7 @@
     const faceImg = /*[[${session.loginUser?.faceImg}]]*/"로그인 회원 얼굴 인증사진";
     const product = /*[[${product}]]*/ "상품";
     const allProductDateList = /*[[${allProductDateList}]]*/ "상품 전체 일정";
+    const festivalApikey = /*[[${festivalApikey}]]*/"공공데이터apikey";
     
     </script>
 

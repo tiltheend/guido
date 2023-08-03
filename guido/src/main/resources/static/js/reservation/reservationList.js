@@ -10,13 +10,19 @@ if(package==1){
     
 }else{
 
-    let outputText = productDate + "(" + dayOfWeek + ") ~";
+    let outputText = productDate + "(" + dayOfWeek + ") ~ ";
 
     // 마지막 날짜 계산
     laterDate.setDate(laterDate.getDate() + (package-1));
-    laterDate = laterDate.toISOString().slice(0, 10);
     
     dayOfWeek = daysOfWeek[laterDate.getDay()];
+
+    // 원하는 형식으로 변환
+    const year = laterDate.getFullYear();
+    const month = String(laterDate.getMonth() + 1).padStart(2, "0");
+    const day = String(laterDate.getDate()).padStart(2, "0");
+
+    laterDate = `${year}-${month}-${day}`;
 
     reservationDate.innerText = outputText + laterDate + "(" + dayOfWeek + ") ";
 }
@@ -24,6 +30,7 @@ if(package==1){
 
 
 let modal = document.getElementById("faceImgModal");
+let closeBtn = document.getElementById("closeBtn");
 
 // 모달 창 토글
 function toggleModal() {
