@@ -514,6 +514,23 @@
 
 
 
+/* 요청사항 div */
+.reservation--request{
+    margin: 40px 0;
+}
+
+.reservation--request>div:nth-of-type(2){
+    padding: 20px;
+    background-color: #e5f8f9;
+    color: #92b7b9;
+}
+
+.reservation--request__text{
+    width: 100%;
+    text-align: left;
+}
+
+
 @media screen and (max-width : 767px) {
     .reservation--detail__product{
         display: block;
@@ -573,7 +590,7 @@
 
 
 .reservation--date__product{
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .reservation--btn,

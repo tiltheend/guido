@@ -10,6 +10,7 @@ import com.guido.common.model.dto.PR;
 import com.guido.common.model.dto.Product;
 import com.guido.common.model.dto.ProductDate;
 import com.guido.common.model.dto.ProductOption;
+import com.guido.common.model.dto.Reservation;
 import com.guido.common.model.dto.Review;
 import com.guido.common.model.dto.User;
 
@@ -131,6 +132,18 @@ public interface ProductDetailService {
 	 * @param pd
 	 */
 	void updatePassedDateList(ProductDate pd);
+
+
+	/** 투어 일정이 현재 날짜보다 이전인 (이미 끝난) 예약 내역 조회
+	 * @return reservationList
+	 */
+	List<Reservation> selectFinishedReservationList();
+
+
+	/** 투어 일정이 현재 날짜보다 이전인 (이미 끝난) 예약 내역 구매확정 처리
+	 * @param reservation
+	 */
+	void updateFinishedReservationList(Reservation reservation);
 
 
 
