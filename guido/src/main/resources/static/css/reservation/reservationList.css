@@ -204,6 +204,12 @@
     padding: 15px;
 }
 
+
+.request--content>div:nth-of-type(2){
+    width:100%;
+}
+
+
 /* 요청사항 text */
 .request--text{
     display: flex;
