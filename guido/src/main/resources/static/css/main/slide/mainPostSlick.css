@@ -324,3 +324,8 @@
     opacity: .75;
     color: #B1D8DA;
 }
+
+.slider-wrapper{
+    overflow: hidden;
+    border-radius: 10px;
+}

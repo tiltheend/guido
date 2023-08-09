@@ -342,4 +342,3 @@ function loadProductByTheme(themeCode) {
     .catch(e => { console.log(e) });
 }
 
-

@@ -9,6 +9,7 @@
     width: 100vw;
     height: 100vh;
     padding: 400px 0;
+    position: relative;
 }
 /* 로그인 */
 .container_top_title{
@@ -251,4 +252,27 @@ input[type="checkbox"]:checked + label{
 }
 .modal2 .modal_body_content{
     margin: 30px 0;
+}
+
+
+
+/* 로그인 임시 계정(체험 계정) */
+.try_account{
+    position: fixed;
+    display: flex;
+    right: 10px;
+    bottom: 40px;
+}
+
+.try_account button{
+    margin: 3px 5px;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    text-decoration: underline;
+    background-color: #ffffff;
+}
+
+.try_account button:hover{
+    color: #5c5c5c;
 }

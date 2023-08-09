@@ -21,6 +21,8 @@ footer .footer-event-link{position: absolute; left: 50%; transform: translateX(-
 .about-guido{
   position: absolute;
   left: 80px;
+  display: flex;
+  align-items: center;
 }
 .about-guido img{
   margin-right: 20px;

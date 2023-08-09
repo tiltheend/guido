@@ -104,20 +104,22 @@
 
                 <!-- <th:block th:unless="${#lists.size(productList)} == 0"> -->
                     <li class="product-row" th:each="product : ${productList}">
-                        <div class="slider single-item" th:data-productno="${product.productNo}"> 
-                            <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}"> 
-                                <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${image.filePath}"></a>
+                        <div class="slider-wrapper">
+                            <div class="slider single-item" th:data-productno="${product.productNo}"> 
+                                <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}"> 
+                                    <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img loading="lazy" th:src="${image.filePath}"></a>
+                                </div>
+                                <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
+                                    <div>
+                                        <img th:src="@{/images/imageNone.png}">
+                                        <p>이미지 2장 이하 오류 막기</p>
+                                    </div>
+                                    <div>
+                                        <img th:src="@{/images/imageNone.png}">
+                                        <p>이미지 2장 이하 오류 막기</p>
+                                    </div>
+                                </th:block>
                             </div>
-                            <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
-                                <div>
-                                    <img th:src="@{/images/imageNone.png}">
-                                    <p>이미지 2장 이하 오류 막기</p>
-                                </div>
-                                <div>
-                                    <img th:src="@{/images/imageNone.png}">
-                                    <p>이미지 2장 이하 오류 막기</p>
-                                </div>
-                            </th:block>
                         </div>
                         <div class="slide-btn">
                             <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next" onclick="slideNextFn(this)">
@@ -179,20 +181,22 @@
         <div class="product-post">
             <ul>
                 <li th:each="product : ${popularProductList}">
-                    <div class="slider single-item" th:data-productno="${product.productNo}">
-                        <div th:if=${product.imageList} th:each="image : ${product.imageList}">
-                            <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${image.filePath}"></a>
+                    <div class="slider-wrapper">
+                        <div class="slider single-item" th:data-productno="${product.productNo}">
+                            <div th:if=${product.imageList} th:each="image : ${product.imageList}">
+                                <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img loading="lazy" th:src="${image.filePath}"></a>
+                            </div>
+                            <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                            </th:block>
                         </div>
-                        <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
-                            <div>
-                                <img th:src="@{/images/imageNone.png}">
-                                <p>이미지 2장 이하 오류 막기</p>
-                            </div>
-                            <div>
-                                <img th:src="@{/images/imageNone.png}">
-                                <p>이미지 2장 이하 오류 막기</p>
-                            </div>
-                        </th:block>
                     </div>
                     <div class="slide-btn">
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next" onclick="slideNextFn(this)">
@@ -249,20 +253,22 @@
         <div class="product-post"> 
             <ul>
                 <li th:each="product : ${superProductList}">
-                    <div class="slider single-item" th:data-productno="${product.productNo}">
-                        <div th:if=${product.imageList} th:each="image : ${product.imageList}">
-                            <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${image.filePath}"></a>
+                    <div class="slider-wrapper">
+                        <div class="slider single-item" th:data-productno="${product.productNo}">
+                            <div th:if=${product.imageList} th:each="image : ${product.imageList}">
+                                <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img loading="lazy" th:src="${image.filePath}"></a>
+                            </div>
+                            <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                            </th:block>
                         </div>
-                        <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
-                            <div>
-                                <img th:src="@{/images/imageNone.png}">
-                                <p>이미지 2장 이하 오류 막기</p>
-                            </div>
-                            <div>
-                                <img th:src="@{/images/imageNone.png}">
-                                <p>이미지 2장 이하 오류 막기</p>
-                            </div>
-                        </th:block>
                     </div>
                     <div class="slide-btn">
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next" onclick="slideNextFn(this)">
@@ -320,20 +326,22 @@
         <div class="product-post">
             <ul>
                 <li th:each="product : ${recommProductList}">
-                    <div class="slider single-item" th:data-productno="${product.productNo}">
-                        <div th:if=${product.imageList} th:each="image : ${product.imageList}">
-                            <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img th:src="${image.filePath}"></a>
+                    <div class="slider-wrapper">
+                        <div class="slider single-item" th:data-productno="${product.productNo}">
+                            <div th:if=${product.imageList} th:each="image : ${product.imageList}">
+                                <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img loading="lazy" th:src="${image.filePath}"></a>
+                            </div>
+                            <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                                <div>
+                                    <img th:src="@{/images/imageNone.png}">
+                                    <p>이미지 2장 이하 오류 막기</p>
+                                </div>
+                            </th:block>
                         </div>
-                        <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
-                            <div>
-                                <img th:src="@{/images/imageNone.png}">
-                                <p>이미지 2장 이하 오류 막기</p>
-                            </div>
-                            <div>
-                                <img th:src="@{/images/imageNone.png}">
-                                <p>이미지 2장 이하 오류 막기</p>
-                            </div>
-                        </th:block>
                     </div>
                     <div class="slide-btn">
                         <img th:src="@{/images/profile/NextBtn.png}" alt="slideNext" class="slick-slide-next" onclick="slideNextFn(this)">
