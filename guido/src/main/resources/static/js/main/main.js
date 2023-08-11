@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
 /* 슬라이드 화살표 커스텀 */
 function slidePreFn(el){
 
-    let boardSlidePreviousOriginal = el.parentElement.previousElementSibling.firstElementChild;
+    let boardSlidePreviousOriginal = el.parentElement.previousElementSibling.firstElementChild.firstElementChild;
     boardSlidePreviousOriginal.click();
 }
 
 function slideNextFn(el){
 
-    let boardSlideNextOriginal = el.parentElement.previousElementSibling.lastElementChild.previousElementSibling;
+    let boardSlideNextOriginal = el.parentElement.previousElementSibling.firstElementChild.lastElementChild.previousElementSibling;
     boardSlideNextOriginal.click();
 }
 

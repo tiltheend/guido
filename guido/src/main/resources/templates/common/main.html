@@ -105,8 +105,8 @@
                 <!-- <th:block th:unless="${#lists.size(productList)} == 0"> -->
                     <li class="product-row" th:each="product : ${productList}">
                         <div class="slider-wrapper">
-                            <div class="slider single-item" th:data-productno="${product.productNo}"> 
-                                <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}"> 
+                            <div class="slider single-item" th:data-productno="${product.productNo}">
+                                <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}">
                                     <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img loading="lazy" th:src="${image.filePath}"></a>
                                 </div>
                                 <th:block th:if="${#lists.size(product.imageList) &lt;= 2}">
