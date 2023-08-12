@@ -1,3 +1,5 @@
+
+
 /* 슬라이드 */
 $('.single-item').slick({
     dots: true,
@@ -5,68 +7,19 @@ $('.single-item').slick({
 });
 
 
-let boardSlide; /* 게시글 슬라이드 박스 */
-let boardSlideBtn; /* 게시글 슬라이드 btn */
 
-let wishHeart; /* 위시 하트 */
-let slickDot; /* 슬라이드 도트 */
+window.addEventListener("DOMContentLoaded", () => {
+    slideHover();
+});
 
-
-document.addEventListener("DOMContentLoaded", () => {
-    
-    /* 호버하면 슬라이드 넘기는 버튼 나오기 */
-    boardSlide = document.querySelectorAll(".slider");
-    boardSlideBtn = document.querySelectorAll(".slide-btn");
-
-    if (boardSlide.length > 0) {
-        for (let i = 0; i < boardSlide.length; i++) {
-            boardSlide[i].addEventListener('mouseover', () => {
-                boardSlideBtn[i].style.display="block";
-            });
-            boardSlideBtn[i].addEventListener('mouseover', () => {
-                boardSlideBtn[i].style.display="block";
-            });
-        }
-        for (let i = 0; i < boardSlide.length; i++) {
-            boardSlide[i].addEventListener('mouseout', () => {
-                boardSlideBtn[i].style.display="none";
-            });
-        }
-    }
-
-    /* 호버하면 슬라이드 도트 나오게 */
-    slickDot = document.querySelectorAll(".slick-dots");
-    if (boardSlide.length > 0) {
-        
-        for (let i = 0; i < boardSlide.length; i++) {
-            slickDot[i].style.display="none";
-            boardSlide[i].addEventListener('mouseover', () => {
-                slickDot[i].style.display="block";
-            });
-            slickDot[i].addEventListener('mouseover', () => {
-                slickDot[i].style.display="block";
-            });
-            boardSlideBtn[i].addEventListener('mouseover', () => {
-                slickDot[i].style.display="block";
-            });
-        }
-        for (let i = 0; i < boardSlide.length; i++) {
-            boardSlide[i].addEventListener('mouseout', () => {
-                slickDot[i].style.display="none";
-            });
-        }
-    }
-});    
 
 /* 슬라이드 화살표 커스텀 */
 function slidePreFn(el){
-
     let boardSlidePreviousOriginal = el.parentElement.previousElementSibling.lastElementChild.firstElementChild;
     boardSlidePreviousOriginal.click();
 }
 
 function slideNextFn(el){
-
     let boardSlideNextOriginal = el.parentElement.previousElementSibling.lastElementChild.lastElementChild.previousElementSibling;
     boardSlideNextOriginal.click();
 }
@@ -194,6 +147,9 @@ function loadProductByTheme(themeCode) {
             const slideWrapper = document.createElement("div");
             slideWrapper.classList.add("slider-wrapper");
 
+            const skeletonDiv = document.createElement("div");
+            slideWrapper.appendChild(skeletonDiv);
+
             const singleItem = document.createElement("div");
             singleItem.classList.add("slider");
             singleItem.classList.add("single-item");
@@ -226,12 +182,14 @@ function loadProductByTheme(themeCode) {
             slideNextImg.setAttribute("src", "/images/profile/NextBtn.png");
             slideNextImg.setAttribute("alt", "slideNext");
             slideNextImg.classList.add("slick-slide-next");
+            slideNextImg.setAttribute("onclick", "slideNextFn(this)");
             slideBtn.appendChild(slideNextImg);
 
             const slidePreImg = document.createElement("img");
             slidePreImg.setAttribute("src", "/images/profile/PreBtn.png");
             slidePreImg.setAttribute("alt", "slidePre");
             slidePreImg.classList.add("slick-slide-pre");
+            slidePreImg.setAttribute("onclick", "slidePreFn(this)");
             slideBtn.appendChild(slidePreImg);
 
             productRow.appendChild(slideBtn);
@@ -302,6 +260,10 @@ function loadProductByTheme(themeCode) {
             regionDiv.appendChild(regionName);
 
             salesText.appendChild(regionDiv);
+            
+            
+            const skeletonDiv2 = document.createElement("div");
+            salesText.appendChild(skeletonDiv2);
 
             const priceDiv = document.createElement("div");
 
@@ -335,18 +297,77 @@ function loadProductByTheme(themeCode) {
             // productRow.appendChild(salesText);
 
             productListContainer.appendChild(productRow);
-        }
 
+        }
+        
         // 슬라이드 라이브러리 초기화
-        $('.single-item').slick({
+        $('.single-item').not('.slick-initialized').slick({
             dots: true,
             dotsClass: "slick-dots"
         });
         
+
+        slideHover();
+
     })
     .catch(e => { console.log(e) });
+    
+    
 }
 
+
+
+function slideHover(){
+    
+    let boardSlide; /* 게시글 슬라이드 박스 */
+    let boardSlideBtn; /* 게시글 슬라이드 btn */
+    
+    let slickDot; /* 슬라이드 도트 */
+
+    /* 호버하면 슬라이드 넘기는 버튼 나오기 */
+    boardSlide = document.querySelectorAll(".slider");
+    boardSlideBtn = document.querySelectorAll(".slide-btn");
+
+    if (boardSlide.length > 0) {
+        for (let i = 0; i < boardSlide.length; i++) {
+            boardSlide[i].addEventListener('mouseover', () => {
+                boardSlideBtn[i].style.display="block";
+            });
+            boardSlideBtn[i].addEventListener('mouseover', () => {
+                boardSlideBtn[i].style.display="block";
+            });
+        }
+        for (let i = 0; i < boardSlide.length; i++) {
+            boardSlide[i].addEventListener('mouseout', () => {
+                boardSlideBtn[i].style.display="none";
+            });
+        }
+    }
+
+    /* 호버하면 슬라이드 도트 나오게 */
+    slickDot = document.querySelectorAll(".slick-dots");
+    if (boardSlide.length > 0) {
+        
+        for (let i = 0; i < boardSlide.length; i++) {
+            slickDot[i].style.display="none";
+            boardSlide[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+            slickDot[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+            boardSlideBtn[i].addEventListener('mouseover', () => {
+                slickDot[i].style.display="block";
+            });
+        }
+        for (let i = 0; i < boardSlide.length; i++) {
+            boardSlide[i].addEventListener('mouseout', () => {
+                slickDot[i].style.display="none";
+            });
+        }
+    }
+
+}
 
 
 
@@ -360,7 +381,7 @@ const hideskeleton = () => {
         $(element).fadeOut();
     });
 };
-// 테스트 코드 (페이지 로딩을 위해 2초간 스켈레톤 애니메이션이 보여짐)
-// window.onload = setTimeout(hideskeleton, 2000);
+
 // 실제 코드 (실제로 사용될 코드)
 window.onload = hideskeleton;
+
