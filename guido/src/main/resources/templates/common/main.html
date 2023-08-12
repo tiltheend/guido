@@ -43,6 +43,7 @@
 
     <!-- ***** 메인 영역 슬라이드 ***** -->
     <div class="main--container">
+        
         <section class="main--top">
             <div class="main--top__slide">
                 <div class="main--silde__container">
@@ -105,6 +106,11 @@
                 <!-- <th:block th:unless="${#lists.size(productList)} == 0"> -->
                     <li class="product-row" th:each="product : ${productList}">
                         <div class="slider-wrapper">
+
+                            <div class="skeleton_loading">
+                                <div class="skeleton_img"></div>
+                            </div>
+
                             <div class="slider single-item" th:data-productno="${product.productNo}">
                                 <div class="productImage" th:if=${product.imageList} th:each="image : ${product.imageList}">
                                     <a th:href="@{/productDetail/product/{productNo}(productNo=${product.productNo})}"><img loading="lazy" th:src="${image.filePath}"></a>
@@ -136,6 +142,7 @@
                                 <img class="heart-icon" onclick="toggleHeart(this)" th:src="@{/images/profile/empty.png}">
                             </th:block>
                         </div>
+
                         <div class="sales-text">
                             <div> 
                                 <p class="product-name" data-productname="${product.productName}">[[${product.productName}]]</p>
@@ -148,6 +155,14 @@
                                 <img th:src="@{/images/profile/location.png}" alt="location">
                                 <span>[[${product.regionName}]]</span>
                             </div>
+
+                            <div class="skeleton_loading">
+                                <div class="skeleton_text"></div>
+                                <div class="skeleton_text"></div>
+                                <div class="skeleton_text"></div>
+                            </div>
+
+
                             <div>
                                 <th:block th:switch="${product.productPackage}">
                                     <th:block th:case="1">

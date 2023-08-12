@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
 /* 슬라이드 화살표 커스텀 */
 function slidePreFn(el){
 
-    let boardSlidePreviousOriginal = el.parentElement.previousElementSibling.firstElementChild.firstElementChild;
+    let boardSlidePreviousOriginal = el.parentElement.previousElementSibling.lastElementChild.firstElementChild;
     boardSlidePreviousOriginal.click();
 }
 
 function slideNextFn(el){
 
-    let boardSlideNextOriginal = el.parentElement.previousElementSibling.firstElementChild.lastElementChild.previousElementSibling;
+    let boardSlideNextOriginal = el.parentElement.previousElementSibling.lastElementChild.lastElementChild.previousElementSibling;
     boardSlideNextOriginal.click();
 }
 
@@ -86,7 +86,7 @@ if(loginUserNo != null){
                     let check;      // 관심상품 등록 여부
                     // console.log(check);
             
-                    let productNo = heartIcon.parentElement.parentElement.firstElementChild.getAttribute("data-productno");
+                    let productNo = heartIcon.parentElement.parentElement.firstElementChild.lastElementChild.getAttribute("data-productno");
                     // console.log(productNo);
                     // console.log(loginUserNo);
             
@@ -117,12 +117,12 @@ if(loginUserNo != null){
                             if (heartIcon.classList.contains("selected")) {
                                 heartIcon.classList.remove("selected");
                                 for(i of selected){
-                                    i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
+                                    i.parentElement.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.remove("selected");
                                 }
                             } else {
                                 heartIcon.classList.add("selected");
                                 for(i of selected){
-                                    i.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
+                                    i.parentElement.nextSibling.nextSibling.nextElementSibling.firstElementChild.classList.add("selected");
                                 }
                                 sendWish(productNo, productName); // 관심상품 등록 알림
                             }
@@ -190,6 +190,9 @@ function loadProductByTheme(themeCode) {
         for (let themeProduct of themeProdList) {
             const productRow = document.createElement("li");
             productRow.classList.add("product-row");
+            
+            const slideWrapper = document.createElement("div");
+            slideWrapper.classList.add("slider-wrapper");
 
             const singleItem = document.createElement("div");
             singleItem.classList.add("slider");
@@ -212,7 +215,9 @@ function loadProductByTheme(themeCode) {
                     singleItem.appendChild(div);
                 }
             }
-            productRow.appendChild(singleItem);
+
+            slideWrapper.appendChild(singleItem);
+            productRow.appendChild(slideWrapper);
 
             const slideBtn = document.createElement("div");
             slideBtn.classList.add("slide-btn");
@@ -342,3 +347,20 @@ function loadProductByTheme(themeCode) {
     .catch(e => { console.log(e) });
 }
 
+
+
+
+/* 스켈레톤 로딩 */
+
+// 스켈레톤 요소
+const skeletonItem = document.querySelectorAll('.skeleton_loading');
+// 스켈레톤 요소 전체 삭제
+const hideskeleton = () => {
+    skeletonItem.forEach(element => {
+        $(element).fadeOut();
+    });
+};
+// 테스트 코드 (페이지 로딩을 위해 2초간 스켈레톤 애니메이션이 보여짐)
+// window.onload = setTimeout(hideskeleton, 2000);
+// 실제 코드 (실제로 사용될 코드)
+window.onload = hideskeleton;
