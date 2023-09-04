@@ -64,17 +64,17 @@ public class ProfileGuideController {
 	
 	// 비동기로 가이드 리뷰 목록 불러오기 (최신 3개)
 	@ResponseBody
-	@PostMapping(value="/guideReivewList", produces="application/json; charset=UTF-8")
+	@PostMapping(value="/guideReviewList", produces="application/json; charset=UTF-8")
 	public List<Review> guideReivewList(@RequestBody int userNo){
 
-		List<Review> guideReivewList = service.guideReivewList(userNo);
+		List<Review> guideReviewList = service.guideReivewList(userNo);
 		
 		// 0.5 단위로 별점 바꾸기
-		for(Review r : guideReivewList) {
+		for(Review r : guideReviewList) {
 			r.setReviewStarsDouble(r.getReviewStars()/20.0);
 		}
 		
-		return guideReivewList;
+		return guideReviewList;
 	}
 	
 	// 가이드 리뷰 목록 더보기 (3개씩)

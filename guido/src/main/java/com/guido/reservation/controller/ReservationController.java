@@ -279,7 +279,7 @@ public class ReservationController {
 
 		 service.reservationCancel(reservation);
 		 
-		 return "redirect:/reservation/reservation_info?reservation_no" + reservation.getReservationNo();
+		 return "redirect:/reservation/reservation_info?reservation_no=" + reservation.getReservationNo();
 	 }
 	 
 	 

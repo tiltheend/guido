@@ -45,7 +45,24 @@
             </form>
             <button class="openFindPwModal font3" id="show">Forgot your password?</button>
         </div>
+
+
+        <div class="try_account">
+            <form th:action="@{/user/login}" method="post" id="loginForm">
+                <input type="hidden" name="userEmail" value="tourist25@gmail.com">
+                <input type="hidden" name="userPassword" value="pass01">
+                <button>try as tourist</button>
+            </form>
+            
+            <form th:action="@{/user/login}" method="post" id="loginForm">
+                <input type="hidden" name="userEmail" value="guide06@gmail.com">
+                <input type="hidden" name="userPassword" value="pass01">
+                <button>try as guide</button>
+            </form>
+        </div>
+
     </div>
+
     <!-- 비밀번호 잊으셨나요 모달 -->
     <div class="modal1" id="modal1">
         <div class="window" id="modalWindow">

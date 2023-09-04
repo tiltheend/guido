@@ -120,13 +120,23 @@
 
             <div class="reservation--divisionline"></div>
         
+            <!-- 요청사항 -->
+            <div class="reservation--request" th:if="*{requestContent}">
+                <div class="reservation--request__text reservation--classification">요청사항</div>
+                <div th:text="*{requestContent}">예약 시 요청사항</div>
+            </div>
+
+
+
+            <div class="reservation--divisionline"></div>
+        
             <div class="reservation--payment__method">
                 <div class="reservation--classification">결제 수단</div>
                 <div th:text="*{paymentMethod=='C'} ? '신용/체크카드' : '페이팔' ">결제 수단</div>
             </div>
 
             <div class="reservation--divisionline"></div>
-
+            
         </div>
 
         <div class="reservation--price">
@@ -144,10 +154,11 @@
                     <div th:text="|KRW ${#numbers.formatInteger(orderPrice, 1, 'COMMA')}|"></div>
                     <div th:text="|KRW ${#numbers.formatInteger(extraFee, 1, 'COMMA')}|"></div>
                 </div>
-
+                
             </div>
-
+            
         </div>
+        
 
 
         <div class="reservation--cancel">여행 출발(개시) 전 취소 및 환불 규정 (*공정거래위원회 제정_소비자 피해보상 규정 기준)
@@ -203,6 +214,7 @@
                         <input type="hidden" name="productDateNo" th:value="*{productDateNo}">
                         <input type="hidden" name="productPackage" th:value="${product.productPackage}">
                         <input type="hidden" name="productNo" th:value="${product.productNo}">
+                        <input type="hidden" name="reservationNo" th:value="*{reservationNo}">
 
                         <button id="realCancelBtn">확인</button>
 

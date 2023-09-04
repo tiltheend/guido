@@ -129,6 +129,7 @@
 		JOIN RESERVATION USING (PRODUCT_NO)
 		WHERE USER_NO = #{userNo}
 		AND FILE_ORDER = 1
+		ORDER BY FILE_NO DESC
 	</select>
 	
 	<!-- 구매 수 카운트 -->

@@ -52,6 +52,8 @@ function reviewMoreFn(){
 }
 document.addEventListener("DOMContentLoaded",()=>{
 
+    // reviewListFn();
+
     reviewMoreFn(); /* 리뷰 글자 길어질 때 더보기 버튼 보여주기 216글자 이상 */
     reviewMoreBtnFn(); /* 리뷰 갯수 세서 3 이하면 버튼 없애고 4이상이면 출력하게 하기 */
 
@@ -64,6 +66,8 @@ document.addEventListener("DOMContentLoaded",()=>{
         reviewModalClose = document.querySelector(".review-write .review-modal-close");
         addReview.addEventListener('click',()=>{
             reviewOptionFn(); // 리뷰 작성 목록 불러오기
+            // let reviewContent = document.querySelector(".review-write #reviewContent").value;
+            // reviewContent="";
             reviewWriteModal.style.display="flex";
 
             // 라디오 버튼 초기 선택 해제
@@ -71,6 +75,8 @@ document.addEventListener("DOMContentLoaded",()=>{
             document.querySelector('.review-write .score-span').innerText="0.0";
             // 모달 닫기
             reviewModalClose.addEventListener('click',()=>{
+                // let reviewContent = document.querySelector(".review-write #reviewContent").value;
+                // reviewContent="";
                 reviewWriteModal.style.display="none";
                 selectElement = document.querySelector(".review-write #reviewSaleList");
                 selectElement.selectedIndex = 0; // 선택 초기화
@@ -79,12 +85,13 @@ document.addEventListener("DOMContentLoaded",()=>{
                 checkObj.selectedStarScore = false;
 
                 selectedScore=null;
+
             });
 
         });
     }
 
-    // 리뷰 글자수 제한 (500) 디비 바꾸기~~
+    // 리뷰 글자수 제한 (300) 디비 바꾸기~~
     let reviewContentNum = document.querySelector(".review-write #reviewContent");
     let reviewCount = document.querySelector(".review-write #count");
     let reviewWrite = document.querySelector(".review-write .write-count");
@@ -95,7 +102,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
             // e.target : 이벤트가 발생한 요소 (==#content)
             reviewCount.innerText=e.target.value.length;
-            if(e.target.value.length>500){
+            if(e.target.value.length>300){
                 reviewCount.classList.add("error");
                 reviewWrite.classList.add("error");
                 document.querySelector(".review-write .write-count .over-error").style.fontSize="0.875rem";
@@ -108,7 +115,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         });
     }
 
-    // 리뷰 글자수 제한 (500) 디비 바꾸기~~
+    // 리뷰 글자수 제한 (300) 디비 바꾸기~~
     let reviewContentEditNum = document.querySelector(".review-edit #reviewContent");
     let reviewCountEdit = document.querySelector(".review-edit #count");
     let reviewWriteEdit = document.querySelector(".review-edit .write-count");
@@ -120,7 +127,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     
             // e.target : 이벤트가 발생한 요소 (==#content)
             reviewCountEdit.innerText=e.target.value.length;
-            if(e.target.value.length>500){
+            if(e.target.value.length>300){
                 reviewCountEdit.classList.add("error");
                 reviewWriteEdit.classList.add("error");
                 document.querySelector(".review-edit .write-count .over-error").style.fontSize="0.875rem";
@@ -255,7 +262,7 @@ if(reviewMoreBtn !=null) {
                     profileDiv.appendChild(reviewerName);
                     firstDiv.appendChild(profileDiv);
     
-                    console.log(review.reviewStarsDouble);
+                    // console.log(review.reviewStarsDouble);
                     // 상품 정보 영역 (별점 + 날짜)
                     const saleReviewInfoDiv = document.createElement("div");
                     saleReviewInfoDiv.classList.add("sale-review-info");
@@ -341,7 +348,30 @@ if(reviewMoreBtn !=null) {
                     // 리뷰 아이템을 리뷰 리스트에 추가
                     newReviewItemUl.appendChild(newReviewItem);
                     myReviewList.appendChild(newReviewItemUl);
+
+                    if(review.reviewReply != null){
+                        const replyItem = document.createElement("li");
+                        replyItem.classList.add("seller-reply");
+                        
+                        const replyDiv = document.createElement("div");
+                        
+                        const replyImg = document.createElement("img");
+                        replyImg.src="/images/profile/replyIcon.png";
+        
+                        const replyText = document.createElement("textarea");
+                        replyText.setAttribute('id', 'sellerReplyContent');
+                        replyText.setAttribute('maxlength', '200');
+                        replyText.setAttribute('readonly', 'readonly');
+                        replyText.textContent = review.reviewReply;
+                        
+                        replyDiv.appendChild(replyImg);
+                        replyDiv.appendChild(replyText);
+                        replyItem.appendChild(replyDiv);
+    
+                        newReviewItemUl.appendChild(replyItem);
+                    }
                     
+
                 }
     
                 reviewMoreFn();
@@ -429,6 +459,12 @@ function reviewAddFn(e){
         alert("내용을 입력해주세요.");
         document.querySelector(".review-write #reviewContent").focus();
         reviewContent = ""; // 띄어쓰기, 개행문자 제거
+        return;
+    }
+    if(reviewContent.length > 300){
+        e.preventDefault();
+        alert("300자 미만으로 입력해주세요");
+        document.querySelector(".review-write #reviewContent").focus();
         return;
     }
     checkObj.reviewContent = true;
@@ -625,7 +661,29 @@ function reviewListFn(e){
                 newReviewItemUl.appendChild(newReviewItem);
                 myReviewList.appendChild(newReviewItemUl);
                 
-                reviewMoreFn();
+                if(review.reviewReply != null){
+                    const replyItem = document.createElement("li");
+                    replyItem.classList.add("seller-reply");
+                    
+                    const replyDiv = document.createElement("div");
+                    
+                    const replyImg = document.createElement("img");
+                    replyImg.src="/images/profile/replyIcon.png";
+    
+                    const replyText = document.createElement("textarea");
+                    replyText.setAttribute('id', 'sellerReplyContent');
+                    replyText.setAttribute('maxlength', '200');
+                    replyText.setAttribute('readonly', 'readonly');
+                    replyText.textContent = review.reviewReply;
+                    
+                    replyDiv.appendChild(replyImg);
+                    replyDiv.appendChild(replyText);
+                    replyItem.appendChild(replyDiv);
+
+                    newReviewItemUl.appendChild(replyItem);
+                }
+
+
             }
 
         }
@@ -655,12 +713,12 @@ function reviewDelFn(el){
     })
     .then(resp => resp.text())
     .then(result => {
-        reviewMoreBtnFn();
         if(result>0){
             alert("리뷰가 삭제 되었습니다.");
-
+            
             reviewListFn();
             reviewOptionFn(); // 리뷰 목록 다시 불러오기
+            reviewMoreBtnFn();
 
         } else if (result=0){
             alert("리뷰 삭제 실패");
@@ -760,8 +818,13 @@ function reviewEditSubmitFn(e){
         reviewContentEdit = ""; // 띄어쓰기, 개행문자 제거
         return;
     }
-
-    console.log(reviewContentEdit);
+    if(reviewContentEdit.length > 300){
+        e.preventDefault();
+        alert("300자 미만으로 입력해주세요");
+        document.querySelector(".review-edit #reviewContent").focus();
+        return;
+    }
+    // console.log(reviewContentEdit);
 
     if(selectedScoreEdit==0.0){
         e.preventDefault();
@@ -788,6 +851,7 @@ function reviewEditSubmitFn(e){
 
                 reviewEditModal.style.display="none";
                 reviewListFn();
+                reviewMoreBtnFn();
 
             } else if (result=0){
                 alert("리뷰 수정 실패");

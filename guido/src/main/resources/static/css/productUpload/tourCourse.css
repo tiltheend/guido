@@ -66,24 +66,24 @@
 #placesList li {
   list-style: none;
 }
-#placesList .item {
+#placesList .map-search-item {
   position: relative;
   /* border-bottom: 1px solid #888; */
   overflow: hidden;
   cursor: pointer;
   min-height: 65px;
 }
-#placesList .item span {
+#placesList .map-search-item span {
   display: block;
   margin-top: 4px;
 }
-#placesList .item h5,
-#placesList .item .info {
+#placesList .map-search-item h5,
+#placesList .map-search-item .info {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-#placesList .item .info {
+#placesList .map-search-item .info {
   padding: 10px 0 10px 55px;
   display: block;
   flex-direction: column;
@@ -103,7 +103,7 @@
 /* #placesList .info .tel {
   color: #009900;
 } */
-#placesList .item .markerbg {
+#placesList .map-search-item .markerbg {
   float: left;
   position: absolute;
   width: 36px;
@@ -111,49 +111,49 @@
   margin: 10px 0 0 10px;
   background: url(https://i.esdrop.com/d/f/l9Kn9J2hcu/WglSTV4NFU.png) no-repeat;
 }
-#placesList .item .marker_1 {
+#placesList .map-search-item .marker_1 {
   background-position: 0 -10px;
 }
-#placesList .item .marker_2 {
+#placesList .map-search-item .marker_2 {
   background-position: 0 -56px;
 }
-#placesList .item .marker_3 {
+#placesList .map-search-item .marker_3 {
   background-position: 0 -102px;
 }
-#placesList .item .marker_4 {
+#placesList .map-search-item .marker_4 {
   background-position: 0 -148px;
 }
-#placesList .item .marker_5 {
+#placesList .map-search-item .marker_5 {
   background-position: 0 -194px;
 }
-#placesList .item .marker_6 {
+#placesList .map-search-item .marker_6 {
   background-position: 0 -240px;
 }
-#placesList .item .marker_7 {
+#placesList .map-search-item .marker_7 {
   background-position: 0 -286px;
 }
-#placesList .item .marker_8 {
+#placesList .map-search-item .marker_8 {
   background-position: 0 -332px;
 }
-#placesList .item .marker_9 {
+#placesList .map-search-item .marker_9 {
   background-position: 0 -378px;
 }
-#placesList .item .marker_10 {
+#placesList .map-search-item .marker_10 {
   background-position: 0 -423px;
 }
-#placesList .item .marker_11 {
+#placesList .map-search-item .marker_11 {
   background-position: 0 -470px;
 }
-#placesList .item .marker_12 {
+#placesList .map-search-item .marker_12 {
   background-position: 0 -516px;
 }
-#placesList .item .marker_13 {
+#placesList .map-search-item .marker_13 {
   background-position: 0 -562px;
 }
-#placesList .item .marker_14 {
+#placesList .map-search-item .marker_14 {
   background-position: 0 -608px;
 }
-#placesList .item .marker_15 {
+#placesList .map-search-item .marker_15 {
   background-position: 0 -654px;
 }
 #pagination {

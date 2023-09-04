@@ -645,6 +645,84 @@ hr{
 
 
 
+/* 스켈레톤 로딩 */
+/* .product-row.skeleton .skeleton-image {
+  background: #e2e2e2;
+}
+
+.product-row.skeleton .skeleton-text {
+  background: #e2e2e2;
+  color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.product-row.skeleton .skeleton-text::before{
+  display: block;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
+    animation: loading 1.3s infinite;
+}
+
+@keyframes loading {
+  100% {
+    transform: translateX(100%);
+  }
+} */
+
+
+.slider-wrapper,
+.sales-text{
+  position: relative;
+}
+
+/*스켈레톤 메인 컨테이너*/
+.skeleton_loading{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+}
+/* 스켈레톤 이미지 */
+.skeleton_img {
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--bg-color);
+}
+
+/* 스켈레톤 텍스트 */
+.skeleton_text {
+  margin-bottom: 0.2rem;
+  height: 1.25rem;
+  border-radius: 1px;
+}
+.skeleton_text:nth-child(1) {
+  width: 100%;
+}
+.skeleton_text:nth-child(2) {
+  width: 30%;
+}
+.skeleton_text:last-child {
+  width: 45%;
+}
+
+.skeleton_loading * {
+  background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: load 1s infinite;
+}
+
+@keyframes load {
+  100% {
+      background-position: -100% 0;
+  }
+}
 
 
 

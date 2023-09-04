@@ -34,7 +34,7 @@ const updatePage = () => {
   if (currentPage == 1) {
     document.querySelector('.text2').innerHTML = '';
     typing2();
-    // updateNextBtnCity();
+    checkCity();
   }
   if (currentPage == 2) {
     document.querySelector('.text6').innerHTML = '';
@@ -257,9 +257,13 @@ const textElements = document.getElementsByClassName('TEXT');
 const clickElements = document.getElementsByClassName('OUTLINE');
 const city = document.getElementById('space');
 const checkSpace = document.getElementById('checkSpace');
+const checkCity = () => {
+  nextBtn.disabled = true;
+};
 
 for (let i = 0; i < clickElements.length; i++) {
   clickElements[i].addEventListener('click', () => {
+    nextBtn.disabled = false;
     // 기존 클릭한 요소의 효과 초기화
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
@@ -278,11 +282,12 @@ for (let i = 0; i < clickElements.length; i++) {
   });
 
   textElements[i].addEventListener('click', () => {
+    nextBtn.disabled = false;
     // 기존 클릭한 요소의 효과 초기화
     for (let j = 0; j < clickElements.length; j++) {
       if (i !== j) {
         clickElements[j].style.fill = '#333';
-        s;
+
         clickElements[j].style.transform = 'none';
       } else {
         clickElements[j].style.fill = 'rgb(59, 119, 124)';
@@ -503,7 +508,6 @@ function addElement() {
     var container = document.getElementById('add-container');
     var warningMessage = document.querySelector('#addWarning');
 
-    // Check if the value already exists in the container
     var existingElements = container.getElementsByClassName('added-element');
     for (var i = 0; i < existingElements.length; i++) {
       if (existingElements[i].textContent === value) {
@@ -512,7 +516,6 @@ function addElement() {
       }
     }
 
-    // Hide the warning message if input value has changed
     if (warningMessage.style.display === 'flex') {
       warningMessage.style.display = 'none';
     }
@@ -531,6 +534,7 @@ function addElement() {
     deleteIcon.addEventListener('click', function (e) {
       e.stopPropagation();
       deleteIcon.parentNode.remove();
+      newInputElement.remove();
     });
 
     newElement.innerHTML = value;
@@ -927,14 +931,6 @@ inputDay.addEventListener('input', () => {
   minTouristName.value = '';
 });
 
-// var hasBossCourse = tourCourse.some(function (course) {
-//   return course.bossCourseFl === 'Y';
-// });
-
-// if (!hasBossCourse) {
-//   nextBtn.disabled = true;
-// }
-
 inputTime.addEventListener('input', () => {
   if (inputTime.value > 0) {
     minTouristNum[0].style.display = 'block';
@@ -998,18 +994,25 @@ const checkMaxTourist = () => {
     nextBtn.disabled = false;
   }
 };
-
+const submitDate = document.getElementById('submitDate');
 const displayNoneTime = () => {
   if (inputDay.value != '') {
     createTime.style.display = 'none';
+    submitDate.style.display = 'none';
   } else {
-    createTime.style.display = 'inline-block';
+    // createTime.style.display = 'inline-block';
+    submitDate.style.display = 'flex';
   }
 };
+const calendarTable = document.getElementById('calendarTable');
+function submitDate2() {
+  createTime.style.display = 'inline-block';
+  calendarTable.style.pointerEvents = 'none';
+}
 
-const selectOptionName = document.getElementById('selectOptionName');
-const insertTimeBtn = document.getElementById('insertTimeBtn');
-const optionNameArray = [];
+// const selectOptionName = document.getElementById('selectOptionName');
+// const insertTimeBtn = document.getElementById('insertTimeBtn');
+// const optionNameArray = [];
 
 // insertTimeBtn.addEventListener('click', function () {
 //   if (

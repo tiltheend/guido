@@ -238,7 +238,6 @@
 .slick-dotted.slick-slider
 {
     width: 300px;
-    margin-bottom: 30px;
 }
 
 .slick-dots
@@ -323,4 +322,9 @@
 {
     opacity: .75;
     color: #B1D8DA;
+}
+
+.slider-wrapper{
+    overflow: hidden;
+    border-radius: 14px;
 }
