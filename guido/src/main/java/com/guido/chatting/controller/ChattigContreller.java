@@ -37,7 +37,7 @@ public class ChattigContreller {
     	
         List<ChattingRoom> roomList = service.selectRoomList(loginUser.getUserNo());
         model.addAttribute("roomList", roomList);
-        return "/profile/chatting/chatting";
+        return "profile/chatting/chatting";
     }
     
     // 채팅 상대 검색

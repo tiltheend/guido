@@ -52,7 +52,7 @@
 		SELECT PRODUCT_DT_NO, PRODUCT_NO,  TO_CHAR(PRODUCT_DT, 'YYYY-MM-DD') PRODUCT_DT,  PRODUCT_DT_AVAILABILITY
 		FROM "PRODUCT_DT"
 		WHERE PRODUCT_NO = #{productNo}
-		AND PRODUCT_DT = #{productDate}
+		AND PRODUCT_DT = TO_DATE(#{productDate}, 'YYYY-MM-DD')
 	</select>
 	
 	
@@ -60,7 +60,7 @@
 	<select id="selectDateInRange" resultType="_int">
 		SELECT COUNT(*) FROM "PRODUCT_DT"
 		WHERE PRODUCT_NO = #{productNo}
-		AND PRODUCT_DT = #{productDate}
+		AND PRODUCT_DT = TO_DATE(#{productDate}, 'YYYY-MM-DD')
 		AND PRODUCT_DT_AVAILABILITY = 'Y'
 	</select>
 	

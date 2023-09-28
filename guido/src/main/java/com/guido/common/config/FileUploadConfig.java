@@ -60,7 +60,6 @@ public class FileUploadConfig implements WebMvcConfigurer {
 		String webPath = "/images/**";
 		
 		// 실제로 자원이 저장되어 있는 로컬 경로
-		// 학원 컴
 		String resourcePath = "file:///C:/guidoImages/";
 		
 		// 지영 맥북

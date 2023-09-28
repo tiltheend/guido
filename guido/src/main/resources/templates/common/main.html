@@ -38,6 +38,10 @@
         <th:block th:if="${session.loginUser != null and session.loginUser.userType == 'G'}">
             <a th:href="@{/upload}"><img th:src="@{/images/icons/writeBtn.png}" alt="가이드 글쓰기"></a> 
         </th:block>
+        
+        <th:block th:if="${session.loginUser == null}">
+            <a th:href="@{/qna/write}"><img th:src="@{/images/qna/information-button.png}" alt="비회원 문의하기"></a> 
+        </th:block>
     </div>
     <!-- </th:block> -->
 
