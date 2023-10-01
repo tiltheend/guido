@@ -69,7 +69,9 @@ public class GoogleLoginController {
     			// localhost
 //    			+ "&redirect_uri=http://localhost:80/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
     			// 학원 발표용
-    			+ "&redirect_uri=http://class-a.xyz/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+//    			+ "&redirect_uri=http://class-a.xyz/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+    			// 배포용 guido.world
+    			+ "&redirect_uri=http://guido.world/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
     			);
     	return redirectView;
     }
@@ -86,7 +88,9 @@ public class GoogleLoginController {
                 // localhost
 //                .redirectUri("http://localhost:80/google/login/oauth")
                 // 학원 발표용
-                .redirectUri("http://class-a.xyz/google/login/oauth")
+//                .redirectUri("http://class-a.xyz/google/login/oauth")
+                // 배포용 guido.world
+                .redirectUri("http://guido.world/google/login/oauth")
                 .grantType("authorization_code").build();
         ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
                 googleOAuthRequestParam, GoogleResponse.class);
