@@ -68,7 +68,10 @@ public class GoogleLoginController {
     	redirectView.setUrl("https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
     			// localhost
 //    			+ "&redirect_uri=http://localhost:80/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
-				+ "&redirect_uri=http://guido.world/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+    			// 학원 발표용
+//    			+ "&redirect_uri=http://class-a.xyz/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
+    			// 배포용 guido.world
+    			+ "&redirect_uri=http://guido.world/google/login/oauth&response_type=code&scope=email%20profile%20openid&access_type=offline"
     			);
     	return redirectView;
     }
@@ -84,6 +87,8 @@ public class GoogleLoginController {
                 .code(authCode)
                 // localhost
 //                .redirectUri("http://localhost:80/google/login/oauth")
+                // 학원 발표용
+//                .redirectUri("http://class-a.xyz/google/login/oauth")
                 // 배포용 guido.world
                 .redirectUri("http://guido.world/google/login/oauth")
                 .grantType("authorization_code").build();
