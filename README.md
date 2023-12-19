@@ -1,8 +1,6 @@
 # Guido
 가이드의 개별적인 능력과 특성에 주안점을 두는 여행 패키지 구매 서비스
 
-🔗 http://guido.world/
-
 
 ![메인화면](https://github.com/tiltheend/guido/assets/101131054/5f2ae6ce-34ad-4321-a0fd-7a3cda38a2eb)
 <br></br>
